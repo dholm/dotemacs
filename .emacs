@@ -1,4 +1,8 @@
-;; (Utilities) ;;
+;; (Coloring and Themes) ;;
+
+(require 'color-theme-subdued)
+(color-theme-subdued)
+
 
 ;; Highlighting "TODO", "FIXME" and friends
 (add-hook 'c-mode-common-hook
@@ -6,6 +10,9 @@
 	    (font-lock-add-keywords nil
 				    '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 
 				       1 font-lock-warning-face t)))))
+
+
+;; (Utilities) ;;
 
 ;; Show line numbers with F6
 ;; http://stud4.tuwien.ac.at/~e0225855/linum/linum.html
