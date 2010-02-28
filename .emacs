@@ -32,6 +32,20 @@
 (require 'magit)
 
 
+;; Hippie Expand
+;; The order that different completes are tested.
+(global-set-key (kbd "C-<tab>") 'hippie-expand)
+
+(setq hippie-expand-try-functions-list
+  '(try-expand-dabbrev-visible
+    try-expand-dabbrev
+    try-expand-dabbrev-all-buffers
+    try-expand-dabbrev-from-kill
+    ; try-expand-all-abbrevs
+    ; try-expand-line 
+))
+
+
 
 ;; (Code Conventions) ;;
 
