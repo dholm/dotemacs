@@ -1,0 +1,3 @@
+[submodule ".emacs.d/dtrt-indent"]
+	path = .emacs.d/dtrt-indent
+	url = git://git.savannah.nongnu.org/dtrt-indent.git
