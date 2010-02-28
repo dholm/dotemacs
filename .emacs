@@ -17,6 +17,11 @@
 (setq show-trailing-whitespace t)
 
 
+;; Magit
+(require 'magit)
+
+
+
 ;; (Code Conventions) ;;
 
 (setq c-default-style "Linux")
