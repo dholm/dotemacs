@@ -14,6 +14,10 @@
 
 ;; (Utilities) ;;
 
+;; Bring up the buffer menu with §
+(global-set-key "§" 'buffer-menu)
+
+
 ;; Show line numbers with F6
 ;; http://stud4.tuwien.ac.at/~e0225855/linum/linum.html
 (require 'linum)
