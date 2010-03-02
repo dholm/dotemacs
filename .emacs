@@ -1,5 +1,7 @@
 ;; (Coloring and Themes) ;;
 
+(setq load-path (cons "~/.emacs.d" load-path))
+
 (require 'color-theme-subdued)
 (color-theme-subdued)
 
@@ -29,6 +31,7 @@
 
 
 ;; Magit
+(setq load-path (cons "~/.emacs.d/magit" load-path))
 (require 'magit)
 
 
@@ -52,6 +55,7 @@
 (setq c-default-style "Linux")
 (setq c++-default-style "Stroustrup")
 
+(setq load-path (cons "~/.emacs.d/dtrt-mode" load-path))
 (add-hook 'c-mode-common-hook
   (lambda()
     (require 'dtrt-indent)
