@@ -55,8 +55,9 @@
 
 ;; (Code Conventions) ;;
 
-(setq c-default-style "Linux")
+(setq c-default-style "K&R")
 (setq c++-default-style "Stroustrup")
+(setq show-trailing-whitespace t)
 
 (setq load-path (cons "~/.emacs.d/dtrt-mode" load-path))
 (add-hook 'c-mode-common-hook
