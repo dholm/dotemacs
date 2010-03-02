@@ -5,6 +5,10 @@
 (require 'color-theme-subdued)
 (color-theme-subdued)
 
+;; Override Darwin
+(set-face-foreground 'font-lock-comment-face "red")
+(set-face-foreground 'font-lock-comment-delimiter-face "red")
+
 
 ;; Highlighting "TODO", "FIXME" and friends
 (add-hook 'c-mode-common-hook
