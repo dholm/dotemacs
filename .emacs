@@ -21,7 +21,7 @@
 ;; (Utilities) ;;
 
 ;; Bring up the buffer menu with §
-(global-set-key "§" 'buffer-menu)
+(global-set-key [?§] 'buffer-menu)
 
 
 ;; Show line numbers with F6
