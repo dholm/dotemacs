@@ -24,6 +24,13 @@
 (global-set-key [?§] 'buffer-menu)
 
 
+;; cycle through buffers with Ctrl-Tab
+(require 'stesla-rotate-buffers)
+(global-set-key (kbd "C-<tab>") 'stesla-rotate-buffers)
+(global-set-key (kbd "C-M-<tab>") (lambda ()
+  (interactive)
+    (stesla-rotate-buffers -1)))
+
 ;; Show line numbers with F6
 ;; http://stud4.tuwien.ac.at/~e0225855/linum/linum.html
 (require 'linum)
