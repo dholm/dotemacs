@@ -10,6 +10,10 @@
 (set-face-foreground 'font-lock-comment-delimiter-face "red")
 
 
+;; Do not show the splash screen
+(setq inhibit-splash-screen t)
+
+
 ;; Highlighting "TODO", "FIXME" and friends
 (add-hook 'c-mode-common-hook
   (lambda ()
