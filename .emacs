@@ -28,6 +28,10 @@
 (global-set-key [?§] 'buffer-menu)
 
 
+;; Show matching parenthesis
+(show-paren-mode 1)
+
+
 ;; cycle through buffers with Ctrl-Tab
 (require 'stesla-rotate-buffers)
 (global-set-key (kbd "C-<tab>") 'stesla-rotate-buffers)
