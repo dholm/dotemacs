@@ -91,6 +91,9 @@
     try-expand-all-abbrevs
     try-expand-line))
 
+;; Per-project settings
+(require 'mk-project)
+
 
 ;; (Code Conventions) ;;
 
