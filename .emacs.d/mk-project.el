@@ -1,1 +1,1 @@
-../mk-project/mk-project.el
+mk-project/mk-project.el

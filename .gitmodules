@@ -4,6 +4,6 @@
 [submodule ".emacs.d/magit"]
 	path = .emacs.d/magit
 	url = git://gitorious.org/magit/mainline.git
-[submodule "mk-project"]
-	path = mk-project
+[submodule ".emacs.d/mk-project"]
+	path = .emacs.d/mk-project
 	url = http://github.com/mattkeller/mk-project.git
