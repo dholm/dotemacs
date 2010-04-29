@@ -39,6 +39,13 @@
   (interactive)
     (stesla-rotate-buffers -1)))
 
+
+;; Browsable kill ring
+(setq load-path (cons "~/.emacs.d/browse-kill-ring" load-path))
+(when (require 'browse-kill-ring nil 'noerror)
+  (browse-kill-ring-default-keybindings))
+
+
 ;; Show line numbers with F6
 ;; http://stud4.tuwien.ac.at/~e0225855/linum/linum.html
 (require 'linum)

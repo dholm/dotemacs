@@ -7,3 +7,6 @@
 [submodule ".emacs.d/mk-project"]
 	path = .emacs.d/mk-project
 	url = http://github.com/mattkeller/mk-project.git
+[submodule ".emacs.d/browse-kill-ring"]
+	path = .emacs.d/browse-kill-ring
+	url = http://github.com/emacsmirror/browse-kill-ring.git
