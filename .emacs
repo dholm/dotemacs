@@ -109,6 +109,9 @@
 (setq c++-default-style "Stroustrup")
 (setq show-trailing-whitespace t)
 
+;; Load the Google C/C++ style
+(require 'google-c-style)
+
 (setq load-path (cons "~/.emacs.d/dtrt-indent" load-path))
 (add-hook 'c-mode-common-hook
   (lambda()
