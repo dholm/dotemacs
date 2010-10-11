@@ -3,7 +3,7 @@
 	url = git://git.savannah.nongnu.org/dtrt-indent.git
 [submodule ".emacs.d/magit"]
 	path = .emacs.d/magit
-	url = git://gitorious.org/magit/mainline.git
+	url = http://github.com/philjackson/magit.git
 [submodule ".emacs.d/mk-project"]
 	path = .emacs.d/mk-project
 	url = http://github.com/mattkeller/mk-project.git
