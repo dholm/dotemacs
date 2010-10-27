@@ -28,10 +28,6 @@
 
 ;; (Utilities) ;;
 
-;; Bring up the buffer menu with §
-(global-set-key [?§] 'buffer-menu)
-
-
 ;; Show matching parenthesis
 (show-paren-mode 1)
 
