@@ -35,6 +35,9 @@
 ;; Show matching parenthesis
 (show-paren-mode 1)
 
+;; Show row and column numbers
+(setq line-number-mode t)
+(setq column-number-mode t)
 
 ;; cycle through buffers with Ctrl-Tab
 (require 'stesla-rotate-buffers)
