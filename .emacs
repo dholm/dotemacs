@@ -13,6 +13,10 @@
 ;; Do not show the splash screen
 (setq inhibit-splash-screen t)
 
+;; Remove all the mouse-assisted crud
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
 ;; Highlighting "TODO", "FIXME" and friends
 (add-hook 'c-mode-common-hook
