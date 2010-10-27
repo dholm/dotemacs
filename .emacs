@@ -127,3 +127,12 @@
     (require 'dtrt-indent)
     (dtrt-indent-mode t)))
 
+
+;; (Key Bindings) ;;
+
+;; Alias C-x C-m to M-x which is a bit awkward to reach
+(global-set-key "\C-x\C-m" 'execute-extended-command)
+
+;; Delete words with C-w and rebind kill region to C-x C-k
+(global-set-key "\C-w" 'backward-kill-word)
+(global-set-key "\C-x\C-k" 'kill-region)
