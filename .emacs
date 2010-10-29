@@ -63,6 +63,10 @@
 (setq load-path (cons "~/.emacs.d/magit" load-path))
 (require 'magit)
 
+;; auto-complete-mode offers superior code completion over existing tools
+(setq load-path (cons "~/.emacs.d/auto-complete" load-path))
+(require 'auto-complete-config)
+(ac-config-default)
 
 ;; Enable both HippieCompletion and indent for tab
 (defun indent-or-complete ()

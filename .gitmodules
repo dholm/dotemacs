@@ -10,3 +10,6 @@
 [submodule ".emacs.d/browse-kill-ring"]
 	path = .emacs.d/browse-kill-ring
 	url = http://github.com/emacsmirror/browse-kill-ring.git
+[submodule ".emacs.d/auto-complete"]
+	path = .emacs.d/auto-complete
+	url = git://github.com/m2ym/auto-complete.git
