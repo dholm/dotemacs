@@ -28,6 +28,20 @@
 
 ;; (Utilities) ;;
 
+;; CEDET
+(load-file "~/cedet-1.0/common/cedet.el")
+(when (featurep 'cedet)
+  (global-ede-mode 1)
+  (semantic-load-enable-minimum-features)
+  (semantic-load-enable-code-helpers)
+  (semantic-load-enable-gaudy-code-helpers)
+  (global-srecode-minor-mode 1)
+  (global-set-key (kbd "C-c .") 'semantic-ia-fast-jump)
+  (global-set-key (kbd "C-c d") 'semantic-ia-show-doc)
+  (global-set-key (kbd "C-c D") 'semantic-ia-describe-class)
+  (global-set-key (kbd "C-c c") 'semantic-ia-complete-symbol)
+  (global-set-key (kbd "C-c t") 'eassist-switch-h-cpp))
+
 ;; Show matching parenthesis
 (show-paren-mode 1)
 
@@ -62,11 +76,6 @@
 ;; Magit
 (setq load-path (cons "~/.emacs.d/magit" load-path))
 (require 'magit)
-
-;; auto-complete-mode offers superior code completion over existing tools
-(setq load-path (cons "~/.emacs.d/auto-complete" load-path))
-(require 'auto-complete-config)
-(ac-config-default)
 
 ;; Enable both HippieCompletion and indent for tab
 (defun indent-or-complete ()
