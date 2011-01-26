@@ -69,8 +69,16 @@
 (global-set-key (kbd "<f6>") 'linum-mode)
 
 
-;; Show trailing whitespace
+;; Show trailing whitespace and delete it on save in c- and c++-mode
 (setq show-trailing-whitespace t)
+(add-hook 'c-mode-common-hook
+	  (lambda()
+	    (add-hook 'before-save-hook
+		      'delete-trailing-whitespace nil t)))
+(add-hook 'c++-mode-common-hook
+	  (lambda()
+	    (add-hook 'before-save-hook
+		      'delete-trailing-whitespace nil t)))
 
 
 ;; Magit
@@ -123,7 +131,7 @@
 
 (setq c-default-style "K&R")
 (setq c++-default-style "Stroustrup")
-(setq show-trailing-whitespace t)
+
 
 ;; Load the Google C/C++ style
 (require 'google-c-style)
