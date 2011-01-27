@@ -122,10 +122,6 @@
     try-expand-all-abbrevs
     try-expand-line))
 
-;; Per-project settings
-(setq load-path (cons "~/.emacs.d/mk-project" load-path))
-(require 'mk-project)
-
 
 ;; (Code Conventions) ;;
 
