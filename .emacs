@@ -29,6 +29,7 @@
 ;; (Utilities) ;;
 
 ;; CEDET
+(load-file "~/.emacs.d/cedet/common/cedet.el")
 (when (featurep 'cedet)
   (global-ede-mode 1)
   (semantic-load-enable-minimum-features)

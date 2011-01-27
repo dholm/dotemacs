@@ -10,3 +10,6 @@
 [submodule ".emacs.d/browse-kill-ring"]
 	path = .emacs.d/browse-kill-ring
 	url = http://github.com/emacsmirror/browse-kill-ring.git
+[submodule ".emacs.d/cedet"]
+	path = .emacs.d/cedet
+	url = git://github.com/emacsmirror/cedet.git
