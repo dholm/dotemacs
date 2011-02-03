@@ -4,7 +4,7 @@ dotemacs: My personal Emacs configuration
 How do I install it?
 --------------------
 
-Clone the project from git://github.com/dholm/dotemacs.git and symbolically link the cloned directory <i>dotemacs</i> to <i>$HOME/.emacs.d</i>. Alternatively you can just clone it right into <i>.emacs.d</i>. From the repository path initialize the submodules by executing <i>git submodule init</i> followed by <i>git submodule update</i> which will pull in all the submodules.
+Clone the project from git://github.com/dholm/dotemacs.git and symbolically link the cloned directory <i>dotemacs</i> to <i>$HOME/.emacs.d</i>. Alternatively you can just clone it right into <i>.emacs.d</i>. From the repository path initialize the submodules by executing <i>git submodule init</i> followed by <i>git submodule update</i> which will pull in all the submodules. If you are not using GNU Emacs check out the EmacsWiki page on [InitFile](http://www.emacswiki.org/emacs/InitFile) for instructions on how to help your Emacs implementation locate <i>init.el</i>.
 
 CEDET needs to be compiled before execution so change into <i>dotemacs/cedet</i> and run <i>make</i>.
 
