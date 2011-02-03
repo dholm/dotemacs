@@ -1,12 +1,12 @@
-[submodule ".emacs.d/dtrt-indent"]
-	path = .emacs.d/dtrt-indent
+[submodule "dtrt-indent"]
+	path = dtrt-indent
 	url = git://git.savannah.nongnu.org/dtrt-indent.git
-[submodule ".emacs.d/magit"]
-	path = .emacs.d/magit
-	url = http://github.com/philjackson/magit.git
-[submodule ".emacs.d/browse-kill-ring"]
-	path = .emacs.d/browse-kill-ring
-	url = http://github.com/emacsmirror/browse-kill-ring.git
-[submodule ".emacs.d/cedet"]
-	path = .emacs.d/cedet
+[submodule "magit"]
+	path = magit
+	url = git://github.com/philjackson/magit.git
+[submodule "browse-kill-ring"]
+	path = browse-kill-ring
+	url = git://github.com/emacsmirror/browse-kill-ring.git
+[submodule "cedet"]
+	path = cedet
 	url = git://github.com/emacsmirror/cedet.git
