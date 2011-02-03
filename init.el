@@ -45,6 +45,11 @@
 ;; Show matching parenthesis
 (show-paren-mode 1)
 
+;; Close all open buffers
+(defun close-all-buffers ()
+  (interactive)
+  (mapc 'kill-buffer (buffer-list)))
+
 ;; Show row and column numbers
 (setq line-number-mode t)
 (setq column-number-mode t)
