@@ -28,8 +28,14 @@
 
 
 ;; Show matching parenthesis
-(show-paren-mode 1)
+(show-paren-mode t)
 
 
 ;; Prefer using UTF-8 encoding
 (prefer-coding-system 'utf-8)
+
+
+;; Set random parameters
+(setq search-highlight t        ; Highlight all visible matches
+      query-replace-highlight t ; Highlight all visible matches
+      transient-mark-mode t)    ; Perform certain commands only on the marked region
