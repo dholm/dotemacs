@@ -32,3 +32,8 @@
   (global-set-key (kbd "C-c D") 'semantic-ia-describe-class)
   (global-set-key (kbd "C-c c") 'semantic-ia-complete-symbol)
   (global-set-key (kbd "C-c t") 'eassist-switch-h-cpp))
+
+
+;; Spell check the current word
+(global-set-key "\C-c\C-w" 'ispell-word)
+
