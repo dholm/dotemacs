@@ -1,7 +1,7 @@
 ;; (Utilities) ;;
 
 ;; CEDET
-(load-file "~/.emacs.d/cedet/common/cedet.el")
+(load-file "~/.emacs.d/vendor/cedet/common/cedet.el")
 (when (featurep 'cedet)
   (global-ede-mode 1)
   (semantic-load-enable-minimum-features)
@@ -26,7 +26,7 @@
 
 
 ;; Browsable kill ring
-(setq load-path (cons "~/.emacs.d/browse-kill-ring" load-path))
+(setq load-path (cons "~/.emacs.d/vendor/browse-kill-ring" load-path))
 (when (require 'browse-kill-ring nil 'noerror)
   (browse-kill-ring-default-keybindings))
 
@@ -49,7 +49,7 @@
 
 
 ;; Magit advanced Git integration
-(setq load-path (cons "~/.emacs.d/magit" load-path))
+(setq load-path (cons "~/.emacs.d/vendor/magit" load-path))
 (require 'magit)
 
 

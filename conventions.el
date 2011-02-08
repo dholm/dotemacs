@@ -10,7 +10,7 @@
 
 
 ;; Enable automatic detection of indentation style
-(setq load-path (cons "~/.emacs.d/dtrt-indent" load-path))
+(setq load-path (cons "~/.emacs.d/vendor/dtrt-indent" load-path))
 (add-hook 'c-mode-common-hook
   (lambda()
     (require 'dtrt-indent)

@@ -1,12 +1,12 @@
-[submodule "dtrt-indent"]
+[submodule "vendor/dtrt-indent"]
 	path = vendor/dtrt-indent
 	url = git://git.savannah.nongnu.org/dtrt-indent.git
-[submodule "magit"]
+[submodule "vendor/magit"]
 	path = vendor/magit
 	url = git://github.com/philjackson/magit.git
-[submodule "browse-kill-ring"]
+[submodule "vendor/browse-kill-ring"]
 	path = vendor/browse-kill-ring
 	url = git://github.com/emacsmirror/browse-kill-ring.git
-[submodule "cedet"]
+[submodule "vendor/cedet"]
 	path = vendor/cedet
 	url = git://github.com/emacsmirror/cedet.git
