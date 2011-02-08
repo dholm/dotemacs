@@ -1,5 +1,10 @@
 ;; (Key Bindings) ;;
 
+;; Function keys
+(global-set-key [f3] 'shell)
+(global-set-key [f7] 'compile)
+
+
 ;; Alias C-x C-m to M-x which is a bit awkward to reach
 (global-set-key "\C-x\C-m" 'execute-extended-command)
 
