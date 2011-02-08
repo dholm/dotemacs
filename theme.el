@@ -29,3 +29,7 @@
 
 ;; Show matching parenthesis
 (show-paren-mode 1)
+
+
+;; Prefer using UTF-8 encoding
+(prefer-coding-system 'utf-8)
