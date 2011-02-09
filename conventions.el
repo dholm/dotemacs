@@ -4,6 +4,15 @@
 (setq c-default-style "K&R")
 (setq c++-default-style "Stroustrup")
 
+;; Override the indentation level of case labels in the K&R- and Stroustrup
+;; styles so that they are indented one level beyond the switch.
+(add-hook 'c-mode-common-hook
+  (lambda()
+    (c-set-offset 'case-label '+)))
+(add-hook 'c++-mode-common-hook
+  (lambda()
+    (c-set-offset 'case-label '+)))
+
 
 ;; Load the Google C/C++ style
 (require 'google-c-style)
