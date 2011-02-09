@@ -17,8 +17,8 @@
 ;; Cycle through all buffers with Ctrl-Tab
 (global-set-key (kbd "C-<tab>") 'stesla-rotate-buffers)
 (global-set-key (kbd "C-M-<tab>") (lambda ()
-  (interactive)
-    (stesla-rotate-buffers -1)))
+				    (interactive)
+				    (stesla-rotate-buffers -1)))
 
 
 ;; Show line numbers with F6
