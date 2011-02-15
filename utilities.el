@@ -53,6 +53,13 @@
 (require 'magit)
 
 
+;; Yet Another Snippet extension
+(setq load-path (cons "~/.emacs.d/vendor/yasnippet" load-path))
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/vendor/yasnippet/snippets")
+
+
 ;; Enable both HippieCompletion and indent for tab
 (defun indent-or-complete ()
   "Complete if point is at end of a word, otherwise indent line."
