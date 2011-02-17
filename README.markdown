@@ -19,3 +19,4 @@ Which modules are included?
  * [Magit](http://zagadka.vm.bytemark.co.uk/magit/), Emacs git integration.
  * [CEDET](http://cedet.sourceforge.net/), Collection of Emacs Development Environment Tools.
  * [YASnippet](http://yasnippet.googlecode.com/), Yet Another Snippet extension.
+ * [tcom Allows Emacs as Editor for MS Outlook](http://wiki.tcl.tk/9198), by utilizing Tcl and its tcom extension it is possible to roundtrip Outlook e-mails using Emacs.

@@ -100,3 +100,8 @@
 	try-expand-dabbrev-from-kill
 	try-expand-all-abbrevs
 	try-expand-line))
+
+
+;; If running on windows load Outlook Edit
+(if (eq system-type 'windows-nt)
+    (require 'outlookedit))
