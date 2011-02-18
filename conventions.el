@@ -28,3 +28,9 @@
 	  (lambda()
 	    (require 'dtrt-indent)
 	    (dtrt-indent-mode t)))
+
+
+;; (Text Conventions) ;;
+
+;; When using fill-paragraph or auto-fill-mode break lines at 80 characters
+(setq-default fill-column 80)
