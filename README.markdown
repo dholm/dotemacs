@@ -5,16 +5,16 @@ How do I install it?
 --------------------
 
 Clone the project from git://github.com/dholm/dotemacs.git and symbolically link
-the cloned directory <i>dotemacs</i> to <i>$HOME/.emacs.d</i>. Alternatively you
-can just clone it right into <i>.emacs.d</i>. From the repository path
-initialize the submodules by executing <i>git submodule init</i> followed by
-<i>git submodule update</i> which will pull in all the submodules. If you are
+the cloned directory *dotemacs* to *$HOME/.emacs.d*. Alternatively you
+can just clone it right into *.emacs.d*. From the repository path
+initialize the submodules by executing *git submodule init* followed by
+*git submodule update* which will pull in all the submodules. If you are
 not using GNU Emacs check out the EmacsWiki page on
 [InitFile](http://www.emacswiki.org/emacs/InitFile) for instructions on how to
-help your Emacs implementation locate <i>init.el</i>.
+help your Emacs implementation locate *init.el*.
 
-CEDET needs to be compiled before execution so change into <i>dotemacs/cedet</i>
-and run <i>make</i>.
+CEDET needs to be compiled before execution so change into *dotemacs/cedet*
+and run *make*.
 
 After performing the aforementioned steps you should now be able to launch Emacs
 and enjoy all the packaged configuration goodies.
@@ -31,8 +31,8 @@ Configured key-bindings
    Overrides the normal kill-region in an attempt to emulate the functionality
    of your standard terminal.
  * (C-x C-k) Kill region
- * (C-<tab>) Cycle through buffers
- * (C-M-<tab>) Cycle through buffers in reverse order
+ * (C-TAB) Cycle through buffers
+ * (C-M-TAB) Cycle through buffers in reverse order
  * (C-c .) Jump to the tag referred to at the cursor
  * (C-c d) Display the code-level documentation for the symbol at the cursor
  * (C-c D) Display all known parts for the datatype at the cursor
