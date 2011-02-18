@@ -3,6 +3,7 @@
 ;; Function keys
 (global-set-key [f3] 'shell)
 (global-set-key [f7] 'compile)
+(global-set-key [f8] 'gdb)
 
 
 ;; Alias C-x C-m to M-x which is a bit awkward to reach
