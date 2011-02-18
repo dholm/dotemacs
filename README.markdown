@@ -26,7 +26,7 @@ Configured key-bindings
  * (F6) Show line numbers
  * (F7) Compile
  * (F8) Execute GDB (gud-mode)
-
+---
  * (C-x C-m) Alias to M-x which is easier to reach
  * (C-w) Kill word backwards
    Overrides the normal kill-region in an attempt to emulate the functionality
@@ -34,7 +34,7 @@ Configured key-bindings
  * (C-x C-k) Kill region
  * (C-<tab>) Cycle through buffers
  * (C-M-<tab>) Cycle through buffers in reverse order
-
+---
  * (C-c .) Jump to the tag referred to at the cursor
  * (C-c d) Display the code-level documentation for the symbol at the cursor
  * (C-c D) Display all known parts for the datatype at the cursor
@@ -46,7 +46,7 @@ Configured key-bindings
 
 New functions
 -------------
- * close-all-buffers Will close all currently open buffers
+ * *close-all-buffers* Will close all currently open buffers
 
  
 Which external modules are included?
