@@ -20,8 +20,37 @@ After performing the aforementioned steps you should now be able to launch Emacs
 and enjoy all the packaged configuration goodies.
 
 
-Which modules are included?
----------------------------
+Configured key-bindings
+-----------------------
+ * (F3) Execute a shell
+ * (F6) Show line numbers
+ * (F7) Compile
+ * (F8) Execute GDB (gud-mode)
+
+ * (C-x C-m) Alias to M-x which is easier to reach
+ * (C-w) Kill word backwards
+   Overrides the normal kill-region in an attempt to emulate the functionality
+   of your standard terminal.
+ * (C-x C-k) Kill region
+ * (C-<tab>) Cycle through buffers
+ * (C-M-<tab>) Cycle through buffers in reverse order
+
+ * (C-c .) Jump to the tag referred to at the cursor
+ * (C-c d) Display the code-level documentation for the symbol at the cursor
+ * (C-c D) Display all known parts for the datatype at the cursor
+ * (C-c c) Smart code completion
+ * (C-c t) Switch between the header and the implementation (for languages where
+   such a concept exists)
+ * (C-c C-w) Spell check the current word
+
+
+New functions
+-------------
+ * close-all-buffers Will close all currently open buffers
+
+ 
+Which external modules are included?
+------------------------------------
 
  * [browse-kill-ring](http://www.todesschaf.org/projects/bkr), makes it possible
    to browse through your kill ring
