@@ -1,7 +1,8 @@
 ;; (Utilities) ;;
 
 ;; CEDET
-(load-file "~/.emacs.d/vendor/cedet/common/cedet.el")
+(if (file-readable-p (expand-file-name "~/.emacs.d/vendor/cedet/common/cedet.elc"))
+    (load-file "~/.emacs.d/vendor/cedet/common/cedet.el"))
 (when (featurep 'cedet)
   (global-ede-mode 1)
   (semantic-load-enable-minimum-features)
