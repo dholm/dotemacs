@@ -1,6 +1,11 @@
 ;; (Theme) ;;
 
+;; Load the support package for color themes
+(setq load-path (cons "~/.emacs.d/vendor/color-theme" load-path))
+(require 'color-theme)
+
 ;; Load and set the color theme "Subdued"
+(setq load-path (cons "~/.emacs.d/vendor/color-theme-subdued" load-path))
 (require 'color-theme-subdued)
 (color-theme-subdued)
 
