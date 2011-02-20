@@ -15,6 +15,7 @@
 
 
 ;; Load the Google C/C++ style
+(setq load-path (cons "~/.emacs.d/vendor/google-c-style" load-path))
 (require 'google-c-style)
 
 
