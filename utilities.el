@@ -100,4 +100,5 @@
 
 ;; If running on windows load Outlook Edit
 (if (eq system-type 'windows-nt)
-    (require 'outlookedit))
+    ((setq load-path (cons "~/.emacs.d/vendor/outlookedit" load-path))
+     (require 'outlookedit)))

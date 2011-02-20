@@ -25,3 +25,6 @@
 [submodule "vendor/linum"]
 	path = vendor/linum
 	url = git://github.com/emacsmirror/linum.git
+[submodule "vendor/outlookedit"]
+	path = vendor/outlookedit
+	url = git://github.com/dholm/outlookedit.git
