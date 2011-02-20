@@ -8,6 +8,7 @@
 
 ;; Alias C-x C-m to M-x which is a bit awkward to reach
 (global-set-key "\C-x\C-m" 'execute-extended-command)
+(global-set-key "\C-c\C-m" 'execute-extended-command)
 
 
 ;; Delete words with C-w and rebind kill region to C-x C-k

@@ -27,6 +27,7 @@ Configured key-bindings
  * (F7) Compile
  * (F8) Execute GDB (gud-mode)
  * (C-x C-m) Alias to M-x which is easier to reach
+ * (C-c C-m) Another alias to M-x
  * (C-w) Kill word backwards
    Overrides the normal kill-region in an attempt to emulate the functionality
    of your standard terminal.
