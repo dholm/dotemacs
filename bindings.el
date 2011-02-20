@@ -15,13 +15,6 @@
 (global-set-key "\C-x\C-k" 'kill-region)
 
 
-;; Cycle through all buffers with Ctrl-Tab
-(global-set-key (kbd "C-<tab>") 'stesla-rotate-buffers)
-(global-set-key (kbd "C-M-<tab>") (lambda ()
-				    (interactive)
-				    (stesla-rotate-buffers -1)))
-
-
 ;; Show line numbers with F6
 (global-set-key (kbd "<f6>") 'linum-mode)
 

@@ -21,10 +21,6 @@
 (setq column-number-mode t)
 
 
-;; Enable support for cycling through open buffers
-(require 'stesla-rotate-buffers)
-
-
 ;; Browsable kill ring
 (setq load-path (cons "~/.emacs.d/vendor/browse-kill-ring" load-path))
 (when (require 'browse-kill-ring nil 'noerror)

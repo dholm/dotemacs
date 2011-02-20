@@ -31,8 +31,6 @@ Configured key-bindings
    Overrides the normal kill-region in an attempt to emulate the functionality
    of your standard terminal.
  * (C-x C-k) Kill region
- * (C-TAB) Cycle through buffers
- * (C-M-TAB) Cycle through buffers in reverse order
  * (C-c .) Jump to the tag referred to at the cursor
  * (C-c d) Display the code-level documentation for the symbol at the cursor
  * (C-c D) Display all known parts for the datatype at the cursor
