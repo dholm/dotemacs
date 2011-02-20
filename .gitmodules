@@ -22,3 +22,6 @@
 [submodule "vendor/google-c-style"]
 	path = vendor/google-c-style
 	url = git://github.com/emacsmirror/google-c-style.git
+[submodule "vendor/linum"]
+	path = vendor/linum
+	url = git://github.com/emacsmirror/linum.git

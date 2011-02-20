@@ -32,7 +32,7 @@
 
 
 ;; Support showing line numbers to the left of the code
-;; http://stud4.tuwien.ac.at/~e0225855/linum/linum.html
+(setq load-path (cons "~/.emacs.d/vendor/linum" load-path))
 (require 'linum)
 
 
