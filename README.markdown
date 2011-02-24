@@ -22,6 +22,9 @@ and enjoy all the packaged configuration goodies.
 
 Configured key-bindings
 -----------------------
+ * (C-h b) Describe all key bindings, this is a standard binding that is highly
+   useful.
+
  * (F3) Execute a shell
  * (F6) Show line numbers
  * (F7) Compile
