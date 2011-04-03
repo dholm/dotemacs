@@ -61,3 +61,5 @@ Which external modules are included?
  * [tcom Allows Emacs as Editor for MS Outlook](http://wiki.tcl.tk/9198), by
    utilizing Tcl and its tcom extension it is possible to roundtrip Outlook
    e-mails using Emacs.
+ * [lusty-explorer](http://www.emacsmirror.org/package/lusty-explorer.html),
+   provides an excellent little file browser buffer for quickly locating files.

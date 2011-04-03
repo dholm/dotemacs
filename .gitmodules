@@ -28,3 +28,6 @@
 [submodule "vendor/outlookedit"]
 	path = vendor/outlookedit
 	url = git://github.com/dholm/outlookedit.git
+[submodule "vendor/lusty-emacs"]
+	path = vendor/lusty-emacs
+	url = git://github.com/sjbach/lusty-emacs.git

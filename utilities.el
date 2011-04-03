@@ -103,3 +103,8 @@
 (setq load-path (cons "~/.emacs.d/vendor/outlookedit" load-path))
 (if (eq system-type 'windows-nt)
     (require 'outlookedit))
+
+
+;; LustyExplorer
+(setq load-path (cons "~/.emacs.d/vendor/lusty-emacs" load-path))
+(require 'lusty-explorer)
