@@ -15,6 +15,7 @@
 (add-hook 'c-mode-common-hook 'load-cedet)
 (add-hook 'emacs-lisp-mode-hook 'load-cedet)
 (add-hook 'lisp-mode-hook 'load-cedet)
+(setq semanticdb-default-save-directory "~/.emacs.cache/semanticdb")
 
 ;; Close all open buffers
 (defun close-all-buffers ()
