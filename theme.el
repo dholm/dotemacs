@@ -14,10 +14,6 @@
 (set-face-foreground 'font-lock-comment-delimiter-face "red")
 
 
-;; Do not show the splash screen
-(setq inhibit-splash-screen t)
-
-
 ;; Remove all the mouse-assisted crud
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
