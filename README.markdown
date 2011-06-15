@@ -49,8 +49,6 @@ New functions
 Which external modules are included?
 ------------------------------------
 
- * [browse-kill-ring](http://www.todesschaf.org/projects/bkr), makes it possible
-   to browse through your kill ring
  * [dtrt-indent](http://savannah.nongnu.org/projects/dtrt-indent/), a minor mode
    which attempts to guess the correct indentation based on the loaded source
    file.
