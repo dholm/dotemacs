@@ -2,6 +2,8 @@
 (setq load-path (cons "~/.emacs.d" load-path))
 (setq load-path (cons "~/.emacs.d/vendor" load-path))
 
+(push "~/.emacs.d/vendor/bin" exec-path)
+
 (load "emacs")
 (load "theme")
 (load "utilities")

@@ -28,3 +28,6 @@
 [submodule "vendor/lusty-emacs"]
 	path = vendor/lusty-emacs
 	url = git://github.com/sjbach/lusty-emacs.git
+[submodule "vendor/xcscope"]
+	path = vendor/xcscope
+	url = git://github.com/dholm/xcscope.git

@@ -64,3 +64,5 @@ Which external modules are included?
    e-mails using Emacs.
  * [lusty-explorer](http://www.emacsmirror.org/package/lusty-explorer.html),
    provides an excellent little file browser buffer for quickly locating files.
+ * [XCscope](http://cscope.sourceforge.net/), Darryl Okahatas xcscope.el comes
+   with the cscope package.

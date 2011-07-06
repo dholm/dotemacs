@@ -17,6 +17,10 @@
 (add-hook 'lisp-mode-hook 'load-cedet)
 (setq semanticdb-default-save-directory "~/.emacs.cache/semanticdb")
 
+;; XCscope
+(setq load-path (cons "~/.emacs.d/vendor/xcscope" load-path))
+(require 'xcscope)
+
 ;; Close all open buffers
 (defun close-all-buffers ()
   (interactive)
