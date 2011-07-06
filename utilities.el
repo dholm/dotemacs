@@ -118,3 +118,5 @@
 ;; LustyExplorer
 (setq load-path (cons "~/.emacs.d/vendor/lusty-emacs" load-path))
 (require 'lusty-explorer)
+(global-set-key "\C-x\C-f" 'lusty-file-explorer)
+(global-set-key "\C-xb" 'lusty-buffer-explorer)

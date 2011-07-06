@@ -42,7 +42,8 @@ Configured key-bindings
  * (C-c t) Switch between the header and the implementation (for languages where
    such a concept exists)
  * (C-c C-w) Spell check the current word
-
+ * (C-x C-f) Lusty file explorer
+ * (C-x b) Lusty buffer explorer
 
 New functions
 -------------
