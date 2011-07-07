@@ -1,6 +1,7 @@
 ;; (Utilities) ;;
 
 ;; CEDET
+(setq load-path (cons "~/.emacs.d/vendor/cedet/common" load-path))
 (defun load-cedet ()
 	"When called cedet will be loaded if it is available"
 	(if (file-readable-p (expand-file-name "~/.emacs.d/vendor/cedet/common/cedet.elc"))
