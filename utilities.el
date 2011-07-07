@@ -26,6 +26,12 @@
 (setq load-path (cons "~/.emacs.d/vendor/xcscope" load-path))
 (require 'xcscope)
 
+
+;; Enable automatic detection of indentation style
+(setq load-path (cons "~/.emacs.d/vendor/dtrt-indent" load-path))
+(require 'dtrt-indent)
+
+
 ;; Close all open buffers
 (defun close-all-buffers ()
   (interactive)
@@ -51,10 +57,6 @@
 ;; Show trailing whitespace and delete it on save in c- and c++-mode
 (setq show-trailing-whitespace t)
 (add-hook 'c-mode-common-hook
-	  (lambda()
-	    (add-hook 'before-save-hook
-		      'delete-trailing-whitespace nil t)))
-(add-hook 'c++-mode-common-hook
 	  (lambda()
 	    (add-hook 'before-save-hook
 		      'delete-trailing-whitespace nil t)))

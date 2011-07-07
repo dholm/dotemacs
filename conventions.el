@@ -7,10 +7,7 @@
 ;; Override the indentation level of case labels in the K&R- and Stroustrup
 ;; styles so that they are indented one level beyond the switch.
 (add-hook 'c-mode-common-hook
-	  (lambda()
-	    (c-set-offset 'case-label '+)))
-(add-hook 'c++-mode-common-hook
-	  (lambda()
+	  (lambda ()
 	    (c-set-offset 'case-label '+)))
 
 
@@ -19,16 +16,19 @@
 (require 'google-c-style)
 
 
-;; Enable automatic detection of indentation style
-(setq load-path (cons "~/.emacs.d/vendor/dtrt-indent" load-path))
+;; Enable installed helpers for C/C++
 (add-hook 'c-mode-common-hook
-	  (lambda()
-	    (require 'dtrt-indent)
-	    (dtrt-indent-mode t)))
-(add-hook 'c++-mode-common-hook
-	  (lambda()
-	    (require 'dtrt-indent)
-	    (dtrt-indent-mode t)))
+	  (lambda ()
+	    ;; Run spell-checker on strings and comments
+	    (flyspell-prog-mode)
+	    ;; Separate camel-case into separate words
+	    (subword-mode t)
+	    (when (featurep 'cedet)
+	      ;; Use semantic as a source for auto complete
+	      (setq ac-sources (append ac-sources '(ac-source-semantic))))
+	    (when (featurep 'dtrt-indent)
+	      ;; Enable dtrt-indent to attempt to identify the indentation rules used
+	      (dtrt-indent-mode t))))
 
 
 ;; (Text Conventions) ;;
