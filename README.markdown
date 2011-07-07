@@ -53,6 +53,9 @@ New functions
 Which external modules are included?
 ------------------------------------
 
+ * [auto-complete](http://cx4a.org/software/auto-complete/), Auto Complete Mode
+   renews an old completion interface and provides an environment that helps
+   users concentrate on their own work.
  * [dtrt-indent](http://savannah.nongnu.org/projects/dtrt-indent/), a minor mode
    which attempts to guess the correct indentation based on the loaded source
    file.
