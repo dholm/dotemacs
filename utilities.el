@@ -2,21 +2,18 @@
 
 ;; CEDET
 (setq load-path (cons "~/.emacs.d/vendor/cedet/common" load-path))
-(defun load-cedet ()
-	"When called cedet will be loaded if it is available"
-	(if (file-readable-p (expand-file-name "~/.emacs.d/vendor/cedet/common/cedet.elc"))
-	    (unless (featurep 'cedet)
-	      (load-file "~/.emacs.d/vendor/cedet/common/cedet.el")
-	      (when (featurep 'cedet)
-		(global-ede-mode 1)
-		(semantic-load-enable-minimum-features)
-		(semantic-load-enable-code-helpers)
-		(semantic-load-enable-gaudy-code-helpers)
-		(global-srecode-minor-mode 1)))))
-(add-hook 'c-mode-common-hook 'load-cedet)
-(add-hook 'emacs-lisp-mode-hook 'load-cedet)
-(add-hook 'lisp-mode-hook 'load-cedet)
-(setq semanticdb-default-save-directory "~/.emacs.cache/semanticdb")
+(if (file-readable-p (expand-file-name "~/.emacs.d/vendor/cedet/common/cedet.elc"))
+    (unless (featurep 'cedet)
+      (require 'cedet)
+      (when (featurep 'cedet)
+	(global-ede-mode 1)
+	(setq semantic-clang-binary "clang")
+	(semantic-load-enable-minimum-features)
+	(semantic-load-enable-code-helpers)
+	(semantic-load-enable-gaudy-code-helpers)
+	(semantic-load-enable-primary-exuberent-ctags-support)
+	(global-srecode-minor-mode 1)
+	(setq semanticdb-default-save-directory "~/.emacs.cache/semanticdb"))))
 
 
 ;; auto-complete-mode offers superior code completion over existing tools
