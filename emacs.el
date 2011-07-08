@@ -11,3 +11,7 @@
 
 ; Emacs will create the backup dir automatically, but not the autosaves dir
 (make-directory "~/.emacs.cache/autosaves/" t)
+
+
+;; Default to UTF-8
+(prefer-coding-system 'utf-8)
