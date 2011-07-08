@@ -19,6 +19,7 @@
 ;; auto-complete-mode offers superior code completion over existing tools
 (setq load-path (cons "~/.emacs.d/vendor/auto-complete" load-path))
 (require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/vendor/auto-complete/ac-dict")
 (ac-config-default)
 
 
