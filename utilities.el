@@ -120,3 +120,12 @@
 (require 'lusty-explorer)
 (global-set-key "\C-x\C-f" 'lusty-file-explorer)
 (global-set-key "\C-xb" 'lusty-buffer-explorer)
+
+
+;; Wind Move enables window navigation
+(require 'windmove)
+(windmove-default-keybindings 'super)
+(global-set-key (kbd "<C-s-left>") 'windmove-left)
+(global-set-key (kbd "<C-s-right>") 'windmove-right)
+(global-set-key (kbd "<C-s-up>") 'windmove-up)
+(global-set-key (kbd "<C-s-down>") 'windmove-down)
