@@ -129,3 +129,9 @@
 (global-set-key (kbd "<C-s-right>") 'windmove-right)
 (global-set-key (kbd "<C-s-up>") 'windmove-up)
 (global-set-key (kbd "<C-s-down>") 'windmove-down)
+
+
+;; Visualize undo history as a tree structure
+(setq load-path (cons "~/.emacs.d/vendor/undo-tree" load-path))
+(require 'undo-tree)
+(global-undo-tree-mode)

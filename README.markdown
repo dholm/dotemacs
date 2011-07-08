@@ -70,3 +70,5 @@ Which external modules are included?
    provides an excellent little file browser buffer for quickly locating files.
  * [XCscope](http://cscope.sourceforge.net/), Darryl Okahatas xcscope.el comes
    with the cscope package.
+ * [undo-tree](http://www.dr-qubit.org/emacs.php), visualize and navigate
+   Emacs' undo history in a tree.
