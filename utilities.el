@@ -54,14 +54,6 @@
 (require 'linum)
 
 
-;; Show trailing whitespace and delete it on save in c- and c++-mode
-(setq show-trailing-whitespace t)
-(add-hook 'c-mode-common-hook
-	  (lambda()
-	    (add-hook 'before-save-hook
-		      'delete-trailing-whitespace nil t)))
-
-
 ;; Magit advanced Git integration
 (setq load-path (cons "~/.emacs.d/vendor/magit" load-path))
 (require 'magit)
