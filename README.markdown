@@ -13,11 +13,15 @@ not using GNU Emacs check out the EmacsWiki page on
 [InitFile](http://www.emacswiki.org/emacs/InitFile) for instructions on how to
 help your Emacs implementation locate *init.el*.
 
-CEDET needs to be compiled before execution so change into *dotemacs/cedet*
-and run *make*.
+CEDET needs to be compiled before execution so change into *vendor/cedet* and
+run *make*.
 
 After performing the aforementioned steps you should now be able to launch Emacs
 and enjoy all the packaged configuration goodies.
+
+To keep the submodules up-to-date remember to occasionally run *git submodule
+foreach git pull* and recompile packages that were updated and require it,
+such as *vendor/cedet*.
 
 
 Configured key-bindings
