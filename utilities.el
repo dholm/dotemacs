@@ -21,6 +21,8 @@
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/vendor/auto-complete/ac-dict")
 (ac-config-default)
+;; Store the completion history in the cache directory
+(setq ac-comphist-file "~/.emacs.cache/ac-comphist.dat")
 
 
 ;; XCscope

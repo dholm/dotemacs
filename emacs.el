@@ -8,9 +8,12 @@
  '(auto-save-file-name-transforms '((".*" "~/.emacs.cache/autosaves/\\1" t)))
  '(backup-directory-alist '((".*" . "~/.emacs.cache/backups/"))))
 
-
-; Emacs will create the backup dir automatically, but not the autosaves dir
+;; Emacs will create the backup dir automatically, but not the autosaves dir
 (make-directory "~/.emacs.cache/autosaves/" t)
+
+
+;; Put session backups into the cache directory
+(setq auto-save-list-file-prefix "~/.emacs.cache/auto-save-list/.saves-")
 
 
 ;; Default to UTF-8
