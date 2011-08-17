@@ -16,10 +16,6 @@
 (global-set-key "\C-x\C-k" 'kill-region)
 
 
-;; Show line numbers with F6
-(global-set-key (kbd "<f6>") 'linum-mode)
-
-
 ;; Setup bindings for CEDET if it is available
 (when (featurep 'cedet)
   (global-set-key (kbd "C-c .") 'semantic-ia-fast-jump)

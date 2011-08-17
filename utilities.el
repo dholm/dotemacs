@@ -52,11 +52,6 @@
   (browse-kill-ring-default-keybindings))
 
 
-;; Support showing line numbers to the left of the code
-(setq load-path (cons "~/.emacs.d/vendor/linum" load-path))
-(require 'linum)
-
-
 ;; Magit advanced Git integration
 (setq load-path (cons "~/.emacs.d/vendor/magit" load-path))
 (require 'magit)
