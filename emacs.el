@@ -14,11 +14,3 @@
 
 ;; Put session backups into the cache directory
 (setq auto-save-list-file-prefix "~/.emacs.cache/auto-save-list/.saves-")
-
-
-;; Default to UTF-8
-(prefer-coding-system 'utf-8)
-
-
-;; Properly display colors in shell
-(ansi-color-for-comint-mode-on)

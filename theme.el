@@ -43,3 +43,7 @@
 (setq search-highlight t        ; Highlight all visible matches
       query-replace-highlight t ; Highlight all visible matches
       transient-mark-mode t)    ; Perform certain commands only on the marked region
+
+
+;; Properly display colors in shell
+(ansi-color-for-comint-mode-on)
