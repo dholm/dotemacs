@@ -37,3 +37,6 @@
 [submodule "vendor/multi-term"]
 	path = vendor/multi-term
 	url = git://github.com/emacsmirror/multi-term.git
+[submodule "vendor/zenburn-emacs"]
+	path = vendor/zenburn-emacs
+	url = git://github.com/bbatsov/zenburn-emacs.git

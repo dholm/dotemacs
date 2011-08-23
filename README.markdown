@@ -78,3 +78,5 @@ Which external modules are included?
    Emacs' undo history in a tree.
  * [MultiTerm](http://www.emacswiki.org/MultiTerm), an improved Emacs terminal
    that handles multiple terminal buffers very well.
+ * [Zenburn](http://github.com/bbatsov/zenburn-emacs), a direct port of the
+   low-contrast Zenburn theme for vim.
