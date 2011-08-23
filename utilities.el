@@ -132,3 +132,8 @@
 (setq load-path (cons "~/.emacs.d/vendor/undo-tree" load-path))
 (require 'undo-tree)
 (global-undo-tree-mode)
+
+
+;; MultiTerm terminal
+(setq load-path (cons "~/.emacs.d/vendor/multi-term" load-path))
+(require 'multi-term)

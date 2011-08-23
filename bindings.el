@@ -1,7 +1,7 @@
 ;; (Key Bindings) ;;
 
 ;; Function keys
-(global-set-key [f3] 'shell)
+(global-set-key [f3] 'multi-term-dedicated-toggle)
 (global-set-key [f7] 'compile)
 (global-set-key [f8] 'gdb)
 

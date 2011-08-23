@@ -29,7 +29,7 @@ Configured key-bindings
  * (C-h b) Describe all key bindings, this is a standard binding that is highly
    useful.
 
- * (F3) Execute a shell
+ * (F3) Toggle the dedicated MultiTerm window
  * (F6) Show line numbers
  * (F7) Compile
  * (F8) Execute GDB (gud-mode)
@@ -76,3 +76,5 @@ Which external modules are included?
    with the cscope package.
  * [undo-tree](http://www.dr-qubit.org/emacs.php), visualize and navigate
    Emacs' undo history in a tree.
+ * [MultiTerm](http://www.emacswiki.org/MultiTerm), an improved Emacs terminal
+   that handles multiple terminal buffers very well.
