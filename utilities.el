@@ -150,3 +150,15 @@
 (setq load-path (cons "~/.emacs.d/vendor/tabbar" load-path))
 (require 'tabbar)
 (tabbar-mode)
+
+
+;; Save/restore the position in Emacs buffers between sessions
+(setq save-place-file "~/.emacs.cache/saveplace")
+(setq-default save-place t)
+(require 'saveplace)
+
+
+;; Save/restore the history of various Emacs minibuffers
+(setq savehist-additional-variables '(search-ring regexp-search-ring kill-ring))
+(setq savehist-file "~/.emacs.cache/savehist")
+(savehist-mode t)
