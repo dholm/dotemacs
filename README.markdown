@@ -80,3 +80,5 @@ Which external modules are included?
    that handles multiple terminal buffers very well.
  * [Zenburn](http://github.com/bbatsov/zenburn-emacs), a direct port of the
    low-contrast Zenburn theme for vim.
+ * [TabBarMode](http://www.emacswiki.org/emacs/TabBarMode), provides a minor
+   mode which will display open buffers as a tab bar at the top.

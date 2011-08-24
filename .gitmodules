@@ -40,3 +40,6 @@
 [submodule "vendor/zenburn-emacs"]
 	path = vendor/zenburn-emacs
 	url = git://github.com/bbatsov/zenburn-emacs.git
+[submodule "vendor/tabbar"]
+	path = vendor/tabbar
+	url = git://github.com/dholm/tabbar.git

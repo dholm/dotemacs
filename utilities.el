@@ -144,3 +144,9 @@
 (setq
  uniquify-buffer-name-style 'post-forward
  uniquify-separator ":")
+
+
+;; Enable TabBar minor mode
+(setq load-path (cons "~/.emacs.d/vendor/tabbar" load-path))
+(require 'tabbar)
+(tabbar-mode)
