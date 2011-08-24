@@ -19,10 +19,23 @@
 ;; auto-complete-mode offers superior code completion over existing tools
 (setq load-path (cons "~/.emacs.d/vendor/auto-complete" load-path))
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/vendor/auto-complete/ac-dict")
+(setq load-path (cons "~/.emacs.d/vendor/auto-complete-clang" load-path))
+(require 'auto-complete-clang)
 (ac-config-default)
+(setq ac-auto-start nil)
+(setq ac-quick-help-delay 0.5)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/vendor/auto-complete/ac-dict")
+(setq-default ac-sources '(ac-source-abbrev ac-source-dictionary
+					    ac-source-words-in-buffer))
+(add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
+(add-hook 'c-mode-common-hook
+	  (lambda ()
+	    (setq ac-sources (append '(ac-source-clang ac-source-yasnippet)
+				     ac-sources))))
+(add-hook 'auto-complete-mode-hook 'ac-common-setup)
 ;; Store the completion history in the cache directory
 (setq ac-comphist-file "~/.emacs.cache/ac-comphist.dat")
+(global-auto-complete-mode t)
 
 
 ;; XCscope

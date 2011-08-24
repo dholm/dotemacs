@@ -46,3 +46,6 @@
 [submodule "vendor/smart-tab"]
 	path = vendor/smart-tab
 	url = git://github.com/genehack/smart-tab.git
+[submodule "vendor/auto-complete-clang"]
+	path = vendor/auto-complete-clang
+	url = git://github.com/brianjcj/auto-complete-clang.git
