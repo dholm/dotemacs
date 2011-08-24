@@ -64,46 +64,10 @@
 (yas/load-directory "~/.emacs.d/vendor/yasnippet/snippets")
 
 
-;; Enable both HippieCompletion and indent for tab
-(defun indent-or-complete ()
-  "Complete if point is at end of a word, otherwise indent line."
-  (interactive)
-  (if (looking-at "\\>")
-      (dabbrev-expand nil)
-    (indent-for-tab-command)))
-
-
-;; Tab completion
-(let (modelist it)
-  (setq modelist '(
-		   'c-mode-common-hook
-		   'lisp-mode-common-hook
-		   'text-mode-hook
-		   'java-mode-hook
-		   'emacs-lisp-mode-hook
-		   'LaTex-mode-hook
-		   'Tex-Mode-hook
-		   'python-mode-hook
-		   'octave-mode-hook))
-  (setq it modelist)
-  (while it
-    (add-hook (eval (car it)) (function
-			       (lambda ()
-				 (local-set-key (kbd "<tab>") 'indent-or-complete))))
-    (add-hook (eval (car it)) (function
-			       (lambda ()
-				 (local-set-key (kbd "TAB") 'indent-or-complete))))
-    (setq it (cdr it))))
-
-
-;; The order that different completes are tested.
-(setq hippie-expand-try-functions-list
-      '(try-expand-dabbrev-visible
-	try-expand-dabbrev
-	try-expand-dabbrev-all-buffers
-	try-expand-dabbrev-from-kill
-	try-expand-all-abbrevs
-	try-expand-line))
+;; SmartTab intelligent tab completion control
+(setq load-path (cons "~/.emacs.d/vendor/smart-tab" load-path))
+(require 'smart-tab)
+(global-smart-tab-mode)
 
 
 ;; If running on windows load Outlook Edit

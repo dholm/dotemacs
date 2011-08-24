@@ -82,3 +82,5 @@ Which external modules are included?
    low-contrast Zenburn theme for vim.
  * [TabBarMode](http://www.emacswiki.org/emacs/TabBarMode), provides a minor
    mode which will display open buffers as a tab bar at the top.
+ * [SmartTab](http://github.com/genehack/smart-tab), smart tab completion for
+   Emacs.
