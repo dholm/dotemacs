@@ -137,3 +137,10 @@
 ;; MultiTerm terminal
 (setq load-path (cons "~/.emacs.d/vendor/multi-term" load-path))
 (require 'multi-term)
+
+
+;; Make buffer names unique
+(require 'uniquify)
+(setq
+ uniquify-buffer-name-style 'post-forward
+ uniquify-separator ":")
