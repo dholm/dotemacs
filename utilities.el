@@ -12,6 +12,7 @@
 	(semantic-load-enable-code-helpers)
 	(semantic-load-enable-gaudy-code-helpers)
 	(semantic-load-enable-primary-exuberent-ctags-support)
+	(global-semanticdb-minor-mode 1)
 	(global-srecode-minor-mode 1)
 	(setq semanticdb-default-save-directory "~/.emacs.cache/semanticdb"))))
 
