@@ -88,3 +88,5 @@ Which external modules are included?
    mode which will display open buffers as a tab bar at the top.
  * [SmartTab](http://github.com/genehack/smart-tab), smart tab completion for
    Emacs.
+ * [ProfileDotEmacs](http://www.emacswiki.org/emacs/ProfileDotEmacs), will
+   report the amount of time spent during various stages during init.

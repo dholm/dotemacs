@@ -143,3 +143,8 @@
 (setq savehist-additional-variables '(search-ring regexp-search-ring kill-ring))
 (setq savehist-file "~/.emacs.cache/savehist")
 (savehist-mode t)
+
+
+;; When using profile-dotemacs start with init.el
+;; To profile run emacs (-Q) -l ~/.emacs.d/vendor/profile-dotemacs/profile-dotemacs.el -f profile-dotemacs
+(setq profile-dotemacs-file "~/.emacs.d/init.el")

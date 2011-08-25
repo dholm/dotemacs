@@ -49,3 +49,6 @@
 [submodule "vendor/auto-complete-clang"]
 	path = vendor/auto-complete-clang
 	url = git://github.com/brianjcj/auto-complete-clang.git
+[submodule "vendor/profile-dotemacs"]
+	path = vendor/profile-dotemacs
+	url = git://github.com/juergenhoetzel/profile-dotemacs.git
