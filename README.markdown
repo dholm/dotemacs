@@ -49,6 +49,10 @@ Configured key-bindings
  * (C-x C-f) Lusty file explorer
  * (C-x b) Lusty buffer explorer
 
+ * (M-j) Move one tab left in TabBar
+ * (M-k) Move one tab right in TabBar
+
+
 New functions
 -------------
  * *close-all-buffers* Will close all currently open buffers

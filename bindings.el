@@ -34,3 +34,9 @@
 (global-set-key (kbd "\C-r") 'isearch-backward-regexp)
 (global-set-key (kbd "C-M-s") 'isearch-forward)
 (global-set-key (kbd "C-M-r") 'isearch-backward)
+
+
+;; Navigation in tabs
+(when (featurep 'tabbar)
+  (global-set-key (kbd "M-j") 'tabbar-backward)
+  (global-set-key (kbd "M-k") 'tabbar-forward))
