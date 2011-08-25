@@ -28,6 +28,9 @@
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/vendor/auto-complete/ac-dict")
 (setq-default ac-sources '(ac-source-abbrev ac-source-dictionary
 					    ac-source-words-in-buffer))
+(when (featurep 'cedet)
+  ;; Use semantic as a source for auto complete
+  (setq ac-sources '(ac-source-semantic)))
 (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
 (add-hook 'c-mode-common-hook
 	  (lambda ()

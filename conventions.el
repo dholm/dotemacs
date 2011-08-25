@@ -28,9 +28,6 @@
 	    (add-hook 'before-save-hook
 		      ;; Delete trailing whitespace on save
 		      'delete-trailing-whitespace nil t)
-	    (when (featurep 'cedet)
-	      ;; Use semantic as a source for auto complete
-	      (setq ac-sources (append ac-sources '(ac-source-semantic))))
 	    (when (featurep 'dtrt-indent)
 	      ;; Enable dtrt-indent to attempt to identify the indentation rules used
 	      (dtrt-indent-mode t))))
