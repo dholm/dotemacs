@@ -23,20 +23,7 @@
 (when (featurep 'yasnippet)
   (setq yas/snippet-dirs "~/.emacs.d/vendor/yasnippet/snippets")
   (yas/initialize)
-  ;; Load snippets on demand to speed up launching Emacs
-  (add-hook 'c-mode-common-hook
-	    (lambda ()
-	      (yas/load-directory "~/.emacs.d/vendor/yasnippet/snippets/cc-mode")
-	      (yas/load-directory "~/.emacs.d/vendor/yasnippet/snippets/c-mode")))
-  (add-hook 'c++-mode-hook
-	    (lambda ()
-	      (yas/load-directory "~/.emacs.d/vendor/yasnippet/snippets/c++-mode")))
-  (add-hook 'text-mode-hook
-	    (lambda ()
-	      (yas/load-directory "~/.emacs.d/vendor/yasnippet/snippets/text-mode")))
-  (add-hook 'emacs-lisp-mode-hook
-	    (lambda ()
-	      (yas/load-directory "~/.emacs.d/vendor/yasnippet/snippets/emacs-lisp-mode"))))
+  (yas/load-directory yas/snippet-dirs))
 
 
 ;; auto-complete-mode offers superior code completion over existing tools
