@@ -7,9 +7,11 @@
 
 
 ;; Load and set the color theme "Zenburn"
-(setq load-path (cons "~/.emacs.d/vendor/zenburn-emacs" load-path))
-(require 'color-theme-zenburn)
-(color-theme-zenburn)
+(when (featurep 'color-theme)
+  (setq load-path (cons "~/.emacs.d/vendor/zenburn-emacs" load-path))
+  (require 'color-theme-zenburn)
+  (when (featurep 'color-theme-zenburn)
+    (color-theme-zenburn)))
 
 
 ;; Override Darwin
