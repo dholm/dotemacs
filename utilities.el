@@ -160,3 +160,8 @@
 ;; When using profile-dotemacs start with init.el
 ;; To profile run emacs (-Q) -l ~/.emacs.d/vendor/profile-dotemacs/profile-dotemacs.el -f profile-dotemacs
 (setq profile-dotemacs-file "~/.emacs.d/init.el")
+
+
+;; When using gud-mode to debug enable gdb-many-windows and a separate IO buffer
+(setq gdb-many-windows t)
+(setq gdb-use-separate-io-buffer t)
