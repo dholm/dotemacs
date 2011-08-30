@@ -112,11 +112,7 @@
 ;; Wind Move enables window navigation
 (require 'windmove)
 (when (featurep 'windmove)
-  (windmove-default-keybindings 'super)
-  (global-set-key (kbd "<C-s-left>") 'windmove-left)
-  (global-set-key (kbd "<C-s-right>") 'windmove-right)
-  (global-set-key (kbd "<C-s-up>") 'windmove-up)
-  (global-set-key (kbd "<C-s-down>") 'windmove-down))
+  (windmove-default-keybindings))
 
 
 ;; Visualize undo history as a tree structure
