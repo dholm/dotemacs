@@ -163,3 +163,8 @@
 ;; When using gud-mode to debug enable gdb-many-windows and a separate IO buffer
 (setq gdb-many-windows t)
 (setq gdb-use-separate-io-buffer t)
+
+
+;; Fast and simple note taking
+(setq load-path (cons "~/.emacs.d/vendor/deft" load-path))
+(require 'deft)

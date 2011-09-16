@@ -90,3 +90,5 @@ Which external modules are included?
    Emacs.
  * [ProfileDotEmacs](http://www.emacswiki.org/emacs/ProfileDotEmacs), will
    report the amount of time spent during various stages during init.
+ * [Deft](http://jblevins.org/projects/deft/), a fast and simple note taking
+   extensions inspired by Notational Velocity.

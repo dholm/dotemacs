@@ -52,3 +52,6 @@
 [submodule "vendor/profile-dotemacs"]
 	path = vendor/profile-dotemacs
 	url = git://github.com/juergenhoetzel/profile-dotemacs.git
+[submodule "vendor/deft"]
+	path = vendor/deft
+	url = git://jblevins.org/git/deft.git
