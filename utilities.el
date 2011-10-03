@@ -168,3 +168,8 @@
 ;; Fast and simple note taking
 (setq load-path (cons "~/.emacs.d/vendor/deft" load-path))
 (require 'deft)
+
+
+;; Enable vc-clearcase so that VC speaks ClearCase
+(setq load-path (cons "~/.emacs.d/vendor/vc-clearcase" load-path))
+(require 'vc-clearcase)

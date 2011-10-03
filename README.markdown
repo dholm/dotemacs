@@ -92,3 +92,5 @@ Which external modules are included?
    report the amount of time spent during various stages during init.
  * [Deft](http://jblevins.org/projects/deft/), a fast and simple note taking
    extensions inspired by Notational Velocity.
+ * [vc-clearcase](http://code.google.com/p/vc-clearcase/), ClearCase
+   integration which works as a client to the Emacs VC package.

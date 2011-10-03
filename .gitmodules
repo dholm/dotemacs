@@ -55,3 +55,6 @@
 [submodule "vendor/deft"]
 	path = vendor/deft
 	url = git://jblevins.org/git/deft.git
+[submodule "vendor/vc-clearcase"]
+	path = vendor/vc-clearcase
+	url = git://github.com/dholm/vc-clearcase.git
