@@ -15,3 +15,9 @@
 
 ;; Put session backups into the cache directory
 (setq auto-save-list-file-prefix "~/.emacs.cache/auto-save-list/.saves-")
+
+
+;; Redraw the entire screen before checking for pending input events.
+;; This will improve performance in general but might degrade performance of
+;; key repeat.
+(setq redisplay-dont-pause t)
