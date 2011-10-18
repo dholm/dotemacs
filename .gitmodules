@@ -58,3 +58,6 @@
 [submodule "vendor/vc-clearcase"]
 	path = vendor/vc-clearcase
 	url = git://github.com/dholm/vc-clearcase.git
+[submodule "vendor/python-mode"]
+	path = vendor/python-mode
+	url = git://github.com/emacsmirror/python-mode.git

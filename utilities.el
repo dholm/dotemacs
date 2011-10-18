@@ -173,3 +173,11 @@
 ;; Enable vc-clearcase so that VC speaks ClearCase
 (setq load-path (cons "~/.emacs.d/vendor/vc-clearcase" load-path))
 (require 'vc-clearcase)
+
+
+;; Python support via python-mode
+(setq load-path (cons "~/.emacs.d/vendor/python-mode" load-path))
+(setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
+(setq interpreter-mode-alist (cons '("python" . python-mode)
+                                   interpreter-mode-alist))
+(autoload 'python-mode "python-mode" "Python editing mode." t)

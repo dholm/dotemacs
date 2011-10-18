@@ -94,3 +94,4 @@ Which external modules are included?
    extensions inspired by Notational Velocity.
  * [vc-clearcase](http://code.google.com/p/vc-clearcase/), ClearCase
    integration which works as a client to the Emacs VC package.
+ * [python-mode](https://launchpad.net/python-mode), enhanced Python support.
