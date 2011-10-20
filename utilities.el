@@ -173,6 +173,7 @@
 ;; Enable vc-clearcase so that VC speaks ClearCase
 (setq load-path (cons "~/.emacs.d/vendor/vc-clearcase" load-path))
 (require 'vc-clearcase)
+(require 'ucm)
 
 
 ;; Python support via python-mode
