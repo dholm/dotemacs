@@ -17,15 +17,6 @@
   (setq semanticdb-default-save-directory "~/.emacs.cache/semanticdb"))
 
 
-;; Yet Another Snippet extension
-(setq load-path (cons "~/.emacs.d/vendor/yasnippet" load-path))
-(require 'yasnippet)
-(when (featurep 'yasnippet)
-  (setq yas/snippet-dirs "~/.emacs.d/vendor/yasnippet/snippets")
-  (yas/initialize)
-  (yas/load-directory yas/snippet-dirs))
-
-
 ;; auto-complete-mode offers superior code completion over existing tools
 (setq load-path (cons "~/.emacs.d/vendor/auto-complete" load-path))
 (require 'auto-complete-config)
