@@ -11,11 +11,6 @@
 	    (c-set-offset 'case-label '+)))
 
 
-;; Load the Google C/C++ style
-(setq load-path (cons "~/.emacs.d/vendor/google-c-style" load-path))
-(require 'google-c-style)
-
-
 ;; Enable installed helpers for C/C++
 (add-hook 'c-mode-common-hook
 	  (lambda ()
