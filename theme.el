@@ -1,11 +1,6 @@
 ;; (Theme) ;;
 
 
-;; Load the support package for color themes
-(setq load-path (cons "~/.emacs.d/vendor/color-theme" load-path))
-(require 'color-theme)
-
-
 ;; Load and set the color theme "Zenburn"
 (when (featurep 'color-theme)
   (setq load-path (cons "~/.emacs.d/vendor/zenburn-emacs" load-path))
