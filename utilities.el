@@ -173,3 +173,9 @@
 (setq interpreter-mode-alist (cons '("python" . python-mode)
                                    interpreter-mode-alist))
 (autoload 'python-mode "python-mode" "Python editing mode." t)
+
+
+;; View Large File support
+(setq load-path (cons "~/.emacs.d/vendor/vlf" load-path))
+(require 'vlf)
+(setq vlf-batch-size 10485760)

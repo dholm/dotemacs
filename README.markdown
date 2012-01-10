@@ -94,3 +94,5 @@ Which external modules are included?
  * [vc-clearcase](http://code.google.com/p/vc-clearcase/), ClearCase
    integration which works as a client to the Emacs VC package.
  * [python-mode](https://launchpad.net/python-mode), enhanced Python support.
+ * [vlf](http://www.emacswiki.org/emacs/vlf.el), support for viewing very
+   large files.
