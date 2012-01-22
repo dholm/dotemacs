@@ -67,7 +67,7 @@ Which external modules are included?
  * [dtrt-indent](http://savannah.nongnu.org/projects/dtrt-indent/), a minor mode
    which attempts to guess the correct indentation based on the loaded source
    file.
- * [Magit](http://zagadka.vm.bytemark.co.uk/magit/), Emacs git integration.
+ * [Magit](http://philjackson.github.com/magit/), Emacs git integration.
  * [CEDET](http://cedet.sourceforge.net/), Collection of Emacs Development
    Environment Tools.
  * [tcom Allows Emacs as Editor for MS Outlook](http://wiki.tcl.tk/9198), by

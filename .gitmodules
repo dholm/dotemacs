@@ -6,7 +6,7 @@
 	url = git://git.savannah.nongnu.org/dtrt-indent.git
 [submodule "vendor/magit"]
 	path = vendor/magit
-	url = git://github.com/philjackson/magit.git
+	url = git://github.com/magit/magit.git
 [submodule "vendor/cedet"]
 	path = vendor/cedet
 	url = git://github.com/emacsmirror/cedet.git
