@@ -52,3 +52,6 @@
 [submodule "vendor/vlf"]
 	path = vendor/vlf
 	url = git://github.com/emacsmirror/vlf.git
+[submodule "vendor/google-styleguide"]
+	path = vendor/google-styleguide
+	url = git://github.com/dholm/google-styleguide.git
