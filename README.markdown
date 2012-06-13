@@ -16,6 +16,9 @@ help your Emacs implementation locate *init.el*.
 CEDET needs to be compiled before execution so change into *vendor/cedet* and
 run *make*.
 
+If you want to be able to access the ECB online help it has to be built as well
+by running *make -C vendor/ecb online-help*.
+
 After performing the aforementioned steps you should now be able to launch Emacs
 and enjoy all the packaged configuration goodies.
 
@@ -57,7 +60,7 @@ New functions
 -------------
  * *close-all-buffers* Will close all currently open buffers
 
- 
+
 Which external modules are included?
 ------------------------------------
 
@@ -96,3 +99,4 @@ Which external modules are included?
  * [python-mode](https://launchpad.net/python-mode), enhanced Python support.
  * [vlf](http://www.emacswiki.org/emacs/vlf.el), support for viewing very
    large files.
+ * [ECB](http://ecb.sourceforge.net/), the versatile Emacs code browser.

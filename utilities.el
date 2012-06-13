@@ -17,6 +17,13 @@
   (setq semanticdb-default-save-directory "~/.emacs.cache/semanticdb"))
 
 
+;; Emacs Code Browser
+(setq load-path (cons "~/.emacs.d/vendor/ecb" load-path))
+(require 'ecb)
+(when (featurep 'ecb)
+  (custom-set-variables
+    '(ecb-options-version "2.40")))
+
 ;; auto-complete-mode offers superior code completion over existing tools
 (setq load-path (cons "~/.emacs.d/vendor/auto-complete" load-path))
 (require 'auto-complete-config)
