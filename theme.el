@@ -2,10 +2,15 @@
 
 
 ;; Load and set the color theme "Zenburn"
-(setq load-path (cons "~/.emacs.d/vendor/zenburn-emacs" load-path))
-(require 'color-theme-zenburn)
-(when (featurep 'color-theme-zenburn)
-  (color-theme-zenburn))
+(if (>= emacs-major-version 24)
+  (progn
+    (add-to-list 'custom-theme-load-path "~/.emacs.d/vendor/zenburn-emacs")
+    (load-theme 'zenburn t))
+  (progn
+    (setq load-path (cons "~/.emacs.d/vendor/zenburn-emacs" load-path))
+    (require 'color-theme-zenburn)
+    (when (featurep 'color-theme-zenburn)
+    (color-theme-zenburn))))
 
 
 ;; Override Darwin
