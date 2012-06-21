@@ -57,4 +57,4 @@
 	url = git://git.randomsample.de/cedet.git
 [submodule "vendor/ecb"]
 	path = vendor/ecb
-	url = git://github.com/emacsmirror/ecb.git
+	url = git://github.com/alexott/ecb.git

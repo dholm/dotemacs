@@ -99,4 +99,6 @@ Which external modules are included?
  * [python-mode](https://launchpad.net/python-mode), enhanced Python support.
  * [vlf](http://www.emacswiki.org/emacs/vlf.el), support for viewing very
    large files.
- * [ECB](http://ecb.sourceforge.net/), the versatile Emacs code browser.
+ * [ECB](http://ecb.sourceforge.net/), the versatile Emacs code browser. Using
+   a modified version of ECB from [alexott](https://github.com/alexott/ecb)
+   which works with Emacs 24.
