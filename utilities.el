@@ -191,7 +191,7 @@
 ;; View Large File support
 (setq load-path (cons "~/.emacs.d/vendor/vlf" load-path))
 (require 'vlf)
-(setq vlf-batch-size 10485760)
+(setq vlf-batch-size 52428800)
 
 
 ;; Sunrise Commander
