@@ -25,6 +25,11 @@
   (custom-set-variables
     '(ecb-options-version "2.40")))
 
+
+;; Visual popup user interface, required by auto-complete
+(setq load-path (cons "~/.emacs.d/vendor/popup" load-path))
+
+
 ;; auto-complete-mode offers superior code completion over existing tools
 (setq load-path (cons "~/.emacs.d/vendor/auto-complete" load-path))
 (require 'auto-complete-config)

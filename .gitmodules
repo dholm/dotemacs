@@ -58,3 +58,6 @@
 [submodule "vendor/ecb"]
 	path = vendor/ecb
 	url = git://github.com/alexott/ecb.git
+[submodule "vendor/popup"]
+	path = vendor/popup
+	url = git://github.com/m2ym/popup-el.git
