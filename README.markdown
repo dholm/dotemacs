@@ -102,3 +102,5 @@ Which external modules are included?
  * [ECB](http://ecb.sourceforge.net/), the versatile Emacs code browser. Using
    a modified version of ECB from [alexott](https://github.com/alexott/ecb)
    which works with Emacs 24.
+ * [Sunrise Commander](http://www.emacswiki.org/emacs/Sunrise_Commander), a
+   Midnight Commander clone in Emacs.

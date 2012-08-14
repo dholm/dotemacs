@@ -192,3 +192,9 @@
 (setq load-path (cons "~/.emacs.d/vendor/vlf" load-path))
 (require 'vlf)
 (setq vlf-batch-size 10485760)
+
+
+;; Sunrise Commander
+(setq load-path (cons "~/.emacs.d/vendor/sunrise-commander" load-path))
+(require 'sunrise-commander)
+(add-to-list 'auto-mode-alist '("\\.srvm\\'" . sr-virtual-mode))

@@ -61,3 +61,6 @@
 [submodule "vendor/popup"]
 	path = vendor/popup
 	url = git://github.com/m2ym/popup-el.git
+[submodule "vendor/sunrise-commander"]
+	path = vendor/sunrise-commander
+	url = git://github.com/escherdragon/sunrise-commander.git
