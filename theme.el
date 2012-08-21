@@ -48,3 +48,8 @@
 
 ;; Properly display colors in shell
 (ansi-color-for-comint-mode-on)
+
+
+;; Set a better font if running in windowsb
+(if (eq system-type 'windows-nt)
+    (set-default-font "consolas-10"))
