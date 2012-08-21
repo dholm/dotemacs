@@ -36,10 +36,6 @@
 (show-paren-mode t)
 
 
-;; Prefer using UTF-8 encoding
-(prefer-coding-system 'utf-8)
-
-
 ;; Set random parameters
 (setq search-highlight t        ; Highlight all visible matches
       query-replace-highlight t ; Highlight all visible matches
