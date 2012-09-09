@@ -180,14 +180,6 @@
 (require 'ucm)
 
 
-;; Python support via python-mode
-(setq load-path (cons "~/.emacs.d/vendor/python-mode" load-path))
-(setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
-(setq interpreter-mode-alist (cons '("python" . python-mode)
-                                   interpreter-mode-alist))
-(autoload 'python-mode "python-mode" "Python editing mode." t)
-
-
 ;; View Large File support
 (setq load-path (cons "~/.emacs.d/vendor/vlf" load-path))
 (require 'vlf)
