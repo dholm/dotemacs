@@ -103,3 +103,5 @@ Which external modules are included?
    which works with Emacs 24.
  * [Sunrise Commander](http://www.emacswiki.org/emacs/Sunrise_Commander), a
    Midnight Commander clone in Emacs.
+ * [Multi Web Mode](https://github.com/fgallina/multi-web-mode), for editing
+   webpages which many times includes multiple languages (HTML, CSS, JS, etc).

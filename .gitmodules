@@ -61,3 +61,6 @@
 [submodule "vendor/sunrise-commander"]
 	path = vendor/sunrise-commander
 	url = git://github.com/escherdragon/sunrise-commander.git
+[submodule "vendor/multi-web-mode"]
+	path = vendor/multi-web-mode
+	url = git://github.com/fgallina/multi-web-mode.git

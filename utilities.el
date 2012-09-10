@@ -49,8 +49,8 @@
   (require 'auto-complete-clang)
   (when (featurep 'auto-complete-clang)
     (add-hook 'c-mode-common-hook
-	      (lambda ()
-		(setq ac-sources (append '(ac-source-clang) ac-sources)))))
+              (lambda ()
+                (setq ac-sources (append '(ac-source-clang) ac-sources)))))
 
   (add-hook 'auto-complete-mode-hook 'ac-common-setup)
 
@@ -190,3 +190,14 @@
 (setq load-path (cons "~/.emacs.d/vendor/sunrise-commander" load-path))
 (require 'sunrise-commander)
 (add-to-list 'auto-mode-alist '("\\.srvm\\'" . sr-virtual-mode))
+
+
+;; Multi Web Mode
+(setq load-path (cons "~/.emacs.d/vendor/multi-web-mode" load-path))
+(require 'multi-web-mode)
+(setq mweb-default-major-mode 'html-mode)
+(setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
+                  (js-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
+                  (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
+(setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
+(multi-web-global-mode 1)
