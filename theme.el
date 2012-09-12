@@ -5,7 +5,9 @@
 (if (>= emacs-major-version 24)
   (progn
     (add-to-list 'custom-theme-load-path "~/.emacs.d/vendor/zenburn-emacs")
-    (load-theme 'zenburn t))
+    (setq load-path (cons "~/.emacs.d/vendor/solarized-emacs" load-path))
+    (add-to-list 'custom-theme-load-path "~/.emacs.d/vendor/solarized-emacs")
+    (load-theme 'solarized-dark t))
   (progn
     (setq load-path (cons "~/.emacs.d/vendor/zenburn-emacs" load-path))
     (require 'color-theme-zenburn)

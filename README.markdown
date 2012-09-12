@@ -105,3 +105,6 @@ Which external modules are included?
    Midnight Commander clone in Emacs.
  * [Multi Web Mode](https://github.com/fgallina/multi-web-mode), for editing
    webpages which many times includes multiple languages (HTML, CSS, JS, etc).
+ * [Solarized for Emacs](https://github.com/bbatsov/solarized-emacs), the
+   Solarized color theme for Emacs is designed to provide optimal colours
+   in all working conditions.
