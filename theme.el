@@ -5,14 +5,14 @@
 (if (>= emacs-major-version 24)
   (progn
     (add-to-list 'custom-theme-load-path "~/.emacs.d/vendor/zenburn-emacs")
-    (setq load-path (cons "~/.emacs.d/vendor/solarized-emacs" load-path))
-    (add-to-list 'custom-theme-load-path "~/.emacs.d/vendor/solarized-emacs")
+    (add-to-list 'custom-theme-load-path "~/.emacs.d/vendor/emacs-color-theme-solarized")
     (load-theme 'solarized-dark t))
   (progn
     (setq load-path (cons "~/.emacs.d/vendor/zenburn-emacs" load-path))
+    (setq load-path (cons "~/.emacs.d/vendor/emacs-color-theme-solarized" load-path))
     (require 'color-theme-zenburn)
     (when (featurep 'color-theme-zenburn)
-    (color-theme-zenburn))))
+      (color-theme-zenburn))))
 
 
 ;; Override Darwin

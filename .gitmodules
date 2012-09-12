@@ -64,6 +64,6 @@
 [submodule "vendor/multi-web-mode"]
 	path = vendor/multi-web-mode
 	url = git://github.com/fgallina/multi-web-mode.git
-[submodule "vendor/solarized-emacs"]
-	path = vendor/solarized-emacs
-	url = git://github.com/bbatsov/solarized-emacs.git
+[submodule "vendor/emacs-color-theme-solarized"]
+	path = vendor/emacs-color-theme-solarized
+	url = git://github.com/sellout/emacs-color-theme-solarized.git
