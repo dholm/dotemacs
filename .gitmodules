@@ -51,7 +51,7 @@
 	url = git://github.com/dholm/google-styleguide.git
 [submodule "vendor/cedet"]
 	path = vendor/cedet
-	url = git://git.randomsample.de/cedet.git
+	url = git://github.com/emacsmirror/cedet.git
 [submodule "vendor/ecb"]
 	path = vendor/ecb
 	url = git://github.com/alexott/ecb.git
