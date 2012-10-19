@@ -26,6 +26,9 @@ To keep the submodules up-to-date remember to occasionally run *git submodule
 foreach git pull* and recompile packages that were updated and require it,
 such as *vendor/cedet*.
 
+To use *slime-newlisp* [newLISP](http://www.newlisp.org/) has to be installed
+separately.
+
 
 Configured key-bindings
 -----------------------
@@ -108,3 +111,7 @@ Which external modules are included?
  * [Solarized Colorscheme for Emacs](https://github.com/sellout/emacs-color-theme-solarized),
    the Solarized color theme for Emacs is designed to provide optimal colours
    in all working conditions.
+ * [SLIME](http://common-lisp.net/project/slime/), the Superior Lisp
+   Interaction Mode for Emacs.
+ * [newLISP utility files](https://github.com/kosh04/newlisp-files), adds Emacs
+   support for newLISP and SLIME.
