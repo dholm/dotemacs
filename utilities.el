@@ -1,20 +1,11 @@
 ;; (Utilities) ;;
 
 ;; CEDET
-(setq load-path (cons "~/.emacs.d/vendor/cedet/common" load-path))
-(if (file-readable-p (expand-file-name "~/.emacs.d/vendor/cedet/common/cedet.elc"))
-    (unless (featurep 'cedet)
-      (require 'cedet)))
+(load-file "~/.emacs.d/vendor/cedet/cedet-devel-load.el")
 (when (featurep 'cedet)
-  (global-ede-mode 1)
-  (setq semantic-clang-binary "clang")
-  (semantic-load-enable-minimum-features)
-  (semantic-load-enable-code-helpers)
-  (semantic-load-enable-gaudy-code-helpers)
-  (semantic-load-enable-primary-exuberent-ctags-support)
-  (global-semanticdb-minor-mode 1)
-  (global-srecode-minor-mode 1)
-  (setq semanticdb-default-save-directory "~/.emacs.cache/semanticdb"))
+  (setq semanticdb-default-save-directory "~/.emacs.cache/semanticdb")
+  (global-ede-mode t)
+  (semantic-load-enable-excessive-code-helpers))
 
 
 ;; Emacs Code Browser
@@ -23,7 +14,7 @@
 (when (featurep 'ecb)
   (setq stack-trace-on-error nil)
   (custom-set-variables
-    '(ecb-options-version "2.40")))
+   '(ecb-options-version "2.40")))
 
 
 ;; Visual popup user interface, required by auto-complete
