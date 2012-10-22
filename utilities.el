@@ -220,3 +220,12 @@
 (require 'slime)
 (slime-setup)
 
+
+;; Markdown Mode
+(setq load-path (cons "~/.emacs.d/vendor/markdown-mode" load-path))
+(autoload 'markdown-mode "markdown-mode.el"
+  "Major mode for editing Markdown files" t)
+(setq auto-mode-alist
+      (cons '("\\.text" . markdown-mode) auto-mode-alist))
+(setq auto-mode-alist
+      (cons '("\\.markdown" . markdown-mode) auto-mode-alist))

@@ -115,3 +115,5 @@ Which external modules are included?
    Interaction Mode for Emacs.
  * [newLISP utility files](https://github.com/kosh04/newlisp-files), adds Emacs
    support for newLISP and SLIME.
+ * [Markdown Mode](http://jblevins.org/projects/markdown-mode), a major mode for
+   editing Markdown-formatted text files.
