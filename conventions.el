@@ -47,6 +47,11 @@
 		      'delete-trailing-whitespace nil t)))
 
 
+;; Use gdb-script-mode for files ending in .gdb
+(setq auto-mode-alist
+      (cons '("\\.gdb" . gdb-script-mode) auto-mode-alist))
+
+
 ;; (Text Conventions) ;;
 
 ;; When using fill-paragraph or auto-fill-mode break lines at 80 characters
