@@ -117,3 +117,8 @@ Which external modules are included?
    support for newLISP and SLIME.
  * [Markdown Mode](http://jblevins.org/projects/markdown-mode), a major mode for
    editing Markdown-formatted text files.
+ * [python-mode](https://launchpad.net/python-mode), an Emacs mode for editing
+   Python code.
+ * [Pylookup](http://taesoo.org/proj/pylookup.html), is a mode to search python
+   documentation within Emacs.
+

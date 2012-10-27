@@ -76,3 +76,12 @@
 [submodule "vendor/markdown-mode"]
 	path = vendor/markdown-mode
 	url = git://jblevins.org/git/markdown-mode.git
+[submodule "vendor/pylookup"]
+	path = vendor/pylookup
+	url = git://github.com/tsgates/pylookup.git
+[submodule "vendor/python-pep8"]
+	path = vendor/python-pep8
+	url = git://gist.github.com/302847.git
+[submodule "vendor/python-pylint"]
+	path = vendor/python-pylint
+	url = git://gist.github.com/302848.git
