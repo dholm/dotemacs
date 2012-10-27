@@ -121,4 +121,4 @@ Which external modules are included?
    Python code.
  * [Pylookup](http://taesoo.org/proj/pylookup.html), is a mode to search python
    documentation within Emacs.
-
+ * [python.el](https://github.com/fgallina/python.el), an updated Python mode.

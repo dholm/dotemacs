@@ -85,3 +85,6 @@
 [submodule "vendor/python-pylint"]
 	path = vendor/python-pylint
 	url = git://gist.github.com/302848.git
+[submodule "vendor/python.el"]
+	path = vendor/python.el
+	url = git://github.com/fgallina/python.el.git
