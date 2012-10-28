@@ -192,3 +192,8 @@
                   (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
 (setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
 (multi-web-global-mode 1)
+
+
+;; Display flymake errors in the minibuffer
+(setq load-path (cons "~/.emacs.d/vendor/flymake-cursor" load-path))
+(require 'flymake-cursor)
