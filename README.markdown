@@ -29,6 +29,12 @@ such as *vendor/cedet*.
 To use *slime-newlisp* [newLISP](http://www.newlisp.org/) has to be installed
 separately.
 
+For Python install the following modules with PIP:
+ * pep8
+ * pylint
+ * ropemode
+ * Pymacs
+
 
 Configured key-bindings
 -----------------------
@@ -117,8 +123,8 @@ Which external modules are included?
    support for newLISP and SLIME.
  * [Markdown Mode](http://jblevins.org/projects/markdown-mode), a major mode for
    editing Markdown-formatted text files.
- * [python-mode](https://launchpad.net/python-mode), an Emacs mode for editing
-   Python code.
+ * [python.el](https://github.com/fgallina/python.el), an updated Python mode.
+ * [Pymacs](http://pymacs.progiciels-bpi.ca/), allows two-way communication
+   between Emacs Lisp and Python.
  * [Pylookup](http://taesoo.org/proj/pylookup.html), is a mode to search python
    documentation within Emacs.
- * [python.el](https://github.com/fgallina/python.el), an updated Python mode.

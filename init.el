@@ -10,6 +10,11 @@
 (load "conventions")
 (load "bindings")
 
+;; Load language-specific configurations
+(load "lisp")
+(load "python")
+
+
 ;; If ~/.emacs.local is available load it as the last file so that it is
 ;; possible to add local settings and overrides.
 (if (file-readable-p (expand-file-name "~/.emacs.local"))

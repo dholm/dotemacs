@@ -88,3 +88,6 @@
 [submodule "vendor/python.el"]
 	path = vendor/python.el
 	url = git://github.com/fgallina/python.el.git
+[submodule "vendor/Pymacs"]
+	path = vendor/Pymacs
+	url = git://github.com/pinard/Pymacs.git

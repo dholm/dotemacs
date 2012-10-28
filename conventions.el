@@ -33,20 +33,6 @@
 	      (dtrt-indent-mode t))))
 
 
-;; Enable installed helpers for Python
-(add-hook 'python-mode-hook
-	  (lambda ()
-	    ;; Run spell-checker on strings and comments
-	    (flyspell-prog-mode)
-	    ;; Separate camel-case into separate words
-	    (subword-mode t)
-	    ;; Show trailing whitespace
-	    (setq show-trailing-whitespace t)
-	    (add-hook 'before-save-hook
-		      ;; Delete trailing whitespace on save
-		      'delete-trailing-whitespace nil t)))
-
-
 ;; Use gdb-script-mode for files ending in .gdb
 (setq auto-mode-alist
       (cons '("\\.gdb$" . gdb-script-mode) auto-mode-alist))
