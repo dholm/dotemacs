@@ -5,6 +5,7 @@
 	  (lambda ()
 	    ;; Run spell-checker on strings and comments
 	    (flyspell-prog-mode)
+	    (flymake-mode)
 	    ;; Separate camel-case into separate words
 	    (subword-mode t)
 	    ;; Show trailing whitespace
