@@ -94,3 +94,6 @@
 [submodule "vendor/flymake-cursor"]
 	path = vendor/flymake-cursor
 	url = git://github.com/emacsmirror/flymake-cursor.git
+[submodule "vendor/ttcn-el"]
+	path = vendor/ttcn-el
+	url = git://github.com/dholm/ttcn-el.git

@@ -128,3 +128,5 @@ Which external modules are included?
    between Emacs Lisp and Python.
  * [Pylookup](http://taesoo.org/proj/pylookup.html), is a mode to search python
    documentation within Emacs.
+ * [ttcn-el](http://people.debian.org/~debacle/ttcn-free/), implements a mode
+   for editing TTCN code in Emacs.
