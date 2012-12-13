@@ -197,3 +197,8 @@
 ;; Display flymake errors in the minibuffer
 (setq load-path (cons "~/.emacs.d/vendor/flymake-cursor" load-path))
 (require 'flymake-cursor)
+
+
+;; wc-mode shows counters for num characters, words etc
+(setq load-path (cons "~/.emacs.d/vendor/wc-mode" load-path))
+(require 'wc-mode)

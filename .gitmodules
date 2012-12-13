@@ -97,3 +97,6 @@
 [submodule "vendor/ttcn-el"]
 	path = vendor/ttcn-el
 	url = git://github.com/dholm/ttcn-el.git
+[submodule "vendor/wc-mode"]
+	path = vendor/wc-mode
+	url = git://github.com/emacsmirror/wc-mode.git

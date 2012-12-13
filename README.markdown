@@ -76,9 +76,9 @@ Which external modules are included?
  * [auto-complete](http://cx4a.org/software/auto-complete/), Auto Complete Mode
    renews an old completion interface and provides an environment that helps
    users concentrate on their own work.
- * [dtrt-indent](http://savannah.nongnu.org/projects/dtrt-indent/), a minor mode
-   which attempts to guess the correct indentation based on the loaded source
-   file.
+ * [dtrt-indent](http://savannah.nongnu.org/projects/dtrt-indent/), a minor
+   mode which attempts to guess the correct indentation based on the loaded
+   source file.
  * [Magit](http://philjackson.github.com/magit/), Emacs git integration.
  * [CEDET](http://cedet.sourceforge.net/), Collection of Emacs Development
    Environment Tools.
@@ -121,8 +121,8 @@ Which external modules are included?
    Interaction Mode for Emacs.
  * [newLISP utility files](https://github.com/kosh04/newlisp-files), adds Emacs
    support for newLISP and SLIME.
- * [Markdown Mode](http://jblevins.org/projects/markdown-mode), a major mode for
-   editing Markdown-formatted text files.
+ * [Markdown Mode](http://jblevins.org/projects/markdown-mode), a major mode
+   for editing Markdown-formatted text files.
  * [python.el](https://github.com/fgallina/python.el), an updated Python mode.
  * [Pymacs](http://pymacs.progiciels-bpi.ca/), allows two-way communication
    between Emacs Lisp and Python.
@@ -130,3 +130,6 @@ Which external modules are included?
    documentation within Emacs.
  * [ttcn-el](http://people.debian.org/~debacle/ttcn-free/), implements a mode
    for editing TTCN code in Emacs.
+ * [wc-mode](http://www.emacswiki.org/emacs/WordCountMode), adds the ability
+   to have a count of the number of characters, words etc in the current
+   buffer.
