@@ -79,12 +79,6 @@
 [submodule "vendor/pylookup"]
 	path = vendor/pylookup
 	url = git://github.com/tsgates/pylookup.git
-[submodule "vendor/python-pep8"]
-	path = vendor/python-pep8
-	url = git://gist.github.com/302847.git
-[submodule "vendor/python-pylint"]
-	path = vendor/python-pylint
-	url = git://gist.github.com/302848.git
 [submodule "vendor/python.el"]
 	path = vendor/python.el
 	url = git://github.com/fgallina/python.el.git
@@ -100,3 +94,6 @@
 [submodule "vendor/wc-mode"]
 	path = vendor/wc-mode
 	url = git://github.com/emacsmirror/wc-mode.git
+[submodule "vendor/emacs-pycheckers"]
+	path = vendor/emacs-pycheckers
+	url = git://github.com/dholm/emacs-pycheckers.git

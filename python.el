@@ -46,14 +46,15 @@
   "Run pylookup-update and create the database at `pylookup-db-file'." t)
 
 
-;; Python pep8 coding convention
-(setq load-path (cons "~/.emacs.d/vendor/python-pep8" load-path))
-(require 'python-pep8)
-
-
-;; Python Pylint code checker
-(setq load-path (cons "~/.emacs.d/vendor/python-pylint" load-path))
-(require 'python-pylint)
+;; Multiple Python checkers support
+(when (load "flymake" t)
+  (defun flymake-pycheckers-init ()
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                       'flymake-create-temp-inplace))
+           (local-file (file-relative-name
+                        temp-file
+                        (file-name-directory buffer-file-name))))
+      (list "/path/to/this/file" (list local-file)))))
 
 
 ;; Ropemacs Python refactoring library
