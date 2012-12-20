@@ -97,3 +97,6 @@
 [submodule "vendor/emacs-pycheckers"]
 	path = vendor/emacs-pycheckers
 	url = git://github.com/dholm/emacs-pycheckers.git
+[submodule "vendor/php-mode"]
+	path = vendor/php-mode
+	url = git://github.com/ejmr/php-mode.git

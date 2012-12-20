@@ -33,7 +33,7 @@ For Python install the following modules with PIP:
  * pep8
  * pylint
  * ropemode
- * Pymacs
+ * ropemacs
 
 
 Configured key-bindings
@@ -133,3 +133,4 @@ Which external modules are included?
  * [wc-mode](http://www.emacswiki.org/emacs/WordCountMode), adds the ability
    to have a count of the number of characters, words etc in the current
    buffer.
+ * [php-mode](https://github.com/ejmr/php-mode), a major mode for PHP.
