@@ -100,3 +100,6 @@
 [submodule "vendor/php-mode"]
 	path = vendor/php-mode
 	url = git://github.com/ejmr/php-mode.git
+[submodule "vendor/haskell-mode"]
+	path = vendor/haskell-mode
+	url = git://github.com/haskell/haskell-mode.git

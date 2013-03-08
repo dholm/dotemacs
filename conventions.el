@@ -95,6 +95,12 @@
       (cons '("\\.markdown$" . markdown-mode) auto-mode-alist))
 
 
+;; Haskell mode
+(load "~/.emacs.d/vendor/haskell-mode/haskell-site-file")
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+
+
 ;; (Text Conventions) ;;
 
 ;; When using fill-paragraph or auto-fill-mode break lines at 80 characters

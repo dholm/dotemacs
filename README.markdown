@@ -134,3 +134,5 @@ Which external modules are included?
    to have a count of the number of characters, words etc in the current
    buffer.
  * [php-mode](https://github.com/ejmr/php-mode), a major mode for PHP.
+ * [haskell-mode](https://github.com/haskell/haskell-mode), major mode for
+   Haskell.
