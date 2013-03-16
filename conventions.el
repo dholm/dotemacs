@@ -107,6 +107,13 @@
 (setq load-path (cons "~/.emacs.d/vendor/js2-mode" load-path))
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-hook 'js2-mode-hook
+          (lambda ()
+	    (setq js2-use-font-lock-faces t)
+	    (setq js2-indent-on-enter-key t)
+	    (setq js2-basic-offset 2)
+	    (set (make-local-variable 'ac-auto-start) 3)
+	    (set (make-local-variable 'ac-auto-show-menu) t)))
 
 
 ;; Gnuplot mode
@@ -114,6 +121,14 @@
 (autoload 'gnuplot-mode "gnuplot" "gnuplot major mode" t)
 (autoload 'gnuplot-make-buffer "gnuplot" "open a buffer in gnuplot mode" t)
 (add-to-list 'auto-mode-alist '("\\.gp$" . gnuplot-mode))
+
+
+;; CSS editing
+(defun dholm/css-mode-hook ()
+  (rainbow-mode t)
+  (set (make-local-variable 'ac-auto-start) 2)
+  (set (make-local-variable 'ac-auto-show-menu) t))
+(add-hook 'css-mode-hook 'dholm/css-mode-hook)
 
 
 ;; (Text Conventions) ;;
@@ -129,3 +144,10 @@
 (set-keyboard-coding-system 'utf-8)
 ;; Treat clipboard input as UTF-8 string first; compound text next, etc.
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+
+
+;; Enable whitespace mode
+(autoload 'whitespace-mode "whitespace" "Toggle whitespace visualization." t)
+(autoload 'whitespace-toggle-options "whitespace" "Toggle local whitespace-mode options." t)
+(setq whitespace-style '(trailing lines space-before-tab indentation space-after-tab)
+      whitespace-line-column 400)

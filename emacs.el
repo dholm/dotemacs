@@ -21,3 +21,12 @@
 ;; This will improve performance in general but might degrade performance of
 ;; key repeat.
 (setq redisplay-dont-pause t)
+
+
+;; Display the current time and system load
+(load-library "time")
+(setq display-time-24hr-format t
+      display-time-form-list (list 'time 'load)
+      display-time-day-and-date t)
+(display-time)
+(blink-cursor-mode t)

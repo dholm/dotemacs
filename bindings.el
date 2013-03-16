@@ -16,15 +16,6 @@
 (global-set-key "\C-x\C-k" 'kill-region)
 
 
-;; Setup bindings for CEDET if it is available
-(when (featurep 'cedet)
-  (global-set-key (kbd "C-c .") 'semantic-ia-fast-jump)
-  (global-set-key (kbd "C-c d") 'semantic-ia-show-doc)
-  (global-set-key (kbd "C-c D") 'semantic-ia-describe-class)
-  (global-set-key (kbd "C-c c") 'semantic-ia-complete-symbol)
-  (global-set-key (kbd "C-c t") 'eassist-switch-h-cpp))
-
-
 ;; Spell check the current word
 (global-set-key "\C-c\C-w" 'ispell-word)
 
@@ -40,3 +31,8 @@
 (when (featurep 'tabbar)
   (global-set-key (kbd "M-j") 'tabbar-backward)
   (global-set-key (kbd "M-k") 'tabbar-forward))
+
+
+;; Bindings for magit
+(when (featurep 'magit)
+  (global-set-key (kbd "C-c m") 'magit-status))
