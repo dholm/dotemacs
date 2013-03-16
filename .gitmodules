@@ -18,10 +18,10 @@
 	url = git://github.com/dholm/xcscope.git
 [submodule "vendor/undo-tree"]
 	path = vendor/undo-tree
-	url = git://github.com/emacsmirror/undo-tree.git
+	url = http://www.dr-qubit.org/git/undo-tree.git
 [submodule "vendor/multi-term"]
 	path = vendor/multi-term
-	url = git://github.com/emacsmirror/multi-term.git
+	url = git://github.com/milkypostman/multi-term.git
 [submodule "vendor/zenburn-emacs"]
 	path = vendor/zenburn-emacs
 	url = git://github.com/bbatsov/zenburn-emacs.git
@@ -87,13 +87,13 @@
 	url = git://github.com/pinard/Pymacs.git
 [submodule "vendor/flymake-cursor"]
 	path = vendor/flymake-cursor
-	url = git://github.com/emacsmirror/flymake-cursor.git
+	url = git://github.com/illusori/emacs-flymake-cursor.git
 [submodule "vendor/ttcn-el"]
 	path = vendor/ttcn-el
 	url = git://github.com/dholm/ttcn-el.git
 [submodule "vendor/wc-mode"]
 	path = vendor/wc-mode
-	url = git://github.com/emacsmirror/wc-mode.git
+	url = git://github.com/bnbeckwith/wc-mode.git
 [submodule "vendor/emacs-pycheckers"]
 	path = vendor/emacs-pycheckers
 	url = git://github.com/dholm/emacs-pycheckers.git
