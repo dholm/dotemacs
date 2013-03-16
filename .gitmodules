@@ -109,3 +109,6 @@
 [submodule "vendor/rainbow-mode"]
 	path = vendor/rainbow-mode
 	url = git://github.com/emacsmirror/rainbow-mode.git
+[submodule "vendor/gnuplot-mode"]
+	path = vendor/gnuplot-mode
+	url = git://github.com/mkmcc/gnuplot-mode.git

@@ -109,6 +109,13 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 
+;; Gnuplot mode
+(setq load-path (cons "~/.emacs.d/vendor/gnuplot-mode" load-path))
+(autoload 'gnuplot-mode "gnuplot" "gnuplot major mode" t)
+(autoload 'gnuplot-make-buffer "gnuplot" "open a buffer in gnuplot mode" t)
+(add-to-list 'auto-mode-alist '("\\.gp$" . gnuplot-mode))
+
+
 ;; (Text Conventions) ;;
 
 ;; When using fill-paragraph or auto-fill-mode break lines at 80 characters
