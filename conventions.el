@@ -93,12 +93,20 @@
       (cons '("\\.text$" . markdown-mode) auto-mode-alist))
 (setq auto-mode-alist
       (cons '("\\.markdown$" . markdown-mode) auto-mode-alist))
+(setq auto-mode-alist
+      (cons '("\\.md$" . markdown-mode) auto-mode-alist))
 
 
 ;; Haskell mode
 (load "~/.emacs.d/vendor/haskell-mode/haskell-site-file")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+
+
+;; JavaScript mode
+(setq load-path (cons "~/.emacs.d/vendor/js2-mode" load-path))
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 
 ;; (Text Conventions) ;;
