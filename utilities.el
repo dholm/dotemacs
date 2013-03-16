@@ -202,3 +202,8 @@
 ;; wc-mode shows counters for num characters, words etc
 (setq load-path (cons "~/.emacs.d/vendor/wc-mode" load-path))
 (require 'wc-mode)
+
+
+;; Rainbow mode
+(setq load-path (cons "~/.emacs.d/vendor/rainbow-mode" load-path))
+(require 'rainbow-mode)

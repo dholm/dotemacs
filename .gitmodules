@@ -106,3 +106,6 @@
 [submodule "vendor/js2-mode"]
 	path = vendor/js2-mode
 	url = git://github.com/mooz/js2-mode.git
+[submodule "vendor/rainbow-mode"]
+	path = vendor/rainbow-mode
+	url = git://github.com/emacsmirror/rainbow-mode.git
