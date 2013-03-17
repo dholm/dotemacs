@@ -23,7 +23,6 @@
 
 
 ;; SLIME
-(setq load-path (cons "~/.emacs.d/utilities/slime" load-path))
 (setq inferior-lisp-program "newlisp")
 (require 'slime)
 (slime-setup)

@@ -3,7 +3,6 @@
 (setq c++-default-style "Stroustrup")
 
 ;; Load the le C/C++ style
-(push "~/.emacs.d/modes/google-styleguide" load-path)
 (require 'google-c-style)
 
 (add-hook 'c-mode-common-hook

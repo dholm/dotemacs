@@ -1,159 +1,30 @@
-[submodule "themes/zenburn-emacs"]
-	path = themes/zenburn-emacs
-	url = git://github.com/bbatsov/zenburn-emacs.git
-	branch = master
-[submodule "themes/emacs-color-theme-solarized"]
-	path = themes/emacs-color-theme-solarized
-	url = git://github.com/sellout/emacs-color-theme-solarized.git
-	branch = master
-[submodule "modes/php-mode"]
-	path = modes/php-mode
-	url = git://github.com/ejmr/php-mode.git
-	branch = master
 [submodule "modes/ttcn-el"]
 	path = modes/ttcn-el
 	url = git://github.com/dholm/ttcn-el.git
-	branch = master
-[submodule "modes/google-styleguide"]
-	path = modes/google-styleguide
-	url = git://github.com/dholm/google-styleguide.git
-	branch = master
-	branch = master
-[submodule "modes/multi-web-mode"]
-	path = modes/multi-web-mode
-	url = git://github.com/fgallina/multi-web-mode.git
-	branch = master
-[submodule "vcs/magit"]
-	path = vcs/magit
-	url = git://github.com/magit/magit.git
 	branch = master
 [submodule "vcs/vc-clearcase"]
 	path = vcs/vc-clearcase
 	url = git://github.com/dholm/vc-clearcase.git
 	branch = master
-[submodule "utilities/auto-complete"]
-	path = utilities/auto-complete
-	url = git://github.com/auto-complete/auto-complete.git
-	branch = master
-[submodule "utilities/popup-el"]
-	path = utilities/popup-el
-	url = git://github.com/auto-complete/popup-el.git
-	branch = master
-[submodule "utilities/auto-complete-clang"]
-	path = utilities/auto-complete-clang
-	url = git://github.com/brianjcj/auto-complete-clang.git
-	branch = master
-[submodule "utilities/dtrt-indent"]
-	path = utilities/dtrt-indent
-	url = git://git.savannah.nongnu.org/dtrt-indent.git
-	branch = master
-[submodule "utilities/lusty-emacs"]
-	path = utilities/lusty-emacs
-	url = git://github.com/sjbach/lusty-emacs.git
-	branch = master
 [submodule "utilities/xcscope"]
 	path = utilities/xcscope
 	url = git://github.com/dholm/xcscope.git
-	branch = master
-[submodule "utilities/ecb"]
-	path = utilities/ecb
-	url = git://github.com/alexott/ecb.git
 	branch = master
 [submodule "utilities/tabbar"]
 	path = utilities/tabbar
 	url = git://github.com/dholm/tabbar.git
 	branch = master
-[submodule "utilities/smart-tab"]
-	path = utilities/smart-tab
-	url = git://github.com/genehack/smart-tab.git
-	branch = master
-[submodule "utilities/cedet"]
-	path = utilities/cedet
-	url = git://github.com/dholm/cedet.git
-	branch = master
-[submodule "utilities/multi-term"]
-	path = utilities/multi-term
-	url = git://github.com/milkypostman/multi-term.git
-	branch = master
-[submodule "utilities/undo-tree"]
-	path = utilities/undo-tree
-	url = http://www.dr-qubit.org/git/undo-tree.git
-	branch = master
-[submodule "utilities/profile-dotemacs"]
-	path = utilities/profile-dotemacs
-	url = git://github.com/juergenhoetzel/profile-dotemacs.git
-	branch = master
-[submodule "utilities/deft"]
-	path = utilities/deft
-	url = git://jblevins.org/git/deft.git
-	branch = master
-[submodule "utilities/vlf"]
-	path = utilities/vlf
-	url = git://github.com/emacsmirror/vlf.git
-	branch = master
-[submodule "utilities/sunrise-commander"]
-	path = utilities/sunrise-commander
-	url = git://github.com/escherdragon/sunrise-commander.git
-	branch = master
 [submodule "utilities/newlisp"]
 	path = utilities/newlisp
 	url = git://github.com/kosh04/newlisp-files.git
-	branch = master
-[submodule "utilities/slime"]
-	path = utilities/slime
-	url = git://github.com/nablaone/slime.git
-	branch = master
-[submodule "utilities/Pymacs"]
-	path = utilities/Pymacs
-	url = git://github.com/pinard/Pymacs.git
-	branch = master
-[submodule "utilities/pylookup"]
-	path = utilities/pylookup
-	url = git://github.com/tsgates/pylookup.git
-	branch = master
-[submodule "utilities/flymake-cursor"]
-	path = utilities/flymake-cursor
-	url = git://github.com/illusori/emacs-flymake-cursor.git
-	branch = master
-[submodule "utilities/wc-mode"]
-	path = utilities/wc-mode
-	url = git://github.com/bnbeckwith/wc-mode.git
 	branch = master
 [submodule "utilities/pycheckers"]
 	path = utilities/pycheckers
 	url = git://github.com/dholm/emacs-pycheckers.git
 	branch = master
-[submodule "modes/haskell-mode"]
-	path = modes/haskell-mode
-	url = git://github.com/haskell/haskell-mode.git
-	branch = master
-[submodule "modes/js2-mode"]
-	path = modes/js2-mode
-	url = git://github.com/mooz/js2-mode.git
-	branch = master
-[submodule "modes/rainbow-mode"]
-	path = modes/rainbow-mode
-	url = git://github.com/emacsmirror/rainbow-mode.git
-	branch = master
-[submodule "modes/gnuplot-mode"]
-	path = modes/gnuplot-mode
-	url = git://github.com/mkmcc/gnuplot-mode.git
-	branch = master
-[submodule "modes/markdown-mode"]
-	path = modes/markdown-mode
-	url = git://jblevins.org/git/markdown-mode.git
-	branch = master
 [submodule "utilities/outlookedit"]
 	path = utilities/outlookedit
 	url = git://github.com/dholm/outlookedit.git
-	branch = master
-[submodule "modes/python-el"]
-	path = modes/python-el
-	url = git://github.com/fgallina/python.el.git
-	branch = emacs-24
-[submodule "modes/Pymacs"]
-	path = modes/Pymacs
-	url = git://github.com/pinard/Pymacs.git
 	branch = master
 [submodule "utilities/elim"]
 	path = utilities/elim

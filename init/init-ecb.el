@@ -1,5 +1,4 @@
 ;; Emacs Code Browser
-(push "~/.emacs.d/utilities/ecb" load-path)
 (require 'ecb)
 (when (featurep 'ecb)
   (setq stack-trace-on-error nil)
