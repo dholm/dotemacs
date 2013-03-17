@@ -1,19 +1,13 @@
 
-(setq load-path (cons "~/.emacs.d" load-path))
-(setq load-path (cons "~/.emacs.d/vendor" load-path))
+(push "~/.emacs.d" load-path)
+(push "~/.emacs.d/bin" exec-path)
 
-(push "~/.emacs.d/vendor/bin" exec-path)
-
-(load "emacs")
-(load "theme")
-(load "utilities")
-(load "conventions")
-(load "bindings")
-
-;; Load language-specific configurations
-(load "lisp")
-(load "python")
-
+(load "emacs.el")
+(load "themes.el")
+(load "modes.el")
+(load "vcs.el")
+(load "utilities.el")
+(load "bindings.el")
 
 ;; If ~/.emacs.local is available load it as the last file so that it is
 ;; possible to add local settings and overrides.

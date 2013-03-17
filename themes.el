@@ -4,12 +4,12 @@
 ;; Load and set the color theme "Zenburn"
 (if (>= emacs-major-version 24)
   (progn
-    (add-to-list 'custom-theme-load-path "~/.emacs.d/vendor/zenburn-emacs")
-    (add-to-list 'custom-theme-load-path "~/.emacs.d/vendor/emacs-color-theme-solarized")
+    (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/zenburn-emacs")
+    (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
     (load-theme 'solarized-dark t))
   (progn
-    (setq load-path (cons "~/.emacs.d/vendor/zenburn-emacs" load-path))
-    (setq load-path (cons "~/.emacs.d/vendor/emacs-color-theme-solarized" load-path))
+    (push "~/.emacs.d/themes/zenburn-emacs" load-path)
+    (push "~/.emacs.d/themes/emacs-color-theme-solarized" load-path)
     (require 'color-theme-zenburn)
     (when (featurep 'color-theme-zenburn)
       (color-theme-zenburn))))
@@ -48,6 +48,6 @@
 (ansi-color-for-comint-mode-on)
 
 
-;; Set a better font if running in windowsb
+;; Set a better font if running in windows
 (if (eq system-type 'windows-nt)
     (set-default-font "consolas-10"))

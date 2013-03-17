@@ -1,270 +1,35 @@
 ;; (Utilities) ;;
 
-;; CEDET
-(load-file "~/.emacs.d/vendor/cedet/cedet-devel-load.el")
-(when (featurep 'cedet)
-  (load-file "~/.emacs.d/vendor/cedet/contrib/cedet-contrib-load.el")
-  (setq semanticdb-default-save-directory "~/.emacs.cache/semanticdb")
-
-  (require 'cedet-files)
-  (require 'cedet-graphviz)
-  (require 'cedet-global)
-  (require 'cedet-cscope)
-
-  (semantic-mode t)
-  (semantic-load-enable-excessive-code-helpers)
-  (require 'semantic-tag-folding)
-  (require 'semantic/ia)
-  (require 'semantic/bovine/c)
-  (require 'semantic/bovine/gcc)
-  (require 'semantic/bovine/clang)
-  (require 'semantic/wisent/javascript)
-  (require 'semantic/wisent/python)
-
-  (require 'semantic/db)
-  (global-semanticdb-minor-mode t)
-
-  (when (cedet-gnu-global-version-check t)
-    (semanticdb-enable-gnu-global-databases 'c-mode)
-    (semanticdb-enable-gnu-global-databases 'c++-mode))
-
-  (when (cedet-ectag-version-check t)
-    (semantic-load-enable-primary-ctags-support))
-
-  (require 'eassist)
-
-  (global-srecode-minor-mode t)
-
-  (global-ede-mode t)
-  (ede-enable-generic-projects)
-
-  (require 'compile)
-  (setq compilation-disable-input nil)
-  (setq compilation-scroll-output t)
-  (setq mode-compile-always-save-buffer-p t)
-
-  (defun dholm/cedet-hook ()
-    (local-set-key [(control return)] 'semantic-ia-complete-symbol)
-    (local-set-key "\C-c?" 'semantic-ia-complete-symbol-menu)
-    (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
-    (local-set-key "\C-c=" 'semantic-decoration-include-visit)
-    (local-set-key "\C-cj" 'semantic-ia-fast-jump)
-    (local-set-key "\C-cq" 'semantic-ia-show-doc)
-    (local-set-key "\C-cs" 'semantic-ia-show-summary)
-    (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
-    (local-set-key "\C-c+" 'semantic-tag-folding-show-block)
-    (local-set-key "\C-c-" 'semantic-tag-folding-fold-block)
-    (local-set-key "\C-c\C-c+" 'semantic-tag-folding-show-all)
-    (local-set-key "\C-c\C-c-" 'semantic-tag-folding-fold-all))
-  (add-hook 'c-mode-common-hook 'dholm/cedet-hook)
-  (add-hook 'lisp-mode-hook 'dholm/cedet-hook)
-  (add-hook 'emacs-lisp-mode-hook 'dholm/cedet-hook)
-
-  (defun dholm/c-mode-cedet-hook ()
-    (local-set-key "\C-ct" 'eassist-switch-h-cpp)
-    (local-set-key "\C-xt" 'eassist-switch-h-cpp)
-    (local-set-key "\C-ce" 'eassist-list-methods)
-    (local-set-key "\C-c\C-r" 'semantic-symref)
-    (add-to-list 'ac-sources 'ac-source-gtags))
-  (add-hook 'c-mode-common-hook 'dholm/c-mode-cedet-hook))
-
-
-;; Emacs Code Browser
-(setq load-path (cons "~/.emacs.d/vendor/ecb" load-path))
-(require 'ecb)
-(when (featurep 'ecb)
-  (setq stack-trace-on-error nil)
-  (custom-set-variables
-   '(ecb-options-version "2.40")))
-
-
-;; Visual popup user interface, required by auto-complete
-(setq load-path (cons "~/.emacs.d/vendor/popup" load-path))
-
-
-;; auto-complete-mode offers superior code completion over existing tools
-(setq load-path (cons "~/.emacs.d/vendor/auto-complete" load-path))
-(require 'auto-complete-config)
-(when (featurep 'auto-complete)
-  (ac-config-default)
-  (setq ac-auto-start nil)
-  (setq ac-quick-help-delay 0.5)
-  (add-to-list 'ac-dictionary-directories "~/.emacs.d/vendor/auto-complete/ac-dict")
-  ;; Store the completion history in the cache directory
-  (setq ac-comphist-file "~/.emacs.cache/ac-comphist.dat")
-
-  (when (featurep 'cedet)
-    ;; Use semantic as a source for auto complete
-    (setq ac-sources '(ac-source-semantic)))
-
-  (setq load-path (cons "~/.emacs.d/vendor/auto-complete-clang" load-path))
-  (require 'auto-complete-clang)
-  (when (featurep 'auto-complete-clang)
-    (add-hook 'c-mode-common-hook
-              (lambda ()
-                (setq ac-sources (append '(ac-source-clang) ac-sources)))))
-
-  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
-
-  ;; Enable auto-complete globally
-  (global-auto-complete-mode t))
-
-
-;; XCscope
-(setq load-path (cons "~/.emacs.d/vendor/xcscope" load-path))
-(require 'xcscope)
-
-
-;; Enable automatic detection of indentation style
-(setq load-path (cons "~/.emacs.d/vendor/dtrt-indent" load-path))
-(require 'dtrt-indent)
-
-
 ;; Close all open buffers
 (defun close-all-buffers ()
   (interactive)
   (mapc 'kill-buffer (buffer-list)))
 
 
-;; Show row and column numbers
-(setq line-number-mode t)
-(setq column-number-mode t)
-
-
-;; Browsable kill ring
-(setq load-path (cons "~/.emacs.d/vendor/browse-kill-ring" load-path))
-(when (require 'browse-kill-ring nil 'noerror)
-  (browse-kill-ring-default-keybindings))
-
-
-;; Magit advanced Git integration
-(setq load-path (cons "~/.emacs.d/vendor/magit" load-path))
-(require 'magit)
-
-
-;; SmartTab intelligent tab completion control
-(setq load-path (cons "~/.emacs.d/vendor/smart-tab" load-path))
-(require 'smart-tab)
-(when (featurep 'smart-tab)
-  (global-smart-tab-mode))
-
-
-;; If running on windows load Outlook Edit
-(setq load-path (cons "~/.emacs.d/vendor/outlookedit" load-path))
-(if (eq system-type 'windows-nt)
-    (require 'outlookedit))
-
-
-;; LustyExplorer
-(setq load-path (cons "~/.emacs.d/vendor/lusty-emacs" load-path))
-(require 'lusty-explorer)
-(when (featurep 'lusty-explorer)
-  (global-set-key "\C-x\C-f" 'lusty-file-explorer)
-  (global-set-key "\C-xb" 'lusty-buffer-explorer))
-
-
-;; Wind Move enables window navigation
-(require 'windmove)
-(when (featurep 'windmove)
-  (windmove-default-keybindings))
-
-
-;; Visualize undo history as a tree structure
-(setq load-path (cons "~/.emacs.d/vendor/undo-tree" load-path))
-(require 'undo-tree)
-(when (featurep 'undo-tree)
-  (global-undo-tree-mode))
-
-
-;; MultiTerm terminal
-(setq load-path (cons "~/.emacs.d/vendor/multi-term" load-path))
-(require 'multi-term)
-
-
-;; Make buffer names unique
-(require 'uniquify)
-(when (featurep 'uniquify)
-  (setq
-   uniquify-buffer-name-style 'post-forward
-   uniquify-separator ":"))
-
-
-;; Enable TabBar minor mode
-(setq load-path (cons "~/.emacs.d/vendor/tabbar" load-path))
-(require 'tabbar)
-(when (featurep 'tabbar-mode)
-  (tabbar-mode))
-
-
-;; Save/restore the position in Emacs buffers between sessions
-(require 'saveplace)
-(when (featurep 'saveplace)
-  (setq save-place-file "~/.emacs.cache/saveplace")
-  (setq-default save-place t))
-
-
-;; Save/restore the history of various Emacs minibuffers
-(require 'savehist)
-(when (featurep 'savehist)
-  (setq savehist-additional-variables '(search-ring regexp-search-ring kill-ring))
-  (setq savehist-file "~/.emacs.cache/savehist")
-  (savehist-mode t))
-
-
 ;; When using profile-dotemacs start with init.el
-;; To profile run emacs (-Q) -l ~/.emacs.d/vendor/profile-dotemacs/profile-dotemacs.el -f profile-dotemacs
+;; To profile run emacs (-Q) -l ~/.emacs.d/utilities/profile-dotemacs/profile-dotemacs.el -f profile-dotemacs
 (setq profile-dotemacs-file "~/.emacs.d/init.el")
 
 
-;; When using gud-mode to debug enable gdb-many-windows and a separate IO buffer
-(setq gdb-many-windows t)
-(setq gdb-use-separate-io-buffer t)
-
-
-;; Fast and simple note taking
-(setq load-path (cons "~/.emacs.d/vendor/deft" load-path))
-(require 'deft)
-
-
-;; Enable vc-clearcase so that VC speaks ClearCase
-(setq load-path (cons "~/.emacs.d/vendor/vc-clearcase" load-path))
-(require 'vc-clearcase)
-(require 'ucm)
-
-
-;; View Large File support
-(setq load-path (cons "~/.emacs.d/vendor/vlf" load-path))
-(require 'vlf)
-(setq vlf-batch-size 52428800)
-
-
-;; Sunrise Commander
-(setq load-path (cons "~/.emacs.d/vendor/sunrise-commander" load-path))
-(require 'sunrise-commander)
-(add-to-list 'auto-mode-alist '("\\.srvm\\'" . sr-virtual-mode))
-
-
-;; Multi Web Mode
-(setq load-path (cons "~/.emacs.d/vendor/multi-web-mode" load-path))
-(require 'multi-web-mode)
-(setq mweb-default-major-mode 'html-mode)
-(setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
-                  (js2-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
-                  (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
-(setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
-(multi-web-global-mode 1)
-
-
-;; Display flymake errors in the minibuffer
-(setq load-path (cons "~/.emacs.d/vendor/flymake-cursor" load-path))
-(require 'flymake-cursor)
-
-
-;; wc-mode shows counters for num characters, words etc
-(setq load-path (cons "~/.emacs.d/vendor/wc-mode" load-path))
-(require 'wc-mode)
-
-
-;; Rainbow mode
-(setq load-path (cons "~/.emacs.d/vendor/rainbow-mode" load-path))
-(require 'rainbow-mode)
+;; Load all utilities
+(load "~/.emacs.d/utilities/cedet.el")
+(load "~/.emacs.d/utilities/ecb.el")
+(load "~/.emacs.d/utilities/auto-complete.el")
+(load "~/.emacs.d/utilities/xcscope.el")
+(load "~/.emacs.d/utilities/dtrt-indent.el")
+(load "~/.emacs.d/utilities/browse-kill-ring.el")
+(load "~/.emacs.d/utilities/smart-tab.el")
+(load "~/.emacs.d/utilities/outlookedit.el")
+(load "~/.emacs.d/utilities/lusty-emacs.el")
+(load "~/.emacs.d/utilities/windmove.el")
+(load "~/.emacs.d/utilities/undo-tree.el")
+(load "~/.emacs.d/utilities/multi-term.el")
+(load "~/.emacs.d/utilities/uniquify.el")
+(load "~/.emacs.d/utilities/tabbar.el")
+(load "~/.emacs.d/utilities/saveplace.el")
+(load "~/.emacs.d/utilities/savehist.el")
+(load "~/.emacs.d/utilities/deft.el")
+(load "~/.emacs.d/utilities/vlf.el")
+(load "~/.emacs.d/utilities/sunrise-commander.el")
+(load "~/.emacs.d/utilities/flymake.el")
+(load "~/.emacs.d/utilities/wc-mode.el")

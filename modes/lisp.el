@@ -3,7 +3,7 @@
 ;; (Utilities) ;;
 
 ;; newLISP utility files
-(setq load-path (cons "~/.emacs.d/vendor/newlisp" load-path))
+(setq load-path (cons "~/.emacs.d/utilities/newlisp" load-path))
 (require 'newlisp)
 (when (featurep 'newlisp)
   (add-to-list 'auto-mode-alist '("\\.lsp$" . newlisp-mode))
@@ -23,7 +23,7 @@
 
 
 ;; SLIME
-(setq load-path (cons "~/.emacs.d/vendor/slime" load-path))
+(setq load-path (cons "~/.emacs.d/utilities/slime" load-path))
 (setq inferior-lisp-program "newlisp")
 (require 'slime)
 (slime-setup)

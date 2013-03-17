@@ -1,24 +1,30 @@
 ;; (Code Conventions) ;;
 
-;; Enable installed helpers for Python
+;; Ropemacs Python refactoring library
+(push "~/.emacs.d/modes/Pymacs" load-path)
+(require 'pymacs)
+(pymacs-load "ropemacs" "rope-")
+
+
+;;; Enable installed helpers for Python
 (add-hook 'python-mode-hook
-	  (lambda ()
-	    ;; Run spell-checker on strings and comments
-	    (flyspell-prog-mode)
-	    (flymake-mode)
-	    ;; Separate camel-case into separate words
-	    (subword-mode t)
-	    ;; Show trailing whitespace
-	    (setq show-trailing-whitespace t)
-	    (add-hook 'before-save-hook
-		      ;; Delete trailing whitespace on save
-		      'delete-trailing-whitespace nil t)))
+          (lambda ()
+            ;; Run spell-checker on strings and comments
+            (flyspell-prog-mode)
+            (flymake-mode)
+            ;; Separate camel-case into separate words
+            (subword-mode t)
+            ;; Show trailing whitespace
+            (setq show-trailing-whitespace t)
+            (add-hook 'before-save-hook
+                      ;; Delete trailing whitespace on save
+                      'delete-trailing-whitespace nil t)))
 
 
 ;; (Utilities) ;;
 
 ;; Python mode for Emacs
-(setq load-path (cons "~/.emacs.d/vendor/python.el" load-path))
+(push "~/.emacs.d/modes/python-el" load-path)
 (setq
  python-shell-interpreter "ipython"
  python-shell-interpreter-args ""
@@ -31,8 +37,8 @@
 
 
 ;; Pylookup
-(setq pylookup-dir "~/.emacs.d/vendor/pylookup")
-(setq load-path (cons pylookup-dir load-path))
+(setq pylookup-dir "~/.emacs.d/utilities/pylookup")
+(push pylookup-dir load-path)
 (require 'pylookup)
 ;; set executable file and db file
 (setq pylookup-program (concat pylookup-dir "/pylookup.py"))
@@ -57,20 +63,14 @@
       (list "/path/to/this/file" (list local-file)))))
 
 
-;; Ropemacs Python refactoring library
-(setq load-path (cons "~/.emacs.d/vendor/Pymacs" load-path))
-(require 'pymacs)
-(pymacs-load "ropemacs" "rope-")
-
-
-;; Run Python checkers when in flymake-mode
+; Run Python checkers when in flymake-mode
 (when (load "flymake" t)
   (defun flymake-pycheckers-init ()
     (let* ((temp-file (flymake-init-create-temp-buffer-copy
-		       'flymake-create-temp-inplace))
-	   (local-file (file-relative-name
-			temp-file
-			(file-name-directory buffer-file-name))))
-      (list "~/.emacs.d/vendor/bin/pycheckers"  (list local-file))))
+                       'flymake-create-temp-inplace))
+           (local-file (file-relative-name
+                        temp-file
+                        (file-name-directory buffer-file-name))))
+      (list "~/.emacs.d/utilities/bin/pycheckers"  (list local-file))))
   (add-to-list 'flymake-allowed-file-name-masks
-	       '("\\.py\\'" flymake-pycheckers-init)))
+               '("\\.py\\'" flymake-pycheckers-init)))

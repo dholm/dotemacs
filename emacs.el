@@ -23,6 +23,11 @@
 (setq redisplay-dont-pause t)
 
 
+;; Show row and column numbers
+(setq line-number-mode t)
+(setq column-number-mode t)
+
+
 ;; Display the current time and system load
 (load-library "time")
 (setq display-time-24hr-format t
