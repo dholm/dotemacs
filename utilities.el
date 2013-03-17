@@ -33,3 +33,4 @@
 (load "~/.emacs.d/utilities/sunrise-commander.el")
 (load "~/.emacs.d/utilities/flymake.el")
 (load "~/.emacs.d/utilities/wc-mode.el")
+(load "~/.emacs.d/utilities/elim.el")

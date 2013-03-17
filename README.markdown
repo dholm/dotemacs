@@ -136,5 +136,7 @@ Which external modules are included?
  * [php-mode](https://github.com/ejmr/php-mode), a major mode for PHP.
  * [haskell-mode](https://github.com/haskell/haskell-mode), major mode for
    Haskell.
- * [Emasc Gnuplot Mode](http://astro.berkeley.edu/~mkmcc/software/gnuplot-mode.html),
+ * [Emacs Gnuplot Mode](http://astro.berkeley.edu/~mkmcc/software/gnuplot-mode.html),
    major mode for editing gnuplot scripts.
+ * [ELIM](https://savannah.nongnu.org/projects/elim), an instant messenger
+   based on libpurple.

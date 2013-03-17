@@ -155,3 +155,7 @@
 	path = modes/Pymacs
 	url = git://github.com/pinard/Pymacs.git
 	branch = master
+[submodule "utilities/elim"]
+	path = utilities/elim
+	url = git://git.savannah.nongnu.org/elim.git
+	branch = master
