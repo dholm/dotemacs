@@ -1,6 +1,5 @@
-(load-file "~/.emacs.d/utilities/cedet/cedet-devel-load.el")
 (when (featurep 'cedet)
-  (load-file "~/.emacs.d/utilities/cedet/contrib/cedet-contrib-load.el")
+  (load-file "~/.emacs.d/el-get/cedet/contrib/cedet-contrib-load.el")
   (setq semanticdb-default-save-directory "~/.emacs.cache/semanticdb")
 
   (require 'cedet-files)

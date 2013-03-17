@@ -1,7 +1,6 @@
 ;; (Code Conventions) ;;
 
 ;; Ropemacs Python refactoring library
-(push "~/.emacs.d/modes/Pymacs" load-path)
 (require 'pymacs)
 (pymacs-load "ropemacs" "rope-")
 
@@ -24,7 +23,6 @@
 ;; (Utilities) ;;
 
 ;; Python mode for Emacs
-(push "~/.emacs.d/modes/python-el" load-path)
 (setq
  python-shell-interpreter "ipython"
  python-shell-interpreter-args ""
@@ -37,7 +35,7 @@
 
 
 ;; Pylookup
-(setq pylookup-dir "~/.emacs.d/utilities/pylookup")
+(setq pylookup-dir "~/.emacs.d/el-get/pylookup")
 (push pylookup-dir load-path)
 (require 'pylookup)
 ;; set executable file and db file
@@ -71,6 +69,6 @@
            (local-file (file-relative-name
                         temp-file
                         (file-name-directory buffer-file-name))))
-      (list "~/.emacs.d/utilities/bin/pycheckers"  (list local-file))))
+      (list "~/.emacs.d/bin/pycheckers"  (list local-file))))
   (add-to-list 'flymake-allowed-file-name-masks
                '("\\.py\\'" flymake-pycheckers-init)))

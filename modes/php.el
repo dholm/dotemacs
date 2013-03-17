@@ -1,5 +1,4 @@
 ;; Load the PHP major mode
-(push "~/.emacs.d/modes/php-mode" load-path)
 (require 'php-mode)
 
 ;; Set up helpers for php-mode

@@ -1,4 +1,3 @@
-(push "~/.emacs.d/utilities/lusty-emacs" load-path)
 (require 'lusty-explorer)
 (when (featurep 'lusty-explorer)
   (global-set-key "\C-x\C-f" 'lusty-file-explorer)

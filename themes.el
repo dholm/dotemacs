@@ -1,19 +1,5 @@
 ;; (Theme) ;;
-
-
-;; Load and set the color theme "Zenburn"
-(if (>= emacs-major-version 24)
-  (progn
-    (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/zenburn-emacs")
-    (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
-    (load-theme 'solarized-dark t))
-  (progn
-    (push "~/.emacs.d/themes/zenburn-emacs" load-path)
-    (push "~/.emacs.d/themes/emacs-color-theme-solarized" load-path)
-    (require 'color-theme-zenburn)
-    (when (featurep 'color-theme-zenburn)
-      (color-theme-zenburn))))
-
+(load-theme 'solarized-dark t)
 
 ;; Override Darwin
 (set-face-foreground 'font-lock-comment-face "red")
@@ -28,10 +14,10 @@
 
 ;; Highlighting "TODO", "FIXME" and friends
 (add-hook 'c-mode-common-hook
-	  (lambda ()
-	    (font-lock-add-keywords nil
-				    '(("\\<\\(FIXME\\|TODO\\|BUG\\):"
-				       1 font-lock-warning-face t)))))
+          (lambda ()
+            (font-lock-add-keywords nil
+                                    '(("\\<\\(FIXME\\|TODO\\|BUG\\):"
+                                       1 font-lock-warning-face t)))))
 
 
 ;; Show matching parenthesis
