@@ -3,8 +3,13 @@
 
 (load "~/.emacs.d/modes/lisp.el")
 (load "~/.emacs.d/modes/c-c++.el")
+(load "~/.emacs.d/modes/python.el")
 (load "~/.emacs.d/modes/gdb.el")
+(load "~/.emacs.d/modes/gnuplot.el")
+(load "~/.emacs.d/modes/javascript.el")
+(load "~/.emacs.d/modes/haskell.el")
 (load "~/.emacs.d/modes/ttcn.el")
+(load "~/.emacs.d/modes/php.el")
 
 
 ;; (Text Conventions) ;;

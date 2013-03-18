@@ -1,6 +1,9 @@
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
+(setq el-get-git-install-url
+      "git://github.com/dholm/el-get.git")
+
 (unless (require 'el-get nil 'noerror)
   (url-retrieve-synchronously
    "https://raw.github.com/dholm/el-get/master/el-get-install.el")
@@ -9,28 +12,28 @@
     (eval-print-last-sexp)))
 
 (setq el-get-user-package-directory "~/.emacs.d/init")
-(setq el-get-sources '(;; Code helpers
-                       auto-complete auto-complete-clang cedet dtrt-indent ecb
-                       flymake-cursor google-c-style smart-tab
+(setq el-get-sources
+      '(;; Code helpers
+        auto-complete auto-complete-clang cedet dtrt-indent ecb flymake-cursor
+        google-c-style smart-tab
 
-                       ;; Modes
-                       gnuplot-mode haskell-mode js2-mode markdown-mode
-                       multi-web-mode rainbow-mode wc-mode pymacs python
-                       pylookup slime php-mode
+        ;; Modes
+        gnuplot-mode haskell-mode js2-mode markdown-mode multi-web-mode
+        rainbow-mode wc-mode pymacs python pylookup slime php-mode
 
-                       ;; Version Control Systems
-                       magit
+        ;; Version Control Systems
+        magit vc-clearcase
 
-                       ;; Utilities
-                       deft undo-tree lusty-explorer multi-term
-                       profile-dotemacs browse-kill-ring sunrise-commander
+        ;; Utilities
+        deft undo-tree lusty-explorer profile-dotemacs ;multi-term
+        browse-kill-ring sunrise-commander
 
-                       ;; Themes
-                       solarized-theme
+        ;; Themes
+        solarized-theme
 
-                       ;; Miscellaneous
-                       vlf))
-(el-get 'sync)
+        ;; Miscellaneous
+        vlf))
+(el-get 'sync el-get-sources)
 
 (global-set-key "\C-x\C-m" 'execute-extended-command)
 (global-set-key "\C-w" 'backward-kill-word)
@@ -42,7 +45,6 @@
 (load "emacs.el")
 (load "themes.el")
 (load "modes.el")
-(load "vcs.el")
 (load "utilities.el")
 (load "bindings.el")
 

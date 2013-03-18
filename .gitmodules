@@ -2,10 +2,6 @@
 	path = modes/ttcn-el
 	url = git://github.com/dholm/ttcn-el.git
 	branch = master
-[submodule "vcs/vc-clearcase"]
-	path = vcs/vc-clearcase
-	url = git://github.com/dholm/vc-clearcase.git
-	branch = master
 [submodule "utilities/xcscope"]
 	path = utilities/xcscope
 	url = git://github.com/dholm/xcscope.git
