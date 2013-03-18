@@ -3,38 +3,32 @@
 
 (unless (require 'el-get nil 'noerror)
   (url-retrieve-synchronously
-   "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+   "https://raw.github.com/dholm/el-get/master/el-get-install.el")
   (let (el-get-master-branch)
     (goto-char (point-max))
     (eval-print-last-sexp)))
 
-(setq
- el-get-sources
- '(el-get
-   cedet
-   auto-complete))
-
 (setq el-get-user-package-directory "~/.emacs.d/init")
 (setq el-get-sources '(;; Code helpers
-		       auto-complete auto-complete-clang cedet dtrt-indent ecb
-		       flymake-cursor google-c-style smart-tab
+                       auto-complete auto-complete-clang cedet dtrt-indent ecb
+                       flymake-cursor google-c-style smart-tab
 
-		       ;; Modes
-		       gnuplot-mode haskell-mode js2-mode markdown-mode
-		       multi-web-mode rainbow-mode wc-mode pymacs python
-		       pylookup slime php-mode
+                       ;; Modes
+                       gnuplot-mode haskell-mode js2-mode markdown-mode
+                       multi-web-mode rainbow-mode wc-mode pymacs python
+                       pylookup slime php-mode
 
-		       ;; Version Control Systems
+                       ;; Version Control Systems
                        magit
 
-		       ;; Utilities
-		       deft undo-tree lusty-explorer multi-term
-		       profile-dotemacs browse-kill-ring sunrise-commander
+                       ;; Utilities
+                       deft undo-tree lusty-explorer multi-term
+                       profile-dotemacs browse-kill-ring sunrise-commander
 
-		       ;; Themes
+                       ;; Themes
                        solarized-theme
 
-		       ;; Miscellaneous
+                       ;; Miscellaneous
                        vlf))
 (el-get 'sync)
 
@@ -57,4 +51,3 @@
 (if (file-readable-p (expand-file-name "~/.emacs.local"))
     (load-file (expand-file-name "~/.emacs.local"))
   nil)
-
