@@ -1,15 +1,13 @@
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
-(setq el-get-git-install-url
-      "git://github.com/dholm/el-get.git")
-
 (unless (require 'el-get nil 'noerror)
-  (url-retrieve-synchronously
-   "https://raw.github.com/dholm/el-get/master/el-get-install.el")
-  (let (el-get-master-branch)
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+    (let (el-get-master-branch)
+      (goto-char (point-max))
+      (eval-print-last-sexp))))
 
 (setq el-get-user-package-directory "~/.emacs.d/init")
 (setq el-get-sources
@@ -25,7 +23,7 @@
         magit vc-clearcase
 
         ;; Utilities
-        deft undo-tree lusty-explorer profile-dotemacs ;multi-term
+        deft undo-tree lusty-explorer profile-dotemacs multi-term
         browse-kill-ring sunrise-commander
 
         ;; Themes
