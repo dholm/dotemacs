@@ -159,3 +159,11 @@
 	path = utilities/elim
 	url = git://git.savannah.nongnu.org/elim.git
 	branch = master
+[submodule "modes/scala-mode2"]
+	path = modes/scala-mode2
+	url = git://github.com/hvesalai/scala-mode2.git
+	branch = master
+[submodule "modes/ensime"]
+	path = modes/ensime
+	url = git://github.com/aemoncannon/ensime.git
+	branch = master

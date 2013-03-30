@@ -140,3 +140,6 @@ Which external modules are included?
    major mode for editing gnuplot scripts.
  * [ELIM](https://savannah.nongnu.org/projects/elim), an instant messenger
    based on libpurple.
+ * [scala-mode2](https://github.com/hvesalai/scala-mode2), Scala major mode.
+ * [Ensime](https://github.com/aemoncannon/ensime), an enhanced Scala mode to
+   complement scala-mode2.
