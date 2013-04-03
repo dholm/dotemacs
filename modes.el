@@ -10,6 +10,7 @@
 (load "~/.emacs.d/modes/haskell.el")
 (load "~/.emacs.d/modes/ttcn.el")
 (load "~/.emacs.d/modes/php.el")
+(load "~/.emacs.d/modes/scala.el")
 
 
 ;; (Text Conventions) ;;
