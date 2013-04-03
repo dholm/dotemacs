@@ -14,4 +14,3 @@
 (load "~/.emacs.d/utilities/tabbar.el")
 (load "~/.emacs.d/utilities/saveplace.el")
 (load "~/.emacs.d/utilities/savehist.el")
-(load "~/.emacs.d/utilities/elim.el")

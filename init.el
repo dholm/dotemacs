@@ -24,7 +24,7 @@
 
         ;; Utilities
         deft undo-tree lusty-explorer profile-dotemacs multi-term
-        browse-kill-ring sunrise-commander
+        browse-kill-ring sunrise-commander elim
 
         ;; Themes
         solarized-theme

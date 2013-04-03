@@ -22,7 +22,3 @@
 	path = utilities/outlookedit
 	url = git://github.com/dholm/outlookedit.git
 	branch = master
-[submodule "utilities/elim"]
-	path = utilities/elim
-	url = git://git.savannah.nongnu.org/elim.git
-	branch = master
