@@ -1,24 +1,24 @@
-[submodule "modes/ttcn-el"]
-	path = modes/ttcn-el
+[submodule ".emacs.d/modes/ttcn-el"]
+	path = .emacs.d/modes/ttcn-el
 	url = git://github.com/dholm/ttcn-el.git
 	branch = master
-[submodule "utilities/xcscope"]
-	path = utilities/xcscope
+[submodule ".emacs.d/utilities/xcscope"]
+	path = .emacs.d/utilities/xcscope
 	url = git://github.com/dholm/xcscope.git
 	branch = master
-[submodule "utilities/tabbar"]
-	path = utilities/tabbar
+[submodule ".emacs.d/utilities/tabbar"]
+	path = .emacs.d/utilities/tabbar
 	url = git://github.com/dholm/tabbar.git
 	branch = master
-[submodule "utilities/newlisp"]
-	path = utilities/newlisp
+[submodule ".emacs.d/utilities/newlisp"]
+	path = .emacs.d/utilities/newlisp
 	url = git://github.com/kosh04/newlisp-files.git
 	branch = master
-[submodule "utilities/pycheckers"]
-	path = utilities/pycheckers
+[submodule ".emacs.d/utilities/pycheckers"]
+	path = .emacs.d/utilities/pycheckers
 	url = git://github.com/dholm/emacs-pycheckers.git
 	branch = master
-[submodule "utilities/outlookedit"]
-	path = utilities/outlookedit
+[submodule ".emacs.d/utilities/outlookedit"]
+	path = .emacs.d/utilities/outlookedit
 	url = git://github.com/dholm/outlookedit.git
 	branch = master
