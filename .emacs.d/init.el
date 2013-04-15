@@ -13,7 +13,7 @@
 (setq el-get-sources
       '(;; Code helpers
         auto-complete auto-complete-clang cedet dtrt-indent ecb flymake-cursor
-        google-c-style smart-tab ensime
+        google-c-style smart-tab ensime scion
 
         ;; Modes
         gnuplot-mode haskell-mode js2-mode markdown-mode multi-web-mode
