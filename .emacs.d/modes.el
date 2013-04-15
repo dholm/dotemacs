@@ -5,6 +5,7 @@
 (load "~/.emacs.d/modes/c-c++.el")
 (load "~/.emacs.d/modes/python.el")
 (load "~/.emacs.d/modes/gdb.el")
+(load "~/.emacs.d/modes/web.el")
 (load "~/.emacs.d/modes/gnuplot.el")
 (load "~/.emacs.d/modes/javascript.el")
 (load "~/.emacs.d/modes/haskell.el")
