@@ -23,14 +23,11 @@
         magit vc-clearcase
 
         ;; Utilities
-        deft undo-tree lusty-explorer profile-dotemacs multi-term
-        browse-kill-ring sunrise-commander elim
+        deft undo-tree lusty-explorer profile-dotemacs browse-kill-ring
+        sunrise-commander elim
 
         ;; Themes
-        solarized-theme
-
-        ;; Miscellaneous
-        vlf))
+        solarized-theme))
 (el-get 'sync el-get-sources)
 
 (global-set-key "\C-x\C-m" 'execute-extended-command)
