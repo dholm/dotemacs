@@ -20,7 +20,7 @@
         rainbow-mode wc-mode pymacs python pylookup slime php-mode scala-mode2
 
         ;; Version Control Systems
-        magit vc-clearcase
+        magit vc-clearcase git-gutter-fringe
 
         ;; Utilities
         deft undo-tree lusty-explorer profile-dotemacs browse-kill-ring
