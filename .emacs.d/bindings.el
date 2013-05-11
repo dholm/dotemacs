@@ -1,6 +1,8 @@
 ;; (Key Bindings) ;;
 
 ;; Function keys
+(when (display-graphic-p)
+  (global-set-key [f2] 'minimap-toggle))
 (global-set-key [f3] 'multi-term-dedicated-toggle)
 (global-set-key [f7] 'compile)
 (global-set-key [f8] 'gdb)

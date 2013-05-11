@@ -24,7 +24,7 @@
 
         ;; Utilities
         deft undo-tree lusty-explorer profile-dotemacs browse-kill-ring
-        sunrise-commander elim
+        sunrise-commander elim minimap
 
         ;; Themes
         solarized-theme))
