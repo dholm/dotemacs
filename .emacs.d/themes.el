@@ -1,6 +1,12 @@
 ;; (Theme) ;;
 (load-theme 'solarized-dark t)
 
+
+;; Font when in graphics mode
+(when (display-graphic-p)
+  (set-default-font "Meslo LG S DZ:pixelsize=10:foundry=bitstream:weight=normal:slant=normal:width=normal:spacing=100:scalable=true"))
+
+
 ;; Override Darwin
 (set-face-foreground 'font-lock-comment-face "red")
 (set-face-foreground 'font-lock-comment-delimiter-face "red")
