@@ -13,11 +13,12 @@
 (setq el-get-sources
       '(;; Code helpers
         auto-complete auto-complete-clang cedet dtrt-indent ecb flymake-cursor
-        google-c-style smart-tab ensime scion pymacs jedi
+        google-c-style smart-tab ensime scion pymacs jedi pde perl-completion
 
         ;; Modes
         gnuplot-mode haskell-mode js2-mode markdown-mode multi-web-mode
         rainbow-mode wc-mode python pylookup slime php-mode scala-mode2
+        cperl-mode
 
         ;; Version Control Systems
         magit vc-clearcase git-gutter-fringe

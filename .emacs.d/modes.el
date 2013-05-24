@@ -12,6 +12,7 @@
 (load "~/.emacs.d/modes/ttcn.el")
 (load "~/.emacs.d/modes/php.el")
 (load "~/.emacs.d/modes/scala.el")
+(load "~/.emacs.d/modes/perl.el")
 
 
 ;; (Text Conventions) ;;
