@@ -27,6 +27,10 @@
         deft undo-tree lusty-explorer profile-dotemacs browse-kill-ring
         sunrise-commander elim minimap
 
+        ;; Editing
+        multiple-cursors expand-region undo-tree browse-kill-ring
+        fill-column-indicator
+
         ;; Navigation
         ace-jump-mode jump-char minimap smart-forward
 

@@ -3,7 +3,7 @@
 ;; Function keys
 (when (display-graphic-p)
   (global-set-key [f2] 'minimap-toggle))
-(global-set-key [f3] 'multi-term-dedicated-toggle)
+(global-set-key [f3] 'fci-mode)
 (global-set-key [f7] 'compile)
 (global-set-key [f8] 'gdb)
 
@@ -34,3 +34,7 @@
 (global-set-key (kbd "C-c <down>") 'enlarge-window)
 (global-set-key (kbd "C-c <left>") 'shrink-window-horizontally)
 (global-set-key (kbd "C-c <right>") 'enlarge-window-horizontally)
+
+
+;; expand selected region by semantic units
+(global-set-key (kbd "C-=") 'er/expand-region)
