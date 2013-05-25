@@ -14,11 +14,12 @@
       '(;; Code helpers
         auto-complete auto-complete-clang cedet dtrt-indent ecb flymake-cursor
         google-c-style smart-tab ensime scion pymacs jedi pde perl-completion
+        js2-refactor
 
         ;; Modes
-        gnuplot-mode haskell-mode js2-mode markdown-mode multi-web-mode
-        rainbow-mode wc-mode python pylookup slime php-mode scala-mode2
-        cperl-mode
+        gnuplot-mode haskell-mode js2-mode markdown-mode nxhtml rainbow-mode
+        wc-mode python pylookup slime php-mode scala-mode2 cperl-mode jinja
+        showcss-mode
 
         ;; Version Control Systems
         magit vc-clearcase git-gutter-fringe
