@@ -25,8 +25,8 @@
         magit vc-clearcase git-gutter-fringe
 
         ;; Utilities
-        deft undo-tree lusty-explorer profile-dotemacs browse-kill-ring
-        sunrise-commander elim minimap
+        deft lusty-explorer profile-dotemacs sunrise-commander elim perspective
+        shell-command bash-completion
 
         ;; Editing
         multiple-cursors expand-region undo-tree browse-kill-ring
