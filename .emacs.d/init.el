@@ -27,6 +27,9 @@
         deft undo-tree lusty-explorer profile-dotemacs browse-kill-ring
         sunrise-commander elim minimap
 
+        ;; Navigation
+        ace-jump-mode jump-char minimap smart-forward
+
         ;; Themes
         solarized-theme))
 (el-get 'sync el-get-sources)
