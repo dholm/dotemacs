@@ -2,7 +2,7 @@
 (setq c-default-style "K&R")
 (setq c++-default-style "Stroustrup")
 
-;; Load the le C/C++ style
+;; Load the Google C/C++ style
 (require 'google-c-style)
 
 (add-hook 'c-mode-common-hook
