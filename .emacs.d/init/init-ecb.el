@@ -10,7 +10,12 @@
 
 
 ;; (ECB Layout) ;;
-(setq ecb-layout-name "left6")
+(setq ecb-layout-name "left7"
+      ecb-layout-window-sizes '(("left7"
+  (ecb-directories-buffer-name 0.17 . 0.6428571428571429)
+  (ecb-sources-buffer-name 0.17 . 0.3392857142857143)
+  (ecb-methods-buffer-name 0.25 . 0.6428571428571429)
+  (ecb-history-buffer-name 0.25 . 0.3392857142857143))))
 (setq ecb-show-sources-in-directories-buffer 'always)
 (setq ecb-compile-window-height 12)
 
@@ -48,8 +53,8 @@
 (global-set-key (kbd "C-;") 'dholm/ecb-show-ecb-windows)
 (global-set-key (kbd "C-'") 'dholm/ecb-hide-ecb-windows)
 ;;; quick navigation between ecb windows
-(global-set-key (kbd "C-)") 'ecb-goto-window-edit1)
-(global-set-key (kbd "C-!") 'ecb-goto-window-directories)
-(global-set-key (kbd "C-@") 'ecb-goto-window-sources)
-(global-set-key (kbd "C-#") 'ecb-goto-window-methods)
-(global-set-key (kbd "C-$") 'ecb-goto-window-compilation)
+(global-set-key (kbd "C-c 1") 'ecb-goto-window-edit1)
+(global-set-key (kbd "C-c 2") 'ecb-goto-window-directories)
+(global-set-key (kbd "C-c 3") 'ecb-goto-window-methods)
+(global-set-key (kbd "C-c 4") 'ecb-goto-window-history)
+(global-set-key (kbd "C-c 5") 'ecb-goto-window-compilation)
