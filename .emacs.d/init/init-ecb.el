@@ -12,6 +12,7 @@
 ;; (ECB Layout) ;;
 (setq ecb-layout-name "left6")
 (setq ecb-show-sources-in-directories-buffer 'always)
+(setq ecb-compile-window-height 12)
 
 
 ;; (Helper Functions) ;;
