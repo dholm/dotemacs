@@ -26,7 +26,7 @@
 
         ;; Utilities
         deft lusty-explorer profile-dotemacs sunrise-commander elim perspective
-        shell-command bash-completion
+        shell-command bash-completion emacs-w3m
 
         ;; Editing
         multiple-cursors expand-region undo-tree browse-kill-ring
