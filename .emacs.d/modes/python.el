@@ -7,6 +7,8 @@
   (flymake-mode)
   ;; Separate camel-case into separate words
   (subword-mode t)
+  ;; ElDoc shows function documentation as you type
+  (eldoc-mode t)
   ;; Show trailing whitespace
   (setq show-trailing-whitespace t)
   ;; Before save hook
