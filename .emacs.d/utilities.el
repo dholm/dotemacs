@@ -7,6 +7,7 @@
 
 
 ;; Load all utilities
+(load "~/.emacs.d/utilities/compile.el")
 (load "~/.emacs.d/utilities/xcscope.el")
 (load "~/.emacs.d/utilities/outlookedit.el")
 (load "~/.emacs.d/utilities/windmove.el")
