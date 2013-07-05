@@ -14,6 +14,7 @@
       '(;; Code helpers
         auto-complete clang-complete-async cedet dtrt-indent ecb flymake-cursor
         google-c-style smart-tab ensime scion pymacs jedi pde perl-completion
+        yasnippet auto-complete-yasnippet
 
         ;; Modes
         gnuplot-mode haskell-mode js2-mode markdown-mode nxhtml rainbow-mode
