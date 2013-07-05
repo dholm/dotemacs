@@ -36,34 +36,7 @@
 (require 'python)
 
 
-;; Pylookup
-(setq pylookup-dir "~/.emacs.d/el-get/pylookup")
-(push pylookup-dir load-path)
-(require 'pylookup)
-;; set executable file and db file
-(setq pylookup-program (concat pylookup-dir "/pylookup.py"))
-(setq pylookup-db-file (concat pylookup-dir "/pylookup.db"))
-;; set search option if you want
-;; (setq pylookup-search-options '("--insensitive" "0" "--desc" "0"))
-;; to speedup, just load it on demand
-(autoload 'pylookup-lookup "pylookup"
-  "Lookup SEARCH-TERM in the Python HTML indexes." t)
-(autoload 'pylookup-update "pylookup" 
-  "Run pylookup-update and create the database at `pylookup-db-file'." t)
-
-
-;; Multiple Python checkers support
-(when (load "flymake" t)
-  (defun flymake-pycheckers-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list "/path/to/this/file" (list local-file)))))
-
-
-; Run Python checkers when in flymake-mode
+;; Run Python checkers when in flymake-mode
 (when (load "flymake" t)
   (defun flymake-pycheckers-init ()
     (let* ((temp-file (flymake-init-create-temp-buffer-copy
