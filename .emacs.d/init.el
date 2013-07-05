@@ -17,8 +17,8 @@
 
         ;; Modes
         gnuplot-mode haskell-mode js2-mode markdown-mode nxhtml rainbow-mode
-        wc-mode python pylookup slime php-mode scala-mode2 cperl-mode jinja
-        showcss-mode
+        wc-mode python-mode pylookup slime php-mode scala-mode2 cperl-mode
+        jinja showcss-mode
 
         ;; Version Control Systems
         magit vc-clearcase git-gutter-fringe
