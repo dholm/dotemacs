@@ -1,4 +1,5 @@
 (add-hook 'c-mode-common-hook
           (lambda ()
-            (setq ac-sources '(ac-source-clang-async))
+            (set (make-local-variable 'ac-sources)
+                 (append ac-sources '(ac-source-clang-async)))
             (ac-clang-launch-completion-process)))

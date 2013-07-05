@@ -1,15 +1,11 @@
 (require 'auto-complete-config)
 
 (ac-config-default)
-(setq ac-auto-start nil)
-(setq ac-quick-help-delay 0.5)
+(setq ac-auto-start nil
+      ac-quick-help-delay 0.5
+      ;; Store the completion history in the cache directory
+      ac-comphist-file "~/.emacs.cache/ac-comphist.dat")
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/el-get/auto-complete/ac-dict")
-;; Store the completion history in the cache directory
-(setq ac-comphist-file "~/.emacs.cache/ac-comphist.dat")
-
-(when (featurep 'cedet)
-  ;; Use semantic as a source for auto complete
-  (setq ac-sources '(ac-source-semantic)))
 
 (add-hook 'auto-complete-mode-hook 'ac-common-setup)
 

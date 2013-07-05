@@ -60,7 +60,10 @@
     (local-set-key "\C-c+" 'semantic-tag-folding-show-block)
     (local-set-key "\C-c-" 'semantic-tag-folding-fold-block)
     (local-set-key "\C-c\C-c+" 'semantic-tag-folding-show-all)
-    (local-set-key "\C-c\C-c-" 'semantic-tag-folding-fold-all))
+    (local-set-key "\C-c\C-c-" 'semantic-tag-folding-fold-all)
+    ;; Use semantic as a source for auto complete
+    (set (make-local-variable 'ac-sources)
+         (append ac-sources '(ac-source-semantic))))
   (add-hook 'c-mode-common-hook 'dholm/cedet-hook)
   (add-hook 'lisp-mode-hook 'dholm/cedet-hook)
   (add-hook 'emacs-lisp-mode-hook 'dholm/cedet-hook)
@@ -70,5 +73,9 @@
     (local-set-key "\C-xt" 'eassist-switch-h-cpp)
     (local-set-key "\C-ce" 'eassist-list-methods)
     (local-set-key "\C-c\C-r" 'semantic-symref)
-    (add-to-list 'ac-sources 'ac-source-gtags))
-  (add-hook 'c-mode-common-hook 'dholm/c-mode-cedet-hook))
+    ;; Autocompletion
+    (auto-complete-mode t)
+    (set (make-local-variable 'ac-sources)
+         (append ac-sources '(ac-source-gtags)))))
+
+(add-hook 'c-mode-common-hook 'dholm/c-mode-cedet-hook)
