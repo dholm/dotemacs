@@ -11,6 +11,9 @@
   (eldoc-mode t)
   ;; Show trailing whitespace
   (setq show-trailing-whitespace t)
+  ;; Auto-completion sources
+  (set (make-local-variable 'ac-sources)
+       (append ac-sources '(ac-source-ropemacs)))
   ;; Before save hook
   (add-hook 'before-save-hook
             ;; Delete trailing whitespace on save
