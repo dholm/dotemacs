@@ -10,10 +10,6 @@
 	path = .emacs.d/utilities/tabbar
 	url = git://github.com/dholm/tabbar.git
 	branch = master
-[submodule ".emacs.d/utilities/newlisp"]
-	path = .emacs.d/utilities/newlisp
-	url = git://github.com/kosh04/newlisp-files.git
-	branch = master
 [submodule ".emacs.d/utilities/pycheckers"]
 	path = .emacs.d/utilities/pycheckers
 	url = git://github.com/dholm/emacs-pycheckers.git
