@@ -6,10 +6,6 @@
 	path = .emacs.d/utilities/tabbar
 	url = git://github.com/dholm/tabbar.git
 	branch = master
-[submodule ".emacs.d/utilities/pycheckers"]
-	path = .emacs.d/utilities/pycheckers
-	url = git://github.com/dholm/emacs-pycheckers.git
-	branch = master
 [submodule ".emacs.d/utilities/outlookedit"]
 	path = .emacs.d/utilities/outlookedit
 	url = git://github.com/dholm/outlookedit.git
