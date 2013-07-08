@@ -1,10 +1,3 @@
-;; Enables support for TTCN-3
-(push "~/.emacs.d/modes/ttcn-el" load-path)
-(require 'ttcn3)
-(setq auto-mode-alist
-      (cons '("\\.ttcn" . ttcn-3-mode) auto-mode-alist))
-
-
 ;; Set the TTCN-3 mode hook
 (add-hook 'ttcn3-mode-hook
           (lambda ()

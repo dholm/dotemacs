@@ -1,7 +1,3 @@
-[submodule ".emacs.d/modes/ttcn-el"]
-	path = .emacs.d/modes/ttcn-el
-	url = git://github.com/dholm/ttcn-el.git
-	branch = master
 [submodule ".emacs.d/utilities/xcscope"]
 	path = .emacs.d/utilities/xcscope
 	url = git://github.com/dholm/xcscope.git
