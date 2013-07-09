@@ -27,7 +27,7 @@
         ;; Utilities
         deft profile-dotemacs sunrise-commander elim perspective shell-command
         bash-completion emacs-w3m bm helm helm-descbinds helm-etags-plus
-        helm-build-command helm-ls-git
+        helm-build-command helm-ls-git helm-ipython helm-c-yasnippet
 
         ;; Editing
         multiple-cursors expand-region undo-tree browse-kill-ring
