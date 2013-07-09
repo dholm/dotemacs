@@ -12,9 +12,9 @@
 (setq el-get-user-package-directory "~/.emacs.d/init")
 (setq el-get-sources
       '(;; Code helpers
-        auto-complete clang-complete-async cedet dtrt-indent ecb flymake
-        flymake-cursor google-c-style smart-tab ensime scion pymacs jedi pde
-        perl-completion yasnippet auto-complete-yasnippet flymake-pycheckers
+        auto-complete clang-complete-async cedet dtrt-indent ecb google-c-style
+        smart-tab ensime scion pymacs jedi pde perl-completion yasnippet
+        auto-complete-yasnippet flymake-cursor flycheck
 
         ;; Modes
         gnuplot-mode haskell-mode js2-mode markdown-mode nxhtml rainbow-mode
