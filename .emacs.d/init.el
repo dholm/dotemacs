@@ -25,8 +25,9 @@
         magit vc-clearcase git-gutter-fringe
 
         ;; Utilities
-        deft lusty-explorer profile-dotemacs sunrise-commander elim perspective
-        shell-command bash-completion emacs-w3m
+        deft profile-dotemacs sunrise-commander elim perspective shell-command
+        bash-completion emacs-w3m helm helm-descbinds helm-etags-plus
+        helm-build-command helm-ls-git
 
         ;; Editing
         multiple-cursors expand-region undo-tree browse-kill-ring
