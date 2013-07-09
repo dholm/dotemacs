@@ -1,7 +1,7 @@
 ;;; (Initialization) ;;;
 
-(setq helm-idle-delay 0.1
-      helm-input-idle-delay 0.1)
+(setq helm-idle-delay 0.3
+      helm-input-idle-delay 0.3)
 
 (helm-mode)
 
