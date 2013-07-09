@@ -26,7 +26,7 @@
 
         ;; Utilities
         deft profile-dotemacs sunrise-commander elim perspective shell-command
-        bash-completion emacs-w3m helm helm-descbinds helm-etags-plus
+        bash-completion emacs-w3m bm helm helm-descbinds helm-etags-plus
         helm-build-command helm-ls-git
 
         ;; Editing
