@@ -1,9 +1,9 @@
 ;; (Code Conventions) ;;
 
-
 (load "~/.emacs.d/modes/lisp.el")
 (load "~/.emacs.d/modes/c-c++.el")
 (load "~/.emacs.d/modes/makefile.el")
+(load "~/.emacs.d/modes/shell.el")
 (load "~/.emacs.d/modes/python.el")
 (load "~/.emacs.d/modes/gdb.el")
 (load "~/.emacs.d/modes/web.el")

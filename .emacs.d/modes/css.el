@@ -1,5 +1,3 @@
-(load "~/.emacs.d/modules/rainbow-mode.el")
-
 ;; CSS editing
 (defun dholm/css-mode-hook ()
   (rainbow-mode t)
