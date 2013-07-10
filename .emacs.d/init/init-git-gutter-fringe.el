@@ -1,2 +1,2 @@
-(setq git-gutter-fr:side 'right-fringe)
+(setq git-gutter-fr:side 'left-fringe)
 

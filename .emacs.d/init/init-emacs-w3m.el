@@ -7,4 +7,4 @@
       w3m-output-coding-system 'utf-8
       w3m-terminal-coding-system 'utf-8)
 (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
-(global-set-key "\C-xm" 'browse-url-at-point)
+(global-set-key (kbd "C-x m") 'browse-url-at-point)

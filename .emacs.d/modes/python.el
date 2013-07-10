@@ -1,7 +1,12 @@
 ;; (Code Conventions) ;;
 
+(setq jedi:setup-keys t
+      jedi:complete-on-dot t)
+
 ;; Enable installed helpers for Python
 (defun dholm/python-mode-hook ()
+  ;; Load jedi
+  (jedi:setup)
   ;; Run spell-checker on strings and comments
   (flyspell-prog-mode)
   ;; Separate camel-case into separate words
@@ -13,6 +18,8 @@
   ;; Auto-completion sources
   (set (make-local-variable 'ac-sources)
        (append ac-sources '(ac-source-ropemacs)))
+  ;; Keybindings
+  (local-set-key (kbd "C-c h") 'pylookup-lookup)
   ;; Before save hook
   (add-hook 'before-save-hook
             ;; Delete trailing whitespace on save

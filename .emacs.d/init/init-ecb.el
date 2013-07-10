@@ -1,5 +1,4 @@
 ;; Emacs Code Browser
-(require 'ecb)
 (require 'ecb-autoloads)
 
 
