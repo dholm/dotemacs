@@ -22,6 +22,7 @@
         auto-complete clang-complete-async cedet dtrt-indent ecb google-c-style
         smart-tab ensime scion pymacs jedi pde perl-completion yasnippet
         auto-complete-yasnippet deferred-flyspell flymake-cursor flycheck
+        auto-complete-emacs-lisp redshank
 
         ;; Modes
         gnuplot-mode haskell-mode js2-mode markdown-mode nxhtml rainbow-mode
@@ -38,8 +39,8 @@
         auto-compile
 
         ;; Editing
-        multiple-cursors expand-region undo-tree browse-kill-ring
-        fill-column-indicator
+        multiple-cursors expand-region undo-tree browse-kill-ring paredit
+        fill-column-indicator elisp-slime-nav rainbow-delimiters
 
         ;; Navigation
         ace-jump-mode jump-char minimap smart-forward
