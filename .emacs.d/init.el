@@ -31,7 +31,7 @@
         ;; Utilities
         deft sunrise-commander elim perspective shell-command bash-completion
         emacs-w3m bm helm helm-descbinds helm-etags-plus auto-compile
-        helm-build-command helm-ls-git helm-ipython helm-c-yasnippet
+        helm-build-command helm-ls-git helm-c-yasnippet
 
         ;; Editing
         multiple-cursors expand-region undo-tree browse-kill-ring paredit
