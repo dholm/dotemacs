@@ -1,4 +1,8 @@
 
+(add-to-list 'load-path user-emacs-directory)
+(add-to-list 'exec-path (concat user-emacs-directory "bin"))
+(require 'benchmarking)
+
 ;; Configure ELPA repositories
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
@@ -33,10 +37,9 @@
         magit vc-clearcase git-gutter-fringe
 
         ;; Utilities
-        deft profile-dotemacs sunrise-commander elim perspective shell-command
-        bash-completion emacs-w3m bm helm helm-descbinds helm-etags-plus
+        deft sunrise-commander elim perspective shell-command bash-completion
+        emacs-w3m bm helm helm-descbinds helm-etags-plus auto-compile
         helm-build-command helm-ls-git helm-ipython helm-c-yasnippet
-        auto-compile
 
         ;; Editing
         multiple-cursors expand-region undo-tree browse-kill-ring paredit
@@ -57,9 +60,6 @@
 
 
 ;; Load additional configuration
-(push "~/.emacs.d" load-path)
-(push "~/.emacs.d/bin" exec-path)
-
 (load "emacs.el")
 (load "themes.el")
 (load "modes.el")
