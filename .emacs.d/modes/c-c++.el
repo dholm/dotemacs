@@ -4,6 +4,9 @@
 
 
 (defun dholm/c-mode-common-hook ()
+  ;; Load CEDET
+  (dholm/c-mode-cedet-hook)
+  ;; Enable eldoc
   (c-turn-on-eldoc-mode)
   ;; Override the indentation level of case labels in the K&R- and
   ;; Stroustrup styles so that they are indented one level beyond

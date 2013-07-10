@@ -1,6 +1,8 @@
 ;; (Code Conventions) ;;
 
 (defun dholm/lisp-mode-hook ()
+  ;; Enable CEDET
+  (dholm/cedet-hook)
   (rainbow-delimiters-mode)
   (enable-paredit-mode)
   (turn-on-eldoc-mode)

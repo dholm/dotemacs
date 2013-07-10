@@ -5,6 +5,8 @@
 
 ;; Enable installed helpers for Python
 (defun dholm/python-mode-hook ()
+  ;; Load CEDET
+  (dholm/python-mode-cedet-hook)
   ;; Load jedi
   (jedi:setup)
   ;; Run spell-checker on strings and comments
