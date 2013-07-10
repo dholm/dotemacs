@@ -42,4 +42,4 @@ LOAD-DURATION is the time taken in milliseconds to load FILE.")
                      t))))
 
 
-(provide 'benchmarking)
+(provide 'utilities/benchmarking)

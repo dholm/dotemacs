@@ -1,7 +1,7 @@
 
 (add-to-list 'load-path user-emacs-directory)
 (add-to-list 'exec-path (concat user-emacs-directory "bin"))
-(require 'benchmarking)
+(require 'utilities/benchmarking)
 
 ;; Configure ELPA repositories
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
