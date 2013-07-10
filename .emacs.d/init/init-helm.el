@@ -6,7 +6,8 @@
 (helm-mode)
 
 ;; Filter out boring buffers
-(loop for exp in '("\\*clang-complete" "\\*CEDET global")
+(loop for exp in '("\\*clang-complete" "\\*CEDET global" "\\*tramp/scpc"
+                   "\\*epc con" "\\*Pymacs" "\\*Completions\\*")
       do (add-to-list 'helm-boring-buffer-regexp-list exp))
 
 ;; Filter out boring files
