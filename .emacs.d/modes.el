@@ -1,19 +1,19 @@
 ;; (Code Conventions) ;;
 
-(load "~/.emacs.d/modes/lisp.el")
-(load "~/.emacs.d/modes/c-c++.el")
-(load "~/.emacs.d/modes/makefile.el")
-(load "~/.emacs.d/modes/shell.el")
-(load "~/.emacs.d/modes/python.el")
-(load "~/.emacs.d/modes/gdb.el")
-(load "~/.emacs.d/modes/web.el")
-(load "~/.emacs.d/modes/gnuplot.el")
-(load "~/.emacs.d/modes/javascript.el")
-(load "~/.emacs.d/modes/haskell.el")
-(load "~/.emacs.d/modes/ttcn.el")
-(load "~/.emacs.d/modes/php.el")
-(load "~/.emacs.d/modes/scala.el")
-(load "~/.emacs.d/modes/perl.el")
+(require 'modes/lisp)
+(require 'modes/c-c++)
+(require 'modes/makefile)
+(require 'modes/shell)
+(require 'modes/python)
+(require 'modes/gdb)
+(require 'modes/web)
+(require 'modes/gnuplot)
+(require 'modes/javascript)
+(require 'modes/haskell)
+(require 'modes/ttcn)
+(require 'modes/php)
+(require 'modes/scala)
+(require 'modes/perl)
 
 
 ;; (Text Conventions) ;;

@@ -14,3 +14,6 @@
   (dtrt-indent-mode t))
 
 (add-hook 'php-mode-hook 'dholm/php-mode-hook)
+
+
+(provide 'modes/php)

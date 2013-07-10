@@ -17,3 +17,6 @@
   (flyspell-prog-mode))
 
 (add-hook 'javascript-mode-hook 'dholm/javascript-mode-hook)
+
+
+(provide 'modes/javascript)

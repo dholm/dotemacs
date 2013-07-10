@@ -23,4 +23,7 @@
             'delete-trailing-whitespace nil t)
   ;; Enable dtrt-indent to attempt to identify the indentation rules used
   (dtrt-indent-mode t))
+
 (add-hook 'c-mode-common-hook 'dholm/c-mode-common-hook)
+
+(provide 'modes/c-c++)

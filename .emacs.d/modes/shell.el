@@ -5,3 +5,6 @@
   (flyspell-prog-mode))
 
 (add-hook 'shell-mode-hook 'dholm/shell-mode-hook)
+
+
+(provide 'modes/shell)

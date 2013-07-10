@@ -4,3 +4,6 @@
 (when (featurep 'saveplace)
   (setq save-place-file "~/.emacs.cache/saveplace")
   (setq-default save-place t))
+
+
+(provide 'utilities/saveplace)

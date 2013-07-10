@@ -9,3 +9,5 @@
                    '(setq mumamo-per-buffer-local-vars
                           (delq 'buffer-file-name mumamo-per-buffer-local-vars))))
 
+
+(provide 'modes/web)

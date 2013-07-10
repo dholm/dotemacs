@@ -17,3 +17,6 @@
 
 (add-hook 'lisp-mode-hook 'dholm/lisp-mode-hook)
 (add-hook 'emacs-lisp-mode-hook 'dholm/emacs-lisp-mode-hook)
+
+
+(provide 'modes/lisp)

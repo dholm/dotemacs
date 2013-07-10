@@ -6,3 +6,6 @@
   (set (make-local-variable 'ac-auto-show-menu) t))
 
 (add-hook 'css-mode-hook 'dholm/css-mode-hook)
+
+
+(provide 'modes/css)

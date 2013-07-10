@@ -30,3 +30,6 @@
 (add-hook 'python-mode-hook 'dholm/python-mode-hook)
 
 ;; (Utilities) ;;
+
+
+(provide 'modes/python)

@@ -3,3 +3,6 @@
 (require 'windmove)
 (when (featurep 'windmove)
   (windmove-default-keybindings))
+
+
+(provide 'utilities/windmove)

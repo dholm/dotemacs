@@ -10,3 +10,6 @@
             'delete-trailing-whitespace nil t))
 
 (add-hook 'scala-mode-hook 'dholm/scala-mode-hook)
+
+
+(provide 'modes/scala)

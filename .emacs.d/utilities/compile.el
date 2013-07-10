@@ -12,3 +12,6 @@
          (prj (ede-current-project current-dir))
          (root-dir (ede-project-root-directory prj)))
     (concat "cd " root-dir "; nice make -j")))
+
+
+(provide 'utilities/compile)

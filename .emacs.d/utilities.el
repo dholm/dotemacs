@@ -7,11 +7,11 @@
 
 
 ;; Load all utilities
-(load "~/.emacs.d/utilities/compile.el")
-(load "~/.emacs.d/utilities/xcscope.el")
-(load "~/.emacs.d/utilities/outlookedit.el")
-(load "~/.emacs.d/utilities/windmove.el")
-(load "~/.emacs.d/utilities/uniquify.el")
-(load "~/.emacs.d/utilities/tabbar.el")
-(load "~/.emacs.d/utilities/saveplace.el")
-(load "~/.emacs.d/utilities/savehist.el")
+(require 'utilities/compile)
+(require 'utilities/xcscope)
+(require 'utilities/outlookedit)
+(require 'utilities/windmove)
+(require 'utilities/uniquify)
+(require 'utilities/tabbar)
+(require 'utilities/saveplace)
+(require 'utilities/savehist)

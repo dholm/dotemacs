@@ -18,3 +18,6 @@
   (flyspell-prog-mode))
 
 (add-hook 'perl-mode-hook 'dholm/perl-mode-hook)
+
+
+(provide 'modes/perl)

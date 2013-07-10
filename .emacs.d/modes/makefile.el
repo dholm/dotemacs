@@ -13,3 +13,6 @@
             'delete-trailing-whitespace nil t))
 
 (add-hook 'makefile-mode-hook 'dholm/makefile-mode-hook)
+
+
+(provide 'modes/makefile)

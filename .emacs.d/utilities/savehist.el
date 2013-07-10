@@ -5,3 +5,6 @@
   (setq savehist-additional-variables '(search-ring regexp-search-ring kill-ring))
   (setq savehist-file "~/.emacs.cache/savehist")
   (savehist-mode t))
+
+
+(provide 'utilities/savehist)

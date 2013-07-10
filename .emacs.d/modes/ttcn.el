@@ -14,3 +14,6 @@
   (dtrt-indent-mode t))
 
 (add-hook 'ttcn3-mode-hook 'dholm/ttcn3-mode-hook)
+
+
+(provide 'modes/ttcn)

@@ -9,3 +9,6 @@
 ;; Use gdb-script-mode for files ending in .gdb
 (setq auto-mode-alist
       (cons '("\\.gdb$" . gdb-script-mode) auto-mode-alist))
+
+
+(provide 'modes/gdb)
