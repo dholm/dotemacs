@@ -16,6 +16,7 @@
 
 ;;; (Bindings) ;;;
 (global-set-key (kbd "C-x r m") 'bm-toggle)
+(global-set-key (kbd "C-x r a") 'bm-bookmark-annotate)
 (global-set-key (kbd "C-x r l") 'bm-show-all)
 (global-set-key (kbd "C-x r b") 'bm-next)
 
