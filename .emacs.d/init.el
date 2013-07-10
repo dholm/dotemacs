@@ -22,7 +22,7 @@
         auto-complete clang-complete-async cedet dtrt-indent ecb google-c-style
         smart-tab ensime scion pymacs jedi pde perl-completion yasnippet
         auto-complete-yasnippet deferred-flyspell flymake-cursor flycheck
-        auto-complete-emacs-lisp redshank
+        auto-complete-emacs-lisp redshank c-eldoc
 
         ;; Modes
         gnuplot-mode haskell-mode js2-mode markdown-mode nxhtml rainbow-mode

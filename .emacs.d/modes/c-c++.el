@@ -4,6 +4,7 @@
 
 
 (defun dholm/c-mode-common-hook ()
+  (c-turn-on-eldoc-mode)
   ;; Override the indentation level of case labels in the K&R- and
   ;; Stroustrup styles so that they are indented one level beyond
   ;; the switch.
