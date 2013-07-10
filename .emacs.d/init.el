@@ -1,4 +1,11 @@
 
+;; Configure ELPA repositories
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+
+
+;; Configure and load el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
 (unless (require 'el-get nil 'noerror)
@@ -9,8 +16,8 @@
       (goto-char (point-max))
       (eval-print-last-sexp))))
 
-(setq el-get-user-package-directory "~/.emacs.d/init")
-(setq el-get-sources
+(setq el-get-user-package-directory "~/.emacs.d/init"
+      el-get-sources
       '(;; Code helpers
         auto-complete clang-complete-async cedet dtrt-indent ecb google-c-style
         smart-tab ensime scion pymacs jedi pde perl-completion yasnippet
@@ -38,12 +45,16 @@
 
         ;; Themes
         solarized-theme))
+
 (el-get 'sync el-get-sources)
+
 
 (global-set-key "\C-x\C-m" 'execute-extended-command)
 (global-set-key "\C-w" 'backward-kill-word)
 (global-set-key "\C-x\C-k" 'kill-region)
 
+
+;; Load additional configuration
 (push "~/.emacs.d" load-path)
 (push "~/.emacs.d/bin" exec-path)
 
@@ -52,6 +63,7 @@
 (load "modes.el")
 (load "utilities.el")
 (load "bindings.el")
+
 
 ;; If ~/.emacs.local is available load it as the last file so that it is
 ;; possible to add local settings and overrides.
