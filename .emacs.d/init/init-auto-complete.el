@@ -1,6 +1,7 @@
 (require 'auto-complete-config)
 
 (setq ac-auto-start nil
+      ac-expand-on-auto-complete nil
       ac-quick-help-delay 0.5
       ;; Store the completion history in the cache directory
       ac-comphist-file "~/.emacs.cache/ac-comphist.dat"
