@@ -9,17 +9,17 @@
 
 
 ;; Alias C-x C-m to M-x which is a bit awkward to reach
-(global-set-key "\C-x\C-m" 'execute-extended-command)
-(global-set-key "\C-c\C-m" 'execute-extended-command)
+(global-set-key (kbd "C-x C-m") 'execute-extended-command)
+(global-set-key (kbd "C-c C-m") 'execute-extended-command)
 
 
 ;; Delete words with C-w and rebind kill region to C-x C-k
-(global-set-key "\C-w" 'backward-kill-word)
-(global-set-key "\C-x\C-k" 'kill-region)
+(global-set-key (kbd "C-w") 'backward-kill-word)
+(global-set-key (kbd "C-x C-k") 'kill-region)
 
 
 ;; Spell check the current word
-(global-set-key "\C-c\C-w" 'ispell-word)
+(global-set-key (kbd "C-c C-w") 'ispell-word)
 
 
 ;; Use regex searches by default

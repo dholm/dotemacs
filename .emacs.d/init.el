@@ -10,17 +10,9 @@
 
 
 ;; Configure and load el-get
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(add-to-list 'load-path (concat user-emacs-directory (file-name-as-directory "el-get") "el-get"))
 
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (let (el-get-master-branch)
-      (goto-char (point-max))
-      (eval-print-last-sexp))))
-
-(setq el-get-user-package-directory "~/.emacs.d/init"
+(setq el-get-user-package-directory (concat user-emacs-directory "init")
       el-get-sources
       '(;; Code helpers
         auto-complete clang-complete-async cedet dtrt-indent ecb google-c-style
@@ -51,20 +43,23 @@
         ;; Themes
         solarized-theme))
 
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+    (let (el-get-master-branch)
+      (goto-char (point-max))
+      (eval-print-last-sexp))))
+
 (el-get 'sync el-get-sources)
-
-
-(global-set-key "\C-x\C-m" 'execute-extended-command)
-(global-set-key "\C-w" 'backward-kill-word)
-(global-set-key "\C-x\C-k" 'kill-region)
 
 
 ;; Load additional configuration
 (load "emacs.el")
+(load "bindings.el")
 (load "themes.el")
 (load "modes.el")
 (load "utilities.el")
-(load "bindings.el")
 
 
 ;; If ~/.emacs.local is available load it as the last file so that it is
