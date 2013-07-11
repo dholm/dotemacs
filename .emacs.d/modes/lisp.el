@@ -11,9 +11,10 @@
   (flyspell-prog-mode))
 
 (defun dholm/emacs-lisp-mode-hook ()
+  (dholm/lisp-mode-hook)
   (elisp-slime-nav-mode)
   (ac-emacs-lisp-mode-setup)
-  (dholm/lisp-mode-hook))
+  (local-set-key (kbd "C-c e") 'macrostep-expand))
 
 (add-hook 'lisp-mode-hook 'dholm/lisp-mode-hook)
 (add-hook 'emacs-lisp-mode-hook 'dholm/emacs-lisp-mode-hook)
