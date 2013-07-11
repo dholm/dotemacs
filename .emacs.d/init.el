@@ -28,7 +28,7 @@
 (setq el-get-user-package-directory (path-join user-emacs-directory "init")
       el-get-sources
       '(;; Look-and-feel
-        diminish solarized-theme page-break-lines
+        diminish solarized-theme page-break-lines pretty-mode-plus
 
 	;; Code helpers
         auto-complete clang-complete-async cedet dtrt-indent ecb google-c-style
