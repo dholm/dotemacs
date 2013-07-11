@@ -1,12 +1,27 @@
 ;; Haskell mode
 
+(defun dholm/generic-haskell-mode-hook ()
+  (turn-on-haskell-doc-mode))
+
+
 (defun dholm/haskell-mode-hook ()
-  (turn-on-haskell-doc-mode)
+  (dholm/generic-haskell-mode-hook)
   (turn-on-haskell-indentation)
+  ;; Enable editing of camel case
+  (subword-mode +1)
+  ;; Bindings
+  (define-key haskell-mode-map (kbd "C-c h") 'hoogle)
   ;; Run spell-checker on strings and comments
   (flyspell-prog-mode))
 
+
+(defun dholm/inferior-haskell-mode-hook ()
+  (dholm/generic-haskell-mode-hook)
+  (turn-on-ghci-completion))
+
+
 (add-hook 'haskell-mode-hook 'dholm/haskell-mode-hook)
+(add-hook 'inferior-haskell-mode-hook 'dholm/inferior-haskell-mode-hook)
 
 
 (provide 'modes/haskell)
