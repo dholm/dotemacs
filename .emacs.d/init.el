@@ -28,7 +28,7 @@
 (setq el-get-user-package-directory (path-join user-emacs-directory "init")
       el-get-sources
       '(;; Look-and-feel
-        diminish
+        diminish solarized-theme page-break-lines
 
 	;; Code helpers
         auto-complete clang-complete-async cedet dtrt-indent ecb google-c-style
@@ -54,10 +54,7 @@
         fill-column-indicator elisp-slime-nav rainbow-delimiters
 
         ;; Navigation
-        ace-jump-mode jump-char minimap smart-forward
-
-        ;; Themes
-        solarized-theme))
+        ace-jump-mode jump-char minimap smart-forward))
 
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
