@@ -1,4 +1,4 @@
-(push "~/.emacs.d/utilities/xcscope" load-path)
+(push (path-join user-emacs-directory "utilities" "xcscope") load-path)
 (require 'xcscope)
 
 

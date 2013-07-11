@@ -1,8 +1,8 @@
 
 ;; Set up paths to caches
-(setq semanticdb-default-save-directory "~/.emacs.cache/semanticdb"
-      ede-project-placeholder-cache-file "~/.emacs.cache/ede-projects.el"
-      srecode-map-save-file "~/.emacs.cache/srecode-map.el")
+(setq-default semanticdb-default-save-directory (path-join *user-cache-directory* "semanticdb")
+              ede-project-placeholder-cache-file (path-join *user-cache-directory* "ede-projects.el")
+              srecode-map-save-file (path-join *user-cache-directory* "srecode-map.el"))
 
 
 ;; Global CEDET initialization

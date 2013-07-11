@@ -1,7 +1,16 @@
 
+;; Bootstrap Emacs and load benchmarking
 (add-to-list 'load-path user-emacs-directory)
 (add-to-list 'exec-path (concat user-emacs-directory "bin"))
 (require 'utilities/benchmarking)
+
+
+;; Set up global constants
+(require 'utilities/path)
+(defconst *user-home-directory* (concat (expand-file-name "~") "/"))
+(defconst *user-cache-directory* (path-join *user-home-directory* ".emacs.cache"))
+(defconst *user-el-get-directory* (path-join user-emacs-directory "el-get"))
+
 
 ;; Configure ELPA repositories
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -10,9 +19,9 @@
 
 
 ;; Configure and load el-get
-(add-to-list 'load-path (concat user-emacs-directory (file-name-as-directory "el-get") "el-get"))
+(add-to-list 'load-path (path-join *user-el-get-directory* "el-get"))
 
-(setq el-get-user-package-directory (concat user-emacs-directory "init")
+(setq el-get-user-package-directory (path-join user-emacs-directory "init")
       el-get-sources
       '(;; Code helpers
         auto-complete clang-complete-async cedet dtrt-indent ecb google-c-style
@@ -64,6 +73,6 @@
 
 ;; If ~/.emacs.local is available load it as the last file so that it is
 ;; possible to add local settings and overrides.
-(if (file-readable-p (expand-file-name "~/.emacs.local"))
-    (load-file (expand-file-name "~/.emacs.local"))
-  nil)
+(setq user-local-init (path-join *user-home-directory* ".emacs.local"))
+(when (file-exists-p user-local-init)
+  (load user-local-init))

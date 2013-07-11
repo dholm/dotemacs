@@ -4,9 +4,9 @@
       ac-expand-on-auto-complete nil
       ac-quick-help-delay 0.5
       ;; Store the completion history in the cache directory
-      ac-comphist-file "~/.emacs.cache/ac-comphist.dat"
+      ac-comphist-file (path-join *user-cache-directory* "ac-comphist.dat")
       ac-use-quick-help t)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/el-get/auto-complete/ac-dict")
+(add-to-list 'ac-dictionary-directories (path-join *user-el-get-directory* "auto-complete" "ac-dict"))
 (add-hook 'auto-complete-mode-hook 'ac-common-setup)
 (ac-config-default)
 

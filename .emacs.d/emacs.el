@@ -4,17 +4,19 @@
 
 
 ;; Put autosave files (ie #foo#) and backup files (ie foo~) into a cache dir
+(defconst emacs-autosaves-directory (path-join *user-cache-directory* "autosaves"))
+
 (custom-set-variables
- '(auto-save-file-name-transforms '((".*" "~/.emacs.cache/autosaves/\\1" t)))
- '(backup-directory-alist '((".*" . "~/.emacs.cache/backups/"))))
+ `(auto-save-file-name-transforms '((".*" ,(concat emacs-autosaves-directory "/\\1") t)))
+ `(backup-directory-alist '((".*" . ,(path-join *user-cache-directory* "backups")))))
 
 
 ;; Emacs will create the backup dir automatically, but not the autosaves dir
-(make-directory "~/.emacs.cache/autosaves/" t)
+(make-directory emacs-autosaves-directory t)
 
 
 ;; Put session backups into the cache directory
-(setq auto-save-list-file-prefix "~/.emacs.cache/auto-save-list/.saves-")
+(setq auto-save-list-file-prefix (path-join *user-cache-directory* "auto-save-list" ".saves-"))
 
 
 ;; Redraw the entire screen before checking for pending input events.
