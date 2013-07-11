@@ -8,6 +8,7 @@
 
 ;; Load all utilities
 (require 'utilities/path)
+(require 'utilities/ibuffer)
 (require 'utilities/compile)
 (require 'utilities/xcscope)
 (require 'utilities/outlookedit)

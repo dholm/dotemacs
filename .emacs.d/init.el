@@ -54,7 +54,7 @@
         fill-column-indicator elisp-slime-nav rainbow-delimiters visual-regexp
 
         ;; Navigation
-        ace-jump-mode jump-char minimap smart-forward))
+        ace-jump-mode jump-char minimap smart-forward ibuffer-vc))
 
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
