@@ -7,8 +7,12 @@
 
 ;; Set up global constants
 (require 'utilities/path)
+(require 'utilities/env)
 (defconst *user-home-directory* (concat (expand-file-name "~") "/"))
-(defconst *user-cache-directory* (path-join *user-home-directory* ".emacs.cache"))
+(defconst *user-data-directory* (getenv-or "XDG_DATA_HOME"
+                                           (path-join *user-home-directory* ".local" "share" "emacs")))
+(defconst *user-cache-directory* (getenv-or "XDG_CACHE_HOME"
+                                            (path-join *user-home-directory* ".cache" "emacs")))
 (defconst *user-el-get-directory* (path-join user-emacs-directory "el-get"))
 
 

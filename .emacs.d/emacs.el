@@ -3,6 +3,11 @@
 (setq inhibit-startup-echo-area-message t)
 
 
+;; Create data and cache directories
+(make-directory *user-cache-directory* t)
+(make-directory *user-data-directory* t)
+
+
 ;; Put autosave files (ie #foo#) and backup files (ie foo~) into a cache dir
 (defconst emacs-autosaves-directory (path-join *user-cache-directory* "autosaves"))
 
