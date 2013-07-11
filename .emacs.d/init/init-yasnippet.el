@@ -1,3 +1,3 @@
 ;; Enables yasnippet globally
-(yas/global-mode t)
-
+(yas-global-mode)
+(diminish 'yas-minor-mode)

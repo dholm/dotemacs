@@ -27,7 +27,10 @@
 
 (setq el-get-user-package-directory (path-join user-emacs-directory "init")
       el-get-sources
-      '(;; Code helpers
+      '(;; Look-and-feel
+        diminish
+
+	;; Code helpers
         auto-complete clang-complete-async cedet dtrt-indent ecb google-c-style
         smart-tab ensime scion pymacs jedi pde perl-completion yasnippet
         auto-complete-yasnippet deferred-flyspell flymake-cursor flycheck

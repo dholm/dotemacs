@@ -4,6 +4,7 @@
       helm-input-idle-delay 0.3)
 
 (helm-mode)
+(diminish 'helm-mode)
 
 ;; Filter out boring buffers
 (loop for exp in '("\\*clang-complete" "\\*CEDET global" "\\*tramp/scpc"

@@ -20,3 +20,4 @@
 
 ;; Enable auto-complete globally
 (global-auto-complete-mode t)
+(diminish 'auto-complete-mode)
