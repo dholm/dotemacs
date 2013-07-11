@@ -42,7 +42,7 @@
         jinja showcss-mode newlisp-mode swank-newlisp ttcn-mode skewer-mode
 
         ;; Version Control Systems
-        magit vc-clearcase git-gutter-fringe
+        magit magithub vc-clearcase git-gutter-fringe git-messenger yagist
 
         ;; Utilities
         deft sunrise-commander elim perspective shell-command bash-completion
