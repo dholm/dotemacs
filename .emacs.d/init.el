@@ -40,12 +40,12 @@
 
 	;; Code helpers
         auto-complete clang-complete-async cedet dtrt-indent ecb google-c-style
-        smart-tab ensime scion pymacs jedi pde perl-completion yasnippet
+        smart-tab ensime scion pymacs jedi pde perl-completion yasnippet tidy
         auto-complete-yasnippet deferred-flyspell flymake-cursor flycheck
         auto-complete-emacs-lisp redshank c-eldoc ghci-completion macrostep
 
         ;; Modes
-        gnuplot-mode haskell-mode js2-mode markdown-mode nxhtml rainbow-mode
+        gnuplot-mode haskell-mode js2-mode markdown-mode mmm-mode rainbow-mode
         wc-mode python-mode pylookup slime php-mode scala-mode2 cperl-mode
         jinja showcss-mode newlisp-mode swank-newlisp ttcn-mode skewer-mode
         csv-mode
