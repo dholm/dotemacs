@@ -21,14 +21,17 @@
 
   ;; Filter out boring files
   (loop for ext in '("\\.elc$" "\\.pyc$" "^#.+#$")
-        do (add-to-list 'helm-boring-file-regexp-list ext)))
+        do (add-to-list 'helm-boring-file-regexp-list ext))
+
+  ;; Only override if helm is installed
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)
+  (global-set-key (kbd "C-x b") 'helm-buffers-list))
 
 (defun dholm/helm-descbinds-init ()
   (helm-descbinds-install))
 
-;;; (Key Bindings) ;;;
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-x b") 'helm-buffers-list)
+
+;;; (Bindings) ;;;
 (global-set-key (kbd "M-.") 'helm-etags+-select)
 (global-set-key (kbd "M-*") 'helm-etags+-history)
 (global-set-key (kbd "M-,") 'helm-etags+-history-action-go-back)
