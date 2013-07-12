@@ -14,7 +14,6 @@
 (require 'utilities/outlookedit)
 (require 'utilities/windmove)
 (require 'utilities/uniquify)
-(require 'utilities/tabbar)
 (require 'utilities/saveplace)
 (require 'utilities/savehist)
 (require 'utilities/recentf)

@@ -57,7 +57,7 @@
         ;; Utilities
         deft sunrise-commander elim perspective shell-command bash-completion
         emacs-w3m bookmark+ helm helm-descbinds helm-etags-plus auto-compile
-        helm-build-command helm-ls-git helm-c-yasnippet crosshairs session
+        helm-build-command helm-ls-git helm-c-yasnippet session
 
         ;; Editing
         multiple-cursors expand-region undo-tree browse-kill-ring paredit
