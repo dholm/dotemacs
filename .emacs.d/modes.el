@@ -6,7 +6,7 @@
 (require 'modes/shell)
 (require 'modes/python)
 (require 'modes/gdb)
-(require 'modes/web)
+(require 'modes/html)
 (require 'modes/gnuplot)
 (require 'modes/javascript)
 (require 'modes/haskell)

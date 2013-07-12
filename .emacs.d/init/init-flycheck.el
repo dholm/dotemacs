@@ -1,5 +1,5 @@
 ;;; (Initialization) ;;;
 
-(eval-after-load "flycheck" '(lambda ()
-                               (global-flycheck-mode)
-                               (diminish 'flycheck-mode)))
+(require 'flycheck)
+(global-flycheck-mode)
+(diminish 'flycheck-mode)

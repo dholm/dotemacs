@@ -1,4 +1,3 @@
-
 ;; Bootstrap Emacs and load benchmarking
 (add-to-list 'load-path user-emacs-directory)
 (add-to-list 'exec-path (concat user-emacs-directory "bin"))
@@ -24,11 +23,20 @@
 
 ;; Configure and load el-get
 (add-to-list 'load-path (path-join *user-el-get-directory* "el-get"))
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+    (let (el-get-master-branch)
+      (goto-char (point-max))
+      (eval-print-last-sexp))))
+
 
 (setq el-get-user-package-directory (path-join user-emacs-directory "init")
       el-get-sources
       '(;; Look-and-feel
-        diminish solarized-theme page-break-lines pretty-mode-plus
+        diminish solarized-theme page-break-lines fill-column-indicator
+        pretty-mode-plus
 
 	;; Code helpers
         auto-complete clang-complete-async cedet dtrt-indent ecb google-c-style
@@ -52,18 +60,11 @@
 
         ;; Editing
         multiple-cursors expand-region undo-tree browse-kill-ring paredit
-        fill-column-indicator elisp-slime-nav rainbow-delimiters visual-regexp
+        rainbow-delimiters visual-regexp
 
         ;; Navigation
-        ace-jump-mode jump-char minimap smart-forward ibuffer-vc csv-nav))
-
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (let (el-get-master-branch)
-      (goto-char (point-max))
-      (eval-print-last-sexp))))
+        ace-jump-mode jump-char minimap smart-forward elisp-slime-nav
+        ibuffer-vc csv-nav))
 
 (el-get 'sync el-get-sources)
 
