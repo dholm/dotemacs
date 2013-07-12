@@ -17,3 +17,4 @@
 (require 'utilities/tabbar)
 (require 'utilities/saveplace)
 (require 'utilities/savehist)
+(require 'utilities/recentf)
