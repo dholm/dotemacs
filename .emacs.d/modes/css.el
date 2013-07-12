@@ -1,4 +1,7 @@
 ;;; (Initialization) ;;;
+(require-package (:name skewer-mode))
+(require-package (:name showcss-mode))
+
 
 ;; Set up HTML embedding support
 (mmm-add-group

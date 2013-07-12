@@ -1,3 +1,5 @@
+(require-package (:name ttcn-mode))
+
 
 ;; Set the TTCN-3 mode hook
 (defun dholm/ttcn3-mode-hook ()

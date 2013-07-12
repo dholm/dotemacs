@@ -1,12 +1,20 @@
 ;; (Code Conventions) ;;
 
-(setq jedi:setup-keys t
-      jedi:complete-on-dot t)
+(defun dholm/jedi-init ()
+  (setq jedi:setup-keys t
+        jedi:complete-on-dot t))
+
 
 ;; Enable installed helpers for Python
 (defun dholm/python-mode-hook ()
+  ;; Configure python-mode
+  (setq py-shell-name "ipython"
+        py-load-pymacs-p t)
   ;; Load CEDET
   (dholm/python-mode-cedet-hook)
+  ;; Load ropemacs
+  (pymacs-load "ropemacs" "rope-")
+  (setq ropemacs-enable-autoimport t)
   ;; Load jedi
   (jedi:setup)
   ;; Run spell-checker on strings and comments
@@ -17,11 +25,12 @@
   (eldoc-mode t)
   ;; Show trailing whitespace
   (setq show-trailing-whitespace t)
+  ;; Bind electric backspace to del which translates to backspace in
+  ;; terminals.
+  (define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
   ;; Auto-completion sources
   (set (make-local-variable 'ac-sources)
        (append ac-sources '(ac-source-ropemacs)))
-  ;; Keybindings
-  (local-set-key (kbd "C-c h") 'pylookup-lookup)
   ;; Before save hook
   (add-hook 'before-save-hook
             ;; Delete trailing whitespace on save
@@ -29,7 +38,11 @@
 
 (add-hook 'python-mode-hook 'dholm/python-mode-hook)
 
+
 ;; (Utilities) ;;
+(require-package (:name jedi :after (dholm/jedi-init)))
+(require-package (:name python-mode))
+(require-package (:name pylookup))
 
 
 (provide 'modes/python)

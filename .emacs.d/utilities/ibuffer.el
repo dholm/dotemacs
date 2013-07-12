@@ -1,3 +1,7 @@
+;;; (Initialization) ;;;
+(require-package (:name ibuffer-vc))
+
+
 (defun dholm/ibuffer-hook ()
   (ibuffer-vc-set-filter-groups-by-vc-root)
   (unless (eq ibuffer-sorting-mode 'filename/process)

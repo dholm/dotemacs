@@ -1,6 +1,9 @@
 ;; JavaScript mode
+(require-package (:name js2-mode :after (dholm/js2-mode-init)))
 
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+(defun dholm/js2-mode-init ()
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
 
 (defun dholm/javascript-mode-hook ()

@@ -1,4 +1,8 @@
 ;; (Utilities) ;;
+(require-package (:name cperl-mode))
+(require-package (:name perl-completion))
+(require-package (:name pde))
+
 
 (defun pde-perl-mode-hook ()
   (local-set-key (kbd "C-c s") 'compile-dwim-compile)
@@ -13,9 +17,12 @@
        nil))
 
 (defun dholm/perl-mode-hook ()
+  (auto-complete-mode t)
+  (set (make-local-variable 'ac-sources)
+       (append ac-sources '(ac-source-perl-completion)))
   (pde-perl-mode-hook)
   ;; Run spell-checker on strings and comments
-  (flyspell-prog-mode))
+  (flyspell-prog-mode t))
 
 (add-hook 'perl-mode-hook 'dholm/perl-mode-hook)
 

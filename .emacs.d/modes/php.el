@@ -1,3 +1,5 @@
+(require-package (:name php-mode))
+
 
 ;; Set up helpers for php-mode
 (defun dholm/php-mode-hook ()

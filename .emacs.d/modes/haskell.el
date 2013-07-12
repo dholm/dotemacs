@@ -1,5 +1,10 @@
 ;; Haskell mode
 
+(require-package (:name haskell-mode))
+(require-package (:name ghci-completion))
+(require-package (:name scion))
+
+
 (defun dholm/generic-haskell-mode-hook ()
   (turn-on-haskell-doc-mode))
 
