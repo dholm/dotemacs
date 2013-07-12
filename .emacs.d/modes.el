@@ -14,6 +14,7 @@
 (require 'modes/php)
 (require 'modes/scala)
 (require 'modes/perl)
+(require 'modes/csv)
 
 
 ;; (Text Conventions) ;;

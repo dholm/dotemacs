@@ -40,6 +40,7 @@
         gnuplot-mode haskell-mode js2-mode markdown-mode nxhtml rainbow-mode
         wc-mode python-mode pylookup slime php-mode scala-mode2 cperl-mode
         jinja showcss-mode newlisp-mode swank-newlisp ttcn-mode skewer-mode
+        csv-mode
 
         ;; Version Control Systems
         magit magithub vc-clearcase git-gutter-fringe git-messenger yagist
@@ -54,7 +55,7 @@
         fill-column-indicator elisp-slime-nav rainbow-delimiters visual-regexp
 
         ;; Navigation
-        ace-jump-mode jump-char minimap smart-forward ibuffer-vc))
+        ace-jump-mode jump-char minimap smart-forward ibuffer-vc csv-nav))
 
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
