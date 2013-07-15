@@ -6,8 +6,8 @@
 
 
 ;; (Basic Configuration) ;;
-(setq stack-trace-on-error nil
-      ecb-options-version "2.40")
+(custom-set-variables
+ '(ecb-options-version "2.40"))
 
 
 ;; (ECB Layout) ;;
