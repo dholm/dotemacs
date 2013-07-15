@@ -15,6 +15,8 @@
  ;; This will improve performance in general but might degrade performance of
  ;; key repeat.
  redisplay-dont-pause t
+ ;; Path to custom-file
+ custom-file (path-join user-emacs-directory "init-custom.el")
  ;; Put autosave files (ie #foo#) and backup files (ie foo~) into a cache dir
  auto-save-file-name-transforms `((".*" ,(concat emacs-autosaves-directory "/\\1") t))
  backup-directory-alist `((".*" . ,(path-join *user-cache-directory* "backups")))

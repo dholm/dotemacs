@@ -1,11 +1,6 @@
 ;;; (Initialization) ;;;
 (require-package (:name session
-                        :before (dholm/session-before-init)
                         :after (dholm/session-init)))
-
-
-(defun dholm/session-before-init ()
-  (custom-set-variables '(session-use-package t nil (session))))
 
 
 (defun dholm/session-init ()
