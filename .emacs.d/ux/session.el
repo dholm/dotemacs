@@ -2,7 +2,7 @@
 (require-package (:name session))
 
 
-(setq session-save-file (path-join *user-data-directory* "session")
+(setq session-save-file (path-join *user-cache-directory* "session")
       desktop-globals-to-save
       (append '((extended-command-history . 30)
                 (file-name-history        . 100)
@@ -24,5 +24,6 @@
                 register-alist)))
 
 (add-hook 'after-init-hook 'session-initialize)
+
 
 (provide 'ux/session)

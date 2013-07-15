@@ -11,5 +11,8 @@
                    bookmark-default-file (path-join *user-data-directory* "bookmarks"))
                   )))
 
+(custom-set-variables
+ '(bmkp-last-as-first-bookmark-file bookmark-default-file))
+
 
 (provide 'utilities/bookmark+)
