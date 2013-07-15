@@ -2,8 +2,14 @@
 (require-package (:name magit))
 (require-package (:name magithub))
 (require-package (:name git-gutter-fringe))
-(require-package (:name git-messenger))
-(require-package (:name yagist))
+(require-package (:name git-messenger
+                        :type github
+                        :pkgname "syohex/emacs-git-messenger"
+                        :depends (popup)))
+(require-package (:name yagist
+                        :type elpa
+                        :repo ("melpa" . "http://melpa.milkbox.net/packages/")
+                        :depends (json)))
 
 
 (setq

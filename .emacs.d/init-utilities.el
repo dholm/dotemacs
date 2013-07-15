@@ -24,6 +24,7 @@
 (require 'utilities/elim)
 (require 'utilities/deft)
 (require 'utilities/perspective)
+(require 'utilities/packed)
 
 
 ;;; (Functions) ;;;

@@ -1,4 +1,9 @@
-(require-package (:name ttcn-mode))
+(require-package (:name ttcn-mode
+                        :type github
+                        :pkgname "dholm/ttcn-el"
+                        :post-init (progn
+                                     (add-to-list 'auto-mode-alist '("\\.mp$" . ttcn-mode))
+                                     (add-to-list 'auto-mode-alist '("\\.ttcn" . ttcn-3-mode)))))
 
 
 ;; Set the TTCN-3 mode hook

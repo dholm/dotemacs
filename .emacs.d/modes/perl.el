@@ -1,7 +1,13 @@
 ;; (Utilities) ;;
 (require-package (:name cperl-mode))
-(require-package (:name perl-completion))
-(require-package (:name pde))
+(require-package (:name perl-completion
+                        :type emacswiki
+                        :website "https://raw.github.com/emacsmirror/emacswiki.org/master/perl-completion.el"))
+(require-package (:name pde
+                        :type github
+                        :pkgname "wenbinye/emacs-pde"
+                        :load-path ("lisp")
+                        :load "lisp/pde-load.el"))
 
 
 (defun pde-perl-mode-hook ()
