@@ -59,8 +59,8 @@
 ;;; quick navigation between ecb windows
 (global-set-key (kbd "C-c 1") 'ecb-goto-window-edit1)
 (global-set-key (kbd "C-c 2") 'ecb-goto-window-directories)
-(global-set-key (kbd "C-c 3") 'ecb-goto-window-methods)
-(global-set-key (kbd "C-c 4") 'ecb-goto-window-history)
+(global-set-key (kbd "C-c 3") 'ecb-goto-window-history)
+(global-set-key (kbd "C-c 4") 'ecb-goto-window-methods)
 (global-set-key (kbd "C-c 5") 'ecb-goto-window-compilation)
 
 
