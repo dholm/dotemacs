@@ -62,6 +62,10 @@
 
 (defun dholm/c-mode-cedet-hook ()
   (dholm/cedet-hook)
+  ;; Load eassist from contrib package
+  (load (path-join (el-get-package-directory "cedet") "contrib" "cedet-contrib-load.el"))
+  (require 'eassist)
+
   ;; Load extra semantic helpers
   (require 'semantic/bovine/c)
   (require 'semantic/bovine/gcc)
