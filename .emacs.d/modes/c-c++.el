@@ -7,7 +7,8 @@
 
 (require-package (:name c-eldoc
                         :type emacswiki
-                        :website "https://raw.github.com/emacsmirror/emacswiki.org/master/c-eldoc.el"))
+                        :website "https://raw.github.com/emacsmirror/emacswiki.org/master/c-eldoc.el"
+                        :prepare (autoload 'c-turn-on-eldoc-mode "c-eldoc" nil t)))
 (when *has-clang*
   (require-package (:name clang-complete-async
                           :type github
