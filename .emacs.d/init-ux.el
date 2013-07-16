@@ -2,6 +2,7 @@
 
 (require 'ux/diminish)
 (require 'ux/solarized)
+(require 'ux/powerline)
 (require 'ux/ace-jump-mode)
 (require 'ux/multiple-cursors)
 (require 'ux/expand-region)
