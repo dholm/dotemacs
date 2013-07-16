@@ -53,7 +53,7 @@
   ;; Enable CEDET
   (dholm/cedet-hook)
   (unwind-protect
-      (progn
+      (lambda ()
         (rainbow-delimiters-mode)
         (enable-paredit-mode)
         (redshank-mode)))
@@ -64,7 +64,7 @@
 (defun dholm/emacs-lisp-mode-hook ()
   (dholm/lisp-mode-hook)
   (unwind-protect
-      (progn
+      (lambda ()
         (elisp-slime-nav-mode)
         (ac-emacs-lisp-mode-setup)))
   (local-set-key (kbd "C-c e") 'macrostep-expand))
