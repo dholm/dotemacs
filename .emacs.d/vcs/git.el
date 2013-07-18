@@ -1,8 +1,9 @@
 ;;; (Initialization) ;;;
-(require-package (:name magit))
+(require-package (:name magit :after (dholm/magit-init)))
 (require-package (:name magithub))
-(require-package (:name git-gutter-fringe))
+(require-package (:name git-gutter-fringe :after (dholm/git-gutter-fringe-init)))
 (require-package (:name git-messenger
+                        :after (dholm/git-messenger-init)
                         :type github
                         :pkgname "syohex/emacs-git-messenger"
                         :depends (popup)))
@@ -12,23 +13,27 @@
                         :depends (json)))
 
 
-(setq
- git-gutter-fr:side 'left-fringe
- git-messenger:show-detail t)
+(defun dholm/git-gutter-fringe-init ()
+  (setq
+   git-gutter-fr:side 'left-fringe
+   git-messenger:show-detail t))
 
 
-;;; (Bindings) ;;;
-(global-set-key (kbd "C-c m") 'magit-status)
-(global-set-key (kbd "C-x v p") 'git-messenger:popup-message)
+(defun dholm/magit-init ()
+  ;; Full screen magit status
+  (defadvice magit-status (around magit-fullscreen activate)
+    (window-configuration-to-register :magit-fullscreen)
+    ad-do-it
+    (delete-other-windows))
+
+  (global-set-key (kbd "C-c v s") 'magit-status))
+
+
+(defun dholm/git-messenger-init ()
+  (global-set-key (kbd "C-c v m") 'git-messenger:popup-message))
 
 
 ;;; (Functions) ;;;
-;; Full screen magit status
-(defadvice magit-status (around magit-fullscreen activate)
-  (window-configuration-to-register :magit-fullscreen)
-  ad-do-it
-  (delete-other-windows))
-
 (defun magit-quit-session ()
   "Restores the previous window configuration and kills the magit buffer"
   (interactive)
