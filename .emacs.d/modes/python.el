@@ -5,6 +5,11 @@
         jedi:complete-on-dot t))
 
 
+(defun dholm/python-mode-cedet-hook ()
+  (dholm/cedet-hook)
+  (require 'semantic/wisent/python))
+
+
 ;; Enable installed helpers for Python
 (defun dholm/python-mode-hook ()
   ;; Configure python-mode

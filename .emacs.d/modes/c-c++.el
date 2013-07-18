@@ -21,6 +21,35 @@
                                           (concat (el-get-package-directory "clang-complete-async") "clang-complete"))))))
 
 
+(defun dholm/c-mode-cedet-hook ()
+  (dholm/cedet-hook)
+  ;; Load eassist from contrib package
+  (load (path-join (el-get-package-directory "cedet") "contrib" "cedet-contrib-load.el"))
+  (require 'eassist)
+
+  ;; Load extra semantic helpers
+  (require 'semantic/bovine/c)
+  (require 'semantic/bovine/gcc)
+  (require 'semantic/bovine/clang)
+
+  ;; Check if GNU Global is available
+  (when (cedet-gnu-global-version-check)
+    (semanticdb-enable-gnu-global-databases 'c-mode)
+    (semanticdb-enable-gnu-global-databases 'c++-mode))
+
+  ;; Local bindings
+  (local-set-key (kbd "C-c t") 'eassist-switch-h-cpp)
+  (local-set-key (kbd "C-x t") 'eassist-switch-h-cpp)
+  (local-set-key (kbd "C-c e") 'eassist-list-methods)
+  (local-set-key (kbd "C-c C-r") 'semantic-symref)
+
+  ;; Autocompletion
+  (auto-complete-mode t)
+  (when (cedet-gnu-global-version-check t)
+    (set (make-local-variable 'ac-sources)
+         (append ac-sources '(ac-source-gtags)))))
+
+
 (defun dholm/c-mode-common-hook ()
   ;; Load CEDET
   (dholm/c-mode-cedet-hook)

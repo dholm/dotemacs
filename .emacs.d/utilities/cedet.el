@@ -60,38 +60,4 @@
        (append ac-sources '(ac-source-semantic)))))
 
 
-(defun dholm/c-mode-cedet-hook ()
-  (dholm/cedet-hook)
-  ;; Load eassist from contrib package
-  (load (path-join (el-get-package-directory "cedet") "contrib" "cedet-contrib-load.el"))
-  (require 'eassist)
-
-  ;; Load extra semantic helpers
-  (require 'semantic/bovine/c)
-  (require 'semantic/bovine/gcc)
-  (require 'semantic/bovine/clang)
-
-  ;; Local bindings
-  (local-set-key (kbd "C-c t") 'eassist-switch-h-cpp)
-  (local-set-key (kbd "C-x t") 'eassist-switch-h-cpp)
-  (local-set-key (kbd "C-c e") 'eassist-list-methods)
-  (local-set-key (kbd "C-c C-r") 'semantic-symref)
-
-  ;; Autocompletion
-  (auto-complete-mode t)
-  (when (cedet-gnu-global-version-check t)
-    (set (make-local-variable 'ac-sources)
-         (append ac-sources '(ac-source-gtags)))))
-
-
-(defun dholm/python-mode-cedet-hook ()
-  (dholm/cedet-hook)
-  (require 'semantic/wisent/python))
-
-
-(defun dholm/javascript-mode-cedet-hook ()
-  (dholm/cedet-hook)
-  (require 'semantic/wisent/javascript))
-
-
 (provide 'utilities/cedet)

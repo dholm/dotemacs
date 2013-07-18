@@ -6,6 +6,11 @@
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
 
+(defun dholm/javascript-mode-cedet-hook ()
+  (dholm/cedet-hook)
+  (require 'semantic/wisent/javascript))
+
+
 (defun dholm/javascript-mode-hook ()
   ;; Load CEDET
   (dholm/javascript-mode-cedet-hook)
