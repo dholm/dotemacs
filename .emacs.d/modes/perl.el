@@ -6,11 +6,12 @@
 (require-package (:name pde
                         :type github
                         :pkgname "wenbinye/emacs-pde"
-                        :load-path ("lisp")
-                        :load "lisp/pde-load.el"))
+                        :load-path ("lisp")))
 
 
-(defun pde-perl-mode-hook ()
+(defun dholm/pde-perl-mode-hook ()
+  (require 'pde-load)
+
   (local-set-key (kbd "C-c s") 'compile-dwim-compile)
   (local-set-key (kbd "C-c r") 'compile-dwim-run)
   (setq compilation-buffer-name-function 'pde-compilation-buffer-name)
@@ -19,14 +20,15 @@
   (when (and buffer-file-name
              (not (string-match "\\.\\(pm\\|pod\\)$" (buffer-file-name))))
     (add-hook 'after-save-hook 'executable-chmod nil t))
-  (set (make-local-variable 'compile-dwim-check-tools)
-       nil))
+  (set (make-local-variable 'compile-dwim-check-tools) nil))
+
 
 (defun dholm/perl-mode-hook ()
   (auto-complete-mode t)
   (set (make-local-variable 'ac-sources)
        (append ac-sources '(ac-source-perl-completion)))
-  (pde-perl-mode-hook)
+  ;; Initialize PDE
+  (dholm/pde-perl-mode-hook)
   ;; Run spell-checker on strings and comments
   (flyspell-prog-mode t))
 
