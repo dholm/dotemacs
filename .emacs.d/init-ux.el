@@ -1,5 +1,6 @@
 ;;; (User Experience) ;;;
 
+(require 'ux/auto-saves)
 (require 'ux/diminish)
 (require 'ux/solarized)
 (require 'ux/powerline)
