@@ -38,8 +38,8 @@
     (semanticdb-enable-gnu-global-databases 'c++-mode))
 
   ;; Local bindings
-  (local-set-key (kbd "C-c e") 'eassist-list-methods)
   (local-set-key (kbd "C-c n t") 'eassist-switch-h-cpp)
+  (local-set-key (kbd "C-c d m") 'eassist-list-methods)
 
   ;; Autocompletion
   (auto-complete-mode t)
