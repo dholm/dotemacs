@@ -1,5 +1,5 @@
 ;;; (Initialization) ;;;
-(require-package (:name fill-column-indicator))
+(require-package '(:name fill-column-indicator))
 
 
 ;;; (Bindings) ;;;

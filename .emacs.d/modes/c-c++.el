@@ -5,12 +5,12 @@
 (setq c++-default-style "Stroustrup")
 
 
-(require-package (:name c-eldoc
+(require-package '(:name c-eldoc
                         :type emacswiki
                         :website "https://raw.github.com/emacsmirror/emacswiki.org/master/c-eldoc.el"
                         :prepare (autoload 'c-turn-on-eldoc-mode "c-eldoc" nil t)))
 (when *has-clang*
-  (require-package (:name clang-complete-async
+  (require-package '(:name clang-complete-async
                           :type github
                           :pkgname "Golevka/emacs-clang-complete-async"
                           :build '(("make"))

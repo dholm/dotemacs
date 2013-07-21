@@ -1,5 +1,5 @@
 ;;; (Initialization) ;;;
-(require-package (:name markdown-mode :after (dholm/markdown-mode-init)))
+(require-package '(:name markdown-mode :after (dholm/markdown-mode-init)))
 
 (defun dholm/markdown-mode-init ()
   (autoload 'markdown-mode "markdown-mode.el"

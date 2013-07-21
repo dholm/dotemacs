@@ -1,6 +1,5 @@
 ;; Emacs Code Browser
-(require-package (:name ecb
-                        :after (dholm/ecb-init)))
+(require-package '(:name ecb :after (dholm/ecb-init)))
 
 (defun dholm/ecb-init ()
   (require 'ecb-autoloads))

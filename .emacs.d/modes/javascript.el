@@ -1,5 +1,5 @@
 ;; JavaScript mode
-(require-package (:name js2-mode :after (dholm/js2-mode-init)))
+(require-package '(:name js2-mode :after (dholm/js2-mode-init)))
 
 
 (defun dholm/js2-mode-init ()

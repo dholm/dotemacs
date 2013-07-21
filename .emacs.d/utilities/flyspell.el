@@ -1,4 +1,4 @@
-(require-package (:name deferred-flyspell))
+(require-package '(:name deferred-flyspell))
 
 
 (provide 'utilities/flyspell)

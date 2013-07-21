@@ -1,4 +1,4 @@
-(require-package (:name php-mode))
+(require-package '(:name php-mode))
 
 
 ;; Set up helpers for php-mode

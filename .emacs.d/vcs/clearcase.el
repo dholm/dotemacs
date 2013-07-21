@@ -1,4 +1,4 @@
-(require-package (:name vc-clearcase))
+(require-package '(:name vc-clearcase))
 
 
 (provide 'vcs/clearcase)

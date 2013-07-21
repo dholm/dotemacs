@@ -1,5 +1,5 @@
-(require-package (:name csv-mode))
-(require-package (:name csv-nav))
+(require-package '(:name csv-mode))
+(require-package '(:name csv-nav))
 
 (setq csv-separators '("," ";" "|" " "))
 

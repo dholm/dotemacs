@@ -1,4 +1,4 @@
-(require-package (:name undo-tree :after (dholm/undo-tree-init)))
+(require-package '(:name undo-tree :after (dholm/undo-tree-init)))
 
 (defun dholm/undo-tree-init ()
   (global-undo-tree-mode)

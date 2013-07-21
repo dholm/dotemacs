@@ -1,5 +1,5 @@
 ;;; (Initialization) ;;;
-(require-package (:name session
+(require-package '(:name session
                         :after (dholm/session-init)))
 
 

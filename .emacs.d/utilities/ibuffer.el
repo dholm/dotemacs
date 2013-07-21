@@ -1,5 +1,5 @@
 ;;; (Initialization) ;;;
-(require-package (:name ibuffer-vc))
+(require-package '(:name ibuffer-vc))
 
 
 (defun dholm/ibuffer-hook ()

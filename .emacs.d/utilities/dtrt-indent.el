@@ -1,4 +1,4 @@
-(require-package (:name dtrt-indent))
+(require-package '(:name dtrt-indent))
 
 
 (provide 'utilities/dtrt-indent)

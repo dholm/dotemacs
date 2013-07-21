@@ -1,6 +1,6 @@
 ;;; (Initialization) ;;;
-(require-package (:name skewer-mode))
-(require-package (:name showcss-mode))
+(require-package '(:name skewer-mode))
+(require-package '(:name showcss-mode))
 
 
 ;; Set up HTML embedding support

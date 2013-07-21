@@ -1,5 +1,5 @@
 ;;; (Initialization) ;;;
-(require-package (:name expand-region))
+(require-package '(:name expand-region))
 
 
 ;;; (Bindings) ;;;

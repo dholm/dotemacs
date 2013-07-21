@@ -1,5 +1,5 @@
 ;;; (Initialization) ;;;
-(require-package (:name diminish))
+(require-package '(:name diminish))
 
 
 (provide 'ux/diminish)

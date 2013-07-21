@@ -1,3 +1,7 @@
+;;; packaging -- initialize package management
+;;; Commentary:
+;;; Code:
+
 ;; Configure ELPA repositories
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
@@ -17,15 +21,16 @@
 
 
 (defvar el-get-packages nil "List of el-get packages to sync")
+(defvar el-get-sources nil "List of package definitions for el-get")
 
 (setq
  el-get-user-package-directory (path-join user-emacs-directory "init")
  el-get-verbose t)
 
 
-(defmacro require-package (package)
+(defun require-package (package)
   "Adds the specified package to el-get-sources"
-  `(setq el-get-sources (append el-get-sources '(,package))))
+  (setq el-get-sources (append el-get-sources `(,package))))
 
 
 (defun dholm/package-list ()
@@ -40,10 +45,11 @@
 
 
 ;; Make sure el-get is registered so that el-get-cleanup doesn't remove it
-(require-package (:name el-get
-			:pkgname "dimitri/el-get"
-			:type github
-			:branch "master"))
+(require-package '(:name el-get
+                         :pkgname "dimitri/el-get"
+                         :type github
+                         :branch "master"))
 
 
 (provide 'lib/packaging)
+;;; packaging.el ends here

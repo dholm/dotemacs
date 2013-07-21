@@ -1,7 +1,8 @@
 (defconst *user-has-sbt* (executable-find "sbt"))
 
-(require-package (:name scala-mode2))
-(when *user-has-sbt* (require-package (:name ensime)))
+(require-package '(:name scala-mode2))
+(when *user-has-sbt*
+  (require-package '(:name ensime)))
 
 
 (defun dholm/scala-mode-hook ()

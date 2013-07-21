@@ -45,9 +45,9 @@
 
 
 ;; (Utilities) ;;
-(require-package (:name jedi :after (dholm/jedi-init)))
-(require-package (:name python-mode))
-(require-package (:name pylookup))
+(require-package '(:name jedi :after (dholm/jedi-init)))
+(require-package '(:name python-mode))
+(require-package '(:name pylookup))
 
 
 (provide 'modes/python)

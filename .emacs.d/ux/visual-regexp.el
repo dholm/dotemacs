@@ -1,5 +1,5 @@
 ;;; (Initialization) ;;;
-(require-package (:name visual-regexp))
+(require-package '(:name visual-regexp))
 
 
 ;;; (Bindings) ;;;

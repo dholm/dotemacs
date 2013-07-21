@@ -1,4 +1,4 @@
-(require-package (:name powerline
+(require-package '(:name powerline
                         :type github
                         :pkgname "milkypostman/powerline"
 			:depends (solarized-theme)

@@ -1,26 +1,26 @@
 ;;; (Initialization) ;;;
 (require 'utilities/cedet)
 
-(require-package (:name rainbow-delimiters))
-(require-package (:name paredit))
-(require-package (:name redshank))
-(require-package (:name macrostep
+(require-package '(:name rainbow-delimiters))
+(require-package '(:name paredit))
+(require-package '(:name redshank))
+(require-package '(:name macrostep
                         :type github
                         :pkgname "joddie/macrostep"))
-(require-package (:name auto-complete-emacs-lisp))
-(require-package (:name slime))
-(require-package (:name elisp-slime-nav))
-(require-package (:name newlisp-mode
+(require-package '(:name auto-complete-emacs-lisp))
+(require-package '(:name slime))
+(require-package '(:name elisp-slime-nav))
+(require-package '(:name newlisp-mode
                         :type github
                         :pkgname "kosh04/newlisp-mode"
                         :features newlisp-mode
                         :post-init (dholm/newlisp-mode-post-init)))
-(require-package (:name swank-newlisp
+(require-package '(:name swank-newlisp
                         :type github
                         :pkgname "kosh04/swank-newlisp"
                         :depends slime
                         :post-init (dholm/swank-newlisp-post-init)))
-(require-package (:name auto-compile
+(require-package '(:name auto-compile
                         :type github
                         :pkgname "tarsius/auto-compile"
                         :depends (packed)

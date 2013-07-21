@@ -1,5 +1,5 @@
 ;; Gnuplot mode
-(require-package (:name gnuplot-mode :after (dholm/gnuplot-mode-init)))
+(require-package '(:name gnuplot-mode :after (dholm/gnuplot-mode-init)))
 
 
 (defun dholm/gnuplot-mode-init ()

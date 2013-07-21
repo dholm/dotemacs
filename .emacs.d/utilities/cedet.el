@@ -1,6 +1,5 @@
 ;; Bring in CEDET package
-(require-package (:name cedet
-                        :after (dholm/cedet-init)))
+(require-package '(:name cedet :after (dholm/cedet-init)))
 
 
 (setq-default

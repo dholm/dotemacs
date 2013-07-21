@@ -1,5 +1,5 @@
 ;;; (Initialization) ;;;
-(require-package (:name page-break-lines
+(require-package '(:name page-break-lines
                         :type github
                         :pkgname "purcell/page-break-lines"
                         :after (dholm/page-break-lines-init)))

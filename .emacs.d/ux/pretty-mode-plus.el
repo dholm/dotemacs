@@ -1,5 +1,5 @@
 ;;; (Initialization) ;;;
-(require-package (:name pretty-mode-plus
+(require-package '(:name pretty-mode-plus
 			:type elpa
 			:repo ("marmalade" . "http://marmalade-repo.org/packages/")
                         :after (dholm/pretty-mode-plus-init)))

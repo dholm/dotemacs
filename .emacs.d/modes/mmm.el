@@ -11,7 +11,7 @@
     (ignore-errors (funcall func))))
 
 
-(require-package (:name mmm-mode
+(require-package '(:name mmm-mode
                         :after (dholm/run-after-mmm-install-hook)))
 
 (setq mmm-global-mode 'maybe

@@ -1,5 +1,4 @@
-(require-package (:name bookmark+
-                        :before (dholm/bookmark+-before-init)))
+(require-package '(:name bookmark+ :before (dholm/bookmark+-before-init)))
 
 
 (defconst *bookmark+-data-file* (path-join *user-data-directory* "bookmarks"))

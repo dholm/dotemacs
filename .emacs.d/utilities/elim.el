@@ -1,5 +1,5 @@
 ;;; (Initialization) ;;;
-(require-package (:name elim))
+(require-package '(:name elim))
 
 
 (setq lui-max-buffer-size 30000

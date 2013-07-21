@@ -1,16 +1,16 @@
 ;;; (Initialization) ;;;
-(require-package (:name helm :after (dholm/helm-init)))
-(require-package (:name helm-descbinds :after (dholm/helm-descbinds-init)))
-(require-package (:name helm-etags-plus))
-(require-package (:name helm-build-command))
-(require-package (:name helm-ls-git
-                        :type github
-                        :pkgname "emacs-helm/helm-ls-git"))
-(require-package (:name helm-c-yasnippet
-                        :type github
-                        :pkgname "emacs-helm/helm-c-yasnippet"
-                        :features helm-c-yasnippet
-                        :depends (helm yasnippet)))
+(require-package '(:name helm :after (dholm/helm-init)))
+(require-package '(:name helm-descbinds :after (dholm/helm-descbinds-init)))
+(require-package '(:name helm-etags-plus))
+(require-package '(:name helm-build-command))
+(require-package '(:name helm-ls-git
+			 :type github
+			 :pkgname "emacs-helm/helm-ls-git"))
+(require-package '(:name helm-c-yasnippet
+			 :type github
+			 :pkgname "emacs-helm/helm-c-yasnippet"
+			 :features helm-c-yasnippet
+			 :depends (helm yasnippet)))
 
 
 (setq helm-idle-delay 0.3

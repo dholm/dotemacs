@@ -2,7 +2,7 @@
 (defconst *has-w3m* (executable-find "w3m"))
 
 (when *has-w3m*
-  (require-package (:name emacs-w3m :after (dholm/w3m-init))))
+  (require-package '(:name emacs-w3m :after (dholm/w3m-init))))
 
 (setq w3m-use-cookies t
       w3m-coding-system 'utf-8

@@ -5,7 +5,7 @@
   (global-set-key (kbd "C-c n s p") 'smart-up)
   (global-set-key (kbd "C-c n s n") 'smart-down))
 
-(require-package (:name smart-forward
+(require-package '(:name smart-forward
 			:after (dholm/smart-forward-init)
 			:type elpa
 			:repo ("melpa" . "http://melpa.milkbox.net/packages/")

@@ -1,4 +1,4 @@
-(require-package (:name yasnippet :after (dholm/yasnippet-init)))
+(require-package '(:name yasnippet :after (dholm/yasnippet-init)))
 
 
 ;; Look for snippets in data directory

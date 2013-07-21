@@ -1,5 +1,5 @@
 ;;; (Initialization) ;;;
-(require-package (:name solarized-theme
+(require-package '(:name solarized-theme
                         :after (dholm/solarized-init)))
 
 (defun dholm/solarized-init ()

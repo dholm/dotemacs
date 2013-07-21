@@ -1,5 +1,5 @@
 ;;; (Initialization) ;;;
-(require-package (:name minimap))
+(require-package '(:name minimap))
 
 
 ;;; (Functions) ;;;

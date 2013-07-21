@@ -1,5 +1,5 @@
 ;;; (Initialization) ;;;
-(require-package (:name deft))
+(require-package '(:name deft))
 
 
 (provide 'utilities/deft)

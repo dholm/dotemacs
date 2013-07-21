@@ -1,7 +1,7 @@
 ;;; (Initialization) ;;;
 
 (require 'modes/mmm)
-(require-package (:name tidy))
+(require-package '(:name tidy))
 
 
 (defun dholm/mmm-register-html-hook ()

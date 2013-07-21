@@ -1,5 +1,5 @@
 ;;; (initialization) ;;;
-(require-package (:name jinja2-mode))
+(require-package '(:name jinja2-mode))
 
 
 (provide 'modes/jinja)

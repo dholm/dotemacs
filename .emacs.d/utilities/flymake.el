@@ -1,4 +1,4 @@
-(require-package (:name flymake-cursor))
+(require-package '(:name flymake-cursor))
 
 
 (provide 'utilities/flymake)

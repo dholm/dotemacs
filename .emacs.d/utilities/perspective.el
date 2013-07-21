@@ -1,5 +1,5 @@
 ;;; (Initialization) ;;;
-(require-package (:name perspective))
+(require-package '(:name perspective))
 
 
 (provide 'utilities/perspective)

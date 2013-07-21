@@ -1,16 +1,16 @@
 ;;; (Initialization) ;;;
-(require-package (:name magit :after (dholm/magit-init)))
-(require-package (:name magithub))
-(require-package (:name git-gutter-fringe :after (dholm/git-gutter-fringe-init)))
-(require-package (:name git-messenger
-                        :after (dholm/git-messenger-init)
-                        :type github
-                        :pkgname "syohex/emacs-git-messenger"
-                        :depends (popup)))
-(require-package (:name yagist
-                        :type elpa
-                        :repo ("melpa" . "http://melpa.milkbox.net/packages/")
-                        :depends (json)))
+(require-package '(:name magit :after (dholm/magit-init)))
+(require-package '(:name magithub))
+(require-package '(:name git-gutter-fringe :after (dholm/git-gutter-fringe-init)))
+(require-package '(:name git-messenger
+			 :after (dholm/git-messenger-init)
+			 :type github
+			 :pkgname "syohex/emacs-git-messenger"
+			 :depends (popup)))
+(require-package '(:name yagist
+			 :type elpa
+			 :repo ("melpa" . "http://melpa.milkbox.net/packages/")
+			 :depends (json)))
 
 
 (defun dholm/git-gutter-fringe-init ()

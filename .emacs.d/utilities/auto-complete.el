@@ -1,7 +1,7 @@
-(require-package (:name auto-complete :after (dholm/auto-complete-init)))
+(require-package '(:name auto-complete :after (dholm/auto-complete-init)))
 
 (require 'utilities/yasnippet)
-(require-package (:name auto-complete-yasnippet))
+(require-package '(:name auto-complete-yasnippet))
 
 
 ;; Workaround for flyspell mode
