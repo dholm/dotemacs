@@ -30,7 +30,7 @@
 
 
 (defun dholm/git-messenger-init ()
-  (global-set-key (kbd "C-c v m") 'git-messenger:popup-message))
+  (global-set-key (kbd "C-c d v") 'git-messenger:popup-message))
 
 
 ;;; (Functions) ;;;
