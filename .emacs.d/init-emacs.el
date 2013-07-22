@@ -1,3 +1,6 @@
+;;; init-emacs --- Emacs core settings
+;;; Commentary:
+;;; Code:
 
 ;; Create data and cache directories
 (make-directory *user-cache-directory* t)
@@ -10,7 +13,8 @@
  ;; key repeat.
  redisplay-dont-pause t
  ;; Path to custom-file
- custom-file (path-join user-emacs-directory "init-custom.el"))
+ custom-file *user-custom-file*)
 
 
 (provide 'init-emacs)
+;;; init-emacs.el ends here

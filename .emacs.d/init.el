@@ -1,3 +1,7 @@
+;;; init --- Emacs initialization
+;;; Commentary:
+;;; Code:
+
 ;; Bootstrap Emacs and load benchmarking
 (add-to-list 'load-path user-emacs-directory)
 (add-to-list 'exec-path (concat user-emacs-directory "bin"))
@@ -13,6 +17,7 @@
 (defconst *user-cache-directory* (getenv-or "XDG_CACHE_HOME"
                                             (path-join *user-home-directory* ".cache" "emacs")))
 (defconst *user-el-get-directory* (path-join user-emacs-directory "el-get"))
+(defconst *user-custom-file* (path-join *user-data-directory* "custom.el"))
 
 
 ;; Set up package management
@@ -37,3 +42,9 @@
 
 ;; Synchronize all registered packages
 (dholm/sync-packages)
+
+
+;; Load custom after all packages have been synced
+(when (file-exists-p custom-file)
+  (load custom-file))
+;;; init.el ends here
