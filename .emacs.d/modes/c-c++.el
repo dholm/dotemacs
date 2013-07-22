@@ -32,6 +32,14 @@
   (require 'semantic/bovine/gcc)
   (require 'semantic/bovine/clang)
 
+  ;; Enable CScope if available
+  (require 'cedet-cscope)
+  (when (cedet-cscope-version-check)
+    (semanticdb-enable-cscope-databases)
+    (setq ede-locate-setup-options
+	  '(ede-locate-cscope
+	    ede-locate-base)))
+
   ;; Check if GNU Global is available
   (when (cedet-gnu-global-version-check)
     (semanticdb-enable-gnu-global-databases 'c-mode)
