@@ -1,7 +1,3 @@
-[submodule ".emacs.d/utilities/xcscope"]
-	path = .emacs.d/utilities/xcscope
-	url = git://github.com/dholm/xcscope.git
-	branch = master
 [submodule ".emacs.d/utilities/outlookedit"]
 	path = .emacs.d/utilities/outlookedit
 	url = git://github.com/dholm/outlookedit.git
