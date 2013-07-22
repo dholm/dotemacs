@@ -1,8 +1,14 @@
-;;; (Bindings) ;;;
+;;; init-bindings --- sets up basic Emacs bindings
+;;; Commentary:
+;;; Code:
 
 ;; Function keys
 (global-set-key [f7] 'compile)
 (global-set-key [f8] 'gdb)
+
+
+;; Binds goto-line to navigation command C-c n g
+(global-set-key (kbd "C-c n g") 'goto-line)
 
 
 ;; Alias C-x C-m to M-x which is a bit awkward to reach
@@ -34,3 +40,4 @@
 
 
 (provide 'init-bindings)
+;;; init-bindings.el ends here
