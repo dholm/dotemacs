@@ -25,6 +25,7 @@
 (require 'utilities/smart-tab)
 (require 'utilities/tramp)
 (require 'utilities/undo-tree)
+(require 'utilities/url)
 (require 'utilities/w3m)
 (require 'utilities/xcscope)
 (require 'utilities/yasnippet)
