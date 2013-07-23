@@ -1,4 +1,6 @@
-;;; (Initialization) ;;;
+;;; html --- initializes HTML modes
+;;; Commentary:
+;;; Code:
 
 (require 'modes/mmm)
 (require-package '(:name tidy))
@@ -8,8 +10,7 @@
   ;; Set up mmm group for HTML editing
   (mmm-add-group
    'fancy-html
-   '(
-     (html-php-tagged
+   '((html-php-tagged
       :submode php-mode
       :face mmm-code-submode-face
       :front "<[?]php"
@@ -61,3 +62,4 @@
 
 
 (provide 'modes/html)
+;;; html.el ends here

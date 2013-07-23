@@ -1,4 +1,7 @@
-;;; (Initialization) ;;;
+;;; css --- initializes CSS modes
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name skewer-mode))
 (require-package '(:name showcss-mode))
 
@@ -45,3 +48,4 @@
 
 
 (provide 'modes/css)
+;;; css.el ends here

@@ -1,4 +1,7 @@
-;;; (Initialization) ;;;
+;;; browse-kill-ring --- initializes Browse Kill Ring
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name browse-kill-ring :after (dholm/browse-kill-ring-init)))
 
 (defun dholm/browse-kill-ring-init ()
@@ -7,3 +10,4 @@
 
 
 (provide 'utilities/browse-kill-ring)
+;;; browse-kill-ring.el ends here

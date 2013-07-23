@@ -1,4 +1,4 @@
-;;; init -- Emacs main initialization
+;;; init --- Emacs main initialization
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,6 @@
-;;; (Utilities) ;;;
+;;; init-utilities --- initializes utilities
+;;; Commentary:
+;;; Code:
 
 ;; Load all utilities
 (require 'utilities/browse-kill-ring)
@@ -35,3 +37,4 @@
 
 
 (provide 'init-utilities)
+;;; init-utilities.el ends here

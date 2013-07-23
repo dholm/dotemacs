@@ -1,4 +1,6 @@
-;; (Code Conventions) ;;
+;;; python --- initializes Python modes
+;;; Commentary:
+;;; Code:
 
 (defun dholm/jedi-init ()
   (setq jedi:setup-keys t
@@ -51,3 +53,4 @@
 
 
 (provide 'modes/python)
+;;; python.el ends here

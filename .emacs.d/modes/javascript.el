@@ -1,4 +1,7 @@
-;; JavaScript mode
+;;; javascript --- initializes JavaScript modes
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name js2-mode :after (dholm/js2-mode-init)))
 
 
@@ -31,3 +34,4 @@
 
 
 (provide 'modes/javascript)
+;;; javascript.el ends here

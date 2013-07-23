@@ -1,4 +1,7 @@
-;;; (Initialization) ;;;
+;;; ace-jump-mode --- quick buffer navigation
+;;; Commentary:
+;;; Code:
+
 (defun dholm/ace-jump-mode-init ()
   (global-set-key (kbd "C-c n SPC") 'ace-jump-mode))
 
@@ -6,3 +9,4 @@
 
 
 (provide 'ux/ace-jump-mode)
+;;; ace-jump-mode.el ends here

@@ -1,4 +1,4 @@
-;;; flycheck -- flycheck configuration
+;;; flycheck --- flycheck configuration
 ;;; Commentary:
 ;;; Code:
 

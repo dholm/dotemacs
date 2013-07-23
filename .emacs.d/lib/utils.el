@@ -1,3 +1,7 @@
+;;; utils --- miscellaneous support functions
+;;; Commentary:
+;;; Code:
+
 (defmacro try-eval (fn &optional finally)
   "Safely evaluate expression fn and run finally after"
   `(unwind-protect
@@ -12,3 +16,4 @@
 
 
 (provide 'lib/utils)
+;;; utils.el ends here

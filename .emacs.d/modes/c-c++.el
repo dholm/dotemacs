@@ -1,3 +1,7 @@
+;;; c/c++ --- initializes C/C++ modes
+;;; Commentary:
+;;; Code:
+
 (defconst *has-clang* (executable-find "clang"))
 
 ;; Set the default C/C++ code style
@@ -6,19 +10,19 @@
 
 
 (require-package '(:name c-eldoc
-                        :type emacswiki
-                        :website "https://raw.github.com/emacsmirror/emacswiki.org/master/c-eldoc.el"
-                        :prepare (autoload 'c-turn-on-eldoc-mode "c-eldoc" nil t)))
+			 :type emacswiki
+			 :website "https://raw.github.com/emacsmirror/emacswiki.org/master/c-eldoc.el"
+			 :prepare (autoload 'c-turn-on-eldoc-mode "c-eldoc" nil t)))
 (when *has-clang*
   (require-package '(:name clang-complete-async
-                          :type github
-                          :pkgname "Golevka/emacs-clang-complete-async"
-                          :build '(("make"))
-                          :depends auto-complete
-                          :features auto-complete-clang-async
-                          :prepare (setq ac-clang-complete-executable
-                                         (expand-file-name
-                                          (concat (el-get-package-directory "clang-complete-async") "clang-complete"))))))
+			   :type github
+			   :pkgname "Golevka/emacs-clang-complete-async"
+			   :build '(("make"))
+			   :depends auto-complete
+			   :features auto-complete-clang-async
+			   :prepare (setq ac-clang-complete-executable
+					  (expand-file-name
+					   (concat (el-get-package-directory "clang-complete-async") "clang-complete"))))))
 
 
 (defun dholm/c-mode-cedet-hook ()
@@ -86,3 +90,4 @@
 
 
 (provide 'modes/c-c++)
+;;; c-c++.el ends here

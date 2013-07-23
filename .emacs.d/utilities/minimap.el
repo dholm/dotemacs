@@ -1,4 +1,7 @@
-;;; (Initialization) ;;;
+;;; minimap --- a code outline when in graphical mode
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name minimap))
 
 
@@ -17,3 +20,4 @@
 
 
 (provide 'utilities/minimap)
+;;; minimap.el ends here

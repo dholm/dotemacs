@@ -1,4 +1,4 @@
-;;; xcscope -- cscope integration
+;;; xcscope --- cscope integration
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,7 @@
-;;; (Initialization) ;;;
+;;; shell --- initializes shell modes
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name bash-completion
 			 :type github
 			 :pkgname "szermatt/emacs-bash-completion"
@@ -21,3 +24,4 @@
 
 
 (provide 'modes/shell)
+;;; shell.el ends here

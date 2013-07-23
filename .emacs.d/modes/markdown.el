@@ -1,4 +1,7 @@
-;;; (Initialization) ;;;
+;;; markdown --- initializes Markdown modes
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name markdown-mode :after (dholm/markdown-mode-init)))
 
 (defun dholm/markdown-mode-init ()
@@ -10,3 +13,4 @@
 
 
 (provide 'modes/markdown)
+;;; markdown.el ends here

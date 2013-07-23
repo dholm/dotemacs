@@ -1,4 +1,7 @@
-;;; (Initialization) ;;;
+;;; session.el --- advanced Emacs session saving
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name session
                         :after (dholm/session-init)))
 
@@ -31,3 +34,4 @@
 
 
 (provide 'ux/session)
+;;; session.el ends here

@@ -1,3 +1,7 @@
+;;; bookmark+ --- initializes Bookmark+ extension
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name bookmark+ :before (dholm/bookmark+-before-init)))
 
 
@@ -16,3 +20,4 @@
 
 
 (provide 'utilities/bookmark+)
+;;; bookmark+.el ends here

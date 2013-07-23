@@ -1,4 +1,7 @@
-;; Gnuplot mode
+;;; gnuplot --- initializes gnuplot mode
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name gnuplot-mode :after (dholm/gnuplot-mode-init)))
 
 
@@ -9,3 +12,4 @@
 
 
 (provide 'modes/gnuplot)
+;;; gnuplot.el ends here

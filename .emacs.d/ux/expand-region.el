@@ -1,4 +1,7 @@
-;;; (Initialization) ;;;
+;;; expand-region --- expand regions by logical increments
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name expand-region))
 
 
@@ -7,3 +10,4 @@
 
 
 (provide 'ux/expand-region)
+;;; expand-region.el ends here

@@ -1,4 +1,7 @@
-;; Set up Emacs compilation support
+;;; compile --- sets up Emacs compile support
+;;; Commentary:
+;;; Code:
+
 (require 'compile)
 (setq compilation-disable-input nil)
 (setq compilation-scroll-output t)
@@ -15,3 +18,4 @@
 
 
 (provide 'utilities/compile)
+;;; compile.el ends here

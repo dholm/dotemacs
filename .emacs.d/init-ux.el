@@ -1,4 +1,6 @@
-;;; (User Experience) ;;;
+;;; init-ux --- initializes user experience
+;;; Commentary:
+;;; Code:
 
 (require 'ux/auto-saves)
 (require 'ux/diminish)
@@ -86,3 +88,4 @@
 
 
 (provide 'init-ux)
+;;; init-ux.el ends here

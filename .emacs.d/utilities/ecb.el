@@ -1,4 +1,7 @@
-;; Emacs Code Browser
+;;; ecb --- Emacs Code Browser
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name ecb :after (dholm/ecb-init)))
 
 (defun dholm/ecb-init ()
@@ -60,3 +63,4 @@
 
 
 (provide 'utilities/ecb)
+;;; ecb.el ends here

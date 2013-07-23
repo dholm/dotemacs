@@ -1,4 +1,7 @@
-;; Bring in CEDET package
+;;; cedet --- initializes CEDET
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name cedet :after (dholm/cedet-init)))
 
 
@@ -60,3 +63,4 @@
 
 
 (provide 'utilities/cedet)
+;;; cedet.el ends here

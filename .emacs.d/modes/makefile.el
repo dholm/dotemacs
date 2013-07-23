@@ -1,3 +1,7 @@
+;;; makefile --- initializes Makefile modes
+;;; Commentary:
+;;; Code:
+
 (defun dholm/makefile-mode-cedet-hook ()
   (dholm/cedet-hook)
   (require 'semantic/bovine/make))
@@ -24,3 +28,4 @@
 
 
 (provide 'modes/makefile)
+;;; makefile.el ends here

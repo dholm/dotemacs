@@ -1,10 +1,13 @@
-;; When using gud-mode to debug enable gdb-many-windows and a separate IO buffer
-(setq gdb-many-windows t)
-(setq gdb-use-separate-io-buffer t)
-(setq gdb-show-main t)
-(setq gud-chdir-before-run nil)
-(setq gud-tooltip-mode t)
+;;; gdb --- initializes GDB modes
+;;; Commentary:
+;;; Code:
 
+;; When using gud-mode to debug enable gdb-many-windows and a separate IO buffer
+(setq gdb-many-windows t
+      gdb-use-separate-io-buffer t
+      gdb-show-main t
+      gud-chdir-before-run nil
+      gud-tooltip-mode t)
 
 ;; Use gdb-script-mode for files ending in .gdb
 (setq auto-mode-alist
@@ -12,3 +15,4 @@
 
 
 (provide 'modes/gdb)
+;;; gdb.el ends here

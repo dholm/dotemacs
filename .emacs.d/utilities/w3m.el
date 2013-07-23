@@ -1,4 +1,7 @@
-;;; (Initialization) ;;;
+;;; w3m --- w3m integration
+;;; Commentary:
+;;; Code:
+
 (defconst *has-w3m* (executable-find "w3m"))
 
 (when *has-w3m*
@@ -19,3 +22,4 @@
 
 
 (provide 'utilities/w3m)
+;;; w3m.el ends here

@@ -1,3 +1,7 @@
+;;; scala --- initializes Scala modes
+;;; Commentary:
+;;; Code:
+
 (defconst *user-has-sbt* (executable-find "sbt"))
 
 (require-package '(:name scala-mode2))
@@ -20,3 +24,4 @@
 
 
 (provide 'modes/scala)
+;;; scala.el ends here

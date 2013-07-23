@@ -1,4 +1,7 @@
-;; (Utilities) ;;
+;;; perl --- initializes Perl modes
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name cperl-mode))
 (require-package '(:name perl-completion
 			 :type emacswiki
@@ -36,3 +39,4 @@
 
 
 (provide 'modes/perl)
+;;; perl.el ends here

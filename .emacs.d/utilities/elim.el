@@ -1,4 +1,7 @@
-;;; (Initialization) ;;;
+;;; elim --- instant messenger
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name elim))
 
 
@@ -9,3 +12,4 @@
 
 
 (provide 'utilities/elim)
+;;; elim.el ends here

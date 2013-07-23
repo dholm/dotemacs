@@ -1,4 +1,7 @@
-;;; (Initialization) ;;;
+;;; uniquify --- create unique names for buffers
+;;; Commentary:
+;;; Code:
+
 (require 'uniquify)
 (setq
  uniquify-buffer-name-style 'reverse
@@ -8,3 +11,4 @@
 
 
 (provide 'ux/uniquify)
+;;; uniquify.el ends here

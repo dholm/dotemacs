@@ -1,4 +1,7 @@
-;;; (Initialization) ;;;
+;;; git --- Git integration
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name magit :after (dholm/magit-init)))
 (require-package '(:name magithub))
 (require-package '(:name git-gutter-fringe :after (dholm/git-gutter-fringe-init)))
@@ -44,3 +47,4 @@
 
 
 (provide 'vcs/git)
+;;; git.el ends here

@@ -1,3 +1,7 @@
+;;; yasnippet --- snippet support
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name yasnippet :after (dholm/yasnippet-init)))
 
 
@@ -12,3 +16,4 @@
 
 
 (provide 'utilities/yasnippet)
+;;; yasnippet.el ends here

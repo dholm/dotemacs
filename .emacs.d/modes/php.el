@@ -1,3 +1,7 @@
+;;; php --- initializes PHP modes
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name php-mode))
 
 
@@ -19,3 +23,4 @@
 
 
 (provide 'modes/php)
+;;; php.el ends here

@@ -1,3 +1,7 @@
+;;; csv --- initializes CSV modes
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name csv-mode))
 (require-package '(:name csv-nav))
 
@@ -5,3 +9,4 @@
 
 
 (provide 'modes/csv)
+;;; csv.el ends here

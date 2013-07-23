@@ -1,4 +1,7 @@
-;;; (Initialization) ;;;
+;;; fill-column-indicator --- shows the fill column
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name fill-column-indicator))
 
 
@@ -7,3 +10,4 @@
 
 
 (provide 'ux/fill-column-indicator)
+;;; fill-column-indicator.el ends here

@@ -1,4 +1,7 @@
-;;; (Initialization) ;;;
+;;; ibuffer --- improved buffer management
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name ibuffer-vc))
 
 
@@ -15,3 +18,4 @@
 
 
 (provide 'utilities/ibuffer)
+;;; ibuffer.el ends here

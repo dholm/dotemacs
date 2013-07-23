@@ -1,30 +1,33 @@
-;;; (Initialization) ;;;
+;;; lisp --- initializes LISP modes
+;;; Commentary:
+;;; Code:
+
 (require 'utilities/cedet)
 
 (require-package '(:name rainbow-delimiters))
 (require-package '(:name paredit))
 (require-package '(:name redshank))
 (require-package '(:name macrostep
-                        :type github
-                        :pkgname "joddie/macrostep"))
+			 :type github
+			 :pkgname "joddie/macrostep"))
 (require-package '(:name auto-complete-emacs-lisp))
 (require-package '(:name slime))
 (require-package '(:name elisp-slime-nav))
 (require-package '(:name newlisp-mode
-                        :type github
-                        :pkgname "kosh04/newlisp-mode"
-                        :features newlisp-mode
-                        :post-init (dholm/newlisp-mode-post-init)))
+			 :type github
+			 :pkgname "kosh04/newlisp-mode"
+			 :features newlisp-mode
+			 :post-init (dholm/newlisp-mode-post-init)))
 (require-package '(:name swank-newlisp
-                        :type github
-                        :pkgname "kosh04/swank-newlisp"
-                        :depends slime
-                        :post-init (dholm/swank-newlisp-post-init)))
+			 :type github
+			 :pkgname "kosh04/swank-newlisp"
+			 :depends slime
+			 :post-init (dholm/swank-newlisp-post-init)))
 (require-package '(:name auto-compile
-                        :type github
-                        :pkgname "tarsius/auto-compile"
-                        :depends (packed)
-                        :after (dholm/auto-compile-init)))
+			 :type github
+			 :pkgname "tarsius/auto-compile"
+			 :depends (packed)
+			 :after (dholm/auto-compile-init)))
 
 
 (setq inferior-lisp-program "newlisp")
@@ -79,3 +82,4 @@
 
 
 (provide 'modes/lisp)
+;;; lisp.el ends here

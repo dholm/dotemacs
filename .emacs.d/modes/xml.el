@@ -1,4 +1,6 @@
-;;; (Initialization) ;;;
+;;; xml --- initializes XML modes
+;;; Commentary:
+;;; Code:
 
 ;; Enable magic-mode to detect XML
 (setq magic-mode-alist (cons '("<\\?xml " . nxml-mode) magic-mode-alist))
@@ -14,3 +16,4 @@
 
 
 (provide 'modes/xml)
+;;; xml.el ends here

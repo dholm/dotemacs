@@ -1,3 +1,7 @@
+;;; undo-tree --- undo history in a tree structure
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name undo-tree :after (dholm/undo-tree-init)))
 
 (defun dholm/undo-tree-init ()
@@ -6,3 +10,4 @@
 
 
 (provide 'utilities/undo-tree)
+;;; undo-tree.el ends here

@@ -1,4 +1,7 @@
-;;; (Initialization) ;;;
+;;; helm --- improved Emacs control
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name helm :after (dholm/helm-init)))
 (require-package '(:name helm-descbinds :after (dholm/helm-descbinds-init)))
 (require-package '(:name helm-etags-plus))
@@ -46,3 +49,4 @@
 
 
 (provide 'utilities/helm)
+;;; helm.el ends here

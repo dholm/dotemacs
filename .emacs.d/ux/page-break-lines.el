@@ -1,8 +1,11 @@
-;;; (Initialization) ;;;
+;;; page-break-lines --- prettify page breaks
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name page-break-lines
-                        :type github
-                        :pkgname "purcell/page-break-lines"
-                        :after (dholm/page-break-lines-init)))
+			 :type github
+			 :pkgname "purcell/page-break-lines"
+			 :after (dholm/page-break-lines-init)))
 
 (defun dholm/page-break-lines-init ()
   (require 'page-break-lines)
@@ -11,3 +14,4 @@
 
 
 (provide 'ux/page-break-lines)
+;;; page-break-lines.el ends here

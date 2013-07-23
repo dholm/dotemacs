@@ -1,3 +1,7 @@
+;;; ttcn --- initializes TTCN modes
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name ttcn-mode
 			 :type github
 			 :pkgname "dholm/ttcn-el"
@@ -24,3 +28,4 @@
 
 
 (provide 'modes/ttcn)
+;;; ttcn.el ends here

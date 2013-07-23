@@ -1,4 +1,7 @@
-;; Stolen from https://github.com/purcell/emacs.d
+;;; benchmarking --- benchmarks require and load statements
+;;; Commentary:
+;;;   Stolen from https://github.com/purcell/emacs.d
+;;; Code:
 
 (defun dholm/time-subtract-millis (b a)
   (* 1000.0 (float-time (time-subtract b a))))
@@ -43,3 +46,4 @@ LOAD-DURATION is the time taken in milliseconds to load FILE.")
 
 
 (provide 'lib/benchmarking)
+;;; benchmarking.el ends here

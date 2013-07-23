@@ -1,4 +1,6 @@
-;;; (Code Conventions) ;;;
+;;; init-modes --- initializes major modes
+;;; Commentary:
+;;; Code:
 
 (require 'modes/lisp)
 (require 'modes/c-c++)
@@ -43,3 +45,4 @@
 
 
 (provide 'init-modes)
+;;; init-modes.el ends here

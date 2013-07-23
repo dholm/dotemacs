@@ -1,4 +1,4 @@
-;;; init-emacs --- Emacs core settings
+;;; init-emacs --- initializes basic Emacs settings
 ;;; Commentary:
 ;;; Code:
 

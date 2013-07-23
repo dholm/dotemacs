@@ -1,4 +1,4 @@
-;;; packaging -- initialize package management
+;;; packaging --- initialize package management
 ;;; Commentary:
 ;;; Code:
 

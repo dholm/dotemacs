@@ -1,3 +1,7 @@
+;;; auto-complete --- initializes auto complete package
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name auto-complete :after (dholm/auto-complete-init)))
 
 (require 'utilities/yasnippet)
@@ -35,3 +39,4 @@
 
 
 (provide 'utilities/auto-complete)
+;;; auto-complete.el ends here

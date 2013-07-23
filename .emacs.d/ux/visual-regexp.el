@@ -1,4 +1,7 @@
-;;; (Initialization) ;;;
+;;; visual-regexp --- visualize regular expressions
+;;; Commentary:
+;;; Code:
+
 (require-package '(:name visual-regexp))
 
 
@@ -8,3 +11,4 @@
 
 
 (provide 'ux/visual-regexp)
+;;; visual-regexp.el ends here

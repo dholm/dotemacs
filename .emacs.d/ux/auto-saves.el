@@ -1,3 +1,7 @@
+;;; auto-saves --- initializes Emacs auto-saves
+;;; Commentary:
+;;; Code:
+
 ;; Set up the autosaves directory
 (defconst *user-autosaves-directory* (path-join *user-cache-directory* "autosaves"))
 (defconst *user-backups-directory* (path-join *user-cache-directory* "backups"))
@@ -24,3 +28,4 @@
 
 
 (provide 'ux/auto-saves)
+;;; auto-saves.el ends here

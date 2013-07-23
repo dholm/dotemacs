@@ -1,16 +1,18 @@
-;; Haskell mode
+;;; haskell --- initializes Haskell modes
+;;; Commentary:
+;;; Code:
 
 (require-package '(:name haskell-mode
-                        :type github
-                        :pkgname "haskell/haskell-mode"
-                        :load "haskell-mode-autoloads.el"
-                        :build (("make" "all"))
-                        :post-init (progn
-                                     (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-                                     (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation))))
+			 :type github
+			 :pkgname "haskell/haskell-mode"
+			 :load "haskell-mode-autoloads.el"
+			 :build (("make" "all"))
+			 :post-init (progn
+				      (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+				      (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation))))
 (require-package '(:name ghci-completion
-                        :type github
-                        :pkgname "manzyuk/ghci-completion"))
+			 :type github
+			 :pkgname "manzyuk/ghci-completion"))
 (require-package '(:name scion))
 
 
@@ -39,3 +41,4 @@
 
 
 (provide 'modes/haskell)
+;;; haskell.el ends here
