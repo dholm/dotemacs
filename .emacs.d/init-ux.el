@@ -2,25 +2,26 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'ux/auto-saves)
-(require 'ux/diminish)
-(require 'ux/solarized)
-(require 'ux/powerline)
 (require 'ux/ace-jump-mode)
-(require 'ux/multiple-cursors)
+(require 'ux/auto-save)
+(require 'ux/backup)
+(require 'ux/diminish)
 (require 'ux/expand-region)
-(require 'ux/page-break-lines)
 (require 'ux/fill-column-indicator)
+(require 'ux/jump-char)
+(require 'ux/multiple-cursors)
+(require 'ux/page-break-lines)
+(require 'ux/powerline)
 (require 'ux/pretty-mode-plus)
-(require 'ux/saveplace)
-(require 'ux/savehist)
 (require 'ux/recentf)
+(require 'ux/savehist)
+(require 'ux/saveplace)
 (require 'ux/session)
-(require 'ux/windmove)
+(require 'ux/smart-forward)
+(require 'ux/solarized)
 (require 'ux/uniquify)
 (require 'ux/visual-regexp)
-(require 'ux/jump-char)
-(require 'ux/smart-forward)
+(require 'ux/windmove)
 
 
 ;; Font when in graphics mode

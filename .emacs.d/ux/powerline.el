@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'ux/solarized)
+
 (require-package '(:name powerline
 			 :type github
 			 :pkgname "milkypostman/powerline"
