@@ -28,7 +28,8 @@
 (defun dholm/c-mode-cedet-hook ()
   (dholm/cedet-hook)
   ;; Load eassist from contrib package
-  (load (path-join (el-get-package-directory "cedet") "contrib" "cedet-contrib-load.el"))
+  (unless (featurep 'cedet-contrib-load)
+    (load (path-join (el-get-package-directory "cedet") "contrib" "cedet-contrib-load.el")))
   (require 'eassist)
 
   ;; Load extra semantic helpers
