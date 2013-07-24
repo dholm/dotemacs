@@ -3,10 +3,13 @@
 ;;; Code:
 
 (require-package '(:name solarized-theme
+			 :type github
+			 :pkgname "awmckinley/solarized-theme"
+			 :prepare (add-to-list 'custom-theme-load-path default-directory)
 			 :after (dholm/solarized-init)))
 
 (defun dholm/solarized-init ()
-  (load-theme 'solarized-dark t))
+  (load-theme 'solarized t))
 
 
 (provide 'ux/solarized)
