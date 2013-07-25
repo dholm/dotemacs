@@ -11,7 +11,7 @@
        '(ace-jump-face-background ((t (:foreground ,base01 ,@back))))
        '(ace-jump-face-foreground ((t (:foreground ,red ,@back ,@fmt-bold)))))))
 
-  (global-set-key (kbd "C-c n SPC") 'ace-jump-mode))
+  (define-key dholm/navigation-map (kbd "SPC") 'ace-jump-mode))
 
 (require-package '(:name ace-jump-mode
 			 :depends (solarized-theme)

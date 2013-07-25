@@ -26,7 +26,7 @@
   ;; Enable editing of camel case
   (subword-mode +1)
   ;; Bindings
-  (define-key haskell-mode-map (kbd "C-c h") 'hoogle)
+  (define-key dholm/documentation-map (kbd "h") 'hoogle)
   ;; Run spell-checker on strings and comments
   (flyspell-prog-mode))
 

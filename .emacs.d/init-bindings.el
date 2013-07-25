@@ -2,13 +2,23 @@
 ;;; Commentary:
 ;;; Code:
 
+;; Set up prefixes for groups of commands
+(define-prefix-command 'dholm/navigation-map)
+(define-prefix-command 'dholm/documentation-map)
+(define-prefix-command 'dholm/vcs-map)
+
+(global-set-key (kbd "C-c n") 'dholm/navigation-map)
+(global-set-key (kbd "C-c d") 'dholm/documentation-map)
+(global-set-key (kbd "C-c v") 'dholm/vcs-map)
+
+
 ;; Function keys
 (global-set-key [f7] 'compile)
 (global-set-key [f8] 'gdb)
 
 
-;; Binds goto-line to navigation command C-c n g
-(global-set-key (kbd "C-c n g") 'goto-line)
+;; Binds goto-line to navigation command g which is easier to access
+(define-key dholm/navigation-map (kbd "g") 'goto-line)
 
 
 ;; Alias C-x C-m to M-x which is a bit awkward to reach

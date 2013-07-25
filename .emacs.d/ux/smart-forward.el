@@ -3,10 +3,10 @@
 ;;; Code:
 
 (defun dholm/smart-forward-init ()
-  (global-set-key (kbd "C-c n s f") 'smart-forward)
-  (global-set-key (kbd "C-c n s b") 'smart-backward)
-  (global-set-key (kbd "C-c n s p") 'smart-up)
-  (global-set-key (kbd "C-c n s n") 'smart-down))
+  (define-key dholm/navigation-map (kbd "s f") 'smart-forward)
+  (define-key dholm/navigation-map (kbd "s b") 'smart-backward)
+  (define-key dholm/navigation-map (kbd "s p") 'smart-up)
+  (define-key dholm/navigation-map (kbd "s n") 'smart-down))
 
 (require-package '(:name smart-forward
 			 :after (dholm/smart-forward-init)

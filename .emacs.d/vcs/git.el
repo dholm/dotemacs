@@ -49,11 +49,11 @@
        '(magit-log-sha1 ((t (:foreground ,yellow)))))))
 
   ;;; (Bindings) ;;;
-  (global-set-key (kbd "C-c v s") 'magit-status))
+  (define-key dholm/vcs-map (kbd "s") 'magit-status))
 
 
 (defun dholm/git-messenger-init ()
-  (global-set-key (kbd "C-c d v") 'git-messenger:popup-message))
+  (define-key dholm/vcs-map (kbd "d") 'git-messenger:popup-message))
 
 
 ;;; (Functions) ;;;
