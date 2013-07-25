@@ -16,6 +16,7 @@
 (require 'utilities/flymake)
 (require 'utilities/flyspell)
 (require 'utilities/helm)
+(require 'utilities/hide-lines)
 (require 'utilities/ibuffer)
 (when (display-graphic-p)
   (require 'utilities/minimap))
