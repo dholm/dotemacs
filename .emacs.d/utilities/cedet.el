@@ -23,12 +23,12 @@
   (global-semanticdb-minor-mode)
 
   ;; Check if GNU Global is available
-  (when (cedet-gnu-global-version-check)
+  (when (cedet-gnu-global-version-check t)
     (semanticdb-enable-gnu-global-databases 'c-mode)
     (semanticdb-enable-gnu-global-databases 'c++-mode))
 
   ;; Check if ectag is available
-  (when (cedet-ectag-version-check)
+  (when (cedet-ectag-version-check t)
     (semantic-load-enable-primary-ectags-support))
 
   ;; Enable SRecode templates globally
