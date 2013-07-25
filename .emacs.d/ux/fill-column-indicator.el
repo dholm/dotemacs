@@ -2,11 +2,14 @@
 ;;; Commentary:
 ;;; Code:
 
-(require-package '(:name fill-column-indicator))
+(defun dholm/fill-column-indicator-init ()
+  (setq fci-rule-color (solarized-find-color 'base02 solarized-dark-palette))
+
+  ;;; (Bindings) ;;;
+  (global-set-key [f3] 'fci-mode))
 
 
-;;; (Bindings) ;;;
-(global-set-key [f3] 'fci-mode)
+(require-package '(:name fill-column-indicator :after (dholm/fill-column-indicator-init)))
 
 
 (provide 'ux/fill-column-indicator)

@@ -21,7 +21,7 @@
 
 
 (defun dholm/helm-init ()
-  (helm-mode)
+  (helm-mode t)
   (diminish 'helm-mode)
   ;; Filter out boring buffers
   (loop for exp in '("\\*clang-complete" "\\*CEDET global" "\\*tramp/scpc"
@@ -32,13 +32,57 @@
   (loop for ext in '("\\.elc$" "\\.pyc$" "^#.+#$")
         do (add-to-list 'helm-boring-file-regexp-list ext))
 
+
+  ;;; (Faces) ;;;
+  (solarized-with-values
+    (eval
+     `(custom-theme-set-faces
+       'solarized
+       '(helm-apt-deinstalled ((t (:foreground ,base01))))
+       '(helm-apt-installed ((t (:foreground ,green))))
+       '(helm-bookmark-directory ((t (:inherit helm-ff-directory))))
+       '(helm-bookmark-file ((t (:foreground ,base0))))
+       '(helm-bookmark-gnus ((t (:foreground ,cyan))))
+       '(helm-bookmark-info ((t (:foreground ,green))))
+       '(helm-bookmark-man ((t (:foreground ,violet))))
+       '(helm-bookmark-w3m ((t (:foreground ,yellow))))
+       '(helm-bookmarks-su ((t (:foreground ,orange))))
+       '(helm-buffer-not-saved ((t (:foreground ,orange))))
+       '(helm-buffer-saved-out ((t (:foreground ,red :background ,base03 ,@fmt-revr))))
+       '(helm-buffer-size ((t (:foreground ,base01))))
+       '(helm-candidate-number ((t (:background ,base02 :foreground ,base1 ,@fmt-bold))))
+       '(helm-ff-directory ((t (:background ,base03  :foreground ,blue))))
+       '(helm-ff-executable ((t (:foreground ,green))))
+       '(helm-ff-file ((t (:background ,base03 :foreground ,base0))))
+       '(helm-ff-invalid-symlink ((t (:background ,base03 :foreground ,orange ,@fmt-ital))))
+       '(helm-ff-prefix ((t (:background ,yellow :foreground ,base03))))
+       '(helm-ff-symlink ((t (:foreground ,cyan))))
+       '(helm-grep-file ((t (:foreground ,cyan ,@fmt-undr))))
+       '(helm-grep-finish ((t (:foreground ,green))))
+       '(helm-grep-lineno ((t (:foreground ,orange))))
+       '(helm-grep-match ((t (:inherit match))))
+       '(helm-grep-running ((t (:foreground ,red))))
+       '(helm-header ((t (:inherit header-line))))
+       '(helm-lisp-completion-info ((t (:foreground ,base0))))
+       '(helm-lisp-show-completion ((t (:foreground ,yellow :background ,base02 ,@fmt-bold))))
+       '(helm-M-x-key ((t (:foreground ,orange ,@fmt-undr))))
+       '(helm-moccur-buffer ((t (:foreground ,cyan ,@fmt-undr))))
+       '(helm-match ((t (:inherit match))))
+       '(helm-selection ((t (:background ,base02 ,@fmt-undr))))
+       '(helm-selection-line ((t (:background ,base02 :foreground ,base1 ,@fmt-none))))
+       '(helm-separator ((t (:foreground ,red))))
+       '(helm-source-header ((t (:background ,blue :foreground ,base03 ,@fmt-none))))
+       '(helm-time-zone-current ((t (:foreground ,green))))
+       '(helm-time-zone-home ((t (:foreground ,red))))
+       '(helm-visible-mark ((t (:background ,base03 :foreground ,magenta ,@fmt-bold)))))))
+
   ;; Only override if helm is installed
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
   (global-set-key (kbd "C-x b") 'helm-buffers-list))
 
 (defun dholm/helm-descbinds-init ()
   (require 'helm-descbinds)
-  (helm-descbinds-install))
+  (helm-descbinds-mode t))
 
 
 ;;; (Bindings) ;;;

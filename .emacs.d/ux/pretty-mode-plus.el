@@ -2,14 +2,22 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun dholm/pretty-mode-plus-init ()
+  (require 'pretty-mode-plus)
+
+  ;;; (Faces) ;;;
+  (solarized-with-values
+    (eval
+     `(custom-theme-set-faces
+       'solarized
+       '(pretty-mode-symbol-face  ((t (:foreground ,green)))))))
+
+  (global-pretty-mode t))
+
 (require-package '(:name pretty-mode-plus
 			 :type elpa
 			 :repo ("marmalade" . "http://marmalade-repo.org/packages/")
 			 :after (dholm/pretty-mode-plus-init)))
-
-(defun dholm/pretty-mode-plus-init ()
-  (require 'pretty-mode-plus)
-  (global-pretty-mode))
 
 
 (provide 'ux/pretty-mode-plus)

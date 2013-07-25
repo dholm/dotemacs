@@ -22,6 +22,7 @@
 (require 'utilities/outlookedit)
 (require 'utilities/packed)
 (require 'utilities/perspective)
+(require 'utilities/popup)
 (require 'utilities/smart-tab)
 (require 'utilities/tramp)
 (require 'utilities/undo-tree)

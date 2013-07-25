@@ -34,19 +34,19 @@
     (eval
      `(custom-theme-set-faces
        'solarized
-       '(magit-section-title ((t (:foreground ,yellow ,@back ,@fmt-bold))))
-       '(magit-branch ((t (:foreground ,orange ,@back ,@fmt-bold))))
-       '(magit-item-highlight ((t (:background ,base02))))
-       '(magit-log-author ((t (:foreground ,cyan ,@back))))
-       '(magit-log-graph ((t (:foreground ,base01 ,@back))))
-       '(magit-log-head-label-bisect-bad ((t (,@fmt-revr :foreground ,red ,@back))))
-       '(magit-log-head-label-bisect-good ((t (,@fmt-revr :foreground ,green ,@back))))
-       '(magit-log-head-label-default ((t (:background ,base02))))
-       '(magit-log-head-label-local ((t (,@fmt-revr :foreground ,blue ,@back))))
-       '(magit-log-head-label-patches ((t (,@fmt-revr :foreground ,red ,@back))))
-       '(magit-log-head-label-remote ((t (,@fmt-revr :foreground ,green ,@back))))
-       '(magit-log-head-label-tags ((t (,@fmt-revr :foreground ,yellow ,@back))))
-       '(magit-log-sha1 ((t (:foreground ,yellow ,@back)))))))
+       '(magit-section-title ((t (:foreground ,yellow :weight bold))))
+       '(magit-branch ((t (:foreground ,orange :weight bold))))
+       '(magit-item-highlight ((t (:background ,base02 :weight unspecified))))
+       '(magit-log-author ((t (:foreground ,cyan))))
+       '(magit-log-graph ((t (:foreground ,base01))))
+       '(magit-log-head-label-bisect-bad ((t (:foreground ,red :box 1))))
+       '(magit-log-head-label-bisect-good ((t (:foreground ,green :box 1))))
+       '(magit-log-head-label-default ((t (:background ,base02 :box 1))))
+       '(magit-log-head-label-local ((t (:foreground ,blue :box 1))))
+       '(magit-log-head-label-patches ((t (:foreground ,red :box 1))))
+       '(magit-log-head-label-remote ((t (:foreground ,green :box 1))))
+       '(magit-log-head-label-tags ((t (:foreground ,yellow :box 1))))
+       '(magit-log-sha1 ((t (:foreground ,yellow)))))))
 
   ;;; (Bindings) ;;;
   (global-set-key (kbd "C-c v s") 'magit-status))

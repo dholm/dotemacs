@@ -5,7 +5,25 @@
 (require-package '(:name ecb :after (dholm/ecb-init)))
 
 (defun dholm/ecb-init ()
-  (require 'ecb-autoloads))
+  (require 'ecb-autoloads)
+
+  ;;; (Faces) ;;;
+  (solarized-with-values
+    (eval
+     `(custom-theme-set-faces
+       'solarized
+       '(ecb-default-highlight-face ((t (:foreground ,base03 :background ,blue))))
+       '(ecb-history-bucket-node-dir-soure-path-face ((t (:inherit ecb-history-bucket-node-face :foreground ,yellow))))
+       '(ecb-source-in-directories-buffer-face ((t (:inherit ecb-directories-general-face :foreground ,base0))))
+       '(ecb-history-dead-buffer-face ((t (:inherit ecb-history-general-face :foreground ,base01))))
+       '(ecb-directory-not-accessible-face ((t (:inherit ecb-directories-general-face :foreground ,base01))))
+       '(ecb-bucket-node-face ((t (:inherit ecb-default-general-face :foreground ,blue))))
+       '(ecb-tag-header-face ((t (:background ,base02))))
+       '(ecb-analyse-bucket-element-face ((t (:inherit ecb-analyse-general-face :foreground ,green))))
+       '(ecb-directories-general-face ((t (:inherit ecb-default-general-face :height 1.0))))
+       '(ecb-method-non-semantic-face ((t (:inherit ecb-methods-general-face :foreground ,cyan))))
+       '(ecb-mode-line-prefix-face ((t (:foreground ,green))))
+       '(ecb-tree-guide-line-face ((t (:inherit ecb-default-general-face :foreground ,base02 :height 1.0))))))))
 
 
 ;; (ECB Layout) ;;

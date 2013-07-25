@@ -3,6 +3,13 @@
 ;;; Code:
 
 (defun dholm/jedi-init ()
+  ;;; (Faces) ;;;
+  (solarized-with-values
+    (eval
+     `(custom-theme-set-faces
+       'solarized
+       '(jedi:highlight-function-argument ((t (:inherit bold)))))))
+
   (setq jedi:setup-keys t
         jedi:complete-on-dot t))
 
