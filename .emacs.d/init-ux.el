@@ -9,6 +9,7 @@
 (require 'ux/expand-region)
 (require 'ux/fill-column-indicator)
 (require 'ux/jump-char)
+(require 'ux/mic-paren)
 (require 'ux/multiple-cursors)
 (require 'ux/page-break-lines)
 (require 'ux/powerline)
