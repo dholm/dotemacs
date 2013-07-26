@@ -20,10 +20,11 @@
 (require 'modes/shell)
 (require 'modes/syslog)
 (require 'modes/ttcn)
+(require 'modes/whitespace)
 (require 'modes/xml)
 
 
-;; (Text Conventions) ;;
+;;; (Text Conventions) ;;;
 
 ;; When using fill-paragraph or auto-fill-mode break lines at 80 characters
 (setq-default fill-column 80)
@@ -36,13 +37,6 @@
 (set-keyboard-coding-system 'utf-8)
 ;; Treat clipboard input as UTF-8 string first; compound text next, etc.
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
-
-
-;; Enable whitespace mode
-(autoload 'whitespace-mode "whitespace" "Toggle whitespace visualization." t)
-(autoload 'whitespace-toggle-options "whitespace" "Toggle local whitespace-mode options." t)
-(setq whitespace-style '(trailing lines space-before-tab indentation space-after-tab)
-      whitespace-line-column 400)
 
 
 (provide 'init-modes)

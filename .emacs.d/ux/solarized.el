@@ -18,6 +18,9 @@
      `(custom-theme-set-faces
        'solarized
 
+       ;; basic coloring
+       '(match ((t (:foreground ,base1 :background ,base02 :weight bold))))
+
        ;; compilation
        '(compilation-column-face ((t (:foreground ,cyan :underline nil))))
        '(compilation-column-number ((t (:inherit font-lock-doc-face :foreground ,cyan :underline nil))))
@@ -78,7 +81,19 @@
        ;; man
        '(Man-overstrike ((t (:foreground ,blue :weight bold))))
        '(Man-reverse ((t (:foreground ,orange))))
-       '(Man-underline ((t (:foreground ,green :underline t))))))))
+       '(Man-underline ((t (:foreground ,green :underline t))))
+
+       ;; whitespace-mode
+       '(whitespace-space ((t (:background unspecified :foreground ,base01 :inverse-video unspecified :slant italic))))
+       `(whitespace-hspace ((t (:background unspecified :foreground ,base1 :inverse-video unspecified))))
+       `(whitespace-tab ((t (:background unspecified :foreground ,red :inverse-video unspecified :weight bold))))
+       `(whitespace-newline ((t (:background unspecified :foreground ,base01 :inverse-video unspecified))))
+       `(whitespace-trailing ((t (:background unspecified :foreground ,orange :inverse-video t))))
+       `(whitespace-line ((t (:background unspecified :foreground ,magenta :inverse-video unspecified))))
+       `(whitespace-space-before-tab ((t (:background ,red :foreground unspecified :inverse-video unspecified))))
+       `(whitespace-indentation ((t (:background unspecified :foreground ,yellow :inverse-video unspecified :weight bold))))
+       `(whitespace-empty ((t (:background unspecified :foreground ,red :inverse-video t))))
+       `(whitespace-space-after-tab ((t (:background unspecified :foreground ,orange :inverse-video t :weight bold))))))))
 
 
 (provide 'ux/solarized)

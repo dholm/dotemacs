@@ -37,8 +37,6 @@
   (subword-mode t)
   ;; ElDoc shows function documentation as you type
   (eldoc-mode t)
-  ;; Show trailing whitespace
-  (setq show-trailing-whitespace t)
   ;; Bind electric backspace to del which translates to backspace in
   ;; terminals.
   (define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
