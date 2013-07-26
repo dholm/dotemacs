@@ -8,6 +8,7 @@
 (require 'ux/diminish)
 (require 'ux/expand-region)
 (require 'ux/fill-column-indicator)
+(require 'ux/highlight-indentation)
 (require 'ux/jump-char)
 (require 'ux/mic-paren)
 (require 'ux/multiple-cursors)
