@@ -9,6 +9,7 @@
 			 :after (dholm/solarized-init)))
 
 (defun dholm/solarized-init ()
+  "Initialize Solarized theme."
   (load-theme 'solarized t)
 
   ;; faces for builtins
@@ -36,15 +37,14 @@
        '(compilation-mode-line-run ((t (:foreground ,orange :weight bold))))
 
        ;; diff
-       ,@(if window-system
-	     `('(diff-added ((t (:foreground ,green ,@fmt-bold))))
-	       '(diff-changed ((t (:foreground ,yellow ,@fmt-bold))))
-	       '(diff-removed ((t (:foreground ,red ,@fmt-bold))))
-	       '(diff-refine-change ((t (:foreground ,blue ,@back ,@fmt-bold)))))
-	   `('(diff-added ((t (:foreground ,green))))
-	     '(diff-changed ((t (:foreground ,yellow))))
-	     '(diff-removed ((t (:foreground ,red))))
-	     '(diff-refine-change ((t (:foreground ,blue ,@back))))))
+       '(diff-added ((t (:foreground ,green ,@back))))
+       '(diff-changed ((t (:foreground ,blue ,@back))))
+       '(diff-removed ((t (:foreground ,red ,@back))))
+       '(diff-header ((t (,@back))))
+       '(diff-file-header ((t (:foreground ,base0 ,@back :weight bold))))
+       '(diff-refine-added ((t :foreground ,base03 :background ,green)))
+       '(diff-refine-change ((t :foreground ,base03 :background ,blue)))
+       '(diff-refine-removed ((t (:foreground ,base03 :background ,red))))
 
        ;; dired
        '(dired-directory ((t (:foreground ,blue :weight normal))))
