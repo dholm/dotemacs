@@ -3,7 +3,9 @@
 ;;; Code:
 
 (defun dholm/fill-column-indicator-init ()
-  (setq fci-rule-color (solarized-find-color 'base02 solarized-dark-palette))
+  "Initialize fill column indicator."
+  (setq-default
+   fci-rule-color (solarized-find-color 'base02 solarized-dark-palette))
 
   ;;; (Bindings) ;;;
   (global-set-key [f3] 'fci-mode))

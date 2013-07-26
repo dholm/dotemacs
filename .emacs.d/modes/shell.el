@@ -2,6 +2,21 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun dholm/sh-mode-hook ()
+  "Initialize sh mode."
+  (setq-default
+   ;; Indent with four spaces
+   indent-tabs-mode nil
+   sh-basic-offset 4
+   sh-indentation 4)
+  ;; Enable ANSI colors for comint
+  (ansi-color-for-comint-mode-on)
+  ;; Run spell-checker on strings and comments
+  (flyspell-prog-mode))
+
+(add-hook 'sh-mode-hook 'dholm/sh-mode-hook)
+
+
 (require-package '(:name bash-completion
 			 :type github
 			 :pkgname "szermatt/emacs-bash-completion"
@@ -13,14 +28,6 @@
 (require-package '(:name shell-command
 			 :type emacswiki
 			 :website "https://raw.github.com/emacsmirror/emacswiki.org/master/shell-command.el"))
-
-
-;;; (Code Conventions) ;;;
-(defun dholm/shell-mode-hook ()
-  ;; Run spell-checker on strings and comments
-  (flyspell-prog-mode))
-
-(add-hook 'shell-mode-hook 'dholm/shell-mode-hook)
 
 
 (provide 'modes/shell)

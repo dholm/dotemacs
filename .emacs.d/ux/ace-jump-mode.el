@@ -3,6 +3,7 @@
 ;;; Code:
 
 (defun dholm/ace-jump-mode-init ()
+  "Initialize ace jump mode."
   ;;; (Faces) ;;;
   (solarized-with-values
     (eval

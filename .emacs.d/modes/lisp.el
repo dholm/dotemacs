@@ -7,7 +7,9 @@
 
 (defun dholm/lisp-mode-hook ()
   "LISP mode hook."
-  (setq-default indent-tabs-mode nil)
+  (setq-default
+   ;; Indent using spaces
+   indent-tabs-mode nil)
   (try-eval (dholm/cedet-hook))
   (try-eval (rainbow-delimiters-mode))
   (try-eval (enable-paredit-mode))
@@ -79,7 +81,7 @@
 (require-package '(:name swank-newlisp
 			 :type github
 			 :pkgname "kosh04/swank-newlisp"
-			 :depends slime
+			 :depends (slime)
 			 :after (dholm/swank-newlisp-init)))
 (require-package '(:name auto-compile
 			 :type github

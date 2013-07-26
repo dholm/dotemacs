@@ -3,6 +3,7 @@
 ;;; Code:
 
 (defun dholm/smart-forward-init ()
+  "Initialize smart-forward."
   (define-key dholm/navigation-map (kbd "s f") 'smart-forward)
   (define-key dholm/navigation-map (kbd "s b") 'smart-backward)
   (define-key dholm/navigation-map (kbd "s p") 'smart-up)

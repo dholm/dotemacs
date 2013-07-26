@@ -24,12 +24,6 @@
 (require 'modes/xml)
 
 
-;;; (Text Conventions) ;;;
-
-;; When using fill-paragraph or auto-fill-mode break lines at 80 characters
-(setq-default fill-column 80)
-
-
 ;; Prefer UTF-8
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)

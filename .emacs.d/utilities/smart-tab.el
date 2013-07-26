@@ -5,7 +5,8 @@
 (require-package '(:name smart-tab :after (dholm/smart-tab-init)))
 
 (defun dholm/smart-tab-init ()
-  (global-smart-tab-mode)
+  "Initialize smart tab."
+  (global-smart-tab-mode t)
   (diminish 'smart-tab-mode))
 
 

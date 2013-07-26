@@ -93,7 +93,8 @@
 (require-package '(:name magithub))
 (require-package '(:name git-gutter :after (dholm/git-gutter-init)))
 (when (display-graphic-p)
-  (require-package '(:name git-gutter-fringe :after (dholm/git-gutter-fringe-init))))
+  (require-package '(:name git-gutter-fringe
+                           :after (dholm/git-gutter-fringe-init))))
 (require-package '(:name git-messenger
 			 :after (dholm/git-messenger-init)
 			 :type github

@@ -3,6 +3,7 @@
 ;;; Code:
 
 (defun dholm/flycheck-init ()
+  "Initialize flycheck."
   (require 'flycheck)
   (global-flycheck-mode t)
 
@@ -19,7 +20,9 @@
        '(flycheck-fringe-error ((t (:foreground ,red :weight bold))))
        '(flycheck-fringe-warning ((t (:foreground ,yellow :weight bold))))))))
 
+
 (defun dholm/flycheck-color-mode-line-init ()
+  "Initialize flycheck color mode."
   (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
 
 

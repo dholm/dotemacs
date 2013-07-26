@@ -43,7 +43,9 @@
        '(cfw:face-toolbar-button-on ((t (:foreground ,base03 :background ,yellow :weight bold))))))))
 
 
-(require-package '(:name calfw :after (dholm/calfw-init)))
+(require-package '(:name calfw
+                         :depends (solarized-theme)
+                         :after (dholm/calfw-init)))
 (require-package '(:name calfw-gcal
 			 :type github
 			 :pkgname "myuhe/calfw-gcal.el"

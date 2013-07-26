@@ -4,10 +4,6 @@
 
 (defconst *has-clang* (executable-find "clang"))
 
-;; Set the default C/C++ code style
-(setq c-default-style "K&R")
-(setq c++-default-style "Stroustrup")
-
 
 (require-package '(:name c-eldoc
 			 :type emacswiki
@@ -18,14 +14,15 @@
 			   :type github
 			   :pkgname "Golevka/emacs-clang-complete-async"
 			   :build '(("make"))
-			   :depends auto-complete
-			   :features auto-complete-clang-async
+			   :depends (auto-complete)
+			   :features (auto-complete-clang-async)
 			   :prepare (setq ac-clang-complete-executable
 					  (expand-file-name
 					   (concat (el-get-package-directory "clang-complete-async") "clang-complete"))))))
 
 
 (defun dholm/c-mode-cedet-hook ()
+  "C mode CEDET hook."
   (dholm/cedet-hook)
   ;; Load eassist from contrib package
   (unless (featurep 'cedet-contrib-load)
@@ -62,6 +59,11 @@
 
 
 (defun dholm/c-mode-common-hook ()
+  "C mode common hook."
+  ;; Set the default C/C++ code styles
+  (setq-default
+   c-default-style "K&R"
+   c++-default-style "Stroustrup")
   ;; Load CEDET
   (dholm/c-mode-cedet-hook)
   ;; Enable eldoc

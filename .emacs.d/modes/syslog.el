@@ -3,6 +3,7 @@
 ;;; Code:
 
 (defun dholm/syslog-mode-init ()
+  "Initialize syslog-mode."
   ;;; (Faces) ;;;
   (solarized-with-values
     (eval

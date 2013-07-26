@@ -2,10 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(require-package '(:name skewer-mode))
-(require-package '(:name showcss-mode))
-
-
 ;; Set up HTML embedding support
 (mmm-add-group
  'html-css
@@ -45,6 +41,9 @@
   (set (make-local-variable 'ac-auto-show-menu) t))
 
 (add-hook 'css-mode-hook 'dholm/css-mode-hook)
+
+(require-package '(:name skewer-mode))
+(require-package '(:name showcss-mode))
 
 
 (provide 'modes/css)

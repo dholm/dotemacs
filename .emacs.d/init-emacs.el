@@ -8,6 +8,10 @@
 
 
 (setq-default
+ ;; When using fill-paragraph or auto-fill-mode break lines at 80 characters
+ fill-column 80
+ ;; Highlight matches when using grep
+ grep-highlight-matches t
  ;; Redraw the entire screen before checking for pending input events.
  ;; This will improve performance in general but might degrade performance of
  ;; key repeat.

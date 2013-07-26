@@ -22,15 +22,17 @@
 
 ;; Set up package management
 (require 'lib/packaging)
+;; Load utilities
+(require 'lib/utils)
 
 
 ;; Load configuration
 (require 'init-emacs)
 (require 'init-bindings)
 (require 'init-ux)
-(require 'init-modes)
-(require 'init-vcs)
 (require 'init-utilities)
+(require 'init-vcs)
+(require 'init-modes)
 
 
 ;; If ~/.emacs.local is available load it as the last file so that it is

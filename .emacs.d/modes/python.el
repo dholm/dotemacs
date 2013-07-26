@@ -10,8 +10,9 @@
        'solarized
        '(jedi:highlight-function-argument ((t (:inherit bold)))))))
 
-  (setq jedi:setup-keys t
-        jedi:complete-on-dot t))
+  (setq-default
+   jedi:setup-keys t
+   jedi:complete-on-dot t))
 
 
 (defun dholm/python-mode-cedet-hook ()

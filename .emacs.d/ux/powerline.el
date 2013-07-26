@@ -13,6 +13,7 @@
 
 
 (defun dholm/powerline-init ()
+  "Initialize powerline."
   (require 'powerline)
 
   ;;; (Faces) ;;;
@@ -29,7 +30,7 @@
        '(powerline-inactive2 ((t (:foreground ,base0 :background ,base01)))))))
 
   ;;; (Theme) ;;;
-  (setq powerline-arrow-shape 'slant)
+  (setq-default powerline-arrow-shape 'slant)
   (powerline-default-theme))
 
 
