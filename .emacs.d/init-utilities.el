@@ -6,6 +6,7 @@
 (require 'utilities/auto-complete)
 (require 'utilities/bookmark+)
 (require 'utilities/browse-kill-ring)
+(require 'utilities/calfw)
 (require 'utilities/cedet)
 (require 'utilities/compile)
 (require 'utilities/deft)
