@@ -2,27 +2,48 @@
 ;;; Commentary:
 ;;; Code:
 
-(require-package '(:name magit :after (dholm/magit-init)))
-(require-package '(:name magithub))
-(require-package '(:name git-gutter-fringe :after (dholm/git-gutter-fringe-init)))
-(require-package '(:name git-messenger
-			 :after (dholm/git-messenger-init)
-			 :type github
-			 :pkgname "syohex/emacs-git-messenger"
-			 :depends (popup)))
-(require-package '(:name yagist
-			 :type elpa
-			 :repo ("melpa" . "http://melpa.milkbox.net/packages/")
-			 :depends (json)))
+(defun dholm/git-gutter-init ()
+  "Initialize git gutter."
+  ;;; (Faces) ;;;
+  (solarized-with-values
+    (eval
+     `(custom-theme-set-faces
+       'solarized
+       '(git-gutter:added ((t (:foreground ,green :weight bold))))
+       '(git-gutter:deleted ((t (:foreground ,red :weight bold))))
+       '(git-gutter:modified ((t (:foreground ,blue :weight bold))))
+       '(git-gutter:unchanged ((t (:foreground ,base02 :weight bold)))))))
+
+  ;;; (Bindings) ;;;
+  (define-key dholm/vcs-map (kbd "g") 'git-gutter:toggle))
 
 
 (defun dholm/git-gutter-fringe-init ()
-  (setq
-   git-gutter-fr:side 'left-fringe
-   git-messenger:show-detail t))
+  "Initialize git gutter fringe."
+  (setq-default git-gutter-fr:side 'left-fringe)
+
+  ;;; (Faces) ;;;
+  (solarized-with-values
+    (eval
+     `(custom-theme-set-faces
+       'solarized
+       '(git-gutter-fr:added ((t (:foreground ,green  :weight bold))))
+       '(git-gutter-fr:deleted ((t (:foreground ,red :weight bold))))
+       '(git-gutter-fr:modified ((t (:foreground ,blue :weight bold))))))))
 
 
 (defun dholm/magit-init ()
+  "Initialize magit."
+  (setq-default
+   ;; Do not save buffers
+   magit-save-some-buffers nil
+   ;; Automatically show process buffer if git takes too long to execute
+   magit-process-popup-time 10
+   ;; Show fine differences for currently selected hunk
+   magit-diff-refine-hunk t
+   ;; Use ido for user input
+   magit-completing-read-function 'magit-ido-completing-read)
+
   ;; Full screen magit status
   (defadvice magit-status (around magit-fullscreen activate)
     (window-configuration-to-register :magit-fullscreen)
@@ -53,17 +74,35 @@
 
 
 (defun dholm/git-messenger-init ()
+  "Initialize git messenger."
+  (setq-default git-messenger:show-detail t)
   (define-key dholm/vcs-map (kbd "d") 'git-messenger:popup-message))
 
 
 ;;; (Functions) ;;;
 (defun magit-quit-session ()
-  "Restores the previous window configuration and kills the magit buffer"
+  "Restore the previous window configuration and kill the magit buffer."
   (interactive)
   (kill-buffer)
   (when (get-register :magit-fullscreen)
     (ignore-errors
       (jump-to-register :magit-fullscreen))))
+
+
+(require-package '(:name magit :after (dholm/magit-init)))
+(require-package '(:name magithub))
+(require-package '(:name git-gutter :after (dholm/git-gutter-init)))
+(when (display-graphic-p)
+  (require-package '(:name git-gutter-fringe :after (dholm/git-gutter-fringe-init))))
+(require-package '(:name git-messenger
+			 :after (dholm/git-messenger-init)
+			 :type github
+			 :pkgname "syohex/emacs-git-messenger"
+			 :depends (popup)))
+(require-package '(:name yagist
+			 :type elpa
+			 :repo ("melpa" . "http://melpa.milkbox.net/packages/")
+			 :depends (json)))
 
 
 (provide 'vcs/git)
