@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(require-package '(:name js2-mode :after (dholm/js2-mode-init)))
-
-
 (defun dholm/js2-mode-init ()
   ;;; (Faces) ;;;
   (solarized-with-values
@@ -29,11 +26,13 @@
 
 
 (defun dholm/javascript-mode-cedet-hook ()
+  "JavaScript CEDET support hook."
   (dholm/cedet-hook)
   (require 'semantic/wisent/javascript))
 
 
 (defun dholm/javascript-mode-hook ()
+  "JavaScript mode hook."
   ;; Load CEDET
   (dholm/javascript-mode-cedet-hook)
   ;; Configure js2-mode
@@ -50,6 +49,8 @@
   (flyspell-prog-mode))
 
 (add-hook 'javascript-mode-hook 'dholm/javascript-mode-hook)
+
+(require-package '(:name js2-mode :after (dholm/js2-mode-init)))
 
 
 (provide 'modes/javascript)

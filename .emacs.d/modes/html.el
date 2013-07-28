@@ -2,12 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'modes/mmm)
-(require-package '(:name tidy))
-
-
-(defun dholm/mmm-register-html-hook ()
-  ;; Set up mmm group for HTML editing
+(after-load 'mmm
   (mmm-add-group
    'fancy-html
    '((html-php-tagged
@@ -41,8 +36,6 @@
   (add-to-list 'mmm-mode-ext-classes-alist '(html-mode nil embedded-css))
   (add-to-list 'mmm-mode-ext-classes-alist '(html-mode nil fancy-html)))
 
-(add-hook 'after-mmm-install-hook 'dholm/mmm-register-html-hook)
-
 
 ;; Support for detecting XHTML
 (defun guess-xhtml-hook ()
@@ -51,14 +44,15 @@
       (save-excursion
         (search-forward-regexp "<[?]xml\\|//W3C//DTD XHTML" 80 t))
     (html-mode)))
-(add-hook 'html-mode-hook 'guess-xhtml-hook t)
-
 
 (defun dholm/html-mode-hook ()
   ;; Configure nxml auto completion
   (setq nxml-slash-auto-complete-flag t))
 
+(add-hook 'html-mode-hook 'guess-xhtml-hook t)
 (add-hook 'html-mode-hook 'dholm/html-mode-hook)
+
+(require-package '(:name tidy))
 
 
 (provide 'modes/html)
