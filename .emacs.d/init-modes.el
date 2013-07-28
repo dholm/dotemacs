@@ -16,6 +16,7 @@
 (require 'modes/perl)
 (require 'modes/php)
 (require 'modes/python)
+(require 'modes/ruby)
 (require 'modes/scala)
 (require 'modes/shell)
 (require 'modes/syslog)

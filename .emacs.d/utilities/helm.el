@@ -39,7 +39,7 @@
        '(helm-buffer-saved-out ((t (:foreground ,red :background ,base03 ,@fmt-revr))))
        '(helm-buffer-size ((t (:foreground ,base01))))
        '(helm-candidate-number ((t (:background ,base02 :foreground ,base1 ,@fmt-bold))))
-       '(helm-ff-directory ((t (:background ,base03  :foreground ,blue))))
+       '(helm-ff-directory ((t (:background ,base03 ,@back :foreground ,blue))))
        '(helm-ff-executable ((t (:foreground ,green))))
        '(helm-ff-file ((t (:background ,base03 :foreground ,base0))))
        '(helm-ff-invalid-symlink ((t (:background ,base03 :foreground ,orange ,@fmt-ital))))
