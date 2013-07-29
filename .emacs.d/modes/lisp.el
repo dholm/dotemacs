@@ -38,7 +38,7 @@
 ;;; (Package Initialization) ;;;
 (defun dholm/newlisp-mode-init ()
   "Initialize newlisp mode."
-  (add-to-list 'auto-mode-alist '("\\.lsp$" . newlisp-mode))
+  (add-auto-mode 'newlisp-mode "\\.lsp$")
   (add-to-list 'interpreter-mode-alist '("newlisp" . newlisp-mode)))
 
 

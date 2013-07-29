@@ -2,13 +2,24 @@
 ;;; Commentary:
 ;;; Code:
 
-(require-package '(:name gnuplot-mode :after (dholm/gnuplot-mode-init)))
+(defun dholm/gnuplot-mode-hook ()
+  "Hook for gnuplot mode."
+  (setq-default
+   ;; Indent using spaces
+   indent-tabs-mode nil)
+  ;; Run spell-checker on strings and comments
+  (flyspell-prog-mode)
+  (add-hook 'before-save-hook
+            ;; Delete trailing whitespace on save
+            'delete-trailing-whitespace nil t))
 
 
 (defun dholm/gnuplot-mode-init ()
-  (autoload 'gnuplot-mode "gnuplot" "gnuplot major mode" t)
-  (autoload 'gnuplot-make-buffer "gnuplot" "open a buffer in gnuplot mode" t)
-  (add-to-list 'auto-mode-alist '("\\.gp$" . gnuplot-mode)))
+  "Initialize gnuplot mode."
+  (add-hook 'gnuplot-mode-hook 'dholm/gnuplot-mode-hook)
+  (add-auto-mode 'gnuplot-mode "\\.gp$"))
+
+(require-package '(:name gnuplot-mode :after (dholm/gnuplot-mode-init)))
 
 
 (provide 'modes/gnuplot)

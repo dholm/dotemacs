@@ -27,9 +27,8 @@
       :back "\"")))
 
   ;; Register file extensions for html-mode
-  (add-to-list 'auto-mode-alist '("\\.inc\\'" . html-mode))
-  (add-to-list 'auto-mode-alist '("\\.php[34]?\\'" . html-mode))
-  (add-to-list 'auto-mode-alist '("\\.[sj]?html?\\'" . html-mode))
+  (add-auto-mode 'html-mode
+                 "\\.inc$" "\\.php[34]?$" "\\.[sj]?html?$")
 
   ;; Enable support for mmm extensions
   (add-to-list 'mmm-mode-ext-classes-alist '(html-mode nil html-js))
@@ -46,6 +45,7 @@
     (html-mode)))
 
 (defun dholm/html-mode-hook ()
+  "HTML mode hook."
   ;; Configure nxml auto completion
   (setq nxml-slash-auto-complete-flag t))
 

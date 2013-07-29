@@ -17,8 +17,6 @@
     (auto-complete-rst-init)
     (auto-complete-mode t)))
 
-(add-hook 'rst-mode-hook 'dholm/rst-mode-hook)
-
 
 (defun dholm/rst-mode-init ()
   "Initialize reStructuredText mode."
@@ -35,11 +33,11 @@
          '(rst-level-5-face ((t (:background ,magenta :foreground ,base03))))
          '(rst-level-6-face ((t (:background ,red     :foreground ,base03))))))))
 
-  ;;; Register auto modes
-  (setq auto-mode-alist
-        (append '(("\\.txt\\'" . rst-mode)
-                  ("\\.rst\\'" . rst-mode)
-                  ("\\.rest\\'" . rst-mode)) auto-mode-alist)))
+  ;; Register auto modes
+  (add-auto-mode 'rst-mode
+                 "\\.txt$" "\\.text$" "\\.rst$" "\\.rest$")
+  ;; Register mode hook
+  (add-hook 'rst-mode-hook 'dholm/rst-mode-hook))
 
 (require-package '(:name rst-mode :after (dholm/rst-mode-init)))
 (require-package '(:name auto-complete-rst

@@ -16,12 +16,13 @@
          '(syslog-warn-face ((t (:foreground ,orange :background unspecified ,@fmt-bold))))
          '(syslog-info-face ((t (:foreground ,blue :background unspecified ,@fmt-bold))))
          '(syslog-debug-face ((t (:foreground ,cyan :background unspecified ,@fmt-bold))))
-         '(syslog-su-face ((t (:foreground ,magenta :background unspecified)))))))))
+         '(syslog-su-face ((t (:foreground ,magenta :background unspecified))))))))
+
+  ;; Register auto mode
+  (add-auto-mode 'syslog-mode "/var/log.*$"))
 
 (require-package '(:name syslog-mode
 			 :depends (hide-lines)
-			 :post-init (progn
-				      (add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode)))
 			 :type github
 			 :pkgname "vapniks/syslog-mode"
 			 :after (dholm/syslog-mode-init)))
