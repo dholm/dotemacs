@@ -2,17 +2,18 @@
 ;;; Commentary:
 ;;; Code:
 
-(require-package '(:name yasnippet :after (dholm/yasnippet-init)))
-
-
-;; Look for snippets in data directory
-(setq yas-snippet-dir (path-join *user-data-directory* "snippets"))
-
-
 (defun dholm/yasnippet-init ()
+  "Initialize yasnippet."
+  ;; Look for snippets in data directory
+  (setq-default
+   yas-snippet-dir (path-join *user-data-directory* "snippets"))
+
   ;; Enables yasnippet globally
   (yas-global-mode)
-  (diminish 'yas-minor-mode))
+  (after-load 'diminish
+    (diminish 'yas-minor-mode)))
+
+(require-package '(:name yasnippet :after (dholm/yasnippet-init)))
 
 
 (provide 'utilities/yasnippet)

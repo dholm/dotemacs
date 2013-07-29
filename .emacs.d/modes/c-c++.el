@@ -28,7 +28,8 @@
             'delete-trailing-whitespace nil t)
   ;; Show guides for indentation levels
   (highlight-indentation-mode)
-  (diminish 'highlight-indentation-mode)
+  (after-load 'diminish
+    (diminish 'highlight-indentation-mode))
   ;; Autocompletion
   (when *has-clang*
     (set (make-local-variable 'ac-sources)

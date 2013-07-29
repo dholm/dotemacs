@@ -2,8 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'lib/utils)
-
 (setq-default
  ;; Always show trailing whitespace
  show-trailing-whitespace t

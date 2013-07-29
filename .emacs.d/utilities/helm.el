@@ -6,7 +6,8 @@
   "Initialize helm."
   ;; Enable helm mode
   (helm-mode t)
-  (diminish 'helm-mode)
+  (after-load 'diminish
+    (diminish 'helm-mode))
 
   (setq-default
    helm-idle-delay 0.2

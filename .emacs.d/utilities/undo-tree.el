@@ -17,7 +17,8 @@
          '(undo-tree-visualizer-register-face ((t (:foreground ,yellow))))))))
 
   (global-undo-tree-mode t)
-  (diminish 'undo-tree-mode))
+  (after-load 'diminish
+    (diminish 'undo-tree-mode)))
 
 (require-package '(:name undo-tree :after (dholm/undo-tree-init)))
 
