@@ -25,14 +25,16 @@
        (append ac-sources '(ac-source-semantic)))))
 
 
-(defun dholm/cedet-init ()
-  "Initialize CEDET."
+(defun dholm/cedet-before-init ()
+  "Setup before loading CEDET."
   (setq-default
    ;; Set up paths to caches
    semanticdb-default-save-directory (path-join *user-cache-directory* "semanticdb")
    ede-project-placeholder-cache-file (path-join *user-cache-directory* "ede-projects.el")
-   srecode-map-save-file (path-join *user-cache-directory* "srecode-map.el"))
+   srecode-map-save-file (path-join *user-cache-directory* "srecode-map.el")))
 
+(defun dholm/cedet-init ()
+  "Initialize CEDET."
   ;; Set up and enable semantic
   (require 'semantic/ia)
   (require 'semantic/db)
@@ -57,8 +59,9 @@
   (global-ede-mode t)
   (ede-enable-generic-projects))
 
-
-(require-package '(:name cedet :after (dholm/cedet-init)))
+(require-package '(:name cedet
+                         :before (dholm/cedet-before-init)
+                         :after (dholm/cedet-init)))
 
 
 (provide 'utilities/cedet)
