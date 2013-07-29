@@ -2,12 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(require-package '(:name solarized-theme
-			 :type github
-			 :pkgname "awmckinley/solarized-theme"
-			 :prepare (add-to-list 'custom-theme-load-path default-directory)
-			 :after (dholm/solarized-init)))
-
 (defun dholm/solarized-init ()
   "Initialize Solarized theme."
   (load-theme 'solarized t)
@@ -94,6 +88,12 @@
        `(whitespace-indentation ((t (:background unspecified :foreground ,yellow :inverse-video unspecified :weight bold))))
        `(whitespace-empty ((t (:background unspecified :foreground ,red :inverse-video t))))
        `(whitespace-space-after-tab ((t (:background unspecified :foreground ,orange :inverse-video t :weight bold))))))))
+
+(require-package '(:name solarized-theme
+			 :type github
+			 :pkgname "awmckinley/solarized-theme"
+			 :prepare (add-to-list 'custom-theme-load-path default-directory)
+			 :after (dholm/solarized-init)))
 
 
 (provide 'ux/solarized)

@@ -8,17 +8,18 @@
   (global-flycheck-mode t)
 
   ;;; (Faces) ;;;
-  (solarized-with-values
-    (eval
-     `(custom-theme-set-faces
-       'solarized
-       ,@(if window-system
-	     `('(flycheck-error ((t (:foreground ,red :underline (:style wave :color ,red) :inherit unspecified))))
-	       '(flycheck-warning ((t (:foreground ,yellow :underline (:style wave :color ,yellow) :inherit unspecified)))))
-	   `('(flycheck-error ((t (:foreground ,red :underline t))))
-	     '(flycheck-warning ((t (:foreground ,yellow :underline t))))))
-       '(flycheck-fringe-error ((t (:foreground ,red :weight bold))))
-       '(flycheck-fringe-warning ((t (:foreground ,yellow :weight bold))))))))
+  (after-load 'solarized-theme
+    (solarized-with-values
+      (eval
+       `(custom-theme-set-faces
+         'solarized
+         ,@(if window-system
+               `('(flycheck-error ((t (:foreground ,red :underline (:style wave :color ,red) :inherit unspecified))))
+                 '(flycheck-warning ((t (:foreground ,yellow :underline (:style wave :color ,yellow) :inherit unspecified)))))
+             `('(flycheck-error ((t (:foreground ,red :underline t))))
+               '(flycheck-warning ((t (:foreground ,yellow :underline t))))))
+         '(flycheck-fringe-error ((t (:foreground ,red :weight bold))))
+         '(flycheck-fringe-warning ((t (:foreground ,yellow :weight bold)))))))))
 
 
 (defun dholm/flycheck-color-mode-line-init ()

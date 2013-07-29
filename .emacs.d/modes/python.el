@@ -3,12 +3,14 @@
 ;;; Code:
 
 (defun dholm/jedi-init ()
+  "Initialize jedi."
   ;;; (Faces) ;;;
-  (solarized-with-values
-    (eval
-     `(custom-theme-set-faces
-       'solarized
-       '(jedi:highlight-function-argument ((t (:inherit bold)))))))
+  (after-load 'solarized-theme
+    (solarized-with-values
+      (eval
+       `(custom-theme-set-faces
+         'solarized
+         '(jedi:highlight-function-argument ((t (:inherit bold))))))))
 
   (setq-default
    jedi:setup-keys t
@@ -16,12 +18,14 @@
 
 
 (defun dholm/python-mode-cedet-hook ()
+  "CEDET hook for Python mode."
   (dholm/cedet-hook)
   (require 'semantic/wisent/python))
 
 
 ;; Enable installed helpers for Python
 (defun dholm/python-mode-hook ()
+  "Python mode hook."
   ;; Configure python-mode
   (setq py-shell-name "ipython"
         py-load-pymacs-p t)

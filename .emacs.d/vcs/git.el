@@ -5,14 +5,15 @@
 (defun dholm/git-gutter-init ()
   "Initialize git gutter."
   ;;; (Faces) ;;;
-  (solarized-with-values
-    (eval
-     `(custom-theme-set-faces
-       'solarized
-       '(git-gutter:added ((t (:foreground ,green :weight bold))))
-       '(git-gutter:deleted ((t (:foreground ,red :weight bold))))
-       '(git-gutter:modified ((t (:foreground ,blue :weight bold))))
-       '(git-gutter:unchanged ((t (:foreground ,base02 :weight bold)))))))
+  (after-load 'solarized-theme
+    (solarized-with-values
+      (eval
+       `(custom-theme-set-faces
+         'solarized
+         '(git-gutter:added ((t (:foreground ,green :weight bold))))
+         '(git-gutter:deleted ((t (:foreground ,red :weight bold))))
+         '(git-gutter:modified ((t (:foreground ,blue :weight bold))))
+         '(git-gutter:unchanged ((t (:foreground ,base02 :weight bold))))))))
 
   ;;; (Bindings) ;;;
   (define-key dholm/vcs-map (kbd "g") 'git-gutter:toggle))
@@ -23,13 +24,14 @@
   (setq-default git-gutter-fr:side 'left-fringe)
 
   ;;; (Faces) ;;;
-  (solarized-with-values
-    (eval
-     `(custom-theme-set-faces
-       'solarized
-       '(git-gutter-fr:added ((t (:foreground ,green  :weight bold))))
-       '(git-gutter-fr:deleted ((t (:foreground ,red :weight bold))))
-       '(git-gutter-fr:modified ((t (:foreground ,blue :weight bold))))))))
+  (after-load 'solarized-theme
+    (solarized-with-values
+      (eval
+       `(custom-theme-set-faces
+         'solarized
+         '(git-gutter-fr:added ((t (:foreground ,green  :weight bold))))
+         '(git-gutter-fr:deleted ((t (:foreground ,red :weight bold))))
+         '(git-gutter-fr:modified ((t (:foreground ,blue :weight bold)))))))))
 
 
 (defun dholm/magit-init ()
@@ -51,42 +53,42 @@
     (delete-other-windows))
 
   ;;; (Faces) ;;;
-  (solarized-with-values
-    (eval
-     `(custom-theme-set-faces
-       'solarized
-       '(magit-section-title ((t (:foreground ,yellow :weight bold))))
-       '(magit-branch ((t (:foreground ,orange :weight bold))))
-       '(magit-item-highlight ((t (:background ,base02 :weight unspecified))))
-       '(magit-log-author ((t (:foreground ,cyan))))
-       '(magit-log-graph ((t (:foreground ,base01))))
-       '(magit-log-head-label-bisect-bad ((t (:foreground ,red :box 1))))
-       '(magit-log-head-label-bisect-good ((t (:foreground ,green :box 1))))
-       '(magit-log-head-label-default ((t (:background ,base02 :box 1))))
-       '(magit-log-head-label-local ((t (:foreground ,blue :box 1))))
-       '(magit-log-head-label-patches ((t (:foreground ,red :box 1))))
-       '(magit-log-head-label-remote ((t (:foreground ,green :box 1))))
-       '(magit-log-head-label-tags ((t (:foreground ,yellow :box 1))))
-       '(magit-log-sha1 ((t (:foreground ,yellow)))))))
+  (after-load 'solarized-theme
+    (solarized-with-values
+      (eval
+       `(custom-theme-set-faces
+         'solarized
+         '(magit-section-title ((t (:foreground ,yellow :weight bold))))
+         '(magit-branch ((t (:foreground ,orange :weight bold))))
+         '(magit-item-highlight ((t (:background ,base02 :weight unspecified))))
+         '(magit-log-author ((t (:foreground ,cyan))))
+         '(magit-log-graph ((t (:foreground ,base01))))
+         '(magit-log-head-label-bisect-bad ((t (:foreground ,red :box 1))))
+         '(magit-log-head-label-bisect-good ((t (:foreground ,green :box 1))))
+         '(magit-log-head-label-default ((t (:background ,base02 :box 1))))
+         '(magit-log-head-label-local ((t (:foreground ,blue :box 1))))
+         '(magit-log-head-label-patches ((t (:foreground ,red :box 1))))
+         '(magit-log-head-label-remote ((t (:foreground ,green :box 1))))
+         '(magit-log-head-label-tags ((t (:foreground ,yellow :box 1))))
+         '(magit-log-sha1 ((t (:foreground ,yellow))))))))
 
   ;;; (Bindings) ;;;
-  (define-key dholm/vcs-map (kbd "s") 'magit-status))
+  (define-key dholm/vcs-map (kbd "s") 'magit-status)
+
+  ;;; (Functions) ;;;
+  (defun magit-quit-session ()
+    "Restore the previous window configuration and kill the magit buffer."
+    (interactive)
+    (kill-buffer)
+    (when (get-register :magit-fullscreen)
+      (ignore-errors
+        (jump-to-register :magit-fullscreen)))))
 
 
 (defun dholm/git-messenger-init ()
   "Initialize git messenger."
   (setq-default git-messenger:show-detail t)
   (define-key dholm/vcs-map (kbd "d") 'git-messenger:popup-message))
-
-
-;;; (Functions) ;;;
-(defun magit-quit-session ()
-  "Restore the previous window configuration and kill the magit buffer."
-  (interactive)
-  (kill-buffer)
-  (when (get-register :magit-fullscreen)
-    (ignore-errors
-      (jump-to-register :magit-fullscreen))))
 
 
 (require-package '(:name magit :after (dholm/magit-init)))

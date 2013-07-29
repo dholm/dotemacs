@@ -3,24 +3,26 @@
 ;;; Code:
 
 (defun dholm/js2-mode-init ()
+  "Initialize js2 mode."
   ;;; (Faces) ;;;
-  (solarized-with-values
-    (eval
-     `(custom-theme-set-faces
-       'solarized
-       '(js2-error ((t (:foreground ,red))))
-       '(js2-external-variable ((t (:foreground ,orange))))
-       '(js2-function-param ((t (:foreground ,green))))
-       '(js2-instance-member ((t (:foreground ,magenta))))
-       '(js2-jsdoc-html-tag-delimiter ((t (:foreground ,cyan))))
-       '(js2-jsdoc-html-tag-name ((t (:foreground ,orange))))
-       '(js2-jsdoc-tag ((t (:foreground ,cyan))))
-       '(js2-jsdoc-type ((t (:foreground ,blue))))
-       '(js2-jsdoc-value ((t (:foreground ,violet))))
-       '(js2-magic-paren ((t (:underline t))))
-       '(js2-private-function-call ((t (:foreground ,yellow))))
-       '(js2-private-member ((t (:foreground ,blue))))
-       '(js2-warning ((t (:underline ,orange)))))))
+  (after-load 'solarized-theme
+    (solarized-with-values
+      (eval
+       `(custom-theme-set-faces
+         'solarized
+         '(js2-error ((t (:foreground ,red))))
+         '(js2-external-variable ((t (:foreground ,orange))))
+         '(js2-function-param ((t (:foreground ,green))))
+         '(js2-instance-member ((t (:foreground ,magenta))))
+         '(js2-jsdoc-html-tag-delimiter ((t (:foreground ,cyan))))
+         '(js2-jsdoc-html-tag-name ((t (:foreground ,orange))))
+         '(js2-jsdoc-tag ((t (:foreground ,cyan))))
+         '(js2-jsdoc-type ((t (:foreground ,blue))))
+         '(js2-jsdoc-value ((t (:foreground ,violet))))
+         '(js2-magic-paren ((t (:underline t))))
+         '(js2-private-function-call ((t (:foreground ,yellow))))
+         '(js2-private-member ((t (:foreground ,blue))))
+         '(js2-warning ((t (:underline ,orange))))))))
 
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
@@ -33,6 +35,8 @@
 
 (defun dholm/javascript-mode-hook ()
   "JavaScript mode hook."
+  ;; Enable js2-mode
+  (js2-mode t)
   ;; Load CEDET
   (dholm/javascript-mode-cedet-hook)
   ;; Configure js2-mode

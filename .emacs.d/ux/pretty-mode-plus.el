@@ -3,20 +3,23 @@
 ;;; Code:
 
 (defun dholm/pretty-mode-plus-init ()
-  (require 'pretty-mode-plus)
-
+  "Initialize pretty mode plus."
   ;;; (Faces) ;;;
-  (solarized-with-values
-    (eval
-     `(custom-theme-set-faces
-       'solarized
-       '(pretty-mode-symbol-face  ((t (:foreground ,green)))))))
-
+  (after-load 'solarized-theme
+    (solarized-with-values
+      (eval
+       `(custom-theme-set-faces
+         'solarized
+         '(pretty-mode-symbol-face  ((t (:foreground ,green))))))))
+  ;; Enable pretty mode plus globally
   (global-pretty-mode t))
 
 (require-package '(:name pretty-mode-plus
-			 :type elpa
-			 :repo ("marmalade" . "http://marmalade-repo.org/packages/")
+			 :type github
+			 :pkgname "akatov/pretty-mode-plus"
+                         :prepare (progn
+                                    (autoload 'turn-on-pretty-mode "pretty-mode-plus")
+                                    (autoload 'global-pretty-mode "pretty-mode-plus"))
 			 :after (dholm/pretty-mode-plus-init)))
 
 

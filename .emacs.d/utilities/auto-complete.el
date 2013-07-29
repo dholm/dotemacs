@@ -37,22 +37,24 @@
   (add-hook 'auto-complete-mode-hook 'ac-common-setup)
 
   ;;; (Faces) ;;;
-  (solarized-with-values
-    (eval
-     `(custom-theme-set-faces
-       'solarized
-       '(ac-candidate-face ((t (:foreground ,orange :background ,base02))))
-       '(ac-selection-face ((t (:foreground ,base03 :background ,cyan))))
-       '(ac-candidate-mouse-face ((t (:foreground ,base03 :background ,cyan))))
-       '(ac-completion-face ((t (:foreground ,base1 :underline t))))
-       '(ac-gtags-candidate-face ((t (:foreground ,blue :background ,base02))))
-       '(ac-gtags-selection-face ((t (:foreground ,base03 :background ,blue))))
-       '(ac-yasnippet-candidate-face ((t (:foreground ,yellow :background ,base02))))
-       '(ac-yasnippet-selection-face ((t (:foreground ,base03 :background ,yellow)))))))
+  (after-load 'solarized-theme
+    (solarized-with-values
+      (eval
+       `(custom-theme-set-faces
+         'solarized
+         '(ac-candidate-face ((t (:foreground ,orange :background ,base02))))
+         '(ac-selection-face ((t (:foreground ,base03 :background ,cyan))))
+         '(ac-candidate-mouse-face ((t (:foreground ,base03 :background ,cyan))))
+         '(ac-completion-face ((t (:foreground ,base1 :underline t))))
+         '(ac-gtags-candidate-face ((t (:foreground ,blue :background ,base02))))
+         '(ac-gtags-selection-face ((t (:foreground ,base03 :background ,blue))))
+         '(ac-yasnippet-candidate-face ((t (:foreground ,yellow :background ,base02))))
+         '(ac-yasnippet-selection-face ((t (:foreground ,base03 :background ,yellow))))))))
 
   ;; Enable auto-complete globally
   (global-auto-complete-mode t)
-  (diminish 'auto-complete-mode))
+  (after-load 'diminish
+    (diminish 'auto-complete-mode)))
 
 (require-package '(:name auto-complete :after (dholm/auto-complete-init)))
 (require-package '(:name auto-complete-yasnippet :depends (yasnippet)))
