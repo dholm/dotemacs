@@ -24,6 +24,7 @@
 (require 'lib/packaging)
 ;; Load utilities
 (require 'lib/utils)
+(require 'lib/hash-tables)
 
 
 ;; Load configuration
