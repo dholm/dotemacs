@@ -21,6 +21,7 @@
 (cl-defmacro do-hash-table-sorted-by-value ((x hash-table) &rest body)
   "Iterates over keys in HASH-TABLE sorted by value with keys accessible as X
 to BODY."
+  (declare (indent defun))
   `(dolist (,x (sort (hash-table-keys ,hash-table)
                      (lambda (k1 k2)
                        (< (gethash k1 ,hash-table)
