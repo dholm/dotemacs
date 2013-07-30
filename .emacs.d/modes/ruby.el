@@ -10,8 +10,7 @@
   (robe-mode t)
   ;; Enable inferior ruby mode
   (inf-ruby-minor-mode t)
-  ;; Enable yard and eldoc mode
-  (yard-mode t)
+  ;; Enable eldoc mode
   (eldoc-mode t)
   ;; Separate camel-case into separate words
   (subword-mode t)
@@ -37,9 +36,6 @@
 
 (require-package '(:name ruby-mode :after (dholm/ruby-mode-init)))
 (require-package '(:name robe-mode :after (dholm/robe-init)))
-(require-package '(:name yard-mode
-                         :type github
-                         :pkgname "pd/yard-mode"))
 (require-package '(:name inf-ruby))
 
 
