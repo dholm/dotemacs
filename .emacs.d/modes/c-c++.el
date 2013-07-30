@@ -21,10 +21,6 @@
   (c-set-offset 'case-label '+)
   ;; Separate camel-case into separate words
   (subword-mode t)
-  ;; Show guides for indentation levels
-  (highlight-indentation-mode)
-  (after-load 'diminish
-    (diminish 'highlight-indentation-mode))
   ;; Autocompletion
   (when *has-clang*
     (set (make-local-variable 'ac-sources)
