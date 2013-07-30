@@ -30,13 +30,14 @@
 (require 'utilities/undo-tree)
 (require 'utilities/url)
 (require 'utilities/w3m)
+(require 'utilities/wc-mode)
 (require 'utilities/xcscope)
 (require 'utilities/yasnippet)
 
 
 ;;; (Functions) ;;;
 (defun close-all-buffers ()
-  "Close all open buffers"
+  "Close all open buffers."
   (interactive)
   (mapc 'kill-buffer (buffer-list)))
 

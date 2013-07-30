@@ -6,10 +6,12 @@
 (define-prefix-command 'dholm/navigation-map)
 (define-prefix-command 'dholm/documentation-map)
 (define-prefix-command 'dholm/vcs-map)
+(define-prefix-command 'dholm/utilities-map)
 
 (global-set-key (kbd "C-c n") 'dholm/navigation-map)
 (global-set-key (kbd "C-c d") 'dholm/documentation-map)
 (global-set-key (kbd "C-c v") 'dholm/vcs-map)
+(global-set-key (kbd "C-c u") 'dholm/utilities-map)
 
 
 ;; Function keys
