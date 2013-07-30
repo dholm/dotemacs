@@ -9,6 +9,10 @@
    yas-snippet-dirs (path-join *user-data-directory* "snippets"))
   (make-directory yas-snippet-dirs t)
 
+  ;; Add yasnippet as auto-complete source
+  (after-load 'auto-complete
+    (add-to-list 'ac-sources 'ac-source-yasnippet))
+
   ;; Enables yasnippet globally
   (yas-global-mode)
   (after-load 'diminish

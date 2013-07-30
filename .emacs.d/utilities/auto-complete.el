@@ -29,7 +29,6 @@
    ac-comphist-file (path-join *user-cache-directory* "ac-comphist.dat"))
 
   (add-to-list 'ac-dictionary-directories (path-join *user-el-get-directory* "auto-complete" "ac-dict"))
-  (add-to-list 'ac-sources 'ac-source-yasnippet)
   (add-to-list 'completion-styles 'initials t)
 
   ;; Install workaround for flyspell
