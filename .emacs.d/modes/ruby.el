@@ -37,7 +37,9 @@
 
 (require-package '(:name ruby-mode :after (dholm/ruby-mode-init)))
 (require-package '(:name robe-mode :after (dholm/robe-init)))
-(require-package '(:name yard-mode))
+(require-package '(:name yard-mode
+                         :type github
+                         :pkgname "pd/yard-mode"))
 (require-package '(:name inf-ruby))
 
 
