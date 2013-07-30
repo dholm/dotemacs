@@ -14,6 +14,10 @@
 (global-set-key (kbd "C-c u") 'dholm/utilities-map)
 
 
+;; Bookmarks
+(global-set-key (kbd "C-c b") 'bookmark-map)
+
+
 ;; Function keys
 (global-set-key [f7] 'compile)
 (global-set-key [f8] 'gdb)

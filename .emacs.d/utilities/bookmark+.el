@@ -20,7 +20,11 @@
    bookmark-default-file *bookmark+-data-file*))
 
 (defun dholm/bookmark+-init ()
-  "Initialize bookmark+.")
+  "Initialize bookmark+."
+  ;;; (Bindings) ;;;
+  (define-key bookmark-map (kbd "l") 'bookmark-jump)
+  (define-key bookmark-map (kbd "e") 'bmkp-edit-bookmark-record)
+  (define-key bookmark-map (kbd "t") 'bmkp-add-tags))
 
 (require-package '(:name bookmark+
                          :before (dholm/bookmark+-before-init)
