@@ -2,22 +2,17 @@
 ;;; Commentary:
 ;;; Code:
 
-(require-package '(:name php-mode))
-
-
-;; Set up helpers for php-mode
 (defun dholm/php-mode-hook ()
-  ;; Run spell-checker on strings and comments
-  (flyspell-prog-mode)
+  "PHP mode hook."
   ;; Separate camel-case into separate words
-  (subword-mode t)
-  (add-hook 'before-save-hook
-            ;; Delete trailing whitespace on save
-            'delete-trailing-whitespace nil t)
-  ;; Enable dtrt-indent to attempt to identify the indentation rules used
-  (dtrt-indent-mode t))
+  (subword-mode t))
 
-(add-hook 'php-mode-hook 'dholm/php-mode-hook)
+
+(defun dholm/php-mode-init ()
+  "Initialize PHP mode."
+  (add-hook 'php-mode-hook 'dholm/php-mode-hook))
+
+(require-package '(:name php-mode :after (dholm/php-mode-init)))
 
 
 (provide 'modes/php)

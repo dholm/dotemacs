@@ -4,21 +4,18 @@
 
 (defconst *user-has-sbt* (executable-find "sbt"))
 
-(require-package '(:name scala-mode2))
+(defun dholm/scala-mode-hook ()
+  "Scala mode hook."
+  (when *user-has-sbt* (ensime-scala-mode-hook)))
+
+
+(defun dholm/scala-mode2-init ()
+  "Initialize scala mode 2."
+  (add-hook 'scala-mode-hook 'dholm/scala-mode-hook))
+
+(require-package '(:name scala-mode2 :after (dholm/scala-mode2-init)))
 (when *user-has-sbt*
   (require-package '(:name ensime)))
-
-
-(defun dholm/scala-mode-hook ()
-  (when *user-has-sbt* (ensime-scala-mode-hook))
-  ;; Run spell-checker on strings and comments
-  (flyspell-prog-mode)
-  ;; Before save hook
-  (add-hook 'before-save-hook
-            ;; Delete trailing whitespace on save
-            'delete-trailing-whitespace nil t))
-
-(add-hook 'scala-mode-hook 'dholm/scala-mode-hook)
 
 
 (provide 'modes/scala)

@@ -3,15 +3,7 @@
 ;;; Code:
 
 (defun dholm/markdown-mode-hook ()
-  "Markdown mode hook."
-  (setq-default
-   ;; Indent using spaces
-   indent-tabs-mode nil)
-  ;; Run spell-checker on strings and comments
-  (flyspell-prog-mode)
-  (add-hook 'before-save-hook
-            ;; Delete trailing whitespace on save
-            'delete-trailing-whitespace nil t))
+  "Markdown mode hook.")
 
 
 (defun dholm/markdown-mode-init ()

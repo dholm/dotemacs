@@ -2,10 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
-(require-package '(:name csv-mode))
-(require-package '(:name csv-nav))
+(defun dholm/csv-mode-init ()
+  "Initialize CSV mode."
+  (setq-default csv-separators '("," ";" "|" " "))
+  (add-auto-mode 'csv-mode "\\.csv$"))
 
-(setq csv-separators '("," ";" "|" " "))
+(require-package '(:name csv-mode :after (dholm/csv-mode-init)))
+(require-package '(:name csv-nav))
 
 
 (provide 'modes/csv)

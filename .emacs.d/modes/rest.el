@@ -4,14 +4,6 @@
 
 (defun dholm/rst-mode-hook ()
   "Hook for reStructuredText mode."
-  (setq-default
-   ;; Indent using spaces
-   indent-tabs-mode nil)
-  ;; Run spell-checker on strings and comments
-  (flyspell-prog-mode)
-  (add-hook 'before-save-hook
-            ;; Delete trailing whitespace on save
-            'delete-trailing-whitespace nil t)
   ;; Enable auto completion
   (after-load 'auto-complete
     (auto-complete-rst-init)
@@ -43,6 +35,7 @@
 (require-package '(:name auto-complete-rst
                          :prepare (progn
                                     (autoload 'auto-complete-rst-init "auto-complete-rst"))))
+
 
 (provide 'modes/rest)
 ;;; rest.el ends here

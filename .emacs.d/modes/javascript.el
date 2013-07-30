@@ -17,10 +17,7 @@
         js2-basic-offset 2)
   ;; Configure autocompletion
   (set (make-local-variable 'ac-auto-start) 3)
-  (set (make-local-variable 'ac-auto-show-menu) t)
-  ;; Run spell-checker on strings and comments
-  (flyspell-prog-mode))
-
+  (set (make-local-variable 'ac-auto-show-menu) t))
 
 (defun dholm/javascript-mode-cedet-hook ()
   "JavaScript CEDET support hook."

@@ -7,20 +7,11 @@
 
 (defun dholm/lisp-mode-hook ()
   "LISP mode hook."
-  (setq-default
-   ;; Indent using spaces
-   indent-tabs-mode nil)
   (try-eval (dholm/cedet-hook))
   (try-eval (rainbow-delimiters-mode))
   (try-eval (enable-paredit-mode))
   (try-eval (redshank-mode))
-  (turn-on-eldoc-mode)
-  (add-hook 'before-save-hook
-            ;; Delete trailing whitespace on save
-            'delete-trailing-whitespace nil t)
-  ;; Run spell-checker on strings and comments
-  (flyspell-prog-mode))
-
+  (turn-on-eldoc-mode))
 
 (defun dholm/emacs-lisp-mode-hook ()
   "Emacs LISP mode hook."

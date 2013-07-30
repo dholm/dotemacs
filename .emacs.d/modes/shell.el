@@ -6,13 +6,10 @@
   "Initialize sh mode."
   (setq-default
    ;; Indent with four spaces
-   indent-tabs-mode nil
    sh-basic-offset 4
    sh-indentation 4)
   ;; Enable ANSI colors for comint
-  (ansi-color-for-comint-mode-on)
-  ;; Run spell-checker on strings and comments
-  (flyspell-prog-mode))
+  (ansi-color-for-comint-mode-on))
 
 (add-hook 'sh-mode-hook 'dholm/sh-mode-hook)
 

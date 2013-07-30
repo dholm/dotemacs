@@ -2,6 +2,21 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun dholm/html-mode-hook ()
+  "HTML mode hook."
+  ;; Configure nxml auto completion
+  (setq nxml-slash-auto-complete-flag t))
+
+(defun guess-xhtml-hook ()
+  "Guess whether the current buffer is XHTML."
+  (when
+      (save-excursion
+        (search-forward-regexp "<[?]xml\\|//W3C//DTD XHTML" 80 t))
+    (html-mode)))
+
+(add-hook 'html-mode-hook 'guess-xhtml-hook t)
+(add-hook 'html-mode-hook 'dholm/html-mode-hook)
+
 (after-load 'mmm
   (mmm-add-group
    'fancy-html
@@ -35,22 +50,6 @@
   (add-to-list 'mmm-mode-ext-classes-alist '(html-mode nil embedded-css))
   (add-to-list 'mmm-mode-ext-classes-alist '(html-mode nil fancy-html)))
 
-
-;; Support for detecting XHTML
-(defun guess-xhtml-hook ()
-  "Guess whether the current buffer is XHTML."
-  (when
-      (save-excursion
-        (search-forward-regexp "<[?]xml\\|//W3C//DTD XHTML" 80 t))
-    (html-mode)))
-
-(defun dholm/html-mode-hook ()
-  "HTML mode hook."
-  ;; Configure nxml auto completion
-  (setq nxml-slash-auto-complete-flag t))
-
-(add-hook 'html-mode-hook 'guess-xhtml-hook t)
-(add-hook 'html-mode-hook 'dholm/html-mode-hook)
 
 (require-package '(:name tidy))
 

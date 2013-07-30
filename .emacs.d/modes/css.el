@@ -32,8 +32,9 @@
 
 ;; CSS editing
 (defun dholm/css-mode-hook ()
-  (skewer-css-mode)
-  (rainbow-mode)
+  "CSS mode hook."
+  (skewer-css-mode t)
+  (rainbow-mode t)
   (ac-css-mode-setup)
   (setq
    cssm-indent-function #'cssm-c-style-indenter

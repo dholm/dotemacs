@@ -16,9 +16,7 @@
   (dholm/generic-haskell-mode-hook)
   (turn-on-haskell-indentation)
   ;; Enable scion
-  (scion-mode t)
-  ;; Run spell-checker on strings and comments
-  (flyspell-prog-mode))
+  (scion-mode t))
 
 
 (defun dholm/inferior-haskell-mode-hook ()
@@ -27,8 +25,10 @@
   (turn-on-ghci-completion))
 
 
-(add-hook 'haskell-mode-hook 'dholm/haskell-mode-hook)
-(add-hook 'inferior-haskell-mode-hook 'dholm/inferior-haskell-mode-hook)
+(defun dholm/haskell-mode-init ()
+  "Initialize haskell mode."
+  (add-hook 'haskell-mode-hook 'dholm/haskell-mode-hook)
+  (add-hook 'inferior-haskell-mode-hook 'dholm/inferior-haskell-mode-hook))
 
 
 (require-package '(:name haskell-mode
@@ -36,13 +36,16 @@
 			 :pkgname "haskell/haskell-mode"
 			 :load "haskell-mode-autoloads.el"
 			 :build (("make" "all"))
-			 :post-init (progn
-				      (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-				      (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation))))
+                         :after (dholm/haskell-mode-init)))
 (require-package '(:name ghci-completion
 			 :type github
 			 :pkgname "manzyuk/ghci-completion"))
-(require-package '(:name scion))
+(require-package '(:name scion
+                         :type github
+                         :pkgname "nominolo/scion"
+                         :load-path "emacs"
+                         :prepare (progn
+                                    (autoload 'scion-mode "scion"))))
 
 
 (provide 'modes/haskell)
