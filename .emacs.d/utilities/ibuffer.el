@@ -2,19 +2,24 @@
 ;;; Commentary:
 ;;; Code:
 
-(require-package '(:name ibuffer-vc))
-
-
 (defun dholm/ibuffer-hook ()
+  "Hook for improved buffer."
   (ibuffer-vc-set-filter-groups-by-vc-root)
   (unless (eq ibuffer-sorting-mode 'filename/process)
     (ibuffer-do-sort-by-filename/process)))
 
-(add-hook 'ibuffer-hook 'dholm/ibuffer-hook)
 
-(setq ibuffer-filter-group-name-face 'font-lock-doc-face)
+(defun dholm/ibuffer-init ()
+  "Initialize improved buffer."
+  (setq-default ibuffer-filter-group-name-face 'font-lock-doc-face)
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
+  (add-hook 'ibuffer-hook 'dholm/ibuffer-hook))
 
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+(dholm/ibuffer-init)
+
+(require-package '(:name ibuffer-vc
+                         :type github
+                         :pkgname "purcell/ibuffer-vc"))
 
 
 (provide 'utilities/ibuffer)

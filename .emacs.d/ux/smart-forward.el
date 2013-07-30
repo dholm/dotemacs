@@ -10,10 +10,10 @@
   (define-key dholm/navigation-map (kbd "s n") 'smart-down))
 
 (require-package '(:name smart-forward
-			 :after (dholm/smart-forward-init)
-			 :type elpa
-			 :repo ("melpa" . "http://melpa.milkbox.net/packages/")
-			 :depends (expand-region)))
+                         :type github
+                         :pkgname "magnars/smart-forward.el"
+                         :depends (expand-region)
+                         :after (dholm/smart-forward-init)))
 
 
 (provide 'ux/smart-forward)

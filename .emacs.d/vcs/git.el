@@ -103,8 +103,8 @@
 			 :pkgname "syohex/emacs-git-messenger"
 			 :depends (popup)))
 (require-package '(:name yagist
-			 :type elpa
-			 :repo ("melpa" . "http://melpa.milkbox.net/packages/")
+			 :type github
+			 :pkgname "mhayashi1120/yagist.el"
 			 :depends (json)))
 
 
