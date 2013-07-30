@@ -4,6 +4,7 @@
 
 (defun dholm/pretty-mode-plus-init ()
   "Initialize pretty mode plus."
+  (require 'pretty-mode-plus)
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
     (solarized-with-values
