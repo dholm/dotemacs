@@ -9,7 +9,7 @@
   (local-set-key (kbd "C-c ?") 'semantic-ia-complete-symbol-menu)
   (local-set-key (kbd "C-c >") 'semantic-complete-analyze-inline)
   (local-set-key (kbd "C-c =") 'semantic-decoration-include-visit)
-  (define-key dholm/navigation-map (kbd "j") 'semantic-ua-fast-jump)
+  (define-key dholm/navigation-map (kbd "j") 'semantic-ia-fast-jump)
   (define-key dholm/documentation-map (kbd "r") 'semantic-symref)
   (define-key dholm/documentation-map (kbd "d") 'semantic-ia-show-doc)
   (define-key dholm/documentation-map (kbd "s") 'semantic-ia-show-summary)
