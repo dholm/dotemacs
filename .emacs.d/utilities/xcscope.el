@@ -16,7 +16,6 @@
          '(cscope-line-face ((t (:foreground ,base0))))
          '(cscope-mouse-face ((t (:foreground ,base0 :background ,blue)))))))))
 
-
 (require-package '(:name xcscope
 			 :type github
 			 :pkgname "dholm/xcscope"

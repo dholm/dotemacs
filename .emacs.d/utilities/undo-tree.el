@@ -18,9 +18,15 @@
 
   (global-undo-tree-mode t)
   (after-load 'diminish
-    (diminish 'undo-tree-mode)))
+    (diminish 'undo-tree-mode))
 
-(require-package '(:name undo-tree :after (dholm/undo-tree-init)))
+  (define-key dholm/utilities-map (kbd "u") 'undo-tree-visualize))
+
+(require-package '(:name undo-tree
+                         :features (undo-tree)
+                         :type git
+                         :url "http://www.dr-qubit.org/git/undo-tree.git/"
+                         :after (dholm/undo-tree-init)))
 
 
 (provide 'utilities/undo-tree)

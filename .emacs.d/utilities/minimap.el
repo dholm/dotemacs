@@ -2,21 +2,21 @@
 ;;; Commentary:
 ;;; Code:
 
-(require-package '(:name minimap))
+(defun dholm/minimap-init ()
+  "Initialize minimap."
+  ;;; (Functions) ;;;
+  (defun minimap-toggle ()
+    "Toggle minimap for current buffer."
+    (interactive)
+    (if (null minimap-bufname)
+        (minimap-create)
+      (minimap-kill)))
 
+  ;;; (Bindings) ;;;
+  (define-key dholm/utilities-map (kbd "m") 'minimap-toggle))
 
-;;; (Functions) ;;;
-(defun minimap-toggle ()
-  "Toggle minimap for current buffer."
-  (interactive)
-  (if (null minimap-bufname)
-    (minimap-create)
-    (minimap-kill)))
-
-
-;;; (Bindings) ;;;
 (when (display-graphic-p)
-  (global-set-key [f2] 'minimap-toggle))
+  (require-package '(:name minimap :after (dholm/minimap-init))))
 
 
 (provide 'utilities/minimap)

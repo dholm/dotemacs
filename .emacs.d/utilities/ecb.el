@@ -3,10 +3,11 @@
 ;;; Code:
 
 (defun dholm/ecb-init ()
+  "Initialize Emacs code browser."
   (require 'ecb-autoloads)
 
   ;; (ECB Layout) ;;
-  (setq
+  (setq-default
    ecb-layout-name "left7"
    ecb-layout-window-sizes '(("left7"
 			      (ecb-directories-buffer-name 0.17 . 0.6428571428571429)
@@ -17,12 +18,8 @@
    ecb-compile-window-height 12)
 
   ;;; (Bindings) ;;;
-  ;;; activate and deactivate ecb
-  (global-set-key (kbd "C-x C-;") 'ecb-activate)
-  (global-set-key (kbd "C-x C-'") 'dholm/ecb-deactivate)
-  ;;; show/hide ecb window
-  (global-set-key (kbd "C-;") 'dholm/ecb-show-ecb-windows)
-  (global-set-key (kbd "C-'") 'dholm/ecb-hide-ecb-windows)
+  (define-key dholm/utilities-map (kbd "e") 'ecb-activate)
+
   ;;; quick navigation between ecb windows
   (define-key dholm/navigation-map (kbd "1") 'ecb-goto-window-edit1)
   (define-key dholm/navigation-map (kbd "2") 'ecb-goto-window-directories)

@@ -31,6 +31,7 @@
 			 :after (dholm/flycheck-init)))
 
 (require-package '(:name flycheck-color-mode-line
+                         :features (flycheck-color-mode-line)
 			 :type github
 			 :pkgname "syl20bnr/flycheck-color-mode-line"
 			 :depends (flycheck)

@@ -41,7 +41,10 @@
          '(cfw:face-today-title ((t (:foreground ,base03 :background ,yellow :weight bold))))
          '(cfw:face-toolbar ((t (:foreground ,base0 :background ,base02))))
          '(cfw:face-toolbar-button-off ((t (:foreground ,base03 :background ,yellow :weight bold))))
-         '(cfw:face-toolbar-button-on ((t (:foreground ,base03 :background ,yellow :weight bold)))))))))
+         '(cfw:face-toolbar-button-on ((t (:foreground ,base03 :background ,yellow :weight bold))))))))
+
+  ;;; (Bindings) ;;;
+  (define-key dholm/utilities-map (kbd "c") 'cfw:open-calendar-buffer))
 
 
 (require-package '(:name calfw

@@ -6,7 +6,8 @@
   "Initialize yasnippet."
   ;; Look for snippets in data directory
   (setq-default
-   yas-snippet-dir (path-join *user-data-directory* "snippets"))
+   yas-snippet-dirs (path-join *user-data-directory* "snippets"))
+  (make-directory yas-snippet-dirs t)
 
   ;; Enables yasnippet globally
   (yas-global-mode)

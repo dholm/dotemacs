@@ -2,7 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(require-package '(:name deft))
+(defun dholm/deft-init ()
+  "Initialize deft."
+  (define-key dholm/utilities-map (kbd "d") 'deft))
+
+(require-package '(:name deft :after (dholm/deft-init)))
 
 
 (provide 'utilities/deft)
