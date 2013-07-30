@@ -53,8 +53,24 @@
   "Initialize Python mode."
   (add-hook 'python-mode-hook 'dholm/python-mode-hook))
 
+(require-package '(:name python-mode
+                         :type bzr
+                         :url "lp:python-mode"
+                         :load-path ("." "test")
+                         :compile nil
+                         :prepare (progn
+                                    (autoload 'python-mode "python-mode"
+                                      "Python editing mode." t)
+                                    (autoload 'doctest-mode "doctest-mode"
+                                      "Doctest unittest editing mode." t)
+                                    (setq py-install-directory
+                                          (el-get-package-directory "python-mode"))
+                                    (add-to-list 'auto-mode-alist
+                                                 '("\\.py$" . python-mode))
+                                    (add-to-list 'interpreter-mode-alist
+                                                 '("python" . python-mode)))
+                         :after (dholm/python-mode-init)))
 (require-package '(:name jedi :after (dholm/jedi-init)))
-(require-package '(:name python-mode :after (dholm/python-mode-init)))
 (require-package '(:name pylookup))
 
 
