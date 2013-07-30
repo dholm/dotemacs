@@ -25,6 +25,7 @@
 ;; Load utilities
 (require 'lib/utils)
 (require 'lib/hash-tables)
+(require 'lib/pkg-config)
 
 
 ;; Load configuration
