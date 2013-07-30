@@ -11,7 +11,7 @@
 
   (setq-default
    ;; Automatically start completion after 0.8s
-   ac-auto-start nil
+   ac-auto-start 0.8
    ;; Use fuzzy matching
    ac-use-fuzzy t
    ;; Do not show menu unless requested
