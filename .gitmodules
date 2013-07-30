@@ -1,4 +1,1 @@
-[submodule ".emacs.d/utilities/outlookedit"]
-	path = .emacs.d/utilities/outlookedit
-	url = git://github.com/dholm/outlookedit.git
-	branch = master
+

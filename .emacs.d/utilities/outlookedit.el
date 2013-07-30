@@ -2,10 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(push (path-join user-emacs-directory "utilities" "outlookedit") load-path)
-
 (if (eq system-type 'windows-nt)
-    (require 'outlookedit))
+    (require-package '(:name outlookedit
+                             :type github
+                             :pkgname "dholm/outlookedit"
+                             :features (outlookedit))))
 
 
 (provide 'utilities/outlookedit)
