@@ -27,7 +27,6 @@
 
 (add-hook 'perl-mode-hook 'dholm/perl-mode-hook)
 
-(require-package '(:name cperl-mode))
 (require-package '(:name perl-completion
 			 :type emacswiki
 			 :website "https://raw.github.com/emacsmirror/emacswiki.org/master/perl-completion.el"))
