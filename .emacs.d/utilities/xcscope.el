@@ -13,8 +13,8 @@
          '(cscope-file-face ((t (:foreground ,green :weight bold))))
          '(cscope-function-face ((t (:foreground ,blue))))
          '(cscope-line-number-face ((t (:foreground ,yellow))))
-         '(cscope-line-face ((t (:foreground ,base0))))
-         '(cscope-mouse-face ((t (:foreground ,base0 :background ,blue)))))))))
+         '(cscope-line-face ((t (:foreground ,solarized-fg))))
+         '(cscope-mouse-face ((t (:foreground ,solarized-fg :background ,blue)))))))))
 
 (require-package '(:name xcscope
 			 :type github

@@ -10,8 +10,10 @@
       (eval
        `(custom-theme-set-faces
          'solarized
-         '(ace-jump-face-background ((t (:foreground ,base01 ,@back))))
-         '(ace-jump-face-foreground ((t (:foreground ,red ,@back ,@fmt-bold))))))))
+         '(ace-jump-face-background ((t (:foreground ,solarized-comment :background ,solarized-bg
+                                                     :inverse-video nil))))
+         '(ace-jump-face-foreground ((t (:foreground ,red :background ,solarized-bg
+                                                     :inverse-video nil :weight bold))))))))
 
   (define-key dholm/navigation-map (kbd "SPC") 'ace-jump-mode))
 

@@ -10,14 +10,21 @@
       (eval
        `(custom-theme-set-faces
          'solarized
-         ,@(if window-system
-               `('(flymake-errline ((t (:foreground ,red :weight bold :underline (:style wave :color ,red) :inherit unspecified))))
-                 '(flymake-infoline ((t (:foreground ,green :underline (:style wave :color ,green) :inherit unspecified))))
-                 '(flymake-warnline ((t (:foreground ,yellow :weight bold :underline (:style wave :color ,yellow) :inherit unspecified)))))
-             `('(flymake-errline ((t (:foreground ,red :weight bold :underline t))))
-               '(flymake-infoline ((t (:foreground ,green))))
-               '(flymake-warnline ((t (:foreground ,yellow :weight bold :underline t)))))))))))
-
+         '(flymake-errline
+           ((,'((supports :underline (:style wave)))
+             (:underline (:style wave :color ,red) :inherit unspecified
+                         :foreground ,red-hc :background ,red-lc))
+            (t (:foreground ,red-hc :background ,red-lc :weight bold :underline t))))
+         '(flymake-infoline
+           ((,'((supports :underline (:style wave)))
+             (:underline (:style wave :color ,green) :inherit unspecified
+                         :foreground ,green-hc :background ,green-lc))
+            (t (:foreground ,green-hc :background ,green-lc :weight bold :underline t))))
+         '(flymake-warnline
+           ((,'((supports :underline (:style wave)))
+             (:underline (:style wave :color ,yellow) :inherit unspecified
+                         :foreground ,yellow-hc :background ,yellow-lc))
+            (t (:foreground ,yellow-hc :background ,yellow-lc :weight bold :underline t)))))))))
 
 (require-package '(:name flymake-cursor :after (dholm/flymake-init)))
 

@@ -18,12 +18,12 @@
       (eval
        `(custom-theme-set-faces
          'solarized
-         '(rst-level-1-face ((t (:background ,yellow  :foreground ,base03))))
-         '(rst-level-2-face ((t (:background ,cyan    :foreground ,base03))))
-         '(rst-level-3-face ((t (:background ,blue    :foreground ,base03))))
-         '(rst-level-4-face ((t (:background ,violet  :foreground ,base03))))
-         '(rst-level-5-face ((t (:background ,magenta :foreground ,base03))))
-         '(rst-level-6-face ((t (:background ,red     :foreground ,base03))))))))
+         '(rst-level-1-face ((t (:foreground ,solarized-bg :background ,yellow))))
+         '(rst-level-2-face ((t (:foreground ,solarized-bg :background ,cyan))))
+         '(rst-level-3-face ((t (:foreground ,solarized-bg :background ,blue))))
+         '(rst-level-4-face ((t (:foreground ,solarized-bg :background ,violet))))
+         '(rst-level-5-face ((t (:foreground ,solarized-bg :background ,magenta))))
+         '(rst-level-6-face ((t (:foreground ,solarized-bg :background ,red))))))))
 
   ;; Register auto modes
   (add-auto-mode 'rst-mode

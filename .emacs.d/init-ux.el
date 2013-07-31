@@ -14,6 +14,7 @@
 (require 'ux/page-break-lines)
 (require 'ux/powerline)
 (require 'ux/pretty-mode-plus)
+(require 'ux/rainbow-delimiters)
 (require 'ux/recentf)
 (require 'ux/savehist)
 (require 'ux/saveplace)

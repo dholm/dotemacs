@@ -41,14 +41,14 @@
       (eval
        `(custom-theme-set-faces
          'solarized
-         '(ac-candidate-face ((t (:foreground ,orange :background ,base02))))
-         '(ac-selection-face ((t (:foreground ,base03 :background ,cyan))))
-         '(ac-candidate-mouse-face ((t (:foreground ,base03 :background ,cyan))))
-         '(ac-completion-face ((t (:foreground ,base1 :underline t))))
-         '(ac-gtags-candidate-face ((t (:foreground ,blue :background ,base02))))
-         '(ac-gtags-selection-face ((t (:foreground ,base03 :background ,blue))))
-         '(ac-yasnippet-candidate-face ((t (:foreground ,yellow :background ,base02))))
-         '(ac-yasnippet-selection-face ((t (:foreground ,base03 :background ,yellow))))))))
+         '(ac-candidate-face ((t (:foreground ,orange :background ,solarized-hl))))
+         '(ac-selection-face ((t (:foreground ,cyan-hc :background ,cyan-lc))))
+         '(ac-candidate-mouse-face ((t (:foreground ,cyan-lc :background ,cyan-hc))))
+         '(ac-completion-face ((t (:foreground ,solarized-emph :underline t))))
+         '(ac-gtags-candidate-face ((t (:foreground ,blue :background ,solarized-hl))))
+         '(ac-gtags-selection-face ((t (:foreground ,blue-hc :background ,blue-lc))))
+         '(ac-yasnippet-candidate-face ((t (:foreground ,yellow :background ,solarized-hl))))
+         '(ac-yasnippet-selection-face ((t (:foreground ,yellow-hc :background ,yellow-lc))))))))
 
   ;; Enable auto-complete globally
   (global-auto-complete-mode t)

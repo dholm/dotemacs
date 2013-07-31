@@ -13,7 +13,7 @@
        'solarized
 
        ;; basic coloring
-       '(match ((t (:foreground ,base1 :background ,base02 :weight bold))))
+       '(match ((t (:foreground ,solarized-emph :background ,solarized-hl :weight bold))))
 
        ;; compilation
        '(compilation-column-face ((t (:foreground ,cyan :underline nil))))
@@ -21,8 +21,8 @@
        '(compilation-enter-directory-face ((t (:foreground ,green :underline nil))))
        '(compilation-error ((t (:inherit error :underline nil))))
        '(compilation-error-face ((t (:foreground ,red : :underline nil))))
-       '(compilation-face ((t (:foreground ,base0 :underline nil))))
-       '(compilation-info ((t (:foreground ,base01 :underline nil :bold nil))))
+       '(compilation-face ((t (:foreground ,solarized-fg :underline nil))))
+       '(compilation-info ((t (:foreground ,solarized-comment :underline nil :bold nil))))
        '(compilation-info-face ((t (:foreground ,blue :underline nil))))
        '(compilation-leave-directory-face ((t (:foreground ,green :underline nil))))
        '(compilation-line-face ((t (:foreground ,green :underline nil))))
@@ -34,42 +34,42 @@
        '(compilation-mode-line-run ((t (:foreground ,orange :weight bold))))
 
        ;; diff
-       '(diff-added ((t (:foreground ,green ,@back))))
-       '(diff-changed ((t (:foreground ,blue ,@back))))
-       '(diff-removed ((t (:foreground ,red ,@back))))
-       '(diff-header ((t (,@back))))
-       '(diff-file-header ((t (:foreground ,base0 ,@back :weight bold))))
-       '(diff-refine-added ((t :foreground ,base03 :background ,green)))
-       '(diff-refine-change ((t :foreground ,base03 :background ,blue)))
-       '(diff-refine-removed ((t (:foreground ,base03 :background ,red))))
+       '(diff-added ((t (:foreground ,green :background ,solarized-bg))))
+       '(diff-changed ((t (:foreground ,blue :background ,solarized-bg))))
+       '(diff-removed ((t (:foreground ,red :background ,solarized-bg))))
+       '(diff-header ((t (:background ,solarized-bg))))
+       '(diff-file-header ((t (:foreground ,solarized-fg :background ,solarized-bg :weight bold))))
+       '(diff-refine-added ((t :foreground ,solarized-bg :background ,green)))
+       '(diff-refine-change ((t :foreground ,solarized-bg :background ,blue)))
+       '(diff-refine-removed ((t (:foreground ,solarized-bg :background ,red))))
 
        ;; dired
        '(dired-directory ((t (:foreground ,blue :weight normal))))
        '(dired-flagged ((t (:foreground ,red))))
-       '(dired-header ((t (:foreground ,base03 :background ,blue))))
+       '(dired-header ((t (:foreground ,solarized-bg :background ,blue))))
        '(dired-ignored ((t (:inherit shadow))))
        '(dired-mark ((t (:foreground ,yellow :weight bold))))
        '(dired-marked ((t (:foreground ,magenta :weight bold))))
-       '(dired-perm-write ((t (:foreground ,base0 :underline t))))
+       '(dired-perm-write ((t (:foreground ,solarized-fg :underline t))))
        '(dired-symlink ((t (:foreground ,cyan :slant italic))))
        '(dired-warning ((t (:foreground ,orange :underline t))))
 
        ;; dropdown
-       '(dropdown-list-face ((t (:background ,base02 :foreground ,cyan))))
-       '(dropdown-list-selection-face ((t (:background ,base02 :foreground ,cyan))))
+       '(dropdown-list-face ((t (:foreground ,cyan :background ,solarized-hl))))
+       '(dropdown-list-selection-face ((t (:foreground ,cyan-hc :background ,cyan-lc))))
 
        ;; grep
-       '(grep-context-face ((t (:foreground ,base0))))
+       '(grep-context-face ((t (:foreground ,solarized-fg))))
        '(grep-error-face ((t (:foreground ,red :weight bold :underline t))))
        '(grep-hit-face ((t (:foreground ,blue))))
        '(grep-match-face ((t (:foreground ,orange :weight bold))))
 
        ;; ido-mode
        '(ido-first-match ((t (:foreground ,yellow :weight normal))))
-       '(ido-only-match ((t (:foreground ,base03 :background ,yellow :weight normal))))
+       '(ido-only-match ((t (:foreground ,solarized-bg :background ,yellow :weight normal))))
        '(ido-subdir ((t (:foreground ,blue))))
        '(ido-incomplete-regexp ((t (:foreground ,red :weight bold))))
-       '(ido-indicator ((t (:background ,red :foreground ,base03 :width condensed))))
+       '(ido-indicator ((t (:foreground ,solarized-bg :background ,red :width condensed))))
        '(ido-virtual ((t (:foreground ,cyan))))
 
        ;; man
@@ -78,20 +78,30 @@
        '(Man-underline ((t (:foreground ,green :underline t))))
 
        ;; whitespace-mode
-       '(whitespace-space ((t (:background unspecified :foreground ,base01 :inverse-video unspecified :slant italic))))
-       `(whitespace-hspace ((t (:background unspecified :foreground ,base1 :inverse-video unspecified))))
-       `(whitespace-tab ((t (:background unspecified :foreground ,red :inverse-video unspecified :weight bold))))
-       `(whitespace-newline ((t (:background unspecified :foreground ,base01 :inverse-video unspecified))))
-       `(whitespace-trailing ((t (:background unspecified :foreground ,orange :inverse-video t))))
-       `(whitespace-line ((t (:background unspecified :foreground ,magenta :inverse-video unspecified))))
-       `(whitespace-space-before-tab ((t (:background ,red :foreground unspecified :inverse-video unspecified))))
-       `(whitespace-indentation ((t (:background unspecified :foreground ,yellow :inverse-video unspecified :weight bold))))
-       `(whitespace-empty ((t (:background unspecified :foreground ,red :inverse-video t))))
-       `(whitespace-space-after-tab ((t (:background unspecified :foreground ,orange :inverse-video t :weight bold))))))))
+       '(whitespace-space ((t (:foreground ,solarized-comment :background unspecified
+                                           :inverse-video unspecified :slant italic))))
+       `(whitespace-hspace ((t (:foreground ,solarized-emph :background unspecified
+                                            :inverse-video unspecified))))
+       `(whitespace-tab ((t (:foreground ,red :background unspecified
+                                         :inverse-video unspecified :weight bold))))
+       `(whitespace-newline ((t (:foreground ,solarized-comment :background unspecified
+                                             :inverse-video unspecified))))
+       `(whitespace-trailing ((t (:foreground ,orange-lc :background unspecified
+                                              :inverse-video t))))
+       `(whitespace-line ((t (:foreground ,magenta :background unspecified
+                                          :inverse-video unspecified))))
+       `(whitespace-space-before-tab ((t (:foreground unspecified :background ,red-lc
+                                                      :inverse-video unspecified))))
+       `(whitespace-indentation ((t (:foreground ,yellow :background unspecified
+                                                 :inverse-video unspecified :weight bold))))
+       `(whitespace-empty ((t (:foreground ,red-lc :background unspecified
+                                           :inverse-video t))))
+       `(whitespace-space-after-tab ((t (:foreground ,orange :background unspecified
+                                                     :inverse-video t :weight bold))))))))
 
 (require-package '(:name solarized-theme
 			 :type github
-			 :pkgname "awmckinley/solarized-theme"
+			 :pkgname "dholm/solarized-theme"
 			 :prepare (add-to-list 'custom-theme-load-path default-directory)
 			 :after (dholm/solarized-init)))
 

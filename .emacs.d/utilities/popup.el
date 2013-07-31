@@ -10,14 +10,14 @@
       (eval
        `(custom-theme-set-faces
          'solarized
-         '(popup-face ((t (:background ,base02 :foreground ,base0))))
-         '(popup-isearch-match ((t (:background ,yellow :foreground ,base03))))
-         '(popup-menu-face ((t (:background ,base02 :foreground ,base0))))
-         '(popup-menu-mouse-face ((t (:background ,blue :foreground ,base0))))
-         '(popup-menu-selection-face ((t (:background ,magenta :foreground ,base03))))
-         '(popup-scroll-bar-background-face ((t (:background ,base01))))
-         '(popup-scroll-bar-foreground-face ((t (:background ,base1))))
-         '(popup-tip-face ((t (:background ,base02 :foreground ,base0)))))))))
+         '(popup-face ((t (:foreground ,solarized-fg :background ,solarized-hl))))
+         '(popup-isearch-match ((t (:foreground ,solarized-bg :background ,yellow))))
+         '(popup-menu-face ((t (:foreground ,solarized-fg :background ,solarized-hl))))
+         '(popup-menu-mouse-face ((t (:foreground ,solarized-fg :background ,blue))))
+         '(popup-menu-selection-face ((t (:foreground ,solarized-bg :background ,magenta))))
+         '(popup-scroll-bar-background-face ((t (:background ,solarized-comment))))
+         '(popup-scroll-bar-foreground-face ((t (:background ,solarized-emph))))
+         '(popup-tip-face ((t (:foreground ,solarized-fg :background ,solarized-hl)))))))))
 
 (require-package '(:name popup :after (dholm/popup-init)))
 

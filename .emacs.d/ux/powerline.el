@@ -12,13 +12,13 @@
       (eval
        `(custom-theme-set-faces
          'solarized
-         '(mode-line ((t (:foreground ,base0 :background ,base01))))
+         '(mode-line ((t (:foreground ,solarized-fg :background ,solarized-comment))))
          '(mode-line-buffer-id ((t (:foreground ,base2 :background ,blue))))
-         '(mode-line-inactive ((t (:foreground ,base0 :background ,base01))))
-         '(powerline-active1 ((t (:foreground ,base2 :background ,base02))))
-         '(powerline-active2 ((t (:foreground ,orange :background ,base02))))
-         '(powerline-inactive1 ((t (:foreground ,base0 :background ,base02))))
-         '(powerline-inactive2 ((t (:foreground ,base0 :background ,base01))))))))
+         '(mode-line-inactive ((t (:foreground ,solarized-fg :background ,solarized-comment))))
+         '(powerline-active1 ((t (:foreground ,solarized-comment :background ,solarized-hl))))
+         '(powerline-active2 ((t (:foreground ,orange :background ,solarized-hl))))
+         '(powerline-inactive1 ((t (:foreground ,solarized-fg :background ,solarized-hl))))
+         '(powerline-inactive2 ((t (:foreground ,solarized-fg :background ,solarized-comment))))))))
 
   ;;; (Theme) ;;;
   (setq-default powerline-arrow-shape 'slant)

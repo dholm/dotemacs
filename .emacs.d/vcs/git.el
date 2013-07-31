@@ -10,10 +10,14 @@
       (eval
        `(custom-theme-set-faces
          'solarized
-         '(git-gutter:added ((t (:foreground ,green :weight bold))))
-         '(git-gutter:deleted ((t (:foreground ,red :weight bold))))
-         '(git-gutter:modified ((t (:foreground ,blue :weight bold))))
-         '(git-gutter:unchanged ((t (:foreground ,base02 :weight bold))))))))
+         '(git-gutter:added ((t (:foreground ,solarized-bg :background ,green
+                                             :weight bold))))
+         '(git-gutter:deleted ((t (:foreground ,solarized-bg :background ,red
+                                               :weight bold))))
+         '(git-gutter:modified ((t (:foreground ,solarized-bg :background ,red
+                                                :weight bold))))
+         '(git-gutter:unchanged ((t (:foreground ,solarized-bg :background ,solarized-hl
+                                                 :weight bold))))))))
 
   ;;; (Bindings) ;;;
   (define-key dholm/vcs-map (kbd "g") 'git-gutter:toggle))
@@ -29,7 +33,7 @@
       (eval
        `(custom-theme-set-faces
          'solarized
-         '(git-gutter-fr:added ((t (:foreground ,green  :weight bold))))
+         '(git-gutter-fr:added ((t (:foreground ,green :weight bold))))
          '(git-gutter-fr:deleted ((t (:foreground ,red :weight bold))))
          '(git-gutter-fr:modified ((t (:foreground ,blue :weight bold)))))))))
 
@@ -60,16 +64,22 @@
          'solarized
          '(magit-section-title ((t (:foreground ,yellow :weight bold))))
          '(magit-branch ((t (:foreground ,orange :weight bold))))
-         '(magit-item-highlight ((t (:background ,base02 :weight unspecified))))
+         '(magit-item-highlight ((t (:background ,solarized-hl :weight unspecified))))
          '(magit-log-author ((t (:foreground ,cyan))))
-         '(magit-log-graph ((t (:foreground ,base01))))
-         '(magit-log-head-label-bisect-bad ((t (:foreground ,red :box 1))))
-         '(magit-log-head-label-bisect-good ((t (:foreground ,green :box 1))))
-         '(magit-log-head-label-default ((t (:background ,base02 :box 1))))
-         '(magit-log-head-label-local ((t (:foreground ,blue :box 1))))
-         '(magit-log-head-label-patches ((t (:foreground ,red :box 1))))
-         '(magit-log-head-label-remote ((t (:foreground ,green :box 1))))
-         '(magit-log-head-label-tags ((t (:foreground ,yellow :box 1))))
+         '(magit-log-graph ((t (:foreground ,solarized-comment))))
+         '(magit-log-head-label-bisect-bad ((t (:foreground ,red-lc :background ,red-hc
+                                                            :box 1))))
+         '(magit-log-head-label-bisect-good ((t (:foreground ,green-lc :background ,green-hc
+                                                             :box 1))))
+         '(magit-log-head-label-default ((t (:background ,solarized-hl :box 1))))
+         '(magit-log-head-label-local ((t (:foreground ,blue-hc :background ,blue-lc
+                                                       :box 1))))
+         '(magit-log-head-label-patches ((t (:foreground ,red-hc :background ,red-lc
+                                                         :box 1))))
+         '(magit-log-head-label-remote ((t (:foreground ,green-hc :background ,green-lc
+                                                        :box 1))))
+         '(magit-log-head-label-tags ((t (:foreground ,yellow-hc :background ,yellow-lc
+                                                      :box 1))))
          '(magit-log-sha1 ((t (:foreground ,yellow))))))))
 
   ;;; (Bindings) ;;;
