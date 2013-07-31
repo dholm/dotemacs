@@ -1,4 +1,4 @@
-;;; init-ux --- initializes user experience
+;;; init-ux.el --- initializes user experience
 ;;; Commentary:
 ;;; Code:
 
@@ -20,6 +20,7 @@
 (require 'ux/saveplace)
 (require 'ux/session)
 (require 'ux/smart-forward)
+(require 'ux/smart-tab)
 (require 'ux/solarized)
 (require 'ux/uniquify)
 (require 'ux/visual-regexp)

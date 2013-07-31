@@ -1,4 +1,4 @@
-;;; init-utilities --- initializes utilities
+;;; init-utilities.el --- initializes utilities
 ;;; Commentary:
 ;;; Code:
 
@@ -27,7 +27,6 @@
 (require 'utilities/packed)
 (require 'utilities/perspective)
 (require 'utilities/popup)
-(require 'utilities/smart-tab)
 (require 'utilities/tramp)
 (require 'utilities/undo-tree)
 (require 'utilities/url)

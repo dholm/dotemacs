@@ -1,4 +1,4 @@
-;;; smart-tab --- make tab do the right thing
+;;; smart-tab.el --- make tab do the right thing
 ;;; Commentary:
 ;;; Code:
 
@@ -11,5 +11,5 @@
 (require-package '(:name smart-tab :after (dholm/smart-tab-init)))
 
 
-(provide 'utilities/smart-tab)
+(provide 'ux/smart-tab)
 ;;; smart-tab.el ends here
