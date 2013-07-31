@@ -1,4 +1,4 @@
-;;; auto-complete --- initializes auto complete package
+;;; auto-complete.el --- initializes auto complete package
 ;;; Commentary:
 ;;; Code:
 
@@ -53,7 +53,11 @@
   ;; Enable auto-complete globally
   (global-auto-complete-mode t)
   (after-load 'diminish
-    (diminish 'auto-complete-mode)))
+    (diminish 'auto-complete-mode))
+
+  ;;; (Bindings) ;;;
+  (define-key dholm/code-map (kbd "c") 'auto-complete)
+  (ac-set-trigger-key "TAB"))
 
 (require-package '(:name auto-complete :after (dholm/auto-complete-init)))
 (require-package '(:name auto-complete-yasnippet :depends (yasnippet)))
