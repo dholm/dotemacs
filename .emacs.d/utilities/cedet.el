@@ -1,14 +1,14 @@
-;;; cedet --- initializes CEDET
+;;; cedet.el --- initializes CEDET
 ;;; Commentary:
 ;;; Code:
 
 (defun dholm/cedet-hook ()
   "Hook for modes with CEDET support."
   ;; Set up local bindings
-  (local-set-key [(control return)] 'semantic-ia-complete-symbol)
-  (local-set-key (kbd "C-c ?") 'semantic-ia-complete-symbol-menu)
-  (local-set-key (kbd "C-c >") 'semantic-complete-analyze-inline)
-  (local-set-key (kbd "C-c =") 'semantic-decoration-include-visit)
+  (define-key dholm/code-map (kbd "RET") 'semantic-ia-complete-symbol)
+  (define-key dholm/code-map (kbd "?") 'semantic-ia-complete-symbol-menu)
+  (define-key dholm/code-map (kbd ">") 'semantic-complete-analyze-inline)
+  (define-key dholm/code-map (kbd "=") 'semantic-decoration-include-visit)
   (define-key dholm/navigation-map (kbd "j") 'semantic-ia-fast-jump)
   (define-key dholm/navigation-map (kbd "b") 'semantic-mrub-switch-tags)
   (define-key dholm/navigation-map (kbd "p") 'semantic-analyze-proto-impl-toggle)

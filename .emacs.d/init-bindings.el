@@ -1,14 +1,16 @@
-;;; init-bindings --- sets up basic Emacs bindings
+;;; init-bindings.el --- sets up basic Emacs bindings
 ;;; Commentary:
 ;;; Code:
 
 ;; Set up prefixes for groups of commands
 (define-prefix-command 'dholm/navigation-map)
+(define-prefix-command 'dholm/code-map)
 (define-prefix-command 'dholm/documentation-map)
 (define-prefix-command 'dholm/vcs-map)
 (define-prefix-command 'dholm/utilities-map)
 
 (global-set-key (kbd "C-c n") 'dholm/navigation-map)
+(global-set-key (kbd "C-c c") 'dholm/code-map)
 (global-set-key (kbd "C-c d") 'dholm/documentation-map)
 (global-set-key (kbd "C-c v") 'dholm/vcs-map)
 (global-set-key (kbd "C-c u") 'dholm/utilities-map)
