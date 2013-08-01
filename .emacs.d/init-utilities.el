@@ -21,6 +21,7 @@
 (require 'utilities/helm)
 (require 'utilities/hide-lines)
 (require 'utilities/ibuffer)
+(require 'utilities/ido)
 (when (display-graphic-p)
   (require 'utilities/minimap))
 (require 'utilities/outlookedit)
