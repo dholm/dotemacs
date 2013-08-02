@@ -2,15 +2,15 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/markdown-mode-hook ()
+(defun user/markdown-mode-hook ()
   "Markdown mode hook.")
 
 
-(defun dholm/markdown-mode-init ()
+(defun user/markdown-mode-init ()
   "Initialize markdown mode."
-  (add-hook 'markdown-mode-hook 'dholm/markdown-mode-hook))
+  (add-hook 'markdown-mode-hook 'user/markdown-mode-hook))
 
-(require-package '(:name markdown-mode :after (dholm/markdown-mode-init)))
+(require-package '(:name markdown-mode :after (user/markdown-mode-init)))
 
 
 (provide 'modes/markdown)

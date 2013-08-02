@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/mic-paren-init ()
+(defun user/mic-paren-init ()
   "Initialize mic-paren."
   (paren-activate))
 
@@ -10,7 +10,7 @@
 			 :type emacswiki
 			 :website "https://raw.github.com/emacsmirror/emacswiki.org/master/mic-paren.el"
 			 :features (mic-paren)
-			 :after (dholm/mic-paren-init)))
+			 :after (user/mic-paren-init)))
 
 
 (provide 'ux/mic-paren)

@@ -1,8 +1,8 @@
-;;; solarized --- solarized color theme
+;;; solarized.el --- solarized color theme
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/solarized-init ()
+(defun user/solarized-init ()
   "Initialize Solarized theme."
   (load-theme 'solarized t)
 
@@ -103,7 +103,7 @@
 			 :type github
 			 :pkgname "dholm/solarized-theme"
 			 :prepare (add-to-list 'custom-theme-load-path default-directory)
-			 :after (dholm/solarized-init)))
+			 :after (user/solarized-init)))
 
 
 (provide 'ux/solarized)

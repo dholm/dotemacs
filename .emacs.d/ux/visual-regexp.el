@@ -2,12 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/visual-regexp-init ()
+(defun user/visual-regexp-init ()
   ;;; (Bindings) ;;;
   (global-set-key [remap query-replace-regexp] 'vr/query-replace)
   (global-set-key [remap replace-regexp] 'vr/replace))
 
-(require-package '(:name visual-regexp :after (dholm/visual-regexp-init)))
+(require-package '(:name visual-regexp :after (user/visual-regexp-init)))
 
 
 (provide 'ux/visual-regexp)

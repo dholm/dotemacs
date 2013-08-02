@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/git-gutter-init ()
+(defun user/git-gutter-init ()
   "Initialize git gutter."
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
@@ -20,10 +20,10 @@
                                                  :weight bold))))))))
 
   ;;; (Bindings) ;;;
-  (define-key dholm/vcs-map (kbd "g") 'git-gutter:toggle))
+  (define-key user/vcs-map (kbd "g") 'git-gutter:toggle))
 
 
-(defun dholm/git-gutter-fringe-init ()
+(defun user/git-gutter-fringe-init ()
   "Initialize git gutter fringe."
   (setq-default git-gutter-fr:side 'left-fringe)
 
@@ -38,7 +38,7 @@
          '(git-gutter-fr:modified ((t (:foreground ,blue :weight bold)))))))))
 
 
-(defun dholm/magit-init ()
+(defun user/magit-init ()
   "Initialize magit."
   (setq-default
    ;; Do not save buffers
@@ -83,7 +83,7 @@
          '(magit-log-sha1 ((t (:foreground ,yellow))))))))
 
   ;;; (Bindings) ;;;
-  (define-key dholm/vcs-map (kbd "s") 'magit-status)
+  (define-key user/vcs-map (kbd "s") 'magit-status)
 
   ;;; (Functions) ;;;
   (defun magit-quit-session ()
@@ -95,20 +95,20 @@
         (jump-to-register :magit-fullscreen)))))
 
 
-(defun dholm/git-messenger-init ()
+(defun user/git-messenger-init ()
   "Initialize git messenger."
   (setq-default git-messenger:show-detail t)
-  (define-key dholm/vcs-map (kbd "d") 'git-messenger:popup-message))
+  (define-key user/vcs-map (kbd "d") 'git-messenger:popup-message))
 
 
-(require-package '(:name magit :after (dholm/magit-init)))
+(require-package '(:name magit :after (user/magit-init)))
 (require-package '(:name magithub))
-(require-package '(:name git-gutter :after (dholm/git-gutter-init)))
+(require-package '(:name git-gutter :after (user/git-gutter-init)))
 (when (display-graphic-p)
   (require-package '(:name git-gutter-fringe
-                           :after (dholm/git-gutter-fringe-init))))
+                           :after (user/git-gutter-fringe-init))))
 (require-package '(:name git-messenger
-			 :after (dholm/git-messenger-init)
+			 :after (user/git-messenger-init)
 			 :type github
 			 :pkgname "syohex/emacs-git-messenger"
 			 :depends (popup)))

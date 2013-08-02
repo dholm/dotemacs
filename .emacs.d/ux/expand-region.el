@@ -2,11 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/expand-region-init ()
+(defun user/expand-region-init ()
   "Initialize expand region."
   (global-set-key (kbd "C-=") 'er/expand-region))
 
-(require-package '(:name expand-region :after (dholm/expand-region-init)))
+(require-package '(:name expand-region :after (user/expand-region-init)))
 
 
 (provide 'ux/expand-region)

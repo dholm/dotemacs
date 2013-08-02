@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/html-mode-hook ()
+(defun user/html-mode-hook ()
   "HTML mode hook.")
 
 (defun guess-xhtml-hook ()
@@ -12,7 +12,7 @@
         (search-forward-regexp "<[?]xml\\|//W3C//DTD XHTML" 80 t))
     (html-mode)))
 
-(defun dholm/html-mode-init ()
+(defun user/html-mode-init ()
   "Initialize HTML mode."
   ;; Configure mmm for HTML
   (after-load 'mmm
@@ -49,9 +49,9 @@
     (add-to-list 'mmm-mode-ext-classes-alist '(html-mode nil fancy-html)))
 
   (add-hook 'html-mode-hook 'guess-xhtml-hook t)
-  (add-hook 'html-mode-hook 'dholm/html-mode-hook))
+  (add-hook 'html-mode-hook 'user/html-mode-hook))
 
-(dholm/html-mode-init)
+(user/html-mode-init)
 
 
 (require-package '(:name tidy))

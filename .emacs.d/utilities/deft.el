@@ -2,11 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/deft-init ()
+(defun user/deft-init ()
   "Initialize deft."
-  (define-key dholm/utilities-map (kbd "d") 'deft))
+  (define-key user/utilities-map (kbd "d") 'deft))
 
-(require-package '(:name deft :after (dholm/deft-init)))
+(require-package '(:name deft :after (user/deft-init)))
 
 
 (provide 'utilities/deft)

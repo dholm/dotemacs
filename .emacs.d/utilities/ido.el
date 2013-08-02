@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/ido-init ()
+(defun user/ido-init ()
   "Initialize ido."
   (setq-default
    ;; Enable fuzzy matching
@@ -12,7 +12,7 @@
    ;; Allow the same buffer to be opened in different windows
    ido-default-buffer-method 'selected-window))
 
-(dholm/ido-init)
+(user/ido-init)
 
 
 (provide 'utilities/ido)

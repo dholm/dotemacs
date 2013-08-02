@@ -2,12 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/mmm-mode-init ()
+(defun user/mmm-mode-init ()
   "Initialize multiple major modes."
   (setq mmm-global-mode 'maybe
         mmm-submode-decoration-level 2))
 
-(require-package '(:name mmm-mode :after (dholm/mmm-mode-init)))
+(require-package '(:name mmm-mode :after (user/mmm-mode-init)))
 
 
 (provide 'modes/mmm)

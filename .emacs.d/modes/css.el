@@ -31,7 +31,7 @@
 
 
 ;; CSS editing
-(defun dholm/css-mode-hook ()
+(defun user/css-mode-hook ()
   "CSS mode hook."
   (skewer-css-mode t)
   (rainbow-mode t)
@@ -42,7 +42,7 @@
   (set (make-local-variable 'ac-auto-start) 2)
   (set (make-local-variable 'ac-auto-show-menu) t))
 
-(add-hook 'css-mode-hook 'dholm/css-mode-hook)
+(add-hook 'css-mode-hook 'user/css-mode-hook)
 
 (require-package '(:name skewer-mode))
 (require-package '(:name showcss-mode))

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/flymake-init ()
+(defun user/flymake-init ()
   "Initialize flymake."
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
@@ -26,7 +26,7 @@
                          :foreground ,yellow-hc :background ,yellow-lc))
             (t (:foreground ,yellow-hc :background ,yellow-lc :weight bold :underline t)))))))))
 
-(require-package '(:name flymake-cursor :after (dholm/flymake-init)))
+(require-package '(:name flymake-cursor :after (user/flymake-init)))
 
 
 (provide 'utilities/flymake)

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/syslog-mode-init ()
+(defun user/syslog-mode-init ()
   "Initialize syslog-mode."
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
@@ -29,7 +29,7 @@
 			 :depends (hide-lines)
 			 :type github
 			 :pkgname "vapniks/syslog-mode"
-			 :after (dholm/syslog-mode-init)))
+			 :after (user/syslog-mode-init)))
 
 
 (provide 'modes/syslog)

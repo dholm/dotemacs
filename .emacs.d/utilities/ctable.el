@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/ctable-init ()
+(defun user/ctable-init ()
   "Initialize ctable."
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
@@ -16,7 +16,7 @@
          '(ctbl:face-row-select ((t (:foreground ,solarized-fg :background ,solarized-hl
                                                  :underline t)))))))))
 
-(require-package '(:name ctable :after (dholm/ctable-init)))
+(require-package '(:name ctable :after (user/ctable-init)))
 
 
 (provide 'utilities/ctable)

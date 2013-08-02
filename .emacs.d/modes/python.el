@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/python-mode-hook ()
+(defun user/python-mode-hook ()
   "Python mode hook."
   (unless (derived-mode-p 'prog-mode)
     (run-hooks 'prog-mode-hook))
@@ -10,7 +10,7 @@
   (setq py-shell-name "ipython"
         py-load-pymacs-p t)
   ;; Load CEDET
-  (dholm/python-mode-cedet-hook)
+  (user/python-mode-cedet-hook)
   ;; Load ropemacs
   (pymacs-load "ropemacs" "rope-")
   (setq ropemacs-enable-autoimport t)
@@ -28,13 +28,13 @@
        (append ac-sources '(ac-source-ropemacs))))
 
 
-(defun dholm/python-mode-cedet-hook ()
+(defun user/python-mode-cedet-hook ()
   "CEDET hook for Python mode."
-  (dholm/cedet-hook)
+  (user/cedet-hook)
   (require 'semantic/wisent/python))
 
 
-(defun dholm/jedi-init ()
+(defun user/jedi-init ()
   "Initialize jedi."
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
@@ -49,9 +49,9 @@
    jedi:complete-on-dot t))
 
 
-(defun dholm/python-mode-init ()
+(defun user/python-mode-init ()
   "Initialize Python mode."
-  (add-hook 'python-mode-hook 'dholm/python-mode-hook))
+  (add-hook 'python-mode-hook 'user/python-mode-hook))
 
 (require-package '(:name python-mode
                          :type bzr
@@ -69,8 +69,8 @@
                                                  '("\\.py$" . python-mode))
                                     (add-to-list 'interpreter-mode-alist
                                                  '("python" . python-mode)))
-                         :after (dholm/python-mode-init)))
-(require-package '(:name jedi :after (dholm/jedi-init)))
+                         :after (user/python-mode-init)))
+(require-package '(:name jedi :after (user/jedi-init)))
 (require-package '(:name pylookup))
 
 

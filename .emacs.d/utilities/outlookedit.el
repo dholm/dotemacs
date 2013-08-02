@@ -1,4 +1,4 @@
-;;; outlookedit --- outlook integration
+;;; outlookedit.el --- outlook integration
 ;;; Commentary:
 ;;; Code:
 

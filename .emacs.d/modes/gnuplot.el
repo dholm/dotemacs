@@ -2,16 +2,16 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/gnuplot-mode-hook ()
+(defun user/gnuplot-mode-hook ()
   "Hook for gnuplot mode.")
 
 
-(defun dholm/gnuplot-mode-init ()
+(defun user/gnuplot-mode-init ()
   "Initialize gnuplot mode."
-  (add-hook 'gnuplot-mode-hook 'dholm/gnuplot-mode-hook)
+  (add-hook 'gnuplot-mode-hook 'user/gnuplot-mode-hook)
   (add-auto-mode 'gnuplot-mode "\\.gp$"))
 
-(require-package '(:name gnuplot-mode :after (dholm/gnuplot-mode-init)))
+(require-package '(:name gnuplot-mode :after (user/gnuplot-mode-init)))
 
 
 (provide 'modes/gnuplot)

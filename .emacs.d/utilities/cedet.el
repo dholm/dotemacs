@@ -2,19 +2,19 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/cedet-hook ()
+(defun user/cedet-hook ()
   "Hook for modes with CEDET support."
   ;; Set up local bindings
-  (define-key dholm/code-map (kbd "RET") 'semantic-ia-complete-symbol)
-  (define-key dholm/code-map (kbd "?") 'semantic-ia-complete-symbol-menu)
-  (define-key dholm/code-map (kbd ">") 'semantic-complete-analyze-inline)
-  (define-key dholm/code-map (kbd "=") 'semantic-decoration-include-visit)
-  (define-key dholm/navigation-map (kbd "j") 'semantic-ia-fast-jump)
-  (define-key dholm/navigation-map (kbd "b") 'semantic-mrub-switch-tags)
-  (define-key dholm/navigation-map (kbd "p") 'semantic-analyze-proto-impl-toggle)
-  (define-key dholm/documentation-map (kbd "r") 'semantic-symref)
-  (define-key dholm/documentation-map (kbd "d") 'semantic-ia-show-doc)
-  (define-key dholm/documentation-map (kbd "s") 'semantic-ia-show-summary)
+  (define-key user/code-map (kbd "RET") 'semantic-ia-complete-symbol)
+  (define-key user/code-map (kbd "?") 'semantic-ia-complete-symbol-menu)
+  (define-key user/code-map (kbd ">") 'semantic-complete-analyze-inline)
+  (define-key user/code-map (kbd "=") 'semantic-decoration-include-visit)
+  (define-key user/navigation-map (kbd "j") 'semantic-ia-fast-jump)
+  (define-key user/navigation-map (kbd "b") 'semantic-mrub-switch-tags)
+  (define-key user/navigation-map (kbd "p") 'semantic-analyze-proto-impl-toggle)
+  (define-key user/documentation-map (kbd "r") 'semantic-symref)
+  (define-key user/documentation-map (kbd "d") 'semantic-ia-show-doc)
+  (define-key user/documentation-map (kbd "s") 'semantic-ia-show-summary)
   (local-set-key (kbd "C-c +") 'semantic-tag-folding-show-block)
   (local-set-key (kbd "C-c -") 'semantic-tag-folding-fold-block)
   (local-set-key (kbd "C-c C-c +") 'semantic-tag-folding-show-all)
@@ -26,7 +26,7 @@
        (append ac-sources '(ac-source-semantic)))))
 
 
-(defun dholm/cedet-before-init ()
+(defun user/cedet-before-init ()
   "Setup before loading CEDET."
   (setq-default
    ;; Set up paths to caches
@@ -34,7 +34,7 @@
    ede-project-placeholder-cache-file (path-join *user-cache-directory* "ede-projects.el")
    srecode-map-save-file (path-join *user-cache-directory* "srecode-map.el")))
 
-(defun dholm/cedet-init ()
+(defun user/cedet-init ()
   "Initialize CEDET."
   ;; Set up and enable semantic
   (require 'semantic/ia)
@@ -61,8 +61,8 @@
   (ede-enable-generic-projects))
 
 (require-package '(:name cedet
-                         :before (dholm/cedet-before-init)
-                         :after (dholm/cedet-init)))
+                         :before (user/cedet-before-init)
+                         :after (user/cedet-init)))
 
 
 (provide 'utilities/cedet)

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/pretty-mode-plus-init ()
+(defun user/pretty-mode-plus-init ()
   "Initialize pretty mode plus."
   (require 'pretty-mode-plus)
 
@@ -23,7 +23,7 @@
                          :prepare (progn
                                     (autoload 'turn-on-pretty-mode "pretty-mode-plus")
                                     (autoload 'global-pretty-mode "pretty-mode-plus"))
-			 :after (dholm/pretty-mode-plus-init)))
+			 :after (user/pretty-mode-plus-init)))
 
 
 (provide 'ux/pretty-mode-plus)

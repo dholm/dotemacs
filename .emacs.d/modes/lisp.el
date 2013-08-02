@@ -5,35 +5,35 @@
 (require 'lib/utils)
 
 
-(defun dholm/lisp-mode-hook ()
+(defun user/lisp-mode-hook ()
   "LISP mode hook."
-  (try-eval (dholm/cedet-hook))
+  (try-eval (user/cedet-hook))
   (try-eval (rainbow-delimiters-mode))
   (try-eval (enable-paredit-mode))
   (try-eval (redshank-mode))
   (turn-on-eldoc-mode))
 
-(defun dholm/emacs-lisp-mode-hook ()
+(defun user/emacs-lisp-mode-hook ()
   "Emacs LISP mode hook."
-  (dholm/lisp-mode-hook)
+  (user/lisp-mode-hook)
   (try-eval (elisp-slime-nav-mode))
   (try-eval (ac-emacs-lisp-mode-setup))
   (local-set-key (kbd "C-c e") 'macrostep-expand))
 
 
 ;; Install mode hooks
-(add-hook 'lisp-mode-hook 'dholm/lisp-mode-hook)
-(add-hook 'emacs-lisp-mode-hook 'dholm/emacs-lisp-mode-hook)
+(add-hook 'lisp-mode-hook 'user/lisp-mode-hook)
+(add-hook 'emacs-lisp-mode-hook 'user/emacs-lisp-mode-hook)
 
 
 ;;; (Package Initialization) ;;;
-(defun dholm/newlisp-mode-init ()
+(defun user/newlisp-mode-init ()
   "Initialize newlisp mode."
   (add-auto-mode 'newlisp-mode "\\.lsp$")
   (add-to-list 'interpreter-mode-alist '("newlisp" . newlisp-mode)))
 
 
-(defun dholm/swank-newlisp-init ()
+(defun user/swank-newlisp-init ()
   "Initialize swank newlisp."
   (setq-default inferior-lisp-program "newlisp")
   (defun swank-newlisp-init (port-filename coding-system)
@@ -48,7 +48,7 @@
       (slime 'newlisp))))
 
 
-(defun dholm/auto-compile-init ()
+(defun user/auto-compile-init ()
   "Initialize auto-compile."
   (require 'auto-compile)
   (auto-compile-on-save-mode t)
@@ -68,17 +68,17 @@
 			 :type github
 			 :pkgname "kosh04/newlisp-mode"
 			 :features newlisp-mode
-			 :after (dholm/newlisp-mode-init)))
+			 :after (user/newlisp-mode-init)))
 (require-package '(:name swank-newlisp
 			 :type github
 			 :pkgname "kosh04/swank-newlisp"
 			 :depends (slime)
-			 :after (dholm/swank-newlisp-init)))
+			 :after (user/swank-newlisp-init)))
 (require-package '(:name auto-compile
 			 :type github
 			 :pkgname "tarsius/auto-compile"
 			 :depends (packed)
-			 :after (dholm/auto-compile-init)))
+			 :after (user/auto-compile-init)))
 
 
 (provide 'modes/lisp)

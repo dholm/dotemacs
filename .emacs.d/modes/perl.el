@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/pde-perl-mode-hook ()
+(defun user/pde-perl-mode-hook ()
   "PDE Perl mode hook."
   (require 'pde-load)
 
@@ -17,15 +17,15 @@
   (set (make-local-variable 'compile-dwim-check-tools) nil))
 
 
-(defun dholm/perl-mode-hook ()
+(defun user/perl-mode-hook ()
   "Perl mode hook."
   (auto-complete-mode t)
   (set (make-local-variable 'ac-sources)
        (append ac-sources '(ac-source-perl-completion)))
   ;; Initialize PDE
-  (dholm/pde-perl-mode-hook))
+  (user/pde-perl-mode-hook))
 
-(add-hook 'perl-mode-hook 'dholm/perl-mode-hook)
+(add-hook 'perl-mode-hook 'user/perl-mode-hook)
 
 (require-package '(:name perl-completion
 			 :type emacswiki

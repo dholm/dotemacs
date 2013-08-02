@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/powerline-init ()
+(defun user/powerline-init ()
   "Initialize powerline."
   (require 'powerline)
 
@@ -27,7 +27,7 @@
 (require-package '(:name powerline
 			 :type github
 			 :pkgname "milkypostman/powerline"
-			 :after (dholm/powerline-init)
+			 :after (user/powerline-init)
 			 :prepare (autoload 'powerline-default-theme "powerline" nil t)))
 
 

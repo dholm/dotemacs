@@ -2,12 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/js2-mode-hook ()
+(defun user/js2-mode-hook ()
   "JavaScript mode hook."
   ;; Enable js2-mode
   (js2-mode t)
   ;; Load CEDET
-  (dholm/javascript-mode-cedet-hook)
+  (user/javascript-mode-cedet-hook)
   ;; Configure js2-mode
   (setq js2-use-font-lock-faces t
         js2-mode-must-byte-compile nil
@@ -19,13 +19,13 @@
   (set (make-local-variable 'ac-auto-start) 3)
   (set (make-local-variable 'ac-auto-show-menu) t))
 
-(defun dholm/javascript-mode-cedet-hook ()
+(defun user/javascript-mode-cedet-hook ()
   "JavaScript CEDET support hook."
-  (dholm/cedet-hook)
+  (user/cedet-hook)
   (require 'semantic/wisent/javascript))
 
 
-(defun dholm/js2-mode-init ()
+(defun user/js2-mode-init ()
   "Initialize js2 mode."
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
@@ -47,10 +47,10 @@
          '(js2-private-member ((t (:foreground ,blue))))
          '(js2-warning ((t (:underline ,orange))))))))
 
-  (add-hook 'js2-mode-hook 'dholm/js2-mode-hook)
+  (add-hook 'js2-mode-hook 'user/js2-mode-hook)
   (add-auto-mode 'js2-mode "\\.js$"))
 
-(require-package '(:name js2-mode :after (dholm/js2-mode-init)))
+(require-package '(:name js2-mode :after (user/js2-mode-init)))
 
 
 (provide 'modes/javascript)

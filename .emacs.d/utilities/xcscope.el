@@ -1,8 +1,8 @@
-;;; xcscope --- cscope integration
+;;; xcscope.el --- cscope integration
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/xcscope-init ()
+(defun user/xcscope-init ()
   "Initialize xcscope."
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
@@ -20,7 +20,7 @@
 			 :type github
 			 :pkgname "dholm/xcscope"
 			 :features xcscope
-			 :after (dholm/xcscope-init)
+			 :after (user/xcscope-init)
 			 :prepare (progn
 				    (setq cscope-indexing-script
 					  (expand-file-name

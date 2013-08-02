@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/helm-init ()
+(defun user/helm-init ()
   "Initialize helm."
   ;; Enable helm mode
   (helm-mode t)
@@ -82,14 +82,14 @@
   (global-set-key (kbd "M-/") 'helm-etags+-history-action-go-forward))
 
 
-(defun dholm/helm-descbinds-init ()
+(defun user/helm-descbinds-init ()
   "Initialize helm-descbinds."
   (require 'helm-descbinds)
   (helm-descbinds-mode t))
 
 
-(require-package '(:name helm :after (dholm/helm-init)))
-(require-package '(:name helm-descbinds :after (dholm/helm-descbinds-init)))
+(require-package '(:name helm :after (user/helm-init)))
+(require-package '(:name helm-descbinds :after (user/helm-descbinds-init)))
 (require-package '(:name helm-etags-plus))
 (require-package '(:name helm-build-command))
 (require-package '(:name helm-ls-git

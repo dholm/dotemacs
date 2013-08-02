@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/undo-tree-init ()
+(defun user/undo-tree-init ()
   "Initialize undo-tree."
   (require 'undo-tree)
 
@@ -23,13 +23,13 @@
   (after-load 'diminish
     (diminish 'undo-tree-mode))
 
-  (define-key dholm/utilities-map (kbd "u") 'undo-tree-visualize))
+  (define-key user/utilities-map (kbd "u") 'undo-tree-visualize))
 
 (require-package '(:name undo-tree
                          :features (undo-tree)
                          :type git
                          :url "http://www.dr-qubit.org/git/undo-tree.git/"
-                         :after (dholm/undo-tree-init)))
+                         :after (user/undo-tree-init)))
 
 
 (provide 'utilities/undo-tree)

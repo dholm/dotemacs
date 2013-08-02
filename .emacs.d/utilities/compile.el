@@ -8,7 +8,7 @@
 (setq mode-compile-always-save-buffer-p t)
 
 
-(defun dholm/gen-std-compile-string ()
+(defun user/gen-std-compile-string ()
   "Generates compilation string for standard GNU Make project"
   (let* ((current-dir (file-name-directory
       		 (or (buffer-file-name (current-buffer)) default-directory)))

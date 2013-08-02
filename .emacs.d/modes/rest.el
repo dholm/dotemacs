@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/rst-mode-hook ()
+(defun user/rst-mode-hook ()
   "Hook for reStructuredText mode."
   ;; Enable auto completion
   (after-load 'auto-complete
@@ -10,7 +10,7 @@
     (auto-complete-mode t)))
 
 
-(defun dholm/rst-mode-init ()
+(defun user/rst-mode-init ()
   "Initialize reStructuredText mode."
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
@@ -29,9 +29,9 @@
   (add-auto-mode 'rst-mode
                  "\\.txt$" "\\.text$" "\\.rst$" "\\.rest$")
   ;; Register mode hook
-  (add-hook 'rst-mode-hook 'dholm/rst-mode-hook))
+  (add-hook 'rst-mode-hook 'user/rst-mode-hook))
 
-(require-package '(:name rst-mode :after (dholm/rst-mode-init)))
+(require-package '(:name rst-mode :after (user/rst-mode-init)))
 (require-package '(:name auto-complete-rst
                          :prepare (progn
                                     (autoload 'auto-complete-rst-init "auto-complete-rst"))))

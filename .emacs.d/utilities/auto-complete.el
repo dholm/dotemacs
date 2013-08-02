@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/auto-complete-init ()
+(defun user/auto-complete-init ()
   "Initialize auto-complete."
   (require 'auto-complete-config)
 
@@ -56,10 +56,10 @@
     (diminish 'auto-complete-mode))
 
   ;;; (Bindings) ;;;
-  (define-key dholm/code-map (kbd "c") 'auto-complete)
+  (define-key user/code-map (kbd "c") 'auto-complete)
   (ac-set-trigger-key "TAB"))
 
-(require-package '(:name auto-complete :after (dholm/auto-complete-init)))
+(require-package '(:name auto-complete :after (user/auto-complete-init)))
 (require-package '(:name auto-complete-yasnippet :depends (yasnippet)))
 
 

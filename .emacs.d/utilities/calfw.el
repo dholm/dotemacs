@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/calfw-init ()
+(defun user/calfw-init ()
   "Initialize calfw."
   ;; Weeks start on Monday
   (setq-default calendar-week-start-day 1)
@@ -48,11 +48,11 @@
                                                        :weight bold))))))))
 
   ;;; (Bindings) ;;;
-  (define-key dholm/utilities-map (kbd "c") 'cfw:open-calendar-buffer))
+  (define-key user/utilities-map (kbd "c") 'cfw:open-calendar-buffer))
 
 
 (require-package '(:name calfw
-                         :after (dholm/calfw-init)))
+                         :after (user/calfw-init)))
 (require-package '(:name calfw-gcal
 			 :type github
 			 :pkgname "myuhe/calfw-gcal.el"

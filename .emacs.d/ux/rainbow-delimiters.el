@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/rainbow-delimiters-init ()
+(defun user/rainbow-delimiters-init ()
   "Initialize rainbow delimiters."
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
@@ -25,7 +25,7 @@
          '(rainbow-delimiters-unmatched-face
           ((t (:foreground ,solarized-fg :background ,solarized-bg :inverse-video t)))))))))
 
-(require-package '(:name rainbow-delimiters :after (dholm/rainbow-delimiters-init)))
+(require-package '(:name rainbow-delimiters :after (user/rainbow-delimiters-init)))
 
 
 (provide 'ux/rainbow-delimiters)

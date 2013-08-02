@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/ecb-init ()
+(defun user/ecb-init ()
   "Initialize Emacs code browser."
   (require 'ecb-autoloads)
 
@@ -18,14 +18,14 @@
    ecb-compile-window-height 12)
 
   ;;; (Bindings) ;;;
-  (define-key dholm/utilities-map (kbd "e") 'ecb-activate)
+  (define-key user/utilities-map (kbd "e") 'ecb-activate)
 
   ;;; quick navigation between ecb windows
-  (define-key dholm/navigation-map (kbd "1") 'ecb-goto-window-edit1)
-  (define-key dholm/navigation-map (kbd "2") 'ecb-goto-window-directories)
-  (define-key dholm/navigation-map (kbd "3") 'ecb-goto-window-history)
-  (define-key dholm/navigation-map (kbd "4") 'ecb-goto-window-methods)
-  (define-key dholm/navigation-map (kbd "5") 'ecb-goto-window-compilation)
+  (define-key user/navigation-map (kbd "1") 'ecb-goto-window-edit1)
+  (define-key user/navigation-map (kbd "2") 'ecb-goto-window-directories)
+  (define-key user/navigation-map (kbd "3") 'ecb-goto-window-history)
+  (define-key user/navigation-map (kbd "4") 'ecb-goto-window-methods)
+  (define-key user/navigation-map (kbd "5") 'ecb-goto-window-compilation)
 
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
@@ -52,7 +52,7 @@
          '(ecb-tree-guide-line-face ((t (:inherit ecb-default-general-face :foreground ,solarized-hl
                                                   :height 1.0)))))))))
 
-(require-package '(:name ecb :after (dholm/ecb-init)))
+(require-package '(:name ecb :after (user/ecb-init)))
 
 
 (provide 'utilities/ecb)

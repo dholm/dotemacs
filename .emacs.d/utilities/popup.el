@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/popup-init ()
+(defun user/popup-init ()
   "Initialize popup."
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
@@ -19,7 +19,7 @@
          '(popup-scroll-bar-foreground-face ((t (:background ,solarized-emph))))
          '(popup-tip-face ((t (:foreground ,solarized-fg :background ,solarized-hl)))))))))
 
-(require-package '(:name popup :after (dholm/popup-init)))
+(require-package '(:name popup :after (user/popup-init)))
 
 
 (provide 'utilities/popup)

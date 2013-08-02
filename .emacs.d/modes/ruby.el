@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/ruby-mode-hook ()
+(defun user/ruby-mode-hook ()
   "Ruby mode hook."
   (unless (derived-mode-p 'prog-mode)
     (run-hooks 'prog-mode-hook))
@@ -19,23 +19,23 @@
   (define-key ruby-mode-map (kbd "RET") 'indent-for-tab-command))
 
 
-(defun dholm/robe-mode-hook ()
+(defun user/robe-mode-hook ()
   "Robe mode hook."
   (add-to-list 'ac-sources 'ac-source-robe)
   (set-auto-complete-as-completion-at-point-function))
 
 
-(defun dholm/ruby-mode-init ()
+(defun user/ruby-mode-init ()
   "Initialize Ruby mode."
-  (add-hook 'ruby-mode-hook 'dholm/ruby-mode-hook))
+  (add-hook 'ruby-mode-hook 'user/ruby-mode-hook))
 
-(defun dholm/robe-init ()
+(defun user/robe-init ()
   "Initialize robe."
   (add-hook 'ruby-mode-hook 'robe-mode)
-  (add-hook 'robe-mode-hook 'dholm/robe-mode-hook))
+  (add-hook 'robe-mode-hook 'user/robe-mode-hook))
 
-(require-package '(:name ruby-mode :after (dholm/ruby-mode-init)))
-(require-package '(:name robe-mode :after (dholm/robe-init)))
+(require-package '(:name ruby-mode :after (user/ruby-mode-init)))
+(require-package '(:name robe-mode :after (user/robe-init)))
 (require-package '(:name inf-ruby))
 
 

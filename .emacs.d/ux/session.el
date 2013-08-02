@@ -3,10 +3,10 @@
 ;;; Code:
 
 (require-package '(:name session
-                        :after (dholm/session-init)))
+                        :after (user/session-init)))
 
 
-(defun dholm/session-init ()
+(defun user/session-init ()
   (setq-default
    session-save-file (path-join *user-cache-directory* "session")
    desktop-globals-to-save

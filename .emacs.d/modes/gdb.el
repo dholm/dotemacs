@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/gdb-script-mode-hook ()
+(defun user/gdb-script-mode-hook ()
   "GDB script mode hook."
   ;; When using gud-mode to debug enable gdb-many-windows and a separate IO buffer
   (setq
@@ -13,11 +13,11 @@
    gud-tooltip-mode t))
 
 
-(defun dholm/gdb-script-mode-init ()
+(defun user/gdb-script-mode-init ()
   "Initialize GDB script mode."
   (add-auto-mode 'gdb-script-mode "\\.gdb$" "\\.gdbinit$"))
 
-(dholm/gdb-script-mode-init)
+(user/gdb-script-mode-init)
 
 
 (provide 'modes/gdb)

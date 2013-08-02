@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/flycheck-init ()
+(defun user/flycheck-init ()
   "Initialize flycheck."
   (require 'flycheck)
   (global-flycheck-mode t)
@@ -27,20 +27,20 @@
          '(flycheck-fringe-warning ((t (:foreground ,yellow-hc :background ,yellow-lc :weight bold)))))))))
 
 
-(defun dholm/flycheck-color-mode-line-init ()
+(defun user/flycheck-color-mode-line-init ()
   "Initialize flycheck color mode."
   (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
 
 
 (require-package '(:name flycheck
-			 :after (dholm/flycheck-init)))
+			 :after (user/flycheck-init)))
 
 (require-package '(:name flycheck-color-mode-line
                          :features (flycheck-color-mode-line)
 			 :type github
 			 :pkgname "syl20bnr/flycheck-color-mode-line"
 			 :depends (flycheck)
-			 :after (dholm/flycheck-color-mode-line-init)))
+			 :after (user/flycheck-color-mode-line-init)))
 
 
 (provide 'utilities/flycheck)

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/yasnippet-init ()
+(defun user/yasnippet-init ()
   "Initialize yasnippet."
   ;; Look for snippets in data directory
   (setq-default
@@ -18,7 +18,7 @@
   (after-load 'diminish
     (diminish 'yas-minor-mode)))
 
-(require-package '(:name yasnippet :after (dholm/yasnippet-init)))
+(require-package '(:name yasnippet :after (user/yasnippet-init)))
 
 
 (provide 'utilities/yasnippet)

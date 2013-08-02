@@ -6,7 +6,7 @@
 (defconst *bookmark+-menu-state-file* (path-join *user-cache-directory* "bookmark-menu-state.el"))
 
 
-(defun dholm/bookmark+-before-init ()
+(defun user/bookmark+-before-init ()
   "Setup before loading bookmark+."
   (setq-default
    ;; Enable versioned backups
@@ -19,7 +19,7 @@
    ;; Put the repository in the data directory
    bookmark-default-file *bookmark+-data-file*))
 
-(defun dholm/bookmark+-init ()
+(defun user/bookmark+-init ()
   "Initialize bookmark+."
   ;;; (Bindings) ;;;
   (define-key bookmark-map (kbd "l") 'bookmark-jump)
@@ -27,8 +27,8 @@
   (define-key bookmark-map (kbd "t") 'bmkp-add-tags))
 
 (require-package '(:name bookmark+
-                         :before (dholm/bookmark+-before-init)
-                         :after (dholm/bookmark+-init)))
+                         :before (user/bookmark+-before-init)
+                         :after (user/bookmark+-init)))
 
 
 (provide 'utilities/bookmark+)

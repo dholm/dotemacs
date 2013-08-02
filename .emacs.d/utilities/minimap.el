@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/minimap-init ()
+(defun user/minimap-init ()
   "Initialize minimap."
   ;;; (Functions) ;;;
   (defun minimap-toggle ()
@@ -13,10 +13,10 @@
       (minimap-kill)))
 
   ;;; (Bindings) ;;;
-  (define-key dholm/utilities-map (kbd "m") 'minimap-toggle))
+  (define-key user/utilities-map (kbd "m") 'minimap-toggle))
 
 (when (display-graphic-p)
-  (require-package '(:name minimap :after (dholm/minimap-init))))
+  (require-package '(:name minimap :after (user/minimap-init))))
 
 
 (provide 'utilities/minimap)

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/text-mode-hook ()
+(defun user/text-mode-hook ()
   "Text mode hook."
   (setq-default
    ;; Indent using spaces by default
@@ -15,7 +15,7 @@
   (after-load 'dtrt-indent
     (dtrt-indent-mode t)))
 
-(add-hook 'text-mode-hook 'dholm/text-mode-hook)
+(add-hook 'text-mode-hook 'user/text-mode-hook)
 
 
 (provide 'modes/text)

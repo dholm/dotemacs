@@ -5,14 +5,14 @@
 (defconst *has-clang* (executable-find "clang"))
 
 
-(defun dholm/c-mode-common-hook ()
+(defun user/c-mode-common-hook ()
   "C mode common hook."
   ;; Set the default C/C++ code styles
   (setq-default
    c-default-style "K&R"
    c++-default-style "Stroustrup")
   ;; Load CEDET
-  (dholm/c-mode-cedet-hook)
+  (user/c-mode-cedet-hook)
   ;; Enable eldoc
   (c-turn-on-eldoc-mode)
   ;; Override the indentation level of case labels in the K&R- and
@@ -29,12 +29,12 @@
   ;; Enable dtrt-indent to attempt to identify the indentation rules used
   (dtrt-indent-mode t))
 
-(add-hook 'c-mode-common-hook 'dholm/c-mode-common-hook)
+(add-hook 'c-mode-common-hook 'user/c-mode-common-hook)
 
 
-(defun dholm/c-mode-cedet-hook ()
+(defun user/c-mode-cedet-hook ()
   "C mode CEDET hook."
-  (dholm/cedet-hook)
+  (user/cedet-hook)
   ;; Load eassist from contrib package
   (unless (featurep 'cedet-contrib-load)
     (load (path-join (el-get-package-directory "cedet") "contrib" "cedet-contrib-load.el")))
@@ -59,8 +59,8 @@
     (semanticdb-enable-gnu-global-databases 'c++-mode))
 
   ;; Local bindings
-  (define-key dholm/navigation-map (kbd "t") 'eassist-switch-h-cpp)
-  (define-key dholm/documentation-map (kbd "m") 'eassist-list-methods)
+  (define-key user/navigation-map (kbd "t") 'eassist-switch-h-cpp)
+  (define-key user/documentation-map (kbd "m") 'eassist-list-methods)
 
   ;; Autocompletion
   (auto-complete-mode t)

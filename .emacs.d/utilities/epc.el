@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/epc-init ()
+(defun user/epc-init ()
   "Initialize EPC."
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
@@ -13,7 +13,7 @@
          '(epc:face-title ((t (:foreground ,blue :background ,solarized-bg
                                            :weight normal :underline nil)))))))))
 
-(require-package '(:name epc :after (dholm/epc-init)))
+(require-package '(:name epc :after (user/epc-init)))
 
 
 (provide 'utilities/epc)

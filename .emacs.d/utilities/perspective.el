@@ -2,11 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/perspective-init ()
+(defun user/perspective-init ()
   "Initialize perspective."
-  (define-key dholm/utilities-map (kbd "p") 'persp-mode))
+  (define-key user/utilities-map (kbd "p") 'persp-mode))
 
-(require-package '(:name perspective :after (dholm/perspective-init)))
+(require-package '(:name perspective :after (user/perspective-init)))
 
 
 (provide 'utilities/perspective)

@@ -2,11 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/wc-mode-init ()
+(defun user/wc-mode-init ()
   "Initialize wc-mode."
-  (define-key dholm/utilities-map (kbd "w") 'wc-mode))
+  (define-key user/utilities-map (kbd "w") 'wc-mode))
 
-(require-package '(:name wc-mode :after (dholm/wc-mode-init)))
+(require-package '(:name wc-mode :after (user/wc-mode-init)))
 
 
 (provide 'utilities/wc-mode)

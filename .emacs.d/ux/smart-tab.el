@@ -2,13 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/smart-tab-init ()
+(defun user/smart-tab-init ()
   "Initialize smart tab."
   (global-smart-tab-mode t)
   (after-load 'diminish
     (diminish 'smart-tab-mode)))
 
-(require-package '(:name smart-tab :after (dholm/smart-tab-init)))
+(require-package '(:name smart-tab :after (user/smart-tab-init)))
 
 
 (provide 'ux/smart-tab)

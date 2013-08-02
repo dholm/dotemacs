@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/prog-mode-hook ()
+(defun user/prog-mode-hook ()
   "Programming mode hook."
   (setq-default
    ;; Indent using spaces by default
@@ -15,7 +15,7 @@
   (after-load 'dtrt-indent
     (dtrt-indent-mode t)))
 
-(add-hook 'prog-mode-hook 'dholm/prog-mode-hook)
+(add-hook 'prog-mode-hook 'user/prog-mode-hook)
 
 
 (provide 'modes/prog)

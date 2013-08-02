@@ -2,13 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/flyspell-init ()
+(defun user/flyspell-init ()
   "Initialize flyspell."
   ;;; (Faces) ;;;
   )
 
 (after-load 'flyspell
-  (dholm/flyspell-init))
+  (user/flyspell-init))
 
 (require-package '(:name deferred-flyspell))
 

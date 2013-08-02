@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun dholm/ace-jump-mode-init ()
+(defun user/ace-jump-mode-init ()
   "Initialize ace jump mode."
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
@@ -15,10 +15,10 @@
          '(ace-jump-face-foreground ((t (:foreground ,red :background ,solarized-bg
                                                      :inverse-video nil :weight bold))))))))
 
-  (define-key dholm/navigation-map (kbd "SPC") 'ace-jump-mode))
+  (define-key user/navigation-map (kbd "SPC") 'ace-jump-mode))
 
 (require-package '(:name ace-jump-mode
-			 :after (dholm/ace-jump-mode-init)))
+			 :after (user/ace-jump-mode-init)))
 
 
 (provide 'ux/ace-jump-mode)

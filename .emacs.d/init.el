@@ -45,7 +45,7 @@
 
 
 ;; Synchronize all registered packages
-(dholm/sync-packages)
+(user/sync-packages)
 
 
 ;; Load custom after all packages have been synced

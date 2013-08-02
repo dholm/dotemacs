@@ -33,15 +33,15 @@
   (setq el-get-sources (append el-get-sources `(,package))))
 
 
-(defun dholm/package-list ()
+(defun user/package-list ()
   "Returns the list of registered packages"
   (append el-get-packages
           (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources))))
 
 
-(defun dholm/sync-packages ()
+(defun user/sync-packages ()
   "Sync all required packages"
-  (el-get 'sync (dholm/package-list)))
+  (el-get 'sync (user/package-list)))
 
 
 ;; Make sure el-get is registered so that el-get-cleanup doesn't remove it
