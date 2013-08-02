@@ -20,9 +20,9 @@
 (global-set-key (kbd "C-c b") 'bookmark-map)
 
 
-;; Function keys
-(global-set-key [f7] 'compile)
-(global-set-key [f8] 'gdb)
+;; General bindings for code map
+(define-key user/code-map (kbd "c") 'compile)
+(define-key user/code-map (kbd "d") 'gud-gdb)
 
 
 ;; Binds goto-line to navigation command g which is easier to access
