@@ -34,7 +34,6 @@
 (require 'utilities/w3m)
 (require 'utilities/wc-mode)
 (require 'utilities/xcscope)
-(require 'utilities/yasnippet)
 
 
 ;;; (Functions) ;;;

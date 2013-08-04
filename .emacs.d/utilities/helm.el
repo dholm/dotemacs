@@ -95,11 +95,6 @@
 (require-package '(:name helm-ls-git
 			 :type github
 			 :pkgname "emacs-helm/helm-ls-git"))
-(require-package '(:name helm-c-yasnippet
-			 :type github
-			 :pkgname "emacs-helm/helm-c-yasnippet"
-			 :features helm-c-yasnippet
-			 :depends (helm yasnippet)))
 
 
 (provide 'utilities/helm)
