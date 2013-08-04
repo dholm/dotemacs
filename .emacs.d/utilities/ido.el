@@ -14,6 +14,18 @@
 
 (user/ido-init)
 
+(defun user/flx-init ()
+  "Initialize FLX."
+  (flx-ido-mode t)
+  (setq-default ido-use-faces nil))
+
+(defun user/ido-vertical-mode-init ()
+  "Initialize IDO vertical mode."
+  (ido-vertical-mode))
+
+(require-package '(:name flx :after (user/flx-init)))
+(require-package '(:name ido-vertical-mode :after (user/ido-vertical-mode-init)))
+
 
 (provide 'utilities/ido)
 ;;; ido.el ends here
