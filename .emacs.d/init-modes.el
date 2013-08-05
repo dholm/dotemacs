@@ -15,6 +15,7 @@
 (require 'modes/csv)
 (require 'modes/gdb)
 (require 'modes/gnuplot)
+(require 'modes/go)
 (require 'modes/haskell)
 (require 'modes/html)
 (require 'modes/javascript)
