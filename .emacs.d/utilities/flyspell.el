@@ -17,14 +17,18 @@
 
   (add-hook 'flyspell-mode-hook 'user/flyspell-mode-hook))
 
-(defun user/deferred-flyspell-init ()
-  "Initialize deferred flyspell."
-  (add-hook 'flyspell-mode-hook 'deferred-flyspell:install-hooks))
-
 (after-load 'flyspell
   (user/flyspell-init))
 
-(require-package '(:name deferred-flyspell :after (user/deferred-flyspell-init)))
+(defun user/flyspell-lazy-init ()
+  "Initialize fly spell lazy."
+  (flyspell-lazy-mode t))
+
+(require-package '(:name flyspell-lazy
+                         :type github
+                         :pkgname "rolandwalker/flyspell-lazy"
+                         :features (flyspell-lazy)
+                         :after (user/flyspell-lazy-init)))
 
 
 (provide 'utilities/flyspell)
