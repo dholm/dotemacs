@@ -1,4 +1,4 @@
-;;; elim --- instant messenger
+;;; elim.el --- instant messenger
 ;;; Commentary:
 ;;; Code:
 
@@ -12,9 +12,12 @@
 
   (define-key user/utilities-map (kbd "i") 'garak))
 
-(if (pkg-config-has-p "libxml-2.0")
+(if
+    (and
+     (pkg-config-has-p "libxml-2.0")
+     (pkg-config-has-p "purple"))
     (require-package '(:name elim :after (user/elim-init)))
-  (message "libxml-2.0 not found, skipping ELIM."))
+  (message "libxml-2.0 or purple not found, skipping ELIM."))
 
 
 (provide 'utilities/elim)

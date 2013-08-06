@@ -5,8 +5,7 @@
 (defconst *has-aspell* (executable-find "aspell"))
 
 (defun user/flyspell-mode-hook ()
-  "Hook for fly spell mode."
-  (deferred-flyspell:install-hooks))
+  "Hook for fly spell mode.")
 
 (defun user/flyspell-init ()
   "Initialize fly spell."
@@ -18,10 +17,14 @@
 
   (add-hook 'flyspell-mode-hook 'user/flyspell-mode-hook))
 
+(defun user/deferred-flyspell-init ()
+  "Initialize deferred flyspell."
+  (add-hook 'flyspell-mode-hook 'deferred-flyspell:install-hooks))
+
 (after-load 'flyspell
   (user/flyspell-init))
 
-(require-package '(:name deferred-flyspell))
+(require-package '(:name deferred-flyspell :after (user/deferred-flyspell-init)))
 
 
 (provide 'utilities/flyspell)
