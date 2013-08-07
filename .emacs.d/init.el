@@ -2,10 +2,14 @@
 ;;; Commentary:
 ;;; Code:
 
-;; Bootstrap Emacs and load benchmarking
+;; Bootstrap Emacs and load benchmark
 (add-to-list 'load-path user-emacs-directory)
-(add-to-list 'exec-path (concat user-emacs-directory "bin"))
-(require 'lib/benchmarking)
+
+(require 'lib/path)
+(add-to-list 'exec-path (path-join user-emacs-directory "bin"))
+
+(require 'lib/benchmark)
+(benchmark/install)
 
 
 ;; Set up global constants
