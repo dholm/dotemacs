@@ -13,9 +13,9 @@
 
 
 ;; Set up global constants
-(require 'lib/path)
 (require 'lib/env)
-(defconst *user-home-directory* (concat (expand-file-name "~") "/"))
+(defconst *user-home-directory* (getenv-or "HOME"
+                                           (concat (expand-file-name "~") "/")))
 (defconst *user-data-directory* (getenv-or "XDG_DATA_HOME"
                                            (path-join *user-home-directory* ".local" "share" "emacs")))
 (defconst *user-cache-directory* (getenv-or "XDG_CACHE_HOME"
@@ -53,6 +53,6 @@
 
 
 ;; Load custom after all packages have been synced
-(when (file-exists-p custom-file)
-  (load custom-file))
+(when (file-exists-p *user-custom-file*)
+  (load *user-custom-file*))
 ;;; init.el ends here
