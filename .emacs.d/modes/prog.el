@@ -7,6 +7,8 @@
   (setq-default
    ;; Indent using spaces by default
    indent-tabs-mode nil)
+  ;; Automatically break long lines
+  (auto-fill-mode t)
   ;; Run spell-checker
   (flyspell-prog-mode)
   ;; Delete trailing whitespace on save

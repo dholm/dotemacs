@@ -8,7 +8,8 @@
 
 
 (setq-default
- ;; When using fill-paragraph or auto-fill-mode break lines at 80 characters
+ ;; When using fill-paragraph or auto-fill-mode break lines at 80 characters by
+ ;; default
  fill-column 80
  ;; Highlight matches when using grep
  grep-highlight-matches t
