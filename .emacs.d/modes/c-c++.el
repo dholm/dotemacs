@@ -11,16 +11,25 @@
   (setq-default
    c-default-style "K&R"
    c++-default-style "Stroustrup")
+
   ;; Load CEDET
   (user/c-mode-cedet-hook)
+
   ;; Enable eldoc
   (c-turn-on-eldoc-mode)
+
   ;; Override the indentation level of case labels in the K&R- and
   ;; Stroustrup styles so that they are indented one level beyond
   ;; the switch.
   (c-set-offset 'case-label '+)
+
   ;; Separate camel-case into separate words
   (subword-mode t)
+
+  (when (el-get-package-is-installed 'helm-etags-plus)
+    ;; Automatically update tags
+    (turn-on-ctags-auto-update-mode))
+
   ;; Autocompletion
   (when *has-clang*
     (set (make-local-variable 'ac-sources)

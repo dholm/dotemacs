@@ -49,9 +49,8 @@
     (semanticdb-enable-gnu-global-databases 'c-mode)
     (semanticdb-enable-gnu-global-databases 'c++-mode))
 
-  ;; Check if ectag is available
-  (when (cedet-ectag-version-check t)
-    (semantic-load-enable-primary-ectags-support))
+  ;; Enable [ec]tags support
+  (semantic-load-enable-primary-ectags-support)
 
   ;; Enable SRecode templates globally
   (global-srecode-minor-mode)
