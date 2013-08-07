@@ -37,9 +37,7 @@
 			 :load "haskell-mode-autoloads.el"
 			 :build (("make" "all"))
                          :after (user/haskell-mode-init)))
-(require-package '(:name ghci-completion
-			 :type github
-			 :pkgname "manzyuk/ghci-completion"))
+(require-package '(:name ghci-completion))
 (require-package '(:name scion
                          :type github
                          :pkgname "nominolo/scion"

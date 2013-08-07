@@ -107,11 +107,7 @@
 (when (display-graphic-p)
   (require-package '(:name git-gutter-fringe
                            :after (user/git-gutter-fringe-init))))
-(require-package '(:name git-messenger
-			 :after (user/git-messenger-init)
-			 :type github
-			 :pkgname "syohex/emacs-git-messenger"
-			 :depends (popup)))
+(require-package '(:name git-messenger :after (user/git-messenger-init)))
 (require-package '(:name yagist
 			 :type github
 			 :pkgname "mhayashi1120/yagist.el"

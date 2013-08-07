@@ -7,18 +7,11 @@
   ;; Separate camel-case into separate words
   (subword-mode t))
 
-
 (defun user/ttcn-mode-init ()
   "Initialize TTCN mode."
   (add-hook 'ttcn3-mode-hook 'user/ttcn3-mode-hook))
 
-(require-package '(:name ttcn-mode
-			 :type github
-			 :pkgname "dholm/ttcn-el"
-			 :post-init (progn
-				      (add-to-list 'auto-mode-alist '("\\.mp$" . ttcn-mode))
-				      (add-to-list 'auto-mode-alist '("\\.ttcn" . ttcn-3-mode)))
-                         :after (user/ttcn-mode-init)))
+(require-package '(:name ttcn-mode :after (user/ttcn-mode-init)))
 
 
 (provide 'modes/ttcn)

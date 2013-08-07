@@ -9,10 +9,7 @@
   (after-load 'diminish
     (diminish 'page-break-lines-mode)))
 
-(require-package '(:name page-break-lines
-			 :type github
-			 :pkgname "purcell/page-break-lines"
-			 :after (user/page-break-lines-init)))
+(require-package '(:name page-break-lines :after (user/page-break-lines-init)))
 
 
 (provide 'ux/page-break-lines)

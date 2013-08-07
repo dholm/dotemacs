@@ -9,11 +9,7 @@
   (define-key user/navigation-map (kbd "s p") 'smart-up)
   (define-key user/navigation-map (kbd "s n") 'smart-down))
 
-(require-package '(:name smart-forward
-                         :type github
-                         :pkgname "magnars/smart-forward.el"
-                         :depends (expand-region)
-                         :after (user/smart-forward-init)))
+(require-package '(:name smart-forward :after (user/smart-forward-init)))
 
 
 (provide 'ux/smart-forward)

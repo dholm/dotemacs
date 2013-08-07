@@ -92,9 +92,7 @@
 (require-package '(:name helm-descbinds :after (user/helm-descbinds-init)))
 (require-package '(:name helm-etags-plus))
 (require-package '(:name helm-build-command))
-(require-package '(:name helm-ls-git
-			 :type github
-			 :pkgname "emacs-helm/helm-ls-git"))
+(require-package '(:name helm-ls-git))
 
 
 (provide 'utilities/helm)

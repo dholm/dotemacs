@@ -25,7 +25,6 @@
 (when (display-graphic-p)
   (require 'utilities/minimap))
 (require 'utilities/outlookedit)
-(require 'utilities/packed)
 (require 'utilities/perspective)
 (require 'utilities/popup)
 (require 'utilities/tramp)

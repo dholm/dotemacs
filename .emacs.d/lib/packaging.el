@@ -45,10 +45,7 @@
 
 
 ;; Make sure el-get is registered so that el-get-cleanup doesn't remove it
-(require-package '(:name el-get
-                         :pkgname "dimitri/el-get"
-                         :type github
-                         :branch "master"))
+(require-package '(:name el-get))
 
 
 (provide 'lib/packaging)
