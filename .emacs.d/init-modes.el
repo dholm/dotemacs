@@ -23,6 +23,7 @@
 (require 'modes/lisp)
 (require 'modes/makefile)
 (require 'modes/markdown)
+(require 'modes/octave)
 (require 'modes/perl)
 (require 'modes/php)
 (require 'modes/prog)
