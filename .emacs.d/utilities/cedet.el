@@ -66,15 +66,35 @@
   (ede-enable-generic-projects)
 
   ;;; (Functions) ;;;
+  (defun user/ede-get-current-project ()
+    "Get the current EDE project."
+    (let* ((fname (or (buffer-file-name (current-buffer)) default-directory))
+           (current-dir (file-name-directory fname)))
+      (ede-current-project current-dir)))
+
+  (defun user/ede-gen-std-compile-string ()
+    "Generate compilation string for standard GNU Make project."
+    (let ((project-root (ede-project-root-directory
+                         (user/ede-get-current-project))))
+      (concat "cd " project-root "; "
+              "nice make -j")))
+
+  (defun user/ede-get-local-var (fname var)
+    "For file FNAME fetch the value of VAR from project."
+    (let ((current-project (user/ede-get-current-project)))
+      (when current-project
+        (let* ((ov (oref current-project local-variables))
+               (lst (assoc var ov)))
+          (when lst
+            (cdr lst))))))
+
   (defun user/ede-compile ()
     "Compile using EDE if possible, otherwise revert to compile."
     (interactive)
-    (cond
-     ((ede-buffer-belongs-to-target-p) (ede-compile-target))
-     ((ede-buffer-belongs-to-project-p) (ede-compile-project))
-     (t (progn
-          (set (make-local-variable 'compile-command) "make -k ")
-          (call-interactively 'compile))))))
+    (let ((current-project (user/ede-get-current-project)))
+      (if current-project
+          (project-compile-project current-project)
+        (call-interactively 'compile)))))
 
 (require-package '(:name cedet
                          :before (user/cedet-before-init)
