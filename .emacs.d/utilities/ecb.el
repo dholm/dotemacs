@@ -6,7 +6,20 @@
   "Initialize Emacs code browser."
   (require 'ecb-autoloads)
 
-  ;; (ECB Layout) ;;
+  ;; ECB version checking code is very old so that it thinks that the latest
+  ;; CEDET/Emacs is not new enough when in fact it is years newer than the
+  ;; latest version that it is aware of.  So simply bypass the version check.
+  (setq-default
+   ecb-version-check nil
+   ecb-tip-of-the-day nil)
+  (defadvice ecb-check-requirements (around no-version-check activate compile)
+    "AROUND NO-VERSION-CHECK ACTIVATE COMPILE"
+    (if (or (< emacs-major-version 23)
+           (and (= emacs-major-version 23)
+              (< emacs-minor-version 3)))
+        ad-do-it))
+
+  ;; ECB layout
   (setq-default
    ecb-layout-name "left7"
    ecb-layout-window-sizes '(("left7"
