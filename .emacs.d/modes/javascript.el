@@ -1,23 +1,32 @@
-;;; javascript --- initializes JavaScript modes
+;;; javascript.el --- initializes JavaScript modes
 ;;; Commentary:
 ;;; Code:
 
 (defun user/js2-mode-hook ()
   "JavaScript mode hook."
   ;; Enable js2-mode
-  (js2-mode t)
+  (js2-mode)
   ;; Load CEDET
   (user/javascript-mode-cedet-hook)
   ;; Configure js2-mode
-  (setq js2-use-font-lock-faces t
-        js2-mode-must-byte-compile nil
-        js2-indent-on-enter-key t
-        js2-auto-indent-p t
-        js2-bounce-indent-p nil
-        js2-basic-offset 2)
+  (setq-default
+   js2-use-font-lock-faces t
+   js2-mode-must-byte-compile nil
+   js2-indent-on-enter-key t
+   js2-auto-indent-p t
+   js2-bounce-indent-p nil
+   js2-basic-offset 2)
+  ;; Enable tern if installed
+  (when (el-get-package-is-installed 'tern)
+    (tern-mode t)
+    (define-key user/navigation-map (kbd "j") 'tern-find-definition)
+    (define-key user/navigation-map (kbd "b") 'tern-pop-find-definition)
+    (define-key user/documentation-map (kbd "d") 'tern-get-docs)
+    (tern-ac-setup))
   ;; Configure autocompletion
   (set (make-local-variable 'ac-auto-start) 3)
   (set (make-local-variable 'ac-auto-show-menu) t))
+
 
 (defun user/javascript-mode-cedet-hook ()
   "JavaScript CEDET support hook."
@@ -50,7 +59,12 @@
   (add-hook 'js2-mode-hook 'user/js2-mode-hook)
   (add-auto-mode 'js2-mode "\\.js$"))
 
+
 (require-package '(:name js2-mode :after (user/js2-mode-init)))
+(require-package '(:name tern
+                         :type github
+                         :pkgname "marijnh/tern"
+                         :load-path ("emacs")))
 
 
 (provide 'modes/javascript)
