@@ -9,6 +9,8 @@
    indent-tabs-mode nil)
   ;; Automatically break long lines
   (auto-fill-mode t)
+  (after-load 'diminish
+    (diminish 'auto-fill-function))
   ;; Run spell-checker
   (flyspell-prog-mode)
   ;; Delete trailing whitespace on save
