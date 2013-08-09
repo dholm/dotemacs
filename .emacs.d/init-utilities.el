@@ -15,6 +15,7 @@
 (require 'utilities/ecb)
 (require 'utilities/elim)
 (require 'utilities/epc)
+(require 'utilities/find-file-in-project)
 (require 'utilities/flycheck)
 (require 'utilities/flymake)
 (require 'utilities/flyspell)
