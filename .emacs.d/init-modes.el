@@ -21,6 +21,7 @@
 (require 'modes/javascript)
 (require 'modes/jinja)
 (require 'modes/lisp)
+(require 'modes/lua)
 (require 'modes/makefile)
 (require 'modes/markdown)
 (require 'modes/octave)
