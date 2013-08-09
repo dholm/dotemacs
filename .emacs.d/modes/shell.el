@@ -7,7 +7,12 @@
   (setq-default
    ;; Indent with four spaces
    sh-basic-offset 4
-   sh-indentation 4))
+   sh-indentation 4)
+
+  ;; Register file types with find-file-in-project
+  (when (el-get-package-is-installed 'find-file-in-project)
+    (user/ffip-local-patterns "*.sh")))
+
 
 (defun user/shell-mode-hook ()
   "Initialize mode for interactive shell."
@@ -22,19 +27,24 @@
   (require 'readline-complete)
   (ac-rlc-setup-sources))
 
-(add-hook 'sh-mode-hook 'user/sh-mode-hook)
-(add-hook 'shell-mode-hook 'user/shell-mode-hook)
-
 
 (defun user/readline-complete-init ()
   "Initialize readline complete."
   (add-to-list 'ac-modes 'shell-mode))
 
-(require-package '(:name bash-completion))
-(require-package '(:name readline-complete :after (user/readline-complete-init)))
-(require-package '(:name shell-command
-			 :type emacswiki
-			 :website "https://raw.github.com/emacsmirror/emacswiki.org/master/shell-command.el"))
+
+(defun user/shell-mode-init ()
+  "Initialize shell modes."
+  (require-package '(:name bash-completion))
+  (require-package '(:name readline-complete :after (user/readline-complete-init)))
+  (require-package '(:name shell-command
+                           :type emacswiki
+                           :website "https://raw.github.com/emacsmirror/emacswiki.org/master/shell-command.el"))
+
+  (add-hook 'sh-mode-hook 'user/sh-mode-hook)
+  (add-hook 'shell-mode-hook 'user/shell-mode-hook))
+
+(user/shell-mode-init)
 
 
 (provide 'modes/shell)

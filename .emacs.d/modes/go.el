@@ -13,6 +13,10 @@
                ;; Fix formatting
                (gofmt-before-save)))
 
+  ;; Register file types with find-file-in-project
+  (when (el-get-package-is-installed 'find-file-in-project)
+    (user/ffip-local-patterns "*.go"))
+
   ;;; (Bindings) ;;;
   (define-key user/documentation-map (kbd "d") 'godef-describe)
   (define-key user/documentation-map (kbd "m") 'godoc)
@@ -22,10 +26,6 @@
 
 (defun user/go-mode-init ()
   "Initialize Go mode."
-  (add-hook 'go-mode-hook 'user/go-mode-hook))
-
-(when *has-go*
-  (require-package '(:name go-mode :after (user/go-mode-init)))
   (require-package '(:name go-autocomplete
                            :type github
                            :pkgname "nsf/gocode"
@@ -36,7 +36,13 @@
                            :prepare (progn
                                       (setq exec-path
                                             (append exec-path
-                                                    (el-get-package-directory "gocode")))))))
+                                                    (el-get-package-directory
+                                                     "gocode"))))))
+
+  (add-hook 'go-mode-hook 'user/go-mode-hook))
+
+(when *has-go*
+  (require-package '(:name go-mode :after (user/go-mode-init))))
 
 
 (provide 'modes/go)

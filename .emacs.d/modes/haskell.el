@@ -1,4 +1,4 @@
-;;; haskell --- initializes Haskell modes
+;;; haskell.el --- initializes Haskell modes
 ;;; Commentary:
 ;;; Code:
 
@@ -18,6 +18,11 @@
   "Haskell mode hook."
   (user/generic-haskell-mode-hook)
   (turn-on-haskell-indentation)
+
+  ;; Register file types with find-file-in-project
+  (when (el-get-package-is-installed 'find-file-in-project)
+    (user/ffip-local-patterns "*.hs" "*.lhs"))
+
   ;; Enable scion
   (scion-mode t))
 
@@ -30,9 +35,16 @@
 
 (defun user/haskell-mode-init ()
   "Initialize haskell mode."
+  (require-package '(:name ghci-completion))
+  (require-package '(:name scion
+                           :type github
+                           :pkgname "nominolo/scion"
+                           :load-path "emacs"
+                           :prepare (progn
+                                      (autoload 'scion-mode "scion"))))
+
   (add-hook 'haskell-mode-hook 'user/haskell-mode-hook)
   (add-hook 'inferior-haskell-mode-hook 'user/inferior-haskell-mode-hook))
-
 
 (when *has-ghc*
   (require-package '(:name haskell-mode
@@ -40,14 +52,7 @@
                            :pkgname "haskell/haskell-mode"
                            :load "haskell-mode-autoloads.el"
                            :build (("make" "all"))
-                           :after (user/haskell-mode-init)))
-  (require-package '(:name ghci-completion))
-  (require-package '(:name scion
-                           :type github
-                           :pkgname "nominolo/scion"
-                           :load-path "emacs"
-                           :prepare (progn
-                                      (autoload 'scion-mode "scion")))))
+                           :after (user/haskell-mode-init))))
 
 
 (provide 'modes/haskell)

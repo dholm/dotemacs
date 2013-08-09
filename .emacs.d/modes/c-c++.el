@@ -1,4 +1,4 @@
-;;; c/c++ --- initializes C/C++ modes
+;;; c-c++.el --- initializes C/C++ modes
 ;;; Commentary:
 ;;; Code:
 
@@ -25,6 +25,10 @@
 
   ;; Separate camel-case into separate words
   (subword-mode t)
+
+  ;; Register file types with find-file-in-project
+  (when (el-get-package-is-installed 'find-file-in-project)
+    (user/ffip-local-patterns "*.c" "*.h" "*.cpp" "*.hpp" "*.cc" "*.hh"))
 
   (when (el-get-package-is-installed 'helm-etags-plus)
     ;; Automatically update tags
@@ -78,13 +82,17 @@
          (append ac-sources '(ac-source-gtags)))))
 
 
-(require-package '(:name c-eldoc
-			 :type github
-                         :pkgname "mooz/c-eldoc"
-                         :depends (deferred)
-			 :prepare (autoload 'c-turn-on-eldoc-mode "c-eldoc" nil t)))
-(when *has-clang*
-  (require-package '(:name clang-complete-async)))
+(defun user/c-c++-mode-init ()
+  "Initialize C/C++ mode."
+  (require-package '(:name c-eldoc
+                           :type github
+                           :pkgname "mooz/c-eldoc"
+                           :depends (deferred)
+                           :prepare (autoload 'c-turn-on-eldoc-mode "c-eldoc" nil t)))
+  (when *has-clang*
+    (require-package '(:name clang-complete-async))))
+
+(user/c-c++-mode-init)
 
 
 (provide 'modes/c-c++)

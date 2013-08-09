@@ -56,15 +56,23 @@
          '(js2-private-member ((t (:foreground ,blue))))
          '(js2-warning ((t (:underline ,orange))))))))
 
+  ;; Register file types with find-file-in-project
+  (when (el-get-package-is-installed 'find-file-in-project)
+    (user/ffip-local-patterns "*.js"))
+
   (add-hook 'js2-mode-hook 'user/js2-mode-hook)
   (add-auto-mode 'js2-mode "\\.js$"))
 
 
-(require-package '(:name js2-mode :after (user/js2-mode-init)))
-(require-package '(:name tern
-                         :type github
-                         :pkgname "marijnh/tern"
-                         :load-path ("emacs")))
+(defun user/javascript-mode-init ()
+  "Initialize JavaScript mode."
+  (require-package '(:name js2-mode :after (user/js2-mode-init)))
+  (require-package '(:name tern
+                           :type github
+                           :pkgname "marijnh/tern"
+                           :load-path ("emacs"))))
+
+(user/javascript-mode-init)
 
 
 (provide 'modes/javascript)

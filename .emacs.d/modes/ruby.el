@@ -1,4 +1,4 @@
-;;; ruby --- ruby mode support
+;;; ruby.el --- ruby mode support
 ;;; Commentary:
 ;;; Code:
 
@@ -19,7 +19,11 @@
   (subword-mode t)
   ;; Bindings
   (define-key ruby-mode-map (kbd "RET") 'reindent-then-newline-and-indent)
-  (define-key ruby-mode-map (kbd "RET") 'indent-for-tab-command))
+  (define-key ruby-mode-map (kbd "RET") 'indent-for-tab-command)
+
+  ;; Register file types with find-file-in-project
+  (when (el-get-package-is-installed 'find-file-in-project)
+    (user/ffip-local-patterns "*.rb")))
 
 
 (defun user/robe-mode-hook ()

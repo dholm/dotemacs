@@ -1,4 +1,4 @@
-;;; text --- text mode support
+;;; text.el --- text mode support
 ;;; Commentary:
 ;;; Code:
 
@@ -17,7 +17,12 @@
   (after-load 'dtrt-indent
     (dtrt-indent-mode t)))
 
-(add-hook 'text-mode-hook 'user/text-mode-hook)
+
+(defun user/text-mode-init ()
+  "Initialize generic text editing mode."
+  (add-hook 'text-mode-hook 'user/text-mode-hook))
+
+(user/text-mode-init)
 
 
 (provide 'modes/text)
