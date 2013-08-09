@@ -12,7 +12,7 @@
   (define-key user/navigation-map (kbd "j") 'semantic-ia-fast-jump)
   (define-key user/navigation-map (kbd "b") 'semantic-mrub-switch-tags)
   (define-key user/navigation-map (kbd "p") 'semantic-analyze-proto-impl-toggle)
-  (define-key user/documentation-map (kbd "r") 'semantic-symref)
+  (define-key user/navigation-map (kbd "r") 'semantic-symref)
   (define-key user/documentation-map (kbd "d") 'semantic-ia-show-doc)
   (define-key user/documentation-map (kbd "s") 'semantic-ia-show-summary)
   (local-set-key (kbd "C-c +") 'semantic-tag-folding-show-block)
