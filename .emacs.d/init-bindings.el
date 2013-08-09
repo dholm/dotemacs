@@ -21,7 +21,6 @@
 
 
 ;; General bindings for code map
-(define-key user/code-map (kbd "c") 'compile)
 (define-key user/code-map (kbd "d") 'gud-gdb)
 
 

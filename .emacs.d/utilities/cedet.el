@@ -4,26 +4,31 @@
 
 (defun user/cedet-hook ()
   "Hook for modes with CEDET support."
-  ;; Set up local bindings
+  ;; Use semantic as a source for auto complete
+  (when (featurep 'auto-complete)
+    (set (make-local-variable 'ac-sources)
+         (append ac-sources '(ac-source-semantic))))
+
+  ;;; (Bindings) ;;;
+  (define-key user/code-map (kbd "c") 'user/ede-compile)
+
   (define-key user/code-map (kbd "RET") 'semantic-ia-complete-symbol)
   (define-key user/code-map (kbd "?") 'semantic-ia-complete-symbol-menu)
   (define-key user/code-map (kbd ">") 'semantic-complete-analyze-inline)
   (define-key user/code-map (kbd "=") 'semantic-decoration-include-visit)
+
   (define-key user/navigation-map (kbd "j") 'semantic-ia-fast-jump)
   (define-key user/navigation-map (kbd "b") 'semantic-mrub-switch-tags)
   (define-key user/navigation-map (kbd "p") 'semantic-analyze-proto-impl-toggle)
   (define-key user/navigation-map (kbd "r") 'semantic-symref)
+
   (define-key user/documentation-map (kbd "d") 'semantic-ia-show-doc)
   (define-key user/documentation-map (kbd "s") 'semantic-ia-show-summary)
+
   (local-set-key (kbd "C-c +") 'semantic-tag-folding-show-block)
   (local-set-key (kbd "C-c -") 'semantic-tag-folding-fold-block)
   (local-set-key (kbd "C-c C-c +") 'semantic-tag-folding-show-all)
-  (local-set-key (kbd "C-c C-c -") 'semantic-tag-folding-fold-all)
-
-  ;; Use semantic as a source for auto complete
-  (when (featurep 'auto-complete)
-    (set (make-local-variable 'ac-sources)
-       (append ac-sources '(ac-source-semantic)))))
+  (local-set-key (kbd "C-c C-c -") 'semantic-tag-folding-fold-all))
 
 
 (defun user/cedet-before-init ()
@@ -33,6 +38,7 @@
    semanticdb-default-save-directory (path-join *user-cache-directory* "semanticdb")
    ede-project-placeholder-cache-file (path-join *user-cache-directory* "ede-projects.el")
    srecode-map-save-file (path-join *user-cache-directory* "srecode-map.el")))
+
 
 (defun user/cedet-init ()
   "Initialize CEDET."
@@ -55,9 +61,20 @@
   ;; Enable SRecode templates globally
   (global-srecode-minor-mode)
 
-  ;; Configure ede-mode project management
+  ;; Configure EDE-mode project management
   (global-ede-mode t)
-  (ede-enable-generic-projects))
+  (ede-enable-generic-projects)
+
+  ;;; (Functions) ;;;
+  (defun user/ede-compile ()
+    "Compile using EDE if possible, otherwise revert to compile."
+    (interactive)
+    (cond
+     ((ede-buffer-belongs-to-target-p) (ede-compile-target))
+     ((ede-buffer-belongs-to-project-p) (ede-compile-project))
+     (t (progn
+          (set (make-local-variable 'compile-command) "make -k ")
+          (call-interactively 'compile))))))
 
 (require-package '(:name cedet
                          :before (user/cedet-before-init)
