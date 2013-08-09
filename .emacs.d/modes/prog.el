@@ -17,9 +17,14 @@
   (add-hook 'write-contents-functions 'delete-trailing-whitespace nil t)
   ;; Enable dtrt-indent to attempt to identify the indentation rules used
   (after-load 'dtrt-indent
-    (dtrt-indent-mode t)))
+    (dtrt-indent-mode t))
+  ;; Highlight FIXME/TODO/etc
+  (when (el-get-package-is-installed 'fic-mode)
+    (fic-mode t)))
 
 (add-hook 'prog-mode-hook 'user/prog-mode-hook)
+
+(require-package '(:name fic-mode))
 
 
 (provide 'modes/prog)
