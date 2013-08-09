@@ -2,6 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
+(defconst *has-ghc* (executable-find "ghc"))
+
+
 (defun user/generic-haskell-mode-hook ()
   "Generic Haskell mode hook."
   (turn-on-haskell-doc-mode)
@@ -31,19 +34,20 @@
   (add-hook 'inferior-haskell-mode-hook 'user/inferior-haskell-mode-hook))
 
 
-(require-package '(:name haskell-mode
-			 :type github
-			 :pkgname "haskell/haskell-mode"
-			 :load "haskell-mode-autoloads.el"
-			 :build (("make" "all"))
-                         :after (user/haskell-mode-init)))
-(require-package '(:name ghci-completion))
-(require-package '(:name scion
-                         :type github
-                         :pkgname "nominolo/scion"
-                         :load-path "emacs"
-                         :prepare (progn
-                                    (autoload 'scion-mode "scion"))))
+(when *has-ghc*
+  (require-package '(:name haskell-mode
+                           :type github
+                           :pkgname "haskell/haskell-mode"
+                           :load "haskell-mode-autoloads.el"
+                           :build (("make" "all"))
+                           :after (user/haskell-mode-init)))
+  (require-package '(:name ghci-completion))
+  (require-package '(:name scion
+                           :type github
+                           :pkgname "nominolo/scion"
+                           :load-path "emacs"
+                           :prepare (progn
+                                      (autoload 'scion-mode "scion")))))
 
 
 (provide 'modes/haskell)

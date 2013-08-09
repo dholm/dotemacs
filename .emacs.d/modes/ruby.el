@@ -2,6 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
+(defconst *has-ruby* (executable-find "ruby"))
+
+
 (defun user/ruby-mode-hook ()
   "Ruby mode hook."
   (unless (derived-mode-p 'prog-mode)
@@ -34,9 +37,11 @@
   (add-hook 'ruby-mode-hook 'robe-mode)
   (add-hook 'robe-mode-hook 'user/robe-mode-hook))
 
-(require-package '(:name ruby-mode :after (user/ruby-mode-init)))
-(require-package '(:name robe-mode :after (user/robe-init)))
-(require-package '(:name inf-ruby))
+
+(when *has-ruby*
+  (require-package '(:name ruby-mode :after (user/ruby-mode-init)))
+  (require-package '(:name robe-mode :after (user/robe-init)))
+  (require-package '(:name inf-ruby)))
 
 
 (provide 'modes/ruby)

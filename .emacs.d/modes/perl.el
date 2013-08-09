@@ -2,6 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
+(defconst *has-perl* (executable-find "perl"))
+
+
 (defun user/pde-perl-mode-hook ()
   "PDE Perl mode hook."
   (require 'pde-load)
@@ -25,15 +28,17 @@
   ;; Initialize PDE
   (user/pde-perl-mode-hook))
 
-(add-hook 'perl-mode-hook 'user/perl-mode-hook)
 
-(require-package '(:name perl-completion
-			 :type emacswiki
-			 :website "https://raw.github.com/emacsmirror/emacswiki.org/master/perl-completion.el"))
-(require-package '(:name pde
-			 :type github
-			 :pkgname "wenbinye/emacs-pde"
-			 :load-path ("lisp")))
+(when *has-perl*
+  (add-hook 'perl-mode-hook 'user/perl-mode-hook)
+
+  (require-package '(:name perl-completion
+                           :type emacswiki
+                           :website "https://raw.github.com/emacsmirror/emacswiki.org/master/perl-completion.el"))
+  (require-package '(:name pde
+                           :type github
+                           :pkgname "wenbinye/emacs-pde"
+                           :load-path ("lisp"))))
 
 
 (provide 'modes/perl)

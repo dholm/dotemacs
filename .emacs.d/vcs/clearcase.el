@@ -2,7 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
-(require-package '(:name vc-clearcase))
+(defconst *has-cleartool* (executable-find "cleartool"))
+
+(when *has-cleartool*
+  (require-package '(:name vc-clearcase)))
 
 
 (provide 'vcs/clearcase)

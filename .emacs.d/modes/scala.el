@@ -4,6 +4,7 @@
 
 (defconst *user-has-sbt* (executable-find "sbt"))
 
+
 (defun user/scala-mode-hook ()
   "Scala mode hook."
   (when *user-has-sbt* (ensime-scala-mode-hook)))

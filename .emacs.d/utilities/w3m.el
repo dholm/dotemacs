@@ -4,6 +4,7 @@
 
 (defconst *has-w3m* (executable-find "w3m"))
 
+
 (defun user/w3m-init ()
   "Initialize w3m."
   (setq-default
@@ -18,6 +19,7 @@
 
   (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
   (define-key user/utilities-map (kbd "b") 'browse-url-at-point))
+
 
 (when *has-w3m*
   (require-package '(:name emacs-w3m :after (user/w3m-init))))

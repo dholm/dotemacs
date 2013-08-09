@@ -2,6 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
+(defconst *has-purple*
+  (and
+   (pkg-config-has-p "libxml-2.0")
+   (pkg-config-has-p "purple")))
+
+
 (defun user/elim-init ()
   "Initialize elim."
   (setq-default
@@ -12,12 +18,9 @@
 
   (define-key user/utilities-map (kbd "i") 'garak))
 
-(if
-    (and
-     (pkg-config-has-p "libxml-2.0")
-     (pkg-config-has-p "purple"))
-    (require-package '(:name elim :after (user/elim-init)))
-  (message "libxml-2.0 or purple not found, skipping ELIM."))
+
+(when *has-purple*
+  (require-package '(:name elim :after (user/elim-init))))
 
 
 (provide 'utilities/elim)

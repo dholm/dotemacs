@@ -2,6 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
+(defconst *has-python* (executable-find "python"))
+
+
 (defun user/python-mode-hook ()
   "Python mode hook."
   (unless (derived-mode-p 'prog-mode)
@@ -53,9 +56,11 @@
   "Initialize Python mode."
   (add-hook 'python-mode-hook 'user/python-mode-hook))
 
-(require-package '(:name python-mode :after (user/python-mode-init)))
-(require-package '(:name jedi :after (user/jedi-init)))
-(require-package '(:name pylookup))
+
+(when *has-python*
+  (require-package '(:name python-mode :after (user/python-mode-init)))
+  (require-package '(:name jedi :after (user/jedi-init)))
+  (require-package '(:name pylookup)))
 
 
 (provide 'modes/python)
