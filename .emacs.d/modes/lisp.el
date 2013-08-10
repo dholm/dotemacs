@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
+;;; (Mode Hooks) ;;;
 (defun user/lisp-mode-hook ()
   "LISP mode hook."
   (when (el-get-package-is-installed 'cedet)
@@ -23,13 +24,16 @@
     (ac-emacs-lisp-mode-setup))
   (local-set-key (kbd "C-c e") 'macrostep-expand))
 
+(defun user/minibuffer-setup-hook ()
+  "Emacs minibuffer hook."
+  (when (eq this-command 'eval-expression)
+    (when (el-get-package-is-installed 'rainbow-delimiters)
+      (rainbow-delimiters-mode))
+    (when (el-get-package-is-installed 'paredit)
+      (enable-paredit-mode))))
 
-;; Install mode hooks
-(add-hook 'lisp-mode-hook 'user/lisp-mode-hook)
-(add-hook 'emacs-lisp-mode-hook 'user/emacs-lisp-mode-hook)
 
-
-;;; (Package Initialization) ;;;
+;;; (Initialization) ;;;
 (defun user/newlisp-mode-init ()
   "Initialize newlisp mode."
   (add-auto-mode 'newlisp-mode "\\.lsp$")
@@ -58,16 +62,29 @@
   (auto-compile-on-load-mode t))
 
 
-(require-package '(:name rainbow-delimiters))
-(require-package '(:name paredit))
-(require-package '(:name redshank))
-(require-package '(:name macrostep))
-(require-package '(:name auto-complete-emacs-lisp))
-(require-package '(:name slime))
-(require-package '(:name elisp-slime-nav))
-(require-package '(:name newlisp-mode :after (user/newlisp-mode-init)))
-(require-package '(:name swank-newlisp :after (user/swank-newlisp-init)))
-(require-package '(:name auto-compile :after (user/auto-compile-init)))
+(defun user/lisp-mode-init ()
+  "Initialize Lisp modes."
+  ;;; (Packages) ;;;
+  (require-package '(:name rainbow-delimiters))
+  (require-package '(:name paredit))
+  (require-package '(:name redshank))
+  (require-package '(:name macrostep))
+  (require-package '(:name auto-complete-emacs-lisp))
+  (require-package '(:name slime))
+  (require-package '(:name elisp-slime-nav))
+  (require-package '(:name newlisp-mode :after (user/newlisp-mode-init)))
+  (require-package '(:name swank-newlisp :after (user/swank-newlisp-init)))
+  (require-package '(:name auto-compile :after (user/auto-compile-init)))
+
+  ;;; (Bindings) ;;;
+  (global-set-key (kbd "C-c SPC") 'eval-expression)
+
+  ;;; (Hooks) ;;;
+  (add-hook 'lisp-mode-hook 'user/lisp-mode-hook)
+  (add-hook 'emacs-lisp-mode-hook 'user/emacs-lisp-mode-hook)
+  (add-hook 'minibuffer-setup-hook 'user/minibuffer-setup-hook))
+
+(user/lisp-mode-init)
 
 
 (provide 'modes/lisp)
