@@ -23,7 +23,7 @@
   (after-load 'diminish
     (diminish 'undo-tree-mode))
 
-  (define-key user/utilities-map (kbd "u") 'undo-tree-visualize))
+  (define-key user/code-map (kbd "u") 'undo-tree-visualize))
 
 (require-package '(:name undo-tree
                          :features (undo-tree)
