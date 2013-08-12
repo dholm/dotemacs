@@ -43,7 +43,7 @@
 
 ;; If ~/.emacs.local is available load it as the last file so that it is
 ;; possible to add local settings and overrides.
-(setq user-local-init (path-join *user-home-directory* ".emacs.local"))
+(setq user-local-init (path-join *user-home-directory* ".emacs.local.el"))
 (when (file-exists-p user-local-init)
   (load user-local-init))
 
