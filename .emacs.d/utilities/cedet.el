@@ -5,7 +5,7 @@
 (defun user/cedet-hook ()
   "Hook for modes with CEDET support."
   ;; Use semantic as a source for auto complete
-  (when (featurep 'auto-complete)
+  (when (el-get-package-is-installed 'auto-complete)
     (set (make-local-variable 'ac-sources)
          (append ac-sources '(ac-source-semantic))))
 
@@ -13,7 +13,7 @@
   (define-key user/code-map (kbd "c") 'user/ede-compile)
 
   (define-key user/code-map (kbd "RET") 'semantic-ia-complete-symbol)
-  (define-key user/code-map (kbd "?") 'semantic-ia-complete-symbol-menu)
+  (define-key user/code-map (kbd "TAB") 'semantic-ia-complete-symbol-menu)
   (define-key user/code-map (kbd ">") 'semantic-complete-analyze-inline)
   (define-key user/code-map (kbd "=") 'semantic-decoration-include-visit)
 
@@ -42,28 +42,41 @@
 
 (defun user/cedet-init ()
   "Initialize CEDET."
-  ;; Configure EDE-mode project management
+  ;;; (EDE) ;;;
   (global-ede-mode t)
   (ede-enable-generic-projects)
 
-  ;; Enable Semantic
+  ;;; (Semantic) ;;;
   (require 'semantic/ia)
   (require 'semantic/db)
 
   (semantic-mode)
   (semantic-load-enable-code-helpers)
-  (global-semanticdb-minor-mode)
 
-  ;; Check if GNU Global is available
-  (when (cedet-gnu-global-version-check t)
-    (semanticdb-enable-gnu-global-databases 'c-mode)
-    (semanticdb-enable-gnu-global-databases 'c++-mode))
+  ;; Scan source code automatically during idle time
+  (global-semantic-idle-scheduler-mode t)
+  ;; Initiate inline completion automatically during idle time
+  (global-semantic-idle-completions-mode t)
+  ;; Show breadcrumbs during idle time
+  (setq-default
+   semantic-idle-breadcrumbs-format-tag-function 'semantic-format-tag-summarize
+   semantic-idle-breadcrumbs-separator " ⊃ "
+   semantic-idle-breadcrumbs-header-line-prefix " ≝ ")
+  (global-semantic-idle-breadcrumbs-mode t)
 
   ;; Enable [ec]tags support
   (semantic-load-enable-primary-ectags-support)
 
   ;; Enable SRecode templates globally
   (global-srecode-minor-mode)
+
+  ;;; (SemanticDB) ;;;
+  (global-semanticdb-minor-mode t)
+
+  ;; Check if GNU Global is available
+  (when (cedet-gnu-global-version-check t)
+    (semanticdb-enable-gnu-global-databases 'c-mode)
+    (semanticdb-enable-gnu-global-databases 'c++-mode))
 
   ;;; (Functions) ;;;
   (defun user/ede-get-current-project ()
