@@ -7,6 +7,9 @@
 
 (defun user/xcscope-init ()
   "Initialize xcscope."
+  (setq-default
+   cscope-index-recursively t)
+
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
     (solarized-with-values
