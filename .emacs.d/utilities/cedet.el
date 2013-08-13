@@ -48,9 +48,9 @@
 
   ;;; (Semantic) ;;;
   (require 'semantic/ia)
-  (require 'semantic/db)
 
-  (semantic-mode)
+  ;; Enable semantic
+  (semantic-mode t)
   (semantic-load-enable-code-helpers)
 
   ;; Scan source code automatically during idle time
@@ -64,6 +64,9 @@
    semantic-idle-breadcrumbs-header-line-prefix " ≝ ")
   (global-semantic-idle-breadcrumbs-mode t)
 
+  ;; Remember recently edited tags
+  (global-semantic-mru-bookmark-mode t)
+
   ;; Enable [ec]tags support
   (semantic-load-enable-primary-ectags-support)
 
@@ -71,6 +74,7 @@
   (global-srecode-minor-mode)
 
   ;;; (SemanticDB) ;;;
+  (require 'semantic/db)
   (global-semanticdb-minor-mode t)
 
   ;; Check if GNU Global is available
