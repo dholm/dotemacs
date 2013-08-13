@@ -13,6 +13,10 @@
        'solarized
 
        ;; basic coloring
+       '(header-line
+         ((t (:foreground ,solarized-comment :background ,solarized-hl
+                          :inverse-video unspecified :underline unspecified
+                          :box (:line-width 1 :color ,solarized-hl :style unspecified)))))
        '(match ((t (:foreground ,solarized-emph :background ,solarized-hl :weight bold))))
 
        ;; compilation
