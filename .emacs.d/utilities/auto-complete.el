@@ -10,10 +10,12 @@
   (ac-config-default)
 
   (setq-default
-   ;; Automatically start completion after 0.8s
+   ;; Limit the number of candidates
+   ac-candidate-limit 200
+   ;; Automatically start completion
    ac-auto-start 0.8
    ;; Use fuzzy matching
-   ac-use-fuzzy t
+   ac-use-fuzzy 1.5
    ;; Do not show menu unless requested
    ac-auto-show-menu nil
    ;; Allow normal navigation keys in menu
