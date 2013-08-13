@@ -42,12 +42,16 @@
 
 (defun user/cedet-init ()
   "Initialize CEDET."
-  ;; Set up and enable semantic
+  ;; Configure EDE-mode project management
+  (global-ede-mode t)
+  (ede-enable-generic-projects)
+
+  ;; Enable Semantic
   (require 'semantic/ia)
   (require 'semantic/db)
 
   (semantic-mode)
-  (semantic-load-enable-excessive-code-helpers)
+  (semantic-load-enable-code-helpers)
   (global-semanticdb-minor-mode)
 
   ;; Check if GNU Global is available
@@ -60,10 +64,6 @@
 
   ;; Enable SRecode templates globally
   (global-srecode-minor-mode)
-
-  ;; Configure EDE-mode project management
-  (global-ede-mode t)
-  (ede-enable-generic-projects)
 
   ;;; (Functions) ;;;
   (defun user/ede-get-current-project ()
