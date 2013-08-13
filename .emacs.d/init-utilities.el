@@ -19,6 +19,7 @@
 (require 'utilities/flycheck)
 (require 'utilities/flymake)
 (require 'utilities/flyspell)
+(require 'utilities/google-this)
 (require 'utilities/helm)
 (require 'utilities/hide-lines)
 (require 'utilities/ibuffer)
