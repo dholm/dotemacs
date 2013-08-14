@@ -23,12 +23,7 @@
   (define-key user/navigation-map (kbd "r") 'semantic-symref)
 
   (define-key user/documentation-map (kbd "d") 'semantic-ia-show-doc)
-  (define-key user/documentation-map (kbd "s") 'semantic-ia-show-summary)
-
-  (local-set-key (kbd "C-c +") 'semantic-tag-folding-show-block)
-  (local-set-key (kbd "C-c -") 'semantic-tag-folding-fold-block)
-  (local-set-key (kbd "C-c C-c +") 'semantic-tag-folding-show-all)
-  (local-set-key (kbd "C-c C-c -") 'semantic-tag-folding-fold-all))
+  (define-key user/documentation-map (kbd "s") 'semantic-ia-show-summary))
 
 
 (defun user/cedet-before-init ()
