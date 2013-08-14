@@ -1,4 +1,4 @@
-;;; hide-lines --- commands for hiding lines based on a regexp
+;;; hide-lines.el --- commands for hiding lines based on a regexp
 ;;; Commentary:
 ;;;  This is a dependency of syslog-mode.
 ;;; Code:
@@ -8,5 +8,5 @@
 			 :pkgname "vapniks/hide-lines"))
 
 
-(provide 'utilities/hide-lines)
+(provide 'ux/hide-lines)
 ;;; hide-lines.el ends here

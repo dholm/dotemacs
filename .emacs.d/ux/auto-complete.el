@@ -63,5 +63,5 @@
 (require-package '(:name auto-complete :after (user/auto-complete-init)))
 
 
-(provide 'utilities/auto-complete)
+(provide 'ux/auto-complete)
 ;;; auto-complete.el ends here

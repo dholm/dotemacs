@@ -1,4 +1,4 @@
-;;; undo-tree --- undo history in a tree structure
+;;; undo-tree.el --- undo history in a tree structure
 ;;; Commentary:
 ;;; Code:
 
@@ -32,5 +32,5 @@
                          :after (user/undo-tree-init)))
 
 
-(provide 'utilities/undo-tree)
+(provide 'ux/undo-tree)
 ;;; undo-tree.el ends here

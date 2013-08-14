@@ -1,4 +1,4 @@
-;;; popup --- visual popups for Emacs
+;;; popup.el --- visual popups for Emacs
 ;;; Commentary:
 ;;; Code:
 
@@ -22,5 +22,5 @@
 (require-package '(:name popup :after (user/popup-init)))
 
 
-(provide 'utilities/popup)
+(provide 'ux/popup)
 ;;; popup.el ends here
