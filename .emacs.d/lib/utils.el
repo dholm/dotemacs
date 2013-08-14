@@ -1,4 +1,4 @@
-;;; utils --- miscellaneous support functions
+;;; utils.el --- miscellaneous support functions
 ;;; Commentary:
 ;;; Code:
 

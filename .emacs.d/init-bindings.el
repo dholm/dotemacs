@@ -2,6 +2,23 @@
 ;;; Commentary:
 ;;; Code:
 
+;; Define command groups
+(defvar user/navigation-map nil
+  "Map for navigational bindings.")
+
+(defvar user/documentation-map nil
+  "Map for bindings to access documentation.")
+
+(defvar user/code-keyboard-prefix nil
+  "Map for bindings that interact with or modify code.")
+
+(defvar user/vcs-keyboard-prefix nil
+  "Map for bindings to interact with version control systems.")
+
+(defvar user/utilities-keyboard-prefix nil
+  "Map for bindings to interact with utility modules.")
+
+
 ;; Set up prefixes for groups of commands
 (defcustom user/navigation-keyboard-prefix (kbd "C-c n")
   "Keyboard prefix to use for navigation commands."
@@ -28,6 +45,8 @@
   :type 'key-sequence
   :group 'user)
 
+
+;; Bind keys to maps
 (define-prefix-command 'user/navigation-map)
 (define-key global-map user/navigation-keyboard-prefix 'user/navigation-map)
 

@@ -1,4 +1,4 @@
-;;; packaging --- initialize package management
+;;; packaging.el --- initialize package management
 ;;; Commentary:
 ;;; Code:
 
@@ -29,18 +29,18 @@
 
 
 (defun require-package (package)
-  "Adds the specified package to el-get-sources"
+  "Add the specified PACKAGE to el-get-sources."
   (setq el-get-sources (append el-get-sources `(,package))))
 
 
 (defun user/package-list ()
-  "Returns the list of registered packages"
+  "Get the list of registered packages."
   (append el-get-packages
           (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources))))
 
 
 (defun user/sync-packages ()
-  "Sync all required packages"
+  "Sync all required packages."
   (el-get 'sync (user/package-list)))
 
 

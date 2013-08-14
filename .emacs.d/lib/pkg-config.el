@@ -1,4 +1,4 @@
-;;; pkg-config --- pkg-config support
+;;; pkg-config.el --- pkg-config support
 ;;; Commentary:
 ;;; Code:
 
