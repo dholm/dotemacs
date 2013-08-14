@@ -1,4 +1,4 @@
-;;; init --- Emacs main initialization
+;;; init.el --- Emacs main initialization
 ;;; Commentary:
 ;;; Code:
 
@@ -11,18 +11,8 @@
 (require 'lib/benchmark)
 (benchmark/install)
 
-
-;; Set up global constants
-(require 'lib/env)
-(defconst *user-home-directory* (getenv-or "HOME"
-                                           (concat (expand-file-name "~") "/")))
-(defconst *user-data-directory* (getenv-or "XDG_DATA_HOME"
-                                           (path-join *user-home-directory* ".local" "share" "emacs")))
-(defconst *user-cache-directory* (getenv-or "XDG_CACHE_HOME"
-                                            (path-join *user-home-directory* ".cache" "emacs")))
-(defconst *user-el-get-directory* (path-join user-emacs-directory "el-get"))
-(defconst *user-custom-file* (path-join *user-data-directory* "custom.el"))
-
+;; Bring in constants used throughout init
+(require 'init-constants)
 
 ;; Set up package management
 (require 'lib/packaging)
