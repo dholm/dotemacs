@@ -22,15 +22,16 @@
   "PDE Perl mode hook."
   (require 'pde-load)
 
-  (local-set-key (kbd "C-c s") 'compile-dwim-compile)
-  (local-set-key (kbd "C-c r") 'compile-dwim-run)
-  (setq compilation-buffer-name-function 'pde-compilation-buffer-name)
-
   ;; chmod when saving
   (when (and buffer-file-name
              (not (string-match "\\.\\(pm\\|pod\\)$" (buffer-file-name))))
     (add-hook 'after-save-hook 'executable-chmod nil t))
-  (set (make-local-variable 'compile-dwim-check-tools) nil))
+  (set (make-local-variable 'compile-dwim-check-tools) nil)
+
+  ;;; (Bindings) ;;;
+  (define-key user/code-map (kbd "c") 'compile-dwim-compile)
+  (define-key user/code-map (kbd "r") 'compile-dwim-run)
+  (setq compilation-buffer-name-function 'pde-compilation-buffer-name))
 
 
 (defun user/perl-mode-init ()

@@ -22,7 +22,7 @@
     (elisp-slime-nav-mode))
   (when (el-get-package-is-installed 'auto-complete-emacs-lisp)
     (ac-emacs-lisp-mode-setup))
-  (local-set-key (kbd "C-c e") 'macrostep-expand))
+  (define-key user/navigation-map (kbd "e") 'macrostep-expand))
 
 (defun user/minibuffer-setup-hook ()
   "Emacs minibuffer hook."
@@ -77,7 +77,7 @@
   (require-package '(:name auto-compile :after (user/auto-compile-init)))
 
   ;;; (Bindings) ;;;
-  (global-set-key (kbd "C-c SPC") 'eval-expression)
+  (define-key user/code-map (kbd "e") 'eval-expression)
 
   ;;; (Hooks) ;;;
   (add-hook 'lisp-mode-hook 'user/lisp-mode-hook)
