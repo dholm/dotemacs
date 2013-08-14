@@ -6,7 +6,11 @@
   "Text mode hook."
   (setq-default
    ;; Indent using spaces by default
-   indent-tabs-mode nil)
+   indent-tabs-mode nil
+   ;; Colons are followed by two spaces
+   colon-double-space t
+   ;; Sentences end after two spaces
+   sentence-end-double-space t)
   ;; Automatically break long lines
   (auto-fill-mode t)
   ;; Run spell-checker
