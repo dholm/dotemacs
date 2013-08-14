@@ -20,10 +20,6 @@
 (global-set-key (kbd "C-c b") 'bookmark-map)
 
 
-;; General bindings for code map
-(define-key user/code-map (kbd "d") 'gud-gdb)
-
-
 ;; Binds goto-line to navigation command g which is easier to access
 (define-key user/navigation-map (kbd "g") 'goto-line)
 

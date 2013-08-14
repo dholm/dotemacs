@@ -39,10 +39,13 @@
     (set (make-local-variable 'ac-sources)
          (append ac-sources '(ac-source-clang-async)))
     (ac-clang-launch-completion-process))
-  ;; Enable dtrt-indent to attempt to identify the indentation rules used
-  (dtrt-indent-mode t))
 
-(add-hook 'c-mode-common-hook 'user/c-mode-common-hook)
+  ;; Enable dtrt-indent to attempt to identify the indentation rules used
+  (dtrt-indent-mode t)
+
+  (when *has-gdb*
+    (gdb-enable-debug t)
+    (define-key user/code-map (kbd "d") 'gdb)))
 
 
 (defun user/c-mode-cedet-hook ()
@@ -86,7 +89,9 @@
                            :depends (deferred)
                            :prepare (autoload 'c-turn-on-eldoc-mode "c-eldoc" nil t)))
   (when *has-clang*
-    (require-package '(:name clang-complete-async))))
+    (require-package '(:name clang-complete-async)))
+
+  (add-hook 'c-mode-common-hook 'user/c-mode-common-hook))
 
 (user/c-c++-mode-init)
 
