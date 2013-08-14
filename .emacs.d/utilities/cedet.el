@@ -18,6 +18,7 @@
   (define-key user/code-map (kbd "=") 'semantic-decoration-include-visit)
 
   (define-key user/navigation-map (kbd "j") 'semantic-ia-fast-jump)
+  (define-key user/navigation-map (kbd "s") 'semantic-complete-jump)
   (define-key user/navigation-map (kbd "b") 'semantic-mrub-switch-tags)
   (define-key user/navigation-map (kbd "p") 'semantic-analyze-proto-impl-toggle)
   (define-key user/navigation-map (kbd "r") 'semantic-symref)
