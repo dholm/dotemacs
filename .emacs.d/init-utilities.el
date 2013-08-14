@@ -34,7 +34,6 @@
 (require 'utilities/url)
 (require 'utilities/w3m)
 (require 'utilities/wc-mode)
-(require 'utilities/xcscope)
 
 
 ;;; (Functions) ;;;
