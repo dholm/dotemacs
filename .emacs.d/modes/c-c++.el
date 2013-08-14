@@ -48,10 +48,13 @@
 (defun user/c-mode-cedet-hook ()
   "C mode CEDET hook."
   (user/cedet-hook)
+
   ;; Load eassist from contrib package
   (unless (featurep 'cedet-contrib-load)
     (load (path-join (el-get-package-directory "cedet") "contrib" "cedet-contrib-load.el")))
   (require 'eassist)
+  (define-key user/navigation-map (kbd "t") 'eassist-switch-h-cpp)
+  (define-key user/documentation-map (kbd "m") 'eassist-list-methods)
 
   ;; Load extra semantic helpers
   (require 'semantic/bovine/c)
@@ -60,24 +63,17 @@
 
   ;; Enable CScope if available
   (require 'cedet-cscope)
-  (when (cedet-cscope-version-check)
+  (when (cedet-cscope-version-check t)
     (semanticdb-enable-cscope-databases)
     (setq ede-locate-setup-options
 	  '(ede-locate-cscope
 	    ede-locate-base)))
 
-  ;; Check if GNU Global is available
-  (when (cedet-gnu-global-version-check)
-    (semanticdb-enable-gnu-global-databases 'c-mode)
-    (semanticdb-enable-gnu-global-databases 'c++-mode))
-
-  ;; Local bindings
-  (define-key user/navigation-map (kbd "t") 'eassist-switch-h-cpp)
-  (define-key user/documentation-map (kbd "m") 'eassist-list-methods)
-
-  ;; Autocompletion
-  (auto-complete-mode t)
+  ;; Enable GNU Global if available
   (when (cedet-gnu-global-version-check t)
+    (semanticdb-enable-gnu-global-databases 'c-mode)
+    (semanticdb-enable-gnu-global-databases 'c++-mode)
+
     (set (make-local-variable 'ac-sources)
          (append ac-sources '(ac-source-gtags)))))
 

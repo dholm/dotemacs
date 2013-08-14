@@ -42,45 +42,39 @@
 
 (defun user/cedet-init ()
   "Initialize CEDET."
-  ;;; (EDE) ;;;
-  (global-ede-mode t)
-  (ede-enable-generic-projects)
-
   ;;; (Semantic) ;;;
   (require 'semantic/ia)
 
-  ;; Enable semantic
-  (semantic-mode t)
-  (semantic-load-enable-code-helpers)
-
   ;; Scan source code automatically during idle time
-  (global-semantic-idle-scheduler-mode t)
+  (add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
+  ;; Highlight the first line of the current tag
+  (add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
   ;; Initiate inline completion automatically during idle time
-  (global-semantic-idle-completions-mode t)
+  (add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode)
   ;; Show breadcrumbs during idle time
   (setq-default
    semantic-idle-breadcrumbs-format-tag-function 'semantic-format-tag-summarize
    semantic-idle-breadcrumbs-separator " ⊃ "
    semantic-idle-breadcrumbs-header-line-prefix " ≝ ")
-  (global-semantic-idle-breadcrumbs-mode t)
+  (add-to-list 'semantic-default-submodes 'global-semantic-idle-breadcrumbs-mode)
 
   ;; Remember recently edited tags
-  (global-semantic-mru-bookmark-mode t)
+  (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
 
   ;; Enable [ec]tags support
-  (semantic-load-enable-primary-ectags-support)
+  (when (cedet-ectag-version-check t)
+    (semantic-load-enable-primary-ectags-support))
 
-  ;; Enable SRecode templates globally
-  (global-srecode-minor-mode)
+  ;; Enable semantic
+  (semantic-mode t)
 
   ;;; (SemanticDB) ;;;
   (require 'semantic/db)
-  (global-semanticdb-minor-mode t)
+  (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
 
-  ;; Check if GNU Global is available
-  (when (cedet-gnu-global-version-check t)
-    (semanticdb-enable-gnu-global-databases 'c-mode)
-    (semanticdb-enable-gnu-global-databases 'c++-mode))
+  ;;; (EDE) ;;;
+  (global-ede-mode t)
+  (ede-enable-generic-projects)
 
   ;;; (Functions) ;;;
   (defun user/ede-get-current-project ()
