@@ -72,6 +72,11 @@
   (require 'semantic/db)
   (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
 
+  ;;; (Context Menu) ;;;
+  (when (display-graphic-p)
+    (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
+    (define-key user/code-map (kbd "SPC") 'cedet-m3-menu-kbd))
+
   ;;; (EDE) ;;;
   (global-ede-mode t)
   (ede-enable-generic-projects)
