@@ -13,25 +13,25 @@
 
   ;;; (Functions) ;;;
   ;; Stolen from https://github.com/magnars/.emacs.d/blob/master/setup-ffip.el
-  (defun ffip--create-exclude-find-options (names)
+  (defun user/ffip--create-exclude-find-options (names)
     (mapconcat (lambda (name)
                  (concat "-not -regex \".*" name ".*\"")) names " "))
 
   (defun user/ffip-local-excludes (&rest names)
     "Given a set of NAMES, will exclude results with those names in the path.
 
-Example: (ffip-local-excludes \"target\" \"overlays\")"
+Example: (user/ffip-local-excludes \"target\" \"overlays\")"
     (set (make-local-variable 'ffip-find-options)
-         (ffip--create-exclude-find-options names)))
+         (user/ffip--create-exclude-find-options names)))
 
   (defun user/ffip-local-patterns (&rest patterns)
     "An exhaustive list of file name PATTERNS to look for.
 
-Example: (ffip-local-patterns \"*.js\" \"*.jsp\" \"*.css\")"
+Example: (user/ffip-local-patterns \"*.js\" \"*.jsp\" \"*.css\")"
     (set (make-local-variable 'ffip-patterns) patterns))
 
   ;; Function to create new functions that look for a specific pattern
-  (defun ffip-create-pattern-file-finder (&rest patterns)
+  (defun user/ffip-create-pattern-file-finder (&rest patterns)
     (lexical-let ((patterns patterns))
       (lambda ()
         (interactive)
