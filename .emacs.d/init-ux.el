@@ -63,14 +63,6 @@
  column-number-mode t)
 
 
-;; Highlighting "TODO", "FIXME" and friends
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (font-lock-add-keywords nil
-                                    '(("\\<\\(FIXME\\|TODO\\|BUG\\):"
-                                       1 font-lock-warning-face t)))))
-
-
 ;; Show matching parenthesis
 (show-paren-mode t)
 
