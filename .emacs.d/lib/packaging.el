@@ -3,6 +3,7 @@
 ;;; Code:
 
 ;; Configure ELPA repositories
+(require 'package)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
@@ -20,12 +21,13 @@
       (eval-print-last-sexp))))
 
 
-(defvar el-get-packages nil "List of el-get packages to sync")
-(defvar el-get-sources nil "List of package definitions for el-get")
+(defvar el-get-packages nil "List of el-get packages to sync.")
+(defvar el-get-sources nil "List of package definitions for el-get.")
 
-(setq
- el-get-user-package-directory (path-join user-emacs-directory "init")
- el-get-verbose t)
+(when (featurep 'el-get)
+  (setq-default
+   el-get-user-package-directory (path-join user-emacs-directory "init")
+   el-get-verbose t))
 
 
 (defun require-package (package)

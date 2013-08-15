@@ -30,7 +30,7 @@
 
 
 ;;; (Functions) ;;;
-(defun close-all-buffers ()
+(defun user/close-all-buffers ()
   "Close all open buffers."
   (interactive)
   (mapc 'kill-buffer (buffer-list)))

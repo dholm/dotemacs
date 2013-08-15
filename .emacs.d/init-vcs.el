@@ -1,4 +1,4 @@
-;;; init-vcs --- initializes version control systems
+;;; init-vcs.el --- initializes version control systems
 ;;; Commentary:
 ;;; Code:
 

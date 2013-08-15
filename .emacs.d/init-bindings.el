@@ -9,13 +9,13 @@
 (defvar user/documentation-map nil
   "Map for bindings to access documentation.")
 
-(defvar user/code-keyboard-prefix nil
+(defvar user/code-map nil
   "Map for bindings that interact with or modify code.")
 
-(defvar user/vcs-keyboard-prefix nil
+(defvar user/vcs-map nil
   "Map for bindings to interact with version control systems.")
 
-(defvar user/utilities-keyboard-prefix nil
+(defvar user/utilities-map nil
   "Map for bindings to interact with utility modules.")
 
 

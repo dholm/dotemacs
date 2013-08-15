@@ -11,7 +11,7 @@
 (require 'lib/benchmark)
 (benchmark/install)
 
-;; Bring in constants used throughout init
+;; Bring in constants used throughout initialization
 (require 'init-constants)
 
 ;; Set up package management
@@ -31,11 +31,9 @@
 (require 'init-modes)
 
 
-;; If ~/.emacs.local is available load it as the last file so that it is
-;; possible to add local settings and overrides.
-(setq user-local-init (path-join *user-home-directory* ".emacs.local.el"))
-(when (file-exists-p user-local-init)
-  (load user-local-init))
+;; Load user's machine-local configuration file, if available.
+(when (file-exists-p *user-local-init*)
+  (load *user-local-init*))
 
 
 ;; Synchronize all registered packages

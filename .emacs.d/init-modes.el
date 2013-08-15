@@ -1,16 +1,20 @@
-;;; init-modes --- initializes major modes
+;;; init-modes.el --- initializes major modes
 ;;; Commentary:
 ;;; Code:
 
-;; Prefer UTF-8
-(prefer-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-;; Treat clipboard input as UTF-8 string first; compound text next, etc.
-(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+(defun user/utf8-init ()
+  "Initialize UTF-8 support."
+  ;; Prefer UTF-8
+  (prefer-coding-system 'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  ;; Treat clipboard input as UTF-8 string first; compound text next, etc.
+  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 
+(user/utf8-init)
 
+;; Load modes
 (require 'modes/c-c++)
 (require 'modes/csv)
 (require 'modes/gdb)

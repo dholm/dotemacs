@@ -1,4 +1,4 @@
-;;; bookmark+ --- initializes Bookmark+ extension
+;;; bookmark+.el --- initializes Bookmark+ extension
 ;;; Commentary:
 ;;; Code:
 

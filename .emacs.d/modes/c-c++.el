@@ -34,7 +34,7 @@
     ;; Automatically update tags
     (turn-on-ctags-auto-update-mode))
 
-  ;; Autocompletion
+  ;; Auto completion
   (when *has-clang*
     (set (make-local-variable 'ac-sources)
          (append ac-sources '(ac-source-clang-async)))
@@ -64,10 +64,11 @@
   (require 'semantic/bovine/gcc)
   (require 'semantic/bovine/clang)
 
-  ;; Enable CScope if available
   (require 'cedet-cscope)
   (when (cedet-cscope-version-check t)
+    ;; Use CScope as a database for SemanticDB
     (semanticdb-enable-cscope-databases)
+    ;; Use CScope as a source for EDE
     (setq ede-locate-setup-options
 	  '(ede-locate-cscope
 	    ede-locate-base)))

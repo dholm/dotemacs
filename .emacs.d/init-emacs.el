@@ -1,6 +1,9 @@
-;;; init-emacs --- initializes basic Emacs settings
+;;; init-emacs.el --- initializes basic Emacs settings
 ;;; Commentary:
 ;;; Code:
+
+
+(defconst *user-custom-file* (path-join *user-data-directory* "custom.el"))
 
 ;; Create data and cache directories
 (make-directory *user-cache-directory* t)

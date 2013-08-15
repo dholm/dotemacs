@@ -1,4 +1,4 @@
-;;; lisp --- initializes LISP modes
+;;; lisp.el --- initializes LISP modes
 ;;; Commentary:
 ;;; Code:
 
