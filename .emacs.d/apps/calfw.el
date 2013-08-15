@@ -1,4 +1,4 @@
-;;; calfw --- calendar for Emacs
+;;; calfw.el --- calendar for Emacs
 ;;; Commentary:
 ;;; Code:
 
@@ -60,5 +60,5 @@
 			 :features calfw-gcal))
 
 
-(provide 'utilities/calfw)
+(provide 'apps/calfw)
 ;;; calfw.el ends here

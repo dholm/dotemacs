@@ -1,4 +1,4 @@
-;;; deft --- sets up Deft
+;;; deft.el --- sets up Deft
 ;;; Commentary:
 ;;; Code:
 
@@ -9,5 +9,5 @@
 (require-package '(:name deft :after (user/deft-init)))
 
 
-(provide 'utilities/deft)
+(provide 'apps/deft)
 ;;; deft.el ends here

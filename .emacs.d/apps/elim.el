@@ -23,5 +23,5 @@
   (require-package '(:name elim :after (user/elim-init))))
 
 
-(provide 'utilities/elim)
+(provide 'apps/elim)
 ;;; elim.el ends here

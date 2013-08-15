@@ -31,5 +31,5 @@
                          :after (user/bookmark+-init)))
 
 
-(provide 'utilities/bookmark+)
+(provide 'apps/bookmark+)
 ;;; bookmark+.el ends here

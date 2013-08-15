@@ -1,4 +1,4 @@
-;;; w3m --- w3m integration
+;;; w3m.el --- w3m integration
 ;;; Commentary:
 ;;; Code:
 
@@ -25,5 +25,5 @@
   (require-package '(:name emacs-w3m :after (user/w3m-init))))
 
 
-(provide 'utilities/w3m)
+(provide 'apps/w3m)
 ;;; w3m.el ends here

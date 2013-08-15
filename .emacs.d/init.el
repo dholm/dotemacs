@@ -29,6 +29,7 @@
 (require 'init-utilities)
 (require 'init-vcs)
 (require 'init-modes)
+(require 'init-apps)
 
 
 ;; Load user's machine-local configuration file, if available.
