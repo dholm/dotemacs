@@ -18,6 +18,7 @@
 (require 'utilities/ido)
 (require 'utilities/outlookedit)
 (require 'utilities/perspective)
+(require 'utilities/project)
 (require 'utilities/tramp)
 (require 'utilities/url)
 (require 'utilities/wc-mode)
