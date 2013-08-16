@@ -1,10 +1,14 @@
-;;; flycheck --- flycheck configuration
+;;; flycheck.el --- flycheck configuration
 ;;; Commentary:
 ;;; Code:
 
 (defun user/flycheck-init ()
   "Initialize flycheck."
   (require 'flycheck)
+
+  (setq-default
+   ;; Wait five seconds before starting checker
+   flycheck-idle-change-delay 5.0)
   (global-flycheck-mode t)
 
   ;;; (Faces) ;;;
