@@ -1,4 +1,4 @@
-;;; helm --- improved Emacs control
+;;; helm.el --- improved Emacs control
 ;;; Commentary:
 ;;; Code:
 
@@ -14,13 +14,15 @@
    helm-input-idle-delay 0.2)
 
   ;; Filter out boring buffers
-  (loop for exp in '("\\*clang-complete" "\\*CEDET global" "\\*tramp/scpc"
-                     "\\*epc con" "\\*Pymacs" "\\*Completions\\*")
-        do (add-to-list 'helm-boring-buffer-regexp-list exp))
+  (dolist (pattern
+           (list "\\*clang-complete" "\\*CEDET global" "\\*tramp/scpc"
+                 "\\*epc con" "\\*Pymacs" "\\*Completions\\*"))
+    (add-to-list 'helm-boring-buffer-regexp-list pattern))
 
   ;; Filter out boring files
-  (loop for ext in '("\\.elc$" "\\.pyc$" "^#.+#$")
-        do (add-to-list 'helm-boring-file-regexp-list ext))
+  (dolist (pattern
+           (list "\\.elc$" "\\.pyc$" "^#.+#$" "^G[R]TAGS$" "^GPATH$"))
+    (add-to-list 'helm-boring-file-regexp-list pattern))
 
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
@@ -88,11 +90,29 @@
   (helm-descbinds-mode t))
 
 
+(defun user/helm-gtags-mode-hook ()
+  "Mode hook for helm-gtags."
+  ;; Automatically update GNU Global database if it exists
+  (when (user/gnu-global-tags-p (buffer-file-name))
+    (setq-default
+     helm-gtags-auto-update t
+     helm-gtags-tag-location (user/gnu-global-tags-location (buffer-file-name)))))
+
+
+(defun user/helm-gtags-init ()
+  "Initialize helm-gtags."
+  (add-hook 'helm-gtags-mode-hook 'user/helm-gtags-mode-hook))
+
+
 (require-package '(:name helm :after (user/helm-init)))
 (require-package '(:name helm-descbinds :after (user/helm-descbinds-init)))
 (require-package '(:name helm-etags-plus))
 (require-package '(:name helm-build-command))
 (require-package '(:name helm-ls-git))
+(require-package '(:name helm-gtags
+                         :type github
+                         :pkgname "syohex/emacs-helm-gtags"
+                         :after (user/helm-gtags-init)))
 
 
 (provide 'utilities/helm)

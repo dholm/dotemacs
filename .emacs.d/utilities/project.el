@@ -27,8 +27,22 @@
   "Get the project root for PATH, if it exists."
   (let ((ede-proj (user/ede-project path)))
     (cond
-     (ede-proj (ede-project-root ede-proj))
+     (ede-proj (ede-project-root-directory ede-proj))
      ((featurep 'find-file-in-project) (user/ffip-project-root path)))))
+
+
+(defun user/gnu-global-tags-location (path)
+  "Get the location of Global's database from PATH, if it exists."
+  (let ((gtags-file-name "GTAGS")
+        (proj-root (user/project-root path)))
+    (when (file-exists-p (path-join proj-root gtags-file-name))
+      proj-root)))
+
+
+(defun user/gnu-global-tags-p (path)
+  "Check if a Global tag database exists for project in PATH."
+  (when (user/gnu-global-tags-location path)
+    t))
 
 
 (provide 'utilities/project)

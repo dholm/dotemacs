@@ -34,6 +34,10 @@
     ;; Automatically update tags
     (turn-on-ctags-auto-update-mode))
 
+  (when (el-get-package-is-installed 'helm-gtags)
+    ;; Enable helm-gtags which in turn enables auto-update of Global tags
+    (helm-gtags-mode t))
+
   ;; Auto completion
   (when *has-clang*
     (set (make-local-variable 'ac-sources)
