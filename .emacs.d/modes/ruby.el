@@ -28,7 +28,8 @@
 
 (defun user/robe-mode-hook ()
   "Robe mode hook."
-  (add-to-list 'ac-sources 'ac-source-robe)
+  (set (make-local-variable 'ac-sources)
+       (append ac-sources '(ac-source-robe)))
   (set-auto-complete-as-completion-at-point-function))
 
 

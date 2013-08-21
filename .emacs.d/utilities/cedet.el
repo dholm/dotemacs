@@ -68,6 +68,22 @@
   (require 'semantic/db)
   (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
 
+  (require 'cedet-cscope)
+  (when (cedet-cscope-version-check t)
+    ;; Use CScope as a database for SemanticDB
+    (semanticdb-enable-cscope-databases)
+    ;; Use CScope as a source for EDE
+    (setq ede-locate-setup-options
+	  '(ede-locate-cscope
+	    ede-locate-base)))
+
+  ;; Enable GNU Global if available
+  (when (cedet-gnu-global-version-check t)
+    (semanticdb-enable-gnu-global-databases 'c-mode)
+    (semanticdb-enable-gnu-global-databases 'c++-mode)
+
+    (add-to-list 'ac-sources 'ac-source-gtags))
+
   ;;; (Context Menu) ;;;
   (when (display-graphic-p)
     (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)

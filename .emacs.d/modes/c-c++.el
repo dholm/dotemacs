@@ -62,24 +62,7 @@
   ;; Load extra semantic helpers
   (require 'semantic/bovine/c)
   (require 'semantic/bovine/gcc)
-  (require 'semantic/bovine/clang)
-
-  (require 'cedet-cscope)
-  (when (cedet-cscope-version-check t)
-    ;; Use CScope as a database for SemanticDB
-    (semanticdb-enable-cscope-databases)
-    ;; Use CScope as a source for EDE
-    (setq ede-locate-setup-options
-	  '(ede-locate-cscope
-	    ede-locate-base)))
-
-  ;; Enable GNU Global if available
-  (when (cedet-gnu-global-version-check t)
-    (semanticdb-enable-gnu-global-databases 'c-mode)
-    (semanticdb-enable-gnu-global-databases 'c++-mode)
-
-    (set (make-local-variable 'ac-sources)
-         (append ac-sources '(ac-source-gtags)))))
+  (require 'semantic/bovine/clang))
 
 
 (defun user/c-c++-mode-init ()
