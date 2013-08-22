@@ -8,18 +8,22 @@
   (when (el-get-package-is-installed 'cedet)
     (user/cedet-hook))
   (when (el-get-package-is-installed 'rainbow-delimiters)
-    (rainbow-delimiters-mode))
+    (rainbow-delimiters-mode t))
   (when (el-get-package-is-installed 'paredit)
-    (enable-paredit-mode))
+    (enable-paredit-mode)
+    (after-load 'diminish
+      (diminish 'paredit-mode)))
   (when (el-get-package-is-installed 'redshank)
-    (redshank-mode))
+    (redshank-mode t))
   (turn-on-eldoc-mode))
 
 (defun user/emacs-lisp-mode-hook ()
   "Emacs LISP mode hook."
   (user/lisp-mode-hook)
   (when (el-get-package-is-installed 'elisp-slime-nav)
-    (elisp-slime-nav-mode))
+    (elisp-slime-nav-mode t)
+    (after-load 'diminish
+      (diminish 'elisp-slime-nav-mode)))
   (when (el-get-package-is-installed 'auto-complete-emacs-lisp)
     (ac-emacs-lisp-mode-setup))
   (define-key user/navigation-map (kbd "e") 'macrostep-expand))

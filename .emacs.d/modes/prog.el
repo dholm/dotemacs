@@ -20,7 +20,10 @@
     (dtrt-indent-mode t))
   ;; Highlight FIXME/TODO/etc
   (when (el-get-package-is-installed 'fic-mode)
-    (fic-mode t)))
+    (fic-mode t))
+  ;; Diminish abbrev mode when loaded
+  (after-load 'diminish
+    (diminish 'abbrev-mode)))
 
 (add-hook 'prog-mode-hook 'user/prog-mode-hook)
 
