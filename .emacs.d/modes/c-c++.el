@@ -16,7 +16,8 @@
   (user/c-mode-cedet-hook)
 
   ;; Enable eldoc
-  (c-turn-on-eldoc-mode)
+  (when (el-get-package-is-installed 'c-eldoc)
+    (c-turn-on-eldoc-mode))
 
   ;; Override the indentation level of case labels in the K&R- and
   ;; Stroustrup styles so that they are indented one level beyond
