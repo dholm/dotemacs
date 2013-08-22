@@ -26,13 +26,49 @@
    ;; Show folders in a pane to the left
    wl-stay-folder-window t
    wl-folder-window-width 30
+   ;; Asynchronously update folders
+   wl-folder-check-async t
    ;; Automatically save drafts every two minutes
    wl-auto-save-drafts-interval 120.0
    ;; Mark sent mails as read
    wl-fcc-force-as-read t
    ;; Set verbose summary
-   wl-summary-width 150
-   wl-summary-line-format "%n%T%P %D/%M (%W) %h:%m %t%[%25(%c %f%) %] %s")
+   wl-summary-width nil
+   wl-summary-line-format "%n%T%P %D/%M (%W) %h:%m %t%[%25(%c %f%) %] %s"
+   ;; UTF-8 guides
+   wl-thread-have-younger-brother-str "├──►"
+   wl-thread-youngest-child-str       "╰──►"
+   wl-thread-vertical-str             "|"
+   wl-thread-horizontal-str           "►"
+   wl-thread-horizontal-str           "►"
+   wl-thread-space-str                " "
+   ;; Field lists
+   wl-message-ignored-field-list '("^.*")
+   wl-message-visible-field-list '("^From:" "^To:" "^Cc:" "^Date:" "^Subject:"
+                                   "^User-Agent:" "^X-Mailer:")
+   wl-message-sort-field-list    wl-message-visible-field-list
+   ;; Message window size
+   wl-message-window-size '(1 . 3)
+   ;; Let SMTP server handle Message-ID
+   wl-insert-message-id nil
+   ;; Use modified UTF-8 for IMAP4
+   elmo-imap4-use-modified-utf7 t
+   ;; Configure mime type priorities
+   mime-view-type-subtype-score-alist '(((text . plain) . 4)
+                                        ((text . enriched) . 3)
+                                        ((text . html) . 2)
+                                        ((text . richtext) . 1)))
+
+  (after-load 'mime-view
+    (autoload 'mime-w3m-preview-text/html "mime-w3m")
+    (ctree-set-calist-strictly
+     'mime-preview-condition
+     '((type . text)
+       (subtype . html)
+       (body . visible)
+       (body-presentation-method . mime-w3m-preview-text/html)))
+    (set-alist 'mime-view-type-subtype-score-alist
+               '(text . html) 3))
 
   ;; Set up wanderlust as the default mail user agent
   (if (boundp 'mail-user-agent)
@@ -103,9 +139,6 @@
      elmo-imap4-default-port '993
      elmo-imap4-default-stream-type 'ssl)
 
-    (setq-default
-     elmo-imap4-use-modified-utf7 t)
-
     ;; SMTP
     (setq-default
      wl-smtp-connection-type 'starttls
@@ -117,7 +150,6 @@
 
     ;; Folders
     (setq-default
-     wl-folder-check-async t
      wl-default-folder "%inbox"
      wl-default-spec "%"
      wl-draft-folder "%[Gmail]/Drafts"
