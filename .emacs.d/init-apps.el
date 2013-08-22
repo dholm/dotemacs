@@ -7,6 +7,7 @@
 (require 'apps/deft)
 (require 'apps/elim)
 (require 'apps/w3m)
+(require 'apps/wanderlust)
 
 
 (provide 'init-apps)
