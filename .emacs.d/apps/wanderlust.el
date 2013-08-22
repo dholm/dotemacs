@@ -2,9 +2,27 @@
 ;;; Commentary:
 ;;; Code:
 
+(defconst *user-wanderlust-data-directory*
+  (path-join *user-data-directory* "wanderlust")
+  "Path to user's Wanderlust data store.")
+
+(defconst *user-wanderlust-cache-directory*
+  (path-join *user-cache-directory* "wanderlust")
+  "Path to user's Wanderlust cache store.")
+
 (defun user/wanderlust-init ()
   "Initialize Wanderlust."
   (setq-default
+   ;; Put configuration into wanderlust data directory
+   wl-init-file (path-join *user-wanderlust-data-directory* "init.el")
+   wl-folders-file (path-join *user-wanderlust-data-directory* "folders")
+   wl-address-file (path-join *user-wanderlust-data-directory* "addresses")
+   ;; Put message database in data directory
+   elmo-msgdb-directory (path-join *user-wanderlust-data-directory* "elmo")
+   ;; Put temporary files in cache directories
+   wl-temporary-file-directory *user-wanderlust-cache-directory*
+   elmo-cache-directory (path-join *user-wanderlust-cache-directory* "elmo")
+   ssl-certificate-directory (path-join *user-cache-directory* "certs")
    ;; Show folders in a pane to the left
    wl-stay-folder-window t
    wl-folder-window-width 30
@@ -67,10 +85,10 @@
 
 (defun user/wanderlust-set-gmail-user (fullname username)
   "Configure Wanderlust to use \"FULLNAME\" <USERNAME@gmail.com>."
-  (let ((folders-file (path-join *user-home-directory* ".folders"))
-        (email-address (concat username "@gmail.com")))
-    (unless (file-exists-p folders-file)
-      (user/wanderlust-create-folders-gmail username folders-file))
+  (make-directory *user-wanderlust-data-directory* t)
+  (let ((email-address (concat username "@gmail.com")))
+    (unless (file-exists-p wl-folders-file)
+      (user/wanderlust-create-folders-gmail username wl-folders-file))
     (setq-default
      ;; Setup mail-from
      wl-from (concat fullname " <" email-address ">")
