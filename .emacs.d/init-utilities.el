@@ -6,6 +6,7 @@
 (require 'utilities/cedet)
 (require 'utilities/compile)
 (require 'utilities/ctable)
+(require 'utilities/direx)
 (require 'utilities/ecb)
 (require 'utilities/epc)
 (require 'utilities/find-file-in-project)

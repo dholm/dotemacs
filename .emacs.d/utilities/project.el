@@ -34,6 +34,12 @@
      (t (user/ffip-project-root path)))))
 
 
+(defun user/project-root-p (path)
+  "Check if PATH represents a project root."
+  (let ((proj-root (user/project-root path)))
+    (and path proj-root (equal (file-truename path) (file-truename proj-root)))))
+
+
 (defun user/gnu-global-tags-location (path)
   "Get the location of Global's database from PATH, if it exists."
   (let ((gtags-file-name "GTAGS")

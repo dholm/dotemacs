@@ -9,7 +9,7 @@
    ffip-limit 4096)
 
   ;;; (Bindings) ;;;
-  (global-set-key (kbd "C-x f") 'find-file-in-project)
+  (define-key user/navigation-map (kbd "f") 'find-file-in-project)
 
   ;;; (Functions) ;;;
   ;; Stolen from https://github.com/magnars/.emacs.d/blob/master/setup-ffip.el
