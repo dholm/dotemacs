@@ -7,6 +7,9 @@
   (setq-default
    ;; Indent using spaces by default
    indent-tabs-mode nil)
+  ;; Enable smart tabs
+  (when (el-get-package-is-installed 'tabkey2)
+    (tabkey2-mode t))
   ;; Automatically break long lines
   (auto-fill-mode t)
   (after-load 'diminish
