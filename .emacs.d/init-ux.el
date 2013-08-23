@@ -17,6 +17,7 @@
 (require 'ux/multiple-cursors)
 (require 'ux/page-break-lines)
 (require 'ux/popup)
+(require 'ux/popwin)
 (require 'ux/powerline)
 (require 'ux/pretty-mode-plus)
 (require 'ux/rainbow-delimiters)

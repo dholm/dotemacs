@@ -3,17 +3,7 @@
 ;;; Code:
 
 (defun user/compilation-hook ()
-  "Compilation mode hook."
-  ;; Create a new compilation window if it isn't open
-  (when (not (get-buffer-window "*compilation*"))
-    (save-selected-window
-      (save-excursion
-        ;; Split vertically and set window to 15 lines high
-        (let* ((w (split-window-vertically))
-               (h (window-height w)))
-          (select-window w)
-          (switch-to-buffer "*compilation*")
-          (shrink-window (- h 15)))))))
+  "Compilation mode hook.")
 
 
 (defun user/compile-init ()
