@@ -27,11 +27,12 @@
 
 (defun user/project-root (path)
   "Get the project root for PATH, if it exists."
-  (let* ((path (file-truename path))
-         (ede-proj (user/ede-project path)))
-    (cond
-     (ede-proj (ede-project-root-directory ede-proj))
-     (t (user/ffip-project-root path)))))
+  (when path
+    (let* ((path (file-truename path))
+           (ede-proj (user/ede-project path)))
+      (cond
+       (ede-proj (ede-project-root-directory ede-proj))
+       (t (user/ffip-project-root path))))))
 
 
 (defun user/project-root-p (path)
