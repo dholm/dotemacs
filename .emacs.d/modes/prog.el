@@ -8,7 +8,7 @@
    ;; Indent using spaces by default
    indent-tabs-mode nil)
   ;; Enable smart tabs
-  (when (el-get-package-is-installed 'tabkey2)
+  (after-load 'tabkey2
     (tabkey2-mode t))
   ;; Automatically break long lines
   (auto-fill-mode t)
@@ -22,7 +22,7 @@
   (after-load 'dtrt-indent
     (dtrt-indent-mode t))
   ;; Highlight FIXME/TODO/etc
-  (when (el-get-package-is-installed 'fic-mode)
+  (after-load 'fix-mode
     (fic-mode t))
   ;; Diminish abbrev mode when loaded
   (after-load 'diminish
