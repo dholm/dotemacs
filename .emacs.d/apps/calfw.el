@@ -56,8 +56,7 @@
 (require-package '(:name calfw-gcal
 			 :type github
 			 :pkgname "myuhe/calfw-gcal.el"
-			 :depends (calfw)
-			 :features calfw-gcal))
+			 :depends (calfw)))
 
 
 (provide 'apps/calfw)
