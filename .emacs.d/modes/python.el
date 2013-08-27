@@ -68,14 +68,13 @@
 
 (defun user/python-mode-init ()
   "Initialize Python mode."
-  (require-package '(:name python-mode :after (user/python-mode-init)))
   (require-package '(:name jedi :after (user/jedi-init)))
   (require-package '(:name pylookup))
 
   (add-hook 'python-mode-hook 'user/python-mode-hook))
 
 (when *has-python*
-  (user/python-mode-init))
+  (require-package '(:name python-mode :after (user/python-mode-init))))
 
 
 (provide 'modes/python)
