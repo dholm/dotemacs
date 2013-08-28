@@ -7,14 +7,16 @@
   (popwin-mode t)
 
   ;; Don't select compilation window when shown
-  (push '(compilation-mode :noselect t) popwin:special-display-config)
+  (push '(compilation-mode :height 20 :dedicated t) popwin:special-display-config)
 
   ;;; (Bindings) ;;;
-  (define-key user/navigation-map (kbd "p") 'popwin:display-last-buffer)
+  (define-key user/navigation-map (kbd "p") 'popwin:popup-buffer)
+  (define-key user/navigation-map (kbd "0") 'popwin:close-popup-window)
   (define-key user/navigation-map (kbd "m") 'popwin:messages))
 
 (require-package '(:name popwin
                          :prepare (autoload 'popwin-mode "popwin")
+                         :load-path ("." "misc")
                          :after (user/popwin-init)))
 
 
