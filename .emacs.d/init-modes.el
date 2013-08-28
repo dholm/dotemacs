@@ -38,6 +38,7 @@
 (require 'modes/scala)
 (require 'modes/shell)
 (require 'modes/syslog)
+(require 'modes/tcl)
 (require 'modes/text)
 (require 'modes/ttcn)
 (require 'modes/whitespace)
