@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'utilities/browse-kill-ring)
 (require 'utilities/cedet)
 (require 'utilities/compile)
 (require 'utilities/ctable)
