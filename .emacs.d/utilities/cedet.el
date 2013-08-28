@@ -96,8 +96,8 @@
   ;;; (Functions) ;;;
   (defun user/ede-get-current-project ()
     "Get the current EDE project."
-    (let* ((fname (or (buffer-file-name (current-buffer)) default-directory))
-           (current-dir (file-name-directory fname)))
+    (let* ((current-file (or (buffer-file-name) default-directory))
+           (current-dir (file-name-directory current-file)))
       (ede-current-project current-dir)))
 
   (defun user/ede-gen-std-compile-string ()
@@ -122,7 +122,16 @@
     (let ((current-project (user/ede-get-current-project)))
       (if current-project
           (project-compile-project current-project)
-        (call-interactively 'compile)))))
+        (call-interactively 'compile))))
+
+  (defun user/gnu-global-create/update ()
+    "Create or update GNU Global database at current project root."
+    (interactive)
+    (let* ((current-file (or (buffer-file-name) default-directory))
+           (proj-root (user/project-root current-file)))
+      (when (and proj-root (cedet-gnu-global-version-check t))
+        (cedet-gnu-global-create/update-database proj-root)
+        (message (format "GNU/Global database updated at %S" proj-root))))))
 
 (require-package '(:name cedet
                          :before (user/cedet-before-init)
