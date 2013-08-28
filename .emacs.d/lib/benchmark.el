@@ -21,20 +21,35 @@ LOAD-DURATION is the time taken in milliseconds to load FILE.")
 (defun benchmark/show-require-times ()
   "Show the benchmark for require."
   (interactive)
-  (benchmark/show-times benchmark/require-times "*require times*"))
+  (benchmark/show-times benchmark/require-times "Feature"))
+
 
 (defun benchmark/show-load-times ()
   "Show the benchmark for load."
   (interactive)
-  (benchmark/show-times benchmark/load-times "*load times*"))
+  (benchmark/show-times benchmark/load-times "File"))
 
 
-(defmacro benchmark/show-times (hash-table name)
-  "Show the benchmark for the specified HASH-TABLE in buffer NAME."
-  `(with-output-to-temp-buffer ,name
-     (do-hash-table-sorted-by-value (val ,hash-table)
-       (princ (format "%s %d\n" val (gethash val ,hash-table))))
-     (switch-to-buffer ,name)))
+(defun benchmark/show-times (hash-table name)
+  "Show the benchmark for the specified HASH-TABLE with primary column NAME."
+  (let* ((column-model
+          (list (make-ctbl:cmodel
+                 :title name :align 'left
+                 :sorter 'ctbl:sort-string-lessp)
+                (make-ctbl:cmodel
+                 :title "ms" :align 'right :min-width 7
+                 :sorter (lambda (a b) (ctbl:sort-number-lessp b a)))))
+         (data (let ((entries ()))
+                 (maphash (lambda (key value)
+                            (add-to-list 'entries (list key (round value)))) hash-table)
+                 entries))
+         (model
+          (make-ctbl:model
+           :column-model column-model :data data :sort-state '(2 1)))
+         (component
+          (ctbl:create-table-component-buffer
+           :model model)))
+    (pop-to-buffer (ctbl:cp-get-buffer component))))
 
 
 ;;;###autoload

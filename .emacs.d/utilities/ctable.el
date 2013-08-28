@@ -4,6 +4,9 @@
 
 (defun user/ctable-init ()
   "Initialize ctable."
+  ;; Register autoload for lib/benchmark
+  (autoload 'make-ctbl:cmodel "ctable")
+
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
     (solarized-with-values
