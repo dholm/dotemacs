@@ -2,7 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(defconst *has-cleartool* (executable-find "cleartool"))
+(defconst *has-cleartool* (and (executable-find "cleartool")
+                             ;; Verify that license is valid
+                             (eq (call-process-shell-command "cleartool" nil nil nil "quit") 0)))
 
 (when *has-cleartool*
   (require-package '(:name vc-clearcase)))
