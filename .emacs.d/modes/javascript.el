@@ -2,20 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/js2-mode-hook ()
+(defun user/js-mode-common-hook ()
   "JavaScript mode hook."
-  ;; Enable js2-mode
-  (js2-mode)
   ;; Load CEDET
   (user/javascript-mode-cedet-hook)
-  ;; Configure js2-mode
-  (setq-default
-   js2-use-font-lock-faces t
-   js2-mode-must-byte-compile nil
-   js2-indent-on-enter-key t
-   js2-auto-indent-p t
-   js2-bounce-indent-p nil
-   js2-basic-offset 2)
   ;; Enable tern if installed
   (when (el-get-package-is-installed 'tern)
     (tern-mode t)
@@ -28,6 +18,23 @@
   (set (make-local-variable 'ac-auto-show-menu) t))
 
 
+(defun user/js-mode-hook ()
+  "JS mode hook."
+  (user/js-mode-common-hook))
+
+
+(defun user/js2-mode-hook ()
+  "JS2 mode hook."
+  (user/js-mode-common-hook)
+  ;; Enable js2-mode
+  (js2-mode)
+  ;; Enable smart indentation
+  (smart-tabs-mode t)
+  (smart-tabs-advice js2-indent-line js2-basic-offset)
+  ;; Enable Flycheck
+  (flycheck-mode t))
+
+
 (defun user/javascript-mode-cedet-hook ()
   "JavaScript CEDET support hook."
   (user/cedet-hook)
@@ -36,6 +43,22 @@
 
 (defun user/js2-mode-init ()
   "Initialize js2 mode."
+  (setq-default
+   ;; Configure indentation
+   js2-indent-on-enter-key t
+   js2-auto-indent-p t
+   js2-bounce-indent-p t
+   ;; Idle timeout before reparsing buffer
+   js2-idle-timer-delay 0.5
+   ;; Do not load browser-specific functions
+   js2-include-browser-externs nil
+   ;; Support Node.js
+   js2-include-node-externs t
+   js2-skip-preprocessor-directives t
+   ;; Disable error parsing in favor of Flycheck
+   js2-show-parse-errors nil
+   js2-strict-missing-semi-warning nil)
+
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
     (solarized-with-values
@@ -60,9 +83,11 @@
   (when (el-get-package-is-installed 'find-file-in-project)
     (user/ffip-local-patterns "*.js"))
 
+  (add-hook 'js-mode-hook 'user/js-mode-hook)
   (add-hook 'js2-mode-hook 'user/js2-mode-hook)
 
   (add-auto-mode 'js2-mode "\\.js$")
+  (add-auto-mode 'javascript-mode "\\.json$")
   (add-magic-mode 'js2-mode "#!/usr/bin/env node"))
 
 
