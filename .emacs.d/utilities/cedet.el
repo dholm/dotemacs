@@ -142,13 +142,22 @@
         (call-interactively 'compile))))
 
   (defun user/gnu-global-create/update ()
-    "Create or update GNU Global database at current project root."
+    "Create or update GNU GLOBAL database at current project root."
     (interactive)
     (let* ((current-file (or (buffer-file-name) default-directory))
            (proj-root (user/project-root current-file)))
       (when (and proj-root (cedet-gnu-global-version-check t))
         (cedet-gnu-global-create/update-database proj-root)
-        (message (format "GNU/Global database updated at %S" proj-root))))))
+        (message (format "GNU GLOBAL database updated at %S" proj-root)))))
+
+  (defun user/gnu-idutils-create/update ()
+    "Create or update GNU idutils database at current project root."
+    (interactive)
+    (let* ((current-file (or (buffer-file-name) default-directory))
+           (proj-root (user/project-root current-file)))
+      (when (and proj-root (cedet-idutils-version-check t))
+        (cedet-idutils-create/update-database proj-root)
+        (message (format "GNU idutils database updated at %S" proj-root))))))
 
 (require-package '(:name cedet
                          :before (user/cedet-before-init)
