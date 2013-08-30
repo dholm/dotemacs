@@ -86,7 +86,9 @@
   ;;; (Hooks) ;;;
   (add-hook 'lisp-mode-hook 'user/lisp-mode-hook)
   (add-hook 'emacs-lisp-mode-hook 'user/emacs-lisp-mode-hook)
-  (add-hook 'minibuffer-setup-hook 'user/minibuffer-setup-hook))
+  (add-hook 'minibuffer-setup-hook 'user/minibuffer-setup-hook)
+
+  (add-auto-mode 'emacs-lisp-mode "Carton$"))
 
 (user/lisp-mode-init)
 
