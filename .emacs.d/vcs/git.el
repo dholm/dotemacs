@@ -47,7 +47,7 @@
    ;; Do not save buffers
    magit-save-some-buffers nil
    ;; Automatically show process buffer if git takes too long to execute
-   magit-process-popup-time 10
+   magit-process-popup-time 30
    ;; Show fine differences for currently selected hunk
    magit-diff-refine-hunk t
    ;; Use ido for user input
