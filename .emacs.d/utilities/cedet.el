@@ -146,7 +146,7 @@
           (project-compile-project current-project)
         (call-interactively 'compile))))
 
-  (defun user/cscope-create/update ()
+  (defun user/cedet-cscope-create/update ()
     "Create or update CScope database at current project root."
     (interactive)
     (let* ((current-file (or (buffer-file-name) default-directory))
@@ -155,7 +155,7 @@
         (cedet-cscope-create/update-database proj-root)
         (message (format "CScope database updated at %S" proj-root)))))
 
-  (defun user/gnu-global-create/update ()
+  (defun user/cedet-gnu-global-create/update ()
     "Create or update GNU GLOBAL database at current project root."
     (interactive)
     (let* ((current-file (or (buffer-file-name) default-directory))
@@ -164,14 +164,21 @@
         (cedet-gnu-global-create/update-database proj-root)
         (message (format "GNU GLOBAL database updated at %S" proj-root)))))
 
-  (defun user/gnu-idutils-create/update ()
+  (defun user/cedet-gnu-idutils-create/update ()
     "Create or update GNU idutils database at current project root."
     (interactive)
     (let* ((current-file (or (buffer-file-name) default-directory))
            (proj-root (user/project-root current-file)))
       (when (and proj-root (cedet-idutils-version-check t))
         (cedet-idutils-create/update-database proj-root)
-        (message (format "GNU idutils database updated at %S" proj-root))))))
+        (message (format "GNU idutils database updated at %S" proj-root)))))
+
+  (defun user/cedet-create/update-all ()
+    "Create or update all databases at current project root."
+    (interactive)
+    (user/cedet-cscope-create/update)
+    (user/cedet-gnu-global-create/update)
+    (user/cedet-gnu-idutils-create/update)))
 
 (require-package '(:name cedet
                          :before (user/cedet-before-init)
