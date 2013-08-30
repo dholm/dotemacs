@@ -39,6 +39,12 @@
 (defun user/cedet-init ()
   "Initialize CEDET."
   ;; Check for important utilities
+  (require 'cedet-cscope)
+  (if (executable-find "cscope")
+      (unless (cedet-cscope-version-check t)
+        (warn "CScope version is too old!"))
+    (warn "CScope not found!"))
+
   (if (executable-find "global")
       (unless (cedet-gnu-global-version-check t)
         (warn "GNU GLOBAL version is too old!"))
@@ -82,7 +88,6 @@
   (require 'semantic/db)
   (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
 
-  (require 'cedet-cscope)
   (when (cedet-cscope-version-check t)
     ;; Use CScope as a database for SemanticDB
     (semanticdb-enable-cscope-databases)
@@ -140,6 +145,15 @@
       (if current-project
           (project-compile-project current-project)
         (call-interactively 'compile))))
+
+  (defun user/cscope-create/update ()
+    "Create or update CScope database at current project root."
+    (interactive)
+    (let* ((current-file (or (buffer-file-name) default-directory))
+           (proj-root (user/project-root current-file)))
+      (when (and proj-root (cedet-cscope-version-check t))
+        (cedet-cscope-create/update-database proj-root)
+        (message (format "CScope database updated at %S" proj-root)))))
 
   (defun user/gnu-global-create/update ()
     "Create or update GNU GLOBAL database at current project root."
