@@ -38,6 +38,19 @@
 
 (defun user/cedet-init ()
   "Initialize CEDET."
+  ;; Check for important utilities
+  (if (executable-find "global")
+      (unless (cedet-gnu-global-version-check t)
+        (warn "GNU GLOBAL version is too old!"))
+    (warn "GNU GLOBAL not found!"))
+
+  (require 'cedet-idutils)
+  (if (executable-find "mkid")
+      (unless (cedet-idutils-version-check t)
+        (warn "GNU idutils is too old!"))
+    (warn "GNU idutils not found!"))
+
+
   ;;; (Semantic) ;;;
   (require 'semantic/ia)
 
@@ -64,6 +77,7 @@
   ;; Enable semantic
   (semantic-mode t)
 
+
   ;;; (SemanticDB) ;;;
   (require 'semantic/db)
   (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
@@ -84,14 +98,17 @@
 
     (add-to-list 'ac-sources 'ac-source-gtags))
 
+
   ;;; (Context Menu) ;;;
   (when (display-graphic-p)
     (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
     (define-key user/code-map (kbd "SPC") 'cedet-m3-menu-kbd))
 
+
   ;;; (EDE) ;;;
   (global-ede-mode t)
   (ede-enable-generic-projects)
+
 
   ;;; (Functions) ;;;
   (defun user/ede-get-current-project ()
