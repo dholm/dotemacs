@@ -61,7 +61,9 @@
     (user/ffip-local-patterns "*.js"))
 
   (add-hook 'js2-mode-hook 'user/js2-mode-hook)
-  (add-auto-mode 'js2-mode "\\.js$"))
+
+  (add-auto-mode 'js2-mode "\\.js$")
+  (add-magic-mode 'js2-mode "#!/usr/bin/env node"))
 
 
 (defun user/javascript-mode-init ()

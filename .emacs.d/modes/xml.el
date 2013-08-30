@@ -22,9 +22,7 @@
   ;; Use nxml-mode for XML
   (fset 'xml-mode 'nxml-mode)
   (add-hook 'nxml-mode-hook 'user/nxml-mode-hook)
-  (setq
-   ;; Enable magic-mode to detect XML
-   magic-mode-alist (cons '("<\\?xml " . nxml-mode) magic-mode-alist))
+  (add-magic-mode 'nxml-mode "<\\?xml ")
 
   (require-package '(:name auto-complete-nxml :after (user/auto-complete-nxml-init))))
 
