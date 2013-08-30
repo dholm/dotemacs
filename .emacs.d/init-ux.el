@@ -26,6 +26,7 @@
 (require 'ux/saveplace)
 (require 'ux/session)
 (require 'ux/smart-forward)
+(require 'ux/smart-tabs-mode)
 (require 'ux/solarized)
 (require 'ux/tabkey2)
 (require 'ux/undo-tree)
