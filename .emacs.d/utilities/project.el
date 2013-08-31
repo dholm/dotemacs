@@ -35,6 +35,11 @@
        (t (user/ffip-project-root path))))))
 
 
+(defun user/project-p (path)
+  "Check if PATH is under project control."
+  (user/project-root path))
+
+
 (defun user/project-root-p (path)
   "Check if PATH represents a project root."
   (let ((proj-root (user/project-root path)))
