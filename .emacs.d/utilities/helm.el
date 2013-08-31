@@ -12,7 +12,10 @@
                                  '(helm-source-man-pages
                                    helm-source-info-pages) buffer-name))
      ((derived-mode-p 'c-mode-common) (helm-other-buffer
-                                       '(helm-source-man-pages)))
+                                       '(helm-source-man-pages) buffer-name))
+     ((derived-mode-p 'python-mode) (helm-pydoc))
+     ((derived-mode-p 'go-mode) (helm-other-buffer
+                                 '(helm-source-go-package) buffer-name))
      (t (message (format "Apropos is unavailable for %S" major-mode))))))
 
 
@@ -185,7 +188,20 @@
 (require-package '(:name helm-gtags
                          :type github
                          :pkgname "syohex/emacs-helm-gtags"
+                         :depends (helm)
                          :after (user/helm-gtags-init)))
+(after-load 'modes/python
+  (when *has-python*
+    (require-package '(:name helm-pydoc
+			     :type github
+			     :depends (helm)
+			     :pkgname "syohex/emacs-helm-pydoc"))))
+(after-load 'modes/go
+  (when *has-go*
+    (require-package '(:name helm-go-package
+			     :type github
+			     :pkgname "yasuyk/helm-go-package"
+			     :depends (helm go-mode)))))
 
 
 (provide 'utilities/helm)
