@@ -38,23 +38,9 @@
 
 (defun user/cedet-init ()
   "Initialize CEDET."
-  ;; Check for important utilities
-  (require 'cedet-cscope)
-  (if (executable-find "cscope")
-      (unless (cedet-cscope-version-check t)
-        (warn "CScope version is too old!"))
-    (warn "CScope not found!"))
-
-  (if (executable-find "global")
-      (unless (cedet-gnu-global-version-check t)
-        (warn "GNU GLOBAL version is too old!"))
-    (warn "GNU GLOBAL not found!"))
-
-  (require 'cedet-idutils)
-  (if (executable-find "mkid")
-      (unless (cedet-idutils-version-check t)
-        (warn "GNU idutils is too old!"))
-    (warn "GNU idutils not found!"))
+  ;; Register missing autoloads
+  (autoload 'cedet-cscope-version-check "cedet-cscope")
+  (autoload 'cedet-idutils-version-check "cedet-idutils")
 
 
   ;;; (Semantic) ;;;
@@ -149,27 +135,39 @@
   (defun user/cedet-cscope-create/update ()
     "Create or update CScope database at current project root."
     (interactive)
+    (if (executable-find "cscope")
+        (unless (cedet-cscope-version-check t)
+          (error "CScope version is too old!"))
+      (error "CScope not found!"))
     (let* ((current-file (or (buffer-file-name) default-directory))
            (proj-root (user/project-root current-file)))
-      (when (and proj-root (cedet-cscope-version-check t))
+      (when proj-root
         (cedet-cscope-create/update-database proj-root)
         (message (format "CScope database updated at %S" proj-root)))))
 
   (defun user/cedet-gnu-global-create/update ()
     "Create or update GNU GLOBAL database at current project root."
     (interactive)
+    (if (executable-find "global")
+        (unless (cedet-gnu-global-version-check t)
+          (error "GNU GLOBAL version is too old!"))
+      (error "GNU GLOBAL not found!"))
     (let* ((current-file (or (buffer-file-name) default-directory))
            (proj-root (user/project-root current-file)))
-      (when (and proj-root (cedet-gnu-global-version-check t))
+      (when proj-root
         (cedet-gnu-global-create/update-database proj-root)
         (message (format "GNU GLOBAL database updated at %S" proj-root)))))
 
   (defun user/cedet-gnu-idutils-create/update ()
     "Create or update GNU idutils database at current project root."
     (interactive)
+    (if (executable-find "mkid")
+        (unless (cedet-idutils-version-check t)
+          (error "GNU idutils is too old!"))
+      (error "GNU idutils not found!"))
     (let* ((current-file (or (buffer-file-name) default-directory))
            (proj-root (user/project-root current-file)))
-      (when (and proj-root (cedet-idutils-version-check t))
+      (when proj-root
         (cedet-idutils-create/update-database proj-root)
         (message (format "GNU idutils database updated at %S" proj-root)))))
 
