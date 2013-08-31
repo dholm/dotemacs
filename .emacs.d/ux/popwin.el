@@ -11,8 +11,7 @@
 
   ;;; (Bindings) ;;;
   (define-key user/navigation-map (kbd "p") 'popwin:popup-buffer)
-  (define-key user/navigation-map (kbd "0") 'popwin:close-popup-window)
-  (define-key user/navigation-map (kbd "m") 'popwin:messages))
+  (define-key user/navigation-map (kbd "0") 'popwin:close-popup-window))
 
 (require-package '(:name popwin
                          :prepare (autoload 'popwin-mode "popwin")

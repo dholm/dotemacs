@@ -62,7 +62,7 @@
     (load (path-join (el-get-package-directory "cedet") "contrib" "cedet-contrib-load.el")))
   (require 'eassist)
   (define-key user/navigation-map (kbd "t") 'eassist-switch-h-cpp)
-  (define-key user/documentation-map (kbd "m") 'eassist-list-methods)
+  (define-key user/navigation-map (kbd "m") 'eassist-list-methods)
 
   ;; Load extra semantic helpers
   (require 'semantic/bovine/c)
