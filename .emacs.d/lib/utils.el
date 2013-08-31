@@ -23,15 +23,21 @@
 
 
 (defun add-auto-mode (mode &rest patterns)
-  "Add entries to `auto-mode-alist' to use `MODE' for all given file `PATTERNS'."
+  "Use `MODE' for all given files matching `PATTERNS'."
   (dolist (pattern patterns)
     (add-to-list 'auto-mode-alist (cons pattern mode))))
 
 
 (defun add-magic-mode (mode &rest patterns)
-  "Add entries to `magic-mode-alist' to use `MODE' for all given file header `PATTERNS'."
+  "Use `MODE' for all files containing header `PATTERNS'."
   (dolist (pattern patterns)
     (add-to-list 'magic-mode-alist (cons pattern mode))))
+
+
+(defun add-interpreter-mode (mode &rest interpreters)
+  "Use`MODE' for all files with shebang `INTERPRETERS'."
+  (dolist (interpreter interpreters)
+    (add-to-list 'interpreter-mode-alist (cons interpreter mode))))
 
 
 (provide 'lib/utils)

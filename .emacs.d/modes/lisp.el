@@ -26,7 +26,10 @@
       (diminish 'elisp-slime-nav-mode)))
   (when (el-get-package-is-installed 'auto-complete-emacs-lisp)
     (ac-emacs-lisp-mode-setup))
-  (define-key user/navigation-map (kbd "e") 'macrostep-expand))
+  (when (el-get-package-is-installed 'popwin)
+    (define-key user/navigation-map (kbd "m") 'popwin:messages))
+  (when (el-get-package-is-installed 'macrostep)
+    (define-key user/navigation-map (kbd "e") 'macrostep-expand)))
 
 (defun user/minibuffer-setup-hook ()
   "Emacs minibuffer hook."
@@ -41,7 +44,7 @@
 (defun user/newlisp-mode-init ()
   "Initialize newlisp mode."
   (add-auto-mode 'newlisp-mode "\\.lsp$")
-  (add-to-list 'interpreter-mode-alist '("newlisp" . newlisp-mode)))
+  (add-interpreter-mode 'newlisp-mode "newlisp"))
 
 
 (defun user/swank-newlisp-init ()

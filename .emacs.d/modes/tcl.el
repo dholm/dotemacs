@@ -8,7 +8,7 @@
 (defun user/tcl-mode-init ()
   "Initialize Tcl mode."
   ;; Use tcl-mode for expect scripts
-  (add-to-list 'interpreter-mode-alist '("expect" . tcl-mode))
+  (add-interpreter-mode 'tcl-mode "expect")
 
   (add-hook 'tcl-mode-hook 'user/tcl-mode-hook))
 
