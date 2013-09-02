@@ -77,7 +77,7 @@
    helm-idle-delay 0.1
    helm-input-idle-delay 0.0
    ;; Limit the number of candidates to a reasonable amount
-   helm-candidate-number-limit 200
+   helm-candidate-number-limit 2000
    ;; Delay showing results that are off screen
    helm-quick-update t)
 
