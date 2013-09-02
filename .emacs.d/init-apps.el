@@ -2,12 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'apps/bookmark+)
-(require 'apps/calfw)
-(require 'apps/deft)
-(require 'apps/elim)
-(require 'apps/w3m)
-(require 'apps/wanderlust)
+(load-all-files-from-dir (path-join user-emacs-directory "apps"))
 
 
 (provide 'init-apps)

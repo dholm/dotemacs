@@ -2,8 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'vcs/git)
-(require 'vcs/clearcase)
+(load-all-files-from-dir (path-join user-emacs-directory "vcs"))
 
 
 (provide 'init-vcs)

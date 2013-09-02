@@ -20,6 +20,7 @@
 (require 'lib/utils)
 (require 'lib/hash-tables)
 (require 'lib/pkg-config)
+(require 'lib/bootstrap)
 
 
 ;; Load configuration

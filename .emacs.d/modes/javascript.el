@@ -80,7 +80,7 @@
          '(js2-warning ((t (:underline ,orange))))))))
 
   ;; Register file types with find-file-in-project
-  (when (el-get-package-is-installed 'find-file-in-project)
+  (after-load 'find-file-in-project
     (user/ffip-local-patterns "*.js"))
 
   (add-hook 'js-mode-hook 'user/js-mode-hook)

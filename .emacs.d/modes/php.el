@@ -11,7 +11,7 @@
   (subword-mode t)
 
   ;; Register file types with find-file-in-project
-  (when (el-get-package-is-installed 'find-file-in-project)
+  (after-load 'find-file-in-project
     (user/ffip-local-patterns "*.php")))
 
 
