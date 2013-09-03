@@ -34,11 +34,11 @@
   (define-key user/utilities-map (kbd "e") 'ecb-activate)
 
   ;;; quick navigation between ecb windows
-  (define-key user/navigation-map (kbd "1") 'ecb-goto-window-edit1)
-  (define-key user/navigation-map (kbd "2") 'ecb-goto-window-directories)
-  (define-key user/navigation-map (kbd "3") 'ecb-goto-window-history)
-  (define-key user/navigation-map (kbd "4") 'ecb-goto-window-methods)
-  (define-key user/navigation-map (kbd "5") 'ecb-goto-window-compilation)
+  (define-key user/navigation-map (kbd "w e") 'ecb-goto-window-edit1)
+  (define-key user/navigation-map (kbd "w d") 'ecb-goto-window-directories)
+  (define-key user/navigation-map (kbd "w h") 'ecb-goto-window-history)
+  (define-key user/navigation-map (kbd "w m") 'ecb-goto-window-methods)
+  (define-key user/navigation-map (kbd "w c") 'ecb-goto-window-compilation)
 
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
