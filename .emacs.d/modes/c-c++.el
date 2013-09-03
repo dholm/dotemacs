@@ -40,13 +40,9 @@
     (helm-gtags-mode t))
 
   ;; Auto completion
-  (when *has-clang*
-    (set (make-local-variable 'ac-sources)
-         (append ac-sources '(ac-source-clang-async)))
-    (ac-clang-launch-completion-process))
-
-  ;; Enable dtrt-indent to attempt to identify the indentation rules used
-  (dtrt-indent-mode t)
+  (when (el-get-package-is-installed 'clang-complete-async)
+    (ac-clang-launch-completion-process)
+    (add-ac-sources 'ac-source-clang-async))
 
   (when *has-gdb*
     (gdb-enable-debug t)
@@ -81,6 +77,7 @@
     (require-package '(:name clang-complete-async)))
 
   (add-hook 'c-mode-common-hook 'user/c-mode-common-hook))
+
 
 (user/c-c++-mode-init)
 

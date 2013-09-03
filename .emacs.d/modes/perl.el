@@ -8,8 +8,8 @@
 (defun user/perl-mode-hook ()
   "Perl mode hook."
   (auto-complete-mode t)
-  (set (make-local-variable 'ac-sources)
-       (append ac-sources '(ac-source-perl-completion)))
+  (add-ac-sources 'ac-source-perl-completion)
+
   ;; Initialize PDE
   (user/pde-perl-mode-hook)
 

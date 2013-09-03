@@ -37,8 +37,7 @@
   (define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
 
   ;; Auto-completion sources
-  (set (make-local-variable 'ac-sources)
-       (append ac-sources '(ac-source-ropemacs)))
+  (add-ac-sources 'ac-source-ropemacs)
 
   ;; Register file types with find-file-in-project
   (after-load 'find-file-in-project

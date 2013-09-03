@@ -5,9 +5,7 @@
 (defun user/cedet-hook ()
   "Hook for modes with CEDET support."
   ;; Use semantic as a source for auto complete
-  (when (el-get-package-is-installed 'auto-complete)
-    (set (make-local-variable 'ac-sources)
-         (append ac-sources '(ac-source-semantic))))
+  (add-ac-sources 'ac-source-semantic)
 
   ;;; (Bindings) ;;;
   (define-key user/code-map (kbd "c") 'user/ede-compile)
@@ -78,16 +76,15 @@
     ;; Use CScope as a database for SemanticDB
     (semanticdb-enable-cscope-databases)
     ;; Use CScope as a source for EDE
-    (setq ede-locate-setup-options
-	  '(ede-locate-cscope
-	    ede-locate-base)))
+    (setq-default ede-locate-setup-options '(ede-locate-cscope
+                                             ede-locate-base)))
 
   ;; Enable GNU Global if available
   (when (cedet-gnu-global-version-check t)
     (semanticdb-enable-gnu-global-databases 'c-mode)
     (semanticdb-enable-gnu-global-databases 'c++-mode)
 
-    (add-to-list 'ac-sources 'ac-source-gtags))
+    (add-ac-sources 'ac-source-gtags))
 
 
   ;;; (Context Menu) ;;;

@@ -8,17 +8,20 @@
 (defun user/octave-mode-hook ()
   "Initialize Octave mode."
   (when (el-get-package-is-installed 'ac-octave)
-    (set (make-local-variable 'ac-sources)
-         (append ac-sources '(ac-octave)))))
+    (add-ac-sources 'ac-octave)))
+
 
 (defun user/octave-init ()
   "Initialize Emacs Octave support."
   (add-auto-mode 'octave-mode "\\.m$")
-  (add-hook 'octave-mode-hook 'user/octave-mode-hook))
+  (add-hook 'octave-mode-hook 'user/octave-mode-hook)
+
+  ;;; (Packages) ;;;
+  (require-package '(:name ac-octave)))
+
 
 (when *has-octave*
-  (user/octave-init)
-  (require-package '(:name ac-octave)))
+  (user/octave-init))
 
 
 (provide 'modes/octave)

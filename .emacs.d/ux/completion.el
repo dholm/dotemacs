@@ -10,6 +10,16 @@
 
   (add-to-list 'completion-styles 'initials t)
 
+  ;;; (Functions) ;;;
+  (defun add-ac-sources (&rest sources)
+    "Add SOURCES for auto-complete after it has been loaded."
+    (after-load 'auto-complete
+      (dolist (source sources)
+        (if (boundp 'ac-sources)
+            (add-to-list 'ac-sources source)
+          (error "Declaration of ac-sources is missing!")))))
+
+  ;;; (Packages) ;;;
   (require-package '(:name auto-complete :after (user/auto-complete-init)))
   (require-package '(:name tabkey2
                            :type http

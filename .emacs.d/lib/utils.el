@@ -35,7 +35,7 @@
 
 
 (defun add-interpreter-mode (mode &rest interpreters)
-  "Use`MODE' for all files with shebang `INTERPRETERS'."
+  "Use `MODE' for all files with shebang `INTERPRETERS'."
   (dolist (interpreter interpreters)
     (add-to-list 'interpreter-mode-alist (cons interpreter mode))))
 
