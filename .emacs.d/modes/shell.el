@@ -35,6 +35,9 @@
 
 (defun user/shell-mode-init ()
   "Initialize shell modes."
+  ;; Properly display colors in shell
+  (ansi-color-for-comint-mode-on)
+
   (require-package '(:name bash-completion))
   (require-package '(:name readline-complete :after (user/readline-complete-init)))
   (require-package '(:name shell-command

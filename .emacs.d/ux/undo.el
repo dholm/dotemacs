@@ -1,6 +1,11 @@
-;;; undo-tree.el --- undo history in a tree structure
+;;; undo.el --- Configure Emacs undo
 ;;; Commentary:
 ;;; Code:
+
+(defun user/undo-init ()
+  "Initialize Emacs undo."
+  (require-package '(:name undo-tree :after (user/undo-tree-init))))
+
 
 (defun user/undo-tree-init ()
   "Initialize undo-tree."
@@ -25,12 +30,9 @@
 
   (define-key user/code-map (kbd "u") 'undo-tree-visualize))
 
-(require-package '(:name undo-tree
-                         :features (undo-tree)
-                         :type git
-                         :url "http://www.dr-qubit.org/git/undo-tree.git/"
-                         :after (user/undo-tree-init)))
+
+(user/undo-init)
 
 
-(provide 'ux/undo-tree)
-;;; undo-tree.el ends here
+(provide 'ux/undo)
+;;; undo.el ends here

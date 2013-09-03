@@ -1,6 +1,29 @@
-;;; powerline --- powerline mode-line
+;;; modeline.el --- Modeline configuration
 ;;; Commentary:
 ;;; Code:
+
+(defun user/modeline-init ()
+  "Initialize Emacs modeline."
+  (setq-default
+   ;; Show row and column numbers.
+   line-number-mode t
+   column-number-mode t)
+
+  ;; Display the current time and system load.
+  (require 'time)
+  (setq-default
+   display-time-24hr-format t
+   display-time-form-list (list 'time 'load)
+   display-time-day-and-date t)
+  (display-time)
+
+  (require-package '(:name diminish))
+  (require-package '(:name powerline
+                           :type github
+                           :pkgname "milkypostman/powerline"
+                           :after (user/powerline-init)
+                           :prepare (autoload 'powerline-default-theme "powerline" nil t))))
+
 
 (defun user/powerline-init ()
   "Initialize powerline."
@@ -24,12 +47,9 @@
   (setq-default powerline-arrow-shape 'slant)
   (powerline-default-theme))
 
-(require-package '(:name powerline
-			 :type github
-			 :pkgname "milkypostman/powerline"
-			 :after (user/powerline-init)
-			 :prepare (autoload 'powerline-default-theme "powerline" nil t)))
+
+(user/modeline-init)
 
 
-(provide 'ux/powerline)
-;;; powerline.el ends here
+(provide 'ux/modeline)
+;;; modeline.el ends here

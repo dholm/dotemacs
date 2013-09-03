@@ -1,6 +1,24 @@
-;;; auto-complete.el --- initializes auto complete package
+;;; completion.el --- Configures automatic code completion
 ;;; Commentary:
 ;;; Code:
+
+(defun user/completion-init ()
+  "Initialize automatic code completion."
+  (setq-default
+   ;; Use complete when auto-complete is unavailable
+   tab-always-indent 'complete)
+
+  (add-to-list 'completion-styles 'initials t)
+
+  (require-package '(:name auto-complete :after (user/auto-complete-init)))
+  (require-package '(:name tabkey2
+                           :type http
+                           :url "http://marmalade-repo.org/packages/tabkey2-1.40.el"
+                           :build '(("mv" "tabkey2-1.40.el" "tabkey2.el"))
+                           :compile "tabkey2.el"
+                           :autoloads "tabkey2"
+                           :after (user/tabkey2-init))))
+
 
 (defun user/auto-complete-init ()
   "Initialize auto-complete."
@@ -25,15 +43,12 @@
    ;; Show quick help popup after half a second
    ac-use-quick-help t
    ac-quick-help-delay 0.5
-   ;; Use complete when auto-complete is unavailable
-   tab-always-indent 'complete
    ;; Store the completion history in the cache directory
    ac-comphist-file (path-join *user-cache-directory* "ac-comphist.dat"))
 
   (add-to-list 'ac-dictionary-directories (path-join *user-el-get-directory* "auto-complete" "ac-dict"))
-  (add-to-list 'completion-styles 'initials t)
 
-  ;; Install workaround for flyspell
+  ;; Install workaround for Flyspell
   (add-hook 'flymake-mode-hook 'ac-flyspell-workaround)
   (add-hook 'auto-complete-mode-hook 'ac-common-setup)
 
@@ -60,8 +75,15 @@
   ;;; (Bindings) ;;;
   (ac-set-trigger-key "TAB"))
 
-(require-package '(:name auto-complete :after (user/auto-complete-init)))
+
+(defun user/tabkey2-init ()
+  "Initialize tabkey2."
+  ;; Just load it since it is used by prog-mode
+  (require 'tabkey2))
 
 
-(provide 'ux/auto-complete)
-;;; auto-complete.el ends here
+(user/completion-init)
+
+
+(provide 'ux/completion)
+;;; completion.el ends here

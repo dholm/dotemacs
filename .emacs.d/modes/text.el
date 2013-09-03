@@ -10,7 +10,10 @@
    ;; Colons are followed by two spaces
    colon-double-space t
    ;; Sentences end after two spaces
-   sentence-end-double-space t)
+   sentence-end-double-space t
+   ;; When using fill-paragraph or auto-fill-mode break lines at 80 characters by
+   ;; default.
+   fill-column 80)
   ;; Automatically break long lines
   (auto-fill-mode t)
   ;; Run spell-checker
@@ -25,6 +28,7 @@
 (defun user/text-mode-init ()
   "Initialize generic text editing mode."
   (add-hook 'text-mode-hook 'user/text-mode-hook))
+
 
 (user/text-mode-init)
 

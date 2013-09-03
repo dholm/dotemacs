@@ -6,7 +6,10 @@
   "Programming mode hook."
   (setq-default
    ;; Indent using spaces by default
-   indent-tabs-mode nil)
+   indent-tabs-mode nil
+   ;; When using fill-paragraph or auto-fill-mode break lines at 80 characters by
+   ;; default.
+   fill-column 80)
   ;; Enable smart tabs
   (after-load 'tabkey2
     (tabkey2-mode t))
@@ -28,9 +31,57 @@
   (after-load 'diminish
     (diminish 'abbrev-mode)))
 
-(add-hook 'prog-mode-hook 'user/prog-mode-hook)
 
-(require-package '(:name fic-mode))
+(defun user/rainbow-delimiters-init ()
+  "Initialize rainbow delimiters."
+  ;;; (Faces) ;;;
+  (after-load 'solarized-theme
+    (solarized-with-values
+      (eval
+       `(custom-theme-set-faces
+         'solarized
+         '(rainbow-delimiters-depth-1-face ((t (:foreground ,cyan))))
+         '(rainbow-delimiters-depth-2-face ((t (:foreground ,yellow))))
+         '(rainbow-delimiters-depth-3-face ((t (:foreground ,blue))))
+         '(rainbow-delimiters-depth-4-face ((t (:foreground ,orange))))
+         '(rainbow-delimiters-depth-5-face ((t (:foreground ,green))))
+         '(rainbow-delimiters-depth-6-face ((t (:foreground ,yellow))))
+         '(rainbow-delimiters-depth-7-face ((t (:foreground ,blue))))
+         '(rainbow-delimiters-depth-8-face ((t (:foreground ,orange))))
+         '(rainbow-delimiters-depth-9-face ((t (:foreground ,green))))
+         '(rainbow-delimiters-depth-10-face ((t (:foreground ,yellow))))
+         '(rainbow-delimiters-depth-11-face ((t (:foreground ,blue))))
+         '(rainbow-delimiters-depth-12-face ((t (:foreground ,orange))))
+         '(rainbow-delimiters-unmatched-face
+          ((t (:foreground ,solarized-fg :background ,solarized-bg
+                           :inverse-video t))))))))
+
+  (global-rainbow-delimiters-mode t))
+
+
+(defun user/mic-paren-init ()
+  "Initialize mic-paren."
+  (paren-activate))
+
+
+(defun user/prog-mode-init ()
+  "Initialize generic programming mode."
+  ;; Show matching parenthesis.
+  (show-paren-mode t)
+
+  (add-hook 'prog-mode-hook 'user/prog-mode-hook)
+
+  ;;; (Packages) ;;;
+  (require-package '(:name fic-mode))
+  (require-package '(:name mic-paren
+                           :type emacswiki
+                           :website "https://raw.github.com/emacsmirror/emacswiki.org/master/mic-paren.el"
+                           :features (mic-paren)
+                           :after (user/mic-paren-init)))
+  (require-package '(:name rainbow-delimiters :after (user/rainbow-delimiters-init))))
+
+
+(user/prog-mode-init)
 
 
 (provide 'modes/prog)

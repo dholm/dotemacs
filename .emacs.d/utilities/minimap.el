@@ -19,5 +19,5 @@
   (require-package '(:name minimap :after (user/minimap-init))))
 
 
-(provide 'ux/minimap)
+(provide 'utilities/minimap)
 ;;; minimap.el ends here
