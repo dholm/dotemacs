@@ -17,6 +17,7 @@
 
 (defun user/lua-mode-init ()
   "Initialize Lua mode."
+  (require-package '(:name lua-mode))
   (require-package '(:name lua-block
                            :type emacswiki
                            :website "https://raw.github.com/emacsmirror/emacswiki.org/master/lua-block.el"
@@ -28,7 +29,7 @@
   (add-hook 'lua-mode-hook 'user/lua-mode-hook))
 
 (when *has-lua*
-  (require-package '(:name lua-mode :after (user/lua-mode-init))))
+  (user/lua-mode-init))
 
 
 (provide 'modes/lua)

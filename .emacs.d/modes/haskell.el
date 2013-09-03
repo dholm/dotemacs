@@ -35,6 +35,7 @@
 
 (defun user/haskell-mode-init ()
   "Initialize haskell mode."
+  (require-package '(:name haskell-mode))
   (require-package '(:name ghci-completion))
   (require-package '(:name scion
                            :type github
@@ -47,12 +48,7 @@
   (add-hook 'inferior-haskell-mode-hook 'user/inferior-haskell-mode-hook))
 
 (when *has-ghc*
-  (require-package '(:name haskell-mode
-                           :type github
-                           :pkgname "haskell/haskell-mode"
-                           :load "haskell-mode-autoloads.el"
-                           :build (("make" "all"))
-                           :after (user/haskell-mode-init))))
+  (user/haskell-mode-init))
 
 
 (provide 'modes/haskell)

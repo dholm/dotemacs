@@ -106,16 +106,11 @@
 
 (when *has-git*
   (require-package '(:name magit :after (user/magit-init)))
-  (require-package '(:name magithub))
   (require-package '(:name git-gutter :after (user/git-gutter-init)))
   (when (display-graphic-p)
     (require-package '(:name git-gutter-fringe
                              :after (user/git-gutter-fringe-init))))
-  (require-package '(:name git-messenger :after (user/git-messenger-init)))
-  (require-package '(:name yagist
-                           :type github
-                           :pkgname "mhayashi1120/yagist.el"
-                           :depends (json))))
+  (require-package '(:name git-messenger :after (user/git-messenger-init))))
 
 
 (provide 'vcs/git)
