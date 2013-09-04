@@ -26,9 +26,9 @@
    backup-by-copying t)
 
   (setq-default
-   ;; Auto-save every two minutes regardless of number of events.
-   auto-save-interval 0
-   auto-save-timeout 120
+   ;; Auto-save every minute or 300 events
+   auto-save-interval 300
+   auto-save-timeout 60
    ;; Always auto-save buffers.
    auto-save-default t
    ;; Put autosave files (ie #foo#) and backup files (ie foo~) into a cache dir.
