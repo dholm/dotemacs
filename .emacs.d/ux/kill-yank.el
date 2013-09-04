@@ -5,14 +5,17 @@
 (defun user/kill-yank-init ()
   "Initialize copy/paste."
   (setq-default
-   ;; Do not interact with X11 primary selection.
-   x-select-enable-primary nil
-   ;; Interact with X11 clipboard selection.
-   x-select-enable-clipboard t
-   ;; Yanking should also use the clipboard.
-   interprogram-paste-function 'x-cut-buffer-or-selection-value
    ;; Mouse selection should not automatically go to kill ring.
    mouse-drag-copy-region nil)
+
+  (when (eq window-system 'x)
+    (setq-default
+     ;; Do not interact with X11 primary selection.
+     x-select-enable-primary nil
+     ;; Interact with X11 clipboard selection.
+     x-select-enable-clipboard t
+     ;; Yanking should also use the clipboard.
+     interprogram-paste-function 'x-cut-buffer-or-selection-value))
 
   ;;; (Bindings) ;;;
   ;; Delete words with C-w and rebind kill region to C-x C-k.
