@@ -5,8 +5,8 @@
 (defun user/scrolling-init ()
   "Configure Emacs buffer scrolling."
   (setq-default
-   ;; Start scrolling on first or last line.
-   scroll-margin 0
+   ;; Set distance in line from margin before scrolling commences.
+   scroll-margin 5
    ;; Prevent cursor from jumping to center of window on scroll.
    scroll-conservatively 100000
    ;; Try to maintain screen position when scrolling entire pages.
