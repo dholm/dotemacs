@@ -8,9 +8,6 @@
    ;; Limit search to 4096 hits
    ffip-limit 4096)
 
-  ;;; (Bindings) ;;;
-  (define-key user/navigation-map (kbd "f") 'find-file-in-project)
-
   ;;; (Functions) ;;;
   ;; Stolen from https://github.com/magnars/.emacs.d/blob/master/setup-ffip.el
   (defun user/ffip--create-exclude-find-options (names)

@@ -150,6 +150,7 @@
   ;;; (Bindings) ;;;
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
   (global-set-key (kbd "C-x b") 'helm-buffers-list)
+
   (define-key 'user/navigation-map (kbd "SPC") 'user/helm-navigate)
   (define-key 'user/documentation-map (kbd "SPC") 'user/helm-apropos))
 
@@ -180,6 +181,12 @@
   (add-hook 'helm-gtags-mode-hook 'user/helm-gtags-mode-hook))
 
 
+(defun user/helm-cmd-t-init ()
+  "Initialize Helm cmd-t."
+  ;;; (Bindings) ;;;
+  (define-key user/navigation-map (kbd "f") 'helm-cmd-t))
+
+
 (require-package '(:name helm :after (user/helm-init)))
 (require-package '(:name helm-descbinds :after (user/helm-descbinds-init)))
 (require-package '(:name helm-etags-plus))
@@ -190,6 +197,11 @@
                          :pkgname "syohex/emacs-helm-gtags"
                          :depends (helm)
                          :after (user/helm-gtags-init)))
+(require-package '(:name helm-cmd-t
+                         :type github
+                         :pkgname "lewang/helm-cmd-t"
+                         :depends (helm)
+                         :after (user/helm-cmd-t-init)))
 (after-load 'modes/python
   (when *has-python*
     (require-package '(:name helm-pydoc
