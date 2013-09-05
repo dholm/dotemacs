@@ -99,22 +99,9 @@
 
 
   ;;; (Functions) ;;;
-  (defun user/ede-get-current-project ()
-    "Get the current EDE project."
-    (let* ((current-file (or (buffer-file-name) default-directory))
-           (current-dir (file-name-directory current-file)))
-      (ede-current-project current-dir)))
-
-  (defun user/ede-gen-std-compile-string ()
-    "Generate compilation string for standard GNU Make project."
-    (let ((project-root (ede-project-root-directory
-                         (user/ede-get-current-project))))
-      (concat "cd " project-root "; "
-              "nice make -j")))
-
   (defun user/ede-get-local-var (fname var)
     "For file FNAME fetch the value of VAR from project."
-    (let ((current-project (user/ede-get-current-project)))
+    (let ((current-project (user/ede-project (user/current-project-root))))
       (when current-project
         (let* ((ov (oref current-project local-variables))
                (lst (assoc var ov)))
@@ -124,7 +111,7 @@
   (defun user/ede-compile ()
     "Compile using EDE if possible, otherwise revert to compile."
     (interactive)
-    (let ((current-project (user/ede-get-current-project)))
+    (let ((current-project (user/ede-project (user/current-project-root))))
       (if current-project
           (project-compile-project current-project)
         (call-interactively 'compile))))
@@ -136,8 +123,7 @@
         (unless (cedet-cscope-version-check t)
           (error "CScope version is too old!"))
       (error "CScope not found!"))
-    (let* ((current-file (or (buffer-file-name) default-directory))
-           (proj-root (user/project-root current-file)))
+    (let ((proj-root (user/current-project-root)))
       (when proj-root
         (cedet-cscope-create/update-database proj-root)
         (message (format "CScope database updated at %S" proj-root)))))
@@ -149,8 +135,7 @@
         (unless (cedet-gnu-global-version-check t)
           (error "GNU GLOBAL version is too old!"))
       (error "GNU GLOBAL not found!"))
-    (let* ((current-file (or (buffer-file-name) default-directory))
-           (proj-root (user/project-root current-file)))
+    (let ((proj-root (user/current-project-root)))
       (when proj-root
         (cedet-gnu-global-create/update-database proj-root)
         (message (format "GNU GLOBAL database updated at %S" proj-root)))))
@@ -162,8 +147,7 @@
         (unless (cedet-idutils-version-check t)
           (error "GNU idutils is too old!"))
       (error "GNU idutils not found!"))
-    (let* ((current-file (or (buffer-file-name) default-directory))
-           (proj-root (user/project-root current-file)))
+    (let ((proj-root (user/current-project-root)))
       (when proj-root
         (cedet-idutils-create/update-database proj-root)
         (message (format "GNU idutils database updated at %S" proj-root)))))

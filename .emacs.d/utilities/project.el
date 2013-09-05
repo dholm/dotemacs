@@ -35,6 +35,12 @@
        (t (user/ffip-project-root path))))))
 
 
+(defun user/current-project-root ()
+  "Get the project root based on current context."
+  (let ((current-file (or (buffer-file-name) default-directory)))
+    (user/project-root current-file)))
+
+
 (defun user/project-p (path)
   "Check if PATH is under project control."
   (user/project-root path))
