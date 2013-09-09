@@ -1,4 +1,4 @@
-;;; makefile --- initializes Makefile modes
+;;; makefile.el --- Initializes Makefile mode
 ;;; Commentary:
 ;;; Code:
 
@@ -19,7 +19,12 @@
   ;; Separate camel-case into separate words
   (subword-mode t))
 
-(add-hook 'makefile-mode-hook 'user/makefile-mode-hook)
+
+(defun user/makefile-mode-init ()
+  "Initialize makefile mode."
+  (add-hook 'makefile-mode-hook 'user/makefile-mode-hook)
+
+  (add-auto-mode 'makefile-mode "\\.mak$"))
 
 
 (provide 'modes/makefile)
