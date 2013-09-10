@@ -8,8 +8,6 @@
   (add-ac-sources 'ac-source-semantic)
 
   ;;; (Bindings) ;;;
-  (define-key user/code-map (kbd "c") 'user/ede-compile)
-
   (define-key user/code-map (kbd "RET") 'semantic-ia-complete-symbol)
   (define-key user/code-map (kbd "TAB") 'semantic-ia-complete-symbol-menu)
   (define-key user/code-map (kbd ">") 'semantic-complete-analyze-inline)
@@ -107,14 +105,6 @@
                (lst (assoc var ov)))
           (when lst
             (cdr lst))))))
-
-  (defun user/ede-compile ()
-    "Compile using EDE if possible, otherwise revert to compile."
-    (interactive)
-    (let ((current-project (user/ede-project (user/current-project-root))))
-      (if current-project
-          (project-compile-project current-project)
-        (call-interactively 'compile))))
 
   (defun user/cedet-cscope-create/update ()
     "Create or update CScope database at current project root."
