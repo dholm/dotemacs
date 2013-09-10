@@ -9,6 +9,12 @@
       project)))
 
 
+(defun user/current-ede-project ()
+  "Get the EDE project based on the current context."
+  (let ((current-file (or (buffer-file-name) default-directory)))
+    (user/ede-project current-file)))
+
+
 (defun user/ffip-project-root (path)
   "Use find-file-in-project to locate root from PATH."
   (when (el-get-package-is-installed 'find-file-in-project)
