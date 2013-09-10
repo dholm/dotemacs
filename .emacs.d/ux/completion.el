@@ -40,8 +40,8 @@
   (setq-default
    ;; Limit the number of candidates
    ac-candidate-limit 200
-   ;; Automatically start completion
-   ac-auto-start 0.8
+   ;; Do not automatically start completion
+   ac-auto-start nil
    ;; Use fuzzy matching
    ac-use-fuzzy 1.5
    ;; Do not show menu unless requested
@@ -83,7 +83,8 @@
     (diminish 'auto-complete-mode))
 
   ;;; (Bindings) ;;;
-  (ac-set-trigger-key "TAB"))
+  (ac-set-trigger-key (kbd "TAB"))
+  (define-key user/code-map (kbd "SPC") 'auto-complete))
 
 
 (defun user/tabkey2-init ()
