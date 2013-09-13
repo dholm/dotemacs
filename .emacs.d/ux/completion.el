@@ -19,6 +19,14 @@
             (add-to-list 'ac-sources source)
           (error "Declaration of ac-sources is missing!")))))
 
+  (defun add-ac-modes (&rest emacs-modes)
+    "Add EMACS-MODES for auto-complete after it has been loaded."
+    (after-load 'auto-complete
+      (dolist (mode emacs-modes)
+        (if (boundp 'ac-modes)
+            (add-to-list 'ac-modes mode)
+          (error "Declaration of ac-modes is missing!")))))
+
   ;;; (Packages) ;;;
   (require-package '(:name auto-complete :after (user/auto-complete-init)))
   (require-package '(:name tabkey2
