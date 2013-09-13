@@ -111,8 +111,8 @@
     (interactive)
     (if (executable-find "cscope")
         (unless (cedet-cscope-version-check t)
-          (error "CScope version is too old!"))
-      (error "CScope not found!"))
+          (warn "CScope version is too old!"))
+      (warn "CScope not found!"))
     (let ((proj-root (user/current-project-root)))
       (when proj-root
         (cedet-cscope-create/update-database proj-root)
@@ -123,8 +123,8 @@
     (interactive)
     (if (executable-find "global")
         (unless (cedet-gnu-global-version-check t)
-          (error "GNU GLOBAL version is too old!"))
-      (error "GNU GLOBAL not found!"))
+          (warn "GNU GLOBAL version is too old!"))
+      (warn "GNU GLOBAL not found!"))
     (let ((proj-root (user/current-project-root)))
       (when proj-root
         (cedet-gnu-global-create/update-database proj-root)
@@ -135,8 +135,8 @@
     (interactive)
     (if (executable-find "mkid")
         (unless (cedet-idutils-version-check t)
-          (error "GNU idutils is too old!"))
-      (error "GNU idutils not found!"))
+          (warn "GNU idutils is too old!"))
+      (warn "GNU idutils not found!"))
     (let ((proj-root (user/current-project-root)))
       (when proj-root
         (cedet-idutils-create/update-database proj-root)
