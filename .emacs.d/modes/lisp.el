@@ -37,7 +37,7 @@
     (elisp-slime-nav-mode t)
     (after-load 'diminish
       (diminish 'elisp-slime-nav-mode)))
-  (when (el-get-package-is-installed 'auto-complete-emacs-lisp)
+  (after-load 'auto-complete-emacs-lisp
     (ac-emacs-lisp-mode-setup))
   (when (el-get-package-is-installed 'popwin)
     (define-key user/navigation-map (kbd "m") 'popwin:messages))

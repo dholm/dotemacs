@@ -19,10 +19,10 @@
             (add-to-list 'ac-sources source)
           (error "Declaration of ac-sources is missing!")))))
 
-  (defun add-ac-modes (&rest emacs-modes)
-    "Add EMACS-MODES for auto-complete after it has been loaded."
+  (defun add-ac-modes (&rest major-modes)
+    "Add MAJOR-MODES for auto-complete after it has been loaded."
     (after-load 'auto-complete
-      (dolist (mode emacs-modes)
+      (dolist (mode major-modes)
         (if (boundp 'ac-modes)
             (add-to-list 'ac-modes mode)
           (error "Declaration of ac-modes is missing!")))))
