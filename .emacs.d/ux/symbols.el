@@ -10,11 +10,6 @@
   (require 'ux/coding)
   (when (eq default-terminal-coding-system 'utf-8)
     (require-package '(:name pretty-mode-plus
-                             :type github
-                             :pkgname "akatov/pretty-mode-plus"
-                             :prepare (progn
-                                        (autoload 'turn-on-pretty-mode "pretty-mode-plus")
-                                        (autoload 'global-pretty-mode "pretty-mode-plus"))
                              :after (user/pretty-mode-plus-init)))))
 
 

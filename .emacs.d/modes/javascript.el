@@ -94,10 +94,7 @@
 (defun user/javascript-mode-init ()
   "Initialize JavaScript mode."
   (require-package '(:name js2-mode :after (user/js2-mode-init)))
-  (require-package '(:name tern
-                           :type github
-                           :pkgname "marijnh/tern"
-                           :load-path ("emacs"))))
+  (require-package '(:name tern)))
 
 (user/javascript-mode-init)
 

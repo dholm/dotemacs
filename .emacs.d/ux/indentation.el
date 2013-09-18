@@ -5,9 +5,7 @@
 (defun user/indentation-init ()
   "Initialize Emacs indentation behavior."
   (require-package '(:name dtrt-indent :after (user/dtrt-indent-init)))
-  (require-package '(:name smart-tabs-mode
-                           :type github
-                           :pkgname "jcsalomon/smarttabs")))
+  (require-package '(:name smarttabs)))
 
 
 (defun user/dtrt-indent-init ()

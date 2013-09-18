@@ -37,12 +37,7 @@
   "Initialize haskell mode."
   (require-package '(:name haskell-mode))
   (require-package '(:name ghci-completion))
-  (require-package '(:name scion
-                           :type github
-                           :pkgname "nominolo/scion"
-                           :load-path "emacs"
-                           :prepare (progn
-                                      (autoload 'scion-mode "scion"))))
+  (require-package '(:name scion))
 
   (add-hook 'haskell-mode-hook 'user/haskell-mode-hook)
   (add-hook 'inferior-haskell-mode-hook 'user/inferior-haskell-mode-hook))

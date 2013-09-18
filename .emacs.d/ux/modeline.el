@@ -18,11 +18,7 @@
   (display-time)
 
   (require-package '(:name diminish))
-  (require-package '(:name powerline
-                           :type github
-                           :pkgname "milkypostman/powerline"
-                           :after (user/powerline-init)
-                           :prepare (autoload 'powerline-default-theme "powerline" nil t))))
+  (require-package '(:name powerline :after (user/powerline-init))))
 
 
 (defun user/powerline-init ()

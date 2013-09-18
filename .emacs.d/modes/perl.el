@@ -39,10 +39,7 @@
   (require-package '(:name perl-completion
                            :type emacswiki
                            :website "https://raw.github.com/emacsmirror/emacswiki.org/master/perl-completion.el"))
-  (require-package '(:name pde
-                           :type github
-                           :pkgname "wenbinye/emacs-pde"
-                           :load-path ("lisp")))
+  (require-package '(:name pde))
 
   (add-hook 'perl-mode-hook 'user/perl-mode-hook))
 

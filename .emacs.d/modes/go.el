@@ -26,18 +26,7 @@
 
 (defun user/go-mode-init ()
   "Initialize Go mode."
-  (require-package '(:name go-autocomplete
-                           :type github
-                           :pkgname "nsf/gocode"
-                           :depends (auto-complete)
-                           :features (go-autocomplete)
-                           :build '(("go" "build"))
-                           :load-path ("emacs")
-                           :prepare (progn
-                                      (setq exec-path
-                                            (append exec-path
-                                                    (el-get-package-directory
-                                                     "gocode"))))))
+  (require-package '(:name go-autocomplete))
 
   (add-hook 'go-mode-hook 'user/go-mode-hook))
 

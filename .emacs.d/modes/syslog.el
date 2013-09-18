@@ -26,14 +26,8 @@
   (add-auto-mode 'syslog-mode "/var/log.*$"))
 
 
-(require-package '(:name hide-lines
-			 :type github
-			 :pkgname "vapniks/hide-lines"))
-(require-package '(:name syslog-mode
-			 :depends (hide-lines)
-			 :type github
-			 :pkgname "vapniks/syslog-mode"
-			 :after (user/syslog-mode-init)))
+(require-package '(:name hide-lines))
+(require-package '(:name syslog-mode :after (user/syslog-mode-init)))
 
 
 (provide 'modes/syslog)
