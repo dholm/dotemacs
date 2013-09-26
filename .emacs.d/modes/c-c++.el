@@ -10,7 +10,9 @@
   ;; Set the default C/C++ code styles
   (setq-default
    c-default-style "K&R"
-   c++-default-style "Stroustrup")
+   c++-default-style "Stroustrup"
+   ;; Indent using four spaces
+   c-basic-offset 4)
 
   ;; Load CEDET
   (user/c-mode-cedet-hook)
