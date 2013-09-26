@@ -9,8 +9,8 @@
 (defun user/compile ()
   "Compile current context."
   (interactive)
-  (cond ((user/current-ede-project)
-         (project-compile-project (user/current-ede-project)))
+  (cond ((user/current-path-apply 'user/ede-project)
+         (project-compile-project (user/current-path-apply 'user/ede-project)))
         ((fboundp 'mode-compile) (call-interactively 'mode-compile))
         (t (call-interactively 'compile))))
 

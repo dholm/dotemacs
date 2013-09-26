@@ -19,10 +19,10 @@
 
   ;; Enable eldoc
   (when (el-get-package-is-installed 'c-eldoc)
+    (c-turn-on-eldoc-mode)
     (setq c-eldoc-includes
           (mapconcat '(lambda (path) (concat "-I" path))
-                     (user/current-project-include-paths) " "))
-    (c-turn-on-eldoc-mode))
+                     (user/current-path-apply 'user/project-include-paths) " ")))
 
   ;; Override the indentation level of case labels in the K&R- and
   ;; Stroustrup styles so that they are indented one level beyond

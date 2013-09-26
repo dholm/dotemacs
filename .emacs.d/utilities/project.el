@@ -17,12 +17,6 @@
       (mapcar '(lambda (path) (expand-file-name path root-path)) include-paths))))
 
 
-(defun user/current-ede-project ()
-  "Get the EDE project based on the current context."
-  (let ((current-file (or (buffer-file-name) default-directory)))
-    (user/ede-project current-file)))
-
-
 (defun user/ffip-project-root (path)
   "Use find-file-in-project to locate root from PATH."
   (when (el-get-package-is-installed 'find-file-in-project)
@@ -48,12 +42,6 @@
        (t (user/ffip-project-root path))))))
 
 
-(defun user/current-project-root ()
-  "Get the project root based on current context."
-  (let ((current-file (or (buffer-file-name) default-directory)))
-    (user/project-root current-file)))
-
-
 (defun user/project-include-paths (path)
   "Get the project include paths for PATH, if it exists."
   (when path
@@ -61,12 +49,6 @@
       (cond
        (ede-proj (user/ede-project-include-paths ede-proj))
        (t nil)))))
-
-
-(defun user/current-project-include-paths ()
-  "Get the project include paths based on current context."
-  (let ((current-file (or (buffer-file-name) default-directory)))
-    (user/project-include-paths current-file)))
 
 
 (defun user/project-p (path)
@@ -92,6 +74,12 @@
   "Check if a Global tag database exists for project in PATH."
   (when (user/gnu-global-tags-location path)
     t))
+
+
+(defun user/current-path-apply (fn)
+  "Based on the current context apply FN to it."
+  (let ((path (or (buffer-file-name) default-directory)))
+    (funcall fn path)))
 
 
 (provide 'utilities/project)
