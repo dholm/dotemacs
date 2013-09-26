@@ -19,6 +19,9 @@
 
   ;; Enable eldoc
   (when (el-get-package-is-installed 'c-eldoc)
+    (setq c-eldoc-includes
+          (mapconcat '(lambda (path) (concat "-I" path))
+                     (user/current-project-include-paths) " "))
     (c-turn-on-eldoc-mode))
 
   ;; Override the indentation level of case labels in the K&R- and
@@ -72,7 +75,7 @@
   "Initialize C/C++ mode."
   (require-package '(:name c-eldoc
                            :type github
-                           :pkgname "mooz/c-eldoc"
+                           :pkgname "nflath/c-eldoc"
                            :depends (deferred)
                            :prepare (autoload 'c-turn-on-eldoc-mode "c-eldoc" nil t)))
   (when *has-clang*
