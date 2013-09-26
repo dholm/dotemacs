@@ -9,6 +9,14 @@
       project)))
 
 
+(defun user/ede-project-include-paths (project)
+  "List of include paths for EDE PROJECT."
+  (when project
+    (let ((root-path (ede-project-root-directory project))
+          (include-paths (oref project include-path)))
+      (mapcar '(lambda (path) (expand-file-name path root-path)) include-paths))))
+
+
 (defun user/current-ede-project ()
   "Get the EDE project based on the current context."
   (let ((current-file (or (buffer-file-name) default-directory)))
@@ -34,8 +42,7 @@
 (defun user/project-root (path)
   "Get the project root for PATH, if it exists."
   (when path
-    (let* ((path (file-truename path))
-           (ede-proj (user/ede-project path)))
+    (let ((ede-proj (user/ede-project (file-truename path))))
       (cond
        (ede-proj (ede-project-root-directory ede-proj))
        (t (user/ffip-project-root path))))))
@@ -45,6 +52,21 @@
   "Get the project root based on current context."
   (let ((current-file (or (buffer-file-name) default-directory)))
     (user/project-root current-file)))
+
+
+(defun user/project-include-paths (path)
+  "Get the project include paths for PATH, if it exists."
+  (when path
+    (let ((ede-proj (user/ede-project (file-truename path))))
+      (cond
+       (ede-proj (user/ede-project-include-paths ede-proj))
+       (t nil)))))
+
+
+(defun user/current-project-include-paths ()
+  "Get the project include paths based on current context."
+  (let ((current-file (or (buffer-file-name) default-directory)))
+    (user/project-include-paths current-file)))
 
 
 (defun user/project-p (path)
