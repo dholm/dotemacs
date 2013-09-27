@@ -68,6 +68,15 @@
   (require 'semantic/bovine/clang))
 
 
+(defun user/c++-header-file-p ()
+  "Return non-nil if in a C++ header."
+  (and (string-match "\\.h$"
+                   (or (buffer-file-name)
+                      (buffer-name)))
+     (save-excursion
+       (re-search-forward "\\_<class\\_>" nil t))))
+
+
 (defun user/c-c++-mode-init ()
   "Initialize C/C++ mode."
   (require-package '(:name c-eldoc
@@ -78,7 +87,10 @@
   (when *has-clang*
     (require-package '(:name clang-complete-async)))
 
-  (add-hook 'c-mode-common-hook 'user/c-mode-common-hook))
+  (add-hook 'c-mode-common-hook 'user/c-mode-common-hook)
+
+  ;; Detect if inside a C++ header file.
+  (add-magic-mode 'c++-mode 'user/c++-header-file-p))
 
 
 (user/c-c++-mode-init)
