@@ -43,20 +43,20 @@
   (require 'semantic/ia)
 
   ;; Scan source code automatically during idle time
-  (add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
+  (global-semantic-idle-scheduler-mode t)
   ;; Highlight the first line of the current tag
-  (add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
+  (global-semantic-highlight-func-mode t)
   ;; Initiate inline completion automatically during idle time
-  (add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode)
+  (global-semantic-idle-completions-mode t)
   ;; Show breadcrumbs during idle time
   (setq-default
    semantic-idle-breadcrumbs-format-tag-function 'semantic-format-tag-summarize
    semantic-idle-breadcrumbs-separator " ⊃ "
    semantic-idle-breadcrumbs-header-line-prefix " ≝ ")
-  (add-to-list 'semantic-default-submodes 'global-semantic-idle-breadcrumbs-mode)
+  (global-semantic-idle-breadcrumbs-mode t)
 
   ;; Remember recently edited tags
-  (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
+  (global-semantic-mru-bookmark-mode t)
 
   ;; Enable [ec]tags support
   (when (cedet-ectag-version-check t)
@@ -68,7 +68,7 @@
 
   ;;; (SemanticDB) ;;;
   (require 'semantic/db)
-  (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+  (global-semanticdb-minor-mode t)
 
   (when (cedet-cscope-version-check t)
     ;; Use CScope as a database for SemanticDB
@@ -87,7 +87,7 @@
 
   ;;; (Context Menu) ;;;
   (when (display-graphic-p)
-    (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
+    (global-cedet-m3-minor-mode t)
     (define-key user/code-map (kbd "SPC") 'cedet-m3-menu-kbd))
 
 
@@ -148,6 +148,7 @@
     (user/cedet-cscope-create/update)
     (user/cedet-gnu-global-create/update)
     (user/cedet-gnu-idutils-create/update)))
+
 
 (require-package '(:name cedet
                          :before (user/cedet-before-init)
