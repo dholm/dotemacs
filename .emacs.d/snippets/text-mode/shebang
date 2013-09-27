@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: shebang
+# key: shebang
+# insert a choice if you have more than one possibility
+# --
+#!/usr/bin/env `(let ((found (user/all-asscs interpreter-mode-alist major-mode))) (if found (yas-choose-value found) ""))`
+
+$0

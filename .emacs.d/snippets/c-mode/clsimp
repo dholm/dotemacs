@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: clsimp
+# key: clsimp
+# --
+#include <stdlib.h>
+#include <string.h>
+
+#include "${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}.h"
+
+struct $1_s {
+   $0
+};
+
+$1_t* $1_create(${2:void})
+{
+    $1_t* $1;
+
+    $1 = calloc(1, sizeof($1_t));
+    if (!$1) {
+       return NULL;
+    }
+
+    return $1;
+}
+
+void $1_destroy($1_t* $1)
+{
+    if ($1) {
+       memset($1, 0UL, sizeof($1_t));
+       free($1);
+    }
+}

@@ -151,8 +151,8 @@
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
   (global-set-key (kbd "C-x b") 'helm-buffers-list)
 
-  (define-key 'user/navigation-map (kbd "SPC") 'user/helm-navigate)
-  (define-key 'user/documentation-map (kbd "SPC") 'user/helm-apropos))
+  (define-key user/navigation-map (kbd "SPC") 'user/helm-navigate)
+  (define-key user/documentation-map (kbd "SPC") 'user/helm-apropos))
 
 
 (defun user/helm-descbinds-init ()

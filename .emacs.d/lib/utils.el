@@ -40,5 +40,16 @@
     (add-to-list 'interpreter-mode-alist (cons interpreter mode))))
 
 
+(defun user/all-asscs (asslist query)
+  "A list of all values in ASSLIST corresponding to QUERY (like rassoc)."
+  (cond
+   ((null asslist) nil)
+   (t
+    (if (equal (cdr (car asslist)) query)
+        (cons (car (car asslist))
+              (user/all-asscs (cdr asslist) query))
+      (user/all-asscs (cdr asslist) query)))))
+
+
 (provide 'lib/utils)
 ;;; utils.el ends here
