@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defconst *has-w3m* (executable-find "w3m"))
-
-
 (defun user/w3m-init ()
   "Initialize w3m."
   (setq-default

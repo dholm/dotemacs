@@ -191,29 +191,30 @@
 (require-package '(:name helm-descbinds :after (user/helm-descbinds-init)))
 (require-package '(:name helm-etags-plus))
 (require-package '(:name helm-build-command))
-(require-package '(:name helm-ls-git))
-(require-package '(:name helm-gtags
-                         :type github
-                         :pkgname "syohex/emacs-helm-gtags"
-                         :depends (helm)
-                         :after (user/helm-gtags-init)))
 (require-package '(:name helm-cmd-t
                          :type github
                          :pkgname "lewang/helm-cmd-t"
                          :depends (helm)
                          :after (user/helm-cmd-t-init)))
-(after-load 'modes/python
-  (when *has-python*
-    (require-package '(:name helm-pydoc
-			     :type github
-			     :depends (helm)
-			     :pkgname "syohex/emacs-helm-pydoc"))))
-(after-load 'modes/go
-  (when *has-go*
-    (require-package '(:name helm-go-package
-			     :type github
-			     :pkgname "yasuyk/helm-go-package"
-			     :depends (helm go-mode)))))
+
+(when *has-git*
+  (require-package '(:name helm-ls-git)))
+(when *has-global*
+  (require-package '(:name helm-gtags
+                           :type github
+                           :pkgname "syohex/emacs-helm-gtags"
+                           :depends (helm)
+                           :after (user/helm-gtags-init))))
+(when *has-python*
+  (require-package '(:name helm-pydoc
+                           :type github
+                           :depends (helm)
+                           :pkgname "syohex/emacs-helm-pydoc")))
+(when *has-go*
+  (require-package '(:name helm-go-package
+                           :type github
+                           :pkgname "yasuyk/helm-go-package"
+                           :depends (helm go-mode))))
 
 
 (provide 'utilities/helm)

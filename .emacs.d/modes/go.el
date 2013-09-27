@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defconst *has-go* (executable-find "go"))
-
-
 (defun user/go-mode-hook ()
   "Go mode hook."
   ;; Automatic code fixes before saving

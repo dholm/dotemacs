@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defconst *has-ruby* (executable-find "ruby"))
-
-
 (defun user/ruby-mode-hook ()
   "Ruby mode hook."
   (unless (derived-mode-p 'prog-mode)

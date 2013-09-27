@@ -12,6 +12,7 @@
 (benchmark/install)
 
 ;; Bring in constants used throughout initialization
+(require 'lib/pkg-config)
 (require 'init-constants)
 
 ;; Set up package management
@@ -19,7 +20,6 @@
 ;; Load utilities
 (require 'lib/utils)
 (require 'lib/hash-tables)
-(require 'lib/pkg-config)
 (require 'lib/bootstrap)
 
 

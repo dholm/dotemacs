@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defconst *has-octave* (executable-find "octave"))
-
-
 (defun user/octave-mode-hook ()
   "Initialize Octave mode."
   (when (el-get-package-is-installed 'ac-octave)

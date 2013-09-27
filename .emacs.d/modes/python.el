@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defconst *has-python* (executable-find "python"))
-
-
 (defun user/python-mode-hook ()
   "Python mode hook."
   (unless (derived-mode-p 'prog-mode)

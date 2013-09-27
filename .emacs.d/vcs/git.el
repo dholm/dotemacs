@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defconst *has-git* (executable-find "git"))
-
-
 (defun user/git-gutter-init ()
   "Initialize git gutter."
   ;;; (Faces) ;;;

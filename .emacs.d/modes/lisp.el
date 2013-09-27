@@ -2,11 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defconst *has-sbcl* (executable-find "sbcl"))
-(defconst *has-lisp* (executable-find "lisp"))
-(defconst *has-clisp* (executable-find "clisp"))
-
-
 ;;; (Mode Hooks) ;;;
 (defun user/lisp-mode-common-hook ()
   "LISP mode hook."

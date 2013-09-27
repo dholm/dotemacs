@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defconst *has-ghc* (executable-find "ghc"))
-
-
 (defun user/generic-haskell-mode-hook ()
   "Generic Haskell mode hook."
   (turn-on-haskell-doc-mode)

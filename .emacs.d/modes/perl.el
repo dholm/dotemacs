@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defconst *has-perl* (executable-find "perl"))
-
-
 (defun user/perl-mode-hook ()
   "Perl mode hook."
   (auto-complete-mode t)

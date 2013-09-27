@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defconst *has-lua* (executable-find "lua"))
-
-
 (defun user/lua-mode-hook ()
   "Lua mode hook."
   (when (el-get-package-is-installed 'lua-block)

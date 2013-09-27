@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defconst *has-php* (executable-find "php"))
-
-
 (defun user/php-mode-hook ()
   "PHP mode hook."
   ;; Separate camel-case into separate words

@@ -2,8 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defconst *has-aspell* (executable-find "aspell"))
-
 (defun user/flyspell-mode-hook ()
   "Hook for fly spell mode.")
 

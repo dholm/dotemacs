@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defconst *has-gdb* (executable-find "gdb"))
-
-
 (defun user/gud-mode-hook ()
   "GDB gud mode hook."
   ;;; (Bindings) ;;;

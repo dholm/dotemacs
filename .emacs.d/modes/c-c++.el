@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defconst *has-clang* (executable-find "clang"))
-
-
 (defun user/c-mode-common-hook ()
   "C mode common hook."
   ;; Set the default C/C++ code styles

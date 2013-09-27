@@ -2,10 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defconst *has-scala* (executable-find "scala"))
-(defconst *has-sbt* (executable-find "sbt"))
-
-
 (defun user/scala-mode-hook ()
   "Scala mode hook."
   (when *has-sbt*
