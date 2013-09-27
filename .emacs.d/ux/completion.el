@@ -42,26 +42,28 @@
   "Initialize auto-complete."
   (require 'auto-complete-config)
 
-  ;; Load default configuration
+  ;; Load default configuration.
   (ac-config-default)
 
   (setq-default
-   ;; Limit the number of candidates
-   ac-candidate-limit 200
-   ;; Do not automatically start completion
-   ac-auto-start nil
-   ;; Use fuzzy matching
+   ;; Limit the number of candidates.
+   ac-candidate-limit 20
+   ;; Wait five seconds until showing completions.
+   ac-delay 5
+   ;; Automatically start completion after two characters.
+   ac-auto-start 2
+   ;; Use fuzzy matching.
    ac-use-fuzzy 1.5
-   ;; Do not show menu unless requested
-   ac-auto-show-menu nil
-   ;; Allow normal navigation keys in menu
+   ;; Automatically show menu after 400ms.
+   ac-auto-show-menu 0.4
+   ;; Allow normal navigation keys in menu.
    ac-use-menu-map t
-   ;; Do not auto-expand common candidates
+   ;; Do not auto-expand common candidates.
    ac-expand-on-auto-complete nil
-   ;; Show quick help popup after half a second
+   ;; Show quick help popup after half a second.
    ac-use-quick-help t
    ac-quick-help-delay 0.5
-   ;; Store the completion history in the cache directory
+   ;; Store the completion history in the cache directory.
    ac-comphist-file (path-join *user-cache-directory* "ac-comphist.dat"))
 
   (add-to-list 'ac-dictionary-directories (path-join *user-el-get-directory* "auto-complete" "ac-dict"))
@@ -89,6 +91,11 @@
   (global-auto-complete-mode t)
   (after-load 'diminish
     (diminish 'auto-complete-mode))
+
+  ;; Set up auto-complete for lisp-interaction- and ielm-mode.
+  (dolist (hook (list 'lisp-interaction-mode-hook
+                      'ielm-mode-hook))
+    (add-hook hook 'ac-emacs-lisp-mode-setup))
 
   ;;; (Bindings) ;;;
   (ac-set-trigger-key (kbd "TAB"))
