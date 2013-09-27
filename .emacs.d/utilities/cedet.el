@@ -42,18 +42,20 @@
   ;;; (Semantic) ;;;
   (require 'semantic/ia)
 
-  ;; Scan source code automatically during idle time
+  ;; Scan source code automatically during idle time.
   (global-semantic-idle-scheduler-mode t)
-  ;; Highlight the first line of the current tag
+  ;; Highlight the first line of the current tag.
   (global-semantic-highlight-func-mode t)
-  ;; Initiate inline completion automatically during idle time
+  ;; Initiate inline completion automatically during idle time.
   (global-semantic-idle-completions-mode t)
-  ;; Show breadcrumbs during idle time
+  ;; Show breadcrumbs during idle time.
   (setq-default
    semantic-idle-breadcrumbs-format-tag-function 'semantic-format-tag-summarize
    semantic-idle-breadcrumbs-separator " ⊃ "
    semantic-idle-breadcrumbs-header-line-prefix " ≝ ")
   (global-semantic-idle-breadcrumbs-mode t)
+  ;; Show summary of tag at point during idle time.
+  (global-semantic-idle-summary-mode t)
 
   ;; Remember recently edited tags
   (global-semantic-mru-bookmark-mode t)

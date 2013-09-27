@@ -14,13 +14,6 @@
   ;; Load CEDET
   (user/c-mode-cedet-hook)
 
-  ;; Enable eldoc
-  (when (el-get-package-is-installed 'c-eldoc)
-    (c-turn-on-eldoc-mode)
-    (setq c-eldoc-includes
-          (mapconcat '(lambda (path) (concat "-I" path))
-                     (user/current-path-apply 'user/project-include-paths) " ")))
-
   ;; Override the indentation level of case labels in the K&R- and
   ;; Stroustrup styles so that they are indented one level beyond
   ;; the switch.
@@ -79,11 +72,6 @@
 
 (defun user/c-c++-mode-init ()
   "Initialize C/C++ mode."
-  (require-package '(:name c-eldoc
-                           :type github
-                           :pkgname "nflath/c-eldoc"
-                           :depends (deferred)
-                           :prepare (autoload 'c-turn-on-eldoc-mode "c-eldoc" nil t)))
   (when *has-clang*
     (require-package '(:name clang-complete-async)))
 
