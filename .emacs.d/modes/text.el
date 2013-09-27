@@ -4,7 +4,7 @@
 
 (defun user/text-mode-hook ()
   "Text mode hook."
-  (setq-default
+  (setq
    ;; Indent using spaces by default
    indent-tabs-mode nil
    ;; Colons are followed by two spaces

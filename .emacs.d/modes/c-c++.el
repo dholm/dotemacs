@@ -5,7 +5,7 @@
 (defun user/c-mode-common-hook ()
   "C mode common hook."
   ;; Set the default C/C++ code styles
-  (setq-default
+  (setq
    c-default-style "K&R"
    c++-default-style "Stroustrup"
    ;; Indent using four spaces

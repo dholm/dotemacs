@@ -2,10 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(eval-when-compile
-  (require 'cl))
-
-
 (defun user/swig-mode-hook ()
   "SWIG mode hook.")
 

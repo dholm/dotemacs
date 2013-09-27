@@ -4,7 +4,7 @@
 
 (defun user/sh-mode-hook ()
   "Initialize mode for shell script editing."
-  (setq-default
+  (setq
    ;; Indent with four spaces
    sh-basic-offset 4
    sh-indentation 4)
@@ -16,7 +16,7 @@
 
 (defun user/shell-mode-hook ()
   "Initialize mode for interactive shell."
-  (setq-default
+  (setq
    ;; Set up to use Bash with input echoing
    explicit-shell-file-name "bash"
    explicit-bash-args '("-c" "export EMACS=; stty echo; bash")

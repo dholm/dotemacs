@@ -8,7 +8,7 @@
     (run-hooks 'prog-mode-hook))
 
   ;; Configure python-mode
-  (setq-default
+  (setq
    py-shell-name "ipython"
    py-load-pymacs-p t)
 
