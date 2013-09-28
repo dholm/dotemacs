@@ -39,8 +39,10 @@
   (interactive)
   (delete-trailing-whitespace)
   (if indent-tabs-mode
-      (untabify (point-min) (point-max))
-    (tabify (point-min) (point-max))))
+      (tabify (point-min) (point-max))
+    (untabify (point-min) (point-max)))
+  ;; Return nil so that buffer is saved.
+  nil)
 
 
 (defun user/rainbow-delimiters-init ()
@@ -64,8 +66,8 @@
          '(rainbow-delimiters-depth-11-face ((t (:foreground ,blue))))
          '(rainbow-delimiters-depth-12-face ((t (:foreground ,orange))))
          '(rainbow-delimiters-unmatched-face
-          ((t (:foreground ,solarized-fg :background ,solarized-bg
-                           :inverse-video t))))))))
+           ((t (:foreground ,solarized-fg :background ,solarized-bg
+                            :inverse-video t))))))))
 
   (global-rainbow-delimiters-mode t))
 

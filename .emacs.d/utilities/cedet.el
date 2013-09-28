@@ -123,7 +123,7 @@
   (defun user/cedet-gnu-global-create/update ()
     "Create or update GNU GLOBAL database at current project root."
     (interactive)
-    (when *has-global*
+    (if *has-global*
         (unless (cedet-gnu-global-version-check t)
           (warn "GNU GLOBAL version is too old!"))
       (warn "GNU GLOBAL not found!"))
@@ -135,7 +135,7 @@
   (defun user/cedet-gnu-idutils-create/update ()
     "Create or update GNU idutils database at current project root."
     (interactive)
-    (when *has-idutils*
+    (if *has-idutils*
         (unless (cedet-idutils-version-check t)
           (warn "GNU idutils is too old!"))
       (warn "GNU idutils not found!"))
