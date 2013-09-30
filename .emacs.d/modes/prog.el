@@ -4,12 +4,6 @@
 
 (defun user/prog-mode-hook ()
   "Programming mode hook."
-  (setq
-   ;; Indent using spaces by default
-   indent-tabs-mode nil
-   ;; When using fill-paragraph or auto-fill-mode break lines at 80 characters by
-   ;; default.
-   fill-column 80)
   ;; Enable smart tabs
   (after-load 'tabkey2
     (tabkey2-mode t))
@@ -79,6 +73,13 @@
   "Initialize generic programming mode."
   ;; Show matching parenthesis.
   (show-paren-mode t)
+
+  (setq-default
+   ;; Indent using spaces by default
+   indent-tabs-mode nil
+   ;; When using fill-paragraph or auto-fill-mode break lines at 80 characters by
+   ;; default.
+   fill-column 80)
 
   (add-hook 'prog-mode-hook 'user/prog-mode-hook)
 
