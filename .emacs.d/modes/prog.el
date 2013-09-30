@@ -2,6 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
+(defvar fix-tabs-on-save nil
+  "Automatically (un)tabify buffer on save according to 'indent-tabs-mode'.")
+
+
 (defun user/prog-mode-hook ()
   "Programming mode hook."
   ;; Enable smart tabs
@@ -30,9 +34,10 @@
   "Cleans up the buffer contents."
   (interactive)
   (delete-trailing-whitespace)
-  (if indent-tabs-mode
-      (tabify (point-min) (point-max))
-    (untabify (point-min) (point-max)))
+  (when fix-tabs-on-save
+    (if indent-tabs-mode
+        (tabify (point-min) (point-max))
+      (untabify (point-min) (point-max))))
   ;; Return nil so that buffer is saved.
   nil)
 
