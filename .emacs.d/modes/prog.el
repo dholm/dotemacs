@@ -29,9 +29,7 @@
     (fic-mode t))
   ;; Diminish abbrev mode when loaded
   (after-load 'diminish
-    (diminish 'abbrev-mode))
-  ;; Automatically indent on newlines
-  (local-set-key (kbd "RET") 'newline-and-indent))
+    (diminish 'abbrev-mode)))
 
 
 (defun user/prog-mode-buffer-cleanup ()
