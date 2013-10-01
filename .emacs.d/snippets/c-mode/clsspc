@@ -5,7 +5,7 @@
 #ifndef ${1:`(upcase (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))`_H}
 #define $1
 
-typedef struct ${2:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_s $2_t
+typedef struct ${2:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_s $2_t;
 
 $2_t* $2_create(${3:void});
 void $2_destroy($2_t* $2);
