@@ -7,13 +7,13 @@
   "LISP mode hook."
   (when (el-get-package-is-installed 'cedet)
     (user/cedet-hook))
-  (when (el-get-package-is-installed 'rainbow-delimiters)
+  (when (require 'rainbow-delimiters nil :noerror)
     (rainbow-delimiters-mode t))
-  (when (el-get-package-is-installed 'paredit)
+  (when (require 'paredit nil :noerror)
     (enable-paredit-mode)
     (after-load 'diminish
       (diminish 'paredit-mode)))
-  (when (el-get-package-is-installed 'redshank)
+  (when (require 'redshank nil :noerror)
     (redshank-mode t))
   (turn-on-eldoc-mode)
 

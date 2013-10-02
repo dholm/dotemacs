@@ -4,7 +4,7 @@
 
 (defun user/scala-mode-hook ()
   "Scala mode hook."
-  (when *has-sbt*
+  (when (el-get-package-is-installed 'ensime)
     (ensime-scala-mode-hook))
 
   ;; Register file types with find-file-in-project
