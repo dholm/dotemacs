@@ -28,15 +28,15 @@
 (defun user/emacs-lisp-mode-hook ()
   "Emacs LISP mode hook."
   (user/lisp-mode-common-hook)
-  (when (el-get-package-is-installed 'elisp-slime-nav)
+  (when (require 'elisp-slime-nav nil :noerror)
     (elisp-slime-nav-mode t)
     (after-load 'diminish
       (diminish 'elisp-slime-nav-mode)))
-  (after-load 'auto-complete-emacs-lisp
+  (when (require 'auto-complete-emacs-lisp nil :noerror)
     (ac-emacs-lisp-mode-setup))
-  (when (el-get-package-is-installed 'popwin)
+  (when (require 'popwin nil :noerror)
     (define-key user/navigation-map (kbd "m") 'popwin:messages))
-  (when (el-get-package-is-installed 'macrostep)
+  (when (require 'macrostep nil :noerror)
     (define-key user/code-map (kbd "e") 'macrostep-expand)))
 
 
