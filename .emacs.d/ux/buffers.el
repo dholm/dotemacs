@@ -14,7 +14,10 @@
    uniquify-buffer-name-style 'reverse
    uniquify-separator " • "
    uniquify-after-kill-buffer-p t
-   uniquify-ignore-buffers-re "^\\*"))
+   uniquify-ignore-buffers-re "^\\*")
+
+  ;;; (Bindings) ;;;
+  (global-set-key (kbd "C-x M-s") 'write-file))
 
 
 (user/buffers-init)
