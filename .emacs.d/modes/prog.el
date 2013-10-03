@@ -27,7 +27,10 @@
     (fic-mode t))
   ;; Diminish abbrev mode when loaded
   (after-load 'diminish
-    (diminish 'abbrev-mode)))
+    (diminish 'abbrev-mode))
+
+  ;;; (Bindings) ;;;
+  (define-key user/code-map (kbd "-") 'comment-dwim))
 
 
 (defun user/prog-mode-buffer-cleanup ()
