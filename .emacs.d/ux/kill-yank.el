@@ -18,9 +18,14 @@
      interprogram-paste-function 'x-cut-buffer-or-selection-value))
 
   ;;; (Bindings) ;;;
-  ;; Delete words with C-w and rebind kill region to C-x C-k.
+  ;; Delete words with C/M-w and rebind kill/yank region to C-x C-k/C-x C-w.
   (global-set-key (kbd "C-w") 'backward-kill-word)
+  (global-set-key (kbd "M-w") 'kill-word)
   (global-set-key (kbd "C-x C-k") 'kill-region)
+  (global-set-key (kbd "C-x C-w") 'kill-ring-save)
+
+  ;; Put backspace on C-h like in terminal.
+  (global-set-key (kbd "C-h") 'delete-backward-char)
 
   ;;; (Packages) ;;;
   (require-package '(:name expand-region :after (user/expand-region-init))))
