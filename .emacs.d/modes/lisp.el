@@ -37,7 +37,10 @@
   (when (require 'popwin nil :noerror)
     (define-key user/navigation-map (kbd "m") 'popwin:messages))
   (when (require 'macrostep nil :noerror)
-    (define-key user/code-map (kbd "e") 'macrostep-expand)))
+    (define-key user/code-map (kbd "e") 'macrostep-expand))
+
+  ;;; (Bindings) ;;;
+  (define-key user/help-map (kbd "SPC") 'elisp-index-search))
 
 
 (defun user/ielm-mode-hook ()

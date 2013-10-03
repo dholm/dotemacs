@@ -6,6 +6,9 @@
 (defvar user/navigation-map nil
   "Map for navigational bindings.")
 
+(defvar user/help-map nil
+  "Map for bindings to access help.")
+
 (defvar user/documentation-map nil
   "Map for bindings to access documentation.")
 
@@ -22,6 +25,11 @@
 ;; Set up prefixes for groups of commands
 (defcustom user/navigation-keyboard-prefix (kbd "C-c n")
   "Keyboard prefix to use for navigation commands."
+  :type 'key-sequence
+  :group 'user)
+
+(defcustom user/help-keyboard-prefix (kbd "C-c h")
+  "Keyboard prefix to use for help commands."
   :type 'key-sequence
   :group 'user)
 
@@ -46,26 +54,50 @@
   :group 'user)
 
 
-;; Bind keys to maps
-(define-prefix-command 'user/navigation-map)
-(define-key global-map user/navigation-keyboard-prefix 'user/navigation-map)
+(defun user/bindings-init ()
+  "Initialize key bindings."
+  ;; Bind keys to maps
+  (define-prefix-command 'user/navigation-map)
+  (define-key global-map user/navigation-keyboard-prefix 'user/navigation-map)
 
-(define-prefix-command 'user/documentation-map)
-(define-key global-map user/documentation-keyboard-prefix 'user/documentation-map)
+  (define-prefix-command 'user/help-map)
+  (define-key global-map user/help-keyboard-prefix 'user/help-map)
 
-(define-prefix-command 'user/code-map)
-(define-key global-map user/code-keyboard-prefix 'user/code-map)
+  (define-prefix-command 'user/documentation-map)
+  (define-key global-map user/documentation-keyboard-prefix 'user/documentation-map)
 
-(define-prefix-command 'user/vcs-map)
-(define-key global-map user/vcs-keyboard-prefix 'user/vcs-map)
+  (define-prefix-command 'user/code-map)
+  (define-key global-map user/code-keyboard-prefix 'user/code-map)
 
-(define-prefix-command 'user/utilities-map)
-(define-key global-map user/utilities-keyboard-prefix 'user/utilities-map)
+  (define-prefix-command 'user/vcs-map)
+  (define-key global-map user/vcs-keyboard-prefix 'user/vcs-map)
 
+  (define-prefix-command 'user/utilities-map)
+  (define-key global-map user/utilities-keyboard-prefix 'user/utilities-map)
 
-;; Alias C-x C-m to M-x which is a bit awkward to reach
-(global-set-key (kbd "C-x C-m") 'execute-extended-command)
-(global-set-key (kbd "C-x m") 'execute-extended-command)
+  ;;; (Bindings) ;;;
+  ;; Alias C-x C-m to M-x which is a bit awkward to reach
+  (global-set-key (kbd "C-x C-m") 'execute-extended-command)
+  (global-set-key (kbd "C-x m") 'execute-extended-command)
+
+  ;; Help keys for bindings.
+  (define-key user/help-map (kbd "b") 'describe-bindings)
+  (define-key user/help-map (kbd "k") 'describe-key)
+  (define-key user/help-map (kbd "K") 'Info-goto-emacs-key-command-node)
+  (define-key user/help-map (kbd "w") 'where-is)
+
+  ;; Help keys for Emacs.
+  (define-key user/help-map (kbd "f") 'describe-function)
+  (define-key user/help-map (kbd "v") 'describe-variable)
+  (define-key user/help-map (kbd "p") 'finder-by-keyword)
+  (define-key user/help-map (kbd "M") 'info-emacs-manual)
+  (define-key user/help-map (kbd "s") 'info-lookup-symbol)
+
+  ;; Help keys for mode.
+  (define-key user/help-map (kbd "m") 'describe-mode)
+  (define-key user/help-map (kbd "S") 'describe-syntax))
+
+(user/bindings-init)
 
 
 (provide 'init-bindings)

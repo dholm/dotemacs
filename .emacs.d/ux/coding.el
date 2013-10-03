@@ -11,7 +11,12 @@
   (set-terminal-coding-system 'utf-8)
   (set-keyboard-coding-system 'utf-8)
   ;; Treat clipboard input as UTF-8 string first; compound text next, etc.
-  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
+  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+
+  ;;; (Bindings) ;;;
+  (define-key user/help-map (kbd "C") 'describe-coding-system)
+  (define-key user/help-map (kbd "c") 'describe-char)
+  (define-key user/help-map (kbd "L") 'describe-language-environment))
 
 
 (user/coding-init)
