@@ -26,6 +26,8 @@
 
   (add-auto-mode 'makefile-mode "\\.mak$"))
 
+(user/makefile-mode-init)
+
 
 (provide 'modes/makefile)
 ;;; makefile.el ends here
