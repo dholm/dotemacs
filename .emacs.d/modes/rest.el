@@ -53,8 +53,7 @@
          '(rst-level-6-face ((t (:foreground ,solarized-bg :background ,red))))))))
 
   ;; Register auto modes
-  (add-auto-mode 'rst-mode
-                 "\\.txt$" "\\.text$" "\\.rst$" "\\.rest$")
+  (add-auto-mode 'rst-mode "\\.rst$" "\\.rest$")
 
   ;; Update TOC automatically if section headers are adjusted
   (add-hook 'rst-adjust-hook 'rst-toc-update)

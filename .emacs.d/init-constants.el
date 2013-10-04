@@ -49,6 +49,7 @@
 (defconst *has-lisp* (executable-find "lisp"))
 (defconst *has-clisp* (executable-find "clisp"))
 (defconst *has-ghc* (executable-find "ghc"))
+(defconst *has-cmake* (executable-find "cmake"))
 
 (defconst *has-git* (executable-find "git"))
 (defconst *has-cleartool* (and (executable-find "cleartool")
