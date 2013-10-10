@@ -4,25 +4,28 @@
 
 (defun user/yasnippet-init ()
   "Initialize yasnippet."
-  (setq-default
-   ;; Paths to where snippets will be stored.
-   yas-snippet-dirs (list
-                     (path-join user-emacs-directory "snippets")
-                     (path-join *user-data-directory* "snippets"))
-   ;; Setup up preferred completion functions.
-   yas-prompt-functions '(yas-completing-prompt
-                          yas-dropdown-prompt
-                          yas-ido-prompt)
-   ;; Only expand in specific contexts.
-   yas-expand-only-for-last-commands '(self-insert-command
-                                       yas-exit-all-snippets
-                                       yas-abort-snippet
-                                       yas-skip-and-clear-or-delete-char
-                                       yas-next-field-or-maybe-expand)
-   ;; Automatically indent lines.
-   yas-indent-line 'auto
-   ;; Wrap expansion around selected region.
-   yas-wrap-around-region t)
+  (let ((local-snippet-dir (path-join *user-data-directory* "snippets")))
+    (setq-default
+     ;; Paths to where snippets will be stored.
+     yas-snippet-dirs (list
+                       (path-join user-emacs-directory "snippets")
+                       local-snippet-dir)
+     ;; Setup up preferred completion functions.
+     yas-prompt-functions '(yas-completing-prompt
+                            yas-dropdown-prompt
+                            yas-ido-prompt)
+     ;; Only expand in specific contexts.
+     yas-expand-only-for-last-commands '(self-insert-command
+                                         yas-exit-all-snippets
+                                         yas-abort-snippet
+                                         yas-skip-and-clear-or-delete-char
+                                         yas-next-field-or-maybe-expand)
+     ;; Automatically indent lines.
+     yas-indent-line 'auto
+     ;; Wrap expansion around selected region.
+     yas-wrap-around-region t)
+
+    (make-directory local-snippet-dir t))
 
   (when (eq window-system 'x)
     (add-to-list 'yas-prompt-functions 'yas-x-prompt))
