@@ -32,6 +32,7 @@
 (defconst *has-cscope* (executable-find "cscope"))
 (defconst *has-ctags* (executable-find "ctags"))
 (defconst *has-idutils* (executable-find "mkid"))
+(defconst *has-ag* (executable-find "ag"))
 
 (defconst *has-python* (executable-find "python"))
 (defconst *has-scala* (executable-find "scala"))

@@ -184,7 +184,7 @@
 (defun user/helm-cmd-t-init ()
   "Initialize Helm cmd-t."
   ;;; (Bindings) ;;;
-  (define-key user/navigation-map (kbd "f") 'helm-cmd-t))
+  (define-key user/navigation-map (kbd "t") 'helm-cmd-t))
 
 
 (require-package '(:name helm :after (user/helm-init)))
