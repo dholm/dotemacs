@@ -14,7 +14,7 @@
   (when project
     (let ((root-path (ede-project-root-directory project))
           (include-paths (oref project include-path)))
-      (mapcar '(lambda (path) (expand-file-name path root-path)) include-paths))))
+      (mapcar #'(lambda (path) (expand-file-name path root-path)) include-paths))))
 
 
 (defun user/ffip-project-root (path)

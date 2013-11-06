@@ -34,6 +34,7 @@
 
 (defun user/anzu-init ()
   "Initialize anzu."
+  (require 'anzu)
   (global-anzu-mode t)
   (after-load 'diminish
     (diminish 'anzu-mode))
