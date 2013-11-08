@@ -52,7 +52,7 @@
   (unless (featurep 'cedet-contrib-load)
     (load (path-join (el-get-package-directory "cedet") "contrib" "cedet-contrib-load.el")))
   (require 'eassist)
-  (define-key user/navigation-map (kbd "t") 'eassist-switch-h-cpp)
+  (define-key user/navigation-map (kbd "h") 'eassist-switch-h-cpp)
   (define-key user/navigation-map (kbd "m") 'eassist-list-methods)
 
   ;; Load extra semantic helpers
