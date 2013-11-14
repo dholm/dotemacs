@@ -14,7 +14,10 @@
   (when (el-get-package-is-installed 'auto-complete-latex)
     (ac-l-setup))
   (when (el-get-package-is-installed 'ac-math)
-    (add-ac-sources 'ac-source-math-unicode 'ac-source-math-latex 'ac-source-latex-commands)))
+    (add-ac-sources 'ac-source-math-unicode 'ac-source-math-latex
+                    'ac-source-latex-commands))
+  (when (el-get-package-is-installed 'auto-complete-auctex)
+    (ac-auctex-setup)))
 
 
 (defun user/auctex-init ()
@@ -66,6 +69,10 @@
   (require-package '(:name zotelo :after (user/zotelo-init)))
   (require-package '(:name ac-math :after (user/ac-math-init)))
   (require-package '(:name auto-complete-latex :after (user/auto-complete-latex)))
+  (require-package '(:name auto-complete-auctex
+                           :type github
+                           :pkgname "monsanto/auto-complete-auctex"
+                           :prepare (autoload 'ac-auctex-setup "auto-complete-auctex")))
 
   (add-hook 'TeX-mode-hook 'user/tex-mode-hook)
   (add-hook 'LaTeX-mode-hook 'user/latex-mode-hook)
