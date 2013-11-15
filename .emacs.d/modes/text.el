@@ -22,7 +22,10 @@
   (add-hook 'write-contents-functions 'delete-trailing-whitespace nil t)
   ;; Enable dtrt-indent to attempt to identify the indentation rules used
   (after-load 'dtrt-indent
-    (dtrt-indent-mode t)))
+    (dtrt-indent-mode t))
+
+  ;;; (Bindings) ;;;
+  (define-key user/code-map (kbd "f") 'fill-paragraph))
 
 
 (defun user/text-mode-init ()
