@@ -8,7 +8,9 @@
   (bibtex-mode t)
 
   ;;; (Bindings) ;;;
-  (define-key user/navigation-map (kbd "c") 'reftex-toc))
+  (define-key user/navigation-map (kbd "c") 'reftex-toc)
+  (when (display-graphic-p)
+    (define-key user/code-map (kbd "p") 'preview-document)))
 
 
 (defun user/latex-mode-hook ()
@@ -60,6 +62,14 @@
    reftex-save-parse-info t
    ;; Cache selection buffers for faster access.
    reftex-use-multiple-selection-buffers t)
+
+  (after-load 'preview
+    ;; Support previewing of TikZ.
+    (add-to-list 'preview-default-preamble "\\PreviewEnvironment{tikzpicture}" t))
+
+  (when (display-graphic-p)
+    ;; Setup LaTeX preview.
+    (LaTeX-preview-setup))
 
   (when *has-latex*
     (setq-default
