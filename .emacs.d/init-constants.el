@@ -41,6 +41,7 @@
 (defconst *has-clang* (executable-find "clang"))
 (defconst *has-ruby* (executable-find "ruby"))
 (defconst *has-go* (executable-find "go"))
+(defconst *has-latex* (executable-find "latex"))
 (defconst *has-lua* (executable-find "lua"))
 (defconst *has-perl* (executable-find "perl"))
 (defconst *has-php* (executable-find "php"))
@@ -62,6 +63,7 @@
    (pkg-config-has-p "libxml-2.0")
    (pkg-config-has-p "purple")))
 (defconst *has-w3m* (executable-find "w3m"))
+(defconst *has-evince* (executable-find "evince"))
 
 
 (provide 'init-constants)
