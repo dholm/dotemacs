@@ -29,8 +29,9 @@
 (defun user/auctex-init ()
   "Initialize AUCTeX."
   (setq-default
-   ;; Make reftex interact with AucTeX.
-   reftex-plug-into-AUCTeX t
+   ;; Use synctex to communicate with LaTeX.
+   TeX-source-correlate-method 'synctex
+   LaTeX-command "latex -synctex=1 -shell-escape"
    ;; Do not ask about saving buffers before starting TeX.
    TeX-save-query nil
    ;; Use PDF rather than DVI by default.
@@ -48,6 +49,8 @@
    TeX-source-correlate-start-server t
 
    ;; (RefTeX) ;;
+   ;; Make reftex interact with AucTeX.
+   reftex-plug-into-AUCTeX t
    ;; Prompt for optional arguments.
    reftex-cite-prompt-optional-args t
    ;; Try to guess the label type before prompting.
@@ -70,11 +73,6 @@
   (when (display-graphic-p)
     ;; Setup LaTeX preview.
     (LaTeX-preview-setup))
-
-  (when *has-latex*
-    (setq-default
-     TeX-source-correlate-method 'synctex
-     LaTeX-command "latex -synctex=1 -shell-escape"))
 
   (cond
    ((eq system-type 'darwin)
@@ -157,7 +155,8 @@
   (add-hook 'latex-mode-hook 'user/latex-mode-hook))
 
 
-(user/tex-mode-init)
+(when *has-latex*
+  (user/tex-mode-init))
 
 
 (provide 'modes/text)
