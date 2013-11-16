@@ -79,7 +79,9 @@
    ;; Limit the number of candidates to a reasonable amount
    helm-candidate-number-limit 2000
    ;; Delay showing results that are off screen
-   helm-quick-update t)
+   helm-quick-update t
+   ;; Put adaptive history in cache directory.
+   helm-adaptive-history-file (path-join *user-cache-directory* "helm-adaptive-history"))
 
   ;; Filter out boring buffers
   (dolist (pattern
