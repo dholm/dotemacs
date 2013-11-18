@@ -7,6 +7,10 @@
   (turn-on-reftex)
   (bibtex-mode t)
 
+  (when (el-get-package-is-installed 'mode-compile)
+    ;; Override AUCTeX in favor of mode-compile.
+    (kill-local-variable 'compile-command))
+
   ;;; (Bindings) ;;;
   (define-key user/navigation-map (kbd "c") 'reftex-toc)
   (when (display-graphic-p)
@@ -140,6 +144,11 @@
    ;; (BibTeX) ;;
    bibtex-autokey-name-case-convert 'identity
    bibtex-autokey-year-length 4)
+
+  (after-load 'mode-compile
+    (setq mode-compile-modes-alist
+          (append '((latex-mode . (tex-compile kill-compilation)))
+                  mode-compile-modes-alist)))
 
   (require-package '(:name auctex :after (user/auctex-init)))
   (require-package '(:name zotelo :after (user/zotelo-init)))

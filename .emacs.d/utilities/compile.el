@@ -46,7 +46,6 @@
   ;;; (Bindings) ;;;
   (define-key user/code-map (kbd "c") 'user/compile)
 
-
   ;;; (Packages) ;;;
   (require-package '(:name mode-compile :after (user/mode-compile-init))))
 
