@@ -7,6 +7,12 @@
   ;; Use semantic as a source for auto complete
   (add-ac-sources 'ac-source-semantic)
 
+  (when (cedet-gnu-global-version-check t)
+    (add-ac-sources 'ac-source-gtags)
+    (when (el-get-package-is-installed 'ggtags)
+      (ggtags-mode t)))
+
+
   ;;; (Bindings) ;;;
   (define-key user/code-map (kbd "RET") 'semantic-ia-complete-symbol)
   (define-key user/code-map (kbd "TAB") 'semantic-ia-complete-symbol-menu)
@@ -82,9 +88,7 @@
   ;; Enable GNU Global if available
   (when (cedet-gnu-global-version-check t)
     (semanticdb-enable-gnu-global-databases 'c-mode)
-    (semanticdb-enable-gnu-global-databases 'c++-mode)
-
-    (add-ac-sources 'ac-source-gtags))
+    (semanticdb-enable-gnu-global-databases 'c++-mode))
 
 
   ;;; (Context Menu) ;;;
