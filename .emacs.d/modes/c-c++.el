@@ -35,7 +35,8 @@
     (helm-gtags-mode t))
 
   ;; Auto completion
-  (when (el-get-package-is-installed 'clang-complete-async)
+  (when (and *has-clang*
+           (el-get-package-is-installed 'clang-complete-async))
     (ac-clang-launch-completion-process)
     (add-ac-sources 'ac-source-clang-async))
 
