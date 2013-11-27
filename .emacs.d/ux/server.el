@@ -6,11 +6,12 @@
 
 (defun user/server-init ()
   "Initialize Emacs server."
-  (setq-default
-   ;; Use TCP instead of local sockets.
-   server-use-tcp t
-   ;; Put TCP authentication files in cache directory.
-   server-auth-dir (path-join *user-cache-directory* "server"))
+  (when (eq system-type 'darwin)
+    (setq-default
+     ;; Use TCP instead of local sockets.
+     server-use-tcp t
+     ;; Put TCP authentication files in cache directory.
+     server-auth-dir (path-join *user-cache-directory* "server")))
 
   (unless (server-running-p)
     (server-start)))
