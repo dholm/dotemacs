@@ -2,6 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/syslog-mode-hook ()
+  "Hook for syslog-mode."
+  ;; There is no need to spell check log files.
+  (flyspell-mode-off))
+
+
 (defun user/syslog-mode-init ()
   "Initialize syslog-mode."
   ;;; (Faces) ;;;
@@ -23,7 +29,9 @@
          '(syslog-su-face ((t (:foreground ,magenta :background unspecified))))))))
 
   ;; Register auto mode
-  (add-auto-mode 'syslog-mode "/var/log.*$"))
+  (add-auto-mode 'syslog-mode "/var/log.*$")
+
+  (add-hook 'syslog-mode-hook 'user/syslog-mode-hook))
 
 
 (require-package '(:name hide-lines))
