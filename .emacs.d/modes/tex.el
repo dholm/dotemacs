@@ -51,6 +51,7 @@
    ;; Support for backwards search in documents.
    TeX-source-correlate-mode t
    TeX-source-correlate-start-server t
+   TeX-master nil
 
    ;; (RefTeX) ;;
    ;; Make reftex interact with AucTeX.
