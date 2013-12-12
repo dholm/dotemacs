@@ -6,6 +6,8 @@
   "TeX mode hook."
   (turn-on-reftex)
   (bibtex-mode t)
+  (outline-minor-mode t)
+  (visual-line-mode t)
 
   (when (el-get-package-is-installed 'mode-compile)
     ;; Override AUCTeX in favor of mode-compile.
@@ -41,6 +43,7 @@
    ;; Use PDF rather than DVI by default.
    TeX-PDF-mode t
    TeX-fold-mode t
+   TeX-interactive-mode t
    ;; Parse file after load/save unless it has a style hook.
    TeX-parse-self t
    TeX-auto-save t
