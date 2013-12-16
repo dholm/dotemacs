@@ -3,7 +3,9 @@
 ;;; Code:
 
 (defun user/flyspell-mode-hook ()
-  "Hook for fly spell mode.")
+  "Hook for fly spell mode."
+  ;;; (Bindings) ;;;
+  (define-key user/code-map (kbd "s") 'ispell-word))
 
 (defun user/flyspell-init ()
   "Initialize fly spell."
