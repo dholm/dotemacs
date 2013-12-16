@@ -5,13 +5,16 @@
 (defun user/tex-mode-hook ()
   "TeX mode hook."
   (turn-on-reftex)
-  (bibtex-mode t)
   (outline-minor-mode t)
   (visual-line-mode t)
 
   (when (el-get-package-is-installed 'mode-compile)
     ;; Override AUCTeX in favor of mode-compile.
     (kill-local-variable 'compile-command))
+
+  ;; Enable AUCTeX auto completion when available.
+  (when (el-get-package-is-installed 'auto-complete-auctex)
+    (ac-auctex-setup))
 
   ;;; (Bindings) ;;;
   (define-key user/navigation-map (kbd "c") 'reftex-toc)
@@ -21,15 +24,20 @@
 
 (defun user/latex-mode-hook ()
   "LaTeX mode hook."
+  ;; Bring in TeX-mode.
+  (user/tex-mode-hook)
+
+  ;; Enable BibTeX support in documents.
+  (bibtex-mode t)
+  ;; Enable TeX math macros.
   (LaTeX-math-mode t)
+
   ;; Enable auto-completion systems.
   (when (el-get-package-is-installed 'auto-complete-latex)
     (ac-l-setup))
   (when (el-get-package-is-installed 'ac-math)
     (add-ac-sources 'ac-source-math-unicode 'ac-source-math-latex
                     'ac-source-latex-commands))
-  (when (el-get-package-is-installed 'auto-complete-auctex)
-    (ac-auctex-setup))
 
   ;; Activate improved sentence filling.
   (ad-activate 'LaTeX-fill-region-as-paragraph)
@@ -37,6 +45,12 @@
   ;;; (Bindings) ;;;
   (after-load 'auctex
     (define-key user/code-map (kbd "f") 'LaTeX-fill-paragraph)))
+
+
+(defun user/bibtex-mode-hook ()
+  "BibTeX mode hook."
+  ;; Bring in TeX-mode.
+  (user/tex-mode-hook))
 
 
 (defun user/auctex-init ()
@@ -192,7 +206,8 @@ Makes it easier to version control LaTeX-files."
 
   (add-hook 'TeX-mode-hook 'user/tex-mode-hook)
   (add-hook 'LaTeX-mode-hook 'user/latex-mode-hook)
-  (add-hook 'latex-mode-hook 'user/latex-mode-hook))
+  (add-hook 'latex-mode-hook 'user/latex-mode-hook)
+  (add-hook 'bibtex-mode-hook 'user/bibtex-mode-hook))
 
 
 (when *has-latex*
