@@ -29,7 +29,14 @@
     (add-ac-sources 'ac-source-math-unicode 'ac-source-math-latex
                     'ac-source-latex-commands))
   (when (el-get-package-is-installed 'auto-complete-auctex)
-    (ac-auctex-setup)))
+    (ac-auctex-setup))
+
+  ;; Activate improved sentence filling.
+  (ad-activate 'LaTeX-fill-region-as-paragraph)
+
+  ;;; (Bindings) ;;;
+  (after-load 'auctex
+    (define-key user/code-map (kbd "f") 'LaTeX-fill-paragraph)))
 
 
 (defun user/auctex-init ()
@@ -93,6 +100,26 @@
         (setq-default
          TeX-view-program-list '(("Evince" "evince --page-index=%(outpage) %o"))
          TeX-view-program-selection '((output-pdf "Evince"))))))
+
+  ;;; (Functions) ;;;
+  (defadvice LaTeX-fill-region-as-paragraph (around LaTeX-sentence-filling)
+    "Start each sentence on a new line.
+
+Makes it easier to version control LaTeX-files."
+    (let ((from (ad-get-arg 0))
+          (to-marker (set-marker (make-marker) (ad-get-arg 1)))
+          tmp-end)
+      (while (< from (marker-position to-marker))
+        (forward-sentence)
+        ;; might have gone beyond to-marker --- use whichever is smaller:
+        (ad-set-arg 1 (setq tmp-end (min (point) (marker-position to-marker))))
+        ad-do-it
+        (ad-set-arg 0 (setq from (point)))
+        (unless (or
+                 (bolp)
+                 (looking-at "\\s *$"))
+          (LaTeX-newline)))
+      (set-marker to-marker nil)))
 
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
