@@ -162,6 +162,15 @@ Makes it easier to version control LaTeX-files."
          '(font-latex-warning-face ((t (:inherit bold :foreground ,orange)))))))))
 
 
+(defun user/ebib-init ()
+  "Initialize Ebib."
+  (setq-default
+   ebib-file-search-dirs `(user/current-path-apply 'user/project-root))
+
+  ;;; (Bindings) ;;;
+  (define-key user/utilities-map (kbd "r") 'ebib))
+
+
 (defun user/zotelo-init ()
   "Initialize Zotelo."
   (add-hook 'TeX-mode-hook 'zotelo-minor-mode))
@@ -196,6 +205,7 @@ Makes it easier to version control LaTeX-files."
                   mode-compile-modes-alist)))
 
   (require-package '(:name auctex :after (user/auctex-init)))
+  (require-package '(:name ebib :after (user/ebib-init)))
   (require-package '(:name zotelo :after (user/zotelo-init)))
   (require-package '(:name ac-math :after (user/ac-math-init)))
   (require-package '(:name auto-complete-latex :after (user/auto-complete-latex)))
