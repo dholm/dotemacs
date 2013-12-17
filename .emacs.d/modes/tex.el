@@ -24,17 +24,10 @@
 
 (defun user/latex-mode-hook ()
   "LaTeX mode hook."
-  ;; Bring in TeX-mode.
-  (user/tex-mode-hook)
-
-  ;; Enable BibTeX support in documents.
-  (bibtex-mode t)
   ;; Enable TeX math macros.
   (LaTeX-math-mode t)
 
   ;; Enable auto-completion systems.
-  (when (el-get-package-is-installed 'auto-complete-latex)
-    (ac-l-setup))
   (when (el-get-package-is-installed 'ac-math)
     (add-ac-sources 'ac-source-math-unicode 'ac-source-math-latex
                     'ac-source-latex-commands))
@@ -43,14 +36,11 @@
   (ad-activate 'LaTeX-fill-region-as-paragraph)
 
   ;;; (Bindings) ;;;
-  (after-load 'auctex
-    (define-key user/code-map (kbd "f") 'LaTeX-fill-paragraph)))
+  (define-key user/code-map (kbd "f") 'LaTeX-fill-paragraph))
 
 
 (defun user/bibtex-mode-hook ()
-  "BibTeX mode hook."
-  ;; Bring in TeX-mode.
-  (user/tex-mode-hook))
+  "BibTeX mode hook.")
 
 
 (defun user/auctex-init ()
@@ -204,6 +194,14 @@ Makes it easier to version control LaTeX-files."
           (append '((latex-mode . (tex-compile kill-compilation)))
                   mode-compile-modes-alist)))
 
+  ;; Set up hooks.
+  (add-hook 'tex-mode-hook 'user/tex-mode-hook)
+  (add-hook 'TeX-mode-hook 'user/tex-mode-hook)
+  (add-hook 'latex-mode-hook 'user/latex-mode-hook)
+  (add-hook 'LaTeX-mode-hook 'user/latex-mode-hook)
+  (add-hook 'bibtex-mode-hook 'user/bibtex-mode-hook)
+
+  ;;; (Packages) ;;;
   (require-package '(:name auctex :after (user/auctex-init)))
   (require-package '(:name ebib :after (user/ebib-init)))
   (require-package '(:name zotelo :after (user/zotelo-init)))
@@ -212,17 +210,12 @@ Makes it easier to version control LaTeX-files."
   (require-package '(:name auto-complete-auctex
                            :type github
                            :pkgname "monsanto/auto-complete-auctex"
-                           :prepare (autoload 'ac-auctex-setup "auto-complete-auctex")))
-
-  (add-hook 'TeX-mode-hook 'user/tex-mode-hook)
-  (add-hook 'LaTeX-mode-hook 'user/latex-mode-hook)
-  (add-hook 'latex-mode-hook 'user/latex-mode-hook)
-  (add-hook 'bibtex-mode-hook 'user/bibtex-mode-hook))
+                           :prepare (autoload 'ac-auctex-setup "auto-complete-auctex"))))
 
 
-(when *has-latex*
+(when (or *has-tex* *has-latex*)
   (user/tex-mode-init))
 
 
-(provide 'modes/text)
-;;; text.el ends here
+(provide 'modes/tex)
+;;; tex.el ends here

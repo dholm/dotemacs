@@ -41,6 +41,7 @@
 (defconst *has-clang* (executable-find "clang"))
 (defconst *has-ruby* (executable-find "ruby"))
 (defconst *has-go* (executable-find "go"))
+(defconst *has-tex* (executable-find "tex"))
 (defconst *has-latex* (executable-find "latex"))
 (defconst *has-lua* (executable-find "lua"))
 (defconst *has-perl* (executable-find "perl"))
