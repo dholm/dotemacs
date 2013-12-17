@@ -22,6 +22,10 @@
    flycheck-idle-change-delay 5.0)
   (global-flycheck-mode t)
 
+  (after-load 'popwin
+    ;; Use popwin for Flycheck error list.
+    (push '(flycheck-error-list-mode :stick t) popwin:special-display-config))
+
   (add-hook 'flycheck-mode-hook 'user/flycheck-mode-hook)
 
   ;;; (Packages) ;;;
