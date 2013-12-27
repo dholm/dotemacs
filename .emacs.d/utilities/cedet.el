@@ -7,11 +7,11 @@
   ;; Use semantic as a source for auto complete
   (add-ac-sources 'ac-source-semantic)
 
-  (when (cedet-gnu-global-version-check t)
-    (add-ac-sources 'ac-source-gtags)
-    (when (el-get-package-is-installed 'ggtags)
-      (ggtags-mode t)))
-
+  (after-load 'cedet-global
+    (when (cedet-gnu-global-version-check t)
+      (add-ac-sources 'ac-source-gtags)
+      (when (el-get-package-is-installed 'ggtags)
+        (ggtags-mode t))))
 
   ;;; (Bindings) ;;;
   (define-key user/code-map (kbd "RET") 'semantic-ia-complete-symbol)
