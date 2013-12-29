@@ -1,4 +1,4 @@
-;;; modeline.el --- Modeline configuration
+;;; mode-line.el --- Mode line configuration
 ;;; Commentary:
 ;;; Code:
 
@@ -59,5 +59,5 @@
 (user/modeline-init)
 
 
-(provide 'ux/modeline)
-;;; modeline.el ends here
+(provide 'ux/mode-line)
+;;; mode-line.el ends here
