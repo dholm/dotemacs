@@ -37,8 +37,8 @@
   (push '(compilation-mode :height 20 :dedicated t) popwin:special-display-config)
 
   ;;; (Bindings) ;;;
-  (define-key user/navigation-map (kbd "p") 'popwin:popup-buffer)
-  (define-key user/navigation-map (kbd "0") 'popwin:close-popup-window))
+  (define-key user/view-map (kbd "p") 'popwin:popup-buffer)
+  (define-key user/view-map (kbd "0") 'popwin:close-popup-window))
 
 
 (user/popups-init)
