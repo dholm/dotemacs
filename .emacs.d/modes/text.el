@@ -11,9 +11,9 @@
    colon-double-space t
    ;; Sentences end after two spaces
    sentence-end-double-space t
-   ;; When using fill-paragraph or auto-fill-mode break lines at 80 characters by
-   ;; default.
-   fill-column 80)
+   ;; When using fill-paragraph or auto-fill-mode break lines at 79 characters
+   ;; by default.
+   fill-column 79)
   ;; Automatically break long lines
   (auto-fill-mode t)
   ;; Run spell-checker
