@@ -101,13 +101,18 @@
   (define-key user/vcs-map (kbd "d") 'git-messenger:popup-message))
 
 
-(when *has-git*
+(defun user/git-init ()
+  "Initialize Git support."
+  ;;; (Packages) ;;;
   (require-package '(:name magit :after (user/magit-init)))
+  (require-package '(:name git-modes))
   (require-package '(:name git-gutter :after (user/git-gutter-init)))
   (when (display-graphic-p)
-    (require-package '(:name git-gutter-fringe
-                             :after (user/git-gutter-fringe-init))))
+    (require-package '(:name git-gutter-fringe :after (user/git-gutter-fringe-init))))
   (require-package '(:name git-messenger :after (user/git-messenger-init))))
+
+(when *has-git*
+  (user/git-init))
 
 
 (provide 'vcs/git)
