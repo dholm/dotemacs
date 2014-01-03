@@ -14,7 +14,9 @@
 (defun user/haskell-mode-hook ()
   "Haskell mode hook."
   (user/generic-haskell-mode-hook)
-  (turn-on-haskell-indentation)
+  (if (el-get-package-is-installed 'hi2)
+      (turn-on-hi2)
+    (turn-on-haskell-indentation))
 
   ;; Register file types with find-file-in-project
   (after-load 'find-file-in-project
@@ -31,10 +33,12 @@
 
 
 (defun user/haskell-mode-init ()
-  "Initialize haskell mode."
+  "Initialize Haskell mode."
   (require-package '(:name haskell-mode))
   (require-package '(:name ghci-completion))
   (require-package '(:name scion))
+  (require-package '(:name hi2))
+  (require-package '(:name flycheck-hdevtools))
 
   (add-hook 'haskell-mode-hook 'user/haskell-mode-hook)
   (add-hook 'inferior-haskell-mode-hook 'user/inferior-haskell-mode-hook))
