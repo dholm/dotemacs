@@ -39,7 +39,7 @@
 
 
 (defun user/magit-init ()
-  "Initialize magit."
+  "Initialize Magit."
   (setq-default
    ;; Do not save buffers
    magit-save-some-buffers nil
@@ -50,11 +50,9 @@
    ;; Use ido for user input
    magit-completing-read-function 'magit-ido-completing-read)
 
-  ;; Full screen magit status
-  (defadvice magit-status (around magit-fullscreen activate)
-    (window-configuration-to-register :magit-fullscreen)
-    ad-do-it
-    (delete-other-windows))
+  ;; Full frame Magit status
+  (when (el-get-package-is-installed 'fullframe)
+    (fullframe magit-status magit-mode-quit-window :magit-fullscreen nil))
 
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
