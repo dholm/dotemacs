@@ -35,6 +35,7 @@
 (defconst *has-ag* (executable-find "ag"))
 
 (defconst *has-python* (executable-find "python"))
+(defconst *has-ipython* (executable-find "ipython"))
 (defconst *has-scala* (executable-find "scala"))
 (when *has-scala*
   (defconst *has-sbt* (executable-find "sbt")))

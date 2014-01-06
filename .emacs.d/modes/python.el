@@ -11,12 +11,13 @@
   (user/python-mode-cedet-hook)
 
   ;; Load ropemacs
-  (pymacs-load "ropemacs" "rope-")
-  (setq-default
-   ropemacs-enable-autoimport t)
+  (when (el-get-package-is-installed 'pymacs)
+    (pymacs-load "ropemacs" "rope-"))
 
-  ;; Load jedi
-  (jedi:setup)
+  (when (el-get-package-is-installed 'elpy)
+    (elpy-enable)
+    (when *has-ipython*
+      (elpy-use-ipython)))
 
   ;; Separate camel-case into separate words
   (subword-mode t)
@@ -44,25 +45,46 @@
 
 (defun user/jedi-init ()
   "Initialize jedi."
+  (setq-default
+   ;; Use default Jedi bindings.
+   jedi:setup-keys t
+   ;; Automatically launch completion on dot.
+   jedi:complete-on-dot t
+   ;; Use popup package.
+   jedi:tooltip-method '(popup))
+
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
     (solarized-with-values
       (eval
        `(custom-theme-set-faces
          'solarized
-         '(jedi:highlight-function-argument ((t (:inherit bold))))))))
+         '(jedi:highlight-function-argument ((t (:inherit bold)))))))))
+
+
+(defun user/elpy-init ()
+  "Initialize Elpy."
+  (when (el-get-package-is-installed 'jedi)
+    (user/jedi-init))
 
   (setq-default
-   jedi:setup-keys t
-   jedi:complete-on-dot t))
+   elpy-rpc-backend "jedi"))
+
+
+(defun user/pymacs-init ()
+  "Initialize PyMacs."
+  (setq-default
+   ropemacs-enable-autoimport t))
 
 
 (defun user/python-mode-init ()
   "Initialize Python mode."
-  (require-package '(:name jedi :after (user/jedi-init)))
   (require-package '(:name python))
+  (require-package '(:name pymacs))
   (require-package '(:name pylookup))
+  (require-package '(:name elpy :after (user/elpy-init)))
 
+  (add-interpreter-mode 'python-mode "python")
   (add-hook 'python-mode-hook 'user/python-mode-hook))
 
 
