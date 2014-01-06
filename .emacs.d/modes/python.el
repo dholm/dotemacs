@@ -7,11 +7,6 @@
   (unless (derived-mode-p 'prog-mode)
     (run-hooks 'prog-mode-hook))
 
-  ;; Configure python-mode
-  (setq
-   py-shell-name "ipython"
-   py-load-pymacs-p t)
-
   ;; Load CEDET
   (user/python-mode-cedet-hook)
 
@@ -64,8 +59,8 @@
 
 (defun user/python-mode-init ()
   "Initialize Python mode."
-  (require-package '(:name python-mode))
   (require-package '(:name jedi :after (user/jedi-init)))
+  (require-package '(:name python))
   (require-package '(:name pylookup))
 
   (add-hook 'python-mode-hook 'user/python-mode-hook))
