@@ -4,20 +4,18 @@
 
 (defun user/python-mode-hook ()
   "Python mode hook."
-  (unless (derived-mode-p 'prog-mode)
-    (run-hooks 'prog-mode-hook))
-
   ;; Load CEDET
   (user/python-mode-cedet-hook)
 
   ;; Load ropemacs
   (when (el-get-package-is-installed 'pymacs)
-    (pymacs-load "ropemacs" "rope-"))
+    (pymacs-load "ropemacs" "rope-")
+    ;; Auto-completion sources
+    (add-ac-sources 'ac-source-ropemacs))
 
-  (when (el-get-package-is-installed 'elpy)
-    (elpy-enable)
-    (when *has-ipython*
-      (elpy-use-ipython)))
+  ;; Enable Jedi
+  (when (el-get-package-is-instsalled 'jedi)
+    (jedi:setup))
 
   ;; Separate camel-case into separate words
   (subword-mode t)
@@ -25,16 +23,18 @@
   ;; ElDoc shows function documentation as you type
   (eldoc-mode t)
 
+  ;; Register file types with find-file-in-project
+  (after-load 'find-file-in-project
+    (user/ffip-local-patterns "*.py"))
+
+  ;;; (Bindings) ;;;
   ;; Bind electric backspace to del which translates to backspace in
   ;; terminals.
   (define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
-
-  ;; Auto-completion sources
-  (add-ac-sources 'ac-source-ropemacs)
-
-  ;; Register file types with find-file-in-project
-  (after-load 'find-file-in-project
-    (user/ffip-local-patterns "*.py")))
+  (when (el-get-package-is-installed 'nose)
+    (define-key user/code-map (kbd "t") 'nosetests-all))
+  (when (el-get-package-is-installed 'virtualenv)
+    (define-key user/code-map (kbd "v") 'virtualenv-workon)))
 
 
 (defun user/python-mode-cedet-hook ()
@@ -62,31 +62,40 @@
          '(jedi:highlight-function-argument ((t (:inherit bold)))))))))
 
 
-(defun user/elpy-init ()
-  "Initialize Elpy."
-  (when (el-get-package-is-installed 'jedi)
-    (user/jedi-init))
-
-  (setq-default
-   elpy-rpc-backend "jedi"))
+(defun user/python-init ()
+  "Initialize python."
+  (when *has-ipython*
+    (setq-default
+     python-shell-interpreter "ipython"
+     python-shell-interpreter-args ""
+     python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+     python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
+     python-shell-completion-setup-code "from IPython.core.completerlib import module_completion"
+     python-shell-completion-module-string-code "';'.join(module_completion('''%s'''))\n"
+     python-shell-completion-string-code "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")))
 
 
 (defun user/pymacs-init ()
   "Initialize PyMacs."
   (setq-default
-   ropemacs-enable-autoimport t))
+   ropemacs-guess-project t
+   ropemacs-enable-autoimport t
+   ;; Don't generate an error on syntax errors.
+   ropemacs-codeassist-maxfixes 3))
 
 
 (defun user/python-mode-init ()
   "Initialize Python mode."
-  (require-package '(:name python))
+  (require-package '(:name python :after (user/python-init)))
   (require-package '(:name pymacs))
+  (require-package '(:name rope))
   (require-package '(:name pylookup))
-  (require-package '(:name elpy :after (user/elpy-init)))
+  (require-package '(:name nose))
+  (require-package '(:name virtualenv))
+  (require-package '(:name jedi :after (user/jedi-init)))
 
   (add-interpreter-mode 'python-mode "python")
   (add-hook 'python-mode-hook 'user/python-mode-hook))
-
 
 (when *has-python*
   (user/python-mode-init))
