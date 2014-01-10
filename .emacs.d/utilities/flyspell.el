@@ -48,7 +48,8 @@
             (flyspell-do-correct 'save nil word cursor-location start end opoint)))
       (ispell-pdict-save t))))
 
-(user/flyspell-init)
+(when (or *has-ispell* *has-aspell*)
+  (user/flyspell-init))
 
 
 (provide 'utilities/flyspell)

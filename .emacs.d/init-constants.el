@@ -28,6 +28,7 @@
 
 ;;; (Binaries) ;;;
 (defconst *has-aspell* (executable-find "aspell"))
+(defconst *has-ispell* (executable-find "ispell"))
 (defconst *has-global* (executable-find "global"))
 (defconst *has-cscope* (executable-find "cscope"))
 (defconst *has-ctags* (executable-find "ctags"))
