@@ -41,6 +41,7 @@
 (when *has-scala*
   (defconst *has-sbt* (executable-find "sbt")))
 (defconst *has-clang* (executable-find "clang"))
+(defconst *has-llvm-config* (executable-find "llvm-config"))
 (defconst *has-ruby* (executable-find "ruby"))
 (defconst *has-go* (executable-find "go"))
 (defconst *has-tex* (executable-find "tex"))

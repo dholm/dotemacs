@@ -73,7 +73,7 @@
 
 (defun user/c-c++-mode-init ()
   "Initialize C/C++ mode."
-  (when *has-clang*
+  (when (and *has-clang* *has-llvm-config*)
     (require-package '(:name clang-complete-async)))
 
   (add-hook 'c-mode-common-hook 'user/c-mode-common-hook)
