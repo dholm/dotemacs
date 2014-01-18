@@ -14,8 +14,12 @@
     (after-load 'diminish
       (diminish 'paredit-mode)))
   (when (require 'redshank nil :noerror)
-    (redshank-mode t))
+    (redshank-mode t)
+    (after-load 'diminish
+      (diminish 'redshank-mode)))
   (turn-on-eldoc-mode)
+  (after-load 'diminish
+    (diminish 'eldoc-mode))
 
   ;;; (Bindings) ;;;
   (define-key user/code-map (kbd "x b") 'eval-buffer)

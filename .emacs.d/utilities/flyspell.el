@@ -4,6 +4,9 @@
 
 (defun user/flyspell-mode-hook ()
   "Hook for fly spell mode."
+  (after-load 'diminish
+    (diminish 'flyspell-mode))
+
   ;;; (Bindings) ;;;
   (define-key user/code-map (kbd "s") 'ispell-word)
   (define-key user/code-map (kbd "S") 'user/flyspell-add-word-to-dict))

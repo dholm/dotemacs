@@ -32,6 +32,9 @@
 
   (yas--initialize)
 
+  (after-load 'diminish
+    (diminish 'yas-minor-mode))
+
   (after-load 'ux/completion
     (add-ac-sources 'ac-source-yasnippet))
 
