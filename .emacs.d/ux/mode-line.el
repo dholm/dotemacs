@@ -2,9 +2,16 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/powerline-init ()
-  "Initialize powerline."
-  (require 'powerline)
+(defun user/smart-mode-line-init ()
+  "Initialize smart mode line."
+  (setq-default
+   ;; Configure theme
+   sml/theme 'dark
+   ;; Shorten path and modes
+   sml/shorten-directory t
+   sml/shorten-mode t
+   sml/name-width 25
+   sml/mode-width 'full)
 
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
@@ -12,17 +19,44 @@
       (eval
        `(custom-theme-set-faces
          'solarized
-         '(mode-line ((t (:foreground ,solarized-fg :background ,solarized-comment))))
-         '(mode-line-buffer-id ((t (:foreground ,base2 :background ,blue))))
-         '(mode-line-inactive ((t (:foreground ,solarized-fg :background ,solarized-comment))))
-         '(powerline-active1 ((t (:foreground ,solarized-comment :background ,solarized-hl))))
-         '(powerline-active2 ((t (:foreground ,orange :background ,solarized-hl))))
-         '(powerline-inactive1 ((t (:foreground ,solarized-fg :background ,solarized-hl))))
-         '(powerline-inactive2 ((t (:foreground ,solarized-fg :background ,solarized-comment))))))))
+         '(sml/global ((t (,@fmt-none
+                           :foreground ,s-mode-line-fg
+                           :box (:line-width 1 :color ,s-mode-line-bg :style unspecified)))))
+         '(sml/modes ((t (:inherit sml/global :foreground ,solarized-comment))))
 
-  ;;; (Theme) ;;;
-  (setq-default powerline-arrow-shape 'slant)
-  (powerline-default-theme))
+         '(sml/line-number ((t (:inherit sml/modes ,@fmt-bold))))
+         '(sml/position-percentage ((t (:inherit sml/modes))))
+         '(sml/col-number ((t (:inherit sml/modes))))
+         '(sml/numbers-separator ((t (:inherit sml/modes))))
+
+         '(sml/mule-info ((t (:inherit sml/modes))))
+         '(sml/client ((t (:inherit sml/modes))))
+
+         '(sml/prefix ((t (:inherit sml/modes))))
+         '(sml/folder ((t (:inherit sml/modes))))
+         '(sml/filename ((t (:inherit sml/global :foreground ,solarized-emph ,@fmt-bold))))
+
+         '(sml/not-modified ((t (:inherit sml/modes))))
+         '(sml/modified ((t (:inherit sml/global :foreground ,yellow))))
+         '(sml/outside-modified ((t (:inherit sml/modified :foreground ,orange))))
+         '(sml/read-only ((t (:inherit sml/modified :foreground ,red))))
+
+         '(sml/vc ((t (:inherit sml/global :foreground ,yellow))))
+         '(sml/vc-edited ((t (:inherit sml/vc :foreground ,orange))))
+         '(sml/git ((t (:inherit sml/vc))))
+
+         '(sml/charging ((t (:inherit sml/global :foreground ,green))))
+         '(sml/discharging ((t (:inherit sml/global :foreground ,red))))
+
+         '(sml/time ((t (:inherit sml/modes)))))))
+
+    (setq-default
+     sml/active-foreground-color (face-attribute 'mode-line :foreground)
+     sml/active-background-color (face-attribute 'mode-line :background)
+     sml/inactive-foreground-color (face-attribute 'mode-line-inactive :foreground)
+     sml/inactive-background-color (face-attribute 'mode-line-inactive :background))
+
+    (sml/setup)))
 
 
 (defun user/modeline-init ()
@@ -53,7 +87,7 @@
 
   ;;; (Packages) ;;;
   (require-package '(:name diminish))
-  (require-package '(:name powerline :after (user/powerline-init))))
+  (require-package '(:name smart-mode-line :after (user/smart-mode-line-init))))
 
 (user/modeline-init)
 
