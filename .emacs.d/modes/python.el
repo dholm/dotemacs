@@ -86,6 +86,7 @@
 
 (defun user/python-mode-init ()
   "Initialize Python mode."
+  ;;; (Packages) ;;;
   (require-package '(:name python :after (user/python-init)))
   (require-package '(:name pymacs))
   (require-package '(:name rope))

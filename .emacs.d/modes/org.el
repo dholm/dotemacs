@@ -10,6 +10,7 @@
   "Initialize Lua mode."
   (require-package '(:name org-mode))
 
+  (autoload 'org-add-link-type "org" "" t)
   (add-hook 'org-mode-hook 'user/org-mode-hook))
 
 (user/org-mode-init)
