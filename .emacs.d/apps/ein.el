@@ -6,7 +6,9 @@
   "Initialize EIN."
   (setq-default
    ;; Enable auto completion.
-   ein:use-auto-complete t)
+   ein:use-auto-complete t
+   ;; Store request package data in cache directory.
+   request-storage-directory (path-join *user-cache-directory* "request"))
 
   (define-key user/utilities-map (kbd "p") 'ein:notebooklist-open))
 
