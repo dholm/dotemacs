@@ -14,9 +14,12 @@
   (eldoc-mode t)
   ;; Separate camel-case into separate words
   (subword-mode t)
-  ;; Bindings
+
+  ;;; (Bindings) ;;;
   (define-key ruby-mode-map (kbd "RET") 'reindent-then-newline-and-indent)
-  (define-key ruby-mode-map (kbd "RET") 'indent-for-tab-command)
+  (define-key ruby-mode-map (kbd "TAB") 'indent-for-tab-command)
+  (when (el-get-package-is-installed 'yari)
+    (define-key user/help-map (kbd "SPC") 'yari))
 
   ;; Register file types with find-file-in-project
   (after-load 'find-file-in-project
@@ -25,24 +28,25 @@
 
 (defun user/robe-mode-hook ()
   "Robe mode hook."
-  (add-ac-sources 'ac-source-robe)
-  (set-auto-complete-as-completion-at-point-function))
+  (robe-ac-setup))
+
+
+(defun user/robe-init ()
+  "Initialize robe."
+  (add-hook 'robe-mode-hook 'user/robe-mode-hook))
 
 
 (defun user/ruby-mode-init ()
   "Initialize Ruby mode."
+  (require-package '(:name ruby-mode))
+  (require-package '(:name robe-mode :after (user/robe-init)))
+  (require-package '(:name inf-ruby))
+  (require-package '(:name yari))
+
   (add-hook 'ruby-mode-hook 'user/ruby-mode-hook))
 
-(defun user/robe-init ()
-  "Initialize robe."
-  (add-hook 'ruby-mode-hook 'robe-mode)
-  (add-hook 'robe-mode-hook 'user/robe-mode-hook))
-
-
 (when *has-ruby*
-  (require-package '(:name ruby-mode :after (user/ruby-mode-init)))
-  (require-package '(:name robe-mode :after (user/robe-init)))
-  (require-package '(:name inf-ruby)))
+  (user/ruby-mode-init))
 
 
 (provide 'modes/ruby)
