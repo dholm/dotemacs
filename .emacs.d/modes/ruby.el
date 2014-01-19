@@ -16,7 +16,6 @@
   (subword-mode t)
 
   ;;; (Bindings) ;;;
-  (define-key ruby-mode-map (kbd "RET") 'reindent-then-newline-and-indent)
   (define-key ruby-mode-map (kbd "TAB") 'indent-for-tab-command)
   (when (el-get-package-is-installed 'yari)
     (define-key user/help-map (kbd "SPC") 'yari))
