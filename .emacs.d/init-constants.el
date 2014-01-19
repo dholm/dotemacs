@@ -62,6 +62,8 @@
                              ;; Verify that license is valid
                              (eq (call-process-shell-command "cleartool" nil nil nil "quit") 0)))
 
+
+;;; (Libraries) ;;;
 (defconst *has-libpurple*
   (and
    (pkg-config-has-p "libxml-2.0")

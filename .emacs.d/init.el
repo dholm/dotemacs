@@ -28,6 +28,7 @@
 (require 'lib/utils)
 (require 'lib/hash-tables)
 (require 'lib/bootstrap)
+(require 'lib/apps)
 
 
 ;; Load configuration.

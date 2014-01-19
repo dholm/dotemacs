@@ -12,8 +12,7 @@
   "Initialize Dash support for Emacs."
   (require-package '(:name dash-at-point :after (user/dash-at-point-init))))
 
-(when (and (eq system-type 'darwin)
-         (file-directory-p "/Applications/Dash.app"))
+(when (osx-app-installed-p "com.kapeli.dash")
   (user/dash-app-init))
 
 
