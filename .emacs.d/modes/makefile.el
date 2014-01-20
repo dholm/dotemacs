@@ -4,16 +4,16 @@
 
 (defun user/makefile-mode-cedet-hook ()
   "CEDET hook for makefiles."
-  (user/cedet-hook)
-  (require 'semantic/bovine/make))
+  (when (featurep 'cedet)
+    (user/cedet-hook)
+    (require 'semantic/bovine/make)))
 
 
 ;; Sets some decent defaults for makefile-mode
 (defun user/makefile-mode-hook ()
   "Initialize makefile mode."
   ;; Load CEDET for makefiles
-  (after-load 'cedet
-    (user/makefile-mode-cedet-hook))
+  (user/makefile-mode-cedet-hook)
   ;; Use tabs for indent
   (setq indent-tabs-mode t)
   ;; Separate camel-case into separate words

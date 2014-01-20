@@ -4,29 +4,31 @@
 
 (defun user/cedet-hook ()
   "Hook for modes with CEDET support."
-  ;; Use semantic as a source for auto complete
-  (add-ac-sources 'ac-source-semantic)
+  (when (featurep 'cedet)
+    ;; Use semantic as a source for auto complete
+    ;; add
+    (add-ac-sources 'ac-source-semantic)
 
-  (after-load 'cedet-global
-    (when (cedet-gnu-global-version-check t)
-      (add-ac-sources 'ac-source-gtags)
-      (when (el-get-package-is-installed 'ggtags)
-        (ggtags-mode t))))
+    (after-load 'cedet-global
+      (when (cedet-gnu-global-version-check t)
+        (add-ac-sources 'ac-source-gtags)
+        (when (el-get-package-is-installed 'ggtags)
+          (ggtags-mode t))))
 
-  ;;; (Bindings) ;;;
-  (define-key user/code-map (kbd "RET") 'semantic-ia-complete-symbol)
-  (define-key user/code-map (kbd "TAB") 'semantic-ia-complete-symbol-menu)
-  (define-key user/code-map (kbd ">") 'semantic-complete-analyze-inline)
-  (define-key user/code-map (kbd "=") 'semantic-decoration-include-visit)
+    ;;; (Bindings) ;;;
+    (define-key user/code-map (kbd "RET") 'semantic-ia-complete-symbol)
+    (define-key user/code-map (kbd "TAB") 'semantic-ia-complete-symbol-menu)
+    (define-key user/code-map (kbd ">") 'semantic-complete-analyze-inline)
+    (define-key user/code-map (kbd "=") 'semantic-decoration-include-visit)
 
-  (define-key user/navigation-map (kbd "j") 'semantic-ia-fast-jump)
-  (define-key user/navigation-map (kbd "s") 'semantic-symref-find-tags-by-regexp)
-  (define-key user/navigation-map (kbd "b") 'semantic-mrub-switch-tags)
-  (define-key user/navigation-map (kbd "i") 'semantic-analyze-proto-impl-toggle)
-  (define-key user/navigation-map (kbd "r") 'semantic-symref)
+    (define-key user/navigation-map (kbd "j") 'semantic-ia-fast-jump)
+    (define-key user/navigation-map (kbd "s") 'semantic-symref-find-tags-by-regexp)
+    (define-key user/navigation-map (kbd "b") 'semantic-mrub-switch-tags)
+    (define-key user/navigation-map (kbd "i") 'semantic-analyze-proto-impl-toggle)
+    (define-key user/navigation-map (kbd "r") 'semantic-symref)
 
-  (define-key user/documentation-map (kbd "d") 'semantic-ia-show-doc)
-  (define-key user/documentation-map (kbd "s") 'semantic-ia-show-summary))
+    (define-key user/documentation-map (kbd "d") 'semantic-ia-show-doc)
+    (define-key user/documentation-map (kbd "s") 'semantic-ia-show-summary)))
 
 
 (defun user/cedet-before-init ()

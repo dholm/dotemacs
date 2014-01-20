@@ -26,8 +26,9 @@
 
 (defun user/javascript-mode-cedet-hook ()
   "JavaScript CEDET support hook."
-  (user/cedet-hook)
-  (require 'semantic/wisent/javascript))
+  (when (featurep 'cedet)
+    (user/cedet-hook)
+    (require 'semantic/wisent/javascript)))
 
 
 (defun user/js3-mode-init ()

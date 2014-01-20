@@ -5,8 +5,7 @@
 ;;; (Mode Hooks) ;;;
 (defun user/lisp-mode-common-hook ()
   "LISP mode hook."
-  (when (el-get-package-is-installed 'cedet)
-    (user/cedet-hook))
+  (user/cedet-hook)
   (when (require 'rainbow-delimiters nil :noerror)
     (rainbow-delimiters-mode t))
   (when (require 'paredit nil :noerror)
