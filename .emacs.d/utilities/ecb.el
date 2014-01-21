@@ -2,6 +2,19 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/ecb-activate-hook ()
+  "ECB activation hook."
+  (define-key user/utilities-map (kbd "e") 'ecb-deactivate)
+  ;; Popwin conflicts with ECB.
+  (popwin-mode -1))
+
+
+(defun user/ecb-deactivate-hook ()
+  "ECB deactivation hook."
+  (define-key user/utilities-map (kbd "e") 'ecb-activate)
+  (popwin-mode t))
+
+
 (defun user/ecb-init ()
   "Initialize Emacs code browser."
   (require 'ecb-autoloads)
@@ -21,14 +34,17 @@
 
   ;; ECB layout
   (setq-default
-   ecb-layout-name "left7"
-   ecb-layout-window-sizes '(("left7"
+   ecb-layout-name "left6"
+   ecb-layout-window-sizes '(("left6"
 			      (ecb-directories-buffer-name 0.17 . 0.6428571428571429)
 			      (ecb-sources-buffer-name 0.17 . 0.3392857142857143)
 			      (ecb-methods-buffer-name 0.25 . 0.6428571428571429)
 			      (ecb-history-buffer-name 0.25 . 0.3392857142857143)))
    ecb-show-sources-in-directories-buffer 'always
    ecb-compile-window-height 12)
+
+  (add-hook 'ecb-activate-hook 'user/ecb-activate-hook)
+  (add-hook 'ecb-deactivate-hook 'user/ecb-deactivate-hook)
 
   ;;; (Bindings) ;;;
   (define-key user/utilities-map (kbd "e") 'ecb-activate)
