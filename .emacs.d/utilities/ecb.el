@@ -2,17 +2,54 @@
 ;;; Commentary:
 ;;; Code:
 
+(defvar user/ecb-active nil "Current state of ECB.")
+
+
 (defun user/ecb-activate-hook ()
   "ECB activation hook."
-  (define-key user/utilities-map (kbd "e") 'ecb-deactivate)
+  (setq user/ecb-active t)
+
   ;; Popwin conflicts with ECB.
-  (popwin-mode -1))
+  (popwin-mode -1)
+
+  ;; Close compile window if open
+  (when (ecb-compile-window-live-p)
+    (ecb-toggle-compile-window))
+
+  ;;; (Bindings) ;;;
+  (define-key user/view-map (kbd "z") 'ecb-toggle-ecb-windows)
+
+  (define-key user/view-map (kbd "e") 'ecb-goto-window-edit1)
+  (define-key user/view-map (kbd "d") 'ecb-goto-window-directories)
+  (define-key user/view-map (kbd "h") 'ecb-goto-window-history)
+  (define-key user/view-map (kbd "m") 'ecb-goto-window-methods)
+  (define-key user/view-map (kbd "c") 'user/ecb-toggle-compile-window))
 
 
 (defun user/ecb-deactivate-hook ()
   "ECB deactivation hook."
-  (define-key user/utilities-map (kbd "e") 'ecb-activate)
+  (setq user/ecb-active nil)
   (popwin-mode t))
+
+
+(defun user/ecb-toggle-active ()
+  "Toggle ECB state."
+  (interactive)
+  (if user/ecb-active
+      (ecb-deactivate)
+    (ecb-activate)))
+
+
+(defun user/ecb-toggle-compile-window ()
+  "Toggle the presence of the ECB compilation window."
+  (interactive)
+  (if (and (ecb-compile-window-live-p)
+         (not (ecb-point-in-compile-window)))
+      (ecb-goto-window-compilation)
+    (progn
+      (ecb-toggle-compile-window)
+      (when (ecb-compile-window-live-p)
+        (ecb-goto-window-compilation)))))
 
 
 (defun user/ecb-init ()
@@ -47,14 +84,7 @@
   (add-hook 'ecb-deactivate-hook 'user/ecb-deactivate-hook)
 
   ;;; (Bindings) ;;;
-  (define-key user/utilities-map (kbd "e") 'ecb-activate)
-
-  ;;; quick navigation between ecb windows
-  (define-key user/navigation-map (kbd "w e") 'ecb-goto-window-edit1)
-  (define-key user/navigation-map (kbd "w d") 'ecb-goto-window-directories)
-  (define-key user/navigation-map (kbd "w h") 'ecb-goto-window-history)
-  (define-key user/navigation-map (kbd "w m") 'ecb-goto-window-methods)
-  (define-key user/navigation-map (kbd "w c") 'ecb-goto-window-compilation)
+  (define-key user/utilities-map (kbd "e") 'user/ecb-toggle-active)
 
   ;;; (Faces) ;;;
   (after-load 'solarized-theme
