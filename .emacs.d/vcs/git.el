@@ -51,7 +51,7 @@
    magit-completing-read-function 'magit-ido-completing-read)
 
   ;; Full frame Magit status
-  (when (el-get-package-is-installed 'fullframe)
+  (after-load 'fullframe
     (fullframe magit-status magit-mode-quit-window :magit-fullscreen nil))
 
   ;;; (Faces) ;;;
