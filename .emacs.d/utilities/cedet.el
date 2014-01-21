@@ -69,7 +69,8 @@
   (global-semantic-mru-bookmark-mode t)
 
   ;; Enable [ec]tags support
-  (when (cedet-ectag-version-check t)
+  (when (and (fboundp 'cedet-ectag-version-check)
+             (cedet-ectag-version-check t))
     (semantic-load-enable-primary-ectags-support))
 
   ;; Enable semantic
@@ -82,13 +83,15 @@
 
   (when (cedet-cscope-version-check t)
     ;; Use CScope as a database for SemanticDB
-    (semanticdb-enable-cscope-databases)
+    (when (fboundp 'semanticdb-enable-cscope-databases)
+      (semanticdb-enable-cscope-databases))
     ;; Use CScope as a source for EDE
     (setq-default ede-locate-setup-options '(ede-locate-cscope
                                              ede-locate-base)))
 
   ;; Enable GNU Global if available
-  (when (cedet-gnu-global-version-check t)
+  (when (and (fboundp 'cedet-gnu-global-version-check)
+             (cedet-gnu-global-version-check t))
     (semanticdb-enable-gnu-global-databases 'c-mode)
     (semanticdb-enable-gnu-global-databases 'c++-mode))
 
