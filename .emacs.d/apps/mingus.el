@@ -6,7 +6,8 @@
   "Initialize Mingus."
   (define-key user/utilities-map (kbd "M") 'mingus))
 
-(require-package '(:name mingus :after (user/mingus-init)))
+(when (fboundp 'define-fringe-bitmap)
+  (require-package '(:name mingus :after (user/mingus-init))))
 
 
 (provide 'apps/mingus)
