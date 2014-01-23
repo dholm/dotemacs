@@ -62,14 +62,16 @@
                              ;; Verify that license is valid
                              (eq (call-process-shell-command "cleartool" nil nil nil "quit") 0)))
 
+(defconst *has-w3m* (executable-find "w3m"))
+(defconst *has-evince* (executable-find "evince"))
+(defconst *has-R* (executable-find "R"))
+
 
 ;;; (Libraries) ;;;
 (defconst *has-libpurple*
   (and
    (pkg-config-has-p "libxml-2.0")
    (pkg-config-has-p "purple")))
-(defconst *has-w3m* (executable-find "w3m"))
-(defconst *has-evince* (executable-find "evince"))
 
 
 (provide 'init-constants)
