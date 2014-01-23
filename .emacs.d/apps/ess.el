@@ -8,6 +8,9 @@
    ;; Make R prompt read only.
    comint-prompt-read-only t)
 
+  ;; Enable ElDoc support.
+  (ess-use-eldoc)
+
   (when (el-get-package-is-installed 'ac-R)
     (ess-ac-init))
 
@@ -17,6 +20,11 @@
 
 (defun user/ess-mode-hook ()
   "ESS mode hook."
+  (user/ess-mode-common-hook))
+
+
+(defun user/inferior-ess-mode-hook ()
+  "Inferior ESS mode hook."
   (user/ess-mode-common-hook))
 
 
@@ -53,6 +61,7 @@
    ess-local-process-name "R")
 
   (add-hook 'ess-mode-hook 'user/ess-mode-hook)
+  (add-hook 'inferiormode-ess-mode-hook 'user/inferior-ess-mode-hook)
   (add-hook 'Rnw-mode-hook 'user/Rnw-mode-hook)
   (add-hook 'ess-R-post-run-hook 'user/ess-R-post-run-hook)
 
