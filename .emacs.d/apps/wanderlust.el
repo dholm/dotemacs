@@ -70,6 +70,9 @@
     (set-alist 'mime-view-type-subtype-score-alist
                '(text . html) 3))
 
+  (el-get-eval-after-load 'fullframe
+    (fullframe wl wl-exit nil))
+
   ;; Set up wanderlust as the default mail user agent
   (if (boundp 'mail-user-agent)
       (setq mail-user-agent 'wl-user-agent))
