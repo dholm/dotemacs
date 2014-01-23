@@ -21,8 +21,6 @@
    explicit-shell-file-name "bash"
    explicit-bash-args '("-c" "export EMACS=; stty echo; bash")
    comint-process-echoes t)
-  ;; Enable ANSI colors for Comint
-  (ansi-color-for-comint-mode-on)
   ;; Enable readline completion
   (require 'readline-complete)
   (ac-rlc-setup-sources))
@@ -35,9 +33,6 @@
 
 (defun user/shell-mode-init ()
   "Initialize shell modes."
-  ;; Properly display colors in shell
-  (ansi-color-for-comint-mode-on)
-
   (require-package '(:name bash-completion))
   (require-package '(:name readline-complete :after (user/readline-complete-init)))
   (require-package '(:name shell-command
