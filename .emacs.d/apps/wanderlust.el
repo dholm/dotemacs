@@ -10,54 +10,22 @@
   (path-join *user-cache-directory* "wanderlust")
   "Path to user's Wanderlust cache store.")
 
-(defun user/wanderlust-init ()
-  "Initialize Wanderlust."
+
+(defun user/mail-citation-hook ()
+  "Mail citation hook."
+  (sc-cite-original))
+
+
+(defun user/semi-init ()
+  "Initialize SEMI."
   (setq-default
-   ;; Put configuration into wanderlust data directory
-   wl-init-file (path-join *user-wanderlust-data-directory* "init.el")
-   wl-folders-file (path-join *user-wanderlust-data-directory* "folders")
-   wl-address-file (path-join *user-wanderlust-data-directory* "addresses")
-   ;; Put message database in data directory
-   elmo-msgdb-directory (path-join *user-wanderlust-data-directory* "elmo")
-   ;; Put temporary files in cache directories
-   wl-temporary-file-directory *user-wanderlust-cache-directory*
-   elmo-cache-directory (path-join *user-wanderlust-cache-directory* "elmo")
-   ssl-certificate-directory (path-join *user-cache-directory* "certs")
-   ;; Show folders in a pane to the left
-   wl-stay-folder-window t
-   wl-folder-window-width 30
-   ;; Asynchronously update folders
-   wl-folder-check-async t
-   ;; Automatically save drafts every two minutes
-   wl-auto-save-drafts-interval 120.0
-   ;; Mark sent mails as read
-   wl-fcc-force-as-read t
-   ;; Set verbose summary
-   wl-summary-width nil
-   wl-summary-line-format "%n%T%P %D/%M (%W) %h:%m %t%[%25(%c %f%) %] %s"
-   ;; UTF-8 guides
-   wl-thread-have-younger-brother-str "├──►"
-   wl-thread-youngest-child-str       "╰──►"
-   wl-thread-vertical-str             "|"
-   wl-thread-horizontal-str           "►"
-   wl-thread-horizontal-str           "►"
-   wl-thread-space-str                " "
-   ;; Field lists
-   wl-message-ignored-field-list '("^.*")
-   wl-message-visible-field-list '("^From:" "^To:" "^Cc:" "^Date:" "^Subject:"
-                                   "^User-Agent:" "^X-Mailer:")
-   wl-message-sort-field-list    wl-message-visible-field-list
-   ;; Message window size
-   wl-message-window-size '(1 . 3)
-   ;; Let SMTP server handle Message-ID
-   wl-insert-message-id nil
-   ;; Use modified UTF-8 for IMAP4
-   elmo-imap4-use-modified-utf7 t
-   ;; Configure mime type priorities
+   ;; MIME type priorities.
    mime-view-type-subtype-score-alist '(((text . plain) . 4)
                                         ((text . enriched) . 3)
                                         ((text . html) . 2)
-                                        ((text . richtext) . 1)))
+                                        ((text . richtext) . 1))
+   ;; Don't split large mails.
+   mime-edit-split-message nil)
 
   (after-load 'mime-view
     (autoload 'mime-w3m-preview-text/html "mime-w3m")
@@ -67,8 +35,122 @@
        (subtype . html)
        (body . visible)
        (body-presentation-method . mime-w3m-preview-text/html)))
-    (set-alist 'mime-view-type-subtype-score-alist
-               '(text . html) 3))
+    (set-alist 'mime-view-type-subtype-score-alist '(text . html) 3)))
+
+
+(defun user/elmo-init ()
+  "Initialize ELMO."
+  (setq-default
+   ;; Put message database in data directory.
+   elmo-msgdb-directory (path-join *user-wanderlust-data-directory* "elmo")
+   ;; Folders go in data directory too.
+   elmo-localdir-folder-path *user-wanderlust-data-directory*
+   elmo-maildir-folder-path *user-wanderlust-data-directory*
+   elmo-search-namazu-default-index-path *user-wanderlust-data-directory*
+   elmo-archive-folder-path *user-wanderlust-data-directory*
+   ;; ELMO's cache go into the user cache directory.
+   elmo-cache-directory (path-join *user-wanderlust-cache-directory* "elmo")
+   ;; Use modified UTF-8 for IMAP4
+   elmo-imap4-use-modified-utf7 t))
+
+
+(defun user/supercite-init ()
+  "Initialize supercite."
+  (setq-default
+   sc-citation-leader ""
+   ;; Use nested citations.
+   sc-nested-citation-p t
+   ;; Do not confirm attribution string before citation.
+   sc-confirm-always-p nil))
+
+
+(defun user/wl-folder-mode-hook ()
+  "Wanderlust folder mode hook."
+  (hl-line-mode t))
+
+
+(defun user/wl-message-buffer-created-hook ()
+  "Wanderlust message buffer created hook."
+  (setq
+   ;; Fold lines that are too long.
+   truncate-lines nil))
+
+
+(defun user/wl-message-redisplay-hook ()
+  "Wanderlust message redisplay hook."
+  (when (display-graphic-p)
+    (smiley-region (point-min) (point-max))))
+
+
+(defun user/wanderlust-init ()
+  "Initialize Wanderlust."
+  (el-get-eval-after-load 'semi
+    (user/semi-init))
+  (after-load 'supercite
+    (user/supercite-init))
+  (after-load 'elmo
+    (user/elmo-init))
+
+  (setq-default
+   ;;; (Basic Configuration) ;;;
+   ;; Put configuration into wanderlust data directory
+   wl-init-file (path-join *user-wanderlust-data-directory* "init.el")
+   wl-folders-file (path-join *user-wanderlust-data-directory* "folders")
+   wl-address-file (path-join *user-wanderlust-data-directory* "addresses")
+   ;; Put temporary files in cache directories
+   wl-temporary-file-directory *user-wanderlust-cache-directory*
+   ssl-certificate-directory (path-join *user-cache-directory* "certs")
+   ;; Mark sent mails as read
+   wl-fcc-force-as-read t
+   ;; Show mail status in mode line.
+   global-mode-string (cons '(wl-modeline-biff-status
+                              wl-modeline-biff-state-on
+                              wl-modeline-biff-state-off) global-mode-string)
+   ;; Check for mail when idle.
+   wl-biff-check-interval 180
+   wl-biff-use-idle-timer t
+   ;; Let SMTP server handle Message-ID
+   wl-insert-message-id nil
+   ;; Message window size
+   wl-message-window-size '(1 . 3)
+   ;; Quit without asking.
+   wl-interactive-exit nil
+
+   ;;; (Folders) ;;;
+   ;; Show folders in a pane to the left
+   wl-stay-folder-window t
+   wl-folder-window-width 30
+   ;; Asynchronously update folders
+   wl-folder-check-async t
+
+   ;;; (Summary) ;;;
+   ;; Set verbose summary
+   wl-summary-width nil
+   wl-summary-line-format "%T%P%M/%D(%W)%h:%m %[ %17f %]%[%1@%] %t%C%s"
+   ;; UTF-8 guides
+   wl-thread-have-younger-brother-str "├──►"
+   wl-thread-youngest-child-str       "╰──►"
+   wl-thread-vertical-str             "|"
+   wl-thread-horizontal-str           "►"
+   wl-thread-horizontal-str           "►"
+   wl-thread-space-str                " "
+
+   ;;; (Messages) ;;;
+   ;; Field lists
+   wl-message-ignored-field-list '("^.*")
+   wl-message-visible-field-list '("^\\(To\\|Cc\\):" "^Subject:"
+                                   "^\\(From\\|Reply-To\\):" "^Organization:"
+                                   "^X-Attribution:" "^\\(Posted\\|Date\\):"
+                                   "^\\(Posted\\|Date\\):"
+                                   "^\\(User-Agent\\|X-Mailer\\):")
+   wl-message-sort-field-list    '("^From:" "^Organization:" "^X-Attribution:"
+                                   "^Subject:" "^Date:" "^To:" "^Cc:")
+
+   ;;; (Drafts) ;;;
+   ;; Raise a new frame when creating a draft.
+   wl-draft-use-frame t
+   ;; Automatically save drafts every two minutes
+   wl-auto-save-drafts-interval 120.0)
 
   (el-get-eval-after-load 'fullframe
     (fullframe wl wl-exit nil))
@@ -119,15 +201,21 @@
          '(wl-highlight-summary-displaying-face ((t (:underline t :weight bold))))))))
 
   ;;; (Bindings) ;;;
-  (define-key user/utilities-map (kbd "m") 'wl))
+  (define-key user/utilities-map (kbd "m") 'wl)
+
+  (add-hook 'mail-citation-hook 'user/mail-citation-hook)
+  (add-hook 'wl-folder-mode-hook 'user/wl-folder-mode-hook)
+  (add-hook 'wl-message-redisplay-hook 'user/wl-message-redisplay-hook)
+  (add-hook 'wl-message-buffer-created-hook 'user/wl-message-buffer-created-hook))
 
 
 (defun user/wanderlust-set-gmail-user (fullname username)
   "Configure Wanderlust to use \"FULLNAME\" <USERNAME@gmail.com>."
   (make-directory *user-wanderlust-data-directory* t)
   (let ((email-address (concat username "@gmail.com")))
-    (unless (file-exists-p wl-folders-file)
-      (user/wanderlust-create-folders-gmail username wl-folders-file))
+    (after-load 'wanderlust
+      (unless (file-exists-p wl-folders-file)
+        (user/wanderlust-create-folders-gmail username wl-folders-file)))
     (setq-default
      ;; Setup mail-from
      wl-from (concat fullname " <" email-address ">")

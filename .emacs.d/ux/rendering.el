@@ -10,8 +10,9 @@
    ;; Redraw the entire screen before checking for pending input events.
    ;; This will improve performance in general but might degrade performance of
    ;; key repeat.
-   redisplay-dont-pause t))
-
+   redisplay-dont-pause t
+   ;; Do not reorder text during rendering.
+   bidi-display-reordering nil))
 
 (user/rendering-init)
 
