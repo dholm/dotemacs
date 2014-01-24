@@ -8,12 +8,14 @@
   (defun minimap-toggle ()
     "Toggle minimap for current buffer."
     (interactive)
+    (when (not (boundp 'minimap-bufname))
+      (require 'minimap))
     (if (null minimap-bufname)
         (minimap-create)
       (minimap-kill)))
 
   ;;; (Bindings) ;;;
-  (define-key user/utilities-map (kbd "m") 'minimap-toggle))
+  (define-key user/view-map (kbd "m") 'minimap-toggle))
 
 (when (display-graphic-p)
   (require-package '(:name minimap :after (user/minimap-init))))
