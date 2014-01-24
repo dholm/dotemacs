@@ -46,26 +46,6 @@
    ;; Disable error parsing in favor of Flycheck
    js3-strict-missing-semi-warning nil)
 
-  ;;; (Faces) ;;;
-  (after-load 'solarized-theme
-    (solarized-with-values
-      (eval
-       `(custom-theme-set-faces
-         'solarized
-         '(js3-warning-face ((t (:underline ,orange))))
-         '(js3-error-face ((t (:foreground ,red))))
-         '(js3-external-variable-face ((t (:foreground ,orange))))
-         '(js3-function-param-face ((t (:foreground ,green))))
-         '(js3-instance-member-face ((t (:foreground ,magenta))))
-         '(js3-jsdoc-html-tag-delimiter-face ((t (:foreground ,cyan))))
-         '(js3-jsdoc-html-tag-name-face ((t (:foreground ,orange))))
-         '(js3-jsdoc-tag-face ((t (:foreground ,cyan))))
-         '(js3-jsdoc-type-face ((t (:foreground ,blue))))
-         '(js3-jsdoc-value-face ((t (:foreground ,violet))))
-         '(js3-magic-paren-face ((t (:underline t))))
-         '(js3-private-function-call-face ((t (:foreground ,yellow))))
-         '(js3-private-member-face ((t (:foreground ,blue))))))))
-
   (add-hook 'js3-mode-hook 'user/js3-mode-hook)
   (add-auto-mode 'js3-mode "\\.js$")
   (add-magic-mode 'js3-mode "#!/usr/bin/env node"))

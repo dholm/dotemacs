@@ -2,6 +2,21 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/visual-regexp-init ()
+  "Initialize visual regexp."
+  ;;; (Bindings) ;;;
+  (global-set-key [remap query-replace-regexp] 'vr/query-replace)
+  (global-set-key [remap replace-regexp] 'vr/replace))
+
+
+(defun user/anzu-init ()
+  "Initialize anzu."
+  (require 'anzu)
+  (global-anzu-mode t)
+  (after-load 'diminish
+    (diminish 'anzu-mode)))
+
+
 (defun user/search-replace-init ()
   "Initialize Emacs search and replace."
   (setq-default
@@ -23,29 +38,6 @@
   ;;; (Packages) ;;;
   (require-package '(:name visual-regexp :after (user/visual-regexp-init)))
   (require-package '(:name anzu :after (user/anzu-init))))
-
-
-(defun user/visual-regexp-init ()
-  "Initialize visual regexp."
-  ;;; (Bindings) ;;;
-  (global-set-key [remap query-replace-regexp] 'vr/query-replace)
-  (global-set-key [remap replace-regexp] 'vr/replace))
-
-
-(defun user/anzu-init ()
-  "Initialize anzu."
-  (require 'anzu)
-  (global-anzu-mode t)
-  (after-load 'diminish
-    (diminish 'anzu-mode))
-
-  (after-load 'solarized-theme
-    (solarized-with-values
-      (eval
-       `(custom-theme-set-faces
-         'solarized
-         '(anzu-mode-line ((t (:foreground ,solarized-emph :weight bold)))))))))
-
 
 (user/search-replace-init)
 

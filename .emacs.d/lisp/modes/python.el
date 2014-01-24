@@ -52,15 +52,7 @@
    ;; Automatically launch completion on dot.
    jedi:complete-on-dot t
    ;; Use popup package.
-   jedi:tooltip-method '(popup))
-
-  ;;; (Faces) ;;;
-  (after-load 'solarized-theme
-    (solarized-with-values
-      (eval
-       `(custom-theme-set-faces
-         'solarized
-         '(jedi:highlight-function-argument ((t (:inherit bold)))))))))
+   jedi:tooltip-method '(popup)))
 
 
 (defun user/python-init ()

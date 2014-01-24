@@ -23,14 +23,6 @@
 
 (defun user/pretty-mode-plus-init ()
   "Initialize pretty mode plus."
-  ;;; (Faces) ;;;
-  (after-load 'solarized-theme
-    (solarized-with-values
-      (eval
-       `(custom-theme-set-faces
-         'solarized
-         '(pretty-mode-symbol-face  ((t (:foreground ,green))))))))
-
   ;; Enable pretty mode plus globally
   (global-pretty-mode t))
 

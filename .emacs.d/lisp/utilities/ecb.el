@@ -84,32 +84,7 @@
   (add-hook 'ecb-deactivate-hook 'user/ecb-deactivate-hook)
 
   ;;; (Bindings) ;;;
-  (define-key user/utilities-map (kbd "e") 'user/ecb-toggle-active)
-
-  ;;; (Faces) ;;;
-  (after-load 'solarized-theme
-    (solarized-with-values
-      (eval
-       `(custom-theme-set-faces
-         'solarized
-         '(ecb-default-highlight-face ((t (:foreground ,solarized-bg :background ,blue))))
-         '(ecb-history-bucket-node-dir-soure-path-face ((t (:inherit ecb-history-bucket-node-face
-                                                                     :foreground ,yellow))))
-         '(ecb-source-in-directories-buffer-face ((t (:inherit ecb-directories-general-face
-                                                               :foreground ,solarized-fg))))
-         '(ecb-history-dead-buffer-face ((t (:inherit ecb-history-general-face
-                                                      :foreground ,solarized-comment))))
-         '(ecb-directory-not-accessible-face ((t (:inherit ecb-directories-general-face
-                                                           :foreground ,solarized-comment))))
-         '(ecb-bucket-node-face ((t (:inherit ecb-default-general-face :foreground ,blue
-                                              :weight normal))))
-         '(ecb-tag-header-face ((t (:background ,solarized-hl))))
-         '(ecb-analyse-bucket-element-face ((t (:inherit ecb-analyse-general-face :foreground ,green))))
-         '(ecb-directories-general-face ((t (:inherit ecb-default-general-face :height 1.0))))
-         '(ecb-method-non-semantic-face ((t (:inherit ecb-methods-general-face :foreground ,cyan))))
-         '(ecb-mode-line-prefix-face ((t (:foreground ,green))))
-         '(ecb-tree-guide-line-face ((t (:inherit ecb-default-general-face :foreground ,solarized-hl
-                                                  :height 1.0)))))))))
+  (define-key user/utilities-map (kbd "e") 'user/ecb-toggle-active))
 
 (require-package '(:name ecb :after (user/ecb-init)))
 

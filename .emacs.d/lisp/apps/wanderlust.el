@@ -166,40 +166,6 @@
         'wl-draft-kill
         'mail-send-hook))
 
-  ;;; (Faces) ;;;
-  (after-load 'solarized-theme
-    (solarized-with-values
-      (eval
-       `(custom-theme-set-faces
-         'solarized
-         '(wl-highlight-folder-few-face ((t (:foreground ,red))))
-         '(wl-highlight-folder-many-face ((t (:foreground ,red))))
-         '(wl-highlight-folder-path-face ((t (:foreground ,orange))))
-         '(wl-highlight-folder-unread-face ((t (:foreground ,blue))))
-         '(wl-highlight-folder-zero-face ((t (:foreground ,solarized-fg))))
-         '(wl-highlight-folder-unknown-face ((t (:foreground ,blue))))
-         '(wl-highlight-message-citation-header ((t (:foreground ,red))))
-         '(wl-highlight-message-cited-text-1 ((t (:foreground ,red))))
-         '(wl-highlight-message-cited-text-2 ((t (:foreground ,green))))
-         '(wl-highlight-message-cited-text-3 ((t (:foreground ,blue))))
-         '(wl-highlight-message-cited-text-4 ((t (:foreground ,blue))))
-         '(wl-highlight-message-header-contents-face ((t (:foreground ,green))))
-         '(wl-highlight-message-headers-face ((t (:foreground ,red))))
-         '(wl-highlight-message-important-header-contents ((t (:foreground ,green))))
-         '(wl-highlight-message-header-contents ((t (:foreground ,green))))
-         '(wl-highlight-message-important-header-contents2 ((t (:foreground ,green))))
-         '(wl-highlight-message-signature ((t (:foreground ,green))))
-         '(wl-highlight-message-unimportant-header-contents ((t (:foreground ,solarized-fg))))
-         '(wl-highlight-summary-answered-face ((t (:foreground ,blue))))
-         '(wl-highlight-summary-disposed-face ((t (:foreground ,solarized-fg
-                                                               :slant italic))))
-         '(wl-highlight-summary-new-face ((t (:foreground ,blue))))
-         '(wl-highlight-summary-normal-face ((t (:foreground ,solarized-fg))))
-         '(wl-highlight-summary-thread-top-face ((t (:foreground ,yellow))))
-         '(wl-highlight-thread-indent-face ((t (:foreground ,magenta))))
-         '(wl-highlight-summary-refiled-face ((t (:foreground ,solarized-fg))))
-         '(wl-highlight-summary-displaying-face ((t (:underline t :weight bold))))))))
-
   ;;; (Bindings) ;;;
   (define-key user/utilities-map (kbd "m") 'wl)
 

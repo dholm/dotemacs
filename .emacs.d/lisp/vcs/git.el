@@ -4,38 +4,13 @@
 
 (defun user/git-gutter-init ()
   "Initialize git gutter."
-  ;;; (Faces) ;;;
-  (after-load 'solarized-theme
-    (solarized-with-values
-      (eval
-       `(custom-theme-set-faces
-         'solarized
-         '(git-gutter:added ((t (:foreground ,solarized-bg :background ,green
-                                             :weight bold))))
-         '(git-gutter:deleted ((t (:foreground ,solarized-bg :background ,red
-                                               :weight bold))))
-         '(git-gutter:modified ((t (:foreground ,solarized-bg :background ,red
-                                                :weight bold))))
-         '(git-gutter:unchanged ((t (:foreground ,solarized-bg :background ,solarized-hl
-                                                 :weight bold))))))))
-
   ;;; (Bindings) ;;;
   (define-key user/vcs-map (kbd "g") 'git-gutter:toggle))
 
 
 (defun user/git-gutter-fringe-init ()
   "Initialize git gutter fringe."
-  (setq-default git-gutter-fr:side 'left-fringe)
-
-  ;;; (Faces) ;;;
-  (after-load 'solarized-theme
-    (solarized-with-values
-      (eval
-       `(custom-theme-set-faces
-         'solarized
-         '(git-gutter-fr:added ((t (:foreground ,green :weight bold))))
-         '(git-gutter-fr:deleted ((t (:foreground ,red :weight bold))))
-         '(git-gutter-fr:modified ((t (:foreground ,blue :weight bold)))))))))
+  (setq-default git-gutter-fr:side 'left-fringe))
 
 
 (defun user/magit-init ()
@@ -53,32 +28,6 @@
   ;; Full frame Magit status
   (el-get-eval-after-load 'fullframe
     (fullframe magit-status magit-mode-quit-window :magit-fullscreen nil))
-
-  ;;; (Faces) ;;;
-  (after-load 'solarized-theme
-    (solarized-with-values
-      (eval
-       `(custom-theme-set-faces
-         'solarized
-         '(magit-section-title ((t (:foreground ,yellow :weight bold))))
-         '(magit-branch ((t (:foreground ,orange :weight bold))))
-         '(magit-item-highlight ((t (:background ,solarized-hl :weight unspecified))))
-         '(magit-log-author ((t (:foreground ,cyan))))
-         '(magit-log-graph ((t (:foreground ,solarized-comment))))
-         '(magit-log-head-label-bisect-bad ((t (:foreground ,red-lc :background ,red-hc
-                                                            :box 1))))
-         '(magit-log-head-label-bisect-good ((t (:foreground ,green-lc :background ,green-hc
-                                                             :box 1))))
-         '(magit-log-head-label-default ((t (:background ,solarized-hl :box 1))))
-         '(magit-log-head-label-local ((t (:foreground ,blue-hc :background ,blue-lc
-                                                       :box 1))))
-         '(magit-log-head-label-patches ((t (:foreground ,red-hc :background ,red-lc
-                                                         :box 1))))
-         '(magit-log-head-label-remote ((t (:foreground ,green-hc :background ,green-lc
-                                                        :box 1))))
-         '(magit-log-head-label-tags ((t (:foreground ,yellow-hc :background ,yellow-lc
-                                                      :box 1))))
-         '(magit-log-sha1 ((t (:foreground ,yellow))))))))
 
   ;;; (Bindings) ;;;
   (define-key user/vcs-map (kbd "s") 'magit-status)

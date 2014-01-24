@@ -72,21 +72,6 @@
   (add-hook 'flymake-mode-hook 'ac-flyspell-workaround)
   (add-hook 'auto-complete-mode-hook 'ac-common-setup)
 
-  ;;; (Faces) ;;;
-  (after-load 'solarized-theme
-    (solarized-with-values
-      (eval
-       `(custom-theme-set-faces
-         'solarized
-         '(ac-candidate-face ((t (:foreground ,orange :background ,solarized-hl))))
-         '(ac-selection-face ((t (:foreground ,cyan-hc :background ,cyan-lc))))
-         '(ac-candidate-mouse-face ((t (:foreground ,cyan-lc :background ,cyan-hc))))
-         '(ac-completion-face ((t (:foreground ,solarized-emph :underline t))))
-         '(ac-gtags-candidate-face ((t (:foreground ,blue :background ,solarized-hl))))
-         '(ac-gtags-selection-face ((t (:foreground ,blue-hc :background ,blue-lc))))
-         '(ac-yasnippet-candidate-face ((t (:foreground ,yellow :background ,solarized-hl))))
-         '(ac-yasnippet-selection-face ((t (:foreground ,yellow-hc :background ,yellow-lc))))))))
-
   ;; Enable auto-complete globally
   (global-auto-complete-mode t)
   (after-load 'diminish

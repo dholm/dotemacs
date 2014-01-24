@@ -5,19 +5,7 @@
 (defun user/ctable-init ()
   "Initialize ctable."
   ;; Register autoload for lib/benchmark
-  (autoload 'make-ctbl:cmodel "ctable")
-
-  ;;; (Faces) ;;;
-  (after-load 'solarized-theme
-    (solarized-with-values
-      (eval
-       `(custom-theme-set-faces
-         'solarized
-         '(ctbl:face-cell-select ((t (:foreground ,solarized-emph :background ,solarized-hl
-                                                  :underline ,solarized-emph :weight bold))))
-         '(ctbl:face-continue-bar ((t (:foreground ,yellow :background ,solarized-hl))))
-         '(ctbl:face-row-select ((t (:foreground ,solarized-fg :background ,solarized-hl
-                                                 :underline t)))))))))
+  (autoload 'make-ctbl:cmodel "ctable"))
 
 (require-package '(:name ctable :after (user/ctable-init)))
 
