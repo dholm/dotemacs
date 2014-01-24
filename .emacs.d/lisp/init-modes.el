@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(load-all-files-from-dir (path-join user-emacs-directory "modes"))
+(load-all-files-from-dir (path-join *user-emacs-lisp-directory* "modes"))
 
 
 (provide 'init-modes)

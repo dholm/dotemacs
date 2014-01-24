@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(load-all-files-from-dir (path-join user-emacs-directory "utilities"))
+(load-all-files-from-dir (path-join *user-emacs-lisp-directory* "utilities"))
 
 
 ;;; (Functions) ;;;

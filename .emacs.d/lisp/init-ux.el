@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(load-all-files-from-dir (path-join user-emacs-directory "ux"))
+(load-all-files-from-dir (path-join *user-emacs-lisp-directory* "ux"))
 
 
 (provide 'init-ux)

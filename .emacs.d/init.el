@@ -2,8 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
+(defconst *user-emacs-lisp-directory*
+  (expand-file-name "lisp" user-emacs-directory)
+  "Path to user Emacs Lisp directory.")
+
 ;; Bootstrap Emacs.
-(add-to-list 'load-path user-emacs-directory)
+(add-to-list 'load-path *user-emacs-lisp-directory*)
 
 (require 'lib/path)
 (add-to-list 'exec-path (path-join user-emacs-directory "bin"))
