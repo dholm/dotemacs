@@ -8,9 +8,6 @@
    ;; Make R prompt read only.
    comint-prompt-read-only t)
 
-  ;; Enable ElDoc support.
-  (ess-use-eldoc)
-
   (when (el-get-package-is-installed 'ac-R)
     (ess-ac-init))
 
@@ -58,7 +55,9 @@
    ess-comint-scroll-to-bottom-on-output t
    ;; Start R in the current directory.
    ess-ask-for-ess-directory nil
-   ess-local-process-name "R")
+   ess-local-process-name "R"
+   ;; Enable ElDoc support.
+   ess-use-eldoc t)
 
   (add-hook 'ess-mode-hook 'user/ess-mode-hook)
   (add-hook 'inferiormode-ess-mode-hook 'user/inferior-ess-mode-hook)
@@ -75,13 +74,12 @@
     (if (not (member "*R*" (mapcar (function buffer-name) (buffer-list))))
         (progn
           (delete-other-windows)
-          (setq
-           window1 (selected-window)
-           window1-name (buffer-name)
-          window2 (split-window window1))
-          (R)
-          (set-window-buffer window2 "*R*")
-          (set-window-buffer window1 window1-name))))
+          (let ((window1 (selected-window))
+                (window1-name (buffer-name))
+                (window2 (split-window (selected-window))))
+            (R)
+            (set-window-buffer window2 "*R*")
+            (set-window-buffer window1 window1-name)))))
 
   (defun user/ess-eval ()
     "Evaluate active region."
