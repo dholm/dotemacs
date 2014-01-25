@@ -8,9 +8,6 @@
 
 (defun user/prog-mode-hook ()
   "Programming mode hook."
-  ;; Enable smart tabs
-  (after-load 'tabkey2
-    (tabkey2-mode t))
   ;; Automatically break long lines
   (auto-fill-mode t)
   (after-load 'diminish

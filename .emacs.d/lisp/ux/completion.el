@@ -2,42 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/completion-init ()
-  "Initialize automatic code completion."
-  (setq-default
-   ;; Use complete when auto-complete is unavailable
-   tab-always-indent 'complete)
-
-  (add-to-list 'completion-styles 'initials t)
-
-  ;;; (Functions) ;;;
-  (defun add-ac-sources (&rest sources)
-    "Add SOURCES for auto-complete after it has been loaded."
-    (after-load 'auto-complete
-      (dolist (source sources)
-        (if (boundp 'ac-sources)
-            (add-to-list 'ac-sources source)
-          (error "Declaration of ac-sources is missing!")))))
-
-  (defun add-ac-modes (&rest major-modes)
-    "Add MAJOR-MODES for auto-complete after it has been loaded."
-    (after-load 'auto-complete
-      (dolist (mode major-modes)
-        (if (boundp 'ac-modes)
-            (add-to-list 'ac-modes mode)
-          (error "Declaration of ac-modes is missing!")))))
-
-  ;;; (Packages) ;;;
-  (require-package '(:name auto-complete :after (user/auto-complete-init)))
-  (require-package '(:name tabkey2
-                           :type http
-                           :url "http://marmalade-repo.org/packages/tabkey2-1.40.el"
-                           :build '(("mv" "tabkey2-1.40.el" "tabkey2.el"))
-                           :compile "tabkey2.el"
-                           :autoloads "tabkey2"
-                           :after (user/tabkey2-init))))
-
-
 (defun user/auto-complete-init ()
   "Initialize auto-complete."
   (require 'auto-complete-config)
@@ -87,11 +51,33 @@
   (define-key user/code-map (kbd "SPC") 'auto-complete))
 
 
-(defun user/tabkey2-init ()
-  "Initialize tabkey2."
-  ;; Just load it since it is used by prog-mode
-  (require 'tabkey2))
+(defun user/completion-init ()
+  "Initialize automatic code completion."
+  (setq-default
+   ;; Use complete when auto-complete is unavailable
+   tab-always-indent 'complete)
 
+  (add-to-list 'completion-styles 'initials t)
+
+  ;;; (Functions) ;;;
+  (defun add-ac-sources (&rest sources)
+    "Add SOURCES for auto-complete after it has been loaded."
+    (after-load 'auto-complete
+      (dolist (source sources)
+        (if (boundp 'ac-sources)
+            (add-to-list 'ac-sources source)
+          (error "Declaration of ac-sources is missing!")))))
+
+  (defun add-ac-modes (&rest major-modes)
+    "Add MAJOR-MODES for auto-complete after it has been loaded."
+    (after-load 'auto-complete
+      (dolist (mode major-modes)
+        (if (boundp 'ac-modes)
+            (add-to-list 'ac-modes mode)
+          (error "Declaration of ac-modes is missing!")))))
+
+  ;;; (Packages) ;;;
+  (require-package '(:name auto-complete :after (user/auto-complete-init))))
 
 (user/completion-init)
 
