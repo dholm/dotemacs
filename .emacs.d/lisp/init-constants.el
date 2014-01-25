@@ -4,6 +4,7 @@
 
 (require 'lib/path)
 (require 'lib/env)
+(require 'lib/pkg-config)
 
 
 ;;; (Directories) ;;;
