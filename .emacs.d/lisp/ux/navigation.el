@@ -15,7 +15,9 @@
 
   ;;; (Bindings) ;;;
   ;; Binds goto-line to navigation command g which is easier to access than M-g g
-  (define-key user/navigation-map (kbd "g") 'goto-line))
+  (define-key user/navigation-map (kbd "g") 'goto-line)
+  ;; Return to the previous marked position.
+  (define-key user/navigation-map (kbd "b") 'pop-global-mark))
 
 
 (defun user/ace-jump-mode-init ()

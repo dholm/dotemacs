@@ -23,7 +23,6 @@
 
     (define-key user/navigation-map (kbd "j") 'semantic-ia-fast-jump)
     (define-key user/navigation-map (kbd "s") 'semantic-symref-find-tags-by-regexp)
-    (define-key user/navigation-map (kbd "b") 'semantic-mrub-switch-tags)
     (define-key user/navigation-map (kbd "i") 'semantic-analyze-proto-impl-toggle)
     (define-key user/navigation-map (kbd "r") 'semantic-symref)
 
@@ -64,9 +63,6 @@
   (global-semantic-idle-breadcrumbs-mode t)
   ;; Show summary of tag at point during idle time.
   (global-semantic-idle-summary-mode t)
-
-  ;; Remember recently edited tags
-  (global-semantic-mru-bookmark-mode t)
 
   ;; Enable [ec]tags support
   (when (and (fboundp 'cedet-ectag-version-check)
