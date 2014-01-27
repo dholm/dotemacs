@@ -85,8 +85,8 @@
 
   ;; Filter out boring buffers
   (dolist (pattern
-           (list "\\*clang-complete" "\\*CEDET global" "\\*tramp/scpc"
-                 "\\*epc con" "\\*Pymacs" "\\*Completions\\*"))
+           (list "\\*CEDET global" "\\*tramp/scpc" "\\*epc con" "\\*Pymacs"
+                 "\\*Completions\\*"))
     (add-to-list 'helm-boring-buffer-regexp-list pattern))
 
   ;; Filter out boring files
