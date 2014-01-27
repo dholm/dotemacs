@@ -11,11 +11,10 @@
 
     (after-load 'cedet-global
       (when (cedet-gnu-global-version-check t)
-        (add-ac-sources 'ac-source-gtags)
-        (when (el-get-package-is-installed 'ggtags)
-          (ggtags-mode t))))
+        (add-ac-sources 'ac-source-gtags)))
 
     ;;; (Bindings) ;;;
+    (define-key user/code-map (kbd "i") 'user/cedet-create/update-all)
     (define-key user/code-map (kbd "RET") 'semantic-ia-complete-symbol)
     (define-key user/code-map (kbd "TAB") 'semantic-ia-complete-symbol-menu)
     (define-key user/code-map (kbd ">") 'semantic-complete-analyze-inline)

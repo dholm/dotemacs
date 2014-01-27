@@ -8,6 +8,8 @@
 
   ;; Load default configuration.
   (ac-config-default)
+  (after-load 'diminish
+    (diminish 'auto-complete-mode))
 
   (setq-default
    ;; Limit the number of candidates.
@@ -34,12 +36,6 @@
 
   ;; Install workaround for Flyspell
   (add-hook 'flymake-mode-hook 'ac-flyspell-workaround)
-  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
-
-  ;; Enable auto-complete globally
-  (global-auto-complete-mode t)
-  (after-load 'diminish
-    (diminish 'auto-complete-mode))
 
   ;; Set up auto-complete for lisp-interaction- and ielm-mode.
   (dolist (hook (list 'lisp-interaction-mode-hook
