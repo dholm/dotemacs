@@ -14,8 +14,6 @@
      ((derived-mode-p 'c-mode-common) (helm-other-buffer
                                        '(helm-source-man-pages) buffer-name))
      ((derived-mode-p 'python-mode) (helm-pydoc))
-     ((derived-mode-p 'go-mode) (helm-other-buffer
-                                 '(helm-source-go-package) buffer-name))
      (t (message (format "Apropos is unavailable for %S" major-mode))))))
 
 
@@ -161,11 +159,6 @@
                            :type github
                            :depends (helm)
                            :pkgname "syohex/emacs-helm-pydoc")))
-(when *has-go*
-  (require-package '(:name helm-go-package
-                           :type github
-                           :pkgname "yasuyk/helm-go-package"
-                           :depends (helm go-mode))))
 
 
 (provide 'utilities/helm)
