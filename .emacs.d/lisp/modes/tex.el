@@ -17,6 +17,8 @@
     (ac-auctex-setup))
 
   ;;; (Bindings) ;;;
+  (when (el-get-package-is-installed 'ltx-help)
+    (define-key user/documentation-map (kbd "d") 'latex-help))
   (define-key user/navigation-map (kbd "c") 'reftex-toc)
   (when (display-graphic-p)
     (define-key user/code-map (kbd "p") 'preview-document)))
@@ -184,7 +186,8 @@ Makes it easier to version control LaTeX-files."
   (require-package '(:name auto-complete-auctex
                            :type github
                            :pkgname "monsanto/auto-complete-auctex"
-                           :prepare (autoload 'ac-auctex-setup "auto-complete-auctex"))))
+                           :prepare (autoload 'ac-auctex-setup "auto-complete-auctex")))
+  (require-package '(:name ltx-help)))
 
 
 (when (or *has-tex* *has-latex*)
