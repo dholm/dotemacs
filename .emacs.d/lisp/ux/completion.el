@@ -44,6 +44,8 @@
 
   ;;; (Bindings) ;;;
   (ac-set-trigger-key (kbd "TAB"))
+  (define-key ac-completing-map (kbd "C-m") nil)
+  (define-key ac-menu-map (kbd "C-m") 'ac-complete)
   (define-key user/code-map (kbd "SPC") 'auto-complete))
 
 
