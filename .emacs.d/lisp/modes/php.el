@@ -14,9 +14,10 @@
 
 (defun user/php-mode-init ()
   "Initialize PHP mode."
-  (require-package '(:name php-mode :after (user/php-mode-init)))
+  (add-hook 'php-mode-hook 'user/php-mode-hook)
 
-  (add-hook 'php-mode-hook 'user/php-mode-hook))
+  ;;; (Packages) ;;;
+  (require-package '(:name php-mode :after (user/php-mode-init))))
 
 (when *has-php*
   (user/php-mode-init))

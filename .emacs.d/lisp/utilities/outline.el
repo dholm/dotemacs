@@ -6,13 +6,13 @@
   "Hook for outline mode."
   ;;; (Bindings) ;;;
   (when (el-get-package-is-installed 'outline-magic)
-    (define-key user/view-map (kbd "f") 'outline-cycle)
-    (define-key user/code-map (kbd "p") 'outline-move-subtree-up)
-    (define-key user/code-map (kbd "n") 'outline-move-subtree-down)
-    (define-key user/code-map (kbd "P") 'outline-promote)
-    (define-key user/code-map (kbd "N") 'outline-demote))
-  (define-key user/navigation-map (kbd "p") 'outline-previous-heading)
-  (define-key user/navigation-map (kbd "n") 'outline-next-heading))
+    (user/bind-key-local :nav :context-cycle 'outline-cycle)
+    (user/bind-key-local :nav :context-up 'outline-move-subtree-up)
+    (user/bind-key-local :nav :context-down 'outline-move-subtree-down)
+    (user/bind-key-local :code :context-promote 'outline-promote)
+    (user/bind-key-local :code :context-demote 'outline-demote))
+  (user/bind-key-local :nav :context-forward 'outline-next-heading)
+  (user/bind-key-local :nav :context-backward 'outline-previous-heading))
 
 
 (defun user/outline-mode-init ()

@@ -1,10 +1,10 @@
-;;; wc-mode --- word count in modeline
+;;; wc-mode.el --- word count in modeline
 ;;; Commentary:
 ;;; Code:
 
 (defun user/wc-mode-init ()
   "Initialize wc-mode."
-  (define-key user/utilities-map (kbd "w") 'wc-mode))
+  (user/bind-key-global :util :wc-mode 'wc-mode))
 
 (require-package '(:name wc-mode :after (user/wc-mode-init)))
 

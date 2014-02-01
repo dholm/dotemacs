@@ -4,10 +4,10 @@
 
 (defun user/profiler-init ()
   "Initialize Emacs profiler."
-  (define-key user/utilities-map (kbd "p p") 'profiler-start)
-  (define-key user/utilities-map (kbd "p P") 'profiler-stop)
-  (define-key user/utilities-map (kbd "p r") 'profiler-report)
-  (define-key user/utilities-map (kbd "p s") 'profiler-report-write))
+  (user/bind-key-global :emacs :profiler-start 'profiler-start)
+  (user/bind-key-global :emacs :profiler-stop 'profiler-stop)
+  (user/bind-key-global :emacs :profiler-report 'profiler-report)
+  (user/bind-key-global :emacs :profiler-save 'profiler-report-write))
 
 (when (fboundp 'profiler-start)
   (user/profiler-init))

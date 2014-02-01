@@ -18,10 +18,12 @@
 
   ;;; (Bindings) ;;;
   (when (el-get-package-is-installed 'ltx-help)
-    (define-key user/documentation-map (kbd "d") 'latex-help))
-  (define-key user/navigation-map (kbd "c") 'reftex-toc)
+    (user/bind-key-local :doc :reference 'latex-help))
+  (user/bind-key-local :nav :functions/toc 'reftex-toc)
   (when (display-graphic-p)
-    (define-key user/code-map (kbd "p") 'preview-document)))
+    (user/bind-key-local :code :run 'preview-document))
+  (when (el-get-package-is-installed 'ebib)
+    (user/bind-key-local :nav :references 'ebib)))
 
 
 (defun user/latex-mode-hook ()
@@ -38,7 +40,7 @@
   (ad-activate 'LaTeX-fill-region-as-paragraph)
 
   ;;; (Bindings) ;;;
-  (define-key user/code-map (kbd "f") 'LaTeX-fill-paragraph))
+  (local-set-key [remap fill-paragraph] 'LaTeX-fill-paragraph))
 
 
 (defun user/bibtex-mode-hook ()
@@ -135,10 +137,7 @@ Makes it easier to version control LaTeX-files."
 (defun user/ebib-init ()
   "Initialize Ebib."
   (setq-default
-   ebib-file-search-dirs `(user/current-path-apply 'user/project-root))
-
-  ;;; (Bindings) ;;;
-  (define-key user/utilities-map (kbd "r") 'ebib))
+   ebib-file-search-dirs `(user/current-path-apply 'user/project-root)))
 
 
 (defun user/zotelo-init ()

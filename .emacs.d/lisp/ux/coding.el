@@ -14,10 +14,9 @@
   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 
   ;;; (Bindings) ;;;
-  (define-key user/help-map (kbd "C") 'describe-coding-system)
-  (define-key user/help-map (kbd "c") 'describe-char)
-  (define-key user/help-map (kbd "L") 'describe-language-environment))
-
+  (user/bind-key-global :emacs :describe-coding 'describe-coding-system)
+  (user/bind-key-global :emacs :describe-char 'describe-char)
+  (user/bind-key-global :emacs :describe-language 'describe-language-environment))
 
 (user/coding-init)
 

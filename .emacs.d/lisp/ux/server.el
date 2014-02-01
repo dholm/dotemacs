@@ -2,10 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'server)
-
 (defun user/server-init ()
   "Initialize Emacs server."
+  (require 'server)
   (unless (server-running-p)
     (server-start)))
 

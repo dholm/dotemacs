@@ -18,7 +18,6 @@
    ;; Scroll the window that the cursor is over.
    mouse-wheel-follow-mouse t))
 
-
 (user/scrolling-init)
 
 

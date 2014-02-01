@@ -15,10 +15,10 @@
     (user/ffip-local-patterns "*.go"))
 
   ;;; (Bindings) ;;;
-  (define-key user/documentation-map (kbd "d") 'godef-describe)
-  (define-key user/documentation-map (kbd "m") 'godoc)
-  (define-key user/navigation-map (kbd "j") 'godef-jump)
-  (define-key user/navigation-map (kbd "i") 'go-goto-imports))
+  (user/bind-key-local :doc :describe 'godef-describe)
+  (user/bind-key-local :doc :reference 'godoc)
+  (user/bind-key-local :nav :follow-symbol 'godef-jump)
+  (user/bind-key-local :nav :switch-spec-impl 'go-goto-imports))
 
 
 (defun user/go-mode-init ()

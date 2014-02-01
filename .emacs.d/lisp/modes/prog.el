@@ -27,8 +27,8 @@
     (diminish 'abbrev-mode))
 
   ;;; (Bindings) ;;;
-  (define-key user/code-map (kbd "a") 'align-current)
-  (define-key user/code-map (kbd "-") 'comment-dwim))
+  (user/bind-key-local :code :align 'align-current)
+  (user/bind-key-local :code :comment 'comment-dwim))
 
 
 (defun user/prog-mode-buffer-cleanup ()
@@ -75,7 +75,6 @@
                            :features (mic-paren)
                            :after (user/mic-paren-init)))
   (require-package '(:name rainbow-delimiters :after (user/rainbow-delimiters-init))))
-
 
 (user/prog-mode-init)
 

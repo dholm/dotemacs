@@ -18,23 +18,15 @@
     (auto-complete-mode t))
 
   ;;; (Bindings) ;;;
-  ;; Adornments
-  (define-key user/documentation-map (kbd "h") 'rst-display-adornments-hierarchy)
-  (define-key user/code-map (kbd "h") 'rst-adjust)
-
-  ;; Blocks
-  (define-key user/code-map (kbd "l") 'rst-line-block-region)
-
   ;; Lists
-  (define-key user/code-map (kbd "b") 'rst-bullet-list-region)
-  (define-key user/code-map (kbd "e") 'rst-enumerate-region)
+  (user/bind-key-local :code :itemize 'rst-bullet-list-region)
+  (user/bind-key-local :code :enumerate 'rst-enumerate-region)
 
   ;; Table of Contents
-  (define-key user/navigation-map (kbd "t") 'rst-toc)
-  (define-key user/code-map (kbd "t") 'rst-toc-insert)
+  (user/bind-key-local :nav :functions/toc 'rst-toc)
 
   ;; Compilation
-  (define-key user/code-map (kbd "c") 'rst-compile))
+  (user/bind-key-local :code :compile 'rst-compile))
 
 
 (defun user/rst-mode-init ()

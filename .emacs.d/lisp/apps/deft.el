@@ -4,7 +4,8 @@
 
 (defun user/deft-init ()
   "Initialize deft."
-  (define-key user/utilities-map (kbd "d") 'deft))
+  ;;; (Bindings) ;;;
+  (user/bind-key-global :apps :notes 'deft))
 
 (require-package '(:name deft :after (user/deft-init)))
 

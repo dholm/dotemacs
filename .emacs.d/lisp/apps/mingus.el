@@ -4,7 +4,8 @@
 
 (defun user/mingus-init ()
   "Initialize Mingus."
-  (define-key user/utilities-map (kbd "M") 'mingus))
+  ;;; (Bindings) ;;;
+  (user/bind-key-global :apps :music 'mingus))
 
 (when (fboundp 'define-fringe-bitmap)
   (require-package '(:name mingus :after (user/mingus-init))))

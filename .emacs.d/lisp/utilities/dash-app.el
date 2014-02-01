@@ -5,7 +5,7 @@
 (defun user/dash-at-point-init ()
   "Initialize Dash-at-point."
   ;;; (Bindings) ;;;
-  (define-key user/documentation-map (kbd "r") 'dash-at-point))
+  (user/bind-key-global :doc :reference 'dash-at-point))
 
 
 (defun user/dash-app-init ()

@@ -2,6 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/expand-region-init ()
+  "Initialize expand region."
+  ;;; (Bindings) ;;;
+  (user/bind-key-global :basic :selection-expand 'er/expand-region))
+
+
 (defun user/kill-yank-init ()
   "Initialize copy/paste."
   (setq-default
@@ -19,10 +25,14 @@
 
   ;;; (Bindings) ;;;
   ;; Delete words with C/M-w and rebind kill/yank region to C-x C-k/C-x C-w.
-  (global-set-key (kbd "C-w") 'backward-kill-word)
-  (global-set-key (kbd "M-w") 'kill-word)
-  (global-set-key (kbd "C-x C-k") 'kill-region)
-  (global-set-key (kbd "C-x C-w") 'kill-ring-save)
+  (user/bind-key-global :basic :cut-word-left 'backward-kill-word)
+  (user/bind-key-global :basic :cut-word-right 'kill-word)
+  ;; Set up basic copy/paste
+  (user/bind-key-global :basic :selection-start 'set-mark-command)
+  (user/bind-key-global :basic :copy 'kill-ring-save)
+  (user/bind-key-global :basic :cut 'kill-region)
+  (user/bind-key-global :basic :paste 'yank)
+  (user/bind-key-global :basic :cycle-paste 'yank-pop)
 
   ;; Rebind to new clipboard functions when available.
   (when (fboundp 'clipboard-kill-region)
@@ -37,12 +47,6 @@
 
   ;;; (Packages) ;;;
   (require-package '(:name expand-region :after (user/expand-region-init))))
-
-
-(defun user/expand-region-init ()
-  "Initialize expand region."
-  ;;; (Bindings) ;;;
-  (global-set-key (kbd "C-=") 'er/expand-region))
 
 (user/kill-yank-init)
 

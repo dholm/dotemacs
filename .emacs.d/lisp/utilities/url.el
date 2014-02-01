@@ -1,6 +1,7 @@
-;;; url --- Emacs URL package
+;;; url.el --- Emacs URL package
 ;;; Commentary:
 ;;; Code:
+
 (defconst *user-url-directory* (path-join *user-cache-directory* "url"))
 
 (setq

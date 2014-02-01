@@ -5,7 +5,7 @@
 (defun user/c-mode-common-hook ()
   "C mode common hook."
   ;; Set the default C/C++ code styles
-  (setq
+  (setq-default
    c-default-style "K&R"
    c++-default-style "Stroustrup"
    ;; Indent using four spaces
@@ -42,7 +42,7 @@
 
   (when *has-gdb*
     (gdb-enable-debug t)
-    (define-key user/code-map (kbd "d") 'gdb)))
+    (user/bind-key-local :debug :start 'gdb)))
 
 
 (defun user/c-mode-cedet-hook ()
@@ -52,10 +52,11 @@
 
     ;; Load eassist from contrib package
     (unless (featurep 'cedet-contrib-load)
-      (load (path-join (el-get-package-directory "cedet") "contrib" "cedet-contrib-load.el")))
+      (load (path-join (el-get-package-directory "cedet") "contrib"
+                       "cedet-contrib-load.el")))
     (require 'eassist)
-    (define-key user/navigation-map (kbd "h") 'eassist-switch-h-cpp)
-    (define-key user/navigation-map (kbd "m") 'eassist-list-methods)
+    (user/bind-key-local :nav :switch-spec-impl 'eassist-switch-h-cpp)
+    (user/bind-key-local :nav :functions/toc 'eassist-list-methods)
 
     ;; Load extra semantic helpers
     (require 'semantic/bovine/c)
@@ -81,7 +82,6 @@
 
   ;; Detect if inside a C++ header file.
   (add-magic-mode 'c++-mode 'user/c++-header-file-p))
-
 
 (user/c-c++-mode-init)
 

@@ -17,13 +17,13 @@
     (ecb-toggle-compile-window))
 
   ;;; (Bindings) ;;;
-  (define-key user/view-map (kbd "z") 'ecb-toggle-ecb-windows)
+  (user/bind-key-local :basic :zoom 'ecb-toggle-ecb-windows)
 
-  (define-key user/view-map (kbd "e") 'ecb-goto-window-edit1)
-  (define-key user/view-map (kbd "d") 'ecb-goto-window-directories)
-  (define-key user/view-map (kbd "h") 'ecb-goto-window-history)
-  (define-key user/view-map (kbd "m") 'ecb-goto-window-methods)
-  (define-key user/view-map (kbd "c") 'user/ecb-toggle-compile-window))
+  (user/bind-key-local :nav :context 'ecb-goto-window-edit1)
+  (user/bind-key-local :basic :open-file-context 'ecb-goto-window-directories)
+  (user/bind-key-local :nav :history 'ecb-goto-window-history)
+  (user/bind-key-local :nav :functions/toc 'ecb-goto-window-methods)
+  (user/bind-key-local :code :compilation-result 'user/ecb-toggle-compile-window))
 
 
 (defun user/ecb-deactivate-hook ()
@@ -84,7 +84,7 @@
   (add-hook 'ecb-deactivate-hook 'user/ecb-deactivate-hook)
 
   ;;; (Bindings) ;;;
-  (define-key user/utilities-map (kbd "e") 'user/ecb-toggle-active))
+  (user/bind-key-global :util :ecb-toggle 'user/ecb-toggle-active))
 
 (require-package '(:name ecb :after (user/ecb-init)))
 

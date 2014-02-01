@@ -8,8 +8,8 @@
     (diminish 'flyspell-mode))
 
   ;;; (Bindings) ;;;
-  (define-key user/code-map (kbd "s") 'ispell-word)
-  (define-key user/code-map (kbd "S") 'user/flyspell-add-word-to-dict))
+  (user/bind-key-local :code :spellcheck-word 'ispell-word)
+  (user/bind-key-local :code :spellcheck-add-word 'user/flyspell-add-word-to-dict))
 
 
 (defun user/flyspell-lazy-init ()

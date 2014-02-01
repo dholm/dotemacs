@@ -25,7 +25,7 @@
     (dtrt-indent-mode t))
 
   ;;; (Bindings) ;;;
-  (define-key user/code-map (kbd "f") 'fill-paragraph))
+  (user/bind-key-local :code :fill-paragraph 'fill-paragraph))
 
 
 (defun user/text-mode-init ()

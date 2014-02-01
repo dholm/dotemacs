@@ -5,8 +5,8 @@
 (defun user/flycheck-mode-hook ()
   "Flycheck mode hook."
   ;;; (Bindings) ;;;
-  (define-key user/code-map (kbd "E") 'flycheck-list-errors)
-  (define-key user/navigation-map (kbd "e") 'flycheck-next-error))
+  (user/bind-key-local :code :warnings/errors 'flycheck-list-errors)
+  (user/bind-key-local :nav :next 'flycheck-next-error))
 
 
 (defun user/flycheck-color-mode-line-init ()

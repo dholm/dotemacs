@@ -13,7 +13,7 @@
   (add-hook 'sage-startup-after-prompt-hook 'user/sage-startup-hook)
 
   ;;; (Bindings) ;;;
-  (define-key user/utilities-map (kbd "S") 'sage))
+  (user/bind-key-global :apps :sage 'sage))
 
 (when *has-sage*
   (require-package '(:name sage-mode :after (user/sage-mode-init))))

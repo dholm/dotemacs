@@ -13,15 +13,15 @@
    user-dialog-box nil)
 
   ;; Remove all the mouse-assisted frames
-  (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-  (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-  (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+  (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+  (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+  (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
   ;;; (Bindings) ;;;
-  (global-set-key (kbd "C-c <up>") 'shrink-window)
-  (global-set-key (kbd "C-c <down>") 'enlarge-window)
-  (global-set-key (kbd "C-c <left>") 'shrink-window-horizontally)
-  (global-set-key (kbd "C-c <right>") 'enlarge-window-horizontally)
+  (user/bind-key-global :emacs :grow-vertical 'enlarge-window)
+  (user/bind-key-global :emacs :shrink-vertical 'shrink-window)
+  (user/bind-key-global :emacs :grow-horizontal 'enlarge-window-horizontally)
+  (user/bind-key-global :emacs :shrink-horizontal 'shrink-window-horizontally)
 
   ;;; (Packages) ;;;
   (require-package '(:name fullframe)))

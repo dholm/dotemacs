@@ -14,19 +14,14 @@
         (add-ac-sources 'ac-source-gtags)))
 
     ;;; (Bindings) ;;;
-    (define-key user/code-map (kbd "i") 'user/cedet-create/update-all)
-    (define-key user/code-map (kbd "RET") 'semantic-ia-complete-symbol)
-    (define-key user/code-map (kbd "TAB") 'semantic-ia-complete-symbol-menu)
-    (define-key user/code-map (kbd ">") 'semantic-complete-analyze-inline)
-    (define-key user/code-map (kbd "=") 'semantic-decoration-include-visit)
+    (user/bind-key-local :code :update-index 'user/cedet-create/update-all)
 
-    (define-key user/navigation-map (kbd "j") 'semantic-ia-fast-jump)
-    (define-key user/navigation-map (kbd "s") 'semantic-symref-find-tags-by-regexp)
-    (define-key user/navigation-map (kbd "i") 'semantic-analyze-proto-impl-toggle)
-    (define-key user/navigation-map (kbd "r") 'semantic-symref)
+    (user/bind-key-local :nav :follow-symbol 'semantic-ia-fast-jump)
+    (user/bind-key-local :nav :find-symbol 'semantic-symref-find-tags-by-regexp)
+    (user/bind-key-local :nav :jump-spec-impl 'semantic-analyze-proto-impl-toggle)
+    (user/bind-key-local :nav :references 'semantic-symref)
 
-    (define-key user/documentation-map (kbd "d") 'semantic-ia-show-doc)
-    (define-key user/documentation-map (kbd "s") 'semantic-ia-show-summary)))
+    (user/bind-key-local :doc :describe 'semantic-ia-show-doc)))
 
 
 (defun user/cedet-before-init ()
@@ -94,7 +89,7 @@
   ;;; (Context Menu) ;;;
   (when (display-graphic-p)
     (global-cedet-m3-minor-mode t)
-    (define-key user/code-map (kbd "SPC") 'cedet-m3-menu-kbd))
+    (local-set-key [mouse-2] 'cedet-m3-menu-kbd))
 
 
   ;;; (EDE) ;;;

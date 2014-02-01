@@ -21,11 +21,10 @@
     (diminish 'eldoc-mode))
 
   ;;; (Bindings) ;;;
-  (define-key user/code-map (kbd "x b") 'eval-buffer)
-  (define-key user/code-map (kbd "x d") 'eval-defun)
-  (define-key user/code-map (kbd "x r") 'eval-region)
-  (define-key user/code-map (kbd "x s") 'eval-last-sexp)
-  (define-key user/code-map (kbd "x M-s") 'eval-print-last-sexp))
+  (user/bind-key-local :code :eval-buffer 'eval-buffer)
+  (user/bind-key-local :code :eval-function 'eval-defun)
+  (user/bind-key-local :code :eval-selection 'eval-region)
+  (user/bind-key-local :code :eval-expression 'eval-last-sexp))
 
 
 (defun user/emacs-lisp-mode-hook ()
@@ -38,12 +37,14 @@
   (when (require 'auto-complete-emacs-lisp nil :noerror)
     (ac-emacs-lisp-mode-setup))
   (when (require 'popwin nil :noerror)
-    (define-key user/navigation-map (kbd "m") 'popwin:messages))
+    (user/bind-key-local :util :popwin-messages 'popwin:messages))
   (when (require 'macrostep nil :noerror)
-    (define-key user/code-map (kbd "e") 'macrostep-expand))
+    (user/bind-key-local :util :macrostep-expand 'macrostep-expand))
 
   ;;; (Bindings) ;;;
-  (define-key user/help-map (kbd "SPC") 'elisp-index-search))
+  (user/bind-key-local :doc :reference 'elisp-index-search)
+  (user/bind-key-local :doc :describe-function 'describe-function)
+  (user/bind-key-local :doc :describe-variable 'describe-variable))
 
 
 (defun user/ielm-mode-hook ()
@@ -75,9 +76,10 @@
    slime-net-coding-system 'utf-8-unix
    slime-complete-symbol*-fancy t)
 
-  (cond (*has-sbcl* (setq-default inferior-lisp-program "sbcl"))
-        (*has-lisp* (setq-default inferior-lisp-program "lisp"))
-        (*has-clisp* (setq-default inferior-lisp-program "clisp -K full")))
+  (cond
+   (*has-sbcl* (setq-default inferior-lisp-program "sbcl"))
+   (*has-lisp* (setq-default inferior-lisp-program "lisp"))
+   (*has-clisp* (setq-default inferior-lisp-program "clisp -K full")))
 
   (add-ac-modes 'slime-repl-mode)
 
@@ -118,9 +120,6 @@
   (when (or *has-sbcl* *has-lisp* *has-clisp*)
     (require-package '(:name slime :after (user/slime-init)))
     (require-package '(:name ac-slime)))
-
-  ;;; (Bindings) ;;;
-  (define-key user/code-map (kbd "e") 'eval-expression)
 
   ;;; (Hooks) ;;;
   (add-hook 'lisp-mode-hook 'user/lisp-mode-common-hook)
