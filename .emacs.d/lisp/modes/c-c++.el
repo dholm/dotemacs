@@ -34,6 +34,12 @@
     ;; Enable helm-gtags which in turn enables auto-update of Global tags
     (helm-gtags-mode t))
 
+  ;; Auto completion
+  (when (and *has-clang*
+           (el-get-package-is-installed 'clang-complete-async))
+    (ac-clang-launch-completion-process)
+    (add-ac-sources 'ac-source-clang-async))
+
   (when *has-gdb*
     (gdb-enable-debug t)
     (define-key user/code-map (kbd "d") 'gdb)))
@@ -68,6 +74,9 @@
 
 (defun user/c-c++-mode-init ()
   "Initialize C/C++ mode."
+  (when (and *has-clang* *has-llvm-config*)
+    (require-package '(:name clang-complete-async)))
+
   (add-hook 'c-mode-common-hook 'user/c-mode-common-hook)
 
   ;; Detect if inside a C++ header file.
