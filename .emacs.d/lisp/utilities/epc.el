@@ -1,4 +1,4 @@
-;;; epc --- RPC stack for Emacs
+;;; epc.el --- RPC stack for Emacs
 ;;; Commentary:
 ;;; Code:
 

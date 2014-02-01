@@ -17,8 +17,13 @@
    uniquify-ignore-buffers-re "^\\*")
 
   ;;; (Bindings) ;;;
-  (global-set-key (kbd "C-x M-s") 'write-file))
-
+  (user/bind-key-global :basic :open-file 'find-file)
+  (user/bind-key-global :basic :open-buffer 'switch-to-buffer)
+  (user/bind-key-global :basic :list-buffers 'list-buffers)
+  (user/bind-key-global :basic :save 'save-buffer)
+  (user/bind-key-global :basic :save-as 'write-file)
+  (user/bind-key-global :basic :close 'kill-buffer)
+  (user/bind-key-global :basic :quit 'save-buffers-kill-terminal))
 
 (user/buffers-init)
 

@@ -60,7 +60,7 @@
 
 
 (defun user/modeline-init ()
-  "Initialize Emacs modeline."
+  "Initialize Emacs mode line."
   (setq-default
    ;; Show row and column numbers.
    line-number-mode t

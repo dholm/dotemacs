@@ -1,11 +1,11 @@
-;;; git --- Git integration
+;;; git.el --- Git integration
 ;;; Commentary:
 ;;; Code:
 
 (defun user/git-gutter-init ()
   "Initialize git gutter."
   ;;; (Bindings) ;;;
-  (define-key user/vcs-map (kbd "g") 'git-gutter:toggle))
+  (user/bind-key-global :vcs :gutter 'git-gutter:toggle))
 
 
 (defun user/git-gutter-fringe-init ()
@@ -30,7 +30,7 @@
     (fullframe magit-status magit-mode-quit-window :magit-fullscreen nil))
 
   ;;; (Bindings) ;;;
-  (define-key user/vcs-map (kbd "s") 'magit-status)
+  (user/bind-key-global :vcs :status 'magit-status)
 
   ;;; (Functions) ;;;
   (defun magit-quit-session ()
@@ -45,7 +45,7 @@
 (defun user/git-messenger-init ()
   "Initialize git messenger."
   (setq-default git-messenger:show-detail t)
-  (define-key user/vcs-map (kbd "d") 'git-messenger:popup-message))
+  (user/bind-key-global :vcs :describe 'git-messenger:popup-message))
 
 
 (defun user/git-init ()

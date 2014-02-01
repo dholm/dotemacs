@@ -17,7 +17,7 @@
     (ecb-toggle-compile-window))
 
   ;;; (Bindings) ;;;
-  (define-key user/view-map (kbd "z") 'ecb-toggle-ecb-windows)
+  (user/bind-key-local :basic :zoom 'ecb-toggle-ecb-windows)
 
   (define-key user/view-map (kbd "e") 'ecb-goto-window-edit1)
   (define-key user/view-map (kbd "d") 'ecb-goto-window-directories)
@@ -84,7 +84,7 @@
   (add-hook 'ecb-deactivate-hook 'user/ecb-deactivate-hook)
 
   ;;; (Bindings) ;;;
-  (define-key user/utilities-map (kbd "e") 'user/ecb-toggle-active))
+  (user/bind-key-global :util :ecb-toggle 'user/ecb-toggle-active))
 
 (require-package '(:name ecb :after (user/ecb-init)))
 

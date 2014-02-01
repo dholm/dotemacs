@@ -18,6 +18,8 @@
 (defun user/pde-perl-mode-hook ()
   "PDE Perl mode hook."
   (require 'pde-load)
+  (setq-default
+   compilation-buffer-name-function 'pde-compilation-buffer-name)
 
   ;; chmod when saving
   (when (and buffer-file-name
@@ -26,9 +28,8 @@
   (set (make-local-variable 'compile-dwim-check-tools) nil)
 
   ;;; (Bindings) ;;;
-  (define-key user/code-map (kbd "c") 'compile-dwim-compile)
-  (define-key user/code-map (kbd "r") 'compile-dwim-run)
-  (setq compilation-buffer-name-function 'pde-compilation-buffer-name))
+  (user/bind-key-local :code :compile 'compile-dwim-compile)
+  (user/bind-key-local :code :run 'compile-dwim-run))
 
 
 (defun user/perl-mode-init ()

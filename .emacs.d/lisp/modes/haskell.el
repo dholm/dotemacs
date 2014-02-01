@@ -6,9 +6,10 @@
   "Generic Haskell mode hook."
   (turn-on-haskell-doc-mode)
   ;; Enable editing of camel case
-  (subword-mode +1)
-  ;; Bindings
-  (define-key user/documentation-map (kbd "h") 'hoogle))
+  (subword-mode t)
+
+  ;;; (Bindings) ;;;
+  (user/bind-key-local :docs :reference 'hoogle))
 
 
 (defun user/haskell-mode-hook ()

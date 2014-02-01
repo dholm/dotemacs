@@ -56,10 +56,12 @@
      w3m-show-graphic-icons-in-mode-line t))
 
   (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
-  (define-key user/utilities-map (kbd "b") 'w3m)
-  (define-key user/utilities-map (kbd "B") 'browse-url-at-point)
 
-  (add-hook 'w3m-display-hook 'user/w3m-display-hook))
+  (add-hook 'w3m-display-hook 'user/w3m-display-hook)
+
+  ;;; (Bindings) ;;;
+  (user/bind-key-global :apps :browser 'w3m)
+  (user/bind-key-global :navigation :open 'browse-url-at-point))
 
 (when *has-w3m*
   (require-package '(:name emacs-w3m :after (user/w3m-init))))

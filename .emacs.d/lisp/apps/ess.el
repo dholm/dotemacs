@@ -65,7 +65,7 @@
   (add-hook 'ess-R-post-run-hook 'user/ess-R-post-run-hook)
 
   ;;; (Bindings) ;;;
-  (define-key user/utilities-map (kbd "s") 'R)
+  (user/bind-key-global :apps :statistics 'R)
 
   ;;; (Functions) ;;;
   (defun user/ess-start-R ()

@@ -30,11 +30,11 @@
   (define-key user/code-map (kbd "e") 'rst-enumerate-region)
 
   ;; Table of Contents
-  (define-key user/navigation-map (kbd "t") 'rst-toc)
+  (user/bind-key-local :navigation :functions/toc 'rst-toc)
   (define-key user/code-map (kbd "t") 'rst-toc-insert)
 
   ;; Compilation
-  (define-key user/code-map (kbd "c") 'rst-compile))
+  (user/bind-key-local :code :compile 'rst-compile))
 
 
 (defun user/rst-mode-init ()

@@ -30,10 +30,9 @@
 
   ;;; (Bindings) ;;;
   ;; Use regular expression searches by default.
-  (global-set-key (kbd "C-s") 'isearch-forward-regexp)
-  (global-set-key (kbd "C-r") 'isearch-backward-regexp)
-  (global-set-key (kbd "C-M-s") 'isearch-forward)
-  (global-set-key (kbd "C-M-r") 'isearch-backward)
+  (user/bind-key-global :basic :search-forward 'isearch-forward-regexp)
+  (user/bind-key-global :basic :search-backward 'isearch-backward-regexp)
+  (user/bind-key-global :basic :search-files 'find-grep)
 
   ;;; (Packages) ;;;
   (require-package '(:name visual-regexp :after (user/visual-regexp-init)))

@@ -10,8 +10,8 @@
    lui-flyspell-alist '(("." "american"))
    elim-directory (path-join *user-cache-directory* "elim"))
 
-  (define-key user/utilities-map (kbd "i") 'garak))
-
+  ;;; (Bindings) ;;;
+  (user/bind-key-global :apps :instant-messenger 'garak))
 
 (when *has-libpurple*
   (require-package '(:name elim :after (user/elim-init))))

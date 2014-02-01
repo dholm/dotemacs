@@ -3,16 +3,17 @@
 ;;; Code:
 
 (defun user/web-mode-hook ()
-  "Web mode hook."
-  (local-set-key (kbd "RET") 'newline-and-indent))
+  "Web mode hook.")
 
 
 (defun user/tern-mode-hook ()
   "Tern mode hook."
-  (define-key user/navigation-map (kbd "j") 'tern-find-definition)
-  (define-key user/navigation-map (kbd "b") 'tern-pop-find-definition)
-  (define-key user/documentation-map (kbd "d") 'tern-get-docs)
-  (tern-ac-setup))
+  (tern-ac-setup)
+
+  ;;; (Bindings) ;;;
+  (user/bind-key-local :navigation :follow-symbol 'tern-find-definition)
+  (user/bind-key-local :navigation :go-back 'tern-pop-find-definition)
+  (user/bind-key-local :docs :reference 'tern-get-docs))
 
 
 (defun user/web-mode-init ()

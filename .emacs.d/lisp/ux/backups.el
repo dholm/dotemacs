@@ -1,4 +1,4 @@
-;;; backup --- Emacs backup system
+;;; backups.el --- Emacs backup system
 ;;; Commentary:
 ;;; Code:
 

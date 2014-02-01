@@ -13,7 +13,8 @@
           popwin:special-display-config))
 
   ;;; (Bindings) ;;;
-  (global-set-key (kbd "C-x f") 'direx-project:jump-to-project-root-other-window))
+  (user/bind-key-global :basic :open-file-context
+                        'direx-project:jump-to-project-root-other-window))
 
 (require-package '(:name direx :after (user/direx-init)))
 

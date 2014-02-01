@@ -32,9 +32,9 @@
   ;; terminals.
   (define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
   (when (el-get-package-is-installed 'nose)
-    (define-key user/code-map (kbd "t") 'nosetests-all))
+    (user/bind-key-local :code :test 'nosetests-all))
   (when (el-get-package-is-installed 'virtualenv)
-    (define-key user/code-map (kbd "v") 'virtualenv-workon)))
+    (user/bind-key-local :code :virtual 'virtualenv-workon)))
 
 
 (defun user/python-mode-cedet-hook ()

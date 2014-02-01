@@ -12,7 +12,7 @@
 (defun user/ibuffer-init ()
   "Initialize improved buffer."
   (setq-default ibuffer-filter-group-name-face 'font-lock-doc-face)
-  (global-set-key (kbd "C-x C-b") 'ibuffer)
+  (global-set-key [remap list-buffers] 'ibuffer)
   (add-hook 'ibuffer-hook 'user/ibuffer-hook))
 
 (user/ibuffer-init)

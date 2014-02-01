@@ -18,10 +18,10 @@
 
   ;;; (Bindings) ;;;
   (when (el-get-package-is-installed 'ltx-help)
-    (define-key user/documentation-map (kbd "d") 'latex-help))
-  (define-key user/navigation-map (kbd "c") 'reftex-toc)
+    (user/bind-key-local :docs :reference 'latex-help))
+  (user/bind-key-local :navigation :functions/toc 'reftex-toc)
   (when (display-graphic-p)
-    (define-key user/code-map (kbd "p") 'preview-document)))
+    (user/bind-key-local :code :run 'preview-document)))
 
 
 (defun user/latex-mode-hook ()
@@ -38,7 +38,7 @@
   (ad-activate 'LaTeX-fill-region-as-paragraph)
 
   ;;; (Bindings) ;;;
-  (define-key user/code-map (kbd "f") 'LaTeX-fill-paragraph))
+  (local-set-key [remap fill-paragraph] 'LaTeX-fill-paragraph))
 
 
 (defun user/bibtex-mode-hook ()

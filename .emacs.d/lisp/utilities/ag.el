@@ -8,12 +8,11 @@
    ag-project-root-function `(user/current-path-apply 'user/project-root))
 
   ;;; (Bindings) ;;;
-  (define-key user/navigation-map (kbd "f") 'ag))
-
+  (global-set-key [remap find-grep] 'ag))
 
 (when *has-ag*
   (require-package '(:name ag :after (user/ag-init))))
 
 
-(provide 'utilities/minimap)
+(provide 'utilities/ag)
 ;;; ag.el ends here

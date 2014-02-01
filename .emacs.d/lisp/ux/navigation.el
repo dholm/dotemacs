@@ -2,11 +2,22 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/ace-jump-mode-init ()
+  "Initialize ace jump mode."
+  ;;; (Bindings) ;;;
+  (user/bind-key-global :util :ace-jump-mode 'ace-jump-mode))
+
+
+(defun user/smart-forward-init ()
+  "Initialize smart-forward."
+  (user/bind-key-global :util :context-forward 'smart-forward)
+  (user/bind-key-global :util :context-backward 'smart-backward)
+  (user/bind-key-global :util :context-up 'smart-up)
+  (user/bind-key-global :util :context-down 'smart-down))
+
+
 (defun user/navigation-init ()
   "Set up Emacs buffer navigation."
-  (require-package '(:name ace-jump-mode :after (user/ace-jump-mode-init)))
-  (require-package '(:name smart-forward :after (user/smart-forward-init)))
-
   ;; Enable mouse in iTerm2
   (when (eq system-type 'darwin)
     (require 'mouse)
@@ -14,25 +25,12 @@
     (defun track-mouse (e)))
 
   ;;; (Bindings) ;;;
-  ;; Binds goto-line to navigation command g which is easier to access than M-g g
-  (define-key user/navigation-map (kbd "g") 'goto-line)
-  ;; Return to the previous marked position.
-  (define-key user/navigation-map (kbd "b") 'pop-global-mark))
+  (user/bind-key-global :navigation :goto-line 'goto-line)
+  (user/bind-key-global :navigation :go-back 'pop-global-mark)
 
-
-(defun user/ace-jump-mode-init ()
-  "Initialize ace jump mode."
-  ;;; (Bindings) ;;;
-  (define-key user/navigation-map (kbd "a") 'ace-jump-mode))
-
-
-(defun user/smart-forward-init ()
-  "Initialize smart-forward."
-  (define-key user/navigation-map (kbd "s f") 'smart-forward)
-  (define-key user/navigation-map (kbd "s b") 'smart-backward)
-  (define-key user/navigation-map (kbd "s p") 'smart-up)
-  (define-key user/navigation-map (kbd "s n") 'smart-down))
-
+  ;;; (Packages) ;;;
+  (require-package '(:name ace-jump-mode :after (user/ace-jump-mode-init)))
+  (require-package '(:name smart-forward :after (user/smart-forward-init))))
 
 (user/navigation-init)
 

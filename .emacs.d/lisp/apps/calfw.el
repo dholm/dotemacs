@@ -19,7 +19,7 @@
    cfw:fchar-top-right-corner ?╗)
 
   ;;; (Bindings) ;;;
-  (define-key user/utilities-map (kbd "c") 'cfw:open-calendar-buffer))
+  (user/bind-key-global :apps :calendar 'cfw:open-calendar-buffer))
 
 
 (require-package '(:name calfw

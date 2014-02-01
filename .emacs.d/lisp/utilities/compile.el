@@ -47,7 +47,7 @@
   (add-hook 'compilation-mode-hook 'user/compilation-mode-hook)
 
   ;;; (Bindings) ;;;
-  (define-key user/code-map (kbd "c") 'user/compile)
+  (user/bind-key-global :code :compile 'user/compile)
 
   ;;; (Packages) ;;;
   (require-package '(:name mode-compile :after (user/mode-compile-init))))

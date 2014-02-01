@@ -9,9 +9,9 @@
     (diminish 'google-this-mode))
 
   ;;; (Bindings) ;;;
-  (define-key user/documentation-map (kbd "g RET") 'google-this)
-  (define-key user/documentation-map (kbd "g SPC") 'google-region)
-  (define-key user/documentation-map (kbd "g s") 'google-search))
+  (user/bind-key-global :util :google 'google-search)
+  (user/bind-key-global :util :google-at-point 'google-this)
+  (user/bind-key-global :util :google-selection 'google-region))
 
 (require-package '(:name google-this
                          :type github

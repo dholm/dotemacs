@@ -34,9 +34,7 @@
     (when (user/project-p current-file)
       (add-to-list 'helm-sources 'helm-source-bookmarks)
       (if (user/ede-project current-file)
-          (add-to-list 'helm-sources 'helm-source-semantic)
-        (when (user/gnu-global-tags-p current-file)
-          (add-to-list 'helm-sources 'helm-source-gtags-select))))
+          (add-to-list 'helm-sources 'helm-source-semantic)))
     (helm-other-buffer helm-sources "*helm-navigate-prog*")))
 
 
@@ -97,11 +95,11 @@
   (require 'helm-semantic)
 
   ;;; (Bindings) ;;;
-  (global-set-key (kbd "C-x C-f") 'helm-find-files)
-  (global-set-key (kbd "C-x b") 'helm-buffers-list)
+  (global-set-key [remap find-file] 'helm-find-files)
+  (global-set-key [remap switch-to-buffer] 'helm-buffers-list)
 
-  (define-key user/navigation-map (kbd "SPC") 'user/helm-navigate)
-  (define-key user/documentation-map (kbd "SPC") 'user/helm-apropos))
+  (user/bind-key-global :navigate :context 'user/helm-navigate)
+  (user/bind-key-global :docs :apropos 'user/helm-apropos))
 
 
 (defun user/helm-descbinds-init ()
@@ -133,18 +131,14 @@
 (defun user/helm-cmd-t-init ()
   "Initialize Helm cmd-t."
   ;;; (Bindings) ;;;
-  (define-key user/navigation-map (kbd "t") 'helm-cmd-t))
+  (user/bind-key-global :basic :open-file-context 'helm-cmd-t))
 
 
 (require-package '(:name helm :after (user/helm-init)))
 (require-package '(:name helm-descbinds :after (user/helm-descbinds-init)))
 (require-package '(:name helm-etags-plus))
 (require-package '(:name helm-build-command))
-(require-package '(:name helm-cmd-t
-                         :type github
-                         :pkgname "lewang/helm-cmd-t"
-                         :depends (helm)
-                         :after (user/helm-cmd-t-init)))
+(require-package '(:name helm-cmd-t :after (user/helm-cmd-t-init)))
 
 (when *has-git*
   (require-package '(:name helm-ls-git)))

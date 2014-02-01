@@ -6,28 +6,28 @@
   "GDB gud mode hook."
   ;;; (Bindings) ;;;
   ;; Breakpoints
-  (define-key user/code-map (kbd "b") 'gud-break)
-  (define-key user/code-map (kbd "t") 'gud-tbreak)
-  (define-key user/code-map (kbd "w") 'gud-watch)
+  (user/bind-key-local :debug :break 'gud-break)
+  (user/bind-key-local :debug :break-temporary 'gud-tbreak)
+  (user/bind-key-local :debug :watch 'gud-watch)
   (define-key user/code-map (kbd "d") 'gud-remove)
 
   ;; Stepping
-  (define-key user/code-map (kbd "s") 'gud-step)
-  (define-key user/code-map (kbd "i") 'gud-stepi)
-  (define-key user/code-map (kbd "n") 'gud-next)
+  (user/bind-key-local :debug :step 'gud-step)
+  (user/bind-key-local :debug :step-instruction 'gud-stepi)
+  (user/bind-key-local :debug :next 'gud-next)
 
   ;; Execution
-  (define-key user/code-map (kbd "r") 'gud-run)
-  (define-key user/code-map (kbd "c") 'gud-cont)
-  (define-key user/code-map (kbd "f") 'gud-finish)
-  (define-key user/code-map (kbd "u") 'gud-until)
+  (user/bind-key-local :debug :run 'gud-run)
+  (user/bind-key-local :debug :continue 'gud-cont)
+  (user/bind-key-local :debug :continue-stack 'gud-finish)
+  (user/bind-key-local :debug :continue-until 'gud-until)
 
   ;; Stack frames
-  (define-key user/navigation-map (kbd "p") 'gud-up)
-  (define-key user/navigation-map (kbd "n") 'gud-down)
+  (user/bind-key-local :debug :stack-up 'gud-up)
+  (user/bind-key-local :debug :stack-down 'gud-down)
 
   ;; Printing
-  (define-key user/documentation-map (kbd "p") 'gud-print))
+  (user/bind-key-local :debug :show-value 'gud-print))
 
 
 (defun user/gdb-mode-hook ()

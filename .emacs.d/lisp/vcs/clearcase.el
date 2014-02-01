@@ -1,4 +1,4 @@
-;;; clearcase --- ClearCase integration
+;;; clearcase.el --- ClearCase integration
 ;;; Commentary:
 ;;; Code:
 

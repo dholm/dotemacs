@@ -32,7 +32,8 @@
    ;; Store the completion history in the cache directory.
    ac-comphist-file (path-join *user-cache-directory* "ac-comphist.dat"))
 
-  (add-to-list 'ac-dictionary-directories (path-join *user-el-get-directory* "auto-complete" "ac-dict"))
+  (add-to-list 'ac-dictionary-directories
+               (path-join *user-el-get-directory* "auto-complete" "ac-dict"))
 
   ;; Install workaround for Flyspell
   (add-hook 'flymake-mode-hook 'ac-flyspell-workaround)
@@ -43,10 +44,11 @@
     (add-hook hook 'ac-emacs-lisp-mode-setup))
 
   ;;; (Bindings) ;;;
-  (ac-set-trigger-key (kbd "TAB"))
+  (ac-set-trigger-key (user/get-key :code :try-complete))
+  ;; Return should complete item in menu.
   (define-key ac-completing-map (kbd "C-m") nil)
   (define-key ac-menu-map (kbd "C-m") 'ac-complete)
-  (define-key user/code-map (kbd "SPC") 'auto-complete))
+  (user/bind-key-global :code :complete 'auto-complete))
 
 
 (defun user/completion-init ()

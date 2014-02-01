@@ -25,7 +25,6 @@
     (dtrt-indent-mode t))
 
   ;;; (Bindings) ;;;
-  (define-key user/code-map (kbd "f") 'fill-paragraph)
   (when (el-get-package-is-installed 'synosaurus)
     (define-key user/code-map (kbd "t") 'synosaurus-choose-and-replace)))
 

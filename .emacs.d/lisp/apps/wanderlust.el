@@ -82,6 +82,75 @@
     (smiley-region (point-min) (point-max))))
 
 
+(defun user/wanderlust-set-gmail-user (fullname username)
+  "Configure Wanderlust to use \"FULLNAME\" <USERNAME@gmail.com>."
+  (make-directory *user-wanderlust-data-directory* t)
+  (let ((email-address (concat username "@gmail.com")))
+    (after-load 'wanderlust
+      (unless (file-exists-p wl-folders-file)
+        (user/wanderlust-create-folders-gmail username wl-folders-file)))
+    (setq-default
+     ;; Setup mail-from
+     wl-from (concat fullname " <" email-address ">")
+     ;; Sane forward tag
+     wl-forward-subject-prefix "Fwd: ")
+
+    ;; IMAP
+    (setq-default
+     elmo-imap4-default-server "imap.gmail.com"
+     elmo-imap4-default-user email-address
+     elmo-imap4-default-authenticate-type 'clear
+     elmo-imap4-default-port '993
+     elmo-imap4-default-stream-type 'ssl)
+
+    ;; SMTP
+    (setq-default
+     wl-smtp-connection-type 'starttls
+     wl-smtp-posting-port 587
+     wl-smtp-authenticate-type "plain"
+     wl-smtp-posting-user username
+     wl-smtp-posting-server "smtp.gmail.com"
+     wl-local-domain "gmail.com")
+
+    ;; Folders
+    (setq-default
+     wl-default-folder "%inbox"
+     wl-default-spec "%"
+     wl-draft-folder "%[Gmail]/Drafts"
+     wl-spam-folder "%[Gmail]/Spam"
+     wl-trash-folder "%[Gmail]/Trash")
+
+    (setq-default
+     wl-insert-message-id nil)))
+
+
+(defun user/wanderlust-create-folders-gmail (username folders-file)
+  "Write GMail folders for USERNAME@gmail.com to FOLDERS-FILE."
+  (let ((folders-template "# -*- conf-unix -*-
++trash  \"Trash\"
++draft  \"Drafts\"
+
+Gmail{
+    %inbox:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Inbox\"
+    Labels{
+        %[Gmail]/Important:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Important\"
+        %[Gmail]/Drafts:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Drafts\"
+        %[Gmail]/All Mail:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"All Mail\"
+        %[Gmail]/Sent Mail:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Sent Mail\"
+        %[Gmail]/Starred:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Starred\"
+        %[Gmail]/Spam:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Spam\"
+        %[Gmail]/Trash:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Trash\"
+    }
+    %Org-Mode:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Org-Mode\"
+}
+"))
+    (with-temp-buffer
+      (insert
+       (replace-regexp-in-string "USERNAME" username folders-template t))
+      (when (file-writable-p folders-file)
+       (write-region (point-min) (point-max) folders-file)))))
+
+
 (defun user/wanderlust-init ()
   "Initialize Wanderlust."
   (el-get-eval-after-load 'semi
@@ -166,83 +235,14 @@
         'wl-draft-kill
         'mail-send-hook))
 
-  ;;; (Bindings) ;;;
-  (define-key user/utilities-map (kbd "m") 'wl)
-
   (add-hook 'mail-citation-hook 'user/mail-citation-hook)
   (add-hook 'wl-folder-mode-hook 'user/wl-folder-mode-hook)
   (add-hook 'wl-message-redisplay-hook 'user/wl-message-redisplay-hook)
-  (add-hook 'wl-message-buffer-created-hook 'user/wl-message-buffer-created-hook))
+  (add-hook 'wl-message-buffer-created-hook
+            'user/wl-message-buffer-created-hook)
 
-
-(defun user/wanderlust-set-gmail-user (fullname username)
-  "Configure Wanderlust to use \"FULLNAME\" <USERNAME@gmail.com>."
-  (make-directory *user-wanderlust-data-directory* t)
-  (let ((email-address (concat username "@gmail.com")))
-    (after-load 'wanderlust
-      (unless (file-exists-p wl-folders-file)
-        (user/wanderlust-create-folders-gmail username wl-folders-file)))
-    (setq-default
-     ;; Setup mail-from
-     wl-from (concat fullname " <" email-address ">")
-     ;; Sane forward tag
-     wl-forward-subject-prefix "Fwd: ")
-
-    ;; IMAP
-    (setq-default
-     elmo-imap4-default-server "imap.gmail.com"
-     elmo-imap4-default-user email-address
-     elmo-imap4-default-authenticate-type 'clear
-     elmo-imap4-default-port '993
-     elmo-imap4-default-stream-type 'ssl)
-
-    ;; SMTP
-    (setq-default
-     wl-smtp-connection-type 'starttls
-     wl-smtp-posting-port 587
-     wl-smtp-authenticate-type "plain"
-     wl-smtp-posting-user username
-     wl-smtp-posting-server "smtp.gmail.com"
-     wl-local-domain "gmail.com")
-
-    ;; Folders
-    (setq-default
-     wl-default-folder "%inbox"
-     wl-default-spec "%"
-     wl-draft-folder "%[Gmail]/Drafts"
-     wl-spam-folder "%[Gmail]/Spam"
-     wl-trash-folder "%[Gmail]/Trash")
-
-    (setq-default
-     wl-insert-message-id nil)))
-
-
-(defun user/wanderlust-create-folders-gmail (username folders-file)
-  "Write GMail folders for USERNAME@gmail.com to FOLDERS-FILE."
-  (let ((folders-template "# -*- conf-unix -*-
-+trash  \"Trash\"
-+draft  \"Drafts\"
-
-Gmail{
-    %inbox:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Inbox\"
-    Labels{
-        %[Gmail]/Important:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Important\"
-        %[Gmail]/Drafts:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Drafts\"
-        %[Gmail]/All Mail:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"All Mail\"
-        %[Gmail]/Sent Mail:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Sent Mail\"
-        %[Gmail]/Starred:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Starred\"
-        %[Gmail]/Spam:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Spam\"
-        %[Gmail]/Trash:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Trash\"
-    }
-    %Org-Mode:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Org-Mode\"
-}
-"))
-    (with-temp-buffer
-      (insert
-       (replace-regexp-in-string "USERNAME" username folders-template t))
-      (when (file-writable-p folders-file)
-       (write-region (point-min) (point-max) folders-file)))))
-
+  ;;; (Bindings) ;;;
+  (user/bind-key-global :apps :email 'wl))
 
 (require-package '(:name wanderlust :after (user/wanderlust-init)))
 

@@ -15,7 +15,7 @@
       (minimap-kill)))
 
   ;;; (Bindings) ;;;
-  (define-key user/view-map (kbd "m") 'minimap-toggle))
+  (user/bind-key-global :util :minimap 'minimap-toggle))
 
 (when (display-graphic-p)
   (require-package '(:name minimap :after (user/minimap-init))))
