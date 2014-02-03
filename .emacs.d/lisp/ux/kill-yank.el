@@ -24,6 +24,14 @@
   (global-set-key (kbd "C-x C-k") 'kill-region)
   (global-set-key (kbd "C-x C-w") 'kill-ring-save)
 
+  ;; Rebind to new clipboard functions when available.
+  (when (fboundp 'clipboard-kill-region)
+    (global-set-key [remap kill-region] 'clipboard-kill-region))
+  (when (fboundp 'clipboard-kill-ring-save)
+    (global-set-key [remap kill-ring-save] 'clipboard-kill-ring-save))
+  (when (fboundp 'clipboard-yank)
+    (global-set-key [remap yank] 'clipboard-yank))
+
   ;; Put backspace on C-h like in terminal.
   (global-set-key (kbd "C-h") 'delete-backward-char)
 
@@ -35,7 +43,6 @@
   "Initialize expand region."
   ;;; (Bindings) ;;;
   (global-set-key (kbd "C-=") 'er/expand-region))
-
 
 (user/kill-yank-init)
 
