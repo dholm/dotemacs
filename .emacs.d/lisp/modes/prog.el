@@ -27,6 +27,7 @@
     (diminish 'abbrev-mode))
 
   ;;; (Bindings) ;;;
+  (define-key user/code-map (kbd "a") 'align-entire)
   (define-key user/code-map (kbd "-") 'comment-dwim))
 
 
