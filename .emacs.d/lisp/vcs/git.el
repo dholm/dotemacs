@@ -13,6 +13,11 @@
   (setq-default git-gutter-fr:side 'left-fringe))
 
 
+(defun user/magit-mode-hook ()
+  "Magit mode hook."
+  ;; Ignore change in whitespace by default.
+  (add-to-list 'magit-diff-options "--ignore-all-space"))
+
 (defun user/magit-init ()
   "Initialize Magit."
   (setq-default
@@ -28,6 +33,8 @@
   ;; Full frame Magit status
   (el-get-eval-after-load 'fullframe
     (fullframe magit-status magit-mode-quit-window :magit-fullscreen nil))
+
+  (add-hook 'magit-mode-hook 'user/magit-mode-hook)
 
   ;;; (Bindings) ;;;
   (define-key user/vcs-map (kbd "s") 'magit-status)
