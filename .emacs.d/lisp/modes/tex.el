@@ -93,7 +93,11 @@
 
   (when (display-graphic-p)
     ;; Setup LaTeX preview.
-    (LaTeX-preview-setup))
+    (if (el-get-package-is-installed 'sage-mode)
+        (after-load 'sage
+          ;; If Sage is available, it must be loaded first.
+          (LaTeX-preview-setup))
+      (LaTeX-preview-setup)))
 
   (cond
    ((eq system-type 'darwin)

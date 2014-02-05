@@ -66,6 +66,7 @@
 (defconst *has-w3m* (executable-find "w3m"))
 (defconst *has-evince* (executable-find "evince"))
 (defconst *has-R* (executable-find "R"))
+(defconst *has-sage* (executable-find "sage"))
 
 
 ;;; (Libraries) ;;;
