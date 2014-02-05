@@ -32,7 +32,7 @@
 
   ;; Full frame Magit status
   (el-get-eval-after-load 'fullframe
-    (fullframe magit-status magit-mode-quit-window :magit-fullscreen nil))
+    (fullframe magit-status magit-mode-quit-window nil))
 
   (add-hook 'magit-mode-hook 'user/magit-mode-hook)
 
