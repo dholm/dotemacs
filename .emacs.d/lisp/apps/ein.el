@@ -10,7 +10,7 @@
    ;; Store request package data in cache directory.
    request-storage-directory (path-join *user-cache-directory* "request"))
 
-  (define-key user/utilities-map (kbd "p") 'ein:notebooklist-open))
+  (define-key user/utilities-map (kbd "n") 'ein:notebooklist-open))
 
 
 (when *has-ipython*
