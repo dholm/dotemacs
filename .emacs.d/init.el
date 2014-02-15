@@ -2,29 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(defconst *user-emacs-lisp-directory*
-  (expand-file-name "lisp" user-emacs-directory)
-  "Path to user Emacs Lisp directory.")
-
-;; Bootstrap Emacs.
-(add-to-list 'load-path *user-emacs-lisp-directory*)
-
-(require 'lib/path)
-(add-to-list 'exec-path (path-join user-emacs-directory "bin"))
-
-
-;; Bring in constants used throughout initialization.
-(require 'lib/pkg-config)
-(require 'init-constants)
-
-
-;; Install benchmark-init if present.
-(let ((benchmark-init-path (path-join *user-el-get-directory* "benchmark-init")))
-  (when (file-exists-p benchmark-init-path)
-    (add-to-list 'load-path benchmark-init-path)
-    (require 'benchmark-init)
-    (benchmark-init/install)))
-
+(eval-and-compile
+  ;; Load Emacs init prologue.
+  (load (expand-file-name "prologue.el" user-emacs-directory)))
 
 ;; Set up package management.
 (require 'lib/packaging)
@@ -45,16 +25,8 @@
 (require 'init-apps)
 
 
-;; Load user's machine-local configuration file, if available.
-(when (file-exists-p *user-local-init*)
-  (load *user-local-init*))
+;; Load Emacs init epilogue.
+(load (expand-file-name "epilogue.el" user-emacs-directory))
 
 
-;; Synchronize all registered packages.
-(user/sync-packages)
-
-
-;; Load custom after all packages have been synced.
-(when (file-exists-p *user-custom-file*)
-  (load *user-custom-file*))
 ;;; init.el ends here
