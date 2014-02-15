@@ -15,10 +15,7 @@
 (require 'lib/apps)
 
 
-;; Load configuration.
-(require 'init-emacs)
-(require 'init-bindings)
-(require 'init-ux)
+;; Load full configuration.
 (require 'init-utilities)
 (require 'init-vcs)
 (require 'init-modes)
@@ -27,6 +24,4 @@
 
 ;; Load Emacs init epilogue.
 (load (expand-file-name "epilogue.el" user-emacs-directory))
-
-
 ;;; init.el ends here

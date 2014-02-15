@@ -32,9 +32,16 @@
 
 ;; Set up package management.
 (require 'lib/packaging)
-(require 'lib/hash-tables)
+
+;; Helper functions for bootstrapping Emacs.
 (require 'lib/bootstrap)
+
+;; Helper functions for other applications.
 (require 'lib/apps)
 
+;; Initialize basic Emacs functionality.
+(require 'init-emacs)
+(require 'init-bindings)
+(require 'init-ux)
 
 ;;; prologue.el ends here

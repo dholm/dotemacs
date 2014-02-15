@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Usage:
 
-;; emacs --load mergetool.el
+;; emacs -Q --load mergetool.el
 
 ;;; Code:
 
@@ -38,6 +38,4 @@
 
 ;; Load Emacs init epilogue.
 (load (expand-file-name "epilogue.el" user-emacs-directory))
-
-
 ;;; mergetool.el ends here
