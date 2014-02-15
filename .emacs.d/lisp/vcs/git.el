@@ -38,6 +38,7 @@
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :vcs :status 'magit-status)
+  (user/bind-key-global :vcs :history 'magit-file-log)
 
   ;;; (Functions) ;;;
   (defun magit-quit-session ()

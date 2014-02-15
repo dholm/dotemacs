@@ -215,6 +215,7 @@
 
      ;;; (Version Control) ;;;
      (:vcs . ((:status . (user/vcs-prefix "s"))
+              (:history . (user/vcs-prefix "h"))
               (:describe . (user/vcs-prefix "d"))
               (:gutter . (user/vcs-prefix "g"))))
 
