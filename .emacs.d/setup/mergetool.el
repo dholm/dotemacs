@@ -13,9 +13,6 @@
 (eval-when-compile
   (require 'ediff))
 
-(require 'init-emacs)
-(require 'init-bindings)
-(require 'init-ux)
 (require 'init-vcs)
 
 
