@@ -8,10 +8,10 @@
 
 (eval-and-compile
   ;; Load Emacs init prologue.
-  (load (expand-file-name "prologue.el" user-emacs-directory)))
+  (load (expand-file-name "prologue.el" user-emacs-directory))
 
-(eval-when-compile
   (require 'ediff))
+
 
 ;; Load VCS support.
 (require 'init-vcs)
