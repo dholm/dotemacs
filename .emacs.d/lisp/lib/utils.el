@@ -29,6 +29,12 @@
      ,@body))
 
 
+(defun add-command-switch (handler &rest switch-list)
+  "Add HANDLER for SWITCH-LIST."
+  (dolist (switch switch-list)
+    (add-to-list 'command-switch-alist (cons switch handler))))
+
+
 (defun add-auto-mode (mode &rest patterns)
   "Use `MODE' for all given files matching `PATTERNS'."
   (dolist (pattern patterns)

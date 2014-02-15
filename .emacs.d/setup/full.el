@@ -1,4 +1,4 @@
-;;; init.el --- Emacs main initialization
+;;; full.el --- Emacs main initialization
 ;;; Commentary:
 ;;; Code:
 
@@ -24,4 +24,4 @@
 
 ;; Load Emacs init epilogue.
 (load (expand-file-name "epilogue.el" user-emacs-directory))
-;;; init.el ends here
+;;; full.el ends here
