@@ -13,10 +13,15 @@
 (eval-when-compile
   (require 'ediff))
 
+;; Load VCS support.
 (require 'init-vcs)
 
 
-(progn
+(let ((local (getenv "LOCAL"))
+      (remote (getenv "REMOTE"))
+      (base (getenv "BASE"))
+      (merged (getenv "MERGED")))
+
   (defun ediff-write-merge-buffer ()
     (let ((file ediff-merge-store-file))
       (set-buffer ediff-buffer-C)
@@ -24,13 +29,11 @@
       (message "Merge buffer saved in: %s" file)
       (set-buffer-modified-p nil)
       (sit-for 1)))
+
   (setq ediff-quit-hook 'kill-emacs
         ediff-quit-merge-hook 'ediff-write-merge-buffer)
-  (message "local: %s remote: %s base: %s merged: %s"
-           (getenv "LOCAL") (getenv "REMOTE")
-           (getenv "BASE") (getenv "MERGED"))
-  (ediff-merge-files-with-ancestor (getenv "LOCAL") (getenv "REMOTE")
-                                   (getenv "BASE") nil (getenv "MERGED")))
+
+  (ediff-merge-files-with-ancestor local remote base nil merged))
 
 
 ;; Load Emacs init epilogue.
