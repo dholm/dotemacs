@@ -22,6 +22,13 @@
      '(progn ,@body)))
 
 
+(defmacro with-feature (feature &rest body)
+  "If FEATURE is available, load it and evaluate BODY."
+  (declare (indent defun))
+  `(when (require ,feature nil t)
+     ,@body))
+
+
 (defun add-auto-mode (mode &rest patterns)
   "Use `MODE' for all given files matching `PATTERNS'."
   (dolist (pattern patterns)
