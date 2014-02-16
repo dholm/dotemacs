@@ -175,7 +175,7 @@
                (:itemize . (user/code-prefix "b"))
                (:enumerate . (user/code-prefix "e"))
 
-               (:complete . (user/code-prefix "SPC"))
+               (:complete . ("C-TAB"))
                (:try-complete . "TAB")
 
                (:context-promote . (user/code-prefix "P"))
