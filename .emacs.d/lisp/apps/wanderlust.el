@@ -16,6 +16,21 @@
   (sc-cite-original))
 
 
+(defun user/bbdbv3-wl-init-hook ()
+  "BBDBv3 Wanderlust initiatlization hook."
+  (user/bbdb-init-hook)
+  (require 'bbdbV3-wl)
+
+  ;;; (Bindings) ;;;
+  (define-key wl-draft-mode-map (user/get-key :code :complete) 'bbdb-complete-name))
+
+
+(defun user/wl-init-hook ()
+  "Wanderlust initialization hook."
+  (when (el-get-package-is-installed 'bbdbv3-wl)
+    (user/bbdbv3-wl-init-hook)))
+
+
 (defun user/semi-init ()
   "Initialize SEMI."
   (setq-default
@@ -236,6 +251,7 @@ Gmail{
         'mail-send-hook))
 
   (add-hook 'mail-citation-hook 'user/mail-citation-hook)
+  (add-hook 'wl-init-hook 'user/wl-init-hook)
   (add-hook 'wl-folder-mode-hook 'user/wl-folder-mode-hook)
   (add-hook 'wl-message-redisplay-hook 'user/wl-message-redisplay-hook)
   (add-hook 'wl-message-buffer-created-hook
@@ -245,6 +261,7 @@ Gmail{
   (user/bind-key-global :apps :email 'wl))
 
 (require-package '(:name wanderlust :after (user/wanderlust-init)))
+(require-package '(:name bbdbv3-wl))
 
 
 (provide 'apps/wanderlust)
