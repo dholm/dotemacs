@@ -28,7 +28,25 @@
 (defun user/wl-init-hook ()
   "Wanderlust initialization hook."
   (when (el-get-package-is-installed 'bbdbv3-wl)
-    (user/bbdbv3-wl-init-hook)))
+    (user/bbdbv3-wl-init-hook))
+
+  (setq-default
+   ;; Show mail status in mode line.
+   global-mode-string (cons '(wl-modeline-biff-status
+                              wl-modeline-biff-state-on
+                              wl-modeline-biff-state-off) global-mode-string))
+
+  ;; Set up wanderlust as the default mail user agent
+  (if (boundp 'mail-user-agent)
+      (setq mail-user-agent 'wl-user-agent))
+  (if (fboundp 'define-mail-user-agent)
+      (define-mail-user-agent
+        'wl-user-agent
+        'wl-user-agent-compose
+        'wl-draft-send
+        'wl-draft-kill
+        'mail-send-hook))
+  (add-hook 'mail-citation-hook 'user/mail-citation-hook))
 
 
 (defun user/semi-init ()
@@ -186,10 +204,6 @@ Gmail{
    ssl-certificate-directory (path-join *user-cache-directory* "certs")
    ;; Mark sent mails as read
    wl-fcc-force-as-read t
-   ;; Show mail status in mode line.
-   global-mode-string (cons '(wl-modeline-biff-status
-                              wl-modeline-biff-state-on
-                              wl-modeline-biff-state-off) global-mode-string)
    ;; Check for mail when idle.
    wl-biff-check-interval 180
    wl-biff-use-idle-timer t
@@ -239,18 +253,6 @@ Gmail{
   (el-get-eval-after-load 'fullframe
     (fullframe wl wl-exit nil))
 
-  ;; Set up wanderlust as the default mail user agent
-  (if (boundp 'mail-user-agent)
-      (setq mail-user-agent 'wl-user-agent))
-  (if (fboundp 'define-mail-user-agent)
-      (define-mail-user-agent
-        'wl-user-agent
-        'wl-user-agent-compose
-        'wl-draft-send
-        'wl-draft-kill
-        'mail-send-hook))
-
-  (add-hook 'mail-citation-hook 'user/mail-citation-hook)
   (add-hook 'wl-init-hook 'user/wl-init-hook)
   (add-hook 'wl-folder-mode-hook 'user/wl-folder-mode-hook)
   (add-hook 'wl-message-redisplay-hook 'user/wl-message-redisplay-hook)
