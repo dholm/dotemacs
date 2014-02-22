@@ -49,6 +49,13 @@
       (el-get nil package-list))))
 
 
+(defun user/load-from-package (package &rest path)
+  "Load file from PACKAGE at PATH."
+  (when (el-get-package-is-installed package)
+    (let ((package-path (el-get-load-path package)))
+      (load (path-join package-path path) :noerror))))
+
+
 ;; Make sure el-get is registered so that el-get-cleanup doesn't remove it
 (require-package '(:name el-get))
 
