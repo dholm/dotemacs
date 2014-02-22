@@ -25,7 +25,7 @@
 (defmacro with-feature (feature &rest body)
   "If FEATURE is available, load it and evaluate BODY."
   (declare (indent defun))
-  `(when (require ,feature nil t)
+  `(when (require ,feature nil :noerror)
      ,@body))
 
 
