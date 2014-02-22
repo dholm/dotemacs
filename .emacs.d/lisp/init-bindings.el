@@ -247,7 +247,7 @@
                (:instant-messenger . (user/apps-prefix "i"))
                (:notes . (user/apps-prefix "n"))
 
-               (:ipython-notebook . (user/apps-prefix "n"))
+               (:ipython-notebook . (user/apps-prefix "N"))
 
                (:music . (user/apps-prefix "m"))
 
