@@ -6,13 +6,13 @@
 (defun user/lisp-mode-common-hook ()
   "LISP mode hook."
   (user/cedet-hook)
-  (when (require 'rainbow-delimiters nil :noerror)
+  (with-feature 'rainbow-delimiters
     (rainbow-delimiters-mode t))
-  (when (require 'paredit nil :noerror)
+  (with-feature 'paredit
     (enable-paredit-mode)
     (after-load 'diminish
       (diminish 'paredit-mode)))
-  (when (require 'redshank nil :noerror)
+  (with-feature 'redshank
     (redshank-mode t)
     (after-load 'diminish
       (diminish 'redshank-mode)))
@@ -30,15 +30,15 @@
 (defun user/emacs-lisp-mode-hook ()
   "Emacs LISP mode hook."
   (user/lisp-mode-common-hook)
-  (when (require 'elisp-slime-nav nil :noerror)
+  (with-feature 'elisp-slime-nav
     (elisp-slime-nav-mode t)
     (after-load 'diminish
       (diminish 'elisp-slime-nav-mode)))
-  (when (require 'auto-complete-emacs-lisp nil :noerror)
+  (with-feature 'auto-complete-emacs-lisp
     (ac-emacs-lisp-mode-setup))
-  (when (require 'popwin nil :noerror)
+  (with-feature 'popwin
     (user/bind-key-local :util :popwin-messages 'popwin:messages))
-  (when (require 'macrostep nil :noerror)
+  (with-feature 'macrostep
     (user/bind-key-local :util :macrostep-expand 'macrostep-expand))
 
   ;;; (Bindings) ;;;
