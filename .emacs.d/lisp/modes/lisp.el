@@ -1,10 +1,10 @@
-;;; lisp.el --- initializes LISP modes
+;;; lisp.el --- Initializes Lisp modes
 ;;; Commentary:
 ;;; Code:
 
 ;;; (Mode Hooks) ;;;
 (defun user/lisp-mode-common-hook ()
-  "LISP mode hook."
+  "Lisp mode hook."
   (user/cedet-hook)
   (with-feature 'rainbow-delimiters
     (rainbow-delimiters-mode t))
@@ -28,7 +28,7 @@
 
 
 (defun user/emacs-lisp-mode-hook ()
-  "Emacs LISP mode hook."
+  "Emacs Lisp mode hook."
   (user/lisp-mode-common-hook)
   (with-feature 'elisp-slime-nav
     (elisp-slime-nav-mode t)
@@ -48,8 +48,11 @@
 
 
 (defun user/ielm-mode-hook ()
-  "Interactive Emacs LISP mode hook."
-  (user/emacs-lisp-mode-hook))
+  "Interactive Emacs Lisp mode hook."
+  (user/emacs-lisp-mode-hook)
+  (when (el-get-package-is-installed 'auto-complete)
+    ;; Setup auto-complete.
+    (ac-emacs-lisp-mode-setup)))
 
 
 (defun user/minibuffer-setup-hook ()

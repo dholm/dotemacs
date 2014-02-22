@@ -19,6 +19,7 @@
    ;; Automatically start completion after two characters.
    ac-auto-start 2
    ;; Use fuzzy matching.
+   ac-fuzzy-enable t
    ac-use-fuzzy 1.5
    ;; Automatically show menu after 400ms.
    ac-auto-show-menu 0.4
@@ -32,6 +33,7 @@
    ;; Store the completion history in the cache directory.
    ac-comphist-file (path-join *user-cache-directory* "ac-comphist.dat"))
 
+  ;; Set up auto-complete dictionary file.
   (add-to-list 'ac-dictionary-directories
                (path-join *user-el-get-directory* "auto-complete" "ac-dict"))
 
@@ -45,18 +47,25 @@
 
   ;;; (Bindings) ;;;
   (ac-set-trigger-key (user/get-key :code :try-complete))
-  ;; Return should complete item in menu.
-  (define-key ac-completing-map (kbd "C-m") nil)
-  (define-key ac-menu-map (kbd "C-m") 'ac-complete)
-  (user/bind-key-global :code :complete 'auto-complete))
+  ;; Return should complete selected item.
+  (define-key ac-completing-map [return] nil)
+  (define-key ac-menu-map [return] 'ac-complete)
+  ;; Expand common part on tab.
+  (define-key ac-completing-map [tab] 'ac-expand-common)
+  ;; Bind auto-complete to completion key.
+  (user/bind-key-global :code :complete 'auto-complete)
+
+  ;; Enable auto-completion globally.
+  (global-auto-complete-mode t))
 
 
 (defun user/completion-init ()
   "Initialize automatic code completion."
   (setq-default
-   ;; Use complete when auto-complete is unavailable
-   tab-always-indent 'complete)
+   ;; Do not fall back to complete if auto-complete is unavailable.
+   tab-always-indent t)
 
+  ;; Allow completion of acronyms and initialisms.
   (add-to-list 'completion-styles 'initials t)
 
   ;;; (Functions) ;;;
