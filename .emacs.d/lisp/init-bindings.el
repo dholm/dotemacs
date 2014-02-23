@@ -2,7 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
-(defvar user/global-keymap nil "Global keymap.")
+(defvar user/global-keymap nil
+  "Global keymap.")
+(defvar user/global-reverse-keymap nil
+  "Global reverse keymap, mapping bindings back to functions.")
 
 
 ;; Set up prefixes for command groups.
@@ -47,25 +50,68 @@
   :group 'user)
 
 
-(defun user/get-key (group name)
-  "Get the key from GROUP to bind for NAME."
-  (let ((key (cdr (assq name (cdr (assq group user/global-keymap))))))
+(defun user/make-key (keys)
+  "Convert KEYS into the internal Emacs key representation."
+  (kbd (if (listp keys)
+           (mapconcat 'identity (mapcar 'eval keys) " ")
+         keys)))
+
+
+(defun user/get-key (group operation)
+  "Get the key from GROUP to bind for OPERATION."
+  (let ((key (cdr (assq operation (cdr (assq group user/global-keymap))))))
     (if key
-        (kbd (if (listp key)
-                 (mapconcat 'identity (mapcar 'eval key) " ")
-               key))
+        (user/make-key key)
       (error (format "Group %s does not contain key for %s!"
-                     (symbol-name group) (symbol-name name))))))
+                     (symbol-name group) (symbol-name operation))))))
+
+
+(defun user/get-key-function (group operation)
+  "Get the function bound to GROUP OPERATION."
+  (car (cdr (assq operation
+                  (cdr (assq group user/global-reverse-keymap))))))
 
 
 (defun user/bind-key-global (group key function)
   "Bind GROUP KEY to FUNCTION globally."
+  (let ((rev-group (assq group user/global-reverse-keymap)))
+    (setq user/global-reverse-keymap
+          (append `((,group . ,(append `((,key ,function)) (cdr rev-group))))
+                  (delq (assoc group user/global-reverse-keymap)
+                        user/global-reverse-keymap))))
   (global-set-key (user/get-key group key) function))
 
 
 (defun user/bind-key-local (group key function)
   "Bind GROUP KEY to FUNCTION in the current keymap."
   (local-set-key (user/get-key group key) function))
+
+
+(defun user/merge-keymap-groups (overlay base)
+  "Merge OVERLAY keymap with BASE group."
+  (let ((group-name (car base))
+        (overlay-keys (cdr overlay))
+        (base-keys (cdr base)))
+    `((,group-name . ,(append overlay-keys base-keys)))))
+
+
+(defun user/global-keymap-overlay (overlay)
+  "Load keymap OVERLAY."
+  (dolist (ovl-group overlay)
+    (let ((ovl-gname (car ovl-group))
+          (ovl-keys (cdr ovl-group)))
+      (dolist (ovl-op (cdr ovl-group))
+        (let ((ovl-oname (car ovl-op))
+              (ovl-key (cdr ovl-op)))
+          ;; TODO: Check that ovl-oname exists.
+          (global-set-key (user/make-key ovl-key)
+                          (user/get-key-function ovl-gname ovl-oname))))
+      (let ((orig-group (assq ovl-gname user/global-keymap))
+            (keymap-without-group (assq-delete-all ovl-gname user/global-keymap)))
+        (setq user/global-keymap
+              (append (user/merge-keymap-groups ovl-group orig-group)
+                      keymap-without-group)))))
+  t)
 
 
 (defun user/global-keymap-init ()

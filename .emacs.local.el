@@ -13,5 +13,12 @@
                           :compile-command "nice make -j")))
 
 
+;; Keymap override.
+(user/global-keymap-overlay
+ '((:basic . ((:open-file-context . "C-x f")))
+   (:nav . ((:go-back . "C-x n")
+            (:follow-symbol . "C-x m")))))
+
+
 (provide '.emacs.local)
 ;;; emacs.local.el ends here
