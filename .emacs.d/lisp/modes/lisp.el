@@ -30,6 +30,10 @@
 (defun user/emacs-lisp-mode-hook ()
   "Emacs Lisp mode hook."
   (user/lisp-mode-common-hook)
+
+  (with-feature 'auto-compile
+    (auto-compile-on-save-mode t)
+    (auto-compile-on-load-mode t))
   (with-feature 'elisp-slime-nav
     (elisp-slime-nav-mode t)
     (after-load 'diminish
@@ -98,13 +102,6 @@
   (add-hook 'slime-repl-mode-hook 'user/slime-mode-hook))
 
 
-(defun user/auto-compile-init ()
-  "Initialize auto-compile."
-  (require 'auto-compile)
-  (auto-compile-on-save-mode t)
-  (auto-compile-on-load-mode t))
-
-
 (defun user/eldoc-eval-init ()
   "Initialize eldoc eval."
   (require 'eldoc-eval)
@@ -120,7 +117,7 @@
   (require-package '(:name macrostep))
   (require-package '(:name auto-complete-emacs-lisp))
   (require-package '(:name elisp-slime-nav))
-  (require-package '(:name auto-compile :after (user/auto-compile-init)))
+  (require-package '(:name auto-compile))
   (require-package '(:name eldoc-eval
                            :type github
                            :pkgname "thierryvolpiatto/eldoc-eval"
