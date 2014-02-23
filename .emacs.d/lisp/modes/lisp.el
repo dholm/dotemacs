@@ -44,7 +44,13 @@
   ;;; (Bindings) ;;;
   (user/bind-key-local :doc :reference 'elisp-index-search)
   (user/bind-key-local :doc :describe-function 'describe-function)
-  (user/bind-key-local :doc :describe-variable 'describe-variable))
+  (user/bind-key-local :doc :describe-variable 'describe-variable)
+
+  (user/bind-key-local :debug :start 'debug)
+  (user/bind-key-local :debug :break 'edebug-defun)
+  (user/bind-key-local :debug :trace 'trace-function-background)
+  (user/bind-key-local :debug :continue 'debugger-continue)
+  (user/bind-key-local :debug :step 'debugger-step-through))
 
 
 (defun user/ielm-mode-hook ()

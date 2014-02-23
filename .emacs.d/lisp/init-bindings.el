@@ -72,7 +72,7 @@
   "Initialize the global keymap."
   (setq
    user/global-keymap
-   `(;;; (Basic keys) ;;;
+   '(;;; (Basic keys) ;;;
      (:basic . ((:open-file . "C-x C-f")
                 (:open-file-context . "C-x f")
                 (:open-buffer . "C-x b")
@@ -198,6 +198,7 @@
      (:debug . ((:start . (user/code-prefix "d"))
 
                 (:break . (user/code-prefix "b"))
+                (:trace . (user/code-prefix "T"))
                 (:break-temporary . (user/code-prefix "t"))
                 (:watch . (user/code-prefix "w"))
 
