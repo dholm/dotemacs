@@ -23,10 +23,6 @@
 
   (add-hook 'deft-mode-hook 'user/deft-mode-hook)
 
-  (after-load 'deft
-    ;; Run deft's setup after it has been loaded.
-    (deft-setup))
-
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :notes 'deft))
 
