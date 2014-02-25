@@ -102,6 +102,11 @@
   (hl-line-mode t))
 
 
+(defun user/wl-summary-mode-hook ()
+  "Wanderlust summary mode hook."
+  (hl-line-mode t))
+
+
 (defun user/wl-message-buffer-created-hook ()
   "Wanderlust message buffer created hook."
   (setq
@@ -255,6 +260,7 @@ Gmail{
 
   (add-hook 'wl-init-hook 'user/wl-init-hook)
   (add-hook 'wl-folder-mode-hook 'user/wl-folder-mode-hook)
+  (add-hook 'wl-summary-mode-hook 'user/wl-summary-mode-hook)
   (add-hook 'wl-message-redisplay-hook 'user/wl-message-redisplay-hook)
   (add-hook 'wl-message-buffer-created-hook
             'user/wl-message-buffer-created-hook)
