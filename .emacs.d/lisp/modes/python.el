@@ -14,7 +14,7 @@
     (add-ac-sources 'ac-source-ropemacs))
 
   ;; Enable Jedi
-  (when (el-get-package-is-instsalled 'jedi)
+  (when (el-get-package-is-installed 'jedi)
     (jedi:setup))
 
   ;; Separate camel-case into separate words
