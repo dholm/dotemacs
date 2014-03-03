@@ -28,9 +28,6 @@
     (user/ffip-local-patterns "*.py"))
 
   ;;; (Bindings) ;;;
-  ;; Bind electric backspace to del which translates to backspace in
-  ;; terminals.
-  (define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
   (when (el-get-package-is-installed 'nose)
     (user/bind-key-local :code :test 'nosetests-all))
   (when (el-get-package-is-installed 'virtualenv)
