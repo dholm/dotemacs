@@ -16,15 +16,19 @@
 
 (defun user/org-agenda-init ()
   "Initialize org agenda."
-  (setq-default
-   ;; Agenda data store.
-   org-agenda-files (path-join *user-org-data-directory* "agendas")
-   ;; Start on Monday.
-   org-agenda-start-on-weekday t
-   ;; Don't display scheduled todos.
-   org-agenda-todo-ignore-scheduled 'future
-   ;; Don't show nested todos.
-   org-agenda-todo-list-sublevels nil)
+  (let ((agenda-data-store (path-join *user-org-data-directory* "agendas")))
+    (setq-default
+     ;; Agenda data store.
+     org-agenda-files `(,agenda-data-store)
+     ;; Start on Monday.
+     org-agenda-start-on-weekday t
+     ;; Don't display scheduled todos.
+     org-agenda-todo-ignore-scheduled 'future
+     ;; Don't show nested todos.
+     org-agenda-todo-list-sublevels nil)
+
+    ;; Ensure that agenda data store exists.
+    (make-directory agenda-data-store t))
 
   (when (not noninteractive)
     ;; When running in batch, don't try to setup windows.
