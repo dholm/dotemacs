@@ -22,6 +22,10 @@
 
 (defun user/popups-init ()
   "Initialize Emacs popups."
+  (setq-default
+   ;; Timeout for messages shown in minibuffer.
+   minibuffer-message-timeout 5)
+
   ;;; (Packages) ;;;
   (require-package '(:name popup :after (user/popup-init)))
   (require-package '(:name popwin :after (user/popwin-init))))
