@@ -2,6 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
+(defconst *user-org-data-directory*
+  (path-join *user-data-directory* "org")
+  "Path to user's org data store.")
+
+
 (defun user/org-mode-hook ()
   "Org mode hook."
   ;;; (Bindings) ;;;
@@ -9,9 +14,33 @@
   (user/bind-key-local :code :context-demote 'org-shiftdown))
 
 
+(defun user/org-agenda-init ()
+  "Initialize org agenda."
+  (setq-default
+   ;; Agenda data store.
+   org-agenda-files (path-join *user-org-data-directory* "agendas")
+   ;; Start on Monday.
+   org-agenda-start-on-weekday t
+   ;; Don't display scheduled todos.
+   org-agenda-todo-ignore-scheduled 'future
+   ;; Don't show nested todos.
+   org-agenda-todo-list-sublevels nil)
+
+  (when (not noninteractive)
+    ;; When running in batch, don't try to setup windows.
+    (setq-default
+     ;; Show agenda in current window.
+     org-agenda-window-setup 'current-window))
+
+  ;;; (Bindings) ;;;
+  (user/bind-key-global :apps :agenda 'org-agenda))
+
+
 (defun user/org-mode-init ()
   "Initialize Lua mode."
   (setq-default
+   ;; Notes data store.
+   org-default-notes-file (path-join *user-org-data-directory* "notes.org")
    ;; Pressing return on a link follows it.
    org-return-follows-link t
    ;; Log time for TODO state changes.
@@ -41,19 +70,28 @@
 
     (after-load 'org-mode
       ;; Initialize clock persistence.
-      (org-clock-persistence-insinuate))))
+      (org-clock-persistence-insinuate)))
 
   (when (display-graphic-p)
     (setq-default
      ;; Display inline images when starting up.
-     org-startup-with-inline-images t)
+     org-startup-with-inline-images t))
+
+  (user/org-agenda-init)
 
   (add-hook 'org-mode-hook 'user/org-mode-hook))
 
-(require-package '(:name org-mode :after (user/org-mode-init)))
 
-;; Fix for EIN if org hasn't been setup yet.
-(autoload 'org-add-link-type "org" "" t)
+(defun user/org-init ()
+  "Initialize org mode."
+  ;; Fix for EIN if org hasn't been setup yet.
+  (autoload 'org-add-link-type "org" "" t)
+
+  ;;; (Packages) ;;;
+  (require-package '(:name org-mode :after (user/org-mode-init)))
+  (require-package '(:name org-caldav)))
+
+(user/org-init)
 
 
 (provide 'modes/org)

@@ -289,7 +289,7 @@
 
      ;;; (Applications) ;;;
      (:apps . ((:browser . (user/apps-prefix "b"))
-               (:calendar . (user/apps-prefix "c"))
+               (:agenda . (user/apps-prefix "a"))
                (:email . (user/apps-prefix "e"))
                (:instant-messenger . (user/apps-prefix "i"))
                (:notes . (user/apps-prefix "n"))
