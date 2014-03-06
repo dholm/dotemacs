@@ -274,6 +274,7 @@
                (:google . (user/utilities-prefix "g"))
                (:google-at-point . (user/documentation-prefix "g RET"))
                (:google-selection . (user/documentation-prefix "g SPC"))
+               (:stack-overflow-search . (user/documentation-prefix "s"))
 
                (:macrostep-expand . (user/code-prefix "e m"))
 
