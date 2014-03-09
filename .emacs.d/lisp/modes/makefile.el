@@ -4,7 +4,7 @@
 
 (defun user/makefile-mode-cedet-hook ()
   "CEDET hook for makefiles."
-  (when (featurep 'cedet)
+  (with-feature 'cedet
     (user/cedet-hook)
     (require 'semantic/bovine/make)))
 

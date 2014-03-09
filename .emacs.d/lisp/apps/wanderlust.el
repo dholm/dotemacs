@@ -255,7 +255,7 @@ Gmail{
    ;; Automatically save drafts every two minutes
    wl-auto-save-drafts-interval 120.0)
 
-  (el-get-eval-after-load 'fullframe
+  (with-feature 'fullframe
     (fullframe wl wl-exit nil))
 
   (add-hook 'wl-init-hook 'user/wl-init-hook)

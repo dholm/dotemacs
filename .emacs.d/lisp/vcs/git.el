@@ -31,7 +31,7 @@
    magit-completing-read-function 'magit-ido-completing-read)
 
   ;; Full frame Magit status
-  (el-get-eval-after-load 'fullframe
+  (with-feature 'fullframe
     (fullframe magit-status magit-mode-quit-window nil))
 
   (add-hook 'magit-mode-hook 'user/magit-mode-hook)

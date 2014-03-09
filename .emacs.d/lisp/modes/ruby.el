@@ -6,23 +6,27 @@
   "Ruby mode hook."
   (unless (derived-mode-p 'prog-mode)
     (run-hooks 'prog-mode-hook))
+
   ;; Enable robe mode
   (robe-mode t)
+
   ;; Enable inferior ruby mode
   (inf-ruby-minor-mode t)
+
   ;; Enable eldoc mode
   (eldoc-mode t)
+
   ;; Separate camel-case into separate words
   (subword-mode t)
 
-  ;;; (Bindings) ;;;
-  (define-key ruby-mode-map (kbd "TAB") 'indent-for-tab-command)
-  (when (el-get-package-is-installed 'yari)
-    (user/bind-key-local :doc :reference 'yari))
-
   ;; Register file types with find-file-in-project
   (after-load 'find-file-in-project
-    (user/ffip-local-patterns "*.rb")))
+    (user/ffip-local-patterns "*.rb"))
+
+  ;;; (Bindings) ;;;
+  (define-key ruby-mode-map (kbd "TAB") 'indent-for-tab-command)
+  (with-feature 'yari
+    (user/bind-key-local :doc :reference 'yari)))
 
 
 (defun user/robe-mode-hook ()
