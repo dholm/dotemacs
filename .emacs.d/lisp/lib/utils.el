@@ -29,6 +29,13 @@
      ,@body))
 
 
+(defmacro with-executable (executable &rest body)
+  "If EXECUTABLE is available in path, evaluate BODY."
+  (declare (indent defun))
+  `(when (executable-find (symbol-name ,executable))
+     ,@body))
+
+
 (defun add-command-switch (handler &rest switch-list)
   "Add HANDLER for SWITCH-LIST."
   (dolist (switch switch-list)
