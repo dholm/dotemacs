@@ -16,7 +16,8 @@
 (defun user/magit-mode-hook ()
   "Magit mode hook."
   ;; Ignore change in whitespace by default.
-  (add-to-list 'magit-diff-options "--ignore-all-space"))
+  (add-to-list 'magit-diff-options "--ignore-space-at-eol"))
+
 
 (defun user/magit-init ()
   "Initialize Magit."
