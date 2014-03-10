@@ -25,12 +25,16 @@
     (user/ffip-local-patterns "*.hs" "*.lhs"))
 
   (with-feature 'scion
-    (scion-mode t)))
+    (scion-mode t))
+
+  (with-feature 'shm
+    (structured-haskell-mode t)))
 
 
 (defun user/inferior-haskell-mode-hook ()
   "Inferior Haskell mode hook."
   (user/generic-haskell-mode-hook)
+
   (turn-on-ghci-completion))
 
 
@@ -41,6 +45,7 @@
   (require-package '(:name scion))
   (require-package '(:name hi2))
   (require-package '(:name flycheck-hdevtools))
+  (require-package '(:name structured-haskell-mode))
 
   (add-hook 'haskell-mode-hook 'user/haskell-mode-hook)
   (add-hook 'inferior-haskell-mode-hook 'user/inferior-haskell-mode-hook))
