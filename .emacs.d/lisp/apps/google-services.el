@@ -26,6 +26,10 @@
 
 (defun user/google-services-init ()
   "Initialize Google services."
+  (setq-default
+   ;; Store OAuth2 token in data store.
+   oauth2-token-file (path-join *user-google-services-data-directory* "oauth2.plstore"))
+
   (require-package '(:name google-contacts :after (user/google-contacts-init)))
   (require-package '(:name google-calendar :after (user/google-calendar-init))))
 
