@@ -10,7 +10,7 @@
   ;;; (Bindings) ;;;
   (global-set-key [remap find-grep] 'ag))
 
-(when *has-ag*
+(with-executable 'ag
   (require-package '(:name ag :after (user/ag-init))))
 
 

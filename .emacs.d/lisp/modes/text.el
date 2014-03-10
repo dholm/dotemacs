@@ -14,12 +14,16 @@
    ;; When using fill-paragraph or auto-fill-mode break lines at 79 characters
    ;; by default.
    fill-column 79)
+
   ;; Automatically break long lines
   (auto-fill-mode t)
+
   ;; Run spell-checker
   (flyspell-mode)
+
   ;; Delete trailing whitespace on save
   (add-hook 'write-contents-functions 'delete-trailing-whitespace nil t)
+
   ;; Enable dtrt-indent to attempt to identify the indentation rules used
   (after-load 'dtrt-indent
     (dtrt-indent-mode t))

@@ -140,15 +140,15 @@
 (require-package '(:name helm-build-command))
 (require-package '(:name helm-cmd-t :after (user/helm-cmd-t-init)))
 
-(when *has-git*
+(with-executable 'git
   (require-package '(:name helm-ls-git)))
-(when *has-global*
+(with-executable 'global
   (require-package '(:name helm-gtags
                            :type github
                            :pkgname "syohex/emacs-helm-gtags"
                            :depends (helm)
                            :after (user/helm-gtags-init))))
-(when *has-python*
+(with-executable 'python
   (require-package '(:name helm-pydoc
                            :type github
                            :depends (helm)

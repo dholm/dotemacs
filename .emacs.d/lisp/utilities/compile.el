@@ -28,9 +28,10 @@
    mode-compile-default-make-options "-k -j")
 
   (after-load 'mode-compile
-    (when *has-clang*
-      (setq cc-compilers-list (cons "clang" cc-compilers-list))
-      (setq c++-compilers-list (cons "clang++" c++-compilers-list)))))
+    (with-executable 'clang
+      (setq-defeault
+       cc-compilers-list (cons "clang" cc-compilers-list)
+       c++-compilers-list (cons "clang++" c++-compilers-list)))))
 
 
 (defun user/compile-init ()

@@ -54,7 +54,7 @@
 
 (defun user/python-init ()
   "Initialize python."
-  (when *has-ipython*
+  (with-executable 'ipython
     (setq-default
      python-shell-interpreter "ipython"
      python-shell-interpreter-args ""
@@ -88,7 +88,7 @@
   (add-interpreter-mode 'python-mode "python")
   (add-hook 'python-mode-hook 'user/python-mode-hook))
 
-(when *has-python*
+(with-executable 'python
   (user/python-mode-init))
 
 

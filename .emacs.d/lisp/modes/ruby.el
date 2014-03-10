@@ -48,7 +48,7 @@
 
   (add-hook 'ruby-mode-hook 'user/ruby-mode-hook))
 
-(when *has-ruby*
+(with-executable 'ruby
   (user/ruby-mode-init))
 
 

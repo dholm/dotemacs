@@ -18,7 +18,8 @@
   (user/bind-key-local :doc :describe 'godef-describe)
   (user/bind-key-local :doc :reference 'godoc)
   (user/bind-key-local :nav :follow-symbol 'godef-jump)
-  (user/bind-key-local :nav :switch-spec-impl 'go-goto-imports))
+  (user/bind-key-local :nav :switch-spec-impl 'go-goto-imports)
+  (user/bind-key-local :debug :start 'realgud-gub))
 
 
 (defun user/go-mode-init ()
@@ -27,7 +28,7 @@
 
   (add-hook 'go-mode-hook 'user/go-mode-hook))
 
-(when *has-go*
+(with-executable 'go
   (require-package '(:name go-mode :after (user/go-mode-init))))
 
 

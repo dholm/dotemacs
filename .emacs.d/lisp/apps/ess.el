@@ -88,7 +88,7 @@
     (if (and transient-mark-mode mark-active)
         (call-interactively 'ess-eval-line-and-step))))
 
-(when *has-R*
+(with-executable 'R
   (require-package '(:name ess :after (user/ess-init)))
   (require-package '(:name ess-smart-underscore))
   (require-package '(:name ac-R :after (user/ac-R-init))))

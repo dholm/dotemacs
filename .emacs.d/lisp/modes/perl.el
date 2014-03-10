@@ -41,7 +41,7 @@
 
   (add-hook 'perl-mode-hook 'user/perl-mode-hook))
 
-(when *has-perl*
+(with-executable 'perl
   (user/perl-mode-init))
 
 

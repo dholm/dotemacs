@@ -5,6 +5,7 @@
 (defun user/generic-haskell-mode-hook ()
   "Generic Haskell mode hook."
   (turn-on-haskell-doc-mode)
+
   ;; Enable editing of camel case
   (subword-mode t)
 
@@ -23,8 +24,8 @@
   (after-load 'find-file-in-project
     (user/ffip-local-patterns "*.hs" "*.lhs"))
 
-  ;; Enable scion
-  (scion-mode t))
+  (with-feature 'scion
+    (scion-mode t)))
 
 
 (defun user/inferior-haskell-mode-hook ()
@@ -44,7 +45,7 @@
   (add-hook 'haskell-mode-hook 'user/haskell-mode-hook)
   (add-hook 'inferior-haskell-mode-hook 'user/inferior-haskell-mode-hook))
 
-(when *has-ghc*
+(with-executable 'ghc
   (user/haskell-mode-init))
 
 

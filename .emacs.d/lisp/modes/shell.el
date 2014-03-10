@@ -4,7 +4,7 @@
 
 (defun user/sh-mode-hook ()
   "Initialize mode for shell script editing."
-  (setq
+  (setq-default
    ;; Indent with four spaces
    sh-basic-offset 4
    sh-indentation 4)
@@ -16,14 +16,15 @@
 
 (defun user/shell-mode-hook ()
   "Initialize mode for interactive shell."
-  (setq
+  (setq-default
    ;; Set up to use Bash with input echoing
    explicit-shell-file-name "bash"
    explicit-bash-args '("-c" "export EMACS=; stty echo; bash")
    comint-process-echoes t)
+
   ;; Enable readline completion
-  (require 'readline-complete)
-  (ac-rlc-setup-sources))
+  (with-feature 'readline-complete
+    (ac-rlc-setup-sources)))
 
 
 (defun user/readline-complete-init ()

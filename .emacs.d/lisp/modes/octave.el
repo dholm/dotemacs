@@ -16,8 +16,7 @@
   ;;; (Packages) ;;;
   (require-package '(:name ac-octave)))
 
-
-(when *has-octave*
+(with-executable 'octave
   (user/octave-init))
 
 

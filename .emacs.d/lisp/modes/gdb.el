@@ -60,7 +60,7 @@
   (add-hook 'gdb-mode-hook 'user/gdb-mode-hook)
   (add-hook 'gdb-script-mode-hook 'user/gdb-script-mode-hook))
 
-(when *has-gdb*
+(with-executable 'gdb
   (user/gdb-modes-init))
 
 

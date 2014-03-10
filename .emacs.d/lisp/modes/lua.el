@@ -25,7 +25,7 @@
 
   (add-hook 'lua-mode-hook 'user/lua-mode-hook))
 
-(when *has-lua*
+(with-executable 'lua
   (user/lua-mode-init))
 
 

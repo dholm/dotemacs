@@ -89,10 +89,12 @@
    slime-net-coding-system 'utf-8-unix
    slime-complete-symbol*-fancy t)
 
-  (cond
-   (*has-sbcl* (setq-default inferior-lisp-program "sbcl"))
-   (*has-lisp* (setq-default inferior-lisp-program "lisp"))
-   (*has-clisp* (setq-default inferior-lisp-program "clisp -K full")))
+  (setq-default inferior-lisp-program
+                (cond
+                 ((executable-find "sbcl") "sbcl")
+                 ((executable-find "lisp") "lisp")
+                 ((executable-find "clisp") "clisp -K full")
+                 (t inferior-lisp-program)))
 
   (add-ac-modes 'slime-repl-mode)
 
@@ -123,7 +125,9 @@
                            :pkgname "thierryvolpiatto/eldoc-eval"
                            :after (user/eldoc-eval-init)))
 
-  (when (or *has-sbcl* *has-lisp* *has-clisp*)
+  (when (or (executable-find "sbcl")
+           (executable-find "lisp")
+           (executable-find "clisp"))
     (require-package '(:name slime :after (user/slime-init)))
     (require-package '(:name ac-slime)))
 

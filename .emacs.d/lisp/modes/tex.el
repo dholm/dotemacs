@@ -108,7 +108,7 @@
                                    ("Skim" "open -a Skim.app %o")
                                    ("open" "open %o")))
      TeX-view-program-selection '((output-pdf "Preview"))))
-   (t (when *has-evince*
+   (t (with-executable 'evince
         (setq-default
          TeX-view-program-list '(("Evince" "evince --page-index=%(outpage) %o"))
          TeX-view-program-selection '((output-pdf "Evince"))))))
@@ -193,7 +193,8 @@ Makes it easier to version control LaTeX-files."
   (require-package '(:name ltx-help)))
 
 
-(when (or *has-tex* *has-latex*)
+(when (or (executable-find "tex")
+         (executable-find "latex"))
   (user/tex-mode-init))
 
 

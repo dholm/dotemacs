@@ -21,10 +21,10 @@
   "Initialize Scala mode."
   (require-package '(:name scala-mode2 :after (user/scala-mode2-init)))
 
-  (when *has-sbt*
+  (with-executable 'sbt
     (require-package '(:name ensime))))
 
-(when *has-scala*
+(with-executable 'scala
   (user/scala-mode-init))
 
 

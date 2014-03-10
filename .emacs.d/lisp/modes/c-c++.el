@@ -35,14 +35,14 @@
     (helm-gtags-mode t))
 
   ;; Auto completion
-  (when (and *has-clang*
+  (when (and (executable-find "clang")
            (el-get-package-is-installed 'clang-complete-async))
     (ac-clang-launch-completion-process)
     (add-ac-sources 'ac-source-clang-async))
 
-  (when *has-gdb*
-    (gdb-enable-debug t)
-    (user/bind-key-local :debug :start 'gdb)))
+  ;;; (Bindings) ;;;
+  (with-executable 'gdb
+    (user/bind-key-local :debug :start 'realgud-gdb)))
 
 
 (defun user/c-mode-cedet-hook ()
@@ -75,7 +75,8 @@
 
 (defun user/c-c++-mode-init ()
   "Initialize C/C++ mode."
-  (when (and *has-clang* *has-llvm-config*)
+  (when (and (executable-find "clang")
+           (executable-find "llvm-config"))
     (require-package '(:name clang-complete-async)))
 
   (add-hook 'c-mode-common-hook 'user/c-mode-common-hook)

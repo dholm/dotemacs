@@ -19,7 +19,7 @@
   ;;; (Packages) ;;;
   (require-package '(:name php-mode :after (user/php-mode-init))))
 
-(when *has-php*
+(with-executable 'php
   (user/php-mode-init))
 
 

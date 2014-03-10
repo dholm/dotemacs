@@ -66,7 +66,7 @@
     (require-package '(:name git-gutter-fringe :after (user/git-gutter-fringe-init))))
   (require-package '(:name git-messenger :after (user/git-messenger-init))))
 
-(when *has-git*
+(with-executable 'git
   (user/git-init))
 
 

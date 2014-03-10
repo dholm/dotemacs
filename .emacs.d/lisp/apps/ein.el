@@ -13,7 +13,7 @@
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :ipython-notebook 'ein:notebooklist-open))
 
-(when *has-ipython*
+(with-executable 'ipython
   (require-package '(:name ein :after (user/ein-init))))
 
 

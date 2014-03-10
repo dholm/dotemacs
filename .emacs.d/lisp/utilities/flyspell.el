@@ -18,7 +18,7 @@
    ;; Be silent when checking words.
    flyspell-issue-message-flag nil)
 
-  (when *has-aspell*
+  (with-executable 'aspell
     (setq-default
      ispell-program-name "aspell"
      ispell-list-command "--list"
@@ -43,7 +43,8 @@
             (flyspell-do-correct 'save nil word cursor-location start end opoint)))
       (ispell-pdict-save t))))
 
-(when (or *has-ispell* *has-aspell*)
+(when (or (executable-find "ispell")
+         (executable-find "aspell"))
   (require-package '(:name flyspell :after (user/flyspell-init)))
   (require-package '(:name auto-dictionary)))
 

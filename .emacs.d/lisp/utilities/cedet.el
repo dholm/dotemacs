@@ -110,10 +110,9 @@
   (defun user/cedet-cscope-create/update ()
     "Create or update CScope database at current project root."
     (interactive)
-    (if *has-cscope*
-        (unless (cedet-cscope-version-check t)
-          (warn "CScope version is too old!"))
-      (warn "CScope not found!"))
+    (with-executable 'cscope
+      (unless (cedet-cscope-version-check t)
+        (warn "CScope version is too old!")))
     (let ((proj-root (user/current-path-apply 'user/project-root)))
       (when proj-root
         (cedet-cscope-create/update-database proj-root)
@@ -122,10 +121,9 @@
   (defun user/cedet-gnu-global-create/update ()
     "Create or update GNU GLOBAL database at current project root."
     (interactive)
-    (if *has-global*
-        (unless (cedet-gnu-global-version-check t)
-          (warn "GNU GLOBAL version is too old!"))
-      (warn "GNU GLOBAL not found!"))
+    (with-executable 'global
+      (unless (cedet-gnu-global-version-check t)
+        (warn "GNU GLOBAL version is too old!")))
     (let ((proj-root (user/current-path-apply 'user/project-root)))
       (when proj-root
         (cedet-gnu-global-create/update-database proj-root)
@@ -134,10 +132,9 @@
   (defun user/cedet-gnu-idutils-create/update ()
     "Create or update GNU idutils database at current project root."
     (interactive)
-    (if *has-idutils*
-        (unless (cedet-idutils-version-check t)
-          (warn "GNU idutils is too old!"))
-      (warn "GNU idutils not found!"))
+    (with-executable 'idutils
+      (unless (cedet-idutils-version-check t)
+        (warn "GNU idutils is too old!")))
     (let ((proj-root (user/current-path-apply 'user/project-root)))
       (when proj-root
         (cedet-idutils-create/update-database proj-root)

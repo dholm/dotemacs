@@ -6,8 +6,10 @@
   "Initialize makefile mode."
   (unless (derived-mode-p 'prog-mode)
     (user/prog-mode-hook))
+
   ;; Separate camel-case into separate words.
   (subword-mode t)
+
   ;; Enable auto-complete.
   (auto-complete-mode t))
 
@@ -19,7 +21,7 @@
   (add-auto-mode 'cmake-mode "CMakeLists\\.txt$")
   (add-auto-mode 'cmake-mode "\\.cmake$"))
 
-(when *has-cmake*
+(with-executable 'cmake
   (require-package '(:name cmake-mode :after (user/cmake-mode-init))))
 
 

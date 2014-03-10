@@ -15,7 +15,7 @@
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :sage 'sage))
 
-(when *has-sage*
+(with-executable 'sage
   (require-package '(:name sage-mode :after (user/sage-mode-init))))
 
 

@@ -11,7 +11,7 @@
   (add-hook 'gnuplot-mode-hook 'user/gnuplot-mode-hook)
   (add-auto-mode 'gnuplot-mode "\\.gp$"))
 
-(when *has-gnuplot*
+(with-executable 'gnuplot
   (require-package '(:name gnuplot-mode :after (user/gnuplot-mode-init))))
 
 

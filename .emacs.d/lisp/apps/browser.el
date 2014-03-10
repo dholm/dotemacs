@@ -1,4 +1,4 @@
-;;; w3m.el --- w3m integration
+;;; browser.el --- Web browsing.
 ;;; Commentary:
 ;;; Code:
 
@@ -15,6 +15,13 @@
   "w3m display hook for URL."
   (rename-buffer
    (format "*w3m: %s*" (or w3m-current-title w3m-current-url) 50) t))
+
+
+(defun user/url-init ()
+  "Initialize URL package."
+  (setq-default
+   ;; Automatically cache all documents.
+   url-automatic-caching t))
 
 
 (defun user/w3m-init ()
@@ -38,11 +45,7 @@
    ;; Automatically restore crashed sessions.
    w3m-session-load-crashed-sessions t
    ;; Display page title in header line.
-   w3m-use-header-line-title t
-   ;; Set the default URL browser to w3m.
-   browse-url-browser-function 'w3m-browse-url
-   ;; Automatically cache all URLs.
-   url-automatic-caching t)
+   w3m-use-header-line-title t)
 
   (when (display-graphic-p)
     (setq-default
@@ -57,15 +60,29 @@
 
   (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
 
-  (add-hook 'w3m-display-hook 'user/w3m-display-hook)
+  (add-hook 'w3m-display-hook 'user/w3m-display-hook))
+
+
+(defun user/browser-init ()
+  "Initialize web browsing in Emacs."
+  (user/url-init)
+
+  (with-executable 'w3m
+    (require-package '(:name emacs-w3m :after (user/w3m-init))))
+
+  ;; Set the default web browser.
+  (setq-default browse-url-browser-function
+                (cond
+                 ((featurep 'eww) 'eww-browse-url)
+                 ((executable-find "w3m") 'w3m-browse-url)
+                 (t 'browse-url-default-browser)))
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :browser 'w3m)
   (user/bind-key-global :nav :open 'browse-url-at-point))
 
-(when *has-w3m*
-  (require-package '(:name emacs-w3m :after (user/w3m-init))))
+(user/browser-init)
 
 
-(provide 'apps/w3m)
-;;; w3m.el ends here
+(provide 'apps/browser)
+;;; browser.el ends here
