@@ -6,7 +6,7 @@
   "Initialize tramp."
   (setq-default
    ;; Default file transfer method.
-   tramp-default-method "ssh"
+   tramp-default-method "scp"
    ;; Cache passwords.
    password-cache t
    password-cache-expiry 1000
