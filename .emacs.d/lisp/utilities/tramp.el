@@ -13,8 +13,7 @@
    ;; Persistency files.
    tramp-persistency-file-name (path-join *user-cache-directory* "tramp")
    ;; Auto save storage.
-   tramp-auto-save-directory (path-join *user-cache-directory* "tramp"
-                                        "auto-saves"))
+   tramp-auto-save-directory (path-join *user-auto-save-directory* "tramp"))
 
   ;; Load SSH configuration
   (after-load 'dash
