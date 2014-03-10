@@ -12,25 +12,17 @@
   (user/bind-key-local :code :spellcheck-add-word 'user/flyspell-add-word-to-dict))
 
 
-(defun user/flyspell-lazy-init ()
-  "Initialize fly spell lazy."
-  (flyspell-lazy-mode t))
-
-
 (defun user/flyspell-init ()
   "Initialize fly spell."
+  (setq-default
+   ;; Be silent when checking words.
+   flyspell-issue-message-flag nil)
+
   (when *has-aspell*
     (setq-default
      ispell-program-name "aspell"
      ispell-list-command "--list"
      ispell-extra-args '("--sug-mode=ultra")))
-
-  (require-package '(:name flyspell-lazy
-                           :type github
-                           :pkgname "rolandwalker/flyspell-lazy"
-                           :features (flyspell-lazy)
-                           :after (user/flyspell-lazy-init)))
-  (require-package '(:name auto-dictionary))
 
   (add-hook 'flyspell-mode-hook 'user/flyspell-mode-hook)
 
@@ -52,7 +44,8 @@
       (ispell-pdict-save t))))
 
 (when (or *has-ispell* *has-aspell*)
-  (user/flyspell-init))
+  (require-package '(:name flyspell :after (user/flyspell-init)))
+  (require-package '(:name auto-dictionary)))
 
 
 (provide 'utilities/flyspell)
