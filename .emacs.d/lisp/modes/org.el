@@ -31,7 +31,7 @@
     (make-directory agenda-data-store t))
 
   (when (not noninteractive)
-    ;; When running in batch, don't try to setup windows.
+    ;; When running in batch, don't setup windows.
     (setq-default
      ;; Show agenda in current window.
      org-agenda-window-setup 'current-window))
@@ -59,9 +59,12 @@
    ;; Fontify code blocks by default.
    org-src-fontify-natively t
    ;; Tab should operate according to local mode.
-   org-src-tab-acts-natively t)
+   org-src-tab-acts-natively t
+   ;; Prevent editing of invisible regions.
+   org-catch-invisible-edits 'error)
 
   (when (not noninteractive)
+    ;; When running in batch, don't setup time tracking.
     (setq-default
      ;; Remove clock line if time is zero.
      org-clock-out-remove-zero-time-clocks t
