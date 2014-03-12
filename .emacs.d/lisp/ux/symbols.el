@@ -10,12 +10,6 @@
     (diminish 'page-break-lines-mode)))
 
 
-(defun user/pretty-mode-init ()
-  "Initialize pretty mode."
-  ;; Enable pretty mode plus globally
-  (global-pretty-mode t))
-
-
 (defun user/symbols-init ()
   "Initialize Emacs symbol handling."
   ;;; (Packages) ;;;
@@ -23,7 +17,7 @@
 
   (require 'ux/coding)
   (when (eq default-terminal-coding-system 'utf-8)
-    (require-package '(:name pretty-mode-plus :after (user/pretty-mode-init)))))
+    (require-package '(:name pretty-mode-plus))))
 
 (user/symbols-init)
 
