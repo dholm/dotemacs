@@ -40,6 +40,27 @@
   (user/bind-key-global :apps :agenda 'org-agenda))
 
 
+(defun user/org-annotate-file ()
+  "Annotate the current buffer."
+  (interactive)
+  (setq-local
+   ;; Create annotated file next to original.
+   org-annotate-file-storage-file (concat buffer-file-name ".org"))
+  (org-annotate-file))
+
+
+(defun user/org-annotate-file-init ()
+  "Initialize org mode file annotation."
+  (setq-default
+   ;; Add link to current line number.
+   org-annotate-file-add-search t)
+
+  (autoload 'org-annotate-file "org-annotate-file" nil t)
+
+  ;;; (Bindings) ;;;
+  (user/bind-key-global :util :annotate-buffer 'user/org-annotate-file))
+
+
 (defun user/org-mode-init ()
   "Initialize Lua mode."
   (setq-default
@@ -85,6 +106,7 @@
      org-startup-with-inline-images t))
 
   (user/org-agenda-init)
+  (user/org-annotate-file-init)
 
   (add-hook 'org-mode-hook 'user/org-mode-hook))
 

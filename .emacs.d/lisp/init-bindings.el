@@ -267,7 +267,9 @@
               (:gutter . (user/vcs-prefix "g"))))
 
      ;;; (Utilities) ;;;
-     (:util . ((:ace-jump-mode . (user/navigation-prefix "a"))
+     (:util . ((:annotate-buffer . (user/utilities-prefix "a"))
+
+               (:ace-jump-mode . (user/navigation-prefix "a"))
 
                (:ecb-toggle . (user/utilities-prefix "e"))
 
