@@ -30,8 +30,8 @@
   ;;; (Bindings) ;;;
   (when (el-get-package-is-installed 'nose)
     (user/bind-key-local :code :test 'nosetests-all))
-  (when (el-get-package-is-installed 'virtualenv)
-    (user/bind-key-local :code :virtual 'virtualenv-workon)))
+  (when (el-get-package-is-installed 'pyvenv)
+    (user/bind-key-local :code :virtual 'pyvenv-workon)))
 
 
 (defun user/python-mode-cedet-hook ()
@@ -82,7 +82,7 @@
   (require-package '(:name rope))
   (require-package '(:name pylookup))
   (require-package '(:name nose))
-  (require-package '(:name virtualenv))
+  (require-package '(:name pyvenv))
   (require-package '(:name jedi :after (user/jedi-init)))
 
   (add-interpreter-mode 'python-mode "python")
