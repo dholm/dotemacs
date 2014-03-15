@@ -14,23 +14,23 @@
   (when project
     (let ((root-path (ede-project-root-directory project))
           (include-paths (oref project include-path)))
-      (mapcar #'(lambda (path) (expand-file-name path root-path)) include-paths))))
+      (mapcar #'(lambda (path) (expand-file-name path root-path))
+              include-paths))))
 
 
 (defun user/ffip-project-root (path)
   "Use find-file-in-project to locate root from PATH."
-  (when (el-get-package-is-installed 'find-file-in-project)
-    (require 'find-file-in-project)
+  (with-feature 'find-file-in-project
     (let ((path-directory (file-name-directory path)))
       (or ffip-project-root
-         (if (functionp ffip-project-root-function)
-             (funcall ffip-project-root-function)
-           (if (listp ffip-project-file)
-               (some (apply-partially 'locate-dominating-file
-                                      path-directory)
-                     ffip-project-file)
-             (locate-dominating-file path-directory
-                                     ffip-project-file)))))))
+          (if (functionp ffip-project-root-function)
+              (funcall ffip-project-root-function)
+            (if (listp ffip-project-file)
+                (cl-some (apply-partially 'locate-dominating-file
+                                          path-directory)
+                         ffip-project-file)
+              (locate-dominating-file path-directory
+                                      ffip-project-file)))))))
 
 
 (defun user/project-root (path)
@@ -49,6 +49,16 @@
       (cond
        (ede-proj (user/ede-project-include-paths ede-proj))
        (t nil)))))
+
+
+(defun user/project-name (path)
+  "Name of project at PATH."
+  (when path
+    (let ((ede-proj (user/ede-project (file-truename path))))
+      (cond
+       (ede-proj (ede-name ede-proj))
+       (t (file-name-nondirectory
+           (directory-file-name (user/ffip-project-root path))))))))
 
 
 (defun user/project-p (path)
