@@ -168,9 +168,9 @@
 +trash  \"Trash\"
 +draft  \"Drafts\"
 
-Gmail{
+Gmail {
     %inbox:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Inbox\"
-    Labels{
+    Labels {
         %[Gmail]/Important:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Important\"
         %[Gmail]/Drafts:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Drafts\"
         %[Gmail]/All Mail:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"All Mail\"
@@ -179,7 +179,6 @@ Gmail{
         %[Gmail]/Spam:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Spam\"
         %[Gmail]/Trash:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Trash\"
     }
-    %Org-Mode:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Org-Mode\"
 }
 "))
     (with-temp-buffer
