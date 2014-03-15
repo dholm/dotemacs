@@ -9,6 +9,9 @@
 
 (defun user/org-mode-hook ()
   "Org mode hook."
+  (when org-modules-loaded
+    (org-load-modules-maybe 'force))
+
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :context-promote 'org-shiftup)
   (user/bind-key-local :code :context-demote 'org-shiftdown))
@@ -29,6 +32,8 @@
 
     ;; Ensure that agenda data store exists.
     (make-directory agenda-data-store t))
+
+  (add-to-list 'org-modules 'org-agenda)
 
   (when (not noninteractive)
     ;; When running in batch, don't setup windows.
@@ -54,6 +59,8 @@
   (setq-default
    ;; Add link to current line number.
    org-annotate-file-add-search t)
+
+  (add-to-list 'org-modules 'org-annotate-file)
 
   (autoload 'org-annotate-file "org-annotate-file" nil t)
 
@@ -83,6 +90,60 @@
    org-src-tab-acts-natively t
    ;; Prevent editing of invisible regions.
    org-catch-invisible-edits 'error)
+
+  ;; Org modules to load by default.
+  (setq org-modules
+        (append org-modules
+                '(;; File attachment manager.
+                  org-attach
+                  ;; Link to BibTeX entries.
+                  org-bibtex
+                  ;; Link to tags.
+                  org-ctags
+                  ;; Org file export.
+                  org-export
+                  ;; Support links to info pages.
+                  org-info
+                  ;; Support links to man pages.
+                  org-man
+                  ;; Export org buffer to MIME email message.
+                  org-mime
+                  ;; Embed source code in org-mode.
+                  org-src)))
+
+  ;; Org babel modules to load by default.
+  (setq org-modules
+        (append org-modules
+                '(;; Emacs Lisp support.
+                  org-emacs-lisp)))
+
+  ;; Org export modules to load by default.
+  (setq org-modules
+        (append org-modules
+                '(;; Ascii support.
+                  ox-ascii
+                  ;; OpenDocument Text support.
+                  ox-odt)))
+
+  (when (el-get-package-is-installed 'bbdb)
+    (setq org-modules (append org-modules '(org-bbdb))))
+  (when (el-get-package-is-installed 'emacs-w3m)
+    (setq org-modules (append org-modules '(org-w3m))))
+  (when (el-get-package-is-installed 'wanderlust)
+    (setq org-modules (append org-modules '(org-wl))))
+
+  (with-executable 'ditaa
+    (setq org-modules (append org-modules '(ob-ditaa))))
+  (with-executable 'dot
+    (setq org-modules (append org-modules '(ob-dot))))
+  (with-executable 'git
+    (setq org-modules (append org-modules '(org-git-link org-magit))))
+  (with-executable 'gnuplot
+    (setq org-modules (append org-modules '(ob-gnuplot))))
+  (with-executable 'latex
+    (setq org-modules (append org-modules '(ox-beamer ox-latex))))
+  (with-executable 'R
+    (setq org-modules (append org-modules '(org-R ob-R))))
 
   (when (not noninteractive)
     ;; When running in batch, don't setup time tracking.
