@@ -1,4 +1,4 @@
-;;; emacs.local.el --- local Emacs configuration
+;;; .emacs.local.el --- local Emacs configuration
 ;;; Commentary:
 ;;; Code:
 
@@ -6,6 +6,7 @@
   ;; Generic EDE project example.
   (when (file-exists-p "/path/to/project/root/file")
     (ede-cpp-root-project "Project"
+                          :name "Project Name"
                           :file "/path/to/project/root/file"
                           :include-path '("libc" "libd")
                           :system-include-path '()
@@ -21,4 +22,4 @@
 
 
 (provide '.emacs.local)
-;;; emacs.local.el ends here
+;;; .emacs.local.el ends here
