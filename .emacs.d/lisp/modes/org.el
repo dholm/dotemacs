@@ -45,13 +45,23 @@
   (user/bind-key-global :apps :agenda 'org-agenda))
 
 
+(defun user/org-annotate-file-storage-file ()
+  "Get the path to the annotation storage file."
+  (if (user/current-path-apply 'user/project-p)
+      (let ((project-root (user/current-path-apply 'user/project-root))
+            (project-name (user/current-path-apply 'user/project-name)))
+        (path-join project-root (concat project-name ".org")))
+    org-annotate-file-storage-file))
+
+
 (defun user/org-annotate-file ()
   "Annotate the current buffer."
   (interactive)
-  (setq-local
-   ;; Create annotated file next to original.
-   org-annotate-file-storage-file (concat buffer-file-name ".org"))
-  (org-annotate-file))
+  (with-feature 'org-annotate-file
+    (let ((storage-file (user/org-annotate-file-storage-file))
+          (popwin-config '(:position :bottom)))
+      (popwin:display-buffer-1 (org-annotate-file-show-section storage-file)
+                               :default-config-keywords popwin-config))))
 
 
 (defun user/org-annotate-file-init ()
@@ -73,6 +83,9 @@
   (setq-default
    ;; Notes data store.
    org-default-notes-file (path-join *user-org-data-directory* "notes.org")
+   ;; Annotations data store.
+   org-annotate-file-storage-file (path-join *user-org-data-directory*
+                                             "annotations.org")
    ;; Pressing return on a link follows it.
    org-return-follows-link t
    ;; Log time for TODO state changes.
