@@ -24,10 +24,10 @@
 
 
 ;; Install benchmark-init if present.
-(let ((benchmark-init-path (path-join *user-el-get-directory* "benchmark-init")))
-  (add-to-list 'load-path benchmark-init-path)
-  (with-feature 'benchmark-init
-    (benchmark-init/install)))
+(let ((benchmark-init.el (path-join *user-el-get-directory*
+                                    "benchmark-init" "benchmark-init.el")))
+  (when (file-exists-p benchmark-init.el)
+    (load benchmark-init.el)))
 
 
 ;; Set up package management.
