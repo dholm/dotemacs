@@ -5,8 +5,7 @@
 (defun user/cedet-hook ()
   "Hook for modes with CEDET support."
   (when (featurep 'cedet)
-    ;; Use semantic as a source for auto complete
-    ;; add
+    ;; Use semantic as a source for auto complete.
     (add-ac-sources 'ac-source-semantic)
 
     (after-load 'cedet-global
@@ -22,6 +21,12 @@
     (user/bind-key-local :nav :references 'semantic-symref)
 
     (user/bind-key-local :doc :describe 'semantic-ia-show-doc)))
+
+
+(defun user/ede-minor-mode-hook ()
+  "Hook for EDE minor mode."
+  (when (el-get-package-is-installed 'ede-compdb)
+    (require 'ede-compdb)))
 
 
 (defun user/cedet-before-init ()
@@ -95,6 +100,7 @@
   ;;; (EDE) ;;;
   (global-ede-mode t)
   (ede-enable-generic-projects)
+  (add-hook 'ede-minor-mode-hook 'user/ede-minor-mode-hook)
 
 
   ;;; (Functions) ;;;
@@ -147,10 +153,10 @@
     (user/cedet-gnu-global-create/update)
     (user/cedet-gnu-idutils-create/update)))
 
-
 (require-package '(:name cedet
                          :before (user/cedet-before-init)
                          :after (user/cedet-init)))
+(require-package '(:name ede-compdb))
 
 
 (provide 'utilities/cedet)
