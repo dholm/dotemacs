@@ -192,7 +192,13 @@
 
   ;;; (Packages) ;;;
   (require-package '(:name org-mode :after (user/org-mode-init)))
-  (require-package '(:name org-caldav)))
+  (require-package '(:name org-caldav))
+
+  (when (el-get-package-is-installed 'org-mode)
+    ;; Override org-mode built into Emacs.
+    (let ((org-mode-path (path-join (el-get-package-directory 'org-mode) "lisp")))
+      (add-to-list 'load-path org-mode-path)
+      (load (path-join org-mode-path "org-loaddefs.el")))))
 
 (user/org-init)
 
