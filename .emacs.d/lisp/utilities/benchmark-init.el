@@ -2,10 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(require-package '(:name benchmark-init
-                         :type github
-                         :depends (ctable)
-                         :pkgname "dholm/benchmark-init-el"))
+(require-package '(:name benchmark-init))
 
 
 (provide 'utilities/benchmark-init)

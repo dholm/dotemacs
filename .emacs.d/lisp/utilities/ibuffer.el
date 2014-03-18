@@ -11,15 +11,18 @@
 
 (defun user/ibuffer-init ()
   "Initialize improved buffer."
-  (setq-default ibuffer-filter-group-name-face 'font-lock-doc-face)
+  (setq-default
+   ibuffer-filter-group-name-face 'font-lock-doc-face)
+
+  (add-hook 'ibuffer-hook 'user/ibuffer-hook)
+
+  ;;; (Bindings) ;;;
   (global-set-key [remap list-buffers] 'ibuffer)
-  (add-hook 'ibuffer-hook 'user/ibuffer-hook))
+
+  ;;; (Packages) ;;;
+  (require-package '(:name ibuffer-vc)))
 
 (user/ibuffer-init)
-
-(require-package '(:name ibuffer-vc
-                         :type github
-                         :pkgname "purcell/ibuffer-vc"))
 
 
 (provide 'utilities/ibuffer)
