@@ -113,8 +113,6 @@
                   org-bibtex
                   ;; Link to tags.
                   org-ctags
-                  ;; Org file export.
-                  org-export
                   ;; Support links to info pages.
                   org-info
                   ;; Support links to man pages.
@@ -128,7 +126,7 @@
   (setq org-modules
         (append org-modules
                 '(;; Emacs Lisp support.
-                  org-emacs-lisp)))
+                  ob-emacs-lisp)))
 
   ;; Org export modules to load by default.
   (setq org-modules
@@ -150,13 +148,13 @@
   (with-executable 'dot
     (setq org-modules (append org-modules '(ob-dot))))
   (with-executable 'git
-    (setq org-modules (append org-modules '(org-git-link org-magit))))
+    (setq org-modules (append org-modules '(org-git-link))))
   (with-executable 'gnuplot
     (setq org-modules (append org-modules '(ob-gnuplot))))
   (with-executable 'latex
-    (setq org-modules (append org-modules '(ox-beamer ox-latex))))
+    (setq org-modules (append org-modules '(ob-latex ox-beamer))))
   (with-executable 'R
-    (setq org-modules (append org-modules '(org-R ob-R))))
+    (setq org-modules (append org-modules '(ob-R))))
 
   (when (not noninteractive)
     ;; When running in batch, don't setup time tracking.
