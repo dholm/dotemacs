@@ -293,11 +293,12 @@
                (:wc-mode . (user/utilities-prefix "w"))))
 
      ;;; (Applications) ;;;
-     (:apps . ((:browser . (user/apps-prefix "b"))
-               (:agenda . (user/apps-prefix "a"))
-               (:email . (user/apps-prefix "e"))
-               (:instant-messenger . (user/apps-prefix "i"))
+     (:apps . ((:agenda . (user/apps-prefix "a"))
                (:notes . (user/apps-prefix "n"))
+               (:capture-task . (user/apps-prefix "c"))
+               (:email . (user/apps-prefix "e"))
+               (:browser . (user/apps-prefix "b"))
+               (:instant-messenger . (user/apps-prefix "i"))
 
                (:ipython-notebook . (user/apps-prefix "N"))
 
