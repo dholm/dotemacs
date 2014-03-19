@@ -135,6 +135,8 @@
                 (:search-forward . "C-s")
                 (:search-backward . "C-r")
                 (:search-files . (user/navigation-prefix "f"))
+                (:swoop . "M-i")
+                (:swoop-multi . "C-M-i")
 
                 (:selection-start . "C-SPC")
                 (:selection-expand . "C-=")

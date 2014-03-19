@@ -134,11 +134,33 @@
   (user/bind-key-global :basic :open-file-context 'helm-cmd-t))
 
 
+(defun user/helm-swoop-init ()
+  "Initialize Helm Swoop."
+  (setq-default
+   ;; Split window vertically when swooping.
+   helm-swoop-split-direction 'split-window-horizontally)
+
+  ;;; (Bindings) ;;;
+  (user/bind-key-global :basic :swoop 'helm-swoop)
+  (user/bind-key-global :basic :swoop-multi 'helm-swoop-multi)
+  (define-key isearch-mode-map
+    (user/get-key :basic :swoop) 'helm-swoop-from-isearch)
+  (after-load 'helm-swoop
+    ;; From helm-swoop to helm-multi-swoop-all
+    (define-key helm-swoop-map
+      (user/get-key :basic :swoop) 'helm-multi-swoop-all-from-helm-swoop)))
+
+
 (require-package '(:name helm :after (user/helm-init)))
 (require-package '(:name helm-descbinds :after (user/helm-descbinds-init)))
 (require-package '(:name helm-etags-plus))
 (require-package '(:name helm-build-command))
 (require-package '(:name helm-cmd-t :after (user/helm-cmd-t-init)))
+(require-package '(:name helm-swoop
+                         :type github
+                         :pkgname "ShingoFukuyama/helm-swoop"
+                         :depends (helm)
+                         :after (user/helm-swoop-init)))
 
 (with-executable 'git
   (require-package '(:name helm-ls-git)))
