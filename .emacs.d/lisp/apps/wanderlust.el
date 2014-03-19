@@ -19,16 +19,18 @@
 (defun user/bbdbv3-wl-init-hook ()
   "BBDBv3 Wanderlust initiatlization hook."
   (user/bbdb-init-hook)
-  (require 'bbdbV3-wl)
-
-  ;;; (Bindings) ;;;
-  (define-key wl-draft-mode-map (user/get-key :code :complete) 'bbdb-complete-name))
+  (require 'bbdbV3-wl))
 
 
 (defun user/wl-init-hook ()
   "Wanderlust initialization hook."
   (when (el-get-package-is-installed 'bbdbv3-wl)
     (user/bbdbv3-wl-init-hook))
+
+  (when (el-get-package-is-installed 'org-mode)
+    (require 'org-mime)
+    (setq-default
+     org-mime-library 'semi))
 
   (setq-default
    ;; Show mail status in mode line.
@@ -111,7 +113,11 @@
   "Wanderlust message buffer created hook."
   (setq
    ;; Fold lines that are too long.
-   truncate-lines nil))
+   truncate-lines nil)
+
+  ;;; (Bindings) ;;;
+  (user/bind-key-local :code :complete 'bbdb-complete-name)
+  (user/bind-key-local :code :compile 'org-mime-htmlize))
 
 
 (defun user/wl-message-redisplay-hook ()
