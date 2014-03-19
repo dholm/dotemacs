@@ -5,6 +5,60 @@
 (defun user/cedet-hook ()
   "Hook for modes with CEDET support."
   (when (featurep 'cedet)
+    ;;; (Semantic) ;;;
+    (require 'semantic/ia)
+
+    ;; Scan source code automatically during idle time.
+    (global-semantic-idle-scheduler-mode t)
+    ;; Highlight the first line of the current tag.
+    (global-semantic-highlight-func-mode t)
+    ;; Initiate inline completion automatically during idle time.
+    (global-semantic-idle-completions-mode t)
+    ;; Show breadcrumbs during idle time.
+    (setq-default
+     semantic-idle-breadcrumbs-format-tag-function 'semantic-format-tag-summarize
+     semantic-idle-breadcrumbs-separator " ⊃ "
+     semantic-idle-breadcrumbs-header-line-prefix " ≝ ")
+    (global-semantic-idle-breadcrumbs-mode t)
+    ;; Show summary of tag at point during idle time.
+    (global-semantic-idle-summary-mode t)
+
+    ;; Enable [ec]tags support
+    (when (and (fboundp 'cedet-ectag-version-check)
+               (cedet-ectag-version-check t))
+      (semantic-load-enable-primary-ectags-support))
+
+    ;; Enable semantic
+    (semantic-mode t)
+
+    ;;; (SemanticDB) ;;;
+    (require 'semantic/db)
+    (global-semanticdb-minor-mode t)
+
+    (when (cedet-cscope-version-check t)
+      ;; Use CScope as a database for SemanticDB
+      (when (fboundp 'semanticdb-enable-cscope-databases)
+        (semanticdb-enable-cscope-databases))
+      ;; Use CScope as a source for EDE
+      (setq ede-locate-setup-options
+            '(ede-locate-cscope ede-locate-base)))
+
+    ;; Enable GNU Global if available
+    (when (and (fboundp 'cedet-gnu-global-version-check)
+               (cedet-gnu-global-version-check t))
+      (semanticdb-enable-gnu-global-databases 'c-mode)
+      (semanticdb-enable-gnu-global-databases 'c++-mode))
+
+    ;;; (Context Menu) ;;;
+    (when (display-graphic-p)
+      (global-cedet-m3-minor-mode t)
+      (local-set-key [mouse-2] 'cedet-m3-menu-kbd))
+
+    ;;; (EDE) ;;;
+    (global-ede-mode t)
+    (ede-enable-generic-projects)
+    (add-hook 'ede-minor-mode-hook 'user/ede-minor-mode-hook)
+
     ;; Use semantic as a source for auto complete.
     (add-ac-sources 'ac-source-semantic)
 
@@ -43,65 +97,6 @@
   ;; Register missing autoloads
   (autoload 'cedet-cscope-version-check "cedet-cscope")
   (autoload 'cedet-idutils-version-check "cedet-idutils")
-
-
-  ;;; (Semantic) ;;;
-  (require 'semantic/ia)
-
-  ;; Scan source code automatically during idle time.
-  (global-semantic-idle-scheduler-mode t)
-  ;; Highlight the first line of the current tag.
-  (global-semantic-highlight-func-mode t)
-  ;; Initiate inline completion automatically during idle time.
-  (global-semantic-idle-completions-mode t)
-  ;; Show breadcrumbs during idle time.
-  (setq-default
-   semantic-idle-breadcrumbs-format-tag-function 'semantic-format-tag-summarize
-   semantic-idle-breadcrumbs-separator " ⊃ "
-   semantic-idle-breadcrumbs-header-line-prefix " ≝ ")
-  (global-semantic-idle-breadcrumbs-mode t)
-  ;; Show summary of tag at point during idle time.
-  (global-semantic-idle-summary-mode t)
-
-  ;; Enable [ec]tags support
-  (when (and (fboundp 'cedet-ectag-version-check)
-             (cedet-ectag-version-check t))
-    (semantic-load-enable-primary-ectags-support))
-
-  ;; Enable semantic
-  (semantic-mode t)
-
-
-  ;;; (SemanticDB) ;;;
-  (require 'semantic/db)
-  (global-semanticdb-minor-mode t)
-
-  (when (cedet-cscope-version-check t)
-    ;; Use CScope as a database for SemanticDB
-    (when (fboundp 'semanticdb-enable-cscope-databases)
-      (semanticdb-enable-cscope-databases))
-    ;; Use CScope as a source for EDE
-    (setq-default ede-locate-setup-options '(ede-locate-cscope
-                                             ede-locate-base)))
-
-  ;; Enable GNU Global if available
-  (when (and (fboundp 'cedet-gnu-global-version-check)
-             (cedet-gnu-global-version-check t))
-    (semanticdb-enable-gnu-global-databases 'c-mode)
-    (semanticdb-enable-gnu-global-databases 'c++-mode))
-
-
-  ;;; (Context Menu) ;;;
-  (when (display-graphic-p)
-    (global-cedet-m3-minor-mode t)
-    (local-set-key [mouse-2] 'cedet-m3-menu-kbd))
-
-
-  ;;; (EDE) ;;;
-  (global-ede-mode t)
-  (ede-enable-generic-projects)
-  (add-hook 'ede-minor-mode-hook 'user/ede-minor-mode-hook)
-
 
   ;;; (Functions) ;;;
   (defun user/ede-get-local-var (fname var)
