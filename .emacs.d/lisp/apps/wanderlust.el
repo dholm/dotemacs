@@ -36,7 +36,7 @@
                               wl-modeline-biff-state-on
                               wl-modeline-biff-state-off) global-mode-string))
 
-  ;; Set up wanderlust as the default mail user agent
+  ;; Set up wanderlust as the default mail user agent.
   (if (boundp 'mail-user-agent)
       (setq mail-user-agent 'wl-user-agent))
   (if (fboundp 'define-mail-user-agent)
@@ -83,7 +83,7 @@
    elmo-archive-folder-path *user-wanderlust-data-directory*
    ;; ELMO's cache go into the user cache directory.
    elmo-cache-directory (path-join *user-wanderlust-cache-directory* "elmo")
-   ;; Use modified UTF-8 for IMAP4
+   ;; Use modified UTF-8 for IMAP4.
    elmo-imap4-use-modified-utf7 t))
 
 
@@ -123,43 +123,49 @@
 (defun user/wanderlust-set-gmail-user (fullname username)
   "Configure Wanderlust to use \"FULLNAME\" <USERNAME@gmail.com>."
   (make-directory *user-wanderlust-data-directory* t)
-  (let ((email-address (concat username "@gmail.com")))
+  (let ((email-address (concat username "@gmail.com"))
+        (folder-template (format "\\\%[Gmail]/\%s:%s/clear@imap.gmail.com:993!" username)))
     (after-load 'wanderlust
       (unless (file-exists-p wl-folders-file)
         (user/wanderlust-create-folders-gmail username wl-folders-file)))
-    (setq-default
-     ;; Setup mail-from
-     wl-from (concat fullname " <" email-address ">")
-     ;; Sane forward tag
-     wl-forward-subject-prefix "Fwd: ")
-
-    ;; IMAP
-    (setq-default
-     elmo-imap4-default-server "imap.gmail.com"
-     elmo-imap4-default-user email-address
-     elmo-imap4-default-authenticate-type 'clear
-     elmo-imap4-default-port '993
-     elmo-imap4-default-stream-type 'ssl)
-
-    ;; SMTP
-    (setq-default
-     wl-smtp-connection-type 'starttls
-     wl-smtp-posting-port 587
-     wl-smtp-authenticate-type "plain"
-     wl-smtp-posting-user username
-     wl-smtp-posting-server "smtp.gmail.com"
-     wl-local-domain "gmail.com")
-
-    ;; Folders
-    (setq-default
-     wl-default-folder "%inbox"
-     wl-default-spec "%"
-     wl-draft-folder "%[Gmail]/Drafts"
-     wl-spam-folder "%[Gmail]/Spam"
-     wl-trash-folder "%[Gmail]/Trash")
 
     (setq-default
-     wl-insert-message-id nil)))
+     ;; Register email address.
+     wl-user-mail-address-list
+     (append `(,email-address))
+     ;; Set up account template.
+     wl-template-alist
+     (append `((,email-address
+                (wl-from . ,(concat fullname " <" email-address ">"))
+                ("From" . wl-from)
+                (wl-insert-message-id . nil)
+                (wl-local-domain . "gmail.com")
+                (wl-message-id-domain . "smtp.gmail.com")
+                ;; IMAP
+                (elmo-imap4-default-server . "imap.gmail.com")
+                (elmo-imap4-default-user . ,email-address)
+                (elmo-imap4-default-authenticate-type . 'clear)
+                (elmo-imap4-default-port . '993)
+                (elmo-imap4-default-stream-type . 'ssl)
+                ;; SMTP
+                (wl-smtp-posting-user . ,username)
+                (wl-smtp-authenticate-type . 'plain)
+                (wl-smtp-connection-type . 'starttls)
+                (wl-smtp-posting-port . 587)
+                (wl-smtp-posting-server . "smtp.gmail.com")
+                ;; Folders
+                (wl-default-folder . "%inbox")
+                (wl-default-spec . "%")
+                (wl-draft-folder . "%[Gmail]/Drafts")
+                (wl-spam-folder . "%[Gmail]/Spam")
+                (wl-trash-folder . "%[Gmail]/Trash"))))
+     ;; Point draft configuration to correct template.
+     wl-draft-config-alist
+     (append `(((string-match ,email-address  wl-draft-parent-folder)
+                (template . ,email-address))))
+     ;; Set up trash folder for account.
+     wl-dispose-folder-alist
+     (append `((,email-address . ,(format folder-template "Trash")))))))
 
 
 (defun user/wanderlust-create-folders-gmail (username folders-file)
@@ -199,37 +205,37 @@ Gmail {
 
   (setq-default
    ;;; (Basic Configuration) ;;;
-   ;; Put configuration into wanderlust data directory
+   ;; Put configuration into wanderlust data directory.
    wl-init-file (path-join *user-wanderlust-data-directory* "init.el")
    wl-folders-file (path-join *user-wanderlust-data-directory* "folders")
    wl-address-file (path-join *user-wanderlust-data-directory* "addresses")
-   ;; Put temporary files in cache directories
+   ;; Put temporary files in cache directories.
    wl-temporary-file-directory *user-wanderlust-cache-directory*
    ssl-certificate-directory (path-join *user-cache-directory* "certs")
-   ;; Mark sent mails as read
+   ;; Mark sent mails as read.
    wl-fcc-force-as-read t
    ;; Check for mail when idle.
    wl-biff-check-interval 180
    wl-biff-use-idle-timer t
-   ;; Let SMTP server handle Message-ID
+   ;; Let SMTP server handle Message-ID.
    wl-insert-message-id nil
-   ;; Message window size
+   ;; Message window size.
    wl-message-window-size '(1 . 3)
    ;; Quit without asking.
    wl-interactive-exit nil
 
    ;;; (Folders) ;;;
-   ;; Show folders in a pane to the left
+   ;; Show folders in a pane to the left.
    wl-stay-folder-window t
    wl-folder-window-width 30
-   ;; Asynchronously update folders
+   ;; Asynchronously update folders.
    wl-folder-check-async t
 
    ;;; (Summary) ;;;
-   ;; Set verbose summary
+   ;; Set verbose summary.
    wl-summary-width nil
    wl-summary-line-format "%T%P%M/%D(%W)%h:%m %[ %17f %]%[%1@%] %t%C%s"
-   ;; UTF-8 guides
+   ;; UTF-8 guides.
    wl-thread-have-younger-brother-str "├──►"
    wl-thread-youngest-child-str       "╰──►"
    wl-thread-vertical-str             "|"
@@ -238,7 +244,7 @@ Gmail {
    wl-thread-space-str                " "
 
    ;;; (Messages) ;;;
-   ;; Field lists
+   ;; Field lists.
    wl-message-ignored-field-list '("^.*")
    wl-message-visible-field-list '("^\\(To\\|Cc\\):" "^Subject:"
                                    "^\\(From\\|Reply-To\\):" "^Organization:"
@@ -251,11 +257,19 @@ Gmail {
    ;;; (Drafts) ;;;
    ;; Raise a new frame when creating a draft.
    wl-draft-use-frame t
-   ;; Automatically save drafts every two minutes
-   wl-auto-save-drafts-interval 120.0)
+   ;; Automatically save drafts every two minutes.
+   wl-auto-save-drafts-interval 120.0
+   ;; Sane forward tag.
+   wl-forward-subject-prefix "Fwd: ")
 
   (with-feature 'fullframe
     (fullframe wl wl-exit nil))
+
+  ;; Pick email account template when opening a draft.
+  (add-hook 'wl-mail-setup-hook 'wl-draft-config-exec)
+  ;; Don't apply email account template when sending draft, otherwise switching
+  ;; templates won't work.
+  (remove-hook 'wl-draft-send-hook 'wl-draft-config-exec)
 
   (add-hook 'wl-init-hook 'user/wl-init-hook)
   (add-hook 'wl-folder-mode-hook 'user/wl-folder-mode-hook)
