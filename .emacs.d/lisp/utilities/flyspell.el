@@ -7,6 +7,9 @@
   (after-load 'diminish
     (diminish 'flyspell-mode))
 
+  (with-feature 'flyspell-lazy
+    (flyspell-lazy-mode t))
+
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :spellcheck-word 'ispell-word)
   (user/bind-key-local :code :spellcheck-add-word 'user/flyspell-add-word-to-dict))
@@ -46,6 +49,7 @@
 (when (or (executable-find "ispell")
          (executable-find "aspell"))
   (require-package '(:name flyspell :after (user/flyspell-init)))
+  (require-package '(:name flyspell-lazy))
   (require-package '(:name auto-dictionary)))
 
 
