@@ -32,12 +32,6 @@
     (setq-default
      org-mime-library 'semi))
 
-  (setq-default
-   ;; Show mail status in mode line.
-   global-mode-string (cons '(wl-modeline-biff-status
-                              wl-modeline-biff-state-on
-                              wl-modeline-biff-state-off) global-mode-string))
-
   ;; Set up wanderlust as the default mail user agent.
   (if (boundp 'mail-user-agent)
       (setq mail-user-agent 'wl-user-agent))
@@ -280,6 +274,12 @@ Gmail {
 
   (with-feature 'fullframe
     (fullframe wl wl-exit nil))
+
+  (setq-default
+   ;; Show mail status in mode line.
+   global-mode-string (cons '(wl-modeline-biff-status
+                              wl-modeline-biff-state-on
+                              wl-modeline-biff-state-off) global-mode-string))
 
   ;; Pick email account template when opening a draft.
   (add-hook 'wl-mail-setup-hook 'wl-draft-config-exec)
