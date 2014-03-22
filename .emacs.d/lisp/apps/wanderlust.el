@@ -80,7 +80,10 @@
    ;; ELMO's cache go into the user cache directory.
    elmo-cache-directory (path-join *user-wanderlust-cache-directory* "elmo")
    ;; Use modified UTF-8 for IMAP4.
-   elmo-imap4-use-modified-utf7 t))
+   elmo-imap4-use-modified-utf7 t)
+
+  (unless (executable-find "namazu")
+    (message "Namazu not found, mail will not be indexed.")))
 
 
 (defun user/supercite-init ()
@@ -103,15 +106,18 @@
   (hl-line-mode t))
 
 
+(defun user/wl-draft-mode-hook ()
+  "Wanderlust draft mode hook."
+  ;;; (Bindings) ;;;
+  (user/bind-key-local :code :complete 'bbdb-complete-name)
+  (user/bind-key-local :code :compile 'org-mime-htmlize))
+
+
 (defun user/wl-message-buffer-created-hook ()
   "Wanderlust message buffer created hook."
   (setq
    ;; Fold lines that are too long.
-   truncate-lines nil)
-
-  ;;; (Bindings) ;;;
-  (user/bind-key-local :code :complete 'bbdb-complete-name)
-  (user/bind-key-local :code :compile 'org-mime-htmlize))
+   truncate-lines nil))
 
 
 (defun user/wl-message-redisplay-hook ()
