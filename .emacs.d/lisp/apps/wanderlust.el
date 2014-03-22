@@ -11,6 +11,43 @@
   "Path to user's Wanderlust cache store.")
 
 
+(defun user/wl-folder-mode-hook ()
+  "Wanderlust folder mode hook."
+  (hl-line-mode t))
+
+
+(defun user/wl-summary-mode-hook ()
+  "Wanderlust summary mode hook."
+  (hl-line-mode t))
+
+
+(defun user/wl-draft-mode-hook ()
+  "Wanderlust draft mode hook."
+  ;;; (Bindings) ;;;
+  (user/bind-key-local :code :try-complete 'bbdb-complete-name)
+  (user/bind-key-local :code :compile 'org-mime-htmlize))
+
+
+(defun user/mime-edit-mode-hook ()
+  "Wanderlust mime edit mode hook."
+  ;; Enable org structured editing.
+  (turn-on-orgstruct)
+  (turn-on-orgstruct++))
+
+
+(defun user/wl-message-buffer-created-hook ()
+  "Wanderlust message buffer created hook."
+  (setq
+   ;; Fold lines that are too long.
+   truncate-lines nil))
+
+
+(defun user/wl-message-redisplay-hook ()
+  "Wanderlust message redisplay hook."
+  (when (display-graphic-p)
+    (smiley-region (point-min) (point-max))))
+
+
 (defun user/mail-citation-hook ()
   "Mail citation hook."
   (sc-cite-original))
@@ -33,16 +70,23 @@
      org-mime-library 'semi))
 
   ;; Set up wanderlust as the default mail user agent.
-  (if (boundp 'mail-user-agent)
-      (setq mail-user-agent 'wl-user-agent))
-  (if (fboundp 'define-mail-user-agent)
-      (define-mail-user-agent
-        'wl-user-agent
-        'wl-user-agent-compose
-        'wl-draft-send
-        'wl-draft-kill
-        'mail-send-hook))
-  (add-hook 'mail-citation-hook 'user/mail-citation-hook))
+  (when (boundp 'mail-user-agent)
+    (setq mail-user-agent 'wl-user-agent))
+
+  (when (fboundp 'define-mail-user-agent)
+    (define-mail-user-agent
+      'wl-user-agent
+      'wl-user-agent-compose
+      'wl-draft-send
+      'wl-draft-kill
+      'mail-send-hook))
+
+  (add-hook 'mail-citation-hook 'user/mail-citation-hook)
+
+  ;;; (Bindings) ;;;
+  ;; Cite original email by default.
+  (define-key wl-summary-mode-map (kbd "A") 'wl-summary-reply)
+  (define-key wl-summary-mode-map (kbd "a") 'wl-summary-reply-with-citation))
 
 
 (defun user/icalendar-import-mime-text (entity &optional situation)
@@ -88,7 +132,9 @@
      '((mode . "play")
        (type . text)
        (subtype . calendar)
-       (method . user/icalendar-import-mime-text)))))
+       (method . user/icalendar-import-mime-text))))
+
+  (add-hook 'mime-edit-mode-hook 'user/mime-edit-mode-hook))
 
 
 (defun user/elmo-init ()
@@ -118,36 +164,6 @@
    sc-nested-citation-p t
    ;; Do not confirm attribution string before citation.
    sc-confirm-always-p nil))
-
-
-(defun user/wl-folder-mode-hook ()
-  "Wanderlust folder mode hook."
-  (hl-line-mode t))
-
-
-(defun user/wl-summary-mode-hook ()
-  "Wanderlust summary mode hook."
-  (hl-line-mode t))
-
-
-(defun user/wl-draft-mode-hook ()
-  "Wanderlust draft mode hook."
-  ;;; (Bindings) ;;;
-  (user/bind-key-local :code :complete 'bbdb-complete-name)
-  (user/bind-key-local :code :compile 'org-mime-htmlize))
-
-
-(defun user/wl-message-buffer-created-hook ()
-  "Wanderlust message buffer created hook."
-  (setq
-   ;; Fold lines that are too long.
-   truncate-lines nil))
-
-
-(defun user/wl-message-redisplay-hook ()
-  "Wanderlust message redisplay hook."
-  (when (display-graphic-p)
-    (smiley-region (point-min) (point-max))))
 
 
 (defun user/wanderlust-set-gmail-user (fullname username)
