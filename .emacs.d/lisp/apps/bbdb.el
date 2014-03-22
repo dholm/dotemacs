@@ -18,7 +18,7 @@
    ;; Set up location of database.
    bbdb-file *user-bbdb-database*
    ;; Automatically save seen addresses.
-   bbdb-offer-save t
+   bbdb-offer-save 1
    ;; Use popups for address completion.
    bbdb-use-pop-up t
    ;; Pop up horizontally.
