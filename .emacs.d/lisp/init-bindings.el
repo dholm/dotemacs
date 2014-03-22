@@ -223,8 +223,9 @@
                (:itemize . (user/code-prefix "b"))
                (:enumerate . (user/code-prefix "e"))
 
-               (:complete . ("C-TAB"))
+               (:complete . "RETURN")
                (:try-complete . "TAB")
+               (:auto-complete . "C-TAB")
 
                (:context-promote . (user/code-prefix "P"))
                (:context-demote . (user/code-prefix "N"))

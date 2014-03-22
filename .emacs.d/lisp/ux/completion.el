@@ -11,7 +11,7 @@
   (after-load 'diminish
     (diminish 'auto-complete-mode))
 
-  (setq-default
+  (setq
    ;; Limit the number of candidates.
    ac-candidate-limit 20
    ;; Wait five seconds until showing completions.
@@ -47,13 +47,19 @@
 
   ;;; (Bindings) ;;;
   (ac-set-trigger-key (user/get-key :code :try-complete))
-  ;; Return should complete selected item.
-  (define-key ac-completing-map [return] nil)
-  (define-key ac-menu-map [return] 'ac-complete)
-  ;; Expand common part on tab.
-  (define-key ac-completing-map [tab] 'ac-expand-common)
-  ;; Bind auto-complete to completion key.
-  (user/bind-key-global :code :complete 'auto-complete)
+  (setq
+   ac-completing-map
+   (let ((map (make-sparse-keymap)))
+     ;; Expand on tab.
+     (define-key map (user/get-key :code :try-complete) 'ac-expand)
+     ;; Complete on enter.
+     (define-key map (user/get-key :code :complete) 'ac-complete)
+     ;; Bind configured auto complete key.
+     (define-key map (user/get-key :code :auto-complete) 'auto-complete)
+     ;; Scroll quick-help using M-n/p.
+     (define-key map (kbd "C-M-n") 'ac-quick-help-scroll-down)
+     (define-key map (kbd "C-M-p") 'ac-quick-help-scroll-up)
+     map))
 
   ;; Enable auto-completion globally.
   (global-auto-complete-mode t))
@@ -61,7 +67,7 @@
 
 (defun user/completion-init ()
   "Initialize automatic code completion."
-  (setq-default
+  (setq
    ;; Do not fall back to complete if auto-complete is unavailable.
    tab-always-indent t)
 
