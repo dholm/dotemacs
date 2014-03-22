@@ -6,6 +6,10 @@
   (path-join *user-data-directory* "org")
   "Path to user's org data store.")
 
+(defconst *user-org-cache-directory*
+  (path-join *user-cache-directory* "org")
+  "Path to user's org cache store.")
+
 
 (defun user/org-mode-hook ()
   "Org mode hook."
@@ -31,7 +35,9 @@
 
 (defun user/org-agenda-init ()
   "Initialize org agenda."
-  (let ((agenda-data-store (path-join *user-org-data-directory* "agendas")))
+  (let ((agenda-data-store (path-join *user-org-data-directory* "agendas"))
+        (tmp-diary (make-temp-file (path-join *user-org-cache-directory*
+                                              "diary"))))
     (setq-default
      ;; Agenda data store.
      org-agenda-files `(,agenda-data-store)
@@ -46,10 +52,18 @@
      ;; Compact block agenda view.
      org-agenda-compact-blocks t
      ;; Position the habit graph to the right.
-     org-habit-graph-column 50)
+     org-habit-graph-column 50
+     ;; Temporary diary that org-agenda can import from.
+     temp-diary tmp-diary
+     diary-file tmp-diary
+     org-agenda-include-diary t)
 
     ;; Ensure that agenda data store exists.
-    (make-directory agenda-data-store t))
+    (make-directory agenda-data-store t)
+
+    ;; Delete temporary diary on exit.
+    (add-to-list 'kill-emacs-hook
+                 (lambda () (delete-file temp-diary))))
 
   (add-to-list 'org-modules 'org-agenda)
 
@@ -305,6 +319,10 @@
 
 (defun user/org-init ()
   "Initialize org mode."
+  ;; Create data and cache stores.
+  (make-directory *user-org-data-directory* t)
+  (make-directory *user-org-cache-directory* t)
+
   ;; Fix for EIN if org hasn't been setup yet.
   (autoload 'org-add-link-type "org" "" t)
 

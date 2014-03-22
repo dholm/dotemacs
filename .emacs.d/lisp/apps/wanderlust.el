@@ -45,26 +45,50 @@
   (add-hook 'mail-citation-hook 'user/mail-citation-hook))
 
 
+(defun user/icalendar-import-mime-text (entity &optional situation)
+  "Import calendar from ENTITY to org agenda, SITUATION is ignored."
+  (save-excursion
+    (let ((calendar-temp-file
+           (make-temp-file
+            (path-join *user-wanderlust-cache-directory* "import.ics"))))
+      (mime-write-entity-content entity calendar-temp-file)
+      (icalendar-import-file calendar-temp-file diary-file)
+      (kill-buffer (find-buffer-visiting calendar-temp-file))
+      (delete-file calendar-temp-file))))
+
+
 (defun user/semi-init ()
   "Initialize SEMI."
   (setq-default
-   ;; MIME type priorities.
-   mime-view-type-subtype-score-alist '(((text . plain) . 4)
-                                        ((text . enriched) . 3)
-                                        ((text . html) . 2)
-                                        ((text . richtext) . 1))
    ;; Don't split large mails.
-   mime-edit-split-message nil)
+   mime-edit-split-message nil
+   ;; MIME type priorities.
+   mime-view-type-subtype-score-alist
+   '(((text . plain) . 4)
+     ((text . enriched) . 3)
+     ((text . html) . 2)
+     ((text . richtext) . 1)))
 
   (after-load 'mime-view
     (autoload 'mime-w3m-preview-text/html "mime-w3m")
+
+    ;; Use w3m to view HTML mail.
     (ctree-set-calist-strictly
      'mime-preview-condition
      '((type . text)
        (subtype . html)
        (body . visible)
        (body-presentation-method . mime-w3m-preview-text/html)))
-    (set-alist 'mime-view-type-subtype-score-alist '(text . html) 3)))
+
+    (set-alist 'mime-view-type-subtype-score-alist '(text . html) 3)
+
+    ;; Support importing calendar invites.
+    (ctree-set-calist-strictly
+     'mime-acting-condition
+     '((mode . "play")
+       (type . text)
+       (subtype . calendar)
+       (method . user/icalendar-import-mime-text)))))
 
 
 (defun user/elmo-init ()
@@ -293,12 +317,16 @@ Gmail {
   ;; templates won't work.
   (remove-hook 'wl-draft-send-hook 'wl-draft-config-exec)
 
+  ;; Configuration hooks.
   (add-hook 'wl-init-hook 'user/wl-init-hook)
-  (add-hook 'wl-folder-mode-hook 'user/wl-folder-mode-hook)
-  (add-hook 'wl-summary-mode-hook 'user/wl-summary-mode-hook)
   (add-hook 'wl-message-redisplay-hook 'user/wl-message-redisplay-hook)
   (add-hook 'wl-message-buffer-created-hook
             'user/wl-message-buffer-created-hook)
+
+  ;; Mode hooks.
+  (add-hook 'wl-folder-mode-hook 'user/wl-folder-mode-hook)
+  (add-hook 'wl-summary-mode-hook 'user/wl-summary-mode-hook)
+  (add-hook 'wl-draft-mode-hook 'user/wl-draft-mode-hook)
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :email 'wl))
