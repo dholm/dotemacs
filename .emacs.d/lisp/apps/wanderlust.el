@@ -296,6 +296,8 @@ Gmail {
    wl-thread-horizontal-str           "►"
    wl-thread-horizontal-str           "►"
    wl-thread-space-str                " "
+   ;; Display TO rather than FROM in "Sent" folders.
+   wl-summary-showto-folder-regexp ".*Sent.*"
 
    ;;; (Messages) ;;;
    ;; Field lists.
