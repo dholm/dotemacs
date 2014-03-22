@@ -128,74 +128,82 @@
 
 (defun user/wanderlust-set-gmail-user (fullname username)
   "Configure Wanderlust to use \"FULLNAME\" <USERNAME@gmail.com>."
-  (make-directory *user-wanderlust-data-directory* t)
   (let ((email-address (concat username "@gmail.com"))
-        (folder-template (format "\\\%[Gmail]/\%s:%s/clear@imap.gmail.com:993!" username)))
-    (after-load 'wanderlust
-      (unless (file-exists-p wl-folders-file)
-        (user/wanderlust-create-folders-gmail username wl-folders-file)))
+        (folder-template (format ":%s/clear@imap.gmail.com:993!" username)))
+    (unless (file-exists-p wl-folders-file)
+      (user/wanderlust-create-folders-gmail username wl-folders-file))
 
-    (setq-default
-     ;; Register email address.
-     wl-user-mail-address-list
-     (append `(,email-address))
-     ;; Set up account template.
-     wl-template-alist
-     (append `((,email-address
-                (wl-from . ,(concat fullname " <" email-address ">"))
-                ("From" . wl-from)
-                (wl-insert-message-id . nil)
-                (wl-local-domain . "gmail.com")
-                (wl-message-id-domain . "smtp.gmail.com")
-                ;; IMAP
-                (elmo-imap4-default-server . "imap.gmail.com")
-                (elmo-imap4-default-user . ,email-address)
-                (elmo-imap4-default-authenticate-type . 'clear)
-                (elmo-imap4-default-port . '993)
-                (elmo-imap4-default-stream-type . 'ssl)
-                ;; SMTP
-                (wl-smtp-posting-user . ,username)
-                (wl-smtp-authenticate-type . 'plain)
-                (wl-smtp-connection-type . 'starttls)
-                (wl-smtp-posting-port . 587)
-                (wl-smtp-posting-server . "smtp.gmail.com")
-                ;; Folders
-                (wl-default-folder . "%inbox")
-                (wl-default-spec . "%")
-                (wl-draft-folder . "%[Gmail]/Drafts")
-                (wl-spam-folder . "%[Gmail]/Spam")
-                (wl-trash-folder . "%[Gmail]/Trash"))))
-     ;; Point draft configuration to correct template.
-     wl-draft-config-alist
-     (append `(((string-match ,email-address  wl-draft-parent-folder)
-                (template . ,email-address))))
-     ;; Set up trash folder for account.
-     wl-dispose-folder-alist
-     (append `((,email-address . ,(format folder-template "Trash")))))))
+    ;; Register email address.
+    (add-to-list 'wl-user-mail-address-list email-address)
+
+    ;; Set up account template.
+    (add-to-list
+     'wl-template-alist
+     `((,email-address
+        (wl-from . ,(concat fullname " <" email-address ">"))
+        ("From" . wl-from)
+        (wl-insert-message-id . nil)
+        (wl-local-domain . "gmail.com")
+        (wl-message-id-domain . "smtp.gmail.com")
+        ;; IMAP
+        (elmo-imap4-default-server . "imap.gmail.com")
+        (elmo-imap4-default-user . ,email-address)
+        (elmo-imap4-default-authenticate-type . 'clear)
+        (elmo-imap4-default-port . '993)
+        (elmo-imap4-default-stream-type . 'ssl)
+        ;; SMTP
+        (wl-smtp-posting-user . ,username)
+        (wl-smtp-authenticate-type . 'plain)
+        (wl-smtp-connection-type . 'starttls)
+        (wl-smtp-posting-port . 587)
+        (wl-smtp-posting-server . "smtp.gmail.com")
+        ;; Folders
+        (wl-default-spec . "%")
+        (wl-default-folder . "%inbox")
+        (wl-draft-folder . "%[Gmail]/Drafts")
+        (wl-spam-folder . "%[Gmail]/Spam")
+        (wl-trash-folder . "%[Gmail]/Trash")
+        (wl-fcc . "%[Gmail]/Sent"))))
+
+    ;; Point draft configuration to correct template.
+    (add-to-list
+     'wl-draft-config-alist
+     `(((string-match ,email-address  wl-draft-parent-folder)
+        (template . ,email-address))))
+
+    ;; Set up trash folder for account.
+    (add-to-list
+     'wl-dispose-folder-alist
+     `((,email-address . ,(concat "%[Gmail]/Trash" folder-template))))
+
+    ;; Check inbox for new mail.
+    (add-to-list 'wl-biff-check-folder-list
+                 (concat "%inbox" folder-template))))
 
 
 (defun user/wanderlust-create-folders-gmail (username folders-file)
   "Write GMail folders for USERNAME@gmail.com to FOLDERS-FILE."
-  (let ((folders-template "# -*- conf-unix -*-
+  (let ((server-string (format "\"%s@gmail.com\"/clear@imap.gmail.com:993!" username))
+        (folders-template "# -*- conf-unix -*-
 +trash  \"Trash\"
 +draft  \"Drafts\"
 
 Gmail {
-    %inbox:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Inbox\"
+    %inbox:SERVER \"Inbox\"
     Labels {
-        %[Gmail]/Important:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Important\"
-        %[Gmail]/Drafts:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Drafts\"
-        %[Gmail]/All Mail:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"All Mail\"
-        %[Gmail]/Sent Mail:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Sent Mail\"
-        %[Gmail]/Starred:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Starred\"
-        %[Gmail]/Spam:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Spam\"
-        %[Gmail]/Trash:\"USERNAME@gmail.com\"/clear@imap.gmail.com:993! \"Trash\"
+        %[Gmail]/Important:SERVER \"Important\"
+        %[Gmail]/Drafts:SERVER \"Drafts\"
+        %[Gmail]/All Mail:SERVER \"All Mail\"
+        %[Gmail]/Sent Mail:SERVER \"Sent Mail\"
+        %[Gmail]/Starred:SERVER \"Starred\"
+        %[Gmail]/Spam:SERVER \"Spam\"
+        %[Gmail]/Trash:SERVER \"Trash\"
     }
 }
 "))
     (with-temp-buffer
       (insert
-       (replace-regexp-in-string "USERNAME" username folders-template t))
+       (replace-regexp-in-string "SERVER" server-string folders-template t))
       (when (file-writable-p folders-file)
        (write-region (point-min) (point-max) folders-file)))))
 
@@ -266,7 +274,9 @@ Gmail {
    ;; Automatically save drafts every two minutes.
    wl-auto-save-drafts-interval 120.0
    ;; Sane forward tag.
-   wl-forward-subject-prefix "Fwd: ")
+   wl-forward-subject-prefix "Fwd: "
+   ;; Automatically select the correct template based on folder.
+   wl-draft-config-matchone t)
 
   (with-feature 'fullframe
     (fullframe wl wl-exit nil))
@@ -287,8 +297,17 @@ Gmail {
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :email 'wl))
 
-(require-package '(:name wanderlust :after (user/wanderlust-init)))
-(require-package '(:name bbdbv3-wl))
+
+(defun user/wl-init ()
+  "Initialize wanderlust."
+  ;; Create data and cache stores.
+  (make-directory *user-wanderlust-data-directory* t)
+  (make-directory *user-wanderlust-cache-directory* t)
+
+  (require-package '(:name wanderlust :after (user/wanderlust-init)))
+  (require-package '(:name bbdbv3-wl)))
+
+(user/wl-init)
 
 
 (provide 'apps/wanderlust)
