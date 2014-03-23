@@ -17,11 +17,16 @@
    undo-tree-history-directory-alist
    `((".*" . ,*user-undo-tree-cache-directory*))
    ;; Persistent undo history.
-   undo-tree-auto-save-history t)
+   undo-tree-auto-save-history t
+   ;; Don't display in mode-line.
+   undo-tree-mode-lighter nil
+   ;; Display time stamps in visualizer by default.
+   undo-tree-visualizer-timestamps t
+   ;; Display diffs in visualizer by default.
+   undo-tree-visualizer-diff t)
 
+  ;; Enable globally.
   (global-undo-tree-mode t)
-  (after-load 'diminish
-    (diminish 'undo-tree-mode))
 
   ;; Compress undo history.
   (defadvice undo-tree-make-history-save-file-name
