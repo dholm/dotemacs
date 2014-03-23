@@ -14,7 +14,7 @@
   (user/bind-key-global :apps :instant-messenger 'garak))
 
 (when (and (pkg-config-has-p "libxml-2.0")
-         (pkg-config-has-p "purple"))
+           (pkg-config-has-p "purple"))
   (require-package '(:name elim :after (user/elim-init))))
 
 

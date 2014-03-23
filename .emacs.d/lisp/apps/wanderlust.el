@@ -290,10 +290,10 @@ Gmail {
    wl-summary-width nil
    wl-summary-line-format "%T%P%M/%D(%W)%h:%m %[ %17f %]%[%1@%] %t%C%s"
    ;; UTF-8 guides.
+   wl-thread-indent-level 0
    wl-thread-have-younger-brother-str "├──►"
+   wl-thread-vertical-str             "┃"
    wl-thread-youngest-child-str       "╰──►"
-   wl-thread-vertical-str             "|"
-   wl-thread-horizontal-str           "►"
    wl-thread-horizontal-str           "►"
    wl-thread-space-str                " "
    ;; Display TO rather than FROM in "Sent" folders.
