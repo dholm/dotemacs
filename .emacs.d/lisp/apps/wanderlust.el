@@ -48,11 +48,6 @@
     (smiley-region (point-min) (point-max))))
 
 
-(defun user/mail-citation-hook ()
-  "Mail citation hook."
-  (sc-cite-original))
-
-
 (defun user/bbdbv3-wl-init-hook ()
   "BBDBv3 Wanderlust initiatlization hook."
   (user/bbdb-init-hook)
@@ -80,8 +75,6 @@
       'wl-draft-send
       'wl-draft-kill
       'mail-send-hook))
-
-  (add-hook 'mail-citation-hook 'user/mail-citation-hook)
 
   ;;; (Bindings) ;;;
   ;; Cite original email by default.
@@ -156,14 +149,15 @@
     (message "Namazu not found, mail will not be indexed.")))
 
 
-(defun user/supercite-init ()
-  "Initialize supercite."
+(defun user/mu-cite-init ()
+  "Initialize mu-cite."
   (setq-default
-   sc-citation-leader ""
-   ;; Use nested citations.
-   sc-nested-citation-p t
-   ;; Do not confirm attribution string before citation.
-   sc-confirm-always-p nil))
+   ;; Citation format.
+   mu-cite-top-format '("On " date ", " full-name " wrote:\n")
+   ;; Use > as prefix.
+   mu-cite-prefix-format (quote ("> ")))
+
+  (add-hook 'mail-citation-hook 'mu-cite-original))
 
 
 (defun user/wanderlust-set-gmail-user (fullname username)
@@ -252,8 +246,6 @@ Gmail {
   "Initialize Wanderlust."
   (el-get-eval-after-load 'semi
     (user/semi-init))
-  (after-load 'supercite
-    (user/supercite-init))
   (after-load 'elmo
     (user/elmo-init))
 
@@ -357,6 +349,7 @@ Gmail {
   (make-directory *user-wanderlust-cache-directory* t)
 
   (require-package '(:name wanderlust :after (user/wanderlust-init)))
+  (require-package '(:name mu-cite :after (user/mu-cite-init)))
   (require-package '(:name bbdbv3-wl)))
 
 (user/wl-init)
