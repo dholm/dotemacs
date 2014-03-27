@@ -163,7 +163,7 @@
 (defun user/wanderlust-set-gmail-user (fullname username)
   "Configure Wanderlust to use \"FULLNAME\" <USERNAME@gmail.com>."
   (let ((email-address (concat username "@gmail.com"))
-        (folder-template (format ":%s/clear@imap.gmail.com:993!" username)))
+        (folder-template (format "\"%s@gmail.com\"/clear@imap.gmail.com:993!" username)))
     (unless (file-exists-p wl-folders-file)
       (user/wanderlust-create-folders-gmail username wl-folders-file))
 
@@ -173,42 +173,42 @@
     ;; Set up account template.
     (add-to-list
      'wl-template-alist
-     `((,email-address
-        (wl-from . ,(concat fullname " <" email-address ">"))
-        ("From" . wl-from)
-        (wl-insert-message-id . nil)
-        (wl-local-domain . "gmail.com")
-        (wl-message-id-domain . "smtp.gmail.com")
-        ;; IMAP
-        (elmo-imap4-default-server . "imap.gmail.com")
-        (elmo-imap4-default-user . ,email-address)
-        (elmo-imap4-default-authenticate-type . 'clear)
-        (elmo-imap4-default-port . '993)
-        (elmo-imap4-default-stream-type . 'ssl)
-        ;; SMTP
-        (wl-smtp-posting-user . ,username)
-        (wl-smtp-authenticate-type . 'plain)
-        (wl-smtp-connection-type . 'starttls)
-        (wl-smtp-posting-port . 587)
-        (wl-smtp-posting-server . "smtp.gmail.com")
-        ;; Folders
-        (wl-default-spec . "%")
-        (wl-default-folder . "%inbox")
-        (wl-draft-folder . "%[Gmail]/Drafts")
-        (wl-spam-folder . "%[Gmail]/Spam")
-        (wl-trash-folder . "%[Gmail]/Trash")
-        (wl-fcc . "%[Gmail]/Sent"))))
+     `(,email-address
+       (wl-from . ,(concat fullname " <" email-address ">"))
+       ("From" . wl-from)
+       (wl-insert-message-id . nil)
+       (wl-local-domain . "gmail.com")
+       (wl-message-id-domain . "smtp.gmail.com")
+       ;; IMAP
+       (elmo-imap4-default-server . "imap.gmail.com")
+       (elmo-imap4-default-user . ,email-address)
+       (elmo-imap4-default-authenticate-type . 'clear)
+       (elmo-imap4-default-port . '993)
+       (elmo-imap4-default-stream-type . 'ssl)
+       ;; SMTP
+       (wl-smtp-posting-user . ,username)
+       (wl-smtp-authenticate-type . 'plain)
+       (wl-smtp-connection-type . 'starttls)
+       (wl-smtp-posting-port . 587)
+       (wl-smtp-posting-server . "smtp.gmail.com")
+       ;; Folders
+       (wl-default-spec . "%")
+       (wl-default-folder . "%inbox")
+       (wl-draft-folder . "%[Gmail]/Drafts")
+       (wl-spam-folder . "%[Gmail]/Spam")
+       (wl-trash-folder . "%[Gmail]/Trash")
+       (wl-fcc . "%[Gmail]/Sent")))
 
     ;; Point draft configuration to correct template.
     (add-to-list
      'wl-draft-config-alist
-     `(((string-match ,email-address  wl-draft-parent-folder)
-        (template . ,email-address))))
+     `((string-match ,email-address  wl-draft-parent-folder)
+       (template . ,email-address)))
 
     ;; Set up trash folder for account.
     (add-to-list
      'wl-dispose-folder-alist
-     `((,email-address . ,(concat "%[Gmail]/Trash" folder-template))))
+     `(,email-address . ,(concat "%[Gmail]/Trash" folder-template)))
 
     ;; Check inbox for new mail.
     (add-to-list 'wl-biff-check-folder-list
