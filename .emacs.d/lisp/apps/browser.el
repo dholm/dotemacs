@@ -17,13 +17,6 @@
    (format "*w3m: %s*" (or w3m-current-title w3m-current-url) 50) t))
 
 
-(defun user/url-init ()
-  "Initialize URL package."
-  (setq-default
-   ;; Automatically cache all documents.
-   url-automatic-caching t))
-
-
 (defun user/w3m-init ()
   "Initialize w3m."
   (setq-default
@@ -65,8 +58,6 @@
 
 (defun user/browser-init ()
   "Initialize web browsing in Emacs."
-  (user/url-init)
-
   (with-executable 'w3m
     (require-package '(:name emacs-w3m :after (user/w3m-init))))
 

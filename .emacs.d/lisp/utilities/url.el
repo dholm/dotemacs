@@ -10,7 +10,9 @@
    ;; Set up cache directory.
    url-configuration-directory *user-url-cache-directory*
    url-cookie-file (path-join *user-url-cache-directory* "cookies")
-   url-history-file (path-join *user-url-cache-directory* "history")))
+   url-history-file (path-join *user-url-cache-directory* "history")
+   ;; Automatically cache all documents.
+   url-automatic-caching t))
 
 (user/url-init)
 
