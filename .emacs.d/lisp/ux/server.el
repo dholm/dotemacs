@@ -2,13 +2,23 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/server-init ()
-  "Initialize Emacs server."
-  (require 'server)
-  (unless (server-running-p)
-    (server-start)))
+(defun user/server-after-init-hook ()
+  "Initialize Emacs server after init has completed."
+  (with-feature 'server
+    (unless (server-running-p)
+      (server-start)
 
-(add-hook 'after-init-hook 'user/server-init)
+      (when (el-get-package-is-installed 'edit-server)
+        (edit-server-start)))))
+
+
+(defun user/server-init ()
+  "Initialize Emacs server functions."
+  (add-hook 'after-init-hook 'user/server-after-init-hook)
+
+  (require-package '(:name edit-server)))
+
+(user/server-init)
 
 
 (provide 'ux/server)
