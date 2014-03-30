@@ -28,16 +28,16 @@
    ;; Set up cache paths.
    w3m-cookie-file (path-join *user-w3m-cache-directory* "cookies")
    w3m-session-file (path-join *user-w3m-cache-directory* "sessions")
+   ;; Set character encoding system from terminal.
+   w3m-coding-system default-terminal-coding-system
+   w3m-terminal-coding-system default-terminal-coding-system
+   w3m-file-coding-system buffer-file-coding-system
+   w3m-file-name-coding-system file-name-coding-system
+   w3m-input-coding-system default-process-coding-system
+   w3m-output-coding-system default-process-coding-system
    ;; Use cookies.
    w3m-use-cookies t
    w3m-cookie-accept-bad-cookies t
-   ;; Default to UTF-8 encoding.
-   w3m-coding-system 'utf-8
-   w3m-file-coding-system 'utf-8
-   w3m-file-name-coding-system 'utf-8
-   w3m-input-coding-system 'utf-8
-   w3m-output-coding-system 'utf-8
-   w3m-terminal-coding-system 'utf-8
    ;; Automatically restore crashed sessions.
    w3m-session-load-crashed-sessions t
    ;; Display page title in header line.
