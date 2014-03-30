@@ -266,8 +266,8 @@ Gmail {
 
    ;;; (Folders) ;;;
    ;; Show folders in a pane to the left.
-   wl-stay-folder-window t
-   wl-folder-window-width 30
+   wl-stay-folder-window nil
+   wl-folder-window-width 45
    ;; Asynchronously update folders.
    wl-folder-check-async t
 
