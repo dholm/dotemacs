@@ -179,12 +179,6 @@
        (wl-insert-message-id . nil)
        (wl-local-domain . "gmail.com")
        (wl-message-id-domain . "smtp.gmail.com")
-       ;; IMAP
-       (elmo-imap4-default-server . "imap.gmail.com")
-       (elmo-imap4-default-user . ,email-address)
-       (elmo-imap4-default-authenticate-type . 'clear)
-       (elmo-imap4-default-port . '993)
-       (elmo-imap4-default-stream-type . 'ssl)
        ;; SMTP
        (wl-smtp-posting-user . ,username)
        (wl-smtp-authenticate-type . 'plain)
