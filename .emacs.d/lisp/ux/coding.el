@@ -6,12 +6,16 @@
   "Initialize coding system."
   ;; Prefer UTF-8 if there is a choice
   (prefer-coding-system 'utf-8)
-  ;; Set coding systems to UTF-8
-  (set-default-coding-systems 'utf-8)
-  (set-terminal-coding-system 'utf-8)
-  (set-keyboard-coding-system 'utf-8)
-  ;; Treat clipboard input as UTF-8 string first; compound text next, etc.
-  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+  (when (eq default-terminal-coding-system 'utf-8)
+    ;; Set coding systems to UTF-8
+    (set-default-coding-systems 'utf-8)
+    (set-terminal-coding-system 'utf-8)
+    (set-keyboard-coding-system 'utf-8)
+    (when (eq window-system 'x)
+      ;; Treat X11 clipboard input as UTF-8 string first; compound text next,
+      ;; etc.
+      (setq-default
+       x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))))
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :emacs :describe-coding 'describe-coding-system)
