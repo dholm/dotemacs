@@ -236,6 +236,25 @@ Gmail {
        (write-region (point-min) (point-max) folders-file)))))
 
 
+(defun user/wanderlust-set-summary-guides ()
+  "Set Wanderlust summary thread guides."
+  (if (eq default-terminal-coding-system 'utf-8)
+      (setq-default
+       wl-thread-indent-level 2
+       wl-thread-have-younger-brother-str "├─┳─"
+       wl-thread-vertical-str             "┃"
+       wl-thread-youngest-child-str       "╰───"
+       wl-thread-horizontal-str           "─"
+       wl-thread-space-str                " ")
+    (setq-default
+     wl-thread-indent-level 2
+     wl-thread-have-younger-brother-str "+"
+     wl-thread-youngest-child-str       "+"
+     wl-thread-vertical-str             "|"
+     wl-thread-horizontal-str           "-"
+     wl-thread-space-str                " ")))
+
+
 (defun user/wanderlust-init ()
   "Initialize Wanderlust."
   (el-get-eval-after-load 'semi
@@ -275,15 +294,10 @@ Gmail {
    ;; Set verbose summary.
    wl-summary-width nil
    wl-summary-line-format "%T%P%M/%D(%W)%h:%m %[ %17f %]%[%1@%] %t%C%s"
-   ;; UTF-8 guides.
-   wl-thread-indent-level 0
-   wl-thread-have-younger-brother-str "├──►"
-   wl-thread-vertical-str             "┃"
-   wl-thread-youngest-child-str       "╰──►"
-   wl-thread-horizontal-str           "►"
-   wl-thread-space-str                " "
    ;; Display TO rather than FROM in "Sent" folders.
    wl-summary-showto-folder-regexp ".*Sent.*"
+   ;; Divide thread if subject has changed.
+   wl-summary-divide-thread-when-subject-changed t
 
    ;;; (Messages) ;;;
    ;; Field lists.
@@ -305,6 +319,9 @@ Gmail {
    wl-forward-subject-prefix "Fwd: "
    ;; Automatically select the correct template based on folder.
    wl-draft-config-matchone t)
+
+  ;; Set up guides in summary mode.
+  (user/wanderlust-set-summary-guides)
 
   (with-feature 'fullframe
     (fullframe wl wl-exit nil))
