@@ -167,10 +167,12 @@
                 (:tutorial . (user/help-prefix "t"))
                 (:where-is . (user/help-prefix "w"))
 
-                (:grow-vertical . "C-c <up>")
-                (:shrink-vertical . "C-c <down>")
-                (:grow-horizontal . "C-c <right>")
-                (:shrink-horizontal . "C-c <left>")
+                (:fullscreen . "C-c C-RET")
+
+                (:grow-vertical . "C-c C-p")
+                (:shrink-vertical . "C-c C-n")
+                (:grow-horizontal . "C-c C-f")
+                (:shrink-horizontal . "C-c C-b")
 
                 (:profiler-start . (user/utilities-prefix "p p"))
                 (:profiler-stop . (user/utilities-prefix "p P"))
