@@ -323,6 +323,12 @@ Gmail {
   ;; Set up guides in summary mode.
   (user/wanderlust-set-summary-guides)
 
+  (when (and (display-graphic-p)
+             (el-get-package-is-installed 'wl-gravatar))
+    (setq-default
+     ;; Insert gravatar as email X-Face.
+     wl-highlight-x-face-function 'wl-gravatar-insert))
+
   (with-feature 'fullframe
     (fullframe wl wl-exit nil))
 
@@ -361,7 +367,9 @@ Gmail {
 
   (require-package '(:name wanderlust :after (user/wanderlust-init)))
   (require-package '(:name mu-cite :after (user/mu-cite-init)))
-  (require-package '(:name bbdbv3-wl)))
+  (require-package '(:name bbdbv3-wl))
+  (when (display-graphic-p)
+    (require-package '(:name wl-gravatar))))
 
 (user/wl-init)
 
