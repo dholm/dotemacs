@@ -8,7 +8,8 @@
     (unless (server-running-p)
       (server-start)
 
-      (when (el-get-package-is-installed 'edit-server)
+      (when (and (display-graphic-p)
+                 (el-get-package-is-installed 'edit-server))
         (edit-server-start)))))
 
 
@@ -16,7 +17,8 @@
   "Initialize Emacs server functions."
   (add-hook 'after-init-hook 'user/server-after-init-hook)
 
-  (require-package '(:name edit-server)))
+  (when (display-graphic-p)
+    (require-package '(:name edit-server))))
 
 (user/server-init)
 
