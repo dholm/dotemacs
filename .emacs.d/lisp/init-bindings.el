@@ -167,7 +167,7 @@
                 (:tutorial . (user/help-prefix "t"))
                 (:where-is . (user/help-prefix "w"))
 
-                (:fullscreen . "C-c C-RET")
+                (:fullscreen . "C-c <C-return>")
 
                 (:grow-vertical . "C-c C-p")
                 (:shrink-vertical . "C-c C-n")
