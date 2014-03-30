@@ -22,6 +22,13 @@
      '(progn ,@body)))
 
 
+(defun feature-p (feature)
+  "Check if FEATURE is available."
+  (or (featurep feature)
+      (el-get-package-is-installed feature)
+      (locate-library (symbol-name feature))))
+
+
 (defmacro with-feature (feature &rest body)
   "If FEATURE is available, load it and evaluate BODY."
   (declare (indent defun))
