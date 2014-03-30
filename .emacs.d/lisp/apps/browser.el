@@ -12,9 +12,12 @@
 
 
 (defun user/w3m-display-hook (url)
-  "w3m display hook for URL."
+  "W3M display hook for URL."
   (rename-buffer
-   (format "*w3m: %s*" (or w3m-current-title w3m-current-url) 50) t))
+   (format "*w3m: %s*" (or w3m-current-title w3m-current-url)) t)
+  (let ((buffer-read-only nil))
+    ;; Remove trailing whitespace when browsing.
+    (delete-trailing-whitespace)))
 
 
 (defun user/w3m-init ()
@@ -38,7 +41,15 @@
    ;; Automatically restore crashed sessions.
    w3m-session-load-crashed-sessions t
    ;; Display page title in header line.
-   w3m-use-header-line-title t)
+   w3m-use-header-line-title t
+   ;; Use UTF-8 to display nicer tables.
+   w3m-default-symbol
+   '("─┼" " ├" "─┬" " ┌" "─┤" " │" "─┐" ""
+     "─┴" " └" "──" ""   "─┘" ""   ""   ""
+     "─┼" " ┠" "━┯" " ┏" "─┨" " ┃" "━┓" ""
+     "━┷" " ┗" "━━" ""   "━┛" ""   ""   ""
+     " •" " □" " ☆" " ○" " ■" " ★" " ◎"
+     " ●" " △" " ●" " ○" " □" " ●" "≪ ↑ ↓ "))
 
   (when (display-graphic-p)
     (setq-default
