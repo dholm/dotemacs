@@ -192,6 +192,7 @@
      (:nav . ((:context . (user/navigation-prefix "SPC"))
 
               (:goto-line . (user/navigation-prefix "g"))
+              (:go-forward . (user/navigation-prefix "f"))
               (:go-back . (user/navigation-prefix "b"))
 
               (:context-cycle . (user/navigation-prefix "s c"))
