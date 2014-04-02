@@ -13,12 +13,7 @@
   (user/bind-key-global :util :google-at-point 'google-this)
   (user/bind-key-global :util :google-selection 'google-region))
 
-(require-package '(:name google-this
-                         :type github
-                         :pkgname "Bruce-Connor/emacs-google-this"
-                         :prepare (progn
-                                    (autoload 'google-this-mode "google-this"))
-                         :after (user/google-this-init)))
+(require-package '(:name google-this :after (user/google-this-init)))
 
 
 (provide 'utilities/google-this)

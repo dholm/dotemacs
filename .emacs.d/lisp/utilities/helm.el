@@ -156,25 +156,14 @@
 (require-package '(:name helm-etags-plus))
 (require-package '(:name helm-build-command))
 (require-package '(:name helm-cmd-t :after (user/helm-cmd-t-init)))
-(require-package '(:name helm-swoop
-                         :type github
-                         :pkgname "ShingoFukuyama/helm-swoop"
-                         :depends (helm)
-                         :after (user/helm-swoop-init)))
+(require-package '(:name helm-swoop :after (user/helm-swoop-init)))
 
 (with-executable 'git
   (require-package '(:name helm-ls-git)))
 (with-executable 'global
-  (require-package '(:name helm-gtags
-                           :type github
-                           :pkgname "syohex/emacs-helm-gtags"
-                           :depends (helm)
-                           :after (user/helm-gtags-init))))
+  (require-package '(:name helm-gtags :after (user/helm-gtags-init))))
 (with-executable 'python
-  (require-package '(:name helm-pydoc
-                           :type github
-                           :depends (helm)
-                           :pkgname "syohex/emacs-helm-pydoc")))
+  (require-package '(:name helm-pydoc)))
 
 
 (provide 'utilities/helm)

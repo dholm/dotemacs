@@ -120,14 +120,11 @@
   (require-package '(:name auto-complete-emacs-lisp))
   (require-package '(:name elisp-slime-nav))
   (require-package '(:name auto-compile))
-  (require-package '(:name eldoc-eval
-                           :type github
-                           :pkgname "thierryvolpiatto/eldoc-eval"
-                           :after (user/eldoc-eval-init)))
+  (require-package '(:name eldoc-eval :after (user/eldoc-eval-init)))
 
   (when (or (executable-find "sbcl")
-           (executable-find "lisp")
-           (executable-find "clisp"))
+            (executable-find "lisp")
+            (executable-find "clisp"))
     (require-package '(:name slime :after (user/slime-init)))
     (require-package '(:name ac-slime)))
 

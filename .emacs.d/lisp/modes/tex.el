@@ -186,10 +186,7 @@ Makes it easier to version control LaTeX-files."
   (require-package '(:name zotelo :after (user/zotelo-init)))
   (require-package '(:name ac-math :after (user/ac-math-init)))
   (require-package '(:name auto-complete-latex :after (user/auto-complete-latex)))
-  (require-package '(:name auto-complete-auctex
-                           :type github
-                           :pkgname "monsanto/auto-complete-auctex"
-                           :prepare (autoload 'ac-auctex-setup "auto-complete-auctex")))
+  (require-package '(:name auto-complete-auctex))
   (require-package '(:name ltx-help)))
 
 
