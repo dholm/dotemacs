@@ -135,7 +135,10 @@
     (add-to-list 'org-babel-load-languages '(latex . t)))
   (with-executable 'perl
     (add-to-list 'org-babel-load-languages '(perl . t)))
-  (with-executable 'plantuml
+  (when (el-get-package-is-installed 'plantuml-mode)
+    (setq-default
+     org-plantuml-jar-path (path-join (el-get-package-directory 'plantuml-mode)
+                                      "plantuml.jar"))
     (add-to-list 'org-babel-load-languages '(plantuml . t)))
   (with-executable 'python
     (add-to-list 'org-babel-load-languages '(python . t)))
