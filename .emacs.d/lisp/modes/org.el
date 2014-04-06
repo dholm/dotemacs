@@ -124,25 +124,25 @@
              (sh . t))))
 
   (with-executable 'ditaa
-    (add-to-list 'org-babel-load-languages '((ditaa . t))))
+    (add-to-list 'org-babel-load-languages '(ditaa . t)))
   (with-executable 'dot
-    (add-to-list 'org-babel-load-languages '((dot . t))))
+    (add-to-list 'org-babel-load-languages '(dot . t)))
   (with-executable 'ghc
-    (add-to-list 'org-babel-load-languages '((haskell . t))))
+    (add-to-list 'org-babel-load-languages '(haskell . t)))
   (with-executable 'gnuplot
-    (add-to-list 'org-babel-load-languages '((gnuplot . t))))
+    (add-to-list 'org-babel-load-languages '(gnuplot . t)))
   (with-executable 'latex
-    (add-to-list 'org-babel-load-languages '((latex . t))))
+    (add-to-list 'org-babel-load-languages '(latex . t)))
   (with-executable 'perl
-    (add-to-list 'org-babel-load-languages '((perl . t))))
+    (add-to-list 'org-babel-load-languages '(perl . t)))
   (with-executable 'plantuml
-    (add-to-list 'org-babel-load-languages '((plantuml . t))))
+    (add-to-list 'org-babel-load-languages '(plantuml . t)))
   (with-executable 'python
-    (add-to-list 'org-babel-load-languages '((python . t))))
+    (add-to-list 'org-babel-load-languages '(python . t)))
   (with-executable 'R
-    (add-to-list 'org-babel-load-languages '((R . t))))
+    (add-to-list 'org-babel-load-languages '(R . t)))
   (with-executable 'ruby
-    (add-to-list 'org-babel-load-languages '((ruby . t)))))
+    (add-to-list 'org-babel-load-languages '(ruby . t))))
 
 
 (defun user/org-export-init ()
