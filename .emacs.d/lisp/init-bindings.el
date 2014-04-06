@@ -217,7 +217,7 @@
      (:code . ((:compile . (user/code-prefix "c"))
                (:run . (user/code-prefix "r"))
                (:test . (user/code-prefix "t"))
-               (:compilation-result . (user/view-map "c"))
+               (:compilation-result . (user/view-prefix "c"))
 
                (:comment . (user/code-prefix "-"))
                (:align . (user/code-prefix "a"))
