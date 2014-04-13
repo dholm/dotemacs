@@ -219,6 +219,11 @@
                (:test . (user/code-prefix "t"))
                (:compilation-result . (user/view-prefix "c"))
 
+               (:bookmark-prefix . "C-c b")
+               (:bookmark-toggle . "C-c b v")
+               (:bookmark-next . "C-c b n")
+               (:bookmark-prev . "C-c b p")
+
                (:comment . (user/code-prefix "-"))
                (:align . (user/code-prefix "a"))
                (:fill-paragraph . (user/code-prefix "f"))
