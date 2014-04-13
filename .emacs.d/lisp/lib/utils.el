@@ -43,6 +43,13 @@
      ,@body))
 
 
+(defun add-many-to-list (the-list &rest entries)
+  "Add to THE-LIST any specified ENTRIES."
+  (dolist (entry entries)
+    (add-to-list the-list entry))
+  (eval the-list))
+
+
 (defun add-command-switch (handler &rest switch-list)
   "Add HANDLER for SWITCH-LIST."
   (dolist (switch switch-list)

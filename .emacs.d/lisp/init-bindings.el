@@ -302,9 +302,12 @@
                (:wc-mode . (user/utilities-prefix "w"))))
 
      ;;; (Applications) ;;;
-     (:apps . ((:agenda . (user/apps-prefix "a"))
+     (:apps . ((:shell . (user/apps-prefix "s"))
+
+               (:agenda . (user/apps-prefix "a"))
                (:notes . (user/apps-prefix "n"))
                (:capture-task . (user/apps-prefix "c"))
+
                (:email . (user/apps-prefix "e"))
                (:browser . (user/apps-prefix "b"))
                (:instant-messenger . (user/apps-prefix "i"))
@@ -313,7 +316,7 @@
 
                (:music . (user/apps-prefix "m"))
 
-               (:statistics . (user/apps-prefix "s"))
+               (:statistics . (user/apps-prefix "R"))
                (:sage . (user/apps-prefix "S")))))))
 
 
