@@ -65,6 +65,24 @@
   (global-auto-complete-mode t))
 
 
+(defun add-ac-sources (&rest sources)
+  "Add SOURCES for auto-complete after it has been loaded."
+  (after-load 'auto-complete
+    (dolist (source sources)
+      (if (boundp 'ac-sources)
+          (add-to-list 'ac-sources source)
+        (error "Declaration of ac-sources is missing!")))))
+
+
+(defun add-ac-modes (&rest major-modes)
+  "Add MAJOR-MODES for auto-complete after it has been loaded."
+  (after-load 'auto-complete
+    (dolist (mode major-modes)
+      (if (boundp 'ac-modes)
+          (add-to-list 'ac-modes mode)
+        (error "Declaration of ac-modes is missing!")))))
+
+
 (defun user/completion-init ()
   "Initialize automatic code completion."
   (setq
@@ -73,23 +91,6 @@
 
   ;; Allow completion of acronyms and initialisms.
   (add-to-list 'completion-styles 'initials t)
-
-  ;;; (Functions) ;;;
-  (defun add-ac-sources (&rest sources)
-    "Add SOURCES for auto-complete after it has been loaded."
-    (after-load 'auto-complete
-      (dolist (source sources)
-        (if (boundp 'ac-sources)
-            (add-to-list 'ac-sources source)
-          (error "Declaration of ac-sources is missing!")))))
-
-  (defun add-ac-modes (&rest major-modes)
-    "Add MAJOR-MODES for auto-complete after it has been loaded."
-    (after-load 'auto-complete
-      (dolist (mode major-modes)
-        (if (boundp 'ac-modes)
-            (add-to-list 'ac-modes mode)
-          (error "Declaration of ac-modes is missing!")))))
 
   ;;; (Packages) ;;;
   (require-package '(:name auto-complete :after (user/auto-complete-init))))
