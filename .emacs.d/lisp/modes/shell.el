@@ -22,6 +22,10 @@
    explicit-bash-args '("-c" "export EMACS=; stty echo; bash")
    comint-process-echoes t)
 
+  (with-feature 'ansi-color
+    ;; Enable ANSI colors for comint.
+    (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on))
+
   ;; Enable readline completion
   (with-feature 'readline-complete
     (ac-rlc-setup-sources)))

@@ -14,10 +14,9 @@
    comint-scroll-show-maximum-output t
    comint-move-point-for-output 'others
    ;; Scroll buffer to bottom in active frame on input.
-   comint-scroll-to-bottom-on-input 'this)
-
-  ;; Enable ANSI colors for Comint
-  (ansi-color-for-comint-mode-on)
+   comint-scroll-to-bottom-on-input 'this
+   ;; Make the prompt read only.
+   comint-prompt-read-only t)
 
   (add-hook 'comint-mode-hook 'user/comint-mode-hook)
 

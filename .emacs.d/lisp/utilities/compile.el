@@ -6,6 +6,16 @@
   "Compilation mode hook.")
 
 
+(defun user/compilation-filter-hook ()
+  "Hook for filtering compilation output."
+  ;; Temporarily make buffer writable.
+  (read-only-mode nil)
+  ;; Colorize compilation output.
+  (ansi-color-apply-on-region (point-min) (point-max))
+  ;; Make buffer read only again.
+  (read-only-mode t))
+
+
 (defun user/compile ()
   "Compile current context."
   (interactive)
@@ -37,15 +47,17 @@
 (defun user/compile-init ()
   "Initialize compile module."
   (setq-default
-   ;; Prevent input in compilation buffer
+   ;; Prevent input in compilation buffer.
    compilation-disable-input nil
-   ;; Automatically scroll output
+   ;; Automatically scroll output.
    compilation-scroll-output t
-   ;; Save the current buffer on compilation
+   ;; Save the current buffer on compilation.
    mode-compile-always-save-buffer-p t)
 
-  ;; Add compilation mode hook
+  ;; Add compilation mode hook.
   (add-hook 'compilation-mode-hook 'user/compilation-mode-hook)
+  ;; Add compilation filter hook.
+  (add-hook 'compilation-filter-hook 'user/compilation-filter-hook)
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :code :compile 'user/compile)
