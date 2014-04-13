@@ -9,11 +9,9 @@
 (defun user/compilation-filter-hook ()
   "Hook for filtering compilation output."
   ;; Temporarily make buffer writable.
-  (read-only-mode nil)
-  ;; Colorize compilation output.
-  (ansi-color-apply-on-region (point-min) (point-max))
-  ;; Make buffer read only again.
-  (read-only-mode t))
+  (let ((inhibit-read-only t))
+    ;; Colorize compilation output.
+    (ansi-color-apply-on-region (point-min) (point-max))))
 
 
 (defun user/compile ()
