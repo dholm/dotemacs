@@ -6,6 +6,14 @@
   "Web mode hook.")
 
 
+(defmacro user/add-web-mode-hook (engine function)
+  "In web mode hook, when using ENGINE, evaluate FUNCTION."
+  `(add-hook 'web-mode-hook
+             (lambda ()
+               (when (string= web-mode-engine (symbol-name ,engine))
+                 (funcall ,function)))))
+
+
 (defun user/tern-mode-hook ()
   "Tern mode hook."
   (tern-ac-setup)

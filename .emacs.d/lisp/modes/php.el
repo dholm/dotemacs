@@ -5,7 +5,11 @@
 (defun user/php-mode-hook ()
   "PHP mode hook."
   ;; Bring in CEDET.
-  (user/cedet-hook)
+  (with-feature 'cedet
+    (user/cedet-hook)
+    (when (derived-mode-p 'web-mode)
+      ;; In web-mode CEDET doesn't automatically load PHP support.
+      (wisent-php-default-setup)))
 
   ;; Separate camel-case into separate words
   (subword-mode t)
@@ -17,10 +21,8 @@
 
 (defun user/php-mode-init ()
   "Initialize PHP mode."
-  (add-hook 'php-mode-hook 'user/php-mode-hook)
-
-  ;;; (Packages) ;;;
-  (require-package '(:name php-mode)))
+  (after-load 'web-mode
+    (user/add-web-mode-hook 'php 'user/php-mode-hook)))
 
 (with-executable 'php
   (user/php-mode-init))
