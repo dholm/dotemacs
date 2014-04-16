@@ -20,6 +20,7 @@
 (defun user/css-mode-init ()
   "Initialize CSS mode."
   (require-package '(:name showcss-mode))
+  (require-package '(:name rainbow-mode))
 
   (add-hook 'css-mode-hook 'user/css-mode-hook))
 
