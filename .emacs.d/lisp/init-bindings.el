@@ -140,6 +140,11 @@
 
                 (:selection-start . "C-SPC")
                 (:selection-expand . "C-=")
+                (:selection-next . "C-.")
+                (:selection-prev . "C-,")
+                (:selection-all . "C-c C-,")
+                (:selection-edit-lines . "C-c C-l")
+
                 (:copy . "C-x C-w")
                 (:cut . "C-x C-k")
                 (:paste . "C-y")

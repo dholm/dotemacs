@@ -8,6 +8,15 @@
   (user/bind-key-global :basic :selection-expand 'er/expand-region))
 
 
+(defun user/multiple-cursors-init ()
+  "Initialize multiple cursors."
+  ;;; (Bindings) ;;;
+  (user/bind-key-global :basic :selection-next 'mc/mark-next-like-this)
+  (user/bind-key-global :basic :selection-prev 'mc/mark-previous-like-this)
+  (user/bind-key-global :basic :selection-all 'mc/mark-all-like-this)
+  (user/bind-key-global :basic :selection-edit-lines 'mc/edit-lines))
+
+
 (defun user/kill-yank-init ()
   "Initialize copy/paste."
   (setq-default
@@ -46,7 +55,8 @@
   (global-set-key (kbd "C-h") 'delete-backward-char)
 
   ;;; (Packages) ;;;
-  (require-package '(:name expand-region :after (user/expand-region-init))))
+  (require-package '(:name expand-region :after (user/expand-region-init)))
+  (require-package '(:name multiple-cursors :after (user/multiple-cursors-init))))
 
 (user/kill-yank-init)
 
