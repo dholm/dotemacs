@@ -50,6 +50,10 @@
   :group 'user)
 
 
+(defconst user/prefix-list (list "C-x" "C-c")
+  "List of the registered prefix keys.")
+
+
 (defun user/make-key (keys)
   "Convert KEYS into the internal Emacs key representation."
   (kbd (if (listp keys)
