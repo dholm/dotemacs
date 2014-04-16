@@ -4,7 +4,7 @@
 
 (defun user/cedet-hook ()
   "Hook for modes with CEDET support."
-  (when (featurep 'cedet)
+  (with-feature 'cedet
     ;;; (Semantic) ;;;
     (require 'semantic/ia)
 
@@ -74,7 +74,10 @@
     (user/bind-key-local :nav :jump-spec-impl 'semantic-analyze-proto-impl-toggle)
     (user/bind-key-local :nav :references 'semantic-symref)
 
-    (user/bind-key-local :doc :describe 'semantic-ia-show-doc)))
+    (user/bind-key-local :doc :describe 'semantic-ia-show-doc)
+
+    (with-feature 'eassist
+      (user/bind-key-local :nav :functions/toc 'eassist-list-methods))))
 
 
 (defun user/ede-minor-mode-hook ()
@@ -94,9 +97,21 @@
 
 (defun user/cedet-init ()
   "Initialize CEDET."
+  ;; Load the contrib package.
+  (unless (featurep 'cedet-contrib-load)
+    (load (path-join (el-get-package-directory "cedet") "contrib"
+                     "cedet-contrib-load.el")))
+
   ;; Register missing autoloads
   (autoload 'cedet-cscope-version-check "cedet-cscope")
   (autoload 'cedet-idutils-version-check "cedet-idutils")
+  (autoload 'wisent-ruby-default-setup "wisent-ruby")
+
+  ;; Register languages from contrib.
+  (after-load 'semantic
+    (add-to-list 'semantic-new-buffer-setup-functions '(csharp-mode . wisent-csharp-default-setup))
+    (add-to-list 'semantic-new-buffer-setup-functions '(php-mode . wisent-php-default-setup))
+    (add-to-list 'semantic-new-buffer-setup-functions '(ruby-mode . wisent-ruby-default-setup)))
 
   ;;; (Functions) ;;;
   (defun user/ede-get-local-var (fname var)

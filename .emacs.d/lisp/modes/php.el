@@ -4,6 +4,9 @@
 
 (defun user/php-mode-hook ()
   "PHP mode hook."
+  ;; Bring in CEDET.
+  (user/cedet-hook)
+
   ;; Separate camel-case into separate words
   (subword-mode t)
 
@@ -17,7 +20,7 @@
   (add-hook 'php-mode-hook 'user/php-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name php-mode :after (user/php-mode-init))))
+  (require-package '(:name php-mode)))
 
 (with-executable 'php
   (user/php-mode-init))

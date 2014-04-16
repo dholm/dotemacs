@@ -47,21 +47,16 @@
 
 (defun user/c-mode-cedet-hook ()
   "C mode CEDET hook."
-  (when (featurep 'cedet)
+  (with-feature 'cedet
     (user/cedet-hook)
-
-    ;; Load eassist from contrib package
-    (unless (featurep 'cedet-contrib-load)
-      (load (path-join (el-get-package-directory "cedet") "contrib"
-                       "cedet-contrib-load.el")))
-    (require 'eassist)
-    (user/bind-key-local :nav :switch-spec-impl 'eassist-switch-h-cpp)
-    (user/bind-key-local :nav :functions/toc 'eassist-list-methods)
 
     ;; Load extra semantic helpers
     (require 'semantic/bovine/c)
     (require 'semantic/bovine/gcc)
-    (require 'semantic/bovine/clang)))
+    (require 'semantic/bovine/clang)
+
+    ;;; (Bindings) ;;;
+    (user/bind-key-local :nav :switch-spec-impl 'eassist-switch-h-cpp)))
 
 
 (defun user/c++-header-file-p ()

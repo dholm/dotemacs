@@ -4,6 +4,9 @@
 
 (defun user/csharp-mode-hook ()
   "C# mode hook."
+  ;; Bring in CEDET.
+  (user/cedet-hook)
+
   (with-feature 'omnisharp
     (omnisharp-mode t)))
 

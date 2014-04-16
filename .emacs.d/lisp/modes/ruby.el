@@ -7,6 +7,9 @@
   (unless (derived-mode-p 'prog-mode)
     (run-hooks 'prog-mode-hook))
 
+  ;; Bring in CEDET.
+  (user/cedet-hook)
+
   ;; Enable robe mode
   (robe-mode t)
 
