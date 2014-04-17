@@ -20,7 +20,11 @@
 (defun user/css-mode-init ()
   "Initialize CSS mode."
   (require-package '(:name showcss-mode))
-  (require-package '(:name rainbow-mode))
+  (require-package '(:name rainbow-mode
+                           :type http
+                           :url "http://elpa.gnu.org/packages/rainbow-mode-0.9.el"
+                           :build '(("mv" "rainbow-mode-0.9.el" "rainbow-mode.el"))
+                           :compile "rainbow-mode.el"))
 
   (add-hook 'css-mode-hook 'user/css-mode-hook))
 
