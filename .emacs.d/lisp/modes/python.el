@@ -54,8 +54,13 @@
 
 (defun user/python-init ()
   "Initialize python."
+  (setq-default
+   ;; Don't try to guess the indentation.
+   python-indent-guess-indent-offset nil)
+
   (with-executable 'ipython
     (setq-default
+     ;; Set IPython as default interpreter.
      python-shell-interpreter "ipython"
      python-shell-interpreter-args ""
      python-shell-prompt-regexp "In \\[[0-9]+\\]: "
