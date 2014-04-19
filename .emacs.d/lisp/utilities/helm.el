@@ -130,6 +130,11 @@
 
 (defun user/helm-cmd-t-init ()
   "Initialize Helm cmd-t."
+  (setq-default
+   ;; Use project helpers to find root.
+   helm-cmd-t-default-repo '(lambda ()
+                              (user/current-path-apply 'user/project-root)))
+
   ;;; (Bindings) ;;;
   (user/bind-key-global :basic :open-file-context 'helm-cmd-t))
 
