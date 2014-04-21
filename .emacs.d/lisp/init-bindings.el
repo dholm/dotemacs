@@ -318,7 +318,8 @@
                (:capture-task . (user/apps-prefix "c"))
 
                (:email . (user/apps-prefix "e"))
-               (:browser . (user/apps-prefix "b"))
+               (:browse . (user/apps-prefix "b"))
+               (:browse-external . (user/apps-prefix "B"))
                (:instant-messenger . (user/apps-prefix "i"))
 
                (:ipython-notebook . (user/apps-prefix "N"))
