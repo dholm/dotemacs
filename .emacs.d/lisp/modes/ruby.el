@@ -4,9 +4,6 @@
 
 (defun user/ruby-mode-hook ()
   "Ruby mode hook."
-  (unless (derived-mode-p 'prog-mode)
-    (run-hooks 'prog-mode-hook))
-
   ;; Bring in CEDET.
   (user/cedet-hook)
 
