@@ -65,7 +65,8 @@
     (add-to-list 'kill-emacs-hook
                  (lambda () (delete-file temp-diary))))
 
-  (add-to-list 'org-modules 'org-agenda)
+  ;; Load org agenda.
+  (add-many-to-list-after-load 'org-modules 'org 'org-agenda)
 
   (when (not noninteractive)
     ;; When running in batch, don't setup windows.
@@ -102,7 +103,8 @@
    ;; Add link to current line number.
    org-annotate-file-add-search t)
 
-  (add-to-list 'org-modules 'org-annotate-file)
+  ;; Load file annotation support.
+  (add-many-to-list-after-load 'org-modules 'org 'org-annotate-file)
 
   (autoload 'org-annotate-file "org-annotate-file" nil t)
 
@@ -114,63 +116,65 @@
   "Initialize org babel."
   (setq-default
    ;; Don't ask for validation.
-   org-confirm-babel-evaluate nil
-   ;; Org babel modules to load by default.
-   org-babel-load-languages
-   (append org-babel-load-languages
-           '(;; Emacs Lisp support.
-             (emacs-lisp . t)
-             ;; Shell script support.
-             (sh . t))))
+   org-confirm-babel-evaluate nil)
+
+  ;; Org babel modules to load by default.
+  (add-many-to-list-after-load 'org-babel-load-languages 'org
+                               '(;; Emacs Lisp support.
+                                 (emacs-lisp . t)
+                                 ;; Shell script support.
+                                 (sh . t)))
 
   (with-executable 'ditaa
-    (add-to-list 'org-babel-load-languages '(ditaa . t)))
+    (add-many-to-list-after-load 'org-babel-load-languages 'org '(ditaa . t)))
   (with-executable 'dot
-    (add-to-list 'org-babel-load-languages '(dot . t)))
+    (add-many-to-list-after-load 'org-babel-load-languages 'org '(dot . t)))
   (with-executable 'ghc
-    (add-to-list 'org-babel-load-languages '(haskell . t)))
+    (add-many-to-list-after-load 'org-babel-load-languages 'org '(haskell . t)))
   (with-executable 'gnuplot
-    (add-to-list 'org-babel-load-languages '(gnuplot . t)))
+    (add-many-to-list-after-load 'org-babel-load-languages 'org '(gnuplot . t)))
   (with-executable 'latex
-    (add-to-list 'org-babel-load-languages '(latex . t)))
+    (add-many-to-list-after-load 'org-babel-load-languages 'org '(latex . t)))
   (with-executable 'perl
-    (add-to-list 'org-babel-load-languages '(perl . t)))
+    (add-many-to-list-after-load 'org-babel-load-languages 'org '(perl . t)))
   (when (el-get-package-is-installed 'plantuml-mode)
     (setq-default
      org-plantuml-jar-path (path-join (el-get-package-directory 'plantuml-mode)
                                       "plantuml.jar"))
-    (add-to-list 'org-babel-load-languages '(plantuml . t)))
+    (add-many-to-list-after-load 'org-babel-load-languages 'org '(plantuml . t)))
   (with-executable 'python
-    (add-to-list 'org-babel-load-languages '(python . t)))
+    (add-many-to-list-after-load 'org-babel-load-languages 'org '(python . t)))
   (with-executable 'R
-    (add-to-list 'org-babel-load-languages '(R . t)))
+    (add-many-to-list-after-load 'org-babel-load-languages 'org '(R . t)))
   (with-executable 'ruby
-    (add-to-list 'org-babel-load-languages '(ruby . t))))
+    (add-many-to-list-after-load 'org-babel-load-languages 'org '(ruby . t))))
 
 
 (defun user/org-export-init ()
   "Initialize org export."
   (setq-default
    ;; Export as UTF-8.
-   org-export-coding-system 'utf-8
-   ;; Org export modules to load by default.
-   org-export-backends
-   (append org-export-backends
-           '(;; Ascii support.
-             ascii
-             ;; HTML.
-             html
-             ;; OpenDocument Text support.
-             odt)))
+   org-export-coding-system 'utf-8)
+
+  ;; Org export modules to load by default.
+  (add-many-to-list-after-load 'org-export-backends 'org
+                               '(;; Ascii support.
+                                 ascii
+                                 ;; HTML.
+                                 html
+                                 ;; OpenDocument Text support.
+                                 odt))
 
   (with-executable 'latex
-    (setq org-export-backends
-          (append org-export-backends
-                  '(beamer latex)))))
+    (add-many-to-list-after-load 'org-export-backends 'org
+                                 '(;; Beamer presentation export.
+                                   beamer
+                                   ;; Plain LaTeX export.
+                                   latex))))
 
 
 (defun user/org-mode-init ()
-  "Initialize Lua mode."
+  "Initialize org mode."
   (setq-default
    ;; Org data store.
    org-directory *user-org-data-directory*
@@ -248,38 +252,35 @@
                     "SCHEDULED: %(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n:"
                     "PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n")))))
 
-  (setq
-   ;; Org modules to load by default.
-   org-modules
-   (append org-modules
-           '(;; File attachment manager.
-             org-attach
-             ;; Link to BibTeX entries.
-             org-bibtex
-             ;; Link to tags.
-             org-ctags
-             ;; Habit tracking.
-             org-habit
-             ;; Support links to info pages.
-             org-info
-             ;; Support links to man pages.
-             org-man
-             ;; Export org buffer to MIME email message.
-             org-mime
-             ;; Allow external applications to talk to org.
-             org-protocol
-             ;; Embed source code in org-mode.
-             org-src)))
+  (add-many-to-list-after-load 'org-modules 'org
+                               '(;; File attachment manager.
+                                 org-attach
+                                 ;; Link to BibTeX entries.
+                                 org-bibtex
+                                 ;; Link to tags.
+                                 org-ctags
+                                 ;; Habit tracking.
+                                 org-habit
+                                 ;; Support links to info pages.
+                                 org-info
+                                 ;; Support links to man pages.
+                                 org-man
+                                 ;; Export org buffer to MIME email message.
+                                 org-mime
+                                 ;; Allow external applications to talk to org.
+                                 org-protocol
+                                 ;; Embed source code in org-mode.
+                                 org-src))
 
   (when (el-get-package-is-installed 'bbdb)
-    (add-to-list 'org-modules 'org-bbdb))
+    (add-many-to-list-after-load 'org-modules 'org 'org-bbdb))
   (when (el-get-package-is-installed 'emacs-w3m)
-    (add-to-list 'org-modules 'org-w3m))
+    (add-many-to-list-after-load 'org-modules 'org 'org-w3m))
   (when (el-get-package-is-installed 'wanderlust)
-    (add-to-list 'org-modules 'org-wl))
+    (add-many-to-list-after-load 'org-modules 'org 'org-wl))
 
   (with-executable 'git
-    (add-to-list 'org-modules 'org-git-link))
+    (add-many-to-list-after-load 'org-modules 'org 'org-git-link))
 
   (when (not noninteractive)
     ;; When running in batch, don't setup time tracking.
