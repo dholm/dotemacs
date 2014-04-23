@@ -36,9 +36,8 @@
 
   ;; Auto completion
   (when (and (executable-find "clang")
-           (el-get-package-is-installed 'clang-complete-async))
-    (ac-clang-launch-completion-process)
-    (add-ac-sources 'ac-source-clang-async))
+             (el-get-package-is-installed 'auto-complete-clang))
+    (add-ac-sources 'ac-source-clang))
 
   ;;; (Bindings) ;;;
   (with-executable 'gdb
@@ -71,8 +70,8 @@
 (defun user/c-c++-mode-init ()
   "Initialize C/C++ mode."
   (when (and (executable-find "clang")
-           (executable-find "llvm-config"))
-    (require-package '(:name clang-complete-async)))
+             (executable-find "llvm-config"))
+    (require-package '(:name auto-complete-clang)))
 
   (add-hook 'c-mode-common-hook 'user/c-mode-common-hook)
 
