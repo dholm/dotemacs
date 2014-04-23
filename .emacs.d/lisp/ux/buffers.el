@@ -4,13 +4,8 @@
 
 (defun user/buffers-init ()
   "Initialize Emacs buffers."
-  (user/uniquify-init))
-
-
-(defun user/uniquify-init ()
-  "Initialize Emacs unique buffer name creation."
-  (require 'uniquify)
   (setq-default
+   ;; Set up uniquify's style.
    uniquify-buffer-name-style 'reverse
    uniquify-separator " • "
    uniquify-after-kill-buffer-p t

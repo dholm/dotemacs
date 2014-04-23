@@ -85,10 +85,6 @@
    ;; Store the completion history in the cache directory.
    ac-comphist-file (path-join *user-cache-directory* "ac-comphist.dat"))
 
-  ;; Set up auto-complete dictionary file.
-  (add-to-list 'ac-dictionary-directories
-               (path-join *user-el-get-directory* "auto-complete" "ac-dict"))
-
   ;; Install workaround for Flyspell
   (add-hook 'flymake-mode-hook 'ac-flyspell-workaround)
 

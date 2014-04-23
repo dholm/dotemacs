@@ -8,24 +8,27 @@
    recentf-max-saved-items 1000
    recentf-exclude '("/tmp/" "/ssh:")
    recentf-save-file (path-join *user-cache-directory* "recentf"))
+
   (recentf-mode t))
 
 
 (defun user/savehist-init ()
   "Initialize Emacs save history."
-  (require 'savehist)
   (setq-default
    savehist-additional-variables '(search-ring regexp-search-ring kill-ring)
    savehist-file (path-join *user-cache-directory* "savehist"))
+
   (savehist-mode t))
 
 
 (defun user/saveplace-init ()
   "Initialize Emacs buffer location history."
-  (require 'saveplace)
-  (setq-default
-   save-place-file (path-join *user-cache-directory* "saveplace")
-   save-place t))
+  (with-feature 'saveplace
+    (setq-default
+     ;; Location of saveplace cache store.
+     save-place-file (path-join *user-cache-directory* "saveplace")
+     ;; Enable.
+     save-place t)))
 
 
 (defun user/sessions-init ()
