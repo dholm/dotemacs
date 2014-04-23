@@ -2,10 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(eval-when-compile
-  (require 'ediff))
-
-
 (defun user/ediff-mode-hook ()
   "Ediff mode hook."
   (setq
@@ -24,7 +20,7 @@
       (set-buffer-modified-p nil)
       (sit-for 1)))
 
-  (setq
+  (setq-default
    ediff-quit-hook 'kill-emacs
    ediff-quit-merge-hook 'ediff-write-merge-buffer)
 
