@@ -2,8 +2,22 @@
 ;;; Commentary:
 ;;; Code:
 
+(defvar user/tex-preview-setup nil
+  "Non-nil if preview has been set up.")
+
+
 (defun user/tex-mode-hook ()
   "TeX mode hook."
+  (when (and (display-graphic-p)
+             (not user/tex-preview-setup))
+    ;; Setup LaTeX preview.
+    (if (el-get-package-is-installed 'sage-mode)
+        (after-load 'sage
+          ;; If Sage is available, it must be loaded first.
+          (LaTeX-preview-setup))
+      (LaTeX-preview-setup))
+    (setq user/tex-preview-setup t))
+
   (turn-on-reftex)
   (outline-minor-mode t)
   (visual-line-mode t)
@@ -92,14 +106,6 @@
   (after-load 'preview
     ;; Support previewing of TikZ.
     (add-to-list 'preview-default-preamble "\\PreviewEnvironment{tikzpicture}" t))
-
-  (when (display-graphic-p)
-    ;; Setup LaTeX preview.
-    (if (el-get-package-is-installed 'sage-mode)
-        (after-load 'sage
-          ;; If Sage is available, it must be loaded first.
-          (LaTeX-preview-setup))
-      (LaTeX-preview-setup)))
 
   (cond
    ((eq system-type 'darwin)
