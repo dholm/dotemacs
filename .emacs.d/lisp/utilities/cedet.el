@@ -4,10 +4,9 @@
 
 (defun user/cedet-hook ()
   "Hook for modes with CEDET support."
-  (with-feature 'cedet
+  ;; Don't use with-feature here in case el-get hasn't initialized CEDET yet.
+  (when (featurep 'cedet-devel-load)
     ;;; (Semantic) ;;;
-    (require 'semantic/ia)
-
     ;; Scan source code automatically during idle time.
     (global-semantic-idle-scheduler-mode t)
     ;; Highlight the first line of the current tag.
@@ -15,10 +14,6 @@
     ;; Initiate inline completion automatically during idle time.
     (global-semantic-idle-completions-mode t)
     ;; Show breadcrumbs during idle time.
-    (setq-default
-     semantic-idle-breadcrumbs-format-tag-function 'semantic-format-tag-summarize
-     semantic-idle-breadcrumbs-separator " ⊃ "
-     semantic-idle-breadcrumbs-header-line-prefix " ≝ ")
     (global-semantic-idle-breadcrumbs-mode t)
     ;; Show summary of tag at point during idle time.
     (global-semantic-idle-summary-mode t)
@@ -32,8 +27,8 @@
     (semantic-mode t)
 
     ;;; (SemanticDB) ;;;
-    (require 'semantic/db)
-    (global-semanticdb-minor-mode t)
+    (with-feature 'semantic/db
+      (global-semanticdb-minor-mode t))
 
     (when (cedet-cscope-version-check t)
       ;; Use CScope as a database for SemanticDB
@@ -69,12 +64,13 @@
     ;;; (Bindings) ;;;
     (user/bind-key-local :code :update-index 'user/cedet-create/update-all)
 
-    (user/bind-key-local :nav :follow-symbol 'semantic-ia-fast-jump)
     (user/bind-key-local :nav :find-symbol 'semantic-symref-find-tags-by-regexp)
     (user/bind-key-local :nav :jump-spec-impl 'semantic-analyze-proto-impl-toggle)
     (user/bind-key-local :nav :references 'semantic-symref)
 
-    (user/bind-key-local :doc :describe 'semantic-ia-show-doc)
+    (with-feature 'semantic/ia
+      (user/bind-key-local :nav :follow-symbol 'semantic-ia-fast-jump)
+      (user/bind-key-local :doc :describe 'semantic-ia-show-doc))
 
     (with-feature 'eassist
       (user/bind-key-local :nav :functions/toc 'eassist-list-methods))))
@@ -84,6 +80,60 @@
   "Hook for EDE minor mode."
   (when (el-get-package-is-installed 'ede-compdb)
     (require 'ede-compdb)))
+
+
+(defun user/ede-get-local-var (fname var)
+  "For file FNAME fetch the value of VAR from project."
+  (let ((current-project (user/ede-project (user/current-path-apply 'user/project-root))))
+    (when current-project
+      (let* ((ov (oref current-project local-variables))
+             (lst (assoc var ov)))
+        (when lst
+          (cdr lst))))))
+
+
+(defun user/cedet-cscope-create/update ()
+  "Create or update CScope database at current project root."
+  (interactive)
+  (with-executable 'cscope
+    (unless (cedet-cscope-version-check t)
+      (warn "CScope version is too old!")))
+  (let ((proj-root (user/current-path-apply 'user/project-root)))
+    (when proj-root
+      (cedet-cscope-create/update-database proj-root)
+      (message (format "CScope database updated at %S" proj-root)))))
+
+
+(defun user/cedet-gnu-global-create/update ()
+  "Create or update GNU GLOBAL database at current project root."
+  (interactive)
+  (with-executable 'global
+    (unless (cedet-gnu-global-version-check t)
+      (warn "GNU GLOBAL version is too old!")))
+  (let ((proj-root (user/current-path-apply 'user/project-root)))
+    (when proj-root
+      (cedet-gnu-global-create/update-database proj-root)
+      (message (format "GNU GLOBAL database updated at %S" proj-root)))))
+
+
+(defun user/cedet-gnu-idutils-create/update ()
+  "Create or update GNU idutils database at current project root."
+  (interactive)
+  (with-executable 'idutils
+    (unless (cedet-idutils-version-check t)
+      (warn "GNU idutils is too old!")))
+  (let ((proj-root (user/current-path-apply 'user/project-root)))
+    (when proj-root
+      (cedet-idutils-create/update-database proj-root)
+      (message (format "GNU idutils database updated at %S" proj-root)))))
+
+
+(defun user/cedet-create/update-all ()
+  "Create or update all databases at current project root."
+  (interactive)
+  (user/cedet-cscope-create/update)
+  (user/cedet-gnu-global-create/update)
+  (user/cedet-gnu-idutils-create/update))
 
 
 (defun user/cedet-before-init ()
@@ -97,6 +147,12 @@
 
 (defun user/cedet-init ()
   "Initialize CEDET."
+  (setq-default
+   ;; Nice looking breadcrumbs.
+   semantic-idle-breadcrumbs-format-tag-function 'semantic-format-tag-summarize
+   semantic-idle-breadcrumbs-separator " ⊃ "
+   semantic-idle-breadcrumbs-header-line-prefix " ≝ ")
+
   ;; Load the contrib package.
   (unless (featurep 'cedet-contrib-load)
     (load (path-join (el-get-package-directory "cedet") "contrib"
@@ -111,57 +167,7 @@
   (after-load 'semantic
     (add-to-list 'semantic-new-buffer-setup-functions '(csharp-mode . wisent-csharp-default-setup))
     (add-to-list 'semantic-new-buffer-setup-functions '(php-mode . wisent-php-default-setup))
-    (add-to-list 'semantic-new-buffer-setup-functions '(ruby-mode . wisent-ruby-default-setup)))
-
-  ;;; (Functions) ;;;
-  (defun user/ede-get-local-var (fname var)
-    "For file FNAME fetch the value of VAR from project."
-    (let ((current-project (user/ede-project (user/current-path-apply 'user/project-root))))
-      (when current-project
-        (let* ((ov (oref current-project local-variables))
-               (lst (assoc var ov)))
-          (when lst
-            (cdr lst))))))
-
-  (defun user/cedet-cscope-create/update ()
-    "Create or update CScope database at current project root."
-    (interactive)
-    (with-executable 'cscope
-      (unless (cedet-cscope-version-check t)
-        (warn "CScope version is too old!")))
-    (let ((proj-root (user/current-path-apply 'user/project-root)))
-      (when proj-root
-        (cedet-cscope-create/update-database proj-root)
-        (message (format "CScope database updated at %S" proj-root)))))
-
-  (defun user/cedet-gnu-global-create/update ()
-    "Create or update GNU GLOBAL database at current project root."
-    (interactive)
-    (with-executable 'global
-      (unless (cedet-gnu-global-version-check t)
-        (warn "GNU GLOBAL version is too old!")))
-    (let ((proj-root (user/current-path-apply 'user/project-root)))
-      (when proj-root
-        (cedet-gnu-global-create/update-database proj-root)
-        (message (format "GNU GLOBAL database updated at %S" proj-root)))))
-
-  (defun user/cedet-gnu-idutils-create/update ()
-    "Create or update GNU idutils database at current project root."
-    (interactive)
-    (with-executable 'idutils
-      (unless (cedet-idutils-version-check t)
-        (warn "GNU idutils is too old!")))
-    (let ((proj-root (user/current-path-apply 'user/project-root)))
-      (when proj-root
-        (cedet-idutils-create/update-database proj-root)
-        (message (format "GNU idutils database updated at %S" proj-root)))))
-
-  (defun user/cedet-create/update-all ()
-    "Create or update all databases at current project root."
-    (interactive)
-    (user/cedet-cscope-create/update)
-    (user/cedet-gnu-global-create/update)
-    (user/cedet-gnu-idutils-create/update)))
+    (add-to-list 'semantic-new-buffer-setup-functions '(ruby-mode . wisent-ruby-default-setup))))
 
 (require-package '(:name cedet
                          :before (user/cedet-before-init)
