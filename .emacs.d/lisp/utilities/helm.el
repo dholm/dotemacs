@@ -57,42 +57,43 @@
           (progn
             (add-to-list 'helm-sources 'helm-source-tracker-search))))
         (helm-other-buffer helm-sources "*helm-navigate-generic*"))
-    ;; Fall back to helm-mini if an error occurs in one of the sources
+    ;; Fall back to helm-mini if an error occurs in one of the sources.
     (error (helm-mini))))
 
 
 (defun user/helm-init ()
   "Initialize helm."
-  ;; Enable helm mode
+  ;; Enable helm mode.
   (helm-mode t)
   (after-load 'diminish
     (diminish 'helm-mode))
 
   (setq-default
-   ;; Idle delays
+   ;; Idle delays.
    helm-idle-delay 0.1
    helm-input-idle-delay 0.0
-   ;; Limit the number of candidates to a reasonable amount
+   ;; Limit the number of candidates to a reasonable amount.
    helm-candidate-number-limit 2000
-   ;; Delay showing results that are off screen
+   ;; Delay showing results that are off screen.
    helm-quick-update t
    ;; Put adaptive history in cache directory.
    helm-adaptive-history-file (path-join *user-cache-directory* "helm-adaptive-history"))
 
-  ;; Filter out boring buffers
+  ;; Filter out boring buffers.
   (dolist (pattern
            (list "\\*clang-complete" "\\*CEDET global" "\\*tramp/scpc"
                  "\\*epc con" "\\*Pymacs" "\\*Completions\\*"))
     (add-to-list 'helm-boring-buffer-regexp-list pattern))
 
-  ;; Filter out boring files
+  ;; Filter out boring files.
   (dolist (pattern
            (list "\\.elc$" "\\.pyc$" "^#.+#$" "^G[R]TAGS$" "^GPATH$" "^ID$"))
     (add-to-list 'helm-boring-file-regexp-list pattern))
 
-  ;; Load sources
+  ;; Load sources.
   (require 'helm-misc)
-  (require 'helm-semantic)
+  (after-load 'semantic
+    (require 'helm-semantic))
 
   ;;; (Bindings) ;;;
   (global-set-key [remap find-file] 'helm-find-files)
@@ -110,7 +111,7 @@
 
 (defun user/helm-gtags-mode-hook ()
   "Mode hook for helm-gtags."
-  ;; Automatically update GNU Global database if it exists
+  ;; Automatically update GNU Global database if it exists.
   (when (user/gnu-global-tags-p (buffer-file-name))
     (setq-default
      helm-gtags-auto-update t
@@ -120,9 +121,9 @@
 (defun user/helm-gtags-init ()
   "Initialize helm-gtags."
   (setq-default
-   ;; Don't care about case when searching tags
+   ;; Don't care about case when searching tags.
    helm-c-gtags-ignore-case t
-   ;; Tags are read only
+   ;; Tags are read only.
    helm-c-gtags-read-only t)
 
   (add-hook 'helm-gtags-mode-hook 'user/helm-gtags-mode-hook))
@@ -151,7 +152,7 @@
   (define-key isearch-mode-map
     (user/get-key :basic :swoop) 'helm-swoop-from-isearch)
   (after-load 'helm-swoop
-    ;; From helm-swoop to helm-multi-swoop-all
+    ;; From helm-swoop to helm-multi-swoop-all.
     (define-key helm-swoop-map
       (user/get-key :basic :swoop) 'helm-multi-swoop-all-from-helm-swoop)))
 
