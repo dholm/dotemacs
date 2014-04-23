@@ -68,12 +68,10 @@
     (user/bind-key-local :nav :jump-spec-impl 'semantic-analyze-proto-impl-toggle)
     (user/bind-key-local :nav :references 'semantic-symref)
 
-    (with-feature 'semantic/ia
-      (user/bind-key-local :nav :follow-symbol 'semantic-ia-fast-jump)
-      (user/bind-key-local :doc :describe 'semantic-ia-show-doc))
+    (user/bind-key-local :nav :follow-symbol 'semantic-ia-fast-jump)
+    (user/bind-key-local :doc :describe 'semantic-ia-show-doc)
 
-    (with-feature 'eassist
-      (user/bind-key-local :nav :functions/toc 'eassist-list-methods))))
+    (user/bind-key-local :nav :functions/toc 'eassist-list-methods)))
 
 
 (defun user/ede-minor-mode-hook ()
