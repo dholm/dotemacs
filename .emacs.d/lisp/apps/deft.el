@@ -2,6 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
+(defconst *user-notes-data-directory*
+  (path-join *user-documents-directory* "Notes")
+  "Path to user's notes data store.")
+
 (defun user/deft-mode-hook ()
   "Deft mode hook."
   ;;; (Bindings) ;;;
@@ -10,9 +14,12 @@
 
 (defun user/deft-init ()
   "Initialize deft."
+  ;; Ensure that notes store exists.
+  (make-directory *user-notes-data-directory* t)
+
   (setq-default
    ;; The path to where notes will be stored.
-   deft-directory (path-join *user-documents-directory* "Notes")
+   deft-directory *user-notes-data-directory*
    ;; Set the default note format.
    deft-extension "org"
    deft-text-mode 'org-mode
