@@ -2,8 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/flyspell-mode-hook ()
-  "Hook for fly spell mode."
+(defun user/flyspell-mode-common-hook ()
+  "Hook for fly spell common mode."
   (after-load 'diminish
     (diminish 'flyspell-mode))
 
@@ -13,6 +13,42 @@
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :spellcheck-word 'ispell-word)
   (user/bind-key-local :code :spellcheck-add-word 'user/flyspell-add-word-to-dict))
+
+
+(defun user/flyspell-mode-hook ()
+  "Hook for fly spell mode."
+  (user/flyspell-mode-common-hook))
+
+
+(defun user/flyspell-prog-mode-hook ()
+  "Hook for fly spell prog mode."
+  (user/flyspell-mode-common-hook))
+
+
+(defun user/flyspell-add-word-to-dict ()
+  "Add the word at the current location to the private dictionary without question."
+  (interactive)
+  ;; Use the correct dictionary.
+  (flyspell-accept-buffer-local-defs)
+  (setq opoint (point-marker))
+  (let ((cursor-location (point))
+        (word (flyspell-get-word nil)))
+    (if (consp word)
+        (let ((start (car (cdr word)))
+              (end (car (cdr (cdr word))))
+              (word (car word)))
+          ;; The word is incorrect, we have to propose a replacement.
+          (flyspell-do-correct 'save nil word cursor-location start end opoint)))
+    (ispell-pdict-save t)))
+
+
+(defun user/flyspell-lazy-init ()
+  "Initialize fly spell lazy."
+  (setq-default
+   ;; Idle timeout before running spell check on region.
+   flyspell-lazy-idle-seconds 10
+   ;; Idle timeout before running spell check on entire buffer.
+   flyspell-lazy-window-idle-seconds 60))
 
 
 (defun user/flyspell-init ()
@@ -28,28 +64,12 @@
      ispell-extra-args '("--sug-mode=ultra")))
 
   (add-hook 'flyspell-mode-hook 'user/flyspell-mode-hook)
-
-  ;;; (Functions) ;;;
-  (defun user/flyspell-add-word-to-dict ()
-    "Add the word at the current location to the private dictionary without question."
-    (interactive)
-    ;; Use the correct dictionary.
-    (flyspell-accept-buffer-local-defs)
-    (setq opoint (point-marker))
-    (let ((cursor-location (point))
-          (word (flyspell-get-word nil)))
-      (if (consp word)
-          (let ((start (car (cdr word)))
-                (end (car (cdr (cdr word))))
-                (word (car word)))
-            ;; The word is incorrect, we have to propose a replacement.
-            (flyspell-do-correct 'save nil word cursor-location start end opoint)))
-      (ispell-pdict-save t))))
+  (add-hook 'flyspell-prog-mode-hook 'user/flyspell-prog-mode-hook))
 
 (when (or (executable-find "ispell")
-         (executable-find "aspell"))
+          (executable-find "aspell"))
   (require-package '(:name flyspell :after (user/flyspell-init)))
-  (require-package '(:name flyspell-lazy))
+  (require-package '(:name flyspell-lazy :after (user/flyspell-lazy-init)))
   (require-package '(:name auto-dictionary)))
 
 
