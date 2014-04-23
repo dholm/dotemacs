@@ -4,6 +4,10 @@
 
 (defun user/info-mode-hook ()
   "Info mode hook."
+  (message "info mode")
+  (when (feature-p 'info+)
+    (require 'info+))
+
   (user/bind-key-local :nav :go-forward 'Info-history-forward)
   (user/bind-key-local :nav :go-back 'Info-history-back))
 
@@ -13,18 +17,14 @@
   (setq-default
    ;; Enable breadcrumbs in header line.
    Info-breadcrumbs-in-header-flag t
-   Info-breadcrumbs-in-mode-line-mode nil)
-
-  (after-load 'info
-    ;; Load info+ when info is loaded.
-    (require 'info+)))
+   Info-breadcrumbs-in-mode-line-mode nil))
 
 
 (defun user/info-mode-init ()
   "Initialize info mode."
   (require-package '(:name info+ :type emacswiki :after (user/info+-init)))
 
-  (add-hook 'info-mode 'user/info-mode-hook))
+  (add-hook 'Info-mode-hook 'user/info-mode-hook))
 
 (user/info-mode-init)
 
