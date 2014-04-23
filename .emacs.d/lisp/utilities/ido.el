@@ -2,6 +2,21 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/ido-mode-hook ()
+  "Mode hook for ido."
+  (when (feature-p 'flx)
+    (flx-ido-mode t))
+  (when (feature-p 'ido-vertical-mode)
+    (ido-vertical-mode t)))
+
+
+(defun user/flx-init ()
+  "Initialize FLX."
+  (setq-default
+   ;; Flex has its own highlights.
+   ido-use-faces nil))
+
+
 (defun user/ido-init ()
   "Initialize ido."
   (setq-default
@@ -10,21 +25,13 @@
    ;; Remember buffers that have been open
    ido-use-virtual-buffers t
    ;; Allow the same buffer to be opened in different windows
-   ido-default-buffer-method 'selected-window))
+   ido-default-buffer-method 'selected-window)
+
+  ;;; (Packages) ;;;
+  (require-package '(:name flx :after (user/flx-init)))
+  (require-package '(:name ido-vertical-mode)))
 
 (user/ido-init)
-
-(defun user/flx-init ()
-  "Initialize FLX."
-  (flx-ido-mode t)
-  (setq-default ido-use-faces nil))
-
-(defun user/ido-vertical-mode-init ()
-  "Initialize IDO vertical mode."
-  (ido-vertical-mode))
-
-(require-package '(:name flx :after (user/flx-init)))
-(require-package '(:name ido-vertical-mode :after (user/ido-vertical-mode-init)))
 
 
 (provide 'utilities/ido)
