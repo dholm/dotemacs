@@ -27,9 +27,7 @@
    ;; Automatically show process buffer if git takes too long to execute
    magit-process-popup-time 30
    ;; Show fine differences for currently selected hunk
-   magit-diff-refine-hunk t
-   ;; Use ido for user input
-   magit-completing-read-function 'magit-ido-completing-read)
+   magit-diff-refine-hunk t)
 
   ;; Full frame Magit status
   (with-feature 'fullframe
