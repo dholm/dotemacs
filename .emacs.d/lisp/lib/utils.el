@@ -49,6 +49,11 @@
     (add-to-list the-list entry))
   (eval the-list))
 
+(defmacro add-many-to-list-after-load (the-list feature &rest entries)
+  "Add to THE-LIST after loading FEATURE any specified ENTRIES."
+  `(after-load ,feature
+     (add-many-to-list ,the-list ,@entries)))
+
 
 (defun add-command-switch (handler &rest switch-list)
   "Add HANDLER for SWITCH-LIST."
