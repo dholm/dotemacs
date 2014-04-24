@@ -22,7 +22,8 @@
        "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
     (let (el-get-master-branch)
       (goto-char (point-max))
-      (eval-print-last-sexp))))
+      (eval-print-last-sexp))
+    (el-get-elpa-build-local-recipes)))
 
 
 (when (featurep 'el-get)
