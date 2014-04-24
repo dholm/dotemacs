@@ -75,9 +75,7 @@
 
 
 (defun user/ede-minor-mode-hook ()
-  "Hook for EDE minor mode."
-  (when (el-get-package-is-installed 'ede-compdb)
-    (require 'ede-compdb)))
+  "Hook for EDE minor mode.")
 
 
 (defun user/ede-get-local-var (fname var)
