@@ -16,11 +16,11 @@
 
 (defun user/flycheck-init ()
   "Initialize flycheck."
-  (require 'flycheck)
-
   (setq-default
    ;; Wait five seconds before starting checker
    flycheck-idle-change-delay 5.0)
+
+  ;; Enable flycheck globally.
   (global-flycheck-mode t)
 
   (after-load 'popwin

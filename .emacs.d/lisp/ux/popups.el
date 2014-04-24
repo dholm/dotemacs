@@ -8,16 +8,16 @@
 
 (defun user/popwin-init ()
   "Initialize popwin."
-  (require 'popwin)
-  (popwin-mode t)
+  (with-feature 'popwin
+    (popwin-mode t)
 
-  ;; Don't select compilation window when shown
-  (push '(compilation-mode :height 20 :dedicated t)
-        popwin:special-display-config)
+    ;; Don't select compilation window when shown
+    (push '(compilation-mode :height 20 :dedicated t)
+          popwin:special-display-config)
 
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :util :popwin-close 'popwin:close-popup-window)
-  (user/bind-key-global :util :popwin-buffer 'popwin:popup-buffer))
+    ;;; (Bindings) ;;;
+    (user/bind-key-global :util :popwin-close 'popwin:close-popup-window)
+    (user/bind-key-global :util :popwin-buffer 'popwin:popup-buffer)))
 
 
 (defun user/popups-init ()

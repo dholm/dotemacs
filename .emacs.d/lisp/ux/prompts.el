@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(eval-when-compile
-  (require 'cl))
-
 (defun user/prompts-init ()
   "Initialize Emacs prompting."
   (setq-default
@@ -16,7 +13,8 @@
 
   (defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
     "Prevent \"Active processes exist\" query when you quit Emacs."
-    (cl-flet ((process-list ())) ad-do-it)))
+    (with-feature 'cl-lib
+      (cl-flet ((process-list ())) ad-do-it))))
 
 (user/prompts-init)
 

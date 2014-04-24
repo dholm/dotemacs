@@ -4,8 +4,7 @@
 
 (defun user/page-break-lines-init ()
   "Initialize page break lines."
-  (require 'page-break-lines)
-  (global-page-break-lines-mode)
+  (global-page-break-lines-mode t)
   (after-load 'diminish
     (diminish 'page-break-lines-mode)))
 
@@ -15,9 +14,9 @@
   ;;; (Packages) ;;;
   (require-package '(:name page-break-lines :after (user/page-break-lines-init)))
 
-  (require 'ux/coding)
-  (when (eq default-terminal-coding-system 'utf-8)
-    (require-package '(:name pretty-mode-plus))))
+  (with-feature 'ux/coding
+    (when (eq default-terminal-coding-system 'utf-8)
+      (require-package '(:name pretty-mode-plus)))))
 
 (user/symbols-init)
 

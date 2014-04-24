@@ -8,11 +8,10 @@
   (defun minimap-toggle ()
     "Toggle minimap for current buffer."
     (interactive)
-    (when (not (boundp 'minimap-bufname))
-      (require 'minimap))
-    (if (null minimap-bufname)
-        (minimap-create)
-      (minimap-kill)))
+    (with-feature 'minimap
+      (if (null minimap-bufname)
+          (minimap-create)
+        (minimap-kill))))
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :util :minimap 'minimap-toggle))

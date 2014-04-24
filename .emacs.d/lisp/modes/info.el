@@ -4,7 +4,6 @@
 
 (defun user/info-mode-hook ()
   "Info mode hook."
-  (message "info mode")
   (when (feature-p 'info+)
     (require 'info+))
 

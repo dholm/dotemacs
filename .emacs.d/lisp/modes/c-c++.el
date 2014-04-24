@@ -46,13 +46,12 @@
 
 (defun user/c-mode-cedet-hook ()
   "C mode CEDET hook."
-  (with-feature 'cedet
-    (user/cedet-hook)
-
+  (with-feature 'semantic/bovine/c
     ;; Load extra semantic helpers
-    (require 'semantic/bovine/c)
     (require 'semantic/bovine/gcc)
     (require 'semantic/bovine/clang)
+
+    (user/cedet-hook)
 
     ;;; (Bindings) ;;;
     (user/bind-key-local :nav :switch-spec-impl 'eassist-switch-h-cpp)))

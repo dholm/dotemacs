@@ -106,7 +106,6 @@
 
 (defun user/eldoc-eval-init ()
   "Initialize eldoc eval."
-  (require 'eldoc-eval)
   (eldoc-in-minibuffer-mode t))
 
 

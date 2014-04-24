@@ -4,9 +4,9 @@
 
 (defun user/nxml-mode-hook ()
   "XML mode hook."
-  ;; Configure nxml auto completion
-  (require 'auto-complete-nxml)
-  (setq nxml-slash-auto-complete-flag t)
+  (with-feature 'auto-complete-nxml
+    ;; Configure nxml auto completion
+    (setq nxml-slash-auto-complete-flag t))
 
   ;; Register file types with find-file-in-project
   (after-load 'find-file-in-project

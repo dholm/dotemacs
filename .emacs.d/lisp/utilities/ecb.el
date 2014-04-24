@@ -54,8 +54,6 @@
 
 (defun user/ecb-init ()
   "Initialize Emacs code browser."
-  (require 'ecb-autoloads)
-
   ;; ECB version checking code is very old so that it thinks that the latest
   ;; CEDET/Emacs is not new enough when in fact it is years newer than the
   ;; latest version that it is aware of.  So simply bypass the version check.

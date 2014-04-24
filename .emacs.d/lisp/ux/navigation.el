@@ -20,9 +20,9 @@
   "Set up Emacs buffer navigation."
   ;; Enable mouse in iTerm2
   (when (eq system-type 'darwin)
-    (require 'mouse)
-    (xterm-mouse-mode t)
-    (defun track-mouse (e)))
+    (with-feature 'mouse
+      (xterm-mouse-mode t)
+      (defun track-mouse (e))))
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :nav :goto-line 'goto-line)

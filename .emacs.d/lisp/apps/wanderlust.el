@@ -50,8 +50,8 @@
 
 (defun user/bbdbv3-wl-init-hook ()
   "BBDBv3 Wanderlust initiatlization hook."
-  (user/bbdb-init-hook)
-  (require 'bbdbV3-wl))
+  (with-feature 'bbdbV3-wl
+    (user/bbdb-init-hook)))
 
 
 (defun user/wl-init-hook ()
@@ -60,9 +60,9 @@
     (user/bbdbv3-wl-init-hook))
 
   (when (el-get-package-is-installed 'org-mode)
-    (require 'org-mime)
-    (setq-default
-     org-mime-library 'semi))
+    (with-feature 'org-mime
+      (setq-default
+       org-mime-library 'semi)))
 
   ;; Set up wanderlust as the default mail user agent.
   (when (boundp 'mail-user-agent)

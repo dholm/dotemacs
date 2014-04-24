@@ -56,10 +56,10 @@
 
 (defun user/auto-complete-init ()
   "Initialize auto-complete."
-  (require 'auto-complete-config)
+  (with-feature 'auto-complete-config
+    ;; Load default configuration.
+    (ac-config-default))
 
-  ;; Load default configuration.
-  (ac-config-default)
   (after-load 'diminish
     (diminish 'auto-complete-mode))
 

@@ -36,9 +36,8 @@
 
 (defun user/python-mode-cedet-hook ()
   "CEDET hook for Python mode."
-  (when (featurep 'cedet)
-    (user/cedet-hook)
-    (require 'semantic/wisent/python)))
+  (with-feature 'semantic/wisent/python
+    (user/cedet-hook)))
 
 
 (defun user/jedi-init ()

@@ -4,9 +4,8 @@
 
 (defun user/makefile-mode-cedet-hook ()
   "CEDET hook for makefiles."
-  (with-feature 'cedet
-    (user/cedet-hook)
-    (require 'semantic/bovine/make)))
+  (with-feature 'semantic/bovine/make
+    (user/cedet-hook)))
 
 
 ;; Sets some decent defaults for makefile-mode
