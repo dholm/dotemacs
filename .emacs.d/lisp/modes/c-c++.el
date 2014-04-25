@@ -14,6 +14,9 @@
   ;; Load CEDET
   (user/c-mode-cedet-hook)
 
+  ;; Enable Doxygen support.
+  (doxygen-mode t)
+
   ;; Override the indentation level of case labels in the K&R- and
   ;; Stroustrup styles so that they are indented one level beyond
   ;; the switch.

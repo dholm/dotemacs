@@ -234,6 +234,7 @@
                (:bookmark-prev . "C-c b p")
 
                (:comment . (user/code-prefix "-"))
+               (:document . (user/code-prefix "="))
                (:align . (user/code-prefix "a"))
                (:fill-paragraph . (user/code-prefix "f"))
 
