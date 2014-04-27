@@ -5,8 +5,6 @@
 (defun user/whitespace-init ()
   "Initialize whitespace mode."
   (setq-default
-   ;; Always show trailing whitespace.
-   show-trailing-whitespace t
    ;; Maximum allowed line length.
    whitespace-line-column 80
    ;; Kinds of whitespace to visualize.
