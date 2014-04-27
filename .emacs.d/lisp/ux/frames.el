@@ -2,6 +2,15 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/transpose-frame-init ()
+  "Initialize transpose-frame."
+  ;;; (Bindings) ;;;
+  (user/bind-key-global :emacs :flip-frame 'flip-frame)
+  (user/bind-key-global :emacs :flop-frame 'flop-frame)
+  (user/bind-key-global :emacs :rotate-frame-forward 'rotate-frame-clockwise)
+  (user/bind-key-global :emacs :rotate-frame-backward 'rotate-frame-anticlockwise))
+
+
 (defun user/frames-init ()
   "Initialize Emacs frames."
   (setq-default
@@ -27,7 +36,8 @@
   (user/bind-key-global :emacs :shrink-horizontal 'shrink-window-horizontally)
 
   ;;; (Packages) ;;;
-  (require-package '(:name fullframe)))
+  (require-package '(:name fullframe))
+  (require-package '(:name transpose-frame :after (user/transpose-frame-init))))
 
 (user/frames-init)
 

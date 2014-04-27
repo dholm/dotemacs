@@ -182,6 +182,10 @@
                 (:shrink-vertical . "C-c C-n")
                 (:grow-horizontal . "C-c C-f")
                 (:shrink-horizontal . "C-c C-b")
+                (:flop-frame . "C-c C-t")
+                (:flip-frame . "C-c M-t")
+                (:rotate-frame-forward . "C-c C-r")
+                (:rotate-frame-backward . "C-c M-r")
 
                 (:profiler-start . (user/utilities-prefix "p p"))
                 (:profiler-stop . (user/utilities-prefix "p P"))
