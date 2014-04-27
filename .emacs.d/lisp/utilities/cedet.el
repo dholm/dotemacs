@@ -2,11 +2,25 @@
 ;;; Commentary:
 ;;; Code:
 
+(defvar user/semantic-initialized nil
+  "Non-nil if Semantic has been initialized.")
+
+(defvar user/ede-initialized nil
+  "Non-nil if EDE has been initialized.")
+
+
 (defun user/cedet-hook ()
   "Hook for modes with CEDET support."
   ;; Don't use with-feature here in case el-get hasn't initialized CEDET yet.
   (when (featurep 'cedet-devel-load)
+    ;;; (EDE) ;;;
+    ;; Enable EDE.
+    (ede-minor-mode t)
+
     ;;; (Semantic) ;;;
+    ;; Enable semantic.
+    (semantic-mode t)
+
     ;; Scan source code automatically during idle time.
     (global-semantic-idle-scheduler-mode t)
     ;; Highlight the first line of the current tag.
@@ -18,54 +32,31 @@
     ;; Show summary of tag at point during idle time.
     (global-semantic-idle-summary-mode t)
 
-    ;; Enable [ec]tags support
-    (when (and (fboundp 'cedet-ectag-version-check)
-               (cedet-ectag-version-check t))
-      (semantic-load-enable-primary-ectags-support))
+    ;; Use semantic as a source for auto complete.
+    (add-ac-sources 'ac-source-semantic)
 
-    ;; Enable semantic
-    (semantic-mode t)
+    ;; Use GNU GLOBAL as a source for auto complete.
+    (with-feature 'cedet-global
+      (when (and (fboundp 'cedet-gnu-global-version-check)
+                 (cedet-gnu-global-version-check t))
+        ;; Register as auto-completion source.
+        (add-ac-sources 'ac-source-gtags)))
 
     ;;; (SemanticDB) ;;;
     (with-feature 'semantic/db
       (global-semanticdb-minor-mode t))
 
-    (when (cedet-cscope-version-check t)
-      ;; Use CScope as a database for SemanticDB
-      (when (fboundp 'semanticdb-enable-cscope-databases)
-        (semanticdb-enable-cscope-databases))
-      ;; Use CScope as a source for EDE
-      (setq ede-locate-setup-options
-            '(ede-locate-cscope ede-locate-base)))
-
-    ;; Enable GNU Global if available
-    (when (and (fboundp 'cedet-gnu-global-version-check)
-               (cedet-gnu-global-version-check t))
-      (semanticdb-enable-gnu-global-databases 'c-mode)
-      (semanticdb-enable-gnu-global-databases 'c++-mode))
-
     ;;; (Context Menu) ;;;
     (when (display-graphic-p)
-      (global-cedet-m3-minor-mode t)
+      (cedet-m3-minor-mode t)
       (local-set-key [mouse-2] 'cedet-m3-menu-kbd))
-
-    ;;; (EDE) ;;;
-    (global-ede-mode t)
-    (ede-enable-generic-projects)
-    (add-hook 'ede-minor-mode-hook 'user/ede-minor-mode-hook)
-
-    ;; Use semantic as a source for auto complete.
-    (add-ac-sources 'ac-source-semantic)
-
-    (after-load 'cedet-global
-      (when (cedet-gnu-global-version-check t)
-        (add-ac-sources 'ac-source-gtags)))
 
     ;;; (Bindings) ;;;
     (user/bind-key-local :code :update-index 'user/cedet-create/update-all)
 
     (user/bind-key-local :nav :find-symbol 'semantic-symref-find-tags-by-regexp)
-    (user/bind-key-local :nav :jump-spec-impl 'semantic-analyze-proto-impl-toggle)
+    (user/bind-key-local :nav :jump-spec-impl
+                         'semantic-analyze-proto-impl-toggle)
     (user/bind-key-local :nav :references 'semantic-symref)
 
     (user/bind-key-local :nav :follow-symbol 'semantic-ia-fast-jump)
@@ -74,13 +65,10 @@
     (user/bind-key-local :nav :functions/toc 'eassist-list-methods)))
 
 
-(defun user/ede-minor-mode-hook ()
-  "Hook for EDE minor mode.")
-
-
 (defun user/ede-get-local-var (fname var)
   "For file FNAME fetch the value of VAR from project."
-  (let ((current-project (user/ede-project (user/current-path-apply 'user/project-root))))
+  (let ((current-project (user/ede-project (user/current-path-apply
+                                            'user/project-root))))
     (when current-project
       (let* ((ov (oref current-project local-variables))
              (lst (assoc var ov)))
@@ -116,12 +104,13 @@
   "Create or update GNU idutils database at current project root."
   (interactive)
   (with-executable 'idutils
-    (unless (cedet-idutils-version-check t)
-      (warn "GNU idutils is too old!")))
-  (let ((proj-root (user/current-path-apply 'user/project-root)))
-    (when proj-root
-      (cedet-idutils-create/update-database proj-root)
-      (message (format "GNU idutils database updated at %S" proj-root)))))
+    (with-feature 'cedet-idutils
+      (unless (cedet-idutils-version-check t)
+        (warn "GNU idutils is too old!"))
+      (let ((proj-root (user/current-path-apply 'user/project-root)))
+        (when proj-root
+          (cedet-idutils-create/update-database proj-root)
+          (message (format "GNU idutils database updated at %S" proj-root)))))))
 
 
 (defun user/cedet-create/update-all ()
@@ -132,12 +121,66 @@
   (user/cedet-gnu-idutils-create/update))
 
 
+(defun user/semantic-init-hook ()
+  "Semantic initialization hook."
+  (unless user/semantic-initialized
+    (message "init semantic")
+    ;; Enable [ec]tags support.
+    (with-feature 'semantic/ectags/util
+      (when (and (fboundp 'cedet-ectag-version-check)
+                 (cedet-ectag-version-check t))
+        (semantic-load-enable-primary-ectags-support)))
+
+    (with-feature 'cedet-cscope
+      (when (cedet-cscope-version-check t)
+        (after-load 'semantic/db
+          ;; Use CScope as a database for SemanticDB.
+          (when (fboundp 'semanticdb-enable-cscope-databases)
+            (semanticdb-enable-cscope-databases)))))
+
+    ;; Enable GNU Global if available.
+    (with-feature 'cedet-global
+      (when (and (fboundp 'cedet-gnu-global-version-check)
+                 (cedet-gnu-global-version-check t))
+        ;; Register as SemanticDB source.
+        (semanticdb-enable-gnu-global-databases 'c-mode)
+        (semanticdb-enable-gnu-global-databases 'c++-mode)))
+
+    ;; Register languages from contrib.
+    (add-to-list 'semantic-new-buffer-setup-functions
+                 '(csharp-mode . wisent-csharp-default-setup))
+    (add-to-list 'semantic-new-buffer-setup-functions
+                 '(php-mode . wisent-php-default-setup))
+    (add-to-list 'semantic-new-buffer-setup-functions
+                 '(ruby-mode . wisent-ruby-default-setup))
+
+    (setq user/semantic-initialized t)))
+
+
+(defun user/ede-init-hook ()
+  "EDE initialization hook."
+  (unless user/ede-initialized
+    (message "init ede")
+    ;; Enable CScope if available.
+    (with-feature 'cedet-cscope
+      (when (cedet-cscope-version-check t)
+        ;; Use CScope as a source for EDE.
+        (setq ede-locate-setup-options
+              '(ede-locate-cscope ede-locate-base))))
+
+    (ede-enable-generic-projects)
+
+    (setq user/ede-initialized t)))
+
+
 (defun user/cedet-before-init ()
   "Setup before loading CEDET."
   (setq-default
    ;; Set up paths to caches
-   semanticdb-default-save-directory (path-join *user-cache-directory* "semanticdb")
-   ede-project-placeholder-cache-file (path-join *user-cache-directory* "ede-projects.el")
+   semanticdb-default-save-directory (path-join *user-cache-directory*
+                                                "semanticdb")
+   ede-project-placeholder-cache-file (path-join *user-cache-directory*
+                                                 "ede-projects.el")
    srecode-map-save-file (path-join *user-cache-directory* "srecode-map.el")))
 
 
@@ -155,15 +198,10 @@
                      "cedet-contrib-load.el")))
 
   ;; Register missing autoloads
-  (autoload 'cedet-cscope-version-check "cedet-cscope")
-  (autoload 'cedet-idutils-version-check "cedet-idutils")
   (autoload 'wisent-ruby-default-setup "wisent-ruby")
 
-  ;; Register languages from contrib.
-  (after-load 'semantic
-    (add-to-list 'semantic-new-buffer-setup-functions '(csharp-mode . wisent-csharp-default-setup))
-    (add-to-list 'semantic-new-buffer-setup-functions '(php-mode . wisent-php-default-setup))
-    (add-to-list 'semantic-new-buffer-setup-functions '(ruby-mode . wisent-ruby-default-setup))))
+  (add-hook 'ede-minor-mode-hook 'user/ede-init-hook)
+  (add-hook 'semantic-mode-hook 'user/semantic-init-hook))
 
 (require-package '(:name cedet
                          :before (user/cedet-before-init)
