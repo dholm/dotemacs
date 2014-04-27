@@ -2,6 +2,17 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/whitespace-disable-style (styles)
+  "Disable STYLES in current mode."
+  (when (boundp 'whitespace-style)
+    (let ((options (user/filter (lambda (x) (member x styles))
+                                whitespace-style)))
+      (when (and (boundp 'global-whitespace-mode) global-whitespace-mode)
+        (global-whitespace-toggle-options options))
+      (when (and (boundp 'whitespace-mode) whitespace-mode)
+        (whitespace-toggle-options options)))))
+
+
 (defun user/whitespace-init ()
   "Initialize whitespace mode."
   (setq-default
