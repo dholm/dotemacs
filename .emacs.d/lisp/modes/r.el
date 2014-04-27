@@ -95,6 +95,8 @@
 
   ;; Register auto modes.
   (add-auto-mode 'R-mode "\\.R$")
+  (add-auto-mode 'Rd-mode "\\.Rd$")
+  (add-auto-mode 'Rnw-mode "\\.Rnw$")
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :statistics 'R))
