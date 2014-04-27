@@ -124,7 +124,6 @@
 (defun user/semantic-init-hook ()
   "Semantic initialization hook."
   (unless user/semantic-initialized
-    (message "init semantic")
     ;; Enable [ec]tags support.
     (with-feature 'semantic/ectags/util
       (when (and (fboundp 'cedet-ectag-version-check)
@@ -160,7 +159,6 @@
 (defun user/ede-init-hook ()
   "EDE initialization hook."
   (unless user/ede-initialized
-    (message "init ede")
     ;; Enable CScope if available.
     (with-feature 'cedet-cscope
       (when (cedet-cscope-version-check t)
