@@ -79,6 +79,11 @@
     (add-to-list 'interpreter-mode-alist (cons interpreter mode))))
 
 
+(defun user/filter (condp lst)
+  "Return list with elements for which CONDP are non-nil in LST."
+  (delq nil (mapcar (lambda (elt) (and (funcall condp elt) elt)) lst)))
+
+
 (defun user/all-asscs (asslist query)
   "A list of all values in ASSLIST corresponding to QUERY (like rassoc)."
   (cond
