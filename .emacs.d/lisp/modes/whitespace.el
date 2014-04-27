@@ -7,6 +7,8 @@
   (setq-default
    ;; Maximum allowed line length.
    whitespace-line-column 80
+   ;; Cleanup whitespace errors on save.
+   whitespace-action '(auto-cleanup)
    ;; Kinds of whitespace to visualize.
    whitespace-style
    '(;; Visualize using faces.
@@ -35,10 +37,9 @@
        ;; 9 TAB, 9655 WHITE RIGHT-POINTING TRIANGLE 「▷」, 92 9 CHARACTER TABULATION 「\t」
        (tab-mark 9 [9655 9] [92 9]))))
 
-  ;; Enable whitespace mode globally.
-  (global-whitespace-mode t)
-  (after-load 'diminish
-    (diminish 'global-whitespace-mode)))
+  (after-load 'whitespace
+    (after-load 'diminish
+      (diminish 'whitespace-mode))))
 
 (user/whitespace-init)
 

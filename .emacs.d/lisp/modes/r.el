@@ -29,9 +29,6 @@
   "Inferior ESS mode hook."
   (user/ess-mode-common-hook)
 
-  ;; Hide irrelevant whitespace.
-  (whitespace-toggle-options '(empty trailing))
-
   (setq
    ;; Make R prompt read only.
    comint-prompt-read-only t))

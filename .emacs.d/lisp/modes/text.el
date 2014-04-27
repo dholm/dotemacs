@@ -21,8 +21,8 @@
   ;; Run spell-checker
   (flyspell-mode)
 
-  ;; Delete trailing whitespace on save
-  (add-hook 'write-contents-functions 'delete-trailing-whitespace nil t)
+  ;; Enable whitespace mode globally.
+  (whitespace-mode t)
 
   ;; Enable dtrt-indent to attempt to identify the indentation rules used
   (after-load 'dtrt-indent

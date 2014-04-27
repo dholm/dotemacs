@@ -2,26 +2,27 @@
 ;;; Commentary:
 ;;; Code:
 
-(defvar fix-tabs-on-save nil
-  "Automatically (un)tabify buffer on save according to 'indent-tabs-mode'.")
-
-
 (defun user/prog-mode-hook ()
   "Programming mode hook."
-  ;; Automatically break long lines
+  ;; Automatically break long lines.
   (auto-fill-mode t)
   (after-load 'diminish
     (diminish 'auto-fill-function))
+
   ;; Run spell-checker
   (flyspell-prog-mode)
-  ;; Delete trailing whitespace on save
-  (add-hook 'write-contents-functions 'user/prog-mode-buffer-cleanup nil t)
+
+  ;; Enable whitespace mode globally.
+  (whitespace-mode t)
+
   ;; Enable dtrt-indent to attempt to identify the indentation rules used
   (after-load 'dtrt-indent
     (dtrt-indent-mode t))
+
   ;; Highlight FIXME/TODO/etc
   (after-load 'fix-mode
     (fic-mode t))
+
   ;; Diminish abbrev mode when loaded
   (after-load 'diminish
     (diminish 'abbrev-mode))
@@ -29,18 +30,6 @@
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :align 'align-current)
   (user/bind-key-local :code :comment 'comment-dwim))
-
-
-(defun user/prog-mode-buffer-cleanup ()
-  "Cleans up the buffer contents."
-  (interactive)
-  (delete-trailing-whitespace)
-  (when fix-tabs-on-save
-    (if indent-tabs-mode
-        (tabify (point-min) (point-max))
-      (untabify (point-min) (point-max))))
-  ;; Return nil so that buffer is saved.
-  nil)
 
 
 (defun user/rainbow-delimiters-init ()
