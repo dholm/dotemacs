@@ -6,16 +6,20 @@
 (defun user/lisp-mode-common-hook ()
   "Lisp mode hook."
   (user/cedet-hook)
+
   (with-feature 'rainbow-delimiters
     (rainbow-delimiters-mode t))
+
   (with-feature 'paredit
     (enable-paredit-mode)
     (after-load 'diminish
       (diminish 'paredit-mode)))
+
   (with-feature 'redshank
     (redshank-mode t)
     (after-load 'diminish
       (diminish 'redshank-mode)))
+
   (turn-on-eldoc-mode)
   (after-load 'diminish
     (diminish 'eldoc-mode))
@@ -34,18 +38,22 @@
   (with-feature 'auto-compile
     (auto-compile-on-save-mode t)
     (auto-compile-on-load-mode t))
+
   (with-feature 'elisp-slime-nav
     (elisp-slime-nav-mode t)
     (after-load 'diminish
       (diminish 'elisp-slime-nav-mode)))
+
   (with-feature 'auto-complete-emacs-lisp
     (ac-emacs-lisp-mode-setup))
+
+  ;;; (Bindings) ;;;
   (with-feature 'popwin
     (user/bind-key-local :util :popwin-messages 'popwin:messages))
+
   (with-feature 'macrostep
     (user/bind-key-local :util :macrostep-expand 'macrostep-expand))
 
-  ;;; (Bindings) ;;;
   (user/bind-key-local :doc :reference 'elisp-index-search)
   (user/bind-key-local :doc :describe-function 'describe-function)
   (user/bind-key-local :doc :describe-variable 'describe-variable)
