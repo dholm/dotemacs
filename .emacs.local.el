@@ -8,6 +8,8 @@
     (ede-cpp-root-project "Project"
                           :name "Project Name"
                           :file "/path/to/project/root/file"
+                          :local-variables '((fill-column . 80)
+                                             (whitespace-line-column . 80))
                           :include-path '("libc" "libd")
                           :system-include-path '()
                           :spp-table '(("DEBUG" . ""))
