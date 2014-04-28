@@ -8,7 +8,14 @@
     (:eww . ((:launch . eww)
              (:browse-url . eww-browse-url)))
     (:default . ((:launch . nil)
-                 (:browse-url . browse-url-default-browser)))))
+                 (:browse-url . user/browse-url-external)))))
+
+
+(defun user/browse-url-external ()
+  "Browse url using external browser."
+  (interactive)
+  (let ((browse-url-browser-function 'browse-url-default-browser))
+    (call-interactively 'browse-url)))
 
 
 (defun user/browser-init ()
@@ -17,16 +24,14 @@
          (cond ((feature-p 'eww) (assq :eww user/browser-alist))
                ((executable-find "w3m") (assq :w3m user/browser-alist))
                (t (assq :default user/browser-alist))))
-        (external-browser
-         (cond ((eq system-type 'darwin) 'browse-url-default-macosx-browser)
-               ((eq system-type 'windows-nt) 'browse-url-default-windows-browser)
-               (t 'browse-url-default-browser))))
+        (external-browser (assq :default user/browser-alist)))
     (setq-default
      browse-url-browser-function (cdr (assq :browse-url browser)))
 
     ;;; (Bindings) ;;;
     (user/bind-key-global :apps :browse (cdr (assq :launch browser)))
-    (user/bind-key-global :apps :browse-external external-browser)
+    (user/bind-key-global :apps :browse-external
+                          (cdr (assq :browse-url external-browser)))
     (user/bind-key-global :nav :open 'browse-url-at-point)))
 
 (user/browser-init)
