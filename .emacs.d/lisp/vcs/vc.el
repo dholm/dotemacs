@@ -11,9 +11,16 @@
 
 (defun user/vc-log-edit-hook ()
   "Version control log editing hook."
+  ;; Limited whitespace style.
+  (setq-local whitespace-style '(face lines-tail))
+
+  ;; Set maximum line length.
+  (setq fill-column 72)
+  (setq-local whitespace-line-column 72)
+
   ;; Enable org minor mode editing tools.
-  (orgstruct-mode t)
-  (orgtbl-mode t))
+  (orgstruct-mode)
+  (orgtbl-mode))
 
 
 (defun user/vc-init ()
