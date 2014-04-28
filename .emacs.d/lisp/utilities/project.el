@@ -36,9 +36,12 @@
 (defun user/project-root (path)
   "Get the project root for PATH, if it exists."
   (when path
-    (let ((ede-proj (user/ede-project (file-truename path))))
+    (let ((ede-proj (user/ede-project (file-truename path)))
+          (vc-backend (and (fboundp 'vc-responsible-backend)
+                           (vc-responsible-backend (file-truename path)))))
       (cond
        (ede-proj (ede-project-root-directory ede-proj))
+       (vc-backend (vc-call-backend vc-backend 'root (file-truename path)))
        (t (user/ffip-project-root path))))))
 
 
