@@ -88,7 +88,7 @@
 
 (defun user/current-path-apply (fn)
   "Based on the current context apply FN to it."
-  (let ((path (or (buffer-file-name) default-directory)))
+  (let ((path (file-truename (or (buffer-file-name) default-directory))))
     (funcall fn path)))
 
 
