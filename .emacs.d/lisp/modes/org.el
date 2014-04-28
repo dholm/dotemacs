@@ -141,7 +141,8 @@
     (setq-default
      org-plantuml-jar-path (path-join (el-get-package-directory 'plantuml-mode)
                                       "plantuml.jar"))
-    (add-many-to-list-after-load 'org-babel-load-languages 'org '(plantuml . t)))
+    (add-many-to-list-after-load 'org-babel-load-languages 'org
+                                 '(plantuml . t)))
   (with-executable 'python
     (add-many-to-list-after-load 'org-babel-load-languages 'org '(python . t)))
   (with-executable 'R
@@ -183,6 +184,9 @@
    ;; Annotations data store.
    org-annotate-file-storage-file (path-join *user-org-data-directory*
                                              "annotations.org")
+   ;; Clock data store.
+   org-clock-persist-file (path-join *user-org-cache-directory*
+                                     "org-clock-save.el")
    ;; Pressing return on a link follows it.
    org-return-follows-link t
    ;; Log time for TODO state changes.
@@ -220,7 +224,8 @@
    ;; State transitions (http://doc.norang.ca/org-mode.html).
    org-todo-keywords
    (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-           (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING")))
+           (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE"
+                     "MEETING")))
    ;; Triggered state changes.
    org-todo-state-tags-triggers
    (quote (("CANCELLED" ("CANCELLED" . t))
@@ -239,7 +244,8 @@
             :clock-in t :clock-resume t :immediate-finish t)
            ("n" "note" entry (file org-default-notes-file)
             "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-           ("j" "Journal" entry (file+datetree (path-join *user-org-data-directory* "diary.org"))
+           ("j" "Journal" entry
+            (file+datetree (path-join *user-org-data-directory* "diary.org"))
             "* %?\n%U\n" :clock-in t :clock-resume t)
            ("w" "org-protocol" entry (file org-default-notes-file)
             "* TODO Review %c\n%U\n" :immediate-finish t)
@@ -249,8 +255,10 @@
             "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
            ("h" "Habit" entry (file org-default-notes-file)
             (concat "* NEXT %?\n%U\n%a\n"
-                    "SCHEDULED: %(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n:"
-                    "PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n")))))
+                    "SCHEDULED: "
+                    "%(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n:"
+                    "PROPERTIES:\n:STYLE: habit\n"
+                    ":REPEAT_TO_STATE: NEXT\n:END:\n")))))
 
   (add-many-to-list-after-load 'org-modules 'org
                                '(;; File attachment manager.
@@ -332,13 +340,7 @@
 
   ;;; (Packages) ;;;
   (require-package '(:name org-mode :after (user/org-mode-init)))
-  (require-package '(:name org-caldav))
-
-  (when (el-get-package-is-installed 'org-mode)
-    ;; Override org-mode built into Emacs.
-    (let ((org-mode-path (path-join (el-get-package-directory 'org-mode) "lisp")))
-      (add-to-list 'load-path org-mode-path)
-      (load (path-join org-mode-path "org-loaddefs.el")))))
+  (require-package '(:name org-caldav)))
 
 (user/org-init)
 
