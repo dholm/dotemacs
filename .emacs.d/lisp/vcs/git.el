@@ -27,8 +27,7 @@
   (with-feature 'fullframe
     (fullframe magit-status magit-mode-quit-window nil))
 
-  (add-hook 'magit-mode-hook 'user/magit-mode-hook)
-  (add-hook 'magit-log-edit-mode-hook 'user/vc-log-edit-hook))
+  (add-hook 'magit-mode-hook 'user/magit-mode-hook))
 
 
 (defun user/git-messenger-init ()
@@ -38,6 +37,8 @@
 
 (defun user/git-init ()
   "Initialize Git support."
+  (add-hook 'git-commit-mode-hook 'user/vc-log-edit-hook)
+
   ;;; (Packages) ;;;
   (require-package '(:name magit :after (user/magit-init)))
   (require-package '(:name git-modes))
