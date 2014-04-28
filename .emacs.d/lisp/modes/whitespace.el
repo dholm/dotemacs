@@ -17,7 +17,7 @@
   "Initialize whitespace mode."
   (setq-default
    ;; Maximum allowed line length.
-   whitespace-line-column 80
+   whitespace-line-column 120
    ;; Cleanup whitespace errors on save.
    whitespace-action '(auto-cleanup)
    ;; Kinds of whitespace to visualize.
