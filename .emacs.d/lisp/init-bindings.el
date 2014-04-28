@@ -289,7 +289,11 @@
      (:vcs . ((:status . (user/vcs-prefix "s"))
               (:history . (user/vcs-prefix "h"))
               (:describe . (user/vcs-prefix "d"))
-              (:gutter . (user/vcs-prefix "g"))))
+              (:gutter . (user/vcs-prefix "g"))
+
+              (:add-buffer . (user/vcs-prefix "a"))
+              (:next-action . (user/vcs-prefix "SPC"))
+              (:mergetool . (user/vcs-prefix "m"))))
 
      ;;; (Utilities) ;;;
      (:util . ((:annotate-buffer . (user/utilities-prefix "a"))
