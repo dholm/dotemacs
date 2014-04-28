@@ -120,10 +120,10 @@
 
   ;; Org babel modules to load by default.
   (add-many-to-list-after-load 'org-babel-load-languages 'org
-                               '(;; Emacs Lisp support.
-                                 (emacs-lisp . t)
-                                 ;; Shell script support.
-                                 (sh . t)))
+                               ;; Emacs Lisp support.
+                               '(emacs-lisp . t)
+                               ;; Shell script support.
+                               '(sh . t))
 
   (with-executable 'ditaa
     (add-many-to-list-after-load 'org-babel-load-languages 'org '(ditaa . t)))
@@ -159,19 +159,19 @@
 
   ;; Org export modules to load by default.
   (add-many-to-list-after-load 'org-export-backends 'org
-                               '(;; Ascii support.
-                                 ascii
-                                 ;; HTML.
-                                 html
-                                 ;; OpenDocument Text support.
-                                 odt))
+                               ;; Ascii support.
+                               'ascii
+                               ;; HTML.
+                               'html
+                               ;; OpenDocument Text support.
+                               'odt)
 
   (with-executable 'latex
     (add-many-to-list-after-load 'org-export-backends 'org
-                                 '(;; Beamer presentation export.
-                                   beamer
-                                   ;; Plain LaTeX export.
-                                   latex))))
+                                 ;; Beamer presentation export.
+                                 'beamer
+                                 ;; Plain LaTeX export.
+                                 'latex)))
 
 
 (defun user/org-mode-init ()
@@ -261,24 +261,24 @@
                     ":REPEAT_TO_STATE: NEXT\n:END:\n")))))
 
   (add-many-to-list-after-load 'org-modules 'org
-                               '(;; File attachment manager.
-                                 org-attach
-                                 ;; Link to BibTeX entries.
-                                 org-bibtex
-                                 ;; Link to tags.
-                                 org-ctags
-                                 ;; Habit tracking.
-                                 org-habit
-                                 ;; Support links to info pages.
-                                 org-info
-                                 ;; Support links to man pages.
-                                 org-man
-                                 ;; Export org buffer to MIME email message.
-                                 org-mime
-                                 ;; Allow external applications to talk to org.
-                                 org-protocol
-                                 ;; Embed source code in org-mode.
-                                 org-src))
+                               ;; File attachment manager.
+                               'org-attach
+                               ;; Link to BibTeX entries.
+                               'org-bibtex
+                               ;; Link to tags.
+                               'org-ctags
+                               ;; Habit tracking.
+                               'org-habit
+                               ;; Support links to info pages.
+                               'org-info
+                               ;; Support links to man pages.
+                               'org-man
+                               ;; Export org buffer to MIME email message.
+                               'org-mime
+                               ;; Allow external applications to talk to org.
+                               'org-protocol
+                               ;; Embed source code in org-mode.
+                               'org-src)
 
   (when (el-get-package-is-installed 'bbdb)
     (add-many-to-list-after-load 'org-modules 'org 'org-bbdb))
