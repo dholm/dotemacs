@@ -37,7 +37,11 @@
     (with-feature 'doxymacs
       (doxymacs-mode t))
     (with-feature 'doc-mode
-      (doc-mode t))
+      (doc-mode t)
+      ;; Disable buffer check from semantic idle scheduler since it tends to
+      ;; hang Emacs for a long time.
+      (remove-hook 'semantic-after-idle-scheduler-reparse-hooks
+                   'doc-mode-check-buffer t))
     (run-hooks 'doxygen-mode-hook)))
 
 
