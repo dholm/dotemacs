@@ -67,6 +67,12 @@
   (user/vcs-command :gutter))
 
 
+(defun user/vcs-review ()
+  "Execute VCS code review command on the current buffer."
+  (interactive)
+  (user/vcs-command :review))
+
+
 (defun user/vcs-next-action ()
   "Execute next VCS action on the current buffer."
   (interactive)
@@ -95,6 +101,7 @@
   (user/bind-key-global :vcs :history 'user/vcs-history)
   (user/bind-key-global :vcs :describe 'user/vcs-describe)
   (user/bind-key-global :vcs :gutter 'user/vcs-gutter)
+  (user/bind-key-global :vcs :review 'user/vcs-review)
 
   (user/bind-key-global :vcs :next-action 'user/vcs-next-action)
   (user/bind-key-global :vcs :add-buffer 'user/vcs-add-buffer)

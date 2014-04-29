@@ -1,7 +1,6 @@
 argparse
 epc>=0.0.4
 flake8>=2.0
-git-review
 ipython>=0.13.2
 jedi>=0.6.0
 rlcompleter2>=0.98
