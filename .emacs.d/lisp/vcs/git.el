@@ -45,7 +45,9 @@
   (require-package '(:name git-gutter))
   (when (display-graphic-p)
     (require-package '(:name git-gutter-fringe :after (user/git-gutter-fringe-init))))
-  (require-package '(:name git-messenger :after (user/git-messenger-init))))
+  (require-package '(:name git-messenger :after (user/git-messenger-init)))
+  (with-executable 'git-review
+    (require-package '(:name gerrit-download))))
 
 (with-executable 'git
   (user/git-init))

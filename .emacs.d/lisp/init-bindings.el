@@ -208,11 +208,11 @@
               (:go-forward . (user/navigation-prefix "f"))
               (:go-back . (user/navigation-prefix "b"))
 
-              (:context-cycle . (user/navigation-prefix "s c"))
-              (:context-forward . (user/navigation-prefix "s f"))
-              (:context-backward . (user/navigation-prefix "s b"))
-              (:context-up . (user/navigation-prefix "s p"))
-              (:context-down . (user/navigation-prefix "s n"))
+              (:context-cycle . (user/navigation-prefix " c"))
+              (:context-forward . (user/navigation-prefix " f"))
+              (:context-backward . (user/navigation-prefix " b"))
+              (:context-up . (user/navigation-prefix " p"))
+              (:context-down . (user/navigation-prefix " n"))
 
               (:next . (user/navigation-prefix "n"))
 
@@ -290,6 +290,7 @@
               (:history . (user/vcs-prefix "h"))
               (:describe . (user/vcs-prefix "d"))
               (:gutter . (user/vcs-prefix "g"))
+              (:review . (user/vcs-prefix "r"))
 
               (:add-buffer . (user/vcs-prefix "a"))
               (:next-action . (user/vcs-prefix "SPC"))

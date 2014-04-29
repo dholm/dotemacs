@@ -2,6 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
+(after-load 'magit
+  ;; Set up root directory where magit will find Git repositories.
+  (add-to-list 'magit-repo-dirs (path-join *user-home-directory* "Projects")))
+
 (after-load 'ede
   ;; Generic EDE project example.
   (when (file-exists-p "/path/to/project/root/file")

@@ -7,6 +7,9 @@
              (:history . magit-file-log)
              (:describe . git-messenger:popup-message)
              (:gutter . git-gutter:toggle)
+             (:review . (lambda ()
+                          ;; Make it non-interactive to pick the current repo.
+                          (gerrit-download)))
              (:add-buffer . (lambda ()
                               (magit-run-git "add" (file-truename
                                                     (buffer-file-name)))))
