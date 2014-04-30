@@ -4,11 +4,11 @@
 
 (defun user/c-mode-common-hook ()
   "C mode common hook."
-  ;; Set the default C/C++ code styles
   (setq-default
+   ;; Set the default C/C++ code styles.
    c-default-style "K&R"
    c++-default-style "Stroustrup"
-   ;; Indent using four spaces
+   ;; Indent using four spaces.
    c-basic-offset 4)
 
   ;; Load CEDET
@@ -22,25 +22,25 @@
   ;; the switch.
   (c-set-offset 'case-label '+)
 
-  ;; Separate camel-case into separate words
+  ;; Separate camel-case into separate words.
   (subword-mode t)
 
-  ;; Register file types with find-file-in-project
+  ;; Register file types with find-file-in-project.
   (after-load 'find-file-in-project
     (user/ffip-local-patterns "*.c" "*.h" "*.cpp" "*.hpp" "*.cc" "*.hh"))
 
   (when (el-get-package-is-installed 'helm-etags-plus)
-    ;; Automatically update tags
+    ;; Automatically update tags.
     (turn-on-ctags-auto-update-mode))
 
   (when (el-get-package-is-installed 'helm-gtags)
-    ;; Enable helm-gtags which in turn enables auto-update of Global tags
+    ;; Enable helm-gtags which in turn enables auto-update of Global tags.
     (helm-gtags-mode t))
 
-  ;; Auto completion
-  (when (and (executable-find "clang")
-             (el-get-package-is-installed 'auto-complete-clang))
-    (add-ac-sources 'ac-source-clang))
+  ;; Auto completion.
+  (with-executable 'clang
+    (with-feature 'auto-complete-clang
+      (add-ac-sources 'ac-source-clang)))
 
   ;;; (Bindings) ;;;
   (with-executable 'gdb
@@ -50,7 +50,7 @@
 (defun user/c-mode-cedet-hook ()
   "C mode CEDET hook."
   (with-feature 'semantic/bovine/c
-    ;; Load extra semantic helpers
+    ;; Load extra semantic helpers.
     (require 'semantic/bovine/gcc)
     (require 'semantic/bovine/clang)
 
