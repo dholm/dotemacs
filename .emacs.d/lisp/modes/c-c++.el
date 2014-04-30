@@ -4,23 +4,19 @@
 
 (defun user/c-mode-common-hook ()
   "C mode common hook."
-  (setq-default
-   ;; Set the default C/C++ code styles.
-   c-default-style "K&R"
-   c++-default-style "Stroustrup"
-   ;; Indent using four spaces.
-   c-basic-offset 4)
+  ;; Indent using four spaces.
+  (setq-local c-basic-offset 4)
+
+  ;; Override the indentation level of case labels in the K&R- and
+  ;; Stroustrup styles so that they are indented one level beyond
+  ;; the switch.
+  (c-set-offset 'case-label '+)
 
   ;; Load CEDET
   (user/c-mode-cedet-hook)
 
   ;; Enable Doxygen support.
   (doxygen-mode t)
-
-  ;; Override the indentation level of case labels in the K&R- and
-  ;; Stroustrup styles so that they are indented one level beyond
-  ;; the switch.
-  (c-set-offset 'case-label '+)
 
   ;; Separate camel-case into separate words.
   (subword-mode t)
@@ -74,6 +70,11 @@
   (when (and (executable-find "clang")
              (executable-find "llvm-config"))
     (require-package '(:name auto-complete-clang)))
+
+  (after-load 'cc-mode
+    (add-many-to-list 'c-default-style
+                      '(c-mode . "K&R")
+                      '(c++-mode . "Stroustrup")))
 
   (add-hook 'c-mode-common-hook 'user/c-mode-common-hook)
 
