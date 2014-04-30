@@ -5,7 +5,8 @@
 (defun user/ag-init ()
   "Initialize ag."
   (setq-default
-   ag-project-root-function `(user/current-path-apply 'user/project-root))
+   ag-project-root-function '(lambda ()
+                               (user/project-root (path-abs-buffer))))
 
   ;;; (Bindings) ;;;
   (global-set-key [remap find-grep] 'ag))

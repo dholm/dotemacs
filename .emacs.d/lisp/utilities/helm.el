@@ -139,7 +139,7 @@
   (setq-default
    ;; Use project helpers to find root.
    helm-cmd-t-default-repo '(lambda ()
-                              (user/current-path-apply 'user/project-root)))
+                              (user/project-root (path-abs-buffer))))
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :basic :open-file-context 'helm-cmd-t))

@@ -80,11 +80,11 @@
 
 (defun user/org-annotate-file-storage-file ()
   "Get the path to the annotation storage file."
-  (if (user/current-path-apply 'user/project-p)
-      (let ((project-root (user/current-path-apply 'user/project-root))
-            (project-name (user/current-path-apply 'user/project-name)))
-        (path-join project-root (concat project-name ".org")))
-    org-annotate-file-storage-file))
+  (let ((path (path-abs-buffer))
+        (project-root (user/project-root (path-abs-buffer))))
+    (if project-root
+        (path-join project-root (concat (user/project-name path) ".org"))
+      org-annotate-file-storage-file)))
 
 
 (defun user/org-annotate-file ()

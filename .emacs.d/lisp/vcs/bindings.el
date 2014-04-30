@@ -11,12 +11,10 @@
                           ;; Make it non-interactive to pick the current repo.
                           (gerrit-download)))
              (:add-buffer . (lambda ()
-                              (magit-run-git "add" (file-truename
-                                                    (buffer-file-name)))))
+                              (magit-run-git "add" (path-abs-buffer))))
              (:mergetool . magit-ediff)))
     (:ClearCase . ((:status . (lambda ()
-                                (vc-dir (file-name-directory
-                                         (file-truename (buffer-file-name))))))
+                                (vc-dir (path-abs-buffer))))
                    (:history . vc-print-log)
                    (:describe . vc-annotate)
                    (:gutter . diff-hl-margin-mode)
@@ -27,7 +25,7 @@
 
 (defun user/vcs-command-group (file-name)
   "Get the appropriate command group for FILE-NAME."
-  (let ((backend (vc-responsible-backend (file-name-directory file-name))))
+  (let ((backend (vc-responsible-backend (path-abs-buffer))))
     (cond ((eq backend 'Git)
            (cdr (assq :Git user/vcs-command-alist)))
           ((eq backend 'CLEARCASE)
@@ -36,7 +34,7 @@
 
 (defun user/vcs-command (command)
   "Run VCS COMMAND on current buffer."
-  (let ((group (user/vcs-command-group (file-truename (buffer-file-name)))))
+  (let ((group (user/vcs-command-group (path-abs-buffer))))
     (when (and group (assq command group))
       (if (interactive-form (cdr (assq command group)))
           (call-interactively (cdr (assq command group)))
