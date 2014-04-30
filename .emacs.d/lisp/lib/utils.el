@@ -43,6 +43,13 @@
      ,@body))
 
 
+(defmacro with-any-executable (executables &rest body)
+  "If any of EXECUTABLES are available in the path, evaluate BODY."
+  (declare (indent defun))
+  `(when (some (lambda (x) (executable-find (symbol-name x))) ,executables)
+     ,@body))
+
+
 (defun add-many-to-list (the-list &rest entries)
   "Add to THE-LIST any specified ENTRIES."
   (dolist (entry entries)
