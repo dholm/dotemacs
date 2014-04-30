@@ -11,8 +11,6 @@
    ;; This will improve performance in general but might degrade performance of
    ;; key repeat.
    redisplay-dont-pause t
-   ;; Defer fontification for faster scrolling in large buffers.
-   jit-lock-defer-time 0.05
    ;; Do not reorder text during rendering.
    bidi-display-reordering nil))
 
