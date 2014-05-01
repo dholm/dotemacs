@@ -4,6 +4,9 @@
 
 (defun user/csharp-mode-hook ()
   "C# mode hook."
+  (with-executable 'xbuild
+    (setq-local compile-command "xbuild "))
+
   ;; Bring in CEDET.
   (user/cedet-hook)
 
@@ -14,6 +17,10 @@
 (defun user/csharp-mode-init ()
   "Initialize C# moed."
   (add-hook 'csharp-mode-hook 'user/csharp-mode-hook)
+
+  (after-load 'mode-compile
+    (add-to-list 'mode-compile-modes-alist
+                 '(csharp-mode . (csharp-invoke-compile-interactively))))
 
   ;;; (Packages) ;;;
   (require-package '(:name csharp-mode))
