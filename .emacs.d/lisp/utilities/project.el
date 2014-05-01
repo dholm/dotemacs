@@ -38,7 +38,8 @@
   (when path
     (let ((ede-proj (user/ede-project (file-truename path)))
           (vc-backend (and (fboundp 'vc-responsible-backend)
-                           (vc-responsible-backend (file-truename path)))))
+                           (ignore-errors
+                             (vc-responsible-backend (file-truename path))))))
       (cond
        (ede-proj (ede-project-root-directory ede-proj))
        (vc-backend (vc-call-backend vc-backend 'root (file-truename path)))
