@@ -37,9 +37,8 @@
 
   (after-load 'mode-compile
     (with-executable 'clang
-      (setq-default
-       cc-compilers-list (cons "clang" cc-compilers-list)
-       c++-compilers-list (cons "clang++" c++-compilers-list)))))
+      (add-to-list 'cc-compilers-list "clang")
+      (add-to-list 'c++-compilers-list "clang++"))))
 
 
 (defun user/compile-init ()
