@@ -143,11 +143,11 @@
                 (:swoop-multi . "C-M-i")
 
                 (:selection-start . "C-SPC")
-                (:selection-expand . "C-=")
-                (:selection-next . "C-.")
-                (:selection-prev . "C-,")
-                (:selection-all . "C-c C-,")
-                (:selection-edit-lines . "C-c C-l")
+                (:selection-expand . "M-=")
+                (:selection-next . "M-.")
+                (:selection-prev . "M-,")
+                (:selection-all . "C-c M-.")
+                (:selection-edit-lines . "C-c M-e")
 
                 (:copy . "C-x C-w")
                 (:cut . "C-x C-k")
