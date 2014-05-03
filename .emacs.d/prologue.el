@@ -21,6 +21,7 @@
 
 ;; Load Emacs utilities.
 (require 'lib/list)
+(require 'lib/string)
 (require 'lib/utils)
 
 
