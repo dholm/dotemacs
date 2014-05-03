@@ -20,6 +20,7 @@
 
 
 ;; Load Emacs utilities.
+(require 'lib/list)
 (require 'lib/utils)
 
 
