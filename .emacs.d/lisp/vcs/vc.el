@@ -29,10 +29,7 @@
   (with-feature 'fullframe
     (fullframe vc-annotate vc-annotate-mode-quit-window nil))
 
-  (add-hook 'find-file-hook 'user/vc-find-file-hook)
-
-  ;;; (Packages) ;;;
-  (require-package '(:name diff-hl)))
+  (add-hook 'find-file-hook 'user/vc-find-file-hook))
 
 (user/vc-init)
 
