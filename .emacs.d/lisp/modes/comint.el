@@ -16,7 +16,11 @@
    ;; Scroll buffer to bottom in active frame on input.
    comint-scroll-to-bottom-on-input 'this
    ;; Make the prompt read only.
-   comint-prompt-read-only t)
+   comint-prompt-read-only t
+   ;; Set a decent input history size.
+   comint-input-ring-size 10000
+   ;; Don't store duplicates in history.
+   comint-input-ignoredups t)
 
   (add-hook 'comint-mode-hook 'user/comint-mode-hook)
 
