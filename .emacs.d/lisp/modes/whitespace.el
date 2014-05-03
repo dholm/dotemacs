@@ -2,6 +2,23 @@
 ;;; Commentary:
 ;;; Code:
 
+(defvar user/whitespace-mode-suppressed nil
+  "Tracks whether `whitespace-mode' is currently being suppressed.")
+(make-variable-buffer-local 'user/prev-whitespace-mode-suppressed)
+
+
+(defun user/whitespace-mode-suppress (suppress)
+  "If SUPPRESS is non-nil, disable `whitespace-mode' in current mode."
+  (when (boundp 'whitespace-mode)
+    (if suppress
+        (when (and whitespace-mode (not user/whitespace-mode-suppressed))
+          (setq user/whitespace-mode-suppressed t)
+          (whitespace-mode -1))
+      (when user/whitespace-mode-suppressed
+        (setq user/whitespace-mode-suppressed nil)
+        (whitespace-mode 1)))))
+
+
 (defun user/whitespace-disable-style (styles)
   "Disable STYLES in current mode."
   (when (boundp 'whitespace-style)
