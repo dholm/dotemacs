@@ -66,13 +66,13 @@
   (setq-default
    ;; Limit the number of candidates.
    ac-candidate-limit 20
-   ;; Wait five seconds until showing completions.
-   ac-delay 5
+   ;; Delay until narrowing completions.
+   ac-delay 0.5
    ;; Automatically start completion after two characters.
    ac-auto-start 2
    ;; Use fuzzy matching.
    ac-fuzzy-enable t
-   ac-use-fuzzy 1.5
+   ac-use-fuzzy t
    ;; Automatically show menu after 400ms.
    ac-auto-show-menu 0.4
    ;; Allow normal navigation keys in menu.
@@ -99,7 +99,7 @@
    ac-completing-map
    (let ((map (make-sparse-keymap)))
      ;; Expand on tab.
-     (define-key map (user/get-key :code :try-complete) 'ac-expand)
+     (define-key map (user/get-key :code :try-complete) 'ac-expand-common)
      ;; Complete on enter.
      (define-key map (user/get-key :code :complete) 'ac-complete)
      ;; Bind configured auto complete key.
