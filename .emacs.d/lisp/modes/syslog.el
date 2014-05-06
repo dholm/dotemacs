@@ -10,13 +10,11 @@
 
 (defun user/syslog-mode-init ()
   "Initialize syslog-mode."
-  ;; Register auto mode
-  (add-auto-mode 'syslog-mode "/var/log.*$")
+  ;; Register auto mode for log files.
+  (add-auto-mode 'syslog-mode "/var/log.*$" "\\.log$")
 
   (add-hook 'syslog-mode-hook 'user/syslog-mode-hook))
 
-
-(require-package '(:name hide-lines))
 (require-package '(:name syslog-mode :after (user/syslog-mode-init)))
 
 
