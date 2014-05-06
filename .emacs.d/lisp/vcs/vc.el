@@ -19,8 +19,7 @@
   (setq-local whitespace-line-column 72)
 
   ;; Enable org minor mode editing tools.
-  (orgstruct-mode)
-  (orgtbl-mode))
+  (orgstruct-mode))
 
 
 (defun user/vc-init ()
