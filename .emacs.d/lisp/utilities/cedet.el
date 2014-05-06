@@ -48,8 +48,7 @@
 
     ;;; (Context Menu) ;;;
     (when (display-graphic-p)
-      (cedet-m3-minor-mode t)
-      (local-set-key [mouse-2] 'cedet-m3-menu-kbd))
+      (cedet-m3-minor-mode t))
 
     ;;; (Bindings) ;;;
     (user/bind-key-local :code :update-index 'user/cedet-create/update-all)

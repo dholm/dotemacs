@@ -25,12 +25,17 @@
 
   (when (eq window-system 'x)
     (setq-default
+     ;; Don't inject mouse selection into X11 clipboard.
+     mouse-drag-copy-region nil
      ;; Do not interact with X11 primary selection.
      x-select-enable-primary nil
-     ;; Interact with X11 clipboard selection.
+     ;; Make kill/yank interact with X11 clipboard selection.
      x-select-enable-clipboard t
-     ;; Yanking should also use the clipboard.
-     interprogram-paste-function 'x-cut-buffer-or-selection-value))
+     ;; Active region should set primary X11 selection.
+     select-active-regions t)
+
+    ;; Set middle mouse button to paste from primary X11 selection.
+    (global-set-key [mouse-2] 'mouse-yank-primary))
 
   ;;; (Bindings) ;;;
   ;; Delete words with C/M-w and rebind kill/yank region to C-x C-k/C-x C-w.
