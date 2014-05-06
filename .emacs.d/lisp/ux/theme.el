@@ -4,6 +4,13 @@
 
 (defun user/solarized-init ()
   "Initialize Solarized theme."
+  (when window-system
+    (setq-default
+     ;; Force using the 256-color palette since it looks nicer.
+     solarized-force-256color t
+     ;; Make the fringe stand out.
+     solarized-distinct-fringe-background t))
+
   (load-theme 'solarized t))
 
 
