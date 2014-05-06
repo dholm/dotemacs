@@ -189,8 +189,7 @@
 
                 (:profiler-start . (user/utilities-prefix "p p"))
                 (:profiler-stop . (user/utilities-prefix "p P"))
-                (:profiler-report . (user/utilities-prefix "p r"))
-                (:profiler-save . (user/utilities-prefix "p s"))))
+                (:profiler-report . (user/utilities-prefix "p r"))))
 
      ;;; (Documentation) ;;;
      (:doc . ((:apropos . (user/documentation-prefix "SPC"))
