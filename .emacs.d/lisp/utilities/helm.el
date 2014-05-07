@@ -175,6 +175,8 @@
   (require-package '(:name helm-gtags :after (user/helm-gtags-init))))
 (with-executable 'python
   (require-package '(:name helm-pydoc)))
+(with-executable 'ag
+  (require-package '(:name helm-ag)))
 
 
 (provide 'utilities/helm)
