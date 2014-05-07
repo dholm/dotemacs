@@ -12,6 +12,9 @@
    ;; Allow dired to be smart about operations.
    dired-dwim-target t)
 
+  ;;; (Packages) ;;;
+  (require-package '(:name dired-k))
+
   ;;; (Bindings) ;;;
   (after-load 'dired
     ;; Do not open new buffers when going down or up a directory.
