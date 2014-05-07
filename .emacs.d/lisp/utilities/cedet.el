@@ -189,13 +189,14 @@
    semantic-idle-breadcrumbs-separator " ⊃ "
    semantic-idle-breadcrumbs-header-line-prefix " ≝ ")
 
-  ;; Load the contrib package.
-  (unless (featurep 'cedet-contrib-load)
-    (load (path-join (el-get-package-directory "cedet") "contrib"
-                     "cedet-contrib-load.el")))
+  (after-load 'cedet-devel-load
+    ;; Load the contrib package.
+    (unless (featurep 'cedet-contrib-load)
+      (load (path-join (el-get-package-directory "cedet") "contrib"
+                       "cedet-contrib-load.el")))
 
-  ;; Register missing autoloads
-  (autoload 'wisent-ruby-default-setup "wisent-ruby")
+    ;; Register missing autoloads
+    (autoload 'wisent-ruby-default-setup "wisent-ruby"))
 
   (add-hook 'ede-minor-mode-hook 'user/ede-init-hook)
   (add-hook 'semantic-mode-hook 'user/semantic-init-hook))
