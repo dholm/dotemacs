@@ -193,6 +193,7 @@
 
      ;;; (Documentation) ;;;
      (:doc . ((:apropos . (user/documentation-prefix "SPC"))
+              (:manual . (user/documentation-prefix "m"))
 
               (:describe . (user/documentation-prefix "d"))
               (:describe-function . (user/documentation-prefix "f"))
