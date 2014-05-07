@@ -170,7 +170,8 @@
 (require-package '(:name helm-swoop :after (user/helm-swoop-init)))
 
 (with-executable 'git
-  (require-package '(:name helm-ls-git)))
+  (require-package '(:name helm-ls-git))
+  (require-package '(:name helm-open-github)))
 (with-executable 'global
   (require-package '(:name helm-gtags :after (user/helm-gtags-init))))
 (with-executable 'python
