@@ -2,15 +2,17 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/git-gutter-fringe-init ()
-  "Initialize git gutter fringe."
-  (setq-default git-gutter-fr:side 'left-fringe))
-
-
 (defun user/magit-mode-hook ()
-  "Magit mode hook."
-  ;; Ignore change in whitespace by default.
-  (add-to-list 'magit-diff-options "--ignore-space-at-eol"))
+  "Magit mode hook.")
+
+
+(defun user/magit-toggle-whitespace ()
+  "Toggle showing all differences in whitespace when using Magit."
+  (interactive)
+  (if (member "-w" magit-diff-options)
+      (setq magit-diff-options (remove "-w" magit-diff-options))
+    (add-to-list 'magit-diff-options "-w"))
+  (magit-refresh))
 
 
 (defun user/magit-init ()
@@ -27,7 +29,16 @@
   (with-feature 'fullframe
     (fullframe magit-status magit-mode-quit-window nil))
 
-  (add-hook 'magit-mode-hook 'user/magit-mode-hook))
+  (add-hook 'magit-mode-hook 'user/magit-mode-hook)
+
+  ;;; (Bindings) ;;;
+  (after-load 'magit
+    (define-key magit-status-mode-map (kbd "W") 'user/magit-toggle-whitespace)))
+
+
+(defun user/git-gutter-fringe-init ()
+  "Initialize git gutter fringe."
+  (setq-default git-gutter-fr:side 'left-fringe))
 
 
 (defun user/git-messenger-init ()
