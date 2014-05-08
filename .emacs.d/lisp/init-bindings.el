@@ -325,7 +325,7 @@
 
                (:agenda . (user/apps-prefix "a"))
                (:notes . (user/apps-prefix "n"))
-               (:capture-task . (user/apps-prefix "c"))
+               (:capture-task . (user/apps-prefix "t"))
 
                (:email . (user/apps-prefix "e"))
                (:browse . (user/apps-prefix "b"))
@@ -336,6 +336,8 @@
 
                (:music . (user/apps-prefix "m"))
 
+               (:calculator . (user/apps-prefix "c"))
+               (:convert-unit . (user/apps-prefix "M-c"))
                (:statistics . (user/apps-prefix "R"))
                (:sage . (user/apps-prefix "S")))))))
 
