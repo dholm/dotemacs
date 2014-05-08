@@ -19,17 +19,19 @@
   (user/bind-key-local :doc :reference 'godoc)
   (user/bind-key-local :nav :follow-symbol 'godef-jump)
   (user/bind-key-local :nav :switch-spec-impl 'go-goto-imports)
-  (user/bind-key-local :debug :start 'realgud-gub))
+  (user/bind-key-local :debug :start 'realgud-gub)
+  (when (feature-p 'go-test)
+    (user/bind-key-local :code :test 'go-test-current-file)))
 
 
 (defun user/go-mode-init ()
   "Initialize Go mode."
-  (require-package '(:name go-autocomplete))
-
   (add-hook 'go-mode-hook 'user/go-mode-hook))
 
 (with-executable 'go
-  (require-package '(:name go-mode :after (user/go-mode-init))))
+  (require-package '(:name go-mode :after (user/go-mode-init)))
+  (require-package '(:name go-autocomplete))
+  (require-package '(:name go-test)))
 
 
 (provide 'modes/go)
