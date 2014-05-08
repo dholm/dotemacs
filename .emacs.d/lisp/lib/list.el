@@ -9,12 +9,6 @@
   (eval the-list))
 
 
-(defmacro add-many-to-list-after-load (the-list feature &rest entries)
-  "Add to THE-LIST after loading FEATURE any specified ENTRIES."
-  `(after-load ,feature
-     (add-many-to-list ,the-list ,@entries)))
-
-
 (defun user/filter (condp lst)
   "Return list with elements for which CONDP are non-nil in LST."
   (delq nil (mapcar (lambda (elt) (and (funcall condp elt) elt)) lst)))
