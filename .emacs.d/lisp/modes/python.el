@@ -28,10 +28,17 @@
     (user/ffip-local-patterns "*.py"))
 
   ;;; (Bindings) ;;;
-  (when (el-get-package-is-installed 'nose)
+  (when (feature-p 'nose)
     (user/bind-key-local :code :test 'nosetests-all))
-  (when (el-get-package-is-installed 'pyvenv)
-    (user/bind-key-local :code :virtual 'pyvenv-workon)))
+  (when (feature-p 'pyvenv)
+    (user/bind-key-local :code :virtual 'pyvenv-workon))
+  (when (feature-p 'jedi)
+    (user/bind-key-local :nav :follow-symbol 'jedi:goto-definition)
+    (user/bind-key-local :nav :go-back 'jedi:goto-definition-pop-marker)
+    (when (feature-p 'helm)
+      (user/bind-key-local :nav :references 'helm-jedi-related-names))
+    (user/bind-key-local :doc :describe 'jedi:show-doc)
+    (user/bind-key-local :code :auto-complete 'jedi:complete)))
 
 
 (defun user/python-mode-cedet-hook ()
@@ -43,8 +50,8 @@
 (defun user/jedi-init ()
   "Initialize jedi."
   (setq-default
-   ;; Use default Jedi bindings.
-   jedi:setup-keys t
+   ;; Don't install Jedi's bindings.
+   jedi:setup-keys nil
    ;; Automatically launch completion on dot.
    jedi:complete-on-dot t
    ;; Use popup package.
