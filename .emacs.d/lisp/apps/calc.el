@@ -36,6 +36,9 @@
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :calculator 'calc)
+  (after-load 'calc
+    ;; Allow yanking using the mouse.
+    (define-key calc-mode-map [mouse-2] 'calc-yank))
 
   ;;; (Packages) ;;;
   (require-package '(:name easy-convert :after (user/easy-convert-init))))
