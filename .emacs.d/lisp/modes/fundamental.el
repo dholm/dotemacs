@@ -33,16 +33,15 @@
   "Initialize fixmee mode."
   (setq-default
    ;; Fixmee uses pcache that needs a cache store.
-   pcache-directory (path-join *user-cache-directory* "pcache/"))
+   pcache-directory (path-join *user-cache-directory* "pcache/")
+   ;; Set the correct bindings.
+   fixmee-view-listing-keystrokes `(,(user/get-key :code :todos)))
 
   (after-load 'popwin
     ;; Use popwin for Fixmee list.
     (push '(fixmee--listview-mode :stick t) popwin:special-display-config))
 
-  (global-fixmee-mode t)
-
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :code :todos 'fixmee-view-listing))
+  (global-fixmee-mode t))
 
 
 (defun user/fundamental-mode-init ()
