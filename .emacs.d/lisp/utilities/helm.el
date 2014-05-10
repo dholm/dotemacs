@@ -104,6 +104,7 @@
   ;;; (Bindings) ;;;
   (global-set-key [remap find-file] 'helm-find-files)
   (global-set-key [remap switch-to-buffer] 'helm-buffers-list)
+  (global-set-key [remap execute-extended-command] 'helm-M-x)
 
   (user/bind-key-global :nav :context 'user/helm-navigate)
   (user/bind-key-global :doc :apropos 'user/helm-apropos))

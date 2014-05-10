@@ -16,7 +16,8 @@
 
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :align 'align-current)
-  (user/bind-key-local :nav :functions/toc 'helm-imenu))
+  (when (feature-p 'helm)
+    (user/bind-key-local :nav :functions/toc 'helm-imenu)))
 
 
 (defun user/rainbow-delimiters-init ()
