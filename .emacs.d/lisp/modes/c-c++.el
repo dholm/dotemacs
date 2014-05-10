@@ -5,7 +5,7 @@
 (defun user/c-mode-common-hook ()
   "C mode common hook."
   ;; Indent using four spaces.
-  (setq-local c-basic-offset 4)
+  (setq c-basic-offset 4)
 
   ;; Override the indentation level of case labels in the K&R- and
   ;; Stroustrup styles so that they are indented one level beyond
@@ -21,15 +21,19 @@
   ;; Separate camel-case into separate words.
   (subword-mode t)
 
+  (when (feature-p 'mic-paren)
+    ;; Match context to open parentheses.
+    (paren-toggle-open-paren-context t))
+
   ;; Register file types with find-file-in-project.
   (after-load 'find-file-in-project
     (user/ffip-local-patterns "*.c" "*.h" "*.cpp" "*.hpp" "*.cc" "*.hh"))
 
-  (when (el-get-package-is-installed 'helm-etags-plus)
+  (when (feature-p 'helm-etags-plus)
     ;; Automatically update tags.
     (turn-on-ctags-auto-update-mode))
 
-  (when (el-get-package-is-installed 'helm-gtags)
+  (when (feature-p 'helm-gtags)
     ;; Enable helm-gtags which in turn enables auto-update of Global tags.
     (helm-gtags-mode t))
 

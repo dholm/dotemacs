@@ -59,9 +59,7 @@
     (user/bind-key-local :nav :references 'semantic-symref)
 
     (user/bind-key-local :nav :follow-symbol 'semantic-ia-fast-jump)
-    (user/bind-key-local :doc :describe 'semantic-ia-show-doc)
-
-    (user/bind-key-local :nav :functions/toc 'eassist-list-methods)))
+    (user/bind-key-local :doc :describe 'semantic-ia-show-doc)))
 
 
 (defun user/ede-get-local-var (fname var)

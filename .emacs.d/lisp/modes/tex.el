@@ -22,6 +22,12 @@
   (outline-minor-mode t)
   (visual-line-mode t)
 
+  (when (feature-p 'mic-paren)
+    ;; Match context to quoted parentheses.
+    (paren-toggle-matching-quoted-paren t)
+    ;; Match paired delimiters.
+    (paren-toggle-matching-paired-delimiter t))
+
   (when (el-get-package-is-installed 'mode-compile)
     ;; Override AUCTeX in favor of mode-compile.
     (kill-local-variable 'compile-command))

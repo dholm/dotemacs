@@ -208,11 +208,11 @@
               (:go-forward . (user/navigation-prefix "f"))
               (:go-back . (user/navigation-prefix "b"))
 
-              (:context-cycle . (user/navigation-prefix " c"))
-              (:context-forward . (user/navigation-prefix " f"))
-              (:context-backward . (user/navigation-prefix " b"))
-              (:context-up . (user/navigation-prefix " p"))
-              (:context-down . (user/navigation-prefix " n"))
+              (:context-cycle . (user/navigation-prefix "s c"))
+              (:context-forward . (user/navigation-prefix "s f"))
+              (:context-backward . (user/navigation-prefix "s b"))
+              (:context-up . (user/navigation-prefix "s p"))
+              (:context-down . (user/navigation-prefix "s n"))
 
               (:next . (user/navigation-prefix "n"))
 
@@ -253,6 +253,7 @@
                (:context-demote . (user/code-prefix "N"))
 
                (:warnings/errors . (user/code-prefix "E"))
+               (:todos . (user/code-prefix "F"))
                (:spellcheck-word . (user/code-prefix "s"))
                (:spellcheck-add-word . (user/code-prefix "S"))
 
