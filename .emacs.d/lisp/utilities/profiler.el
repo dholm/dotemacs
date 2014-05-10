@@ -5,8 +5,8 @@
 (defun user/profiler-report-mode-hook ()
   "Profiler report mode hook."
   ;;; (Bindings) ;;;
-  (user/bind-key-local :emacs :save 'profiler-report-write-profile)
-  (user/bind-key-local :emacs :save-as 'profiler-report-write-profile))
+  (user/bind-key-local :basic :save 'profiler-report-write-profile)
+  (user/bind-key-local :basic :save-as 'profiler-report-write-profile))
 
 
 (defun user/profiler-init ()
