@@ -4,6 +4,9 @@
 
 (defun user/csharp-mode-hook ()
   "C# mode hook."
+  (unless (derived-mode-p 'prog-mode)
+    (user/prog-mode-hook))
+
   (with-executable 'xbuild
     (setq-local compile-command "xbuild "))
 
