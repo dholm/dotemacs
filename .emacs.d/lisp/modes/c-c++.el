@@ -83,7 +83,10 @@
   (add-hook 'c-mode-common-hook 'user/c-mode-common-hook)
 
   ;; Detect if inside a C++ header file.
-  (add-magic-mode 'c++-mode 'user/c++-header-file-p))
+  (add-magic-mode 'c++-mode 'user/c++-header-file-p)
+
+  ;;; (Packages) ;;;
+  (require-package '(:name google-c-style)))
 
 (user/c-c++-mode-init)
 
