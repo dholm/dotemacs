@@ -10,6 +10,9 @@
   (with-executable 'xbuild
     (setq-local compile-command "xbuild "))
 
+  ;; Still indent inside namespace.
+  (c-set-offset 'innamespace '+)
+
   ;; Bring in CEDET.
   (user/cedet-hook)
 
