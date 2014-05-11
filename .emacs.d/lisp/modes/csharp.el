@@ -14,7 +14,9 @@
   (user/cedet-hook)
 
   (with-feature 'omnisharp
-    (omnisharp-mode t)))
+    (omnisharp-mode t)
+    (eldoc-mode t)
+    (add-ac-sources 'ac-source-omnisharp)))
 
 
 (defun user/csharp-mode-init ()
