@@ -53,6 +53,8 @@
    ediff-split-window-function (if (> (frame-width) (* 2 80))
                                    'split-window-horizontally
                                  'split-window-vertically)
+   ;; Don't create a separate frame for ediff.
+   ediff-window-setup-function 'ediff-setup-windows-plain
    ;; Ignore changes in whitespace.
    ediff-diff-options "-w"
    ediff-ignore-similar-regions t)
