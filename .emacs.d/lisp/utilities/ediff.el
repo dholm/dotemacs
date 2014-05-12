@@ -9,6 +9,12 @@
    truncate-lines t))
 
 
+(defun user/ediff-startup-hook ()
+  "Ediff startup hook."
+  ;; Go to the first difference on startup.
+  (ediff-next-difference))
+
+
 (defun user/ediff-mergetool ()
   "Launch ediff as mergetool."
   (defun ediff-write-merge-buffer ()
@@ -27,7 +33,9 @@
   (let ((local (pop command-line-args-left))
         (remote (pop command-line-args-left))
         (base (pop command-line-args-left))
-        (merged (pop command-line-args-left)))
+        (merged (pop command-line-args-left))
+        ;; Show only conflicts.
+        (ediff-show-clashes-only t))
     (ediff-merge-files-with-ancestor local remote base nil merged)))
 
 
@@ -41,12 +49,16 @@
 (defun user/ediff-init ()
   "Initialize ediff."
   (setq-default
+   ;; Split window differently depending on frame width.
+   ediff-split-window-function (if (> (frame-width) (* 2 80))
+                                   'split-window-horizontally
+                                 'split-window-vertically)
    ;; Ignore changes in whitespace.
    ediff-diff-options "-w"
    ediff-ignore-similar-regions t)
 
   ;; Go to first difference on start.
-  (add-hook 'ediff-startup-hook 'ediff-next-difference))
+  (add-hook 'ediff-startup-hook 'user/ediff-startup-hook))
 
 (after-load 'ediff
   (user/ediff-init))
