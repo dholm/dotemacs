@@ -10,8 +10,12 @@
   "Toggle showing all differences in whitespace when using Magit."
   (interactive)
   (if (member "-w" magit-diff-options)
-      (setq magit-diff-options (remove "-w" magit-diff-options))
-    (add-to-list 'magit-diff-options "-w"))
+      (progn
+        (message "Showing differences in whitespace.")
+        (setq magit-diff-options (remove "-w" magit-diff-options)))
+    (progn
+      (message "Hiding differences in whitespace.")
+      (add-to-list 'magit-diff-options "-w")))
   (magit-refresh))
 
 
