@@ -23,7 +23,7 @@
 
 
 (defun user/csharp-mode-init ()
-  "Initialize C# moed."
+  "Initialize C# mode."
   (add-hook 'csharp-mode-hook 'user/csharp-mode-hook)
 
   (after-load 'csharp-mode

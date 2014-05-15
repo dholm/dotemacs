@@ -2,6 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/server-save ()
+  "Save and quickly exit from server edit mode."
+  (interactive)
+  (save-buffer)
+  (server-edit))
+
+
 (defun user/server-after-init-hook ()
   "Initialize Emacs server after init has completed."
   (with-feature 'server
