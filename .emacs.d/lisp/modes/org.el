@@ -343,6 +343,7 @@
 
   ;;; (Packages) ;;;
   (require-package '(:name org-mode :after (user/org-mode-init)))
+  (require-package '(:name org-sync))
   (require-package '(:name org-caldav)))
 
 (user/org-init)
