@@ -61,7 +61,8 @@
     (setq-default
      ispell-program-name "aspell"
      ispell-list-command "--list"
-     ispell-extra-args '("--sug-mode=ultra")))
+     ;; Improve performance by reducing suggestions.
+     ispell-extra-args '("--sug-mode=ultra" "--dont-suggest")))
 
   (add-hook 'flyspell-mode-hook 'user/flyspell-mode-hook)
   (add-hook 'flyspell-prog-mode-hook 'user/flyspell-prog-mode-hook))
