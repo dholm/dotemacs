@@ -8,7 +8,9 @@
     (setq
      ;; Swap command and option on MacOS X.
      mac-option-modifier 'alt
-     mac-command-modifier 'meta))
+     mac-command-modifier 'meta
+     ;; Use right option key for writing special characters.
+     mac-right-option-modifier nil))
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :code :fill-paragraph 'fill-paragraph))
