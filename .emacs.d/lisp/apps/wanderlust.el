@@ -189,7 +189,7 @@
       (wl-message-id-domain . "smtp.gmail.com")
       ;; SMTP
       (wl-smtp-posting-user . ,username)
-      (wl-smtp-authenticate-type . 'plain)
+      (wl-smtp-authenticate-type . "plain")
       (wl-smtp-connection-type . 'starttls)
       (wl-smtp-posting-port . 587)
       (wl-smtp-posting-server . "smtp.gmail.com")
@@ -331,7 +331,7 @@ Gmail {
  ;; Support for writing/reading flowed emails.
  (add-hook 'mime-display-text/plain-hook 'user/mime-display-text/plain-hook)
  (after-load 'wl-mime
-	     (mime-edit-insert-tag "text" "plain" "; format=flowed"))
+             (mime-edit-insert-tag "text" "plain" "; format=flowed"))
 
  ;; Set up guides in summary mode.
  (user/wanderlust-set-summary-guides)
