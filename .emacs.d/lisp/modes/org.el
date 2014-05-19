@@ -334,6 +334,10 @@
 
 (defun user/org-sync-init ()
   "Initialize org sync."
+  (setq-default
+   ;; Org sync cache store.
+   os-cache-file (path-join *user-org-cache-directory* "org-sync-cache"))
+
   (after-load 'os
     ;; Redmine module.
     (load "os-rmine")
