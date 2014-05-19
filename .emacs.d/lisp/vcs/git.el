@@ -2,6 +2,17 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/git-commit-mode-hook ()
+  "Git commit mode hook."
+  ;; Run the shared log edit hook.
+  (user/vc-log-edit-hook)
+
+  ;;; (Bindings) ;;;
+  ;; Ensure C-c C-c and C-c C-k are bound to git and not org.
+  (local-set-key (kbd "C-c C-c") 'git-commit-commit)
+  (local-set-key (kbd "C-c C-k") 'git-commit-abort))
+
+
 (defun user/magit-mode-hook ()
   "Magit mode hook.")
 
@@ -52,7 +63,7 @@
 
 (defun user/git-init ()
   "Initialize Git support."
-  (add-hook 'git-commit-mode-hook 'user/vc-log-edit-hook)
+  (add-hook 'git-commit-mode-hook 'user/git-commit-mode-hook)
 
   ;;; (Packages) ;;;
   (require-package '(:name magit :after (user/magit-init)))
