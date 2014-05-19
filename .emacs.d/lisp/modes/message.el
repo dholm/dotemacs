@@ -23,8 +23,7 @@
   (user/bind-key-local :code :try-complete 'bbdb-complete-name)
   (user/bind-key-local :code :compile 'org-mime-htmlize)
   ;; Ensure C-c C-c is used to save and close message.
-  (local-unset-key "\C-c\C-c")
-  (define-key message-mode-map (kbd "C-c C-c") 'user/server-save))
+  (local-set-key (kbd "C-c C-c") 'user/server-save))
 
 
 (defun user/message-mode-init ()
