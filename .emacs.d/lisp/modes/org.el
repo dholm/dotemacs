@@ -332,6 +332,15 @@
   (user/bind-key-global :apps :capture-task 'org-capture))
 
 
+(defun user/org-sync-init ()
+  "Initialize org sync."
+  (after-load 'os
+    ;; Redmine module.
+    (load "os-rmine")
+    ;; GitHub module.
+    (load "os-github")))
+
+
 (defun user/org-init ()
   "Initialize org mode."
   ;; Create data and cache stores.
@@ -343,7 +352,7 @@
 
   ;;; (Packages) ;;;
   (require-package '(:name org-mode :after (user/org-mode-init)))
-  (require-package '(:name org-sync))
+  (require-package '(:name org-sync :after (user/org-sync-init)))
   (require-package '(:name org-caldav)))
 
 (user/org-init)
