@@ -18,19 +18,17 @@
               include-paths))))
 
 
-(defun user/ffip-project-root (path)
-  "Use find-file-in-project to locate root from PATH."
-  (with-feature 'find-file-in-project
-    (let ((path-directory (file-name-directory path)))
-      (or ffip-project-root
-          (if (functionp ffip-project-root-function)
-              (funcall ffip-project-root-function)
-            (if (listp ffip-project-file)
-                (cl-some (apply-partially 'locate-dominating-file
-                                          path-directory)
-                         ffip-project-file)
-              (locate-dominating-file path-directory
-                                      ffip-project-file)))))))
+(defun user/projectile-project-root (path)
+  "Use projectile to locate root from PATH."
+  (with-feature 'projectile
+    (file-truename
+     (let ((dir (file-truename path)))
+       (or (--reduce-from
+            (or acc (funcall it dir)) nil
+            projectile-project-root-files-functions)
+           (if projectile-require-project-root
+               (error "You're not in a project")
+             path))))))
 
 
 (defun user/project-root (path)
@@ -43,7 +41,7 @@
       (cond
        (ede-proj (ede-project-root-directory ede-proj))
        (vc-backend (vc-call-backend vc-backend 'root (file-truename path)))
-       (t (user/ffip-project-root path))))))
+       (t (user/projectile-project-root path))))))
 
 
 (defun user/project-include-paths (path)
@@ -62,7 +60,7 @@
       (cond
        (ede-proj (ede-name ede-proj))
        (t (file-name-nondirectory
-           (directory-file-name (user/ffip-project-root path))))))))
+           (directory-file-name (user/projectile-project-root path))))))))
 
 
 (defun user/project-p (path)

@@ -5,11 +5,7 @@
 (defun user/ttcn3-mode-hook ()
   "TTCN mode hook."
   ;; Separate camel-case into separate words
-  (subword-mode t)
-
-  ;; Register file types with find-file-in-project
-  (after-load 'find-file-in-project
-    (user/ffip-local-patterns "*.ttcn")))
+  (subword-mode t))
 
 
 (defun user/ttcn-mode-init ()

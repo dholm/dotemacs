@@ -5,11 +5,7 @@
 (defun user/scala-mode-hook ()
   "Scala mode hook."
   (when (el-get-package-is-installed 'ensime)
-    (ensime-scala-mode-hook))
-
-  ;; Register file types with find-file-in-project
-  (after-load 'find-file-in-project
-    (user/ffip-local-patterns "*.scala" "*.java")))
+    (ensime-scala-mode-hook)))
 
 
 (defun user/scala-mode2-init ()

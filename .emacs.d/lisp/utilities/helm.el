@@ -135,17 +135,6 @@
   (add-hook 'helm-gtags-mode-hook 'user/helm-gtags-mode-hook))
 
 
-(defun user/helm-cmd-t-init ()
-  "Initialize Helm cmd-t."
-  (setq-default
-   ;; Use project helpers to find root.
-   helm-cmd-t-default-repo '(lambda ()
-                              (user/project-root (path-abs-buffer))))
-
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :basic :open-file-context 'helm-cmd-t))
-
-
 (defun user/helm-swoop-init ()
   "Initialize Helm Swoop."
   (setq-default
@@ -167,7 +156,6 @@
 (require-package '(:name helm-descbinds :after (user/helm-descbinds-init)))
 (require-package '(:name helm-etags-plus))
 (require-package '(:name helm-build-command))
-(require-package '(:name helm-cmd-t :after (user/helm-cmd-t-init)))
 (require-package '(:name helm-swoop :after (user/helm-swoop-init)))
 
 (with-executable 'git

@@ -23,10 +23,6 @@
   ;; ElDoc shows function documentation as you type
   (eldoc-mode t)
 
-  ;; Register file types with find-file-in-project
-  (after-load 'find-file-in-project
-    (user/ffip-local-patterns "*.py"))
-
   ;;; (Bindings) ;;;
   (when (feature-p 'nose)
     (user/bind-key-local :code :test 'nosetests-all))

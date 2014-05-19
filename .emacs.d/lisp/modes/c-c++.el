@@ -25,10 +25,6 @@
     ;; Match context to open parentheses.
     (paren-toggle-open-paren-context t))
 
-  ;; Register file types with find-file-in-project.
-  (after-load 'find-file-in-project
-    (user/ffip-local-patterns "*.c" "*.h" "*.cpp" "*.hpp" "*.cc" "*.hh"))
-
   (when (feature-p 'helm-etags-plus)
     ;; Automatically update tags.
     (turn-on-ctags-auto-update-mode))

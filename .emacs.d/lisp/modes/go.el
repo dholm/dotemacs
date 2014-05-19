@@ -10,10 +10,6 @@
                ;; Fix formatting
                (gofmt-before-save)))
 
-  ;; Register file types with find-file-in-project
-  (after-load 'find-file-in-project
-    (user/ffip-local-patterns "*.go"))
-
   ;;; (Bindings) ;;;
   (user/bind-key-local :doc :describe 'godef-describe)
   (user/bind-key-local :doc :reference 'godoc)

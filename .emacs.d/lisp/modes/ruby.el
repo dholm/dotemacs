@@ -19,10 +19,6 @@
   ;; Separate camel-case into separate words
   (subword-mode t)
 
-  ;; Register file types with find-file-in-project
-  (after-load 'find-file-in-project
-    (user/ffip-local-patterns "*.rb"))
-
   ;;; (Bindings) ;;;
   (define-key ruby-mode-map (kbd "TAB") 'indent-for-tab-command)
   (with-feature 'yari

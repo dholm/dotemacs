@@ -8,11 +8,7 @@
   (add-ac-sources 'ac-source-perl-completion)
 
   ;; Initialize PDE
-  (user/pde-perl-mode-hook)
-
-  ;; Register file types with find-file-in-project
-  (after-load 'find-file-in-project
-    (user/ffip-local-patterns "*.pl")))
+  (user/pde-perl-mode-hook))
 
 
 (defun user/pde-perl-mode-hook ()

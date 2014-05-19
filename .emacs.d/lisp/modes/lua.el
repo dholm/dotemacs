@@ -5,11 +5,7 @@
 (defun user/lua-mode-hook ()
   "Lua mode hook."
   (when (el-get-package-is-installed 'lua-block)
-    (lua-block-mode t))
-
-  ;; Register file types with find-file-in-project
-  (after-load 'find-file-in-project
-    (user/ffip-local-patterns "*.lua")))
+    (lua-block-mode t)))
 
 
 (defun user/lua-mode-init ()

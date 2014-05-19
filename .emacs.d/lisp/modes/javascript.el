@@ -52,10 +52,6 @@
 
 (defun user/javascript-mode-init ()
   "Initialize JavaScript mode."
-  ;; Register file types with find-file-in-project
-  (after-load 'find-file-in-project
-    (user/ffip-local-patterns "*.js"))
-
   (add-hook 'javascript-mode-hook 'user/javascript-mode-hook)
   (add-auto-mode 'javascript-mode "\\.json$")
 

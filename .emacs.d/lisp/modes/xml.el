@@ -6,11 +6,7 @@
   "XML mode hook."
   (with-feature 'auto-complete-nxml
     ;; Configure nxml auto completion
-    (setq nxml-slash-auto-complete-flag t))
-
-  ;; Register file types with find-file-in-project
-  (after-load 'find-file-in-project
-    (user/ffip-local-patterns "*.xml")))
+    (setq nxml-slash-auto-complete-flag t)))
 
 
 (defun user/auto-complete-nxml-init ()

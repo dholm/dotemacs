@@ -11,11 +11,7 @@
   (setq-default
    ;; Indent with four spaces.
    sh-basic-offset 4
-   sh-indentation 4)
-
-  ;; Register file types with find-file-in-project.
-  (after-load 'find-file-in-project
-    (user/ffip-local-patterns "*.sh")))
+   sh-indentation 4))
 
 
 (defun user/shell-mode-common-hook ()

@@ -20,10 +20,6 @@
       (turn-on-hi2)
     (turn-on-haskell-indentation))
 
-  ;; Register file types with find-file-in-project
-  (after-load 'find-file-in-project
-    (user/ffip-local-patterns "*.hs" "*.lhs"))
-
   (with-feature 'scion
     (scion-mode t))
 
