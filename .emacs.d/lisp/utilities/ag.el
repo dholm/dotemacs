@@ -9,7 +9,10 @@
                                (user/project-root (path-abs-buffer))))
 
   ;;; (Bindings) ;;;
-  (global-set-key [remap find-grep] 'ag))
+  (if (and (feature-p 'projectile)
+           (fboundp 'projectile-ag))
+      (global-set-key [remap find-grep] 'projectile-ag)
+    (global-set-key [remap find-grep] 'ag)))
 
 (with-executable 'ag
   (require-package '(:name ag :after (user/ag-init))))
