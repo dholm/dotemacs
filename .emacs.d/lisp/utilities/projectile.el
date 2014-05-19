@@ -10,9 +10,6 @@
                                              "projectile-bookmarks.eld")
    ;; Projectile cache store.
    projectile-cache-file (path-join *user-cache-directory* "projectile")
-   ;; Run Projectile tasks when idle.
-   projectile-enable-idle-timer t
-   projectile-idle-timer-seconds 30
    ;; Use default completion that will usually be provided by Helm.
    projectile-completion-system 'default)
 
