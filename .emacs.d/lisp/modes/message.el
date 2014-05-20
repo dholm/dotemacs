@@ -13,8 +13,8 @@
    local-abbrev-table message-mode-abbrev-table)
 
   ;; Use org structured editing.
-  (turn-on-orgstruct)
-  (turn-on-orgstruct++)
+  (orgstruct-mode t)
+  (orgstruct++-mode t)
 
   ;; Enable footnotes.
   (footnote-mode t)
