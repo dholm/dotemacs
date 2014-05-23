@@ -33,10 +33,10 @@
     ;; Enable helm-gtags which in turn enables auto-update of Global tags.
     (helm-gtags-mode t))
 
-  ;; Auto completion.
-  (with-executable 'clang
-    (with-feature 'auto-complete-clang
-      (add-ac-sources 'ac-source-clang)))
+  (with-feature 'irony
+    (when (member major-mode irony-known-modes)
+      ;; Better auto completion.
+      (irony-mode t)))
 
   ;;; (Bindings) ;;;
   (with-executable 'gdb
@@ -65,12 +65,15 @@
        (re-search-forward "\\_<class\\_>" nil t))))
 
 
+(defun user/irony-mode-init ()
+  "Initialize irony mode."
+  (after-load 'irony-mode
+    (when (feature-p 'auto-complete)
+      (irony-enable 'ac))))
+
+
 (defun user/c-c++-mode-init ()
   "Initialize C/C++ mode."
-  (when (and (executable-find "clang")
-             (executable-find "llvm-config"))
-    (require-package '(:name auto-complete-clang)))
-
   (after-load 'cc-mode
     (add-many-to-list 'c-default-style
                       '(c-mode . "K&R")
@@ -82,6 +85,10 @@
   (add-magic-mode 'c++-mode 'user/c++-header-file-p)
 
   ;;; (Packages) ;;;
+  (when (and (executable-find "cmake")
+             (executable-find "clang")
+             (executable-find "llvm-config"))
+    (require-package '(:name irony-mode :after (user/irony-mode-init))))
   (require-package '(:name google-c-style)))
 
 (user/c-c++-mode-init)
