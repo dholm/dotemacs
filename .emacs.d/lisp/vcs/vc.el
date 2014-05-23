@@ -20,7 +20,8 @@
 
   ;; Enable org minor mode editing tools.
   (orgstruct-mode t)
-  (orgstruct++-mode t))
+  (orgstruct++-mode t)
+  (orgtbl-mode t))
 
 
 (defun user/vc-init ()
