@@ -22,6 +22,11 @@
     (add-ac-sources 'ac-source-omnisharp)))
 
 
+(defun user/sln-mode-init ()
+  "Initialize sln mode."
+  (add-auto-mode 'sln-mode "\\.sln$"))
+
+
 (defun user/csharp-mode-init ()
   "Initialize C# mode."
   (add-hook 'csharp-mode-hook 'user/csharp-mode-hook)
@@ -35,7 +40,8 @@
 
   ;;; (Packages) ;;;
   (require-package '(:name csharp-mode))
-  (require-package '(:name omnisharp-mode)))
+  (require-package '(:name omnisharp-mode))
+  (require-package '(:name sln-mode :after (user/sln-mode-init))))
 
 (user/csharp-mode-init)
 
