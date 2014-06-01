@@ -24,6 +24,13 @@
   (user/bind-key-local :doc :reference 'tern-get-docs))
 
 
+(defun user/current-buffer-django-p ()
+  "Evaluate to non-nil if the current buffer should use the `django` engine."
+  (save-excursion
+    (search-forward-regexp (concat "{% base\\|{% if\\|{% for\\|{% include\\|"
+                                   "{% block\\|{% csrf_token %}") nil t)))
+
+
 (defun user/web-mode-init ()
   "Initialize web mode."
   (setq-default
@@ -34,11 +41,15 @@
    web-mode-css-indent-offset 2
    web-mode-code-indent-offset 2
    ;; Highlight current HTML element.
-   web-mode-enable-current-element-highlight t)
+   web-mode-enable-current-element-highlight t
+   ;; Engine selection.
+   web-mode-engines-alist
+   '(("django" . user/current-buffer-django-p)
+     ("php" . "\\.php[3-5]?")))
 
   (add-hook 'web-mode-hook 'user/web-mode-hook)
 
-  (add-auto-mode 'web-mode "\\.html?$" "\\.phtml$" "\\.php[34]?$"))
+  (add-auto-mode 'web-mode "\\.html?$" "\\.phtml$" "\\.php[3-5]?$"))
 
 
 (defun user/tern-init ()
