@@ -7,8 +7,12 @@
   ;; Load CEDET
   (user/python-mode-cedet-hook)
 
+  ;; Enable virtualenv support.
+  (when (feature-p 'pyvenv)
+    (pyvenv-mode t))
+
   ;; Load ropemacs
-  (when (el-get-package-is-installed 'pymacs)
+  (when (feature-p 'pymacs)
     (pymacs-load "ropemacs" "rope-")
     ;; Auto-completion sources
     (add-ac-sources 'ac-source-ropemacs))
@@ -83,6 +87,14 @@
    ropemacs-codeassist-maxfixes 3))
 
 
+(defun user/python-environment-init ()
+  "Initialize Python environment package."
+  (setq-default
+   ;; Locate of Python environment store.
+   python-environment-directory (path-join *user-cache-directory*
+                                           "python-environment")))
+
+
 (defun user/python-mode-init ()
   "Initialize Python mode."
   ;;; (Packages) ;;;
@@ -91,6 +103,7 @@
   (require-package '(:name rope))
   (require-package '(:name pylookup))
   (require-package '(:name nose))
+  (require-package '(:name python-environment :after (user/python-environment-init)))
   (require-package '(:name pyvenv))
   (require-package '(:name jedi :after (user/jedi-init)))
 
