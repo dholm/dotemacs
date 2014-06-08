@@ -11,11 +11,8 @@
   (when (feature-p 'pyvenv)
     (pyvenv-mode t))
 
-  ;; Load ropemacs
   (when (feature-p 'pymacs)
-    (pymacs-load "ropemacs" "rope-")
-    ;; Auto-completion sources
-    (add-ac-sources 'ac-source-ropemacs))
+    (pymacs-load "ropemacs" "rope-"))
 
   ;; Enable Jedi
   (when (el-get-package-is-installed 'jedi)
@@ -99,8 +96,9 @@
   "Initialize Python mode."
   ;;; (Packages) ;;;
   (require-package '(:name python :after (user/python-init)))
+  (require-package '(:name py-autopep8))
+  (require-package '(:name ropemacs))
   (require-package '(:name pymacs))
-  (require-package '(:name rope))
   (require-package '(:name pylookup))
   (require-package '(:name nose))
   (require-package '(:name python-environment :after (user/python-environment-init)))
