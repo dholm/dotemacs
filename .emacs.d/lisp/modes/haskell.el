@@ -9,6 +9,10 @@
   ;; Enable editing of camel case
   (subword-mode t)
 
+  (with-feature 'ac-ghc-mod
+    (add-ac-sources 'ac-source-ghc-module 'ac-source-ghc-symbol
+                    'ac-source-ghc-pragmas 'ac-source-ghc-langexts))
+
   ;;; (Bindings) ;;;
   (user/bind-key-local :doc :reference 'hoogle))
 
@@ -20,8 +24,8 @@
       (turn-on-hi2)
     (turn-on-haskell-indentation))
 
-  (with-feature 'scion
-    (scion-mode t))
+  (with-feature 'ghc
+    (ghc-init))
 
   (with-feature 'shm
     (structured-haskell-mode t)))
@@ -38,10 +42,11 @@
   "Initialize Haskell mode."
   (require-package '(:name haskell-mode))
   (require-package '(:name ghci-completion))
-  (require-package '(:name scion))
   (require-package '(:name hi2))
   (require-package '(:name flycheck-hdevtools))
   (require-package '(:name structured-haskell-mode))
+  (require-package '(:name ghc-mod))
+  (require-package '(:name ac-ghc-mod))
 
   (add-hook 'haskell-mode-hook 'user/haskell-mode-hook)
   (add-hook 'inferior-haskell-mode-hook 'user/inferior-haskell-mode-hook))
