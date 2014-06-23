@@ -312,8 +312,6 @@
 
                (:macrostep-expand . (user/code-prefix "e m"))
 
-               (:minimap . (user/view-prefix "m"))
-
                (:popwin-close . (user/view-prefix "0"))
                (:popwin-buffer . (user/view-prefix "p"))
                (:popwin-messages . (user/view-prefix "m"))
