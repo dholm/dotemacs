@@ -13,6 +13,16 @@
 
 (defun user/org-mode-hook ()
   "Org mode hook."
+  ;; Proper filling of org-mode text, form:
+  ;;  * http://lists.gnu.org/archive/html/emacs-orgmode/2008-01/msg00375.html
+  (org-set-local 'paragraph-separate
+                 "\f\\|\\*+ \\|[ ]*$\\| [ \t]*[:|]\\|^[ \t]+\\[[0-9]\\{4\\}-")
+  ;; The paragraph starter includes hand-formatted lists.
+  (org-set-local 'paragraph-start
+                 (concat "\f\\|[ ]*$\\|\\*+ \\|\f\\|[ \t]*\\([-+*][ \t]+\\|"
+                         "[0-9]+[.)][ \t] +\\)\\|[ \t]*[:|]\\|"
+                         "^[ \t]+\\[[0-9]\\{4\\}-"))
+
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :context-promote 'org-shiftup)
   (user/bind-key-local :code :context-demote 'org-shiftdown))
