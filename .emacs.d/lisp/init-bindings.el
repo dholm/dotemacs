@@ -329,7 +329,8 @@
                (:email . (user/apps-prefix "e"))
                (:browse . (user/apps-prefix "b"))
                (:browse-external . (user/apps-prefix "B"))
-               (:instant-messenger . (user/apps-prefix "i"))
+               (:irc . (user/apps-prefix "i"))
+               (:instant-messenger . (user/apps-prefix "I"))
 
                (:ipython-notebook . (user/apps-prefix "N"))
 
