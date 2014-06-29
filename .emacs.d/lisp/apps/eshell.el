@@ -43,6 +43,8 @@
   (setq-default
    ;; Set the path to the shell cache store.
    eshell-directory-name *shell-cache-directory*
+   ;; And the shell login script.
+   eshell-login-script (path-join *user-home-directory* ".eshellrc")
    ;; Set eshell prompt.
    eshell-prompt-function 'user/shell-prompt
    eshell-highlight-prompt nil
