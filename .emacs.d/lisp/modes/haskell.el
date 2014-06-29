@@ -44,6 +44,7 @@
   (require-package '(:name ghci-completion))
   (require-package '(:name hi2))
   (require-package '(:name flycheck-hdevtools))
+  (require-package '(:name flycheck-haskell))
   (require-package '(:name structured-haskell-mode))
   (require-package '(:name ghc-mod))
   (require-package '(:name ac-ghc-mod))
