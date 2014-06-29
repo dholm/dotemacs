@@ -29,6 +29,7 @@
                         'Info-goto-emacs-key-command-node)
   (user/bind-key-global :emacs :where-is 'where-is)
 
+  (user/bind-key-global :emacs :find-library 'find-library)
   (user/bind-key-global :emacs :find-package 'finder-by-keyword)
   (user/bind-key-global :emacs :manual 'info-emacs-manual)
 

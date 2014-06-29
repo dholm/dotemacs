@@ -171,6 +171,7 @@
                 (:describe-symbol . (user/help-prefix "s"))
                 (:describe-syntax . (user/help-prefix "S"))
 
+                (:find-library . (user/help-prefix "l"))
                 (:find-package . (user/help-prefix "p"))
                 (:manual . (user/help-prefix "M"))
                 (:tutorial . (user/help-prefix "t"))
