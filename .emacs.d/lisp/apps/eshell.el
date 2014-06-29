@@ -47,6 +47,19 @@
    " "))
 
 
+(defun user/raise-eshell ()
+  "Start, or switch to, `eshell' in the current working directory."
+  (interactive)
+  (let ((path (file-name-directory
+               (or (buffer-file-name) *user-home-directory*)))
+        (hasfile (not (eq (buffer-file-name) nil))))
+    (eshell)
+    (if (and hasfile (eq eshell-process-list nil))
+        (progn
+          (eshell/cd path)
+          (eshell-reset)))))
+
+
 (defun user/eshell-init ()
   "Initialize the Emacs shell."
   (setq-default
@@ -84,7 +97,7 @@
   (add-hook 'eshell-mode-hook 'user/eshell-mode-hook)
 
   ;;; (Bindings) ;;;
-  (user/bind-key-global :apps :shell 'eshell)
+  (user/bind-key-global :apps :shell 'user/raise-eshell)
 
   ;;; (Packages) ;;;
   (require-package '(:name eshell-manual)))
