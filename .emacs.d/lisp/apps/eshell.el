@@ -17,10 +17,19 @@
   (add-ac-modes 'eshell-mode))
 
 
+(defun user/shorten-path (path)
+  "Shorten the length of PATH."
+  (let ((scount (1- (count ?/ path))))
+    (dotimes (i scount)
+      (string-match "\\(/\\.?.\\)[^/]+" path)
+      (setq path (replace-match "\\1" nil nil path))))
+  path)
+
+
 (defun user/shell-prompt ()
   "Return a prompt for the shell."
   (concat
-   (with-face (concat (eshell/pwd) " ")
+   (with-face (concat (user/shorten-path (eshell/pwd)) " ")
               :inherit 'header-line)
    (with-face (format-time-string "(%Y-%m-%d %H:%M) " (current-time))
               :inherit 'header-line)
