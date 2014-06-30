@@ -19,6 +19,13 @@
    :urgency 'low))
 
 
+(defun user/bitlbee-init ()
+  "Initialize bitlbee."
+  (setq-default
+   ;; Run in ForkDaemon mode so that purple plugins work.
+   bitlbee-options "-n -F -v "))
+
+
 (defun user/erc-init ()
   "Initialize erc."
   (setq-default
@@ -125,7 +132,7 @@
 (require-package '(:name erc :after (user/erc-init)))
 (require-package '(:name erc-highlight-nicknames))
 (with-executable 'bitlbee
-  (require-package '(:name bitlbee)))
+  (require-package '(:name bitlbee :after (user/bitlbee-init))))
 
 
 (provide 'apps/erc)
