@@ -34,7 +34,7 @@
     (helm-gtags-mode t))
 
   (with-feature 'irony
-    (when (member major-mode irony-known-modes)
+    (when (member major-mode irony-supported-major-modes)
       ;; Better auto completion.
       (irony-mode t)))
 
