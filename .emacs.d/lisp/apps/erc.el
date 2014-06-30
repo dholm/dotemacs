@@ -68,8 +68,6 @@
      'autojoin
      ;; Automatically go away when inactive.
      'autoaway
-     ;; Automatic completion.
-     'completion
      ;; Handle IRC control characters.
      'irccontrols
      ;; Channel listings.
