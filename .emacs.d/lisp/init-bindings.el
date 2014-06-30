@@ -312,6 +312,8 @@
 
                (:macrostep-expand . (user/code-prefix "e m"))
 
+               (:notifications . (user/utilities-prefix "n"))
+
                (:popwin-close . (user/view-prefix "0"))
                (:popwin-buffer . (user/view-prefix "p"))
                (:popwin-messages . (user/view-prefix "m"))
