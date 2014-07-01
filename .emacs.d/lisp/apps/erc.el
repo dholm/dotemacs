@@ -29,6 +29,10 @@
 (defun user/erc-init ()
   "Initialize erc."
   (setq-default
+   ;; Close ERC buffers on quit.
+   erc-kill-buffer-on-part t
+   erc-kill-queries-on-quit t
+   erc-kill-server-buffer-on-quit t
    ;; Interpret mIRC color codes.
    erc-interpret-mirc-color t
    ;; Open queries in the current window.
