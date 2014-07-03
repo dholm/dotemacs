@@ -296,7 +296,9 @@
 
               (:add-buffer . (user/vcs-prefix "a"))
               (:next-action . (user/vcs-prefix "SPC"))
-              (:mergetool . (user/vcs-prefix "m"))))
+              (:mergetool . (user/vcs-prefix "m"))
+
+              (:time-machine . (user/vcs-prefix "t"))))
 
      ;;; (Utilities) ;;;
      (:util . ((:annotate-buffer . (user/utilities-prefix "a"))

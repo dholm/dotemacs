@@ -12,7 +12,10 @@
                           (gerrit-download)))
              (:add-buffer . (lambda ()
                               (magit-run-git "add" (path-abs-buffer))))
-             (:mergetool . magit-ediff)))
+             (:mergetool . magit-ediff)
+             (:time-machine . (lambda ()
+                                (when (feature-p 'git-timemachine)
+                                  (call-interactively 'git-timemachine))))))
     (:ClearCase . ((:status . (lambda ()
                                 (vc-dir (path-abs-buffer))))
                    (:history . vc-print-log)
@@ -89,6 +92,12 @@
   (user/vcs-command :mergetool))
 
 
+(defun user/vcs-time-machine ()
+  "Run VCS time machine on the current buffer."
+  (interactive)
+  (user/vcs-command :time-machine))
+
+
 (defun user/vcs-bindings-init ()
   "Initialize smart VCS bindings."
   ;; Need autoload for bindings to work.
@@ -103,7 +112,9 @@
 
   (user/bind-key-global :vcs :next-action 'user/vcs-next-action)
   (user/bind-key-global :vcs :add-buffer 'user/vcs-add-buffer)
-  (user/bind-key-global :vcs :mergetool 'user/vcs-mergetool))
+  (user/bind-key-global :vcs :mergetool 'user/vcs-mergetool)
+
+  (user/bind-key-global :vcs :time-machine 'user/vcs-time-machine))
 
 (user/vcs-bindings-init)
 
