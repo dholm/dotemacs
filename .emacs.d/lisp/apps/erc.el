@@ -58,8 +58,11 @@
    erc-log-channels-directory (path-join *user-erc-cache-directory* "logs")
    ;; Log channels.
    erc-log-channels t
-   ;; Save buffer when parting channel.
-   erc-save-buffer-on-part t
+   ;; Insert log file contents into opened buffers.
+   erc-log-insert-log-on-open t
+   ;; Save buffers to log on activity.
+   erc-log-write-after-send t
+   erc-log-write-after-insert t
    ;; Always add a timestamp.
    erc-timestamp-only-if-changed-flag nil
    ;; Ensure prompt is at the bottom of the window.
