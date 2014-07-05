@@ -123,6 +123,7 @@
 
   ;; Ensure that the log directory exists.
   (make-directory erc-log-channels-directory t)
+  (set-file-modes erc-log-channels-directory #o0700)
 
   ;; Hooks.
   (add-hook 'erc-connect-pre-hook (lambda (x) (erc-update-modules)))

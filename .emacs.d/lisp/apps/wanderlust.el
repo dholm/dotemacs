@@ -376,7 +376,9 @@ Gmail {
  "Initialize wanderlust."
  ;; Create data and cache stores.
  (make-directory *user-wanderlust-data-directory* t)
+ (set-file-modes *user-wanderlust-data-directory* #o0700)
  (make-directory *user-wanderlust-cache-directory* t)
+ (set-file-modes *user-wanderlust-cache-directory* #o0700)
 
  (require-package '(:name wanderlust :after (user/wanderlust-init)))
  (require-package '(:name mu-cite :after (user/mu-cite-init)))
