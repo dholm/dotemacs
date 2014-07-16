@@ -131,12 +131,16 @@
   ;; Hooks.
   (add-hook 'erc-connect-pre-hook (lambda (x) (erc-update-modules)))
   (add-hook 'erc-mode-hook 'user/erc-mode-hook)
+  (when (feature-p 'bbdb2erc)
+    (add-hook 'bbdb-notice-hook 'bbdb2erc-online-status))
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :irc 'erc))
 
 (require-package '(:name erc :after (user/erc-init)))
 (require-package '(:name erc-highlight-nicknames))
+(when (feature-p 'bbdb)
+  (require-package '(:name bbdb2erc)))
 (with-executable 'bitlbee
   (require-package '(:name bitlbee :after (user/bitlbee-init))))
 
