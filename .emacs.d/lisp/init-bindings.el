@@ -253,6 +253,9 @@
                (:context-promote . (user/code-prefix "P"))
                (:context-demote . (user/code-prefix "N"))
 
+               (:library-list . (user/code-prefix "l"))
+               (:disassemble . (user/code-prefix "D"))
+
                (:warnings/errors . (user/code-prefix "E"))
                (:todos . (user/code-prefix "F"))
                (:spellcheck-word . (user/code-prefix "s"))

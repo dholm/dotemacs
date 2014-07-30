@@ -39,6 +39,9 @@
       (irony-mode t)))
 
   ;;; (Bindings) ;;;
+  (when (feature-p 'iasm-mode)
+    (user/bind-key-local :code :library-list 'iasm-disasm-link-buffer)
+    (user/bind-key-local :code :disassemble 'iasm-goto-disasm-buffer))
   (with-executable 'gdb
     (user/bind-key-local :debug :start 'realgud-gdb)))
 
