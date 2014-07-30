@@ -6,6 +6,32 @@
   "Assembly mode hook.")
 
 
+(define-derived-mode arm-mode asm-mode "ARM"
+  "Major mode for editing ARM assembler code."
+  ;; Unset ; key.
+  (local-unset-key (vector asm-comment-char))
+  (set (make-local-variable 'asm-comment-char) ?@)
+  (local-set-key (vector asm-comment-char) 'asm-comment)
+  ;; Update syntax for new comment char.
+  (set-syntax-table (make-syntax-table asm-mode-syntax-table))
+  (modify-syntax-entry asm-comment-char "< b")
+  ;; Fix one level comments.
+  (set (make-local-variable 'comment-start) (string asm-comment-char)))
+
+
+(define-derived-mode mips-mode asm-mode "MIPS"
+  "Major mode for editing MIPS assembler code."
+  ;; Unset ; key.
+  (local-unset-key (vector asm-comment-char))
+  (set (make-local-variable 'asm-comment-char) ?#)
+  (local-set-key (vector asm-comment-char) 'asm-comment)
+  ;; Update syntax for new comment char.
+  (set-syntax-table (make-syntax-table asm-mode-syntax-table))
+  (modify-syntax-entry asm-comment-char "< b")
+  ;; Fix one level comments.
+  (set (make-local-variable 'comment-start) (string asm-comment-char)))
+
+
 (defun user/iasm-mode-init ()
   "Initialize interactive assmelby mode."
   ;;; (Bindings) ;;;
