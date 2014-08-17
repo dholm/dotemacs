@@ -67,7 +67,14 @@
 
   (after-load 'whitespace
     (after-load 'diminish
-      (diminish 'whitespace-mode))))
+      (diminish 'whitespace-mode))
+
+    (defadvice whitespace-cleanup (around whitespace-cleanup-indent-tab
+                                          activate)
+      "Fix whitespace-cleanup indent-tabs-mode bug."
+      (let ((whitespace-indent-tabs-mode indent-tabs-mode)
+            (whitespace-tab-width tab-width))
+        ad-do-it))))
 
 (user/whitespace-init)
 
