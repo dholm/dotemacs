@@ -6,7 +6,7 @@
   "Initialize smart mode line."
   (setq-default
    ;; Configure theme.
-   sml/theme 'respectful
+   sml/theme 'automatic
    ;; Shorten path and modes.
    sml/shorten-directory t
    sml/shorten-mode t
