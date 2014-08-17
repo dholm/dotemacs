@@ -51,7 +51,7 @@
   (with-feature 'semantic/bovine/c
     ;; Load extra semantic helpers.
     (require 'semantic/bovine/gcc)
-    (require 'semantic/bovine/clang)
+    (require 'semantic/bovine/clang nil :noerror)
 
     (user/cedet-hook)
 
