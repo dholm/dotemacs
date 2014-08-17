@@ -4,6 +4,10 @@
 
 (defun user/lisp-mode-common-hook ()
   "Lisp mode hook."
+  (setq-local
+   ;; Indent using spaces.
+   indent-tabs-mode nil)
+
   (user/cedet-hook)
 
   (with-feature 'rainbow-delimiters

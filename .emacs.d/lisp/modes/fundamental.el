@@ -48,8 +48,6 @@
 (defun user/fundamental-mode-init ()
   "Initialize Emacs fundamental mode."
   (setq-default
-   ;; Indent using spaces by default.
-   indent-tabs-mode nil
    ;; When using fill-paragraph or auto-fill-mode break lines at 80 characters by
    ;; default.
    fill-column 80)
