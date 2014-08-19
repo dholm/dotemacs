@@ -13,7 +13,9 @@
    sentence-end-double-space t
    ;; When using fill-paragraph or auto-fill-mode break lines at 79 characters
    ;; by default.
-   fill-column 79)
+   fill-column 79
+   ;; Indent using spaces.
+   indent-tabs-mode nil)
 
   ;; Run spell-checker.
   (flyspell-mode t)
