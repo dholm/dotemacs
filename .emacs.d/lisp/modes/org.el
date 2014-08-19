@@ -13,6 +13,9 @@
 
 (defun user/org-mode-hook ()
   "Org mode hook."
+  (unless (derived-mode-p 'text-mode)
+    (user/text-mode-hook))
+
   ;; Proper filling of org-mode text, form:
   ;;  * http://lists.gnu.org/archive/html/emacs-orgmode/2008-01/msg00375.html
   (org-set-local 'paragraph-separate
