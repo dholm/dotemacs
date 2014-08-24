@@ -4,9 +4,10 @@
 
 (defun user/ede-project (path)
   "Get the EDE project for PATH."
-  (let ((project (ede-current-project (expand-file-name path))))
-    (when (ede-cpp-root-project-p project)
-      project)))
+  (with-feature 'ede/cpp-root
+    (let ((project (ede-current-project (expand-file-name path))))
+      (when (ede-cpp-root-project-p project)
+        project))))
 
 
 (defun user/ede-project-include-paths (project)
