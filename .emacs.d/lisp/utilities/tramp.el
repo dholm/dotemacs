@@ -16,10 +16,10 @@
    tramp-auto-save-directory (path-join *user-auto-save-directory* "tramp"))
 
   ;; Load SSH configuration
-  (after-load 'dash
+  (after-load 'tramp
     (tramp-set-completion-function
      "ssh" (-map
-            (lambda (x) (list 'tramp-parse-config x))
+            (lambda (x) (list 'tramp-parse-sconfig x))
             (-remove
              (lambda (x) (not (file-exists-p x)))
              `(,(path-join "/" "etc" "ssh_config")
