@@ -29,6 +29,8 @@
     (global-semantic-idle-completions-mode t)
     ;; Show breadcrumbs during idle time.
     (global-semantic-idle-breadcrumbs-mode t)
+    ;; Breadcrumbs should be sticky.
+    (global-semantic-stickyfunc-mode t)
     ;; Show summary of tag at point during idle time.
     (global-semantic-idle-summary-mode t)
 
