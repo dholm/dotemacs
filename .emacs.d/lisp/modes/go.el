@@ -10,6 +10,9 @@
                ;; Fix formatting
                (gofmt-before-save)))
 
+  ;; Camel-case separates words.
+  (subword-mode t)
+
   (when (feature-p 'go-eldoc)
     (go-eldoc-setup))
 
