@@ -115,26 +115,6 @@
   (helm-descbinds-mode t))
 
 
-(defun user/helm-gtags-mode-hook ()
-  "Mode hook for helm-gtags."
-  ;; Automatically update GNU Global database if it exists.
-  (when (user/gnu-global-tags-p (buffer-file-name))
-    (setq-default
-     helm-gtags-auto-update t
-     helm-gtags-tag-location (user/gnu-global-tags-location (buffer-file-name)))))
-
-
-(defun user/helm-gtags-init ()
-  "Initialize helm-gtags."
-  (setq-default
-   ;; Don't care about case when searching tags.
-   helm-c-gtags-ignore-case t
-   ;; Tags are read only.
-   helm-c-gtags-read-only t)
-
-  (add-hook 'helm-gtags-mode-hook 'user/helm-gtags-mode-hook))
-
-
 (defun user/helm-swoop-init ()
   "Initialize Helm Swoop."
   (setq-default
@@ -161,8 +141,6 @@
 (with-executable 'git
   (require-package '(:name helm-ls-git))
   (require-package '(:name helm-open-github)))
-(with-executable 'global
-  (require-package '(:name helm-gtags :after (user/helm-gtags-init))))
 (with-executable 'python
   (require-package '(:name helm-pydoc)))
 (with-executable 'ag
