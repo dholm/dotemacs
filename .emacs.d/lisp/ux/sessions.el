@@ -6,7 +6,10 @@
   "Initialize Emacs recent files history."
   (setq-default
    recentf-max-saved-items 1000
-   recentf-exclude '("/tmp/" "/ssh:")
+   recentf-exclude '("/tmp/"
+                     ;; Prevent entries from loading tramp resulting in the
+                     ;; stable version of CEDET being loaded before devel.
+                     "/ssh:" "/sudo:")
    recentf-save-file (path-join *user-cache-directory* "recentf"))
 
   (recentf-mode t))
