@@ -105,7 +105,7 @@
   (require-package '(:name pyvenv))
   (require-package '(:name jedi :after (user/jedi-init)))
 
-  (add-interpreter-mode 'python-mode "python")
+  (add-interpreter-mode 'python-mode "python[0-9.]*")
   (add-hook 'python-mode-hook 'user/python-mode-hook))
 
 (with-executable 'python
