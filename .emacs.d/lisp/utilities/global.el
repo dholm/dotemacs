@@ -23,8 +23,8 @@
   (setq-default
    ;; Don't care about case when searching tags.
    helm-gtags-ignore-case t
-   ;; Tags are read only.
-   helm-gtags-read-only t
+   ;; When navigating open buffers in r/w mode.
+   helm-gtags-read-only nil
    ;; Use input at cursor.
    helm-gtags-use-input-at-cursor t
    ;; Pulse at point after jump.
