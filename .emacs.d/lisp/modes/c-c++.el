@@ -56,7 +56,8 @@
     (user/cedet-hook)
 
     ;;; (Bindings) ;;;
-    (user/bind-key-local :nav :switch-spec-impl 'eassist-switch-h-cpp)))
+    (with-feature 'eassist
+      (user/bind-key-local :nav :switch-spec-impl 'eassist-switch-h-cpp))))
 
 
 (defun user/c++-header-file-p ()

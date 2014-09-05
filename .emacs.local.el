@@ -7,7 +7,7 @@
   (add-to-list 'magit-repo-dirs (path-join *user-home-directory* "Projects")))
 
 (after-load 'ede
-  (with-feature 'ede/cpp-root
+  (with-function 'ede-cpp-root-project
     ;; Generic EDE project example.
     (when (file-exists-p "/path/to/project/root/file")
       (ede-cpp-root-project "Project"

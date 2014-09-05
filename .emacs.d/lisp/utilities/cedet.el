@@ -11,60 +11,59 @@
 
 (defun user/cedet-hook ()
   "Hook for modes with CEDET support."
+  ;;; (EDE) ;;;
   ;; Don't use with-feature here in case el-get hasn't initialized CEDET yet.
   (when (featurep 'cedet-devel-load)
-    ;;; (EDE) ;;;
     ;; Enable EDE.
-    (ede-minor-mode t)
+    (ede-minor-mode t))
 
     ;;; (Semantic) ;;;
-    ;; Enable semantic.
-    (semantic-mode t)
+  ;; Enable semantic.
+  (semantic-mode t)
 
-    ;; Scan source code automatically during idle time.
-    (global-semantic-idle-scheduler-mode t)
-    ;; Highlight the first line of the current tag.
-    (global-semantic-highlight-func-mode t)
-    ;; Initiate inline completion automatically during idle time.
-    (global-semantic-idle-completions-mode t)
-    ;; Show breadcrumbs during idle time.
-    (global-semantic-idle-breadcrumbs-mode t)
-    ;; Breadcrumbs should be sticky.
-    (global-semantic-stickyfunc-mode t)
-    ;; Show summary of tag at point during idle time.
-    (global-semantic-idle-summary-mode t)
+  ;; Scan source code automatically during idle time.
+  (global-semantic-idle-scheduler-mode t)
+  ;; Highlight the first line of the current tag.
+  (global-semantic-highlight-func-mode t)
+  ;; Initiate inline completion automatically during idle time.
+  (global-semantic-idle-completions-mode t)
+  ;; Show breadcrumbs during idle time.
+  (global-semantic-idle-breadcrumbs-mode t)
+  ;; Breadcrumbs should be sticky.
+  (global-semantic-stickyfunc-mode t)
+  ;; Show summary of tag at point during idle time.
+  (global-semantic-idle-summary-mode t)
 
-    ;; Use semantic as a source for auto complete.
-    (add-ac-sources 'ac-source-semantic)
+  ;; Use semantic as a source for auto complete.
+  (add-ac-sources 'ac-source-semantic)
 
-    ;; Use GNU GLOBAL as a source for auto complete.
-    (with-feature 'cedet-global
-      (when (and (fboundp 'cedet-gnu-global-version-check)
-                 (cedet-gnu-global-version-check t))
-        ;; Register as auto-completion source.
-        (add-ac-sources 'ac-source-gtags)))
+  ;; Use GNU GLOBAL as a source for auto complete.
+  (with-feature 'cedet-global
+    (when (and (fboundp 'cedet-gnu-global-version-check)
+               (cedet-gnu-global-version-check t))
+      ;; Register as auto-completion source.
+      (add-ac-sources 'ac-source-gtags)))
 
     ;;; (SemanticDB) ;;;
-    (with-feature 'semantic/db
-      (global-semanticdb-minor-mode t))
+  (with-feature 'semantic/db
+    (global-semanticdb-minor-mode t))
 
     ;;; (Context Menu) ;;;
-    (when (display-graphic-p)
-      (cedet-m3-minor-mode t))
+  (when (display-graphic-p)
+    (cedet-m3-minor-mode t))
 
-    ;;; (Bindings) ;;;
-    (user/bind-key-local :code :update-index 'user/cedet-create/update-all)
+  ;;; (Bindings) ;;;
+  (user/bind-key-local :code :update-index 'user/cedet-create/update-all)
 
-    (when (feature-p 'helm)
-      (user/bind-key-local :nav :functions/toc 'helm-semantic-or-imenu))
-    (unless (and (boundp 'helm-gtags-mode) helm-gtags-mode)
-      (user/bind-key-local :nav :find-symbol 'semantic-symref-find-tags-by-regexp)
-      (user/bind-key-local :nav :references 'semantic-symref)
-      (user/bind-key-local :nav :follow-symbol 'semantic-ia-fast-jump))
-    (user/bind-key-local :nav :jump-spec-impl
-                         'semantic-analyze-proto-impl-toggle)
+  (when (feature-p 'helm)
+    (user/bind-key-local :nav :functions/toc 'helm-semantic-or-imenu))
+  (unless (and (boundp 'helm-gtags-mode) helm-gtags-mode)
+    (user/bind-key-local :nav :find-symbol 'semantic-symref-find-tags-by-regexp)
+    (user/bind-key-local :nav :references 'semantic-symref)
+    (user/bind-key-local :nav :follow-symbol 'semantic-ia-fast-jump))
+  (user/bind-key-local :nav :jump-spec-impl 'semantic-analyze-proto-impl-toggle)
 
-    (user/bind-key-local :doc :describe 'semantic-ia-show-doc)))
+  (user/bind-key-local :doc :describe 'semantic-ia-show-doc))
 
 
 (defun user/ede-get-local-var (fname var)

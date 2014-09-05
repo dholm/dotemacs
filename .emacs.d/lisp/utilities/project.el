@@ -6,7 +6,8 @@
   "Get the EDE project for PATH."
   (with-feature 'ede/cpp-root
     (let ((project (ede-current-project (expand-file-name path))))
-      (when (ede-cpp-root-project-p project)
+      (when (and (featurep 'ede/cpp-root)
+                 (ede-cpp-root-project-p project))
         project))))
 
 
