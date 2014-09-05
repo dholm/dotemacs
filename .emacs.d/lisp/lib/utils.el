@@ -36,6 +36,13 @@
      ,@body))
 
 
+(defmacro with-function (function &rest body)
+  "If FUNCTION is available, evaluate BODY."
+  (declare (indent defun))
+  `(when (functionp ,function)
+     ,@body))
+
+
 (defun add-command-switch (handler &rest switch-list)
   "Add HANDLER for SWITCH-LIST."
   (dolist (switch switch-list)
