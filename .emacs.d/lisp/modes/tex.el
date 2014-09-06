@@ -159,7 +159,7 @@ Makes it easier to version control LaTeX-files."
   (setq-default
    ac-l-dict-directory (path-join (el-get-package-directory
                                    'auto-complete-latex) "ac-l-dict"))
-  (add-ac-modes 'latex-mode 'LaTeX-mode))
+  (add-completion-modes 'latex-mode 'LaTeX-mode))
 
 
 (defun user/ac-math-init ()
@@ -167,7 +167,7 @@ Makes it easier to version control LaTeX-files."
   (setq-default
    ;; Enable unicode math input.
    ac-math-unicode-in-math-p t)
-  (add-ac-modes 'latex-mode 'LaTeX-mode))
+  (add-completion-modes 'latex-mode 'LaTeX-mode))
 
 
 (defun user/tex-mode-init ()
@@ -193,6 +193,7 @@ Makes it easier to version control LaTeX-files."
   (require-package '(:name auctex :after (user/auctex-init)))
   (require-package '(:name ebib :after (user/ebib-init)))
   (require-package '(:name zotelo :after (user/zotelo-init)))
+  (require-package '(:name company-auctex))
   (require-package '(:name ac-math :after (user/ac-math-init)))
   (require-package '(:name auto-complete-latex :after (user/auto-complete-latex)))
   (require-package '(:name ltx-help)))

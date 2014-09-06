@@ -58,7 +58,7 @@
 (defun user/ielm-init ()
   "Initialize interactive elisp mode."
   ;; Use auto-completion even in inferior elisp mode.
-  (add-ac-modes 'inferior-emacs-lisp-mode)
+  (add-completion-modes 'inferior-emacs-lisp-mode)
 
   (add-hook 'ielm-mode-hook 'user/ielm-mode-hook))
 

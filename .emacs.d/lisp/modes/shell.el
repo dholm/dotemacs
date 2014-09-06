@@ -34,7 +34,7 @@
 
 (defun user/readline-complete-init ()
   "Initialize readline complete."
-  (add-ac-modes 'shell-mode 'eshell-mode))
+  (add-completion-modes 'shell-mode 'eshell-mode))
 
 
 (defun user/shell-mode-init ()

@@ -59,7 +59,7 @@
                  ((executable-find "clisp") "clisp -K full")
                  (t inferior-lisp-program)))
 
-  (add-ac-modes 'slime-repl-mode)
+  (add-completion-modes 'slime-repl-mode)
 
   (slime-setup '(slime-repl))
 
@@ -81,6 +81,7 @@
             (executable-find "lisp")
             (executable-find "clisp"))
     (require-package '(:name slime :after (user/slime-init)))
+    (require-package '(:name slime-company))
     (require-package '(:name ac-slime))))
 
 (user/lisp-mode-init)

@@ -107,23 +107,36 @@
      ;; Scroll quick-help using M-n/p.
      (define-key map (kbd "C-M-n") 'ac-quick-help-scroll-down)
      (define-key map (kbd "C-M-p") 'ac-quick-help-scroll-up)
-     map))
+     map)))
 
-  ;; Enable auto-completion globally.
-  (global-auto-complete-mode t))
+
+(defun user/company-mode-init ()
+  "Initialize company-mode."
+  (setq-default
+   ;; Auto-complete directly after '.'.
+   company-minimum-prefix-length 0)
+
+  (after-load 'diminish
+    (diminish 'company-mode))
+
+  ;;; (Bindings) ;;;
+  (user/bind-key-global :code :auto-complete 'company-complete)
+
+  ;; Enable `company-mode' completion globally.
+  (global-company-mode t))
 
 
 (defun add-ac-sources (&rest sources)
-  "Add SOURCES for auto-complete after it has been loaded."
-  (after-load 'auto-complete
+  "Add SOURCES for auto-completion backend after it has been loaded."
+  (after-load 'company-mode
     (dolist (source sources)
       (if (boundp 'ac-sources)
           (add-to-list 'ac-sources source)
         (error "Declaration of ac-sources is missing!")))))
 
 
-(defun add-ac-modes (&rest major-modes)
-  "Add MAJOR-MODES for auto-complete after it has been loaded."
+(defun add-completion-modes (&rest major-modes)
+  "Add MAJOR-MODES for auto-completion after it has been loaded."
   (after-load 'auto-complete
     (dolist (mode major-modes)
       (if (boundp 'ac-modes)
@@ -141,7 +154,10 @@
   (add-to-list 'completion-styles 'initials t)
 
   ;;; (Packages) ;;;
-  (require-package '(:name auto-complete :after (user/auto-complete-init))))
+  (require-package '(:name auto-complete :after (user/company-mode-init)))
+  (require-package '(:name company-mode :after (user/company-mode-init)))
+  (when (feature-p 'helm)
+    (require-package '(:name helm-company))))
 
 (user/completion-init)
 

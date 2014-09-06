@@ -100,6 +100,7 @@
   ;;; (Packages) ;;;
   (require-package '(:name python :after (user/python-init)))
   (require-package '(:name anaconda-mode))
+  (require-package '(:name company-anaconda))
   (require-package '(:name py-autopep8))
   (require-package '(:name ropemacs))
   (require-package '(:name pymacs))

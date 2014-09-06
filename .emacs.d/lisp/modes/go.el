@@ -36,6 +36,7 @@
 (with-executable 'go
   (require-package '(:name go-mode :after (user/go-mode-init)))
   (require-package '(:name go-autocomplete))
+  (require-package '(:name go-company))
   (require-package '(:name go-eldoc))
   (require-package '(:name go-test))
   (require-package '(:name go-projectile))

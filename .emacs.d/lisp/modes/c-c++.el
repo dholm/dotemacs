@@ -93,7 +93,8 @@
              (executable-find "clang")
              (executable-find "llvm-config"))
     (require-package '(:name irony-mode :after (user/irony-mode-init))))
-  (require-package '(:name google-c-style)))
+  (require-package '(:name google-c-style))
+  (require-package '(:name company-c-headers)))
 
 (user/c-c++-mode-init)
 

@@ -61,6 +61,7 @@
   "Initialize web development."
   (require-package '(:name web-mode :after (user/web-mode-init)))
   (require-package '(:name tern :after (user/tern-init)))
+  (require-package '(:name company-tern))
   (require-package '(:name skewer-mode))
   (require-package '(:name tidy)))
 

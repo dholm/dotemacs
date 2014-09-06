@@ -41,6 +41,7 @@
 (defun user/haskell-mode-init ()
   "Initialize Haskell mode."
   (require-package '(:name haskell-mode))
+  (require-package '(:name company-ghc))
   (require-package '(:name ghci-completion))
   (require-package '(:name hi2))
   (require-package '(:name flycheck-hdevtools))

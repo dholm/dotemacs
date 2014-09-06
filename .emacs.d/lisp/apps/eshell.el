@@ -14,7 +14,7 @@
 
   ;; Use auto-complete for completion.
   (add-ac-sources 'ac-source-pcomplete)
-  (add-ac-modes 'eshell-mode))
+  (add-completion-modes 'eshell-mode))
 
 
 (defun user/shorten-path (path)
