@@ -14,6 +14,9 @@
   (when (feature-p 'pymacs)
     (pymacs-load "ropemacs" "rope-"))
 
+  (when (feature-p 'anaconda-mode)
+    (anaconda-mode t))
+
   ;; Enable Jedi
   (when (el-get-package-is-installed 'jedi)
     (jedi:setup))
@@ -96,6 +99,7 @@
   "Initialize Python mode."
   ;;; (Packages) ;;;
   (require-package '(:name python :after (user/python-init)))
+  (require-package '(:name anaconda-mode))
   (require-package '(:name py-autopep8))
   (require-package '(:name ropemacs))
   (require-package '(:name pymacs))
