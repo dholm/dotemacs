@@ -334,9 +334,11 @@
                (:notes . (user/apps-prefix "n"))
                (:capture-task . (user/apps-prefix "t"))
 
-               (:email . (user/apps-prefix "e"))
                (:browse . (user/apps-prefix "b"))
                (:browse-external . (user/apps-prefix "B"))
+               (:feed-reader . (user/apps-prefix "f"))
+
+               (:email . (user/apps-prefix "e"))
                (:irc . (user/apps-prefix "i"))
                (:instant-messenger . (user/apps-prefix "I"))
 

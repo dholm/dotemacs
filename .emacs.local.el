@@ -20,6 +20,12 @@
                             :spp-table '(("DEBUG" . ""))
                             :compile-command "nice make -j"))))
 
+(after-load 'elfeed
+  (setq elfeed-feeds
+        ;; Set up web feeds to read using elfeed.
+        '(("http://dholm.com/feed/" blog personal)
+          ("http://nullprogram.com/feed/" blog programming))))
+
 
 ;; Keymap override.
 (user/global-keymap-overlay
