@@ -71,9 +71,9 @@
   (require-package '(:name magit :after (user/magit-init)))
   (require-package '(:name magit-gerrit))
   (require-package '(:name magit-tramp))
+  (require-package '(:name git-timemachine))
   (when (version<= "24.4" emacs-version)
-    (require-package '(:name magit-filenotify))
-    (require-package '(:name git-timemachine)))
+    (require-package '(:name magit-filenotify)))
 
   (require-package '(:name git-gutter))
   (when (display-graphic-p)
