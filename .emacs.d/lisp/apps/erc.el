@@ -112,6 +112,18 @@
       ;; Highlight nicknames in chats.
       (add-to-list 'erc-modules 'highlight-nicknames))
 
+    (when (feature-p 'erc-youtube)
+      ;; Display information about YouTube links.
+      (add-to-list 'erc-modules 'youtube))
+
+    (when (feature-p 'erc-track-score)
+      (setq-default
+       ;; Show channel score.
+       erc-track-showcount t)
+
+      (after-load 'erc-track
+        (erc-track-score-mode t)))
+
     (when (display-graphic-p)
       ;; Replace smileys with icons.
       (add-to-list 'erc-modules 'smiley)))
@@ -138,7 +150,9 @@
   (user/bind-key-global :apps :irc 'erc))
 
 (require-package '(:name erc :after (user/erc-init)))
+(require-package '(:name erc-youtube))
 (require-package '(:name erc-highlight-nicknames))
+(require-package '(:name erc-track-score))
 (when (feature-p 'bbdb)
   (require-package '(:name bbdb2erc)))
 (with-executable 'bitlbee
