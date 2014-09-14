@@ -26,6 +26,17 @@
    bitlbee-options "-n -F -v "))
 
 
+(defun user/erc-prompt ()
+  "ERC prompt function."
+  (if (and (boundp 'erc-default-recipients)
+           (erc-default-target))
+      (erc-propertize (concat "[" (erc-default-target) "]")
+                      'read-only t 'rear-nonsticky t
+                      'front-nonsticky t)
+    (erc-propertize (concat "[" (buffer-name) "]") 'read-only t
+                    'rear-nonsticky t 'front-nonsticky t)))
+
+
 (defun user/erc-init ()
   "Initialize erc."
   (setq-default
@@ -66,7 +77,23 @@
    ;; Always add a timestamp.
    erc-timestamp-only-if-changed-flag nil
    ;; Ensure prompt is at the bottom of the window.
-   erc-scrolltobottom-mode t)
+   erc-scrolltobottom-mode t
+   ;; Maximum buffer size.
+   erc-max-buffer-size 100000
+   ;; Nicer ERC prompt.
+   erc-prompt 'user/erc-prompt
+   ;; Even buttonize links that are not proper URLs.
+   erc-button-url-regexp
+   "\\([-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]+\\.\\)+[-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]*[-a-zA-Z0-9\\/]"
+   ;; ERC mode and header line.
+   erc-mode-line-format
+   (concat
+    "[" (with-face "%n" 'erc-my-nick-face) "] "
+    "[" (with-face "%S" 'erc-keyword-face) "(%m)] "
+    (with-face "%a" 'erc-bold-face))
+   erc-header-line-format "%o"
+   ;; Highlight user mentioning us or a keyword.
+   erc-current-nick-highlight-type 'nick-or-keyword)
 
   (after-load 'erc
     (add-many-to-list
@@ -91,6 +118,8 @@
      'networks
      ;; Hide non-irc commands after evaluation.
      'noncommands
+     ;; Generate notifications for select users.
+     'notify
      ;; Make displayed lines read-only.
      'readonly
      ;; Input history ring.
@@ -126,7 +155,10 @@
 
     (when (display-graphic-p)
       ;; Replace smileys with icons.
-      (add-to-list 'erc-modules 'smiley)))
+      (add-to-list 'erc-modules 'smiley)
+      (when (feature-p 'erc-tex)
+        ;; Render (La)TeX mathematical expressions.
+        (add-to-list 'erc-modules 'tex))))
 
   (when (eq default-terminal-coding-system 'utf-8)
     (setq-default
@@ -153,6 +185,10 @@
 (require-package '(:name erc-youtube))
 (require-package '(:name erc-highlight-nicknames))
 (require-package '(:name erc-track-score))
+(require-package '(:name erc-view-log))
+(require-package '(:name erc-crypt))
+(when (display-graphic-p)
+  (require-package '(:name erc-tex)))
 (when (feature-p 'bbdb)
   (require-package '(:name bbdb2erc)))
 (with-executable 'bitlbee
