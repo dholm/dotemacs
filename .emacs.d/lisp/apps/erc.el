@@ -19,13 +19,6 @@
    :urgency 'low))
 
 
-(defun user/bitlbee-init ()
-  "Initialize bitlbee."
-  (setq-default
-   ;; Run in ForkDaemon mode so that purple plugins work.
-   bitlbee-options "-n -F -v "))
-
-
 (defun user/erc-prompt ()
   "ERC prompt function."
   (if (and (boundp 'erc-default-recipients)
@@ -192,7 +185,12 @@
 (when (feature-p 'bbdb)
   (require-package '(:name bbdb2erc)))
 (with-executable 'bitlbee
-  (require-package '(:name bitlbee :after (user/bitlbee-init))))
+  (after-load 'prodigy
+    (prodigy-define-service
+     :name "Bitlbee"
+     :command "bitlbee"
+     :args '("-n" "-F" "-v" "-d" "~/.bitlbee" "-c" "~/.bitlbee/bitlbee.conf")
+     :cwd "~/.bitlbee")))
 
 
 (provide 'apps/erc)

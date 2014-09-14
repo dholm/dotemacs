@@ -331,6 +331,7 @@
 
      ;;; (Applications) ;;;
      (:apps . ((:shell . (user/apps-prefix "s"))
+               (:services . (user/apps-prefix "p"))
 
                (:agenda . (user/apps-prefix "a"))
                (:notes . (user/apps-prefix "n"))
