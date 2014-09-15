@@ -32,10 +32,6 @@
     ;; Override AUCTeX in favor of mode-compile.
     (kill-local-variable 'compile-command))
 
-  ;; Enable AUCTeX auto completion when available.
-  (when (el-get-package-is-installed 'auto-complete-auctex)
-    (ac-auctex-setup))
-
   ;;; (Bindings) ;;;
   (when (el-get-package-is-installed 'ltx-help)
     (user/bind-key-local :doc :reference 'latex-help))
@@ -199,7 +195,6 @@ Makes it easier to version control LaTeX-files."
   (require-package '(:name zotelo :after (user/zotelo-init)))
   (require-package '(:name ac-math :after (user/ac-math-init)))
   (require-package '(:name auto-complete-latex :after (user/auto-complete-latex)))
-  (require-package '(:name auto-complete-auctex))
   (require-package '(:name ltx-help)))
 
 
