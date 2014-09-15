@@ -86,7 +86,9 @@
     (with-face "%a" 'erc-bold-face))
    erc-header-line-format "%o"
    ;; Highlight user mentioning us or a keyword.
-   erc-current-nick-highlight-type 'nick-or-keyword)
+   erc-current-nick-highlight-type 'nick-or-keyword
+   ;; Set the width to half the window width.
+   erc-fill-column (/ (window-total-width (frame-root-window)) 2))
 
   (after-load 'erc
     (add-many-to-list
