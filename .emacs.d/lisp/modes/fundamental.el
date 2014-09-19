@@ -30,21 +30,6 @@
   (paren-activate))
 
 
-(defun user/fixmee-mode-init ()
-  "Initialize fixmee mode."
-  (setq-default
-   ;; Fixmee uses pcache that needs a cache store.
-   pcache-directory (path-join *user-cache-directory* "pcache/")
-   ;; Set the correct bindings.
-   fixmee-view-listing-keystrokes `(,(user/get-key :code :todos)))
-
-  (after-load 'popwin
-    ;; Use popwin for Fixmee list.
-    (push '(fixmee--listview-mode :stick t) popwin:special-display-config))
-
-  (global-fixmee-mode t))
-
-
 (defun user/fundamental-mode-init ()
   "Initialize Emacs fundamental mode."
   (setq-default
@@ -58,7 +43,6 @@
     (diminish 'auto-fill-function))
 
   ;;; (Packages) ;;;
-  (require-package '(:name fixmee :after (user/fixmee-mode-init)))
   (require-package '(:name rainbow-delimiters
                            :after (user/rainbow-delimiters-init)))
   (require-package '(:name mic-paren :after (user/mic-paren-init))))
