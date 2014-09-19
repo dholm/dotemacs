@@ -57,21 +57,29 @@
    ;; Be silent when checking words.
    flyspell-issue-message-flag nil)
 
-  (with-executable 'aspell
+  (cond
+   ((executable-find "hunspell")
+    (setq-default
+     ispell-program-name "hunspell"
+     ispell-really-hunspell t))
+   ((executable-find "aspell")
     (setq-default
      ispell-program-name "aspell"
      ispell-list-command "--list"
      ;; Improve performance by reducing suggestions.
-     ispell-extra-args '("--sug-mode=ultra" "--dont-suggest")))
+     ispell-extra-args '("--sug-mode=ultra" "--dont-suggest"))))
 
   (add-hook 'flyspell-mode-hook 'user/flyspell-mode-hook)
   (add-hook 'flyspell-prog-mode-hook 'user/flyspell-prog-mode-hook))
 
 (when (or (executable-find "ispell")
-          (executable-find "aspell"))
+          (executable-find "aspell")
+          (executable-find "hunspell"))
   (require-package '(:name flyspell :after (user/flyspell-init)))
   (require-package '(:name flyspell-lazy :after (user/flyspell-lazy-init)))
-  (require-package '(:name auto-dictionary)))
+  (require-package '(:name auto-dictionary))
+  (with-executable 'hunspell
+    (require-package '(:name rw-hunspell :after (rw-hunspell-setup)))))
 
 
 (provide 'utilities/flyspell)
