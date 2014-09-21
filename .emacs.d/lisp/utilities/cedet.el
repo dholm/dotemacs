@@ -146,13 +146,14 @@
         (semanticdb-enable-gnu-global-databases 'c-mode)
         (semanticdb-enable-gnu-global-databases 'c++-mode)))
 
-    ;; Register languages from contrib.
-    (add-to-list 'semantic-new-buffer-setup-functions
-                 '(csharp-mode . wisent-csharp-default-setup))
-    (add-to-list 'semantic-new-buffer-setup-functions
-                 '(php-mode . wisent-php-default-setup))
-    (add-to-list 'semantic-new-buffer-setup-functions
-                 '(ruby-mode . wisent-ruby-default-setup))
+    (when (featurep 'cedet-devel-load)
+      ;; Register languages from contrib.
+      (add-to-list 'semantic-new-buffer-setup-functions
+                   '(csharp-mode . wisent-csharp-default-setup))
+      (add-to-list 'semantic-new-buffer-setup-functions
+                   '(php-mode . wisent-php-default-setup))
+      (add-to-list 'semantic-new-buffer-setup-functions
+                   '(ruby-mode . wisent-ruby-default-setup)))
 
     (setq user/semantic-initialized t)))
 
