@@ -61,10 +61,12 @@
    ((executable-find "hunspell")
     (setq-default
      ispell-program-name "hunspell"
-     ispell-really-hunspell t))
+     ispell-really-hunspell t
+     ispell-extra-args '("-a" "-i" "utf-8")))
    ((executable-find "aspell")
     (setq-default
      ispell-program-name "aspell"
+     ispell-really-aspell t
      ispell-list-command "--list"
      ;; Improve performance by reducing suggestions.
      ispell-extra-args '("--sug-mode=ultra" "--dont-suggest"))))
