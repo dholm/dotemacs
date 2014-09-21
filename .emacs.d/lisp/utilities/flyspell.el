@@ -51,6 +51,14 @@
    flyspell-lazy-window-idle-seconds 60))
 
 
+(defun user/rw-hunspell-init ()
+  "Initialize rw-hunspell."
+  (after-load 'ispell
+    (when ispell-really-hunspell
+      ;; Initialize `rw-hunspell` if Hunspell is in use.
+      (rw-hunspell-setup))))
+
+
 (defun user/flyspell-init ()
   "Initialize fly spell."
   (setq-default
@@ -58,7 +66,8 @@
    flyspell-issue-message-flag nil)
 
   (cond
-   ((executable-find "hunspell")
+   (;; Disable Hunspell due to issues on some machines.
+    (and nil (executable-find "hunspell"))
     (setq-default
      ispell-program-name "hunspell"
      ispell-really-hunspell t
@@ -81,7 +90,7 @@
   (require-package '(:name flyspell-lazy :after (user/flyspell-lazy-init)))
   (require-package '(:name auto-dictionary))
   (with-executable 'hunspell
-    (require-package '(:name rw-hunspell :after (rw-hunspell-setup)))))
+    (require-package '(:name rw-hunspell :after (user/rw-hunspell-init)))))
 
 
 (provide 'utilities/flyspell)
