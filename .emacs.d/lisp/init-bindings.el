@@ -304,6 +304,7 @@
 
      ;;; (Utilities) ;;;
      (:util . ((:annotate-buffer . (user/utilities-prefix "a"))
+               (:draw . (user/utilities-prefix "d"))
 
                (:ace-jump-mode . (user/navigation-prefix "a"))
 
