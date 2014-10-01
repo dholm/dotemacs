@@ -135,7 +135,9 @@
   "Initialize automatic code completion."
   (setq
    ;; Do not fall back to complete if auto-complete is unavailable.
-   tab-always-indent t)
+   tab-always-indent t
+   ;; Cycle completions in minibuffer below a certain threshold.
+   completion-cycle-threshold 5)
 
   ;; Allow completion of acronyms and initialisms.
   (add-to-list 'completion-styles 'initials t)
