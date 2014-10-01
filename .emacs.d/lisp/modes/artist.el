@@ -8,14 +8,6 @@
   (local-set-key (kbd "C-c C-a C-s") 'user/artist-select-setting))
 
 
-(defun user/toggle-artist-mode ()
-  "Toggle `artist-mode' on or off."
-  (interactive)
-  (if (eq major-mode 'picture-mode)
-      (artist-mode-off)
-    (artist-mode t)))
-
-
 (defun user/artist-select-setting (setting)
   "Interactively select a SETTING to change in `artist-mode'."
   (interactive
@@ -42,7 +34,7 @@
   (add-hook 'picture-mode-hook 'user/artist-mode-hook)
 
   ;;; (Bindings) ;;;
-  (user/bind-key-global :util :draw 'user/toggle-artist-mode))
+  (user/bind-key-global :util :draw 'artist-mode))
 
 (user/artist-mode-init)
 
