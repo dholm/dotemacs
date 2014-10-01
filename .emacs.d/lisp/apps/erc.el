@@ -7,8 +7,21 @@
   "Path to user's erc cache store.")
 
 
+(defface erc-header-line-disconnected
+  '((t (:inherit 'flymake-errline)))
+  "Face to use when ERC has been disconnected."
+  :group 'erc-faces)
+
+
 (defun user/erc-mode-hook ()
   "Mode hook for erc.")
+
+
+(defun erc-update-header-line-show-disconnected ()
+  "Use a different face in the header-line when disconnected."
+  (erc-with-server-buffer
+    (cond ((erc-server-process-alive) 'erc-header-line)
+          (t 'erc-header-line-disconnected))))
 
 
 (defun user/erc-global-notify (match-type nick message)
@@ -88,7 +101,9 @@
    ;; Highlight user mentioning us or a keyword.
    erc-current-nick-highlight-type 'nick-or-keyword
    ;; Set the width to half the window width.
-   erc-fill-column (/ (window-total-width (frame-root-window)) 2))
+   erc-fill-column (/ (window-total-width (frame-root-window)) 2)
+   ;; Modify the face of the header line when disconnected.
+   erc-header-line-face-method 'erc-update-header-line-show-disconnected)
 
   (after-load 'erc
     (add-many-to-list
