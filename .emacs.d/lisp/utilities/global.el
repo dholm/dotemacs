@@ -18,6 +18,16 @@
   (user/bind-key-local :nav :references 'helm-gtags-find-rtag))
 
 
+(defun user/gnu-global-create/update ()
+  "Create or update GNU GLOBAL database at current project root."
+  (interactive)
+  (with-executable 'global
+    (with-project-root project-root nil
+      (cond
+       ((require 'cedet-global nil :noerror)
+        (cedet-gnu-global-create/update-database project-root))))))
+
+
 (defun user/helm-gtags-init ()
   "Initialize helm-gtags."
   (setq-default

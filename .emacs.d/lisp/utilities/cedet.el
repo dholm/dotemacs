@@ -86,18 +86,6 @@
       (message (format "CScope database updated at %S" proj-root)))))
 
 
-(defun user/cedet-gnu-global-create/update ()
-  "Create or update GNU GLOBAL database at current project root."
-  (interactive)
-  (with-executable 'global
-    (unless (cedet-gnu-global-version-check t)
-      (warn "GNU GLOBAL version is too old!")))
-  (let ((proj-root (user/project-root (path-abs-buffer))))
-    (when proj-root
-      (cedet-gnu-global-create/update-database proj-root)
-      (message (format "GNU GLOBAL database updated at %S" proj-root)))))
-
-
 (defun user/cedet-gnu-idutils-create/update ()
   "Create or update GNU idutils database at current project root."
   (interactive)
@@ -114,7 +102,7 @@
   "Create or update all databases at current project root."
   (interactive)
   (user/cedet-cscope-create/update)
-  (user/cedet-gnu-global-create/update)
+  (user/gnu-global-create/update)
   (user/cedet-gnu-idutils-create/update))
 
 
