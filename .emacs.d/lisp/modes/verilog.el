@@ -3,7 +3,8 @@
 ;;; Code:
 
 (defun user/verilog-mode-hook ()
-  "Verilog mode hook.")
+  "Verilog mode hook."
+  (user/gnu-global-enable))
 
 
 (defun user/verilog-mode-init ()

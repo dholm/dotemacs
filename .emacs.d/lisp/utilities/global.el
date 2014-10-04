@@ -18,6 +18,12 @@
   (user/bind-key-local :nav :references 'helm-gtags-find-rtag))
 
 
+(defun user/gnu-global-enable ()
+  "Activate GNU Global in current major mode."
+  (with-feature 'helm-gtags
+    (helm-gtags-mode t)))
+
+
 (defun user/gnu-global-create/update ()
   "Create or update GNU GLOBAL database at current project root."
   (interactive)

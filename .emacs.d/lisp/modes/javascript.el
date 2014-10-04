@@ -7,6 +7,8 @@
   ;; Load CEDET
   (user/javascript-mode-cedet-hook)
 
+  (user/gnu-global-enable)
+
   (tern-mode t))
 
 

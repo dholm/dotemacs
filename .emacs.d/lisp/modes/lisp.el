@@ -10,6 +10,8 @@
 
   (user/cedet-hook)
 
+  (user/gnu-global-enable)
+
   (with-feature 'rainbow-delimiters
     (rainbow-delimiters-mode t))
 

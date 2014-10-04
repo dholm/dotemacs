@@ -3,7 +3,8 @@
 ;;; Code:
 
 (defun user/tcl-mode-hook ()
-  "Tcl mode hook.")
+  "Tcl mode hook."
+  (user/gnu-global-enable))
 
 (defun user/tcl-mode-init ()
   "Initialize Tcl mode."

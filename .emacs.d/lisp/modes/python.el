@@ -7,6 +7,8 @@
   ;; Load CEDET
   (user/python-mode-cedet-hook)
 
+  (user/gnu-global-enable)
+
   ;; Enable virtualenv support.
   (when (feature-p 'pyvenv)
     (pyvenv-mode t))

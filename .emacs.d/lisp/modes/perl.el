@@ -4,6 +4,8 @@
 
 (defun user/perl-mode-hook ()
   "Perl mode hook."
+  (user/gnu-global-enable)
+
   (auto-complete-mode t)
   (add-ac-sources 'ac-source-perl-completion))
 

@@ -4,6 +4,8 @@
 
 (defun user/lua-mode-hook ()
   "Lua mode hook."
+  (user/gnu-global-enable)
+
   (when (el-get-package-is-installed 'lua-block)
     (lua-block-mode t)))
 

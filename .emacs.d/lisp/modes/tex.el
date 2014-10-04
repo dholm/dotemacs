@@ -8,6 +8,8 @@
 
 (defun user/tex-mode-hook ()
   "TeX mode hook."
+  (user/gnu-global-enable)
+
   (when (and (display-graphic-p)
              (not user/tex-preview-setup))
     ;; Setup LaTeX preview.

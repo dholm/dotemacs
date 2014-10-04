@@ -7,6 +7,8 @@
   ;; Bring in CEDET.
   (user/cedet-hook)
 
+  (user/gnu-global-enable)
+
   ;; Enable robe mode
   (robe-mode t)
 

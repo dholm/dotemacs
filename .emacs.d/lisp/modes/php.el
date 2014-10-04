@@ -11,6 +11,8 @@
       ;; In web-mode CEDET doesn't automatically load PHP support.
       (wisent-php-default-setup)))
 
+  (user/gnu-global-enable)
+
   ;; Separate camel-case into separate words
   (subword-mode t))
 

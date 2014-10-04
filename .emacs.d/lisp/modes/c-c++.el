@@ -29,9 +29,7 @@
     ;; Automatically update tags.
     (turn-on-ctags-auto-update-mode))
 
-  (when (feature-p 'helm-gtags)
-    ;; Enable helm-gtags which in turn enables auto-update of Global tags.
-    (helm-gtags-mode t))
+  (user/gnu-global-enable)
 
   (with-feature 'irony
     (when (member major-mode irony-supported-major-modes)

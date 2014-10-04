@@ -3,7 +3,8 @@
 ;;; Code:
 
 (defun user/vhdl-mode-hook ()
-  "VHDL mode hook.")
+  "VHDL mode hook."
+  (user/gnu-global-enable))
 
 
 (defun user/vhdl-mode-init ()

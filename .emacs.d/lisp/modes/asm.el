@@ -4,9 +4,7 @@
 
 (defun user/asm-mode-hook ()
   "Assembly mode hook."
-  (when (feature-p 'helm-gtags)
-    ;; Enable helm-gtags.
-    (helm-gtags-mode t)))
+  (user/gnu-global-enable))
 
 
 (define-derived-mode arm-mode asm-mode "ARM"

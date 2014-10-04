@@ -7,6 +7,8 @@
   (unless (derived-mode-p 'prog-mode)
     (user/prog-mode-hook))
 
+  (user/gnu-global-enable)
+
   (with-executable 'xbuild
     (setq-local compile-command "xbuild "))
 
