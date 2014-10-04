@@ -21,7 +21,18 @@
 (defun user/gnu-global-enable ()
   "Activate GNU Global in current major mode."
   (with-feature 'helm-gtags
-    (helm-gtags-mode t)))
+    (after-load 'diminish
+      (diminish 'helm-gtags-mode))
+    (helm-gtags-mode t))
+
+  (with-feature 'ggtags
+    (after-load 'diminish
+      (diminish 'ggtags-mode))
+    (ggtags-mode t)
+
+    (setq-local
+     ;; Enable Eldoc support.
+     eldoc-documentation-function #'ggtags-eldoc-function)))
 
 
 (defun user/gnu-global-create/update ()
@@ -31,7 +42,9 @@
     (with-project-root project-root nil
       (cond
        ((require 'cedet-global nil :noerror)
-        (cedet-gnu-global-create/update-database project-root))))))
+        (cedet-gnu-global-create/update-database project-root))
+       ((require 'ggtags nil :noerror)
+        (ggtags-create-tags project-root))))))
 
 
 (defun user/helm-gtags-init ()
@@ -52,7 +65,8 @@
 (defun user/global-init ()
   "Initialize GNU Global support."
   ;;; (Packages) ;;;
-  (require-package '(:name helm-gtags :after (user/helm-gtags-init))))
+  (require-package '(:name helm-gtags :after (user/helm-gtags-init)))
+  (require-package '(:name ggtags)))
 
 (with-executable 'global
   (user/global-init))
