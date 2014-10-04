@@ -28,9 +28,7 @@
        (or (--reduce-from
             (or acc (funcall it dir)) nil
             projectile-project-root-files-functions)
-           (if projectile-require-project-root
-               (error "You're not in a project")
-             path))))))
+           path)))))
 
 
 (defun user/project-root (path)
