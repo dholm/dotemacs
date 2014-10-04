@@ -70,22 +70,40 @@
   (user/project-root path))
 
 
+(defmacro with-project-root (project-root &optional path &rest body)
+  "Bind PROJECT-ROOT for PATH and evaluate BODY if project exists."
+  (declare (indent defun)
+           (debug let))
+  `(let ((,project-root (user/project-root (or ,path (path-abs-buffer)))))
+     (when ,project-root
+       ,@body)))
+
+
+(defmacro with-ede-project (ede-project &optional path &rest body)
+  "Bind EDE-PROJECT for PATH and evaluate BODY if project exists."
+  (declare (indent defun)
+           (debug with-project-root))
+  `(let ((,ede-project (user/ede-project
+                        (user/project-root (or ,path (path-abs-buffer))))))
+     (when ,ede-project
+       ,@body)))
+
+
 (defun user/project-root-p (path)
   "Check if PATH represents a project root."
-  (let ((proj-root (user/project-root path)))
+  (with-project-root proj-root path
     (and path proj-root (equal (file-truename path) (file-truename proj-root)))))
 
 
 (defun user/gnu-global-tags-location (path)
   "Get the location of Global's database from PATH, if it exists."
-  (let ((gtags-file-name "GTAGS")
-        (proj-root (user/project-root path)))
-    (when (file-exists-p (path-join proj-root gtags-file-name))
+  (with-project-root proj-root path
+    (when (file-exists-p (path-join proj-root "GTAGS"))
       proj-root)))
 
 
 (defun user/gnu-global-tags-p (path)
-  "Check if a Global tag database exists for project in PATH."
+  "Check if a GNU Global tag database exists for project in PATH."
   (when (user/gnu-global-tags-location path)
     t))
 

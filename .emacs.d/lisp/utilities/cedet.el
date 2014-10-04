@@ -68,13 +68,11 @@
 
 (defun user/ede-get-local-var (fname var)
   "For file FNAME fetch the value of VAR from project."
-  (let ((current-project (user/ede-project
-                          (user/project-root (path-abs-buffer)))))
-    (when current-project
-      (let* ((ov (oref current-project local-variables))
-             (lst (assoc var ov)))
-        (when lst
-          (cdr lst))))))
+  (with-ede-project current-project fname
+    (let* ((ov (oref current-project local-variables))
+           (lst (assoc var ov)))
+      (when lst
+        (cdr lst)))))
 
 
 (defun user/cedet-cscope-create/update ()
@@ -82,9 +80,8 @@
   (interactive)
   (with-executable 'cscope
     (unless (cedet-cscope-version-check t)
-      (warn "CScope version is too old!")))
-  (let ((proj-root (user/project-root (path-abs-buffer))))
-    (when proj-root
+      (warn "CScope version is too old!"))
+    (with-project-root proj-root nil
       (cedet-cscope-create/update-database proj-root)
       (message (format "CScope database updated at %S" proj-root)))))
 
@@ -108,10 +105,9 @@
     (with-feature 'cedet-idutils
       (unless (cedet-idutils-version-check t)
         (warn "GNU idutils is too old!"))
-      (let ((proj-root (user/project-root (path-abs-buffer))))
-        (when proj-root
-          (cedet-idutils-create/update-database proj-root)
-          (message (format "GNU idutils database updated at %S" proj-root)))))))
+      (with-project-root proj-root nil
+        (cedet-idutils-create/update-database proj-root)
+        (message (format "GNU idutils database updated at %S" proj-root))))))
 
 
 (defun user/cedet-create/update-all ()
