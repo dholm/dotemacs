@@ -38,6 +38,8 @@
       (doxymacs-mode t))
     (with-feature 'doc-mode
       (doc-mode t)
+      (after-load 'diminish
+        (diminish 'doc-mode))
       ;; Disable buffer check from semantic idle scheduler since it tends to
       ;; hang Emacs for a long time.
       (remove-hook 'semantic-after-idle-scheduler-reparse-hooks

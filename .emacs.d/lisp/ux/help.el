@@ -14,7 +14,9 @@
    guide-key-tip/enabled (display-graphic-p))
 
   ;; Enable guide key.
-  (guide-key-mode t))
+  (guide-key-mode t)
+  (after-load 'diminish
+    (diminish 'guide-key-mode)))
 
 
 (defun user/help-init ()

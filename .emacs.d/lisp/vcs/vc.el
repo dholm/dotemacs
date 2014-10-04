@@ -6,7 +6,9 @@
   "Find file hook for version controlled files."
   (when (vc-working-revision (buffer-file-name))
     ;; Automatically refresh version controlled files.
-    (auto-revert-mode t)))
+    (auto-revert-mode t)
+    (after-load 'diminish
+      (diminish 'auto-revert-mode))))
 
 
 (defun user/vc-log-edit-hook ()

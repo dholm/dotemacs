@@ -24,6 +24,8 @@
    wg-mode-line-decor-right-brace "]")
 
   (workgroups-mode t)
+  (after-load 'diminish
+    (diminish 'workgroups-mode))
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :util :perspective 'wg-switch-to-workgroup))

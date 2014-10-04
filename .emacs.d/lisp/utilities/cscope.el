@@ -22,6 +22,8 @@
     (cscope-setup))
 
   (with-feature 'helm-cscope
+    (after-load 'diminish
+      (diminish 'helm-cscope-mode))
     (helm-cscope-mode t)))
 
 
