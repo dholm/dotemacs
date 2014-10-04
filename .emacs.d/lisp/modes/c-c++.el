@@ -30,6 +30,7 @@
     (turn-on-ctags-auto-update-mode))
 
   (user/gnu-global-enable)
+  (user/cscope-enable)
 
   (with-feature 'irony
     (when (member major-mode irony-supported-major-modes)

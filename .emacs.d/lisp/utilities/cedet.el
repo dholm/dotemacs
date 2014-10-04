@@ -75,17 +75,6 @@
         (cdr lst)))))
 
 
-(defun user/cedet-cscope-create/update ()
-  "Create or update CScope database at current project root."
-  (interactive)
-  (with-executable 'cscope
-    (unless (cedet-cscope-version-check t)
-      (warn "CScope version is too old!"))
-    (with-project-root proj-root nil
-      (cedet-cscope-create/update-database proj-root)
-      (message (format "CScope database updated at %S" proj-root)))))
-
-
 (defun user/cedet-gnu-idutils-create/update ()
   "Create or update GNU idutils database at current project root."
   (interactive)
@@ -101,7 +90,7 @@
 (defun user/cedet-create/update-all ()
   "Create or update all databases at current project root."
   (interactive)
-  (user/cedet-cscope-create/update)
+  (user/cscope-create/update)
   (user/gnu-global-create/update)
   (user/cedet-gnu-idutils-create/update))
 
