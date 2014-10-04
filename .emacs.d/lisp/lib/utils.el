@@ -29,20 +29,6 @@
       (locate-library (symbol-name feature))))
 
 
-(defmacro with-feature (feature &rest body)
-  "If FEATURE is available, load it and evaluate BODY."
-  (declare (indent defun))
-  `(when (require ,feature nil :noerror)
-     ,@body))
-
-
-(defmacro with-function (function &rest body)
-  "If FUNCTION is available, evaluate BODY."
-  (declare (indent defun))
-  `(when (functionp ,function)
-     ,@body))
-
-
 (defun add-command-switch (handler &rest switch-list)
   "Add HANDLER for SWITCH-LIST."
   (dolist (switch switch-list)

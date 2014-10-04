@@ -17,19 +17,5 @@ Ex: (path-join \"/tmp\" \"a\" \"b\" \"c\") => /tmp/a/b/c"
            (cdr dirs))))
 
 
-(defmacro with-executable (executable &rest body)
-  "If EXECUTABLE is available in path, evaluate BODY."
-  (declare (indent defun))
-  `(when (executable-find (symbol-name ,executable))
-     ,@body))
-
-
-(defmacro with-any-executable (executables &rest body)
-  "If any of EXECUTABLES are available in the path, evaluate BODY."
-  (declare (indent defun))
-  `(when (some (lambda (x) (executable-find (symbol-name x))) ,executables)
-     ,@body))
-
-
 (provide 'lib/path)
 ;;; path.el ends here
