@@ -87,7 +87,7 @@
  (save-excursion
    (let ((calendar-temp-file
           (make-temp-file
-           (path-join *user-wanderlust-cache-directory* "import.ics"))))
+           (path-join *user-wanderlust-cache-directory* "import.cal"))))
      (mime-write-entity-content entity calendar-temp-file)
      (icalendar-import-file calendar-temp-file diary-file)
      (kill-buffer (find-buffer-visiting calendar-temp-file))

@@ -48,9 +48,7 @@
 
 (defun user/org-agenda-init ()
   "Initialize org agenda."
-  (let ((agenda-data-store (path-join *user-org-data-directory* "agendas"))
-        (tmp-diary (make-temp-file (path-join *user-org-cache-directory*
-                                              "diary"))))
+  (let ((agenda-data-store (path-join *user-org-data-directory* "agendas")))
     (setq-default
      ;; Agenda data store.
      org-agenda-files `(,agenda-data-store)
@@ -66,17 +64,11 @@
      org-agenda-compact-blocks t
      ;; Position the habit graph to the right.
      org-habit-graph-column 50
-     ;; Temporary diary that org-agenda can import from.
-     temp-diary tmp-diary
-     diary-file tmp-diary
+     ;; Include Emacs' Diary in org-agenda.
      org-agenda-include-diary t)
 
     ;; Ensure that agenda data store exists.
-    (make-directory agenda-data-store t)
-
-    ;; Delete temporary diary on exit.
-    (add-to-list 'kill-emacs-hook
-                 (lambda () (delete-file temp-diary))))
+    (make-directory agenda-data-store t))
 
   ;; Load org agenda.
   (after-load 'org-agenda
@@ -210,6 +202,8 @@
    ;; Log time when rescheduling an entry.
    org-log-reschedule 'time
    org-log-redeadline 'time
+   ;; Round clock times to 15 minute increments.
+   org-time-stamp-rounding-minutes (quote (1 15))
    ;; Log drawer state changes.
    org-log-into-drawer t
    ;; Allow single letter commands at beginning of headlines.
