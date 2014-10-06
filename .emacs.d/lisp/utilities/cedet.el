@@ -180,7 +180,6 @@
 (require-package '(:name cedet
                          :before (user/cedet-before-init)
                          :after (user/cedet-init)))
-(require-package '(:name ede-compdb))
 
 
 (provide 'utilities/cedet)
