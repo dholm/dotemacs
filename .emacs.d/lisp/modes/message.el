@@ -5,8 +5,8 @@
 (defun user/message-mode-hook ()
   "Message mode hook."
   (setq
-   ;; RFC2822 2.1.1 Line Length Limits.
-   fill-column 78
+   ;; RFC2822 2.1.1 Line Length Limits (including CRLF).
+   fill-column (- 78 2)
    ;; Fold lines that are too long.
    truncate-lines nil
    ;; Select abbrev table for message mode.
@@ -23,8 +23,8 @@
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :try-complete 'bbdb-complete-name)
   (user/bind-key-local :code :compile 'org-mime-htmlize)
-  ;; Ensure C-c C-c is used to save and close message.
-  (local-set-key (kbd "C-c C-c") 'user/server-save))
+  ;; Ensure C-x # is used to save and close message.
+  (local-set-key (kbd "C-x #") 'user/server-save))
 
 
 (defun user/message-mode-init ()
