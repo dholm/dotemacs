@@ -9,6 +9,9 @@
 (make-directory *user-data-directory* t)
 
 (setq-default
+ ;; Reduce number of pauses due to garbage collection.
+ gc-cons-threshold (* 50 1024 1024)
+ gc-cons-percentage 0.5
  ;; Path to custom-file
  custom-file *user-custom-file*)
 
