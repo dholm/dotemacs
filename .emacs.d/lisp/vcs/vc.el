@@ -23,7 +23,11 @@
   ;; Enable org minor mode editing tools.
   (orgstruct-mode t)
   (orgstruct++-mode t)
-  (orgtbl-mode t))
+  (orgtbl-mode t)
+
+  ;;; (Bindings) ;;;
+  ;; Ensure C-x # is used to save and close message.
+  (local-set-key (kbd "C-x #") 'user/server-save))
 
 
 (defun user/vc-init ()
