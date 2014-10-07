@@ -11,6 +11,14 @@
    ;; This will improve performance in general but might degrade performance of
    ;; key repeat.
    redisplay-dont-pause t
+   ;; Always use JIT mode for font-lock.
+   font-lock-support-mode 'jit-lock-mode
+   ;; Set up font-lock JIT mode to do background parsing.
+   jit-lock-stealth-time 1.0
+   jit-lock-stealth-nice 0.03
+   jit-lock-stealth-load 200
+   jit-lock-stealth-verbose nil
+   jit-lock-chunk-size 500
    ;; Do not reorder text during rendering.
    bidi-display-reordering nil))
 
