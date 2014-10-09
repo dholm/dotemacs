@@ -20,6 +20,19 @@
     (delete-trailing-whitespace)))
 
 
+(defun user/w3m-browse-current-buffer ()
+  "Open the current buffer in w3m."
+  (interactive)
+  (if (file-readable-p (path-abs-buffer))
+      (w3m-find-file (path-abs-buffer))
+    (let ((filename (concat (make-temp-file "w3m-") ".html")))
+      (unwind-protect
+          (progn
+            (write-region (point-min) (point-max) filename)
+            (w3m-find-file filename))
+        (delete-file filename)))))
+
+
 (defun user/w3m-init ()
   "Initialize w3m."
   (setq-default
