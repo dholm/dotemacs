@@ -59,8 +59,7 @@
     (user/bind-key-local :nav :functions/toc 'helm-semantic-or-imenu))
   (unless (and (boundp 'helm-gtags-mode) helm-gtags-mode)
     (user/bind-key-local :nav :find-symbol 'semantic-symref-find-tags-by-regexp)
-    (user/bind-key-local :nav :references 'semantic-symref)
-    (user/bind-key-local :nav :follow-symbol 'semantic-ia-fast-jump))
+    (user/bind-key-local :nav :references 'semantic-symref))
   (user/bind-key-local :nav :jump-spec-impl 'semantic-analyze-proto-impl-toggle)
 
   (user/bind-key-local :doc :describe 'semantic-ia-show-doc))

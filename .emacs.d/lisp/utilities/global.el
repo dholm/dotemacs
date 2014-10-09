@@ -13,7 +13,6 @@
 
   ;;; (Bindings) ;;;
   (user/bind-key-local :nav :find-symbol 'helm-gtags-select)
-  (user/bind-key-local :nav :follow-symbol 'helm-gtags-find-tag)
   (user/bind-key-local :nav :go-back 'helm-gtags-pop-stack)
   (user/bind-key-local :nav :references 'helm-gtags-find-rtag))
 
