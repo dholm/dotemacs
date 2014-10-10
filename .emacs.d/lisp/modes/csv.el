@@ -2,13 +2,29 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/csv-mode-hook ()
+  "CSV mode hook."
+  (setq
+   ;; Do not wrap long lines.
+   truncate-lines t)
+
+  (turn-off-auto-fill)
+  (when (memq 'lines whitespace-style)
+    (whitespace-toggle-options '(lines))))
+
+
 (defun user/csv-mode-init ()
   "Initialize CSV mode."
-  (setq-default csv-separators '("," ";" "|" " "))
-  (add-auto-mode 'csv-mode "\\.csv$"))
+  (setq-default
+   ;; Default separators for CSV files.
+   csv-separators '("," ";" "|" " " "\t")
+   ;; Number of lines to consider part of header.
+   csv-header-lines 1)
+
+  (add-auto-mode 'csv-mode "\\.[Cc][Ss][Vv]$")
+  (add-hook 'csv-mode-hook 'user/csv-mode-hook))
 
 (require-package '(:name csv-mode :after (user/csv-mode-init)))
-(require-package '(:name csv-nav))
 
 
 (provide 'modes/csv)
