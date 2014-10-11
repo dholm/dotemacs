@@ -4,8 +4,12 @@
 
 (defvar user/global-keymap nil
   "Global keymap.")
+
 (defvar user/global-reverse-keymap nil
   "Global reverse keymap, mapping bindings back to functions.")
+
+(defvar ctl-l-map (make-keymap)
+  "Default keymap for \\<ctl-l-map> commands.")
 
 
 ;; Set up prefixes for command groups.
@@ -50,7 +54,7 @@
   :group 'user)
 
 
-(defconst user/prefix-list (list "C-x" "C-c")
+(defconst user/prefix-list (list "C-x" "C-c" "C-l")
   "List of the registered prefix keys.")
 
 
@@ -177,6 +181,8 @@
                 (:tutorial . (user/help-prefix "t"))
                 (:where-is . (user/help-prefix "w"))
 
+                (:redraw . "C-l C-l")
+                (:recenter . "C-l l")
                 (:fullscreen . "C-c <C-return>")
                 (:text-scale-increase . "C-+")
                 (:text-scale-decrease . "C--")
@@ -362,6 +368,10 @@
 
 (defun user/bindings-init ()
   "Initialize key bindings."
+  (global-unset-key (kbd "C-l"))
+  (define-key global-map (kbd "C-l") 'ctl-l-prefix)
+  (fset 'ctl-l-prefix ctl-l-map)
+
   ;; Initialize global keymap.
   (user/global-keymap-init)
 

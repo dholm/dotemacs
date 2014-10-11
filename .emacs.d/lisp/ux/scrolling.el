@@ -16,7 +16,10 @@
    ;; Use constant speed when scrolling with mouse wheel.
    mouse-wheel-progressive-speed nil
    ;; Scroll the window that the cursor is over.
-   mouse-wheel-follow-mouse t))
+   mouse-wheel-follow-mouse t)
+
+  ;;; (Bindings) ;;;
+  (user/bind-key-global :emacs :recenter 'recenter))
 
 (user/scrolling-init)
 

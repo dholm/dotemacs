@@ -20,7 +20,10 @@
    jit-lock-stealth-verbose nil
    jit-lock-chunk-size 500
    ;; Do not reorder text during rendering.
-   bidi-display-reordering nil))
+   bidi-display-reordering nil)
+
+  ;;; (Bindings) ;;;
+  (user/bind-key-global :emacs :redraw 'redraw-display))
 
 (user/rendering-init)
 
