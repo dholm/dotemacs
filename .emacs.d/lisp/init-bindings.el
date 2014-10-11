@@ -138,8 +138,8 @@
                 (:search-forward . "C-s")
                 (:search-backward . "C-r")
                 (:search-files . ("C-l M-f"))
-                (:swoop . "M-i")
-                (:swoop-multi . "C-M-i")
+                (:swoop . "C-l C-s")
+                (:swoop-multi . "C-l C-M-s")
 
                 (:selection-start . "C-SPC")
                 (:selection-expand . "M-=")
@@ -243,9 +243,9 @@
 
                (:comment . (user/code-prefix "-"))
                (:document . (user/code-prefix "="))
-               (:join-line . "C-x ^")
-               (:align . (user/code-prefix "a"))
-               (:fill-paragraph . (user/code-prefix "f"))
+               (:join-line . "C-x ^")           ;; C-x C-6
+               (:align . ("C-x C-]"))           ;; C-x C-5
+               (:fill-paragraph . ("C-x C-\\")) ;; C-x C-4
 
                (:itemize . (user/code-prefix "b"))
                (:enumerate . (user/code-prefix "e"))
