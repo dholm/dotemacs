@@ -123,7 +123,7 @@
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :basic :swoop 'helm-swoop)
-  (user/bind-key-global :basic :swoop-multi 'helm-swoop-multi)
+  (user/bind-key-global :basic :swoop-multi 'helm-multi-swoop)
   (define-key isearch-mode-map
     (user/get-key :basic :swoop) 'helm-swoop-from-isearch)
   (after-load 'helm-swoop
@@ -134,17 +134,8 @@
 
 (require-package '(:name helm :after (user/helm-init)))
 (require-package '(:name helm-descbinds :after (user/helm-descbinds-init)))
-(require-package '(:name helm-etags-plus))
 (require-package '(:name helm-build-command))
 (require-package '(:name helm-swoop :after (user/helm-swoop-init)))
-
-(with-executable 'git
-  (require-package '(:name helm-ls-git))
-  (require-package '(:name helm-open-github)))
-(with-executable 'python
-  (require-package '(:name helm-pydoc)))
-(with-executable 'ag
-  (require-package '(:name helm-ag)))
 
 
 (provide 'utilities/helm)

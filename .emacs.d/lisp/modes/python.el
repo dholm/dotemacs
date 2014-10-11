@@ -110,6 +110,8 @@
   (require-package '(:name python-environment :after (user/python-environment-init)))
   (require-package '(:name pyvenv))
   (require-package '(:name jedi :after (user/jedi-init)))
+  (when (feature-p 'helm)
+    (require-package '(:name helm-pydoc)))
 
   (add-interpreter-mode 'python-mode "python[0-9.]*")
   (add-hook 'python-mode-hook 'user/python-mode-hook))

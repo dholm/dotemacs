@@ -15,7 +15,13 @@
 (defun user/tags-init ()
   "Initialize tag support."
   ;;; (Bindings) ;;;
-  (user/bind-key-global :nav :follow-symbol 'user/follow-tag))
+  (user/bind-key-global :nav :follow-symbol 'user/follow-tag)
+
+  ;;; (Packages) ;;;
+  (when (feature-p 'helm)
+    (require-package '(:name helm-etags-plus))))
+
+(user/tags-init)
 
 
 (provide 'utilities/tags)
