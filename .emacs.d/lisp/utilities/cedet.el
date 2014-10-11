@@ -17,7 +17,7 @@
     ;; Enable EDE.
     (ede-minor-mode t))
 
-    ;;; (Semantic) ;;;
+  ;;; (Semantic) ;;;
   ;; Enable semantic.
   (semantic-mode t)
 
@@ -44,12 +44,12 @@
       ;; Register as auto-completion source.
       (add-ac-sources 'ac-source-gtags)))
 
-    ;;; (SemanticDB) ;;;
+  ;;; (SemanticDB) ;;;
   (with-feature 'semantic/db
     (global-semanticdb-minor-mode t))
 
-    ;;; (Context Menu) ;;;
-  (when (display-graphic-p)
+  ;;; (Context Menu) ;;;
+  (when (and (featurep 'cedet-devel-load) (display-graphic-p))
     (cedet-m3-minor-mode t))
 
   ;;; (Bindings) ;;;
