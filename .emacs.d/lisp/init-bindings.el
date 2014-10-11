@@ -178,6 +178,8 @@
                 (:where-is . (user/help-prefix "w"))
 
                 (:fullscreen . "C-c <C-return>")
+                (:text-scale-increase . "C-+")
+                (:text-scale-decrease . "C--")
 
                 (:grow-vertical . "C-c C-p")
                 (:shrink-vertical . "C-c C-n")

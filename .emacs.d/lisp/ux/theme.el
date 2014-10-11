@@ -29,6 +29,12 @@
   ;; Enable blinking cursor
   (blink-cursor-mode)
 
+  ;;; (Bindings) ;;;
+  (when (display-graphic-p)
+    (user/bind-key-global :emacs :text-scale-increase 'text-scale-increase)
+    (user/bind-key-global :emacs :text-scale-decrease 'text-scale-decrease))
+
+  ;;; (Packages) ;;;
   (require-package '(:name solarized-theme
                            :type github
                            :pkgname "dholm/solarized-theme"
