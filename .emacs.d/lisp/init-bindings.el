@@ -13,11 +13,6 @@
 
 
 ;; Set up prefixes for command groups.
-(defcustom user/navigation-prefix (kbd "C-c n")
-  "Keyboard prefix to use for navigation commands."
-  :type 'key-sequence
-  :group 'user)
-
 (defcustom user/view-prefix (kbd "C-x v")
   "Keyboard prefix to use for view commands."
   :type 'key-sequence
@@ -142,7 +137,7 @@
 
                 (:search-forward . "C-s")
                 (:search-backward . "C-r")
-                (:search-files . (user/navigation-prefix "f"))
+                (:search-files . ("C-l M-f"))
                 (:swoop . "M-i")
                 (:swoop-multi . "C-M-i")
 
@@ -211,27 +206,27 @@
               (:reference . (user/documentation-prefix "r"))))
 
      ;;; (Navigation) ;;;
-     (:nav . ((:context . (user/navigation-prefix "SPC"))
+     (:nav . ((:context . ("C-l SPC"))
 
-              (:goto-line . (user/navigation-prefix "g"))
-              (:go-forward . (user/navigation-prefix "f"))
-              (:go-back . (user/navigation-prefix "b"))
+              (:goto-line . ("C-l g"))
+              (:go-forward . ("C-l f"))
+              (:go-back . ("C-l b"))
 
-              (:context-cycle . (user/navigation-prefix "s c"))
-              (:context-forward . (user/navigation-prefix "s f"))
-              (:context-backward . (user/navigation-prefix "s b"))
-              (:context-up . (user/navigation-prefix "s p"))
-              (:context-down . (user/navigation-prefix "s n"))
+              (:context-cycle . ("C-l C-c"))
+              (:context-forward . ("C-l C-f"))
+              (:context-backward . ("C-l C-b"))
+              (:context-up . ("C-l C-p"))
+              (:context-down . ("C-l C-n"))
 
-              (:next . (user/navigation-prefix "n"))
+              (:next . ("C-l n"))
 
-              (:follow-symbol . (user/navigation-prefix "j"))
-              (:find-symbol . (user/navigation-prefix "s"))
-              (:jump-spec-impl . (user/navigation-prefix "i"))
-              (:references . (user/navigation-prefix "r"))
-              (:switch-spec-impl . (user/navigation-prefix "h"))
-              (:functions/toc . (user/navigation-prefix "t"))
-              (:history . (user/view-prefix "h"))
+              (:follow-symbol . ("C-l j"))
+              (:find-symbol . ("C-l s"))
+              (:jump-spec-impl . ("C-l i"))
+              (:references . ("C-l r"))
+              (:switch-spec-impl . ("C-l h"))
+              (:functions/toc . ("C-l t"))
+              (:history . ("C-l h"))
 
               (:open . (user/utilities-prefix "o"))))
 
@@ -314,7 +309,7 @@
      (:util . ((:annotate-buffer . (user/utilities-prefix "a"))
                (:draw . (user/utilities-prefix "d"))
 
-               (:ace-jump-mode . (user/navigation-prefix "a"))
+               (:ace-jump-mode . ("C-l a"))
 
                (:ecb-toggle . (user/utilities-prefix "e"))
 
