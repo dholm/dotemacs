@@ -27,7 +27,9 @@
   (when (display-graphic-p)
     (require-package '(:name edit-server))))
 
-(user/server-init)
+(unless (eq system-type 'darwin)
+  ;; Emacs clients regularly causes Emacs to crash on Darwin.
+  (user/server-init))
 
 
 (provide 'ux/server)
