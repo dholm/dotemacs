@@ -49,6 +49,7 @@ mode that sets `syntax-ppss' properly."
   ;;; (Bindings) ;;;
   (global-set-key [remap move-beginning-of-line] 'beginning-or-indentation)
   (global-set-key [remap move-end-of-line] 'end-of-line-or-code)
+  (user/bind-key-global :code :join-line 'join-line)
   (user/bind-key-global :code :fill-paragraph 'fill-paragraph))
 
 (user/editing-init)

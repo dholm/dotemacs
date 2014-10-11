@@ -243,6 +243,7 @@
 
                (:comment . (user/code-prefix "-"))
                (:document . (user/code-prefix "="))
+               (:join-line . "C-x ^")
                (:align . (user/code-prefix "a"))
                (:fill-paragraph . (user/code-prefix "f"))
 
