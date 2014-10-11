@@ -19,7 +19,10 @@
    inhibit-startup-echo-area-message t
    ;; Inhibit GUI features
    use-file-dialog nil
-   user-dialog-box nil)
+   user-dialog-box nil
+   ;; Don't split frames horizontally.
+   split-width-threshold 180
+   split-height-threshold nil)
 
   ;; Remove all the mouse-assisted frames
   (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
