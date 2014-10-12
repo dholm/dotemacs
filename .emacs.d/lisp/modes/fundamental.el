@@ -10,6 +10,9 @@
   ;; Enable whitespace mode globally.
   (whitespace-mode t)
 
+  (with-feature 'rainbow-delimiters
+    (rainbow-delimiters-mode t))
+
   ;; Enable dtrt-indent to attempt to identify the indentation rules used.
   (after-load 'dtrt-indent
     (dtrt-indent-mode t))
@@ -18,11 +21,6 @@
   (user/bind-key-local :code :align 'align-current)
   (when (feature-p 'helm)
     (user/bind-key-local :nav :functions/toc 'helm-imenu)))
-
-
-(defun user/rainbow-delimiters-init ()
-  "Initialize rainbow delimiters."
-  (global-rainbow-delimiters-mode t))
 
 
 (defun user/mic-paren-init ()
@@ -43,8 +41,7 @@
     (diminish 'auto-fill-function))
 
   ;;; (Packages) ;;;
-  (require-package '(:name rainbow-delimiters
-                           :after (user/rainbow-delimiters-init)))
+  (require-package '(:name rainbow-delimiters))
   (require-package '(:name mic-paren :after (user/mic-paren-init))))
 
 (user/fundamental-mode-init)
