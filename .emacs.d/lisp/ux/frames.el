@@ -20,8 +20,9 @@
    ;; Inhibit GUI features
    use-file-dialog nil
    user-dialog-box nil
+   ;; Only split frame if it occupies at least 2/3 of the screen width.
+   split-width-threshold (* (/ (window-total-width (frame-root-window)) 3) 2)
    ;; Don't split frames horizontally.
-   split-width-threshold 180
    split-height-threshold nil)
 
   ;; Remove all the mouse-assisted frames
