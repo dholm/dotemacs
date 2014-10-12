@@ -10,6 +10,12 @@
   (path-join *user-cache-directory* "org")
   "Path to user's org cache store.")
 
+(defvar user/org-mobile-sync-timer nil
+  "Timer used for syncing OrgMobile.")
+
+(defvar user/org-mobile-sync-secs (* 60 20)
+  "Interval of OrgMobile sync in seconds.")
+
 
 (defun user/org-mode-hook ()
   "Org mode hook."
@@ -117,6 +123,39 @@
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :util :annotate-buffer 'user/org-annotate-file))
+
+
+(defun user/org-mobile-sync-pull-and-push ()
+  "Sync OrgMobile directory."
+  (org-mobile-pull)
+  (org-mobile-push)
+  (after-load 'sauron
+    (sauron-add-event 'my 3 "Called org-mobile-pull and org-mobile-push")))
+
+
+(defun user/org-mobile-sync-start ()
+  "Start automated `org-mobile-push'."
+  (interactive)
+  (setq user/org-mobile-sync-timer
+        (run-with-idle-timer user/org-mobile-sync-secs t
+                             'user/org-mobile-sync-pull-and-push)))
+
+
+(defun user/org-mobile-sync-stop ()
+  "Stop automated `org-mobile-push'."
+  (interactive)
+  (cancel-timer user/org-mobile-sync-timer))
+
+
+(defun user/org-mobile-init ()
+  "Initialize org mobile."
+  (setq-default
+   ;; Location of TODO items to sync.
+   org-mobile-inbox-for-pull org-default-notes-file
+   ;; MobileOrg sync directory.
+   org-mobile-directory (path-join *user-org-data-directory* "mobile")
+   ;; Custom agenda view.
+   org-mobile-force-id-on-agenda-items nil))
 
 
 (defun user/org-babel-init ()
@@ -331,6 +370,7 @@
   (user/org-export-init)
   (user/org-agenda-init)
   (user/org-annotate-file-init)
+  (user/org-mobile-init)
 
   (add-hook 'org-load-hook 'user/org-load-hook)
   (add-hook 'org-mode-hook 'user/org-mode-hook)
