@@ -22,7 +22,7 @@
 
 (defun user/server-init ()
   "Initialize Emacs server functions."
-  (add-hook 'after-init-hook 'user/server-after-init-hook)
+  (add-hook 'user/after-init-hook 'user/server-after-init-hook)
 
   (when (display-graphic-p)
     (require-package '(:name edit-server))))

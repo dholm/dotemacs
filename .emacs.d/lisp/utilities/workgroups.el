@@ -23,9 +23,7 @@
    wg-mode-line-decor-divider ":"
    wg-mode-line-decor-right-brace "]")
 
-  (workgroups-mode t)
-  (after-load 'diminish
-    (diminish 'workgroups-mode))
+  (add-hook 'user/after-init-hook 'workgroups-mode)
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :util :perspective 'wg-switch-to-workgroup))

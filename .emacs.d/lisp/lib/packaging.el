@@ -2,6 +2,16 @@
 ;;; Commentary:
 ;;; Code:
 
+(defvar el-get-sources nil
+  "List of package definitions for el-get.")
+(defvar el-get-safe-mode nil
+  "Start el-get in safe mode.")
+(defcustom user/after-init-hook nil
+  "Hook that is run after both Emacs and package manager have completed init."
+  :group 'init
+  :type 'hook)
+
+
 ;; Configure ELPA repositories
 (with-feature 'package
   (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -11,9 +21,6 @@
 
 
 ;; Configure and load el-get
-(defvar el-get-sources nil "List of package definitions for el-get.")
-(defvar el-get-safe-mode nil "Start el-get in safe mode.")
-
 (add-to-list 'load-path (path-join *user-el-get-directory* "el-get"))
 (unless (require 'el-get nil 'noerror)
   (setq el-get-safe-mode t)
@@ -47,7 +54,8 @@
   (let ((package-list (user/package-list)))
     (if el-get-safe-mode
         (el-get 'sync package-list)
-      (el-get nil package-list))))
+      (el-get nil package-list))
+    (run-hooks 'user/after-init-hook)))
 
 
 (defun user/load-from-package (package &rest path)
