@@ -107,7 +107,8 @@
   (global-set-key [remap execute-extended-command] 'helm-M-x)
 
   (user/bind-key-global :nav :context 'user/helm-navigate)
-  (user/bind-key-global :doc :apropos 'user/helm-apropos))
+  (user/bind-key-global :doc :apropos 'user/helm-apropos)
+  (user/bind-key-global :emacs :elisp-search 'helm-info-elisp))
 
 
 (defun user/helm-descbinds-init ()

@@ -34,6 +34,7 @@
   (user/bind-key-global :emacs :find-library 'find-library)
   (user/bind-key-global :emacs :find-package 'finder-by-keyword)
   (user/bind-key-global :emacs :manual 'info-emacs-manual)
+  (user/bind-key-global :emacs :elisp-search 'elisp-index-search)
 
   (user/bind-key-global :emacs :describe-mode 'describe-mode)
   (user/bind-key-global :emacs :describe-syntax 'describe-syntax)

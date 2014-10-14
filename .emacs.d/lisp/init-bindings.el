@@ -173,6 +173,7 @@
                 (:find-library . (user/help-prefix "l"))
                 (:find-package . (user/help-prefix "p"))
                 (:manual . (user/help-prefix "M"))
+                (:elisp-search . (user/help-prefix "e"))
                 (:tutorial . (user/help-prefix "t"))
                 (:where-is . (user/help-prefix "w"))
 
