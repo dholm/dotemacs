@@ -121,7 +121,8 @@
     (when (featurep 'cedet-devel-load)
       ;; Register languages from contrib.
       (add-to-list 'semantic-new-buffer-setup-functions
-                   '(csharp-mode . wisent-csharp-default-setup))
+                   '(csharp-mode . wisent-csharp-default-setup)
+                   '(vala-mode . wisent-csharp-default-setup))
       (add-to-list 'semantic-new-buffer-setup-functions
                    '(php-mode . wisent-php-default-setup))
       (add-to-list 'semantic-new-buffer-setup-functions
