@@ -16,7 +16,8 @@
   ;;; (Packages) ;;;
   (require-package '(:name sml-mode :after (user/sml-mode-init))))
 
-(user/sml-mode-init)
+(with-executable 'sml
+  (user/sml-mode-init))
 
 
 (provide 'modes/sml)
