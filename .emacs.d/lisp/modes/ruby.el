@@ -29,7 +29,7 @@
 
 (defun user/robe-mode-hook ()
   "Robe mode hook."
-  (robe-ac-setup))
+  (ac-robe-setup))
 
 
 (defun user/robe-init ()
