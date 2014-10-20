@@ -115,7 +115,7 @@
 
 (defun add-ac-sources (&rest sources)
   "Add SOURCES for auto-complete after it has been loaded."
-  (after-load 'auto-complete
+  (with-feature 'auto-complete
     (dolist (source sources)
       (if (boundp 'ac-sources)
           (add-to-list 'ac-sources source)
@@ -124,7 +124,7 @@
 
 (defun add-ac-modes (&rest major-modes)
   "Add MAJOR-MODES for auto-complete after it has been loaded."
-  (after-load 'auto-complete
+  (with-feature 'auto-complete
     (dolist (mode major-modes)
       (if (boundp 'ac-modes)
           (add-to-list 'ac-modes mode)

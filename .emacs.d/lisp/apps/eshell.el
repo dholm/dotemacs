@@ -13,8 +13,7 @@
   (turn-on-eldoc-mode)
 
   ;; Use auto-complete for completion.
-  (add-ac-sources 'ac-source-pcomplete)
-  (add-ac-modes 'eshell-mode))
+  (add-ac-sources 'ac-source-pcomplete))
 
 
 (defun user/shorten-path (path)
@@ -94,6 +93,10 @@
     (add-many-to-list 'eshell-visual-commands
                       "htop" "perf" "ssh" "telnet" "tmux"))
 
+  ;; For `ac-source-pcomplete'.
+  (add-ac-modes 'eshell-mode)
+
+  ;;; (Hooks) ;;;
   (add-hook 'eshell-mode-hook 'user/eshell-mode-hook)
 
   ;;; (Bindings) ;;;
