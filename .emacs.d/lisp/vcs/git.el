@@ -16,9 +16,7 @@
 
 
 (defun user/magit-mode-hook ()
-  "Magit mode hook."
-  (when (version<= "24.4" emacs-version)
-    (magit-filenotify-mode t)))
+  "Magit mode hook.")
 
 
 (defun user/magit-toggle-whitespace ()
@@ -74,8 +72,6 @@
   (require-package '(:name magit-gerrit))
   (require-package '(:name magit-tramp))
   (require-package '(:name git-timemachine))
-  (when (version<= "24.4" emacs-version)
-    (require-package '(:name magit-filenotify)))
 
   (require-package '(:name git-gutter))
   (when (display-graphic-p)
