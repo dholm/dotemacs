@@ -72,13 +72,28 @@
     (error (helm-mini))))
 
 
-(defun user/helm-init ()
-  "Initialize helm."
-  ;; Enable helm mode.
+(defun user/helm-mode ()
+  "Start helm-mode."
   (helm-mode t)
+  (with-feature 'helm-descbinds
+    (helm-descbinds-mode t))
   (after-load 'diminish
     (diminish 'helm-mode))
 
+  ;; Filter out boring buffers.
+  (dolist (pattern
+           (list "\\*clang-complete" "\\*CEDET global" "\\*tramp/scpc"
+                 "\\*epc con" "\\*Pymacs" "\\*Completions\\*"))
+    (add-to-list 'helm-boring-buffer-regexp-list pattern))
+
+  ;; Filter out boring files.
+  (dolist (pattern
+           (list "\\.elc$" "\\.pyc$" "^#.+#$" "^G[R]TAGS$" "^GPATH$" "^ID$"))
+    (add-to-list 'helm-boring-file-regexp-list pattern)))
+
+
+(defun user/helm-init ()
+  "Initialize helm."
   (setq-default
    ;; Idle delays.
    helm-idle-delay 0.1
@@ -90,16 +105,9 @@
    ;; Put adaptive history in cache directory.
    helm-adaptive-history-file (path-join *user-cache-directory* "helm-adaptive-history"))
 
-  ;; Filter out boring buffers.
-  (dolist (pattern
-           (list "\\*clang-complete" "\\*CEDET global" "\\*tramp/scpc"
-                 "\\*epc con" "\\*Pymacs" "\\*Completions\\*"))
-    (add-to-list 'helm-boring-buffer-regexp-list pattern))
-
-  ;; Filter out boring files.
-  (dolist (pattern
-           (list "\\.elc$" "\\.pyc$" "^#.+#$" "^G[R]TAGS$" "^GPATH$" "^ID$"))
-    (add-to-list 'helm-boring-file-regexp-list pattern))
+  ;;; (Hooks) ;;;
+  ;; Since Helm depends on `eieio', enable it after package initialization.
+  (add-hook 'user/after-init-hook 'user/helm-mode)
 
   ;;; (Bindings) ;;;
   (global-set-key [remap find-file] 'helm-find-files)
@@ -109,11 +117,6 @@
   (user/bind-key-global :nav :context 'user/helm-navigate)
   (user/bind-key-global :doc :apropos 'user/helm-apropos)
   (user/bind-key-global :emacs :elisp-search 'helm-info-elisp))
-
-
-(defun user/helm-descbinds-init ()
-  "Initialize helm-descbinds."
-  (helm-descbinds-mode t))
 
 
 (defun user/helm-swoop-init ()
@@ -134,7 +137,7 @@
 
 
 (require-package '(:name helm :after (user/helm-init)))
-(require-package '(:name helm-descbinds :after (user/helm-descbinds-init)))
+(require-package '(:name helm-descbinds))
 (require-package '(:name helm-build-command))
 (require-package '(:name helm-swoop :after (user/helm-swoop-init)))
 
