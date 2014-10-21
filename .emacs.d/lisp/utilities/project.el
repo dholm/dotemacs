@@ -38,10 +38,12 @@
           (vc-backend (and (fboundp 'vc-responsible-backend)
                            (ignore-errors
                              (vc-responsible-backend (file-truename path))))))
-      (cond
-       (ede-proj (ede-project-root-directory ede-proj))
-       (vc-backend (vc-call-backend vc-backend 'root (file-truename path)))
-       (t (user/projectile-project-root path))))))
+      (unwind-protect
+          (file-truename
+           (cond
+            (ede-proj (ede-project-root-directory ede-proj))
+            (vc-backend (vc-call-backend vc-backend 'root (file-truename path)))
+            (t (user/projectile-project-root path))))))))
 
 
 (defun user/project-include-paths (path)
@@ -91,19 +93,6 @@
   "Check if PATH represents a project root."
   (with-project-root proj-root path
     (and path proj-root (equal (file-truename path) (file-truename proj-root)))))
-
-
-(defun user/gnu-global-tags-location (path)
-  "Get the location of Global's database from PATH, if it exists."
-  (with-project-root proj-root path
-    (when (file-exists-p (path-join proj-root "GTAGS"))
-      proj-root)))
-
-
-(defun user/gnu-global-tags-p (path)
-  "Check if a GNU Global tag database exists for project in PATH."
-  (when (user/gnu-global-tags-location path)
-    t))
 
 
 (provide 'utilities/project)
