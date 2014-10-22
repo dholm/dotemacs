@@ -244,7 +244,7 @@
 
                (:comment . (user/code-prefix "-"))
                (:document . (user/code-prefix "="))
-               (:join-line . "C-x ^")           ;; C-x C-6
+               (:join-line . "C-x C-^")         ;; C-x C-6
                (:align . ("C-x C-]"))           ;; C-x C-5
                (:fill-paragraph . ("C-x C-\\")) ;; C-x C-4
 
