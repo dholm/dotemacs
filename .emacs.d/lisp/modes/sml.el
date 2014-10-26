@@ -3,7 +3,10 @@
 ;;; Code:
 
 (defun user/sml-mode-hook ()
-  "SML mode hook.")
+  "SML mode hook."
+  (setq
+   ;; Indent with spaces by default.
+   indent-tabs-mode nil))
 
 
 (defun user/sml-mode-init ()
