@@ -3,7 +3,9 @@
 ;;; Code:
 
 (defun user/web-mode-hook ()
-  "Web mode hook.")
+  "Web mode hook."
+  (with-feature 'pandoc-mode
+    (pandoc-mode t)))
 
 
 (defmacro user/add-web-mode-hook (engine function)

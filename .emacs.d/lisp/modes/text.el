@@ -20,6 +20,9 @@
   ;; Run spell-checker.
   (flyspell-mode t)
 
+  (with-feature 'pandoc-mode
+    (pandoc-mode t))
+
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :fill-paragraph 'fill-paragraph))
 
