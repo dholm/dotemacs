@@ -33,6 +33,11 @@
   :type 'key-sequence
   :group 'user)
 
+(defcustom user/code-eval-prefix (kbd "C-c c e")
+  "Keyboard prefix to use for code evaluation commands."
+  :type 'key-sequence
+  :group 'user)
+
 (defcustom user/vcs-prefix (kbd "C-c v")
   "Keyboard prefix to use for version control commands."
   :type 'key-sequence
@@ -268,9 +273,11 @@
                (:update-index . (user/code-prefix "i"))
 
                (:eval-expression . ("C-x C-e"))
-               (:eval-buffer . (user/code-prefix "e b"))
-               (:eval-function . (user/code-prefix "e f"))
-               (:eval-selection . (user/code-prefix "e s"))
+               (:eval-buffer . (user/code-eval-prefix "b"))
+               (:eval-function . (user/code-eval-prefix "f"))
+               (:eval-selection . (user/code-eval-prefix "s"))
+
+               (:macro-expand . (user/code-eval-prefix "m"))
 
                (:virtual . (user/code-prefix "v"))))
 
@@ -319,8 +326,6 @@
                (:google-at-point . (user/documentation-prefix "g RET"))
                (:google-selection . (user/documentation-prefix "g SPC"))
                (:stack-overflow-search . (user/documentation-prefix "s"))
-
-               (:macrostep-expand . (user/code-prefix "e m"))
 
                (:notifications . (user/utilities-prefix "n"))
 

@@ -23,7 +23,7 @@
     (user/bind-key-local :util :popwin-messages 'popwin:messages))
 
   (with-feature 'macrostep
-    (user/bind-key-local :util :macrostep-expand 'macrostep-expand))
+    (user/bind-key-local :code :macro-expand 'macrostep-expand))
 
   (user/bind-key-local :doc :reference 'elisp-index-search)
   (user/bind-key-local :doc :describe-function 'describe-function)
