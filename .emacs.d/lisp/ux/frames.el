@@ -2,6 +2,23 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/close-and-kill-current-window ()
+  "If multiple windows are open, close the current one and kill the buffer."
+  (interactive)
+  (kill-this-buffer)
+  (if (not (one-window-p))
+      (delete-window)))
+
+
+(defun user/close-and-kill-other-window ()
+  "If multiple windows are open, close the next one and kill its buffer."
+  (interactive)
+  (other-window 1)
+  (kill-this-buffer)
+  (if (not (one-window-p))
+      (delete-window)))
+
+
 (defun user/transpose-frame-init ()
   "Initialize transpose-frame."
   ;;; (Bindings) ;;;

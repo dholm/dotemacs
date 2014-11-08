@@ -17,15 +17,20 @@
 (defun user/kill-all-buffers ()
   "Close all open buffers."
   (interactive)
-  (user/kill-matching-buffers "^[^\*].+[^\*]$")
+  (mapc 'kill-buffer (buffer-list))
   (switch-to-buffer "*scratch*"))
 
 
 (defun user/kill-other-buffers ()
   "Close all open buffers except current one."
   (interactive)
-  (user/kill-matching-buffers "^[^\*].+[^\*]$"
-                              (lambda (x) (eq (current-buffer) x))))
+  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
+
+
+(defun user/keep-buffers-init ()
+  "Initialize keep-buffers."
+  ;; Protect certain buffers from being killed.
+  (keep-buffers-mode t))
 
 
 (defun user/buffers-init ()
@@ -44,7 +49,10 @@
   (user/bind-key-global :basic :save 'save-buffer)
   (user/bind-key-global :basic :save-as 'write-file)
   (user/bind-key-global :basic :close 'kill-buffer)
-  (user/bind-key-global :basic :quit 'save-buffers-kill-terminal))
+  (user/bind-key-global :basic :quit 'save-buffers-kill-terminal)
+
+  ;;; (Packages) ;;;
+  (require-package '(:name keep-buffers :after (user/keep-buffers-init))))
 
 (user/buffers-init)
 
