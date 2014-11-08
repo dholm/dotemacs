@@ -4,8 +4,14 @@
 
 (defun user/scheme-mode-hook ()
   "Scheme mode hook."
-  (with-feature 'paredit
-    (enable-paredit-mode)))
+  (user/cedet-hook)
+  (semantic-default-scheme-setup)
+
+  (user/gnu-global-enable)
+
+  (enable-paredit-mode)
+
+  (geiser-mode t))
 
 
 (defun user/geiser-mode-hook ()
