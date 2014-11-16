@@ -371,8 +371,8 @@
 (defun user/bindings-init ()
   "Initialize key bindings."
   (global-unset-key (kbd "C-l"))
-  (define-key global-map (kbd "C-l") 'ctl-l-prefix)
-  (fset 'ctl-l-prefix ctl-l-map)
+  (define-prefix-command 'ctl-l-map)
+  (global-set-key (kbd "C-l") 'ctl-l-map)
 
   ;; Initialize global keymap.
   (user/global-keymap-init)
