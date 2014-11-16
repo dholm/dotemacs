@@ -2,11 +2,15 @@
 ;;; Commentary:
 ;;; Code:
 
+(eval-when-compile
+  (require 'cl))
+
+
 (defun ac-pcomplete ()
   "Auto-complete source for pcomplete."
   ;; eshell uses `insert-and-inherit' to insert a \t if no completion
   ;; can be found, but this must not happen as auto-complete source
-  (flet ((insert-and-inherit (&rest args)))
+  (cl-flet ((insert-and-inherit (&rest args)))
     ;; this code is stolen from `pcomplete' in pcomplete.el
     (let* (tramp-mode ;; do not automatically complete remote stuff
            (pcomplete-stub)
