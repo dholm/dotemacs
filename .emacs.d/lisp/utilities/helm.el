@@ -74,22 +74,26 @@
 
 (defun user/helm-mode ()
   "Start helm-mode."
-  (helm-mode t)
-  (with-feature 'helm-descbinds
-    (helm-descbinds-mode t))
-  (after-load 'diminish
-    (diminish 'helm-mode))
+  ;; helm-org depends on Flyspell, wait for it to be loaded.
+  (after-load 'flyspell
+    (helm-mode t)
 
-  ;; Filter out boring buffers.
-  (dolist (pattern
-           (list "\\*clang-complete" "\\*CEDET global" "\\*tramp/scpc"
-                 "\\*epc con" "\\*Pymacs" "\\*Completions\\*"))
-    (add-to-list 'helm-boring-buffer-regexp-list pattern))
+    (with-feature 'helm-descbinds
+      (helm-descbinds-mode t))
 
-  ;; Filter out boring files.
-  (dolist (pattern
-           (list "\\.elc$" "\\.pyc$" "^#.+#$" "^G[R]TAGS$" "^GPATH$" "^ID$"))
-    (add-to-list 'helm-boring-file-regexp-list pattern)))
+    (after-load 'diminish
+      (diminish 'helm-mode))
+
+    ;; Filter out boring buffers.
+    (dolist (pattern
+             (list "\\*clang-complete" "\\*CEDET global" "\\*tramp/scpc"
+                   "\\*epc con" "\\*Pymacs" "\\*Completions\\*"))
+      (add-to-list 'helm-boring-buffer-regexp-list pattern))
+
+    ;; Filter out boring files.
+    (dolist (pattern
+             (list "\\.elc$" "\\.pyc$" "^#.+#$" "^G[R]TAGS$" "^GPATH$" "^ID$"))
+      (add-to-list 'helm-boring-file-regexp-list pattern))))
 
 
 (defun user/helm-init ()
