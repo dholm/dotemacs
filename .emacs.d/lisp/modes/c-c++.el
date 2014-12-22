@@ -56,6 +56,12 @@
 
     ;;; (Bindings) ;;;
     (with-feature 'eassist
+      (add-many-to-list
+       'eassist-header-switches
+       ;; Add "hh" as C++ header file.
+       '("hh" . ("cpp" "cc"))
+       '("cc" . ("h" "hh" "hpp")))
+
       (user/bind-key-local :nav :switch-spec-impl 'eassist-switch-h-cpp))))
 
 
