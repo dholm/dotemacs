@@ -34,5 +34,14 @@
             (:follow-symbol . "C-x m")))))
 
 
+;; Email setup.
+(after-load 'wl
+  ;; Wanderlust
+  (user/wanderlust-set-gmail-user "John Doe" "john.doe"))
+(after-load 'gnus
+  ;; Gnus
+  (user/gnus-set-gmail-user "John Doe" "john.doe"))
+
+
 (provide '.emacs.local)
 ;;; .emacs.local.el ends here
