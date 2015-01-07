@@ -11,10 +11,6 @@
   (add-to-list 'load-path *user-emacs-lisp-directory*))
 
 
-;; Allow Emacs to use binaries from bin.
-(add-to-list 'exec-path (expand-file-name "bin" user-emacs-directory))
-
-
 ;; Bring in constants used throughout initialization.
 (require 'init-constants)
 
