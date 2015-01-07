@@ -14,11 +14,7 @@
   "Shell mode common hook."
   (with-feature 'ansi-color
     ;; Enable ANSI colors for comint.
-    (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on))
-
-  ;; Enable readline completion.
-  (with-feature 'readline-complete
-    (ac-rlc-setup-sources)))
+    (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)))
 
 
 (defun user/shell-mode-hook ()
@@ -32,17 +28,11 @@
    comint-process-echoes t))
 
 
-(defun user/readline-complete-init ()
-  "Initialize readline complete."
-  (add-ac-modes 'shell-mode 'eshell-mode))
-
-
 (defun user/shell-mode-init ()
   "Initialize shell modes."
 
   ;;; (Packages) ;;;
   (require-package '(:name bash-completion))
-  (require-package '(:name readline-complete :after (user/readline-complete-init)))
   (require-package '(:name shell-command
                            :type emacswiki
                            :website "https://raw.github.com/emacsmirror/emacswiki.org/master/shell-command.el"))
