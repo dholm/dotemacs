@@ -4,6 +4,10 @@
 
 (defun user/web-mode-hook ()
   "Web mode hook."
+  (setq
+   ;; Don't indent using tabs by default.
+   indent-tabs-mode nil)
+
   (with-feature 'pandoc-mode
     (pandoc-mode t)))
 
