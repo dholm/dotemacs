@@ -26,7 +26,9 @@
   (user/bind-key-local :nav :switch-spec-impl 'go-goto-imports)
   (user/bind-key-local :debug :start 'realgud-gub)
   (when (feature-p 'go-test)
-    (user/bind-key-local :code :test 'go-test-current-file)))
+    (user/bind-key-local :code :test 'go-test-current-file))
+  (when (feature-p 'helm-go-package)
+    (local-set-key [remap go-import-add] 'helm-go-package)))
 
 
 (defun user/go-mode-init ()
@@ -39,7 +41,9 @@
   (require-package '(:name go-eldoc))
   (require-package '(:name go-test))
   (require-package '(:name go-projectile))
-  (require-package '(:name go-oracle)))
+  (require-package '(:name go-oracle))
+  (when (feature-p 'helm)
+    (require-package '(:name helm-go-package))))
 
 
 (provide 'modes/go)
