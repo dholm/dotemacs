@@ -3,7 +3,8 @@
 ;;; Code:
 
 (defun user/conf-mode-hook ()
-  "Configuration mode hook.")
+  "Configuration mode hook."
+  (user/fundamental-mode-hook))
 
 
 (defun user/nginx-mode-init ()
