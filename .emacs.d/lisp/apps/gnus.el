@@ -15,12 +15,38 @@
   "Gnus group mode hook."
   (setq header-line-format "    Ticked    New     Unread   Group")
   (gnus-topic-mode t)
-  (hl-line-mode t))
+  (hl-line-mode t)
+
+  ;;; (Bindings) ;;;
+  (define-key gnus-group-mode-map (kbd "v s") 'user/gnus-mailsync))
 
 
 (defun user/gnus-summary-mode-hook ()
   "Gnus summary mode hook."
   (hl-line-mode t))
+
+
+(defun user/gnus-agent-plugged-hook ()
+  "Gnus agent plugged mode hook."
+  (setq
+   ;; Stop queueing email.
+   smtpmail-queue-mail nil))
+
+
+(defun user/gnus-agent-unplugged-hook ()
+  "Gnus agent unplugged mode hook."
+  (setq
+   ;; Start queueing email.
+   smtpmail-queue-mail t))
+
+
+(defun user/gnus-mailsync ()
+  "Sync tags, empty the queue and download all mail."
+  (interactive)
+  (gnus-agent-while-plugged
+    (gnus-agent-synchronize-flags)
+    (gnus-group-get-new-news)
+    (gnus-agent-fetch-session)))
 
 
 (defun user/gnus-set-gmail-user (fullname username)
@@ -52,7 +78,9 @@
        (posting-style
         (name ,fullname)
         (address ,email-address))
-       (expiry-wait . never)))))
+       (expiry-wait . never)))
+
+    (user/smtpmail-set-gmail-user fullname username)))
 
 
 (defun user/gnus-score-init ()
@@ -130,6 +158,11 @@
      gnus-unseen-mark      ?✩
      gnus-unread-mark      ?✉))
 
+  ;; Use smtpmail queue instead of Gnus queue.
+  (defadvice gnus-group-send-queue (after smtp-flush-queue activate)
+    "Empty the smtpmail queue after emptying the gnus send queue."
+    (smtpmail-send-queued-mail))
+
   ;;; (Hooks) ;;;
   (add-hook 'gnus-group-mode-hook 'user/gnus-group-mode-hook))
 
@@ -174,9 +207,27 @@
   (add-hook 'gnus-summary-mode-hook 'user/gnus-summary-mode-hook))
 
 
+(defun user/gnus-agent-init ()
+  "Initialize Gnus agent."
+  (setq-default
+   ;; Automatically go online when plugged in.
+   gnus-agent-go-online t)
+
+  ;; Set up smtpmail queue based on Gnus queue state.
+  (defadvice gnus (after gnus-queue-off activate)
+    "Turn off and flush the smtpmail queue when starting a plugged gnus."
+    (setq smtpmail-queue-mail nil)
+    (smtpmail-send-queued-mail))
+  (defadvice gnus-unplugged (after gnus-queue-on activate)
+    "Turn on the smtpmail queue when starting an unplugged gnus."
+    (setq smtpmail-queue-mail t)))
+
+
 (defun user/gnus-init ()
   "Initialize Gnus."
   (setq-default
+   ;; Make Gnus the default mail reader.
+   read-mail-command 'gnus
    ;; Gnus cache store.
    gnus-use-cache t
    gnus-cache-directory *user-gnus-cache-directory*
@@ -204,7 +255,11 @@
      "multipart/encrypted"
      "multipart/signed")
    ;; Date format.
-   gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M")))
+   gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
+   ;; Suppress startup message.
+   gnus-inhibit-startup-message t
+   ;; Don't require confirmation before downloading folders.
+   gnus-large-newsgroup nil)
 
   (when (display-graphic-p)
     (setq-default
@@ -225,6 +280,7 @@
   (make-directory *user-gnus-cache-directory* t)
   (set-file-modes *user-gnus-cache-directory* #o0700)
 
+  (user/gnus-agent-init)
   (user/gnus-mime-init)
   (user/gnus-summary-init)
   (user/gnus-groups-init)
