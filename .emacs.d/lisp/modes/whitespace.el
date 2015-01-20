@@ -7,6 +7,13 @@
 (make-variable-buffer-local 'user/prev-whitespace-mode-suppressed)
 
 
+(defun user/whitespace-mode-hook ()
+  "Whitespace mode hook."
+  ;;; (Bindings) ;;;
+  (user/bind-key-local :code :whitespace-auto-cleanup
+                       'user/toggle-whitespace-auto-cleanup))
+
+
 (defun user/whitespace-mode-suppress (suppress)
   "If SUPPRESS is non-nil, disable `whitespace-mode' in current mode."
   (when (boundp 'whitespace-mode)
@@ -22,12 +29,20 @@
 (defun user/whitespace-disable-style (styles)
   "Disable STYLES in current mode."
   (when (boundp 'whitespace-style)
-    (let ((options (user/filter (lambda (x) (member x styles))
-                                whitespace-style)))
+    (let ((options (user/filter-form (member styles it) whitespace-style)))
       (when (and (boundp 'global-whitespace-mode) global-whitespace-mode)
         (global-whitespace-toggle-options options))
       (when (and (boundp 'whitespace-mode) whitespace-mode)
         (whitespace-toggle-options options)))))
+
+
+(defun user/toggle-whitespace-auto-cleanup ()
+  "Toggle the state of automatic whitespace cleanup in current buffer."
+  (interactive)
+  (setq whitespace-action (user/toggle-element whitespace-action 'auto-cleanup))
+  (message
+   (concat "Whitespace cleanup "
+           (if (member 'auto-cleanup whitespace-action) "enabled" "disabled"))))
 
 
 (defun user/whitespace-init ()
@@ -74,7 +89,9 @@
       "Fix whitespace-cleanup indent-tabs-mode bug."
       (let ((whitespace-indent-tabs-mode indent-tabs-mode)
             (whitespace-tab-width tab-width))
-        ad-do-it))))
+        ad-do-it)))
+
+  (add-hook 'whitespace-mode-hook 'user/whitespace-mode-hook))
 
 (user/whitespace-init)
 

@@ -9,9 +9,25 @@
   (eval the-list))
 
 
-(defun user/filter (condp lst)
-  "Return list with elements for which CONDP are non-nil in LST."
-  (delq nil (mapcar (lambda (elt) (and (funcall condp elt) elt)) lst)))
+(defmacro user/filter-form (form list)
+  "Return list with elements for which FORM are non-nil in LIST."
+  (declare (debug (form form)))
+  (let ((r (make-symbol "result")))
+    `(let (,r)
+       (--each ,list (when ,form (!cons it ,r)))
+       (nreverse ,r))))
+
+
+(defun user/filter (condp list)
+  "Return list with elements for which CONDP are non-nil in LIST."
+  (user/filter-form (funcall condp it) list))
+
+
+(defun user/toggle-element (list element)
+  "Return LIST with ELEMENT removed if present or added if not present."
+  (if (member element list)
+      (user/filter-form (not (eq element it)) list)
+    (cons element list)))
 
 
 (defun user/all-asscs (asslist query)

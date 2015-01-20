@@ -252,6 +252,7 @@
                (:join-line . "C-x C-^")         ;; C-x C-6
                (:align . ("C-x C-]"))           ;; C-x C-5
                (:fill-paragraph . ("C-x C-\\")) ;; C-x C-4
+               (:whitespace-auto-cleanup . (user/code-prefix "w"))
 
                (:itemize . (user/code-prefix "b"))
                (:enumerate . (user/code-prefix "e"))
