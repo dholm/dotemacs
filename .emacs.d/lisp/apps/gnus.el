@@ -217,7 +217,8 @@
   (defadvice gnus (after gnus-queue-off activate)
     "Turn off and flush the smtpmail queue when starting a plugged gnus."
     (setq smtpmail-queue-mail nil)
-    (smtpmail-send-queued-mail))
+    (when (file-exists-p (path-join smtpmail-queue-dir "index"))
+      (smtpmail-send-queued-mail)))
   (defadvice gnus-unplugged (after gnus-queue-on activate)
     "Turn on the smtpmail queue when starting an unplugged gnus."
     (setq smtpmail-queue-mail t)))
@@ -232,6 +233,13 @@
    gnus-use-cache t
    gnus-cache-directory *user-gnus-cache-directory*
    ;; Gnus data store.
+   gnus-directory *user-gnus-data-directory*
+   message-directory (path-join *user-gnus-data-directory* "mail")
+   nnfolder-directory (path-join *user-gnus-data-directory* "mail" "archive")
+   nnfolder-active-file (path-join *user-gnus-data-directory*
+                                   "mail" "archive" "active")
+   smtpmail-queue-dir (path-join *user-gnus-data-directory* "mail" "queued-mail")
+   smime-certificate-directory (path-join *user-gnus-data-directory* "certs")
    gnus-article-save-directory (path-join *user-gnus-data-directory* "articles")
    ;; Asynchronous header prefetch.
    gnus-use-header-prefetch t
@@ -260,6 +268,16 @@
    gnus-inhibit-startup-message t
    ;; Don't require confirmation before downloading folders.
    gnus-large-newsgroup nil)
+
+  (setq-default
+   ;; Archive using nnfolder.
+   gnus-message-archive-method
+   `(nnfolder "archive"
+              (nnfolder-directory ,(path-join message-directory "archive"))
+              (nnfolder-active-file ,(path-join message-directory
+                                                "archive" "active"))
+              (nnfolder-get-new-mail nil)
+              (nnfolder-inhibit-expiry t)))
 
   (when (display-graphic-p)
     (setq-default
