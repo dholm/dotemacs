@@ -13,6 +13,7 @@
 (require 'lib/hash-tables)
 (require 'lib/bootstrap)
 (require 'lib/apps)
+(require 'lib/introspection)
 
 
 ;; Load full configuration.
