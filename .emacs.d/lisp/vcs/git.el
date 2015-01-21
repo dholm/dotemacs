@@ -32,6 +32,11 @@
   (magit-refresh))
 
 
+(defun user/magit-idle-breadcrumbs-init ()
+  "Initialize Magit Idle Breadcrumbs."
+  (global-magit-idle-breadcrumbs-mode t))
+
+
 (defun user/magit-init ()
   "Initialize Magit."
   (setq-default
@@ -71,6 +76,11 @@
   (require-package '(:name magit :after (user/magit-init)))
   (require-package '(:name magit-gerrit))
   (require-package '(:name magit-tramp))
+  (require-package '(:name magit-idle-breadcrumbs
+                           :type github
+                           :pkgname "dholm/magit-idle-breadcrumbs"
+                           :depends (magit)
+                           :after (user/magit-idle-breadcrumbs-init)))
   (require-package '(:name git-timemachine))
 
   (require-package '(:name git-gutter))
