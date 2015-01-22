@@ -32,9 +32,10 @@
 
 (defun user/vc-init ()
   "Initialize Emacs version control package."
-  ;; Full frame annotations.
-  (with-feature 'fullframe
-    (fullframe vc-annotate vc-annotate-mode-quit-window nil))
+  (after-load 'vc-annotate
+    (with-feature 'fullframe
+      ;; Full frame annotations.
+      (fullframe vc-annotate vc-annotate-mode-quit-window nil)))
 
   (add-hook 'find-file-hook 'user/vc-find-file-hook))
 

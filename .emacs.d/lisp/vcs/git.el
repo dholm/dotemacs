@@ -47,9 +47,10 @@
    ;; Show fine differences for currently selected hunk.
    magit-diff-refine-hunk t)
 
-  ;; Full frame Magit status.
-  (with-feature 'fullframe
-    (fullframe magit-status magit-mode-quit-window nil))
+  (after-load 'magit
+    (with-feature 'fullframe
+      ;; Full frame Magit status.
+      (fullframe magit-status magit-mode-quit-window nil)))
 
   (add-hook 'magit-mode-hook 'user/magit-mode-hook)
 

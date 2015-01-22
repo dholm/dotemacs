@@ -342,8 +342,9 @@ Gmail {
     ;; Insert gravatar as email X-Face.
     wl-highlight-x-face-function 'wl-gravatar-insert))
 
- (with-feature 'fullframe
-   (fullframe wl wl-exit nil))
+ (after-load 'wl
+   (with-feature 'fullframe
+     (fullframe wl wl-exit nil)))
 
  (setq-default
   ;; Show mail status in mode line.
