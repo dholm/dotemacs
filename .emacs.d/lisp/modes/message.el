@@ -55,7 +55,9 @@
    message-citation-line-function 'message-insert-formatted-citation-line
    message-citation-line-format "On %a, %b %d %Y at %r, %f wrote:"
    ;; Ask for confirmation before sending.
-   message-confirm-send t)
+   message-confirm-send t
+   ;; Generate headers before editing message.
+   message-generate-headers-first t)
 
   ;; Hooks
   (add-hook 'message-mode-hook 'user/message-mode-hook)
