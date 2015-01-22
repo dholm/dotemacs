@@ -352,6 +352,7 @@
                (:browse . (user/apps-prefix "b"))
                (:browse-external . (user/apps-prefix "B"))
                (:feed-reader . (user/apps-prefix "f"))
+               (:stack-exchange . (user/apps-prefix "x"))
 
                (:email . (user/apps-prefix "e"))
                (:irc . (user/apps-prefix "i"))
