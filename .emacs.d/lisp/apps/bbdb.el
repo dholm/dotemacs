@@ -34,6 +34,8 @@
    ;; Automatically add addresses to bbdb.
    bbdb-update-records-p 'create
    bbdb-mua-update-interactive-p '(create . create)
+   ;; Don't assume a certain phone number style.
+   bbdb-phone-style nil
    ;; Automatically add address to existing contact.
    bbdb-always-add-address t
    ;; Add all addresses in an email.

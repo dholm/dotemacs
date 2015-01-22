@@ -21,10 +21,29 @@
   (footnote-mode t)
 
   ;;; (Bindings) ;;;
-  (user/bind-key-local :code :try-complete 'bbdb-complete-name)
+  (user/bind-key-local :code :try-complete 'user/eudc-expand-inline)
   (user/bind-key-local :code :compile 'org-mime-htmlize)
   ;; Ensure C-x # is used to save and close message.
   (local-set-key (kbd "C-x #") 'user/server-save))
+
+
+(defun user/message-setup-hook ()
+  "Outgoing message setup hook."
+  ;; Load Emacs directory client.
+  (eudc-load-eudc))
+
+
+(defun user/eudc-expand-inline ()
+  "Expand entry at point using EUDC."
+  (interactive)
+  (if (eq eudc-protocol 'ldap)
+      (progn (move-end-of-line 1)
+             (insert "*")
+             (unless (condition-case nil
+                         (eudc-expand-inline)
+                       (error nil))
+               (backward-delete-char-untabify 1)))
+    (eudc-expand-inline)))
 
 
 (defun user/message-mode-init ()
@@ -38,7 +57,9 @@
    ;; Ask for confirmation before sending.
    message-confirm-send t)
 
+  ;; Hooks
   (add-hook 'message-mode-hook 'user/message-mode-hook)
+  (add-hook 'message-setup-hook 'user/message-setup-hook)
 
   ;; Register auto mode.
   (add-auto-mode 'message-mode "\\.eml$"))
