@@ -77,8 +77,14 @@
        (display . all)
        (posting-style
         (name ,fullname)
-        (address ,email-address))
+        (address ,email-address)
+        (gcc ,(concat "nnimap+" email-address ":%[Gmail]/Sent")))
        (expiry-wait . never)))
+
+    (add-to-list
+     'gnus-message-archive-group
+     `(,(concat email-address ".*")
+       ,(concat "nnimap+" email-address ":%[Gmail]/Sent")))
 
     (user/smtpmail-set-gmail-user fullname username)))
 
