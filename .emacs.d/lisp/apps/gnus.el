@@ -49,7 +49,8 @@
 
 (defun user/gnus-startup-hook ()
   "Gnus startup hook."
-  (bbdb-insinuate-gnus))
+  ;; Enable BBDB.
+  (bbdb-initialize 'gnus)
 
 
 (defun user/gnus-mailsync ()
