@@ -40,6 +40,18 @@
    smtpmail-queue-mail t))
 
 
+(defun user/gnus-message-sent-hook ()
+  "Message sent hook for Gnus."
+  ;; Increase score for followups to a sent article.
+  (gnus-score-followup-article)
+  (gnus-score-followup-thread))
+
+
+(defun user/gnus-startup-hook ()
+  "Gnus startup hook."
+  (bbdb-insinuate-gnus))
+
+
 (defun user/gnus-mailsync ()
   "Sync tags, empty the queue and download all mail."
   (interactive)
@@ -101,12 +113,17 @@
    ;; Adaptive score list.
    gnus-default-adaptive-score-alist
    '((gnus-unread-mark)
-     (gnus-ticked-mark (from 40))
-     (gnus-dormant-mark (from 50))
-     (gnus-saved-mark (from 200) (subject 50))
-     (gnus-del-mark (from -20) (subject -50))
-     (gnus-read-mark (from 20) (subject 10))
-     (gnus-killed-mark (from -10) (subject -30)))
+     (gnus-ticked-mark (from 4))
+     (gnus-dormant-mark (from 5))
+     (gnus-saved-mark (from 20) (subject 5))
+     (gnus-del-mark (from -2) (subject -5))
+     (gnus-read-mark (from 2) (subject 1))
+     (gnus-killed-mark (from -1) (subject -3)))
+   ;; Decay score over time.
+   gnus-decay-scores t
+   ;; Score decay rate.
+   gnus-score-decay-constant 1
+   gnus-score-decay-scale 0.03
    ;; Workaround for GMail folder names.
    nnheader-file-name-translation-alist '((?[ . ?_) (?] . ?_))))
 
@@ -257,12 +274,17 @@
    gnus-always-read-dribble-file t
    ;; Headers visible by default.
    gnus-visible-headers
-   '("^From" "^To" "^Cc" "^Bcc" "^Subject" "^Date"
-     "\\|^User-Agent:\\|^X-Mailer:")
+   (concat
+    "^From:\\|^Newsgroups:\\|^Subject:\\|^Date:\\|^Followup-To:\\|^Reply-To:"
+    "\\|^Summary:\\|^Keywords:\\|^To:\\|^[BGF]?Cc:\\|^Posted-To:"
+    "\\|^Mail-Copies-To:\\|^Mail-Followup-To:\\|^Apparently-To:"
+    "\\|^Gnus-Warning:\\|^Resent-From:\\|^X-Sent:\\|^User-Agent:"
+    "\\|^X-Mailer:\\|^X-Newsreader:")
    ;; Sort order.
    gnus-sorted-header-list
-   '("^From:" "^To:" "^Newsgroups:" "^Cc:" "^Subject:" "^Summary:"
-     "^Keywords:" "^Followup-To:" "^Date:" "^Organization:")
+   '("^From:" "^Subject:" "^Summary:" "^Keywords:" "^Newsgroups:"
+     "^Followup-To:" "^To:" "^Cc:" "^Date:" "^User-Agent:" "^X-Mailer:"
+     "^X-Newsreader:")
    ;; Buttonized MIME types.
    gnus-buttonized-mime-types
    '("multipart/alternative"
@@ -273,7 +295,9 @@
    ;; Suppress startup message.
    gnus-inhibit-startup-message t
    ;; Don't require confirmation before downloading folders.
-   gnus-large-newsgroup nil)
+   gnus-large-newsgroup nil
+   ;; Mark sent messages as read.
+   gnus-gcc-mark-as-read t)
 
   (setq-default
    ;; Archive using nnfolder.
@@ -304,11 +328,16 @@
   (make-directory *user-gnus-cache-directory* t)
   (set-file-modes *user-gnus-cache-directory* #o0700)
 
+  ;; Gnus modes.
   (user/gnus-agent-init)
   (user/gnus-mime-init)
   (user/gnus-summary-init)
   (user/gnus-groups-init)
-  (user/gnus-score-init))
+  (user/gnus-score-init)
+
+  ;; Hooks
+  (add-hook 'gnus-startup-hook 'user/gnus-startup-hook)
+  (add-hook 'message-sent-hook 'user/gnus-message-sent-hook))
 
 (require-package '(:name gnus :after (user/gnus-init)))
 
