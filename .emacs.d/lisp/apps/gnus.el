@@ -51,6 +51,8 @@
   "Gnus startup hook."
   ;; Enable BBDB.
   (bbdb-initialize 'gnus)
+  ;; Enable S/MIME via EasyPG.
+  (epa-file-enable))
 
 
 (defun user/gnus-mailsync ()
@@ -132,6 +134,11 @@
 (defun user/gnus-mime-init ()
   "Initialize Gnus MIME."
   (setq-default
+   ;; Buttonized MIME types.
+   gnus-buttonized-mime-types
+   '("multipart/alternative"
+     "multipart/encrypted"
+     "multipart/signed")
    ;; Prefer plaintext emails.
    mm-discouraged-alternatives '("text/html" "text/richtext")
    ;; Display text/html only mails in Emacs.
@@ -142,7 +149,23 @@
    ;; HTML rendering method.
    mm-text-html-renderer
    (cond ((feature-p 'shr) 'mm-shr)
-         ((executable-find "w3m") 'w3m)))
+         ((executable-find "w3m") 'w3m))
+   ;; Use EasyPG for signing and encryption of emails.
+   mml-smime-use 'epg
+   ;; Always decrypt emails.
+   mm-decrypt-option 'always
+   ;; Always verify signed emails.
+   mm-verify-option 'always)
+
+  (let ((ca-directory "/etc/ssl/certs"))
+    (when (file-exists-p ca-directory)
+      (setq-default smime-CA-directory ca-directory)))
+
+  (let ((certificate-directory (path-join *user-home-directory* ".ssl")))
+    (when (file-exists-p certificate-directory)
+      (setq-default
+       ;; User certificate store.
+       smime-certificate-directory certificate-directory)))
 
   (when (eq default-terminal-coding-system 'utf-8)
     (setq-default mm-coding-system-priorities '(utf-8)))
@@ -263,7 +286,6 @@
    nnfolder-active-file (path-join *user-gnus-data-directory*
                                    "mail" "archive" "active")
    smtpmail-queue-dir (path-join *user-gnus-data-directory* "mail" "queued-mail")
-   smime-certificate-directory (path-join *user-gnus-data-directory* "certs")
    gnus-article-save-directory (path-join *user-gnus-data-directory* "articles")
    ;; Asynchronous header prefetch.
    gnus-use-header-prefetch t
@@ -286,11 +308,6 @@
    '("^From:" "^Subject:" "^Summary:" "^Keywords:" "^Newsgroups:"
      "^Followup-To:" "^To:" "^Cc:" "^Date:" "^User-Agent:" "^X-Mailer:"
      "^X-Newsreader:")
-   ;; Buttonized MIME types.
-   gnus-buttonized-mime-types
-   '("multipart/alternative"
-     "multipart/encrypted"
-     "multipart/signed")
    ;; Date format.
    gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
    ;; Suppress startup message.
@@ -298,7 +315,9 @@
    ;; Don't require confirmation before downloading folders.
    gnus-large-newsgroup nil
    ;; Mark sent messages as read.
-   gnus-gcc-mark-as-read t)
+   gnus-gcc-mark-as-read t
+   ;; Keep password cache longer.
+   password-cache-expiry 3600)
 
   (setq-default
    ;; Archive using nnfolder.
