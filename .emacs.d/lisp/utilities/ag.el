@@ -15,6 +15,10 @@
    ag-project-root-function '(lambda ()
                                (user/project-root (path-abs-buffer))))
 
+  (after-load 'ag
+    ;; Search inside compressed files.
+    (add-to-list 'ag-arguments "--search-zip"))
+
   ;;; (Bindings) ;;;
   (if (and (feature-p 'projectile)
            (fboundp 'projectile-ag))
