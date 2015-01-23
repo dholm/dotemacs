@@ -10,7 +10,9 @@
    ;; Do not ignore incomplete results.
    eudc-strict-return-matches nil
    ;; Server hotlist store.
-   eudc-options-file (path-join *user-cache-directory* "eudc-options"))
+   eudc-options-file (path-join *user-cache-directory* "eudc-options")
+   ;; Default `ldapsearch' parameters.
+   ldap-ldapsearch-args '("-tt" "-LLL" "-x"))
 
   (after-load 'ldap
     (eudc-protocol-set
