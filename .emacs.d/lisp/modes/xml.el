@@ -4,6 +4,13 @@
 
 (defun user/nxml-mode-hook ()
   "XML mode hook."
+  (setq
+   outline-regexp "^[ \t]*\<[a-zA-Z]+")
+  (outline-minor-mode t)
+
+  (with-feature 'sgml-mode
+    (hs-minor-mode t))
+
   (with-feature 'auto-complete-nxml
     ;; Configure nxml auto completion
     (setq nxml-slash-auto-complete-flag t))
@@ -22,6 +29,7 @@
   (let ((begin (if (use-region-p) (region-beginning) (point-min)))
         (end (if (use-region-p) (region-end) (point-max))))
     (user/xml-tidy-region begin end)))
+
 
 (defun user/xml-tidy-region (begin end)
   "Pretty print XML between BEGIN and END."
@@ -48,6 +56,16 @@
   ;; XML modes.
   (add-magic-mode 'nxml-mode "<\\?xml")
   (add-auto-mode 'nxml-mode "\\.xsd$" "\\.xslt$" "\\.rss$")
+
+  ;; Enable hide/show support for XML.
+  (add-to-list
+   'hs-special-modes-alist
+   '(nxml-mode
+     "<!--\\|<[^/>]>\\|<[^/][^>]*[^/]>"
+     ""
+     ;; Comment start.
+     "<!--"
+     sgml-skip-tag-forward nil))
 
   ;;; (Hooks) ;;;
   (add-hook 'nxml-mode-hook 'user/nxml-mode-hook)
