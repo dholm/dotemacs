@@ -18,7 +18,9 @@
    woman-fill-frame t)
 
   ;;; (Bindings) ;;;
-  (user/bind-key-global :doc :manual 'woman))
+  (if (feature-p 'helm)
+      (user/bind-key-global :doc :manual 'helm-man-woman)
+    (user/bind-key-global :doc :manual 'man)))
 
 
 (defun user/man-mode-init ()
