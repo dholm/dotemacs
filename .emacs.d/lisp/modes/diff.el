@@ -14,6 +14,9 @@
    ;; Open patches in read-only mode by default.
    diff-default-read-only t)
 
+  ;; Diff modes.
+  (add-auto-mode 'diff-mode "/patch$")
+
   (add-hook 'diff-mode-hook 'user/diff-mode-hook))
 
 (user/diff-mode-init)
