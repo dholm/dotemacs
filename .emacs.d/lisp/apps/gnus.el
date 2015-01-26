@@ -280,6 +280,11 @@
    ;; Gnus cache store.
    gnus-use-cache t
    gnus-cache-directory *user-gnus-cache-directory*
+   ;; Cache all types of articles and never remove them.
+   gnus-cache-enter-articles '(ticked dormant read unread)
+   gnus-cache-remove-articles nil
+   ;; Types of groups to cache.
+   gnus-cacheable-groups "^nnimap"
    ;; Gnus data store.
    gnus-directory *user-gnus-data-directory*
    message-directory (path-join *user-gnus-data-directory* "mail")
