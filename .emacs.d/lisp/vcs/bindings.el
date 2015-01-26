@@ -5,6 +5,7 @@
 (defvar user/vcs-command-alist
   '((:Git . ((:status . magit-status)
              (:history . magit-file-log)
+             (:version . magit-show)
              (:describe . git-messenger:popup-message)
              (:gutter . git-gutter:toggle)
              (:review . (lambda ()
@@ -19,6 +20,7 @@
     (:ClearCase . ((:status . (lambda ()
                                 (vc-dir (path-abs-buffer))))
                    (:history . vc-print-log)
+                   (:version . vc-revision-other-window)
                    (:describe . vc-annotate)
                    (:gutter . diff-hl-margin-mode)
                    (:add-buffer . vc-register)
@@ -54,6 +56,12 @@
   "Execute VCS history command on the current buffer."
   (interactive)
   (user/vcs-command :history))
+
+
+(defun user/vcs-version ()
+  "Execute VCS version command on the current buffer."
+  (interactive)
+  (user/vcs-command :version))
 
 
 (defun user/vcs-describe ()
@@ -106,6 +114,7 @@
   ;;; (Bindings) ;;;
   (user/bind-key-global :vcs :status 'user/vcs-status)
   (user/bind-key-global :vcs :history 'user/vcs-history)
+  (user/bind-key-global :vcs :version 'user/vcs-version)
   (user/bind-key-global :vcs :describe 'user/vcs-describe)
   (user/bind-key-global :vcs :gutter 'user/vcs-gutter)
   (user/bind-key-global :vcs :review 'user/vcs-review)

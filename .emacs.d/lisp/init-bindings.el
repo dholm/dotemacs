@@ -306,6 +306,7 @@
      ;;; (Version Control) ;;;
      (:vcs . ((:status . (user/vcs-prefix "s"))
               (:history . (user/vcs-prefix "h"))
+              (:version . (user/vcs-prefix "v"))
               (:describe . (user/vcs-prefix "d"))
               (:gutter . (user/vcs-prefix "g"))
               (:review . (user/vcs-prefix "r"))
