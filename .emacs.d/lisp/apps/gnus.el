@@ -134,6 +134,8 @@
 (defun user/gnus-mime-init ()
   "Initialize Gnus MIME."
   (setq-default
+   ;; Default location for downloaded attachments.
+   mm-default-directory (path-join *user-home-directory* "Downloads")
    ;; Buttonized MIME types.
    gnus-buttonized-mime-types
    '("multipart/alternative"
@@ -224,6 +226,8 @@
            "%~(max-right 20)~(pad-right 20)f %B%s\n")
    ;; Thread construction method.
    gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
+   ;; Collapse threads by default.
+   gnus-thread-hide-subtree t
    ;; Sort method.
    gnus-thread-sort-functions '(gnus-thread-sort-by-date)
    ;; Don't automatically open next message when reaching end.
@@ -252,7 +256,14 @@
      gnus-sum-thread-tree-single-leaf     "\\-> "))
 
   ;;; (Hooks) ;;;
-  (add-hook 'gnus-summary-mode-hook 'user/gnus-summary-mode-hook))
+  (add-hook 'gnus-summary-mode-hook 'user/gnus-summary-mode-hook)
+
+  ;;; (Bindings) ;;;
+  (after-load 'gnus
+    (define-key gnus-summary-mode-map (kbd "[")
+      (lambda () (interactive) (scroll-other-window -1)))
+    (define-key gnus-summary-mode-map (kbd "]")
+      (lambda () (interactive) (scroll-other-window 1)))))
 
 
 (defun user/gnus-agent-init ()
@@ -285,6 +296,8 @@
    gnus-cache-remove-articles nil
    ;; Types of groups to cache.
    gnus-cacheable-groups "^nnimap"
+   ;; Default method should be mail spooler.
+   gnus-select-method '(nnml "")
    ;; Gnus data store.
    gnus-directory *user-gnus-data-directory*
    message-directory (path-join *user-gnus-data-directory* "mail")
@@ -323,7 +336,11 @@
    ;; Mark sent messages as read.
    gnus-gcc-mark-as-read t
    ;; Keep password cache longer.
-   password-cache-expiry 3600)
+   password-cache-expiry 3600
+   ;; Don't require confirmation on exit.
+   gnus-interactive-exit nil
+   ;; Always attempt to build complete threads.
+   gnus-fetch-old-headers t)
 
   (setq-default
    ;; Archive using nnfolder.
