@@ -175,8 +175,9 @@
     (setq-default
      mm-inline-text-html-with-images t
      mm-inline-large-images t)
+
     (after-load 'mm-decode
-      (add-to-list 'mm-attachment-override-types '("image/.*")))))
+      (add-to-list 'mm-attachment-override-types "image/.*"))))
 
 
 (defun user/gnus-groups-init ()
