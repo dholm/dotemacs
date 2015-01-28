@@ -229,7 +229,14 @@
    ;; Collapse threads by default.
    gnus-thread-hide-subtree t
    ;; Sort method.
-   gnus-thread-sort-functions '(gnus-thread-sort-by-date)
+   gnus-thread-sort-functions
+   '((not gnus-thread-sort-by-total-score)
+     (not gnus-thread-sort-by-most-recent-number)
+     (not gnus-thread-sort-by-most-recent-date))
+   gnus-subthread-sort-functions
+   '(gnus-thread-sort-by-number
+     gnus-thread-sort-by-date)
+   gnus-sort-gathered-threads-function 'gnus-thread-sort-by-date
    ;; Don't automatically open next message when reaching end.
    gnus-summary-stop-at-end-of-message t)
 
