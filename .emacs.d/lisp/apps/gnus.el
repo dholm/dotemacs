@@ -51,6 +51,9 @@
   "Gnus startup hook."
   ;; Enable BBDB.
   (bbdb-initialize 'gnus)
+  (when (feature-p 'google-contacts)
+    ;; Google Contacts for Gnus.
+    (require 'google-contacts-gnus))
   ;; Enable S/MIME via EasyPG.
   (epa-file-enable))
 

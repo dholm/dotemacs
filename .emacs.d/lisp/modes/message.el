@@ -23,6 +23,10 @@
   ;; Enable BBDB.
   (bbdb-initialize 'message)
 
+  (when (feature-p 'google-contacts)
+    ;; Google Contacts for message mode.
+    (require 'google-contacts-message))
+
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :try-complete 'user/eudc-expand-inline)
   (user/bind-key-local :code :compile 'org-mime-htmlize)
