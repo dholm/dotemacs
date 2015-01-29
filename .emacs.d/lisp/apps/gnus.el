@@ -390,6 +390,8 @@
   (add-hook 'message-sent-hook 'user/gnus-message-sent-hook))
 
 (require-package '(:name gnus :after (user/gnus-init)))
+(with-executable 'gpgsm
+  (require-package '(:name jl-smime)))
 
 
 (provide 'apps/gnus)

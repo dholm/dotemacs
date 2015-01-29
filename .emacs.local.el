@@ -40,7 +40,27 @@
   (user/wanderlust-set-gmail-user "John Doe" "john.doe"))
 (after-load 'gnus
   ;; Gnus
-  (user/gnus-set-gmail-user "John Doe" "john.doe"))
+  (user/gnus-set-gmail-user "John Doe" "john.doe")
+
+  ;; S/MIME
+  (add-to-list
+   'smime-keys
+   `(,email-address
+     ,(path-join *user-home-directory* ".ssl" "certificate.pem") nil))
+  (setq
+   smime-ldap-host-list '("ldap.host.com")
+   jl-smime-permit-ldap "@\\(.+\\.\\)?company\\.com$"))
+
+
+;; Directory services.
+(after-load 'ldap
+  (setq-default
+   ldap-host-parameters-alist
+   '(("ldap.host.com" base "dc=company,dc=com"
+      binddn "uid=jdoe,ou=users,o=company"))))
+(after-load 'eudc
+  (eudc-set-server "ldap.host.com" 'ldap t)
+  (add-to-list 'eudc-server-hotlist '("ldap.host.com" . ldap)))
 
 
 (provide '.emacs.local)
