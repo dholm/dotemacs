@@ -18,7 +18,8 @@
        smtpmail-default-smtp-server "smtp.gmail.com"
        smtpmail-smtp-server "smtp.gmail.com"
        smtpmail-smtp-service 587
-       smtpmail-local-domain "gmail.com"))))
+       smtpmail-local-domain "gmail.com"
+       mail-host-address "gmail.com"))))
 
 
 (defun user/smtpmail-init ()

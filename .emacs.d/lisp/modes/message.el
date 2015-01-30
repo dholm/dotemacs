@@ -34,6 +34,12 @@
   (local-set-key (kbd "C-x #") 'user/server-save))
 
 
+(defun user/message-send-hook ()
+  "Hook run when sending a message."
+  ;; Normalize all footnotes in message.
+  (org-footnote-normalize))
+
+
 (defun user/message-setup-hook ()
   "Outgoing message setup hook."
   ;; Load Emacs directory client.
@@ -69,6 +75,7 @@
   ;; Hooks
   (add-hook 'message-mode-hook 'user/message-mode-hook)
   (add-hook 'message-setup-hook 'user/message-setup-hook)
+  (add-hook 'message-send-hook 'user/message-send-hook)
 
   ;; Register auto mode.
   (add-auto-mode 'message-mode "\\.eml$"))

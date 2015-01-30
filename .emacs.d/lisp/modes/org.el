@@ -317,6 +317,8 @@
                       'org-bibtex
                       ;; Link to tags.
                       'org-ctags
+                      ;; Link to articles and messages in Gnus.
+                      'org-gnus
                       ;; Habit tracking.
                       'org-habit
                       ;; Support links to info pages.

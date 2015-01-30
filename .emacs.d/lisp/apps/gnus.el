@@ -55,7 +55,10 @@
     ;; Google Contacts for Gnus.
     (require 'google-contacts-gnus))
   ;; Enable S/MIME via EasyPG.
-  (epa-file-enable))
+  (epa-file-enable)
+  (with-feature 'gnus-dired
+    ;; Attach files using dired.
+    (turn-on-gnus-dired-mode)))
 
 
 (defun user/gnus-mailsync ()
@@ -160,7 +163,22 @@
    ;; Always decrypt emails.
    mm-decrypt-option 'always
    ;; Always verify signed emails.
-   mm-verify-option 'always)
+   mm-verify-option 'always
+   ;; Set some sane encoding types.
+   mm-content-transfer-encoding-defaults
+   '(;; Use 8-bit encoding for readable files.
+     ("text/x-patch" 8bit)
+     ("text/.*" 8bit)
+     ("message/rfc822" 8bit)
+     ("application/emacs-lisp" 8bit)
+     ("application/x-emacs-lisp" 8bit)
+     ("application/x-patch" 8bit)
+     (".*" base64))
+   ;; Avoid spaces in filenames when saving attachments.
+   mm-file-name-rewrite-functions
+   '(mm-file-name-trim-whitespace
+     mm-file-name-collapse-whitespace
+     mm-file-name-replace-whitespace))
 
   (let ((ca-directory "/etc/ssl/certs"))
     (when (file-exists-p ca-directory)
@@ -191,7 +209,13 @@
    ;; Groups format.
    gnus-group-line-format
    (concat "%M %1(%1{%6i %}%)%{ %}%2(%2{%7U %}%)%{ %}%3(%3{%7y %}%)%{%* %}"
-           "%4(%B%-45G%)\n"))
+           "%4(%B%-45G%)\n")
+   ;; Group sort method.
+   gnus-group-sort-function
+   '(gnus-group-sort-by-score
+     gnus-group-sort-by-unread
+     gnus-group-sort-by-alphabet
+     gnus-group-sort-by-level))
 
   (when (eq default-terminal-coding-system 'utf-8)
     (setq-default
@@ -231,7 +255,7 @@
    gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
    ;; Collapse threads by default.
    gnus-thread-hide-subtree t
-   ;; Sort method.
+   ;; Thread sort method.
    gnus-thread-sort-functions
    '((not gnus-thread-sort-by-total-score)
      (not gnus-thread-sort-by-most-recent-number)
@@ -241,7 +265,11 @@
      gnus-thread-sort-by-date)
    gnus-sort-gathered-threads-function 'gnus-thread-sort-by-date
    ;; Don't automatically open next message when reaching end.
-   gnus-summary-stop-at-end-of-message t)
+   gnus-summary-stop-at-end-of-message t
+   ;; Simplify message subjects.
+   gnus-simplify-subject-functions
+   '(gnus-simplify-subject-re
+     gnus-simplify-whitespace))
 
   (if (eq default-terminal-coding-system 'utf-8)
       (setq-default
@@ -316,6 +344,8 @@
                                    "mail" "archive" "active")
    smtpmail-queue-dir (path-join *user-gnus-data-directory* "mail" "queued-mail")
    gnus-article-save-directory (path-join *user-gnus-data-directory* "articles")
+   ;; Enable asynchronous operations.
+   gnus-asynchronous t
    ;; Asynchronous header prefetch.
    gnus-use-header-prefetch t
    ;; Default method.
@@ -395,6 +425,8 @@
 (require-package '(:name gnus :after (user/gnus-init)))
 (with-executable 'gpgsm
   (require-package '(:name jl-smime)))
+(when (display-graphic-p)
+  (require-package '(:name gnus-gravatar)))
 
 
 (provide 'apps/gnus)
