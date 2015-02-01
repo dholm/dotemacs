@@ -79,8 +79,9 @@
 
   (add-hook 'w3m-display-hook 'user/w3m-display-hook))
 
-(with-executable 'w3m
-  (require-package '(:name emacs-w3m :after (user/w3m-init))))
+(unless (feature-p 'eww)
+  (with-executable 'w3m
+    (require-package '(:name emacs-w3m :after (user/w3m-init)))))
 
 
 (provide 'apps/w3m)

@@ -22,7 +22,7 @@
   "Initialize web browsing in Emacs."
   (let ((browser
          (cond ((feature-p 'eww) (assq :eww user/browser-alist))
-               ((executable-find "w3m") (assq :w3m user/browser-alist))
+               ((feature-p 'emacs-w3m) (assq :w3m user/browser-alist))
                (t (assq :default user/browser-alist))))
         (external-browser (assq :default user/browser-alist)))
     (setq-default

@@ -157,7 +157,7 @@
    ;; HTML rendering method.
    mm-text-html-renderer
    (cond ((feature-p 'shr) 'mm-shr)
-         ((executable-find "w3m") 'w3m))
+         ((feature-p 'emacs-w3m) 'w3m))
    ;; Use EasyPG for signing and encryption of emails.
    mml-smime-use 'epg
    ;; Always decrypt emails.
