@@ -2,6 +2,14 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/iconify-or-deiconify-frame ()
+  "Iconify the selected frame, or deiconify if it's currently an icon."
+  (interactive)
+  (if (display-graphic-p)
+      (iconify-or-deiconify-frame)
+    (suspend-frame)))
+
+
 (defun user/close-and-kill-current-window ()
   "If multiple windows are open, close the current one and kill the buffer."
   (interactive)
