@@ -249,9 +249,9 @@
 
                (:comment . (user/code-prefix "-"))
                (:document . (user/code-prefix "="))
-               (:join-line . "C-x C-^")         ;; C-x C-6
-               (:align . ("C-x C-]"))           ;; C-x C-5
-               (:fill-paragraph . ("C-x C-\\")) ;; C-x C-4
+               (:join-line . ((if (display-graphic-p) "C-x C-6" "C-x C-^")))
+               (:align . ((if (display-graphic-p) "C-x C-5" "C-x C-]")))
+               (:fill-paragraph . ((if (display-graphic-p) "C-x C-4" "C-x C-\\")))
                (:tidy . ("C-x ="))
                (:whitespace-auto-cleanup . (user/code-prefix "w"))
 
