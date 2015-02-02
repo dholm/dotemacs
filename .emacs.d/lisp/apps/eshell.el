@@ -37,11 +37,11 @@
           (format "(%s)" (vc-responsible-backend default-directory))) "")
     :inherit 'header-line)
    (with-face "\n" :inherit 'header-line)
-   (with-face user-login-name :foreground "blue")
+   (with-face user-login-name 'font-lock-variable-name-face)
    "@"
-   (with-face "localhost" :foreground "green")
+   (with-face "localhost" 'font-lock-keyword-face)
    (if (= (user-uid) 0)
-       (with-face " #" :foreground "red")
+       (with-face " #" 'font-lock-warning-face)
      " $")
    " "))
 
