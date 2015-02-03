@@ -125,7 +125,9 @@
    nnimap-split-methods 'nnmail-split-fancy
    ;; Initialize list of mailboxes where splitting should occur.
    nnimap-inbox nil
-   ;; Always download entire message.
+   ;; Only download textual parts of articles by default.
+   nnimap-fetch-partial-articles "text/"
+   ;; Always download entire article when splitting.
    nnimap-split-download-body-default t
    ;; Warn about duplicate mail.
    nnmail-treat-duplicates 'warn
