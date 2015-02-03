@@ -4,13 +4,19 @@
 
 (defun user/c-mode-common-hook ()
   "C mode common hook."
-  ;; Indent using four spaces.
-  (setq c-basic-offset 4)
+  (setq
+   ;; Indent using four spaces.
+   c-basic-offset 4)
 
   ;; Override the indentation level of case labels in the K&R- and
   ;; Stroustrup styles so that they are indented one level beyond
   ;; the switch.
   (c-set-offset 'case-label '+)
+
+  ;; Propertize "#if 0" regions as comments.
+  (font-lock-add-keywords
+   nil
+   '((user/c-mode-font-lock-if0 (0 font-lock-comment-face prepend))) 'add-to-end)
 
   ;; Load CEDET
   (user/c-mode-cedet-hook)
@@ -63,6 +69,31 @@
        '("cc" . ("h" "hh" "hpp")))
 
       (user/bind-key-local :nav :switch-spec-impl 'eassist-switch-h-cpp))))
+
+
+(defun user/c-mode-font-lock-if0 (limit)
+  "Propertize '#if 0' regions, up to LIMIT in size, as comments."
+  (save-restriction
+    (widen)
+    (save-excursion
+      (goto-char (point-min))
+      (let ((depth 0) str start start-depth)
+        (while (re-search-forward "^\\s-*#\\s-*\\(if\\|else\\|endif\\)" limit 'move)
+          (setq str (match-string 1))
+          (if (string= str "if")
+              (progn
+                (setq depth (1+ depth))
+                (when (and (null start) (looking-at "\\s-+0"))
+                  (setq start (match-end 0)
+                        start-depth depth)))
+            (when (and start (= depth start-depth))
+              (c-put-font-lock-face start (match-beginning 0) 'font-lock-comment-face)
+              (setq start nil))
+            (when (string= str "endif")
+              (setq depth (1- depth)))))
+        (when (and start (> depth 0))
+          (c-put-font-lock-face start (point) 'font-lock-comment-face)))))
+  nil)
 
 
 (defun user/c++-header-file-p ()
