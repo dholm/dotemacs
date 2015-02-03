@@ -393,10 +393,10 @@
     "\\|^Summary:\\|^Keywords:\\|^To:\\|^[BGF]?Cc:\\|^Posted-To:"
     "\\|^Mail-Copies-To:\\|^Mail-Followup-To:\\|^Apparently-To:"
     "\\|^Gnus-Warning:\\|^Resent-From:\\|^X-Sent:\\|^User-Agent:"
-    "\\|^X-Mailer:\\|^X-Newsreader:")
+    "\\|^X-Mailer:\\|^X-Newsreader:\\|^List-Id:")
    ;; Sort order.
    gnus-sorted-header-list
-   '("^From:" "^Subject:" "^Summary:" "^Keywords:" "^Newsgroups:"
+   '("^From:" "^Subject:" "^Summary:" "^Keywords:" "^Newsgroups:" "^List-Id:"
      "^Followup-To:" "^To:" "^Cc:" "^Date:" "^User-Agent:" "^X-Mailer:"
      "^X-Newsreader:")
    ;; Date format.
