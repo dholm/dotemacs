@@ -56,6 +56,10 @@
     (require 'google-contacts-gnus))
   ;; Enable S/MIME via EasyPG.
   (epa-file-enable)
+  (when (feature-p 'jl-smime)
+    ;; S/MIME LDAP support.
+    (require 'ldap)
+    (load "jl-smime"))
   (with-feature 'gnus-dired
     ;; Attach files using dired.
     (turn-on-gnus-dired-mode)))
