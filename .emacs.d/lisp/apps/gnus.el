@@ -99,15 +99,50 @@
        (posting-style
         (name ,fullname)
         (address ,email-address)
-        (gcc ,(concat "nnimap+" email-address ":%[Gmail]/Sent")))
+        (gcc ,(concat "nnimap+" email-address ":[Gmail]/Sent")))
        (expiry-wait . never)))
 
     (add-to-list
-     'gnus-message-archive-group
-     `(,(concat email-address ".*")
-       ,(concat "nnimap+" email-address ":%[Gmail]/Sent")))
+     'gnus-message-archive-method
+     `(nnimap ,email-address
+              (nnfolder-directory ,(concat "nnimap+" email-address ":\"Sent Items\""))
+              (nnfolder-get-new-mail t)
+              (nnfolder-inhibit-expiry t)))
+
+    (add-to-list 'nnimap-inbox (concat "nnimap+" email-address ":INBOX"))
 
     (user/smtpmail-set-gmail-user fullname username)))
+
+
+(defun user/nnmail-init ()
+  "Initialize nnmail."
+  (setq-default
+   ;; Stop splitting at first matching rule.
+   nnmail-crosspost nil
+   nnimap-split-crosspost nil
+   ;; Use the same function to split nnmail and nnimap.
+   nnmail-split-methods 'nnmail-split-fancy
+   nnimap-split-methods 'nnmail-split-fancy
+   ;; Initialize list of mailboxes where splitting should occur.
+   nnimap-inbox nil
+   ;; Always download entire message.
+   nnimap-split-download-body-default t
+   ;; Warn about duplicate mail.
+   nnmail-treat-duplicates 'warn
+   ;; Default split rules.
+   nnmail-split-fancy
+   '(|
+     ;; Split followups based on parent's message id.
+     (: nnmail-split-fancy-with-parent))))
+
+
+(defun user/nnfolder-init ()
+  "Initialize nnfolder."
+  (setq-default
+   ;; nnfolder data store.
+   nnfolder-directory (path-join *user-gnus-data-directory* "mail" "archive")
+   nnfolder-active-file (path-join *user-gnus-data-directory*
+                                   "mail" "archive" "active")))
 
 
 (defun user/gnus-score-init ()
@@ -339,9 +374,6 @@
    ;; Gnus data store.
    gnus-directory *user-gnus-data-directory*
    message-directory (path-join *user-gnus-data-directory* "mail")
-   nnfolder-directory (path-join *user-gnus-data-directory* "mail" "archive")
-   nnfolder-active-file (path-join *user-gnus-data-directory*
-                                   "mail" "archive" "active")
    smtpmail-queue-dir (path-join *user-gnus-data-directory* "mail" "queued-mail")
    gnus-article-save-directory (path-join *user-gnus-data-directory* "articles")
    ;; Enable asynchronous operations.
@@ -382,6 +414,15 @@
    ;; Always attempt to build complete threads.
    gnus-fetch-old-headers t)
 
+  ;; Initialize Gnus modules.
+  (user/gnus-agent-init)
+  (user/gnus-mime-init)
+  (user/gnus-summary-init)
+  (user/gnus-groups-init)
+  (user/gnus-score-init)
+  (user/nnmail-init)
+  (user/nnfolder-init)
+
   (setq-default
    ;; Archive using nnfolder.
    gnus-message-archive-method
@@ -410,13 +451,6 @@
   (set-file-modes *user-gnus-data-directory* #o0700)
   (make-directory *user-gnus-cache-directory* t)
   (set-file-modes *user-gnus-cache-directory* #o0700)
-
-  ;; Gnus modes.
-  (user/gnus-agent-init)
-  (user/gnus-mime-init)
-  (user/gnus-summary-init)
-  (user/gnus-groups-init)
-  (user/gnus-score-init)
 
   ;; Hooks
   (add-hook 'gnus-startup-hook 'user/gnus-startup-hook)
