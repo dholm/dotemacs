@@ -51,9 +51,14 @@
    ;; Save the current buffer on compilation.
    mode-compile-always-save-buffer-p t)
 
-  ;; Add compilation mode hook.
+  (after-load 'popwin
+    (add-to-list
+     'popwin:special-display-config
+     ;; Don't select compilation window when shown
+     '(compilation-mode :height 20 :dedicated t)))
+
+  ;;; (Hooks) ;;;
   (add-hook 'compilation-mode-hook 'user/compilation-mode-hook)
-  ;; Add compilation filter hook.
   (add-hook 'compilation-filter-hook 'user/compilation-filter-hook)
 
   ;;; (Bindings) ;;;

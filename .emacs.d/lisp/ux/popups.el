@@ -20,10 +20,6 @@
   (with-feature 'popwin
     (popwin-mode t)
 
-    ;; Don't select compilation window when shown
-    (push '(compilation-mode :height 20 :dedicated t)
-          popwin:special-display-config)
-
     ;;; (Bindings) ;;;
     (user/bind-key-global :util :popwin-close 'popwin:close-popup-window)
     (user/bind-key-global :util :popwin-buffer 'popwin:popup-buffer)))
