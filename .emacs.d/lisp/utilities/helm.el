@@ -96,33 +96,6 @@
       (add-to-list 'helm-boring-file-regexp-list pattern))))
 
 
-(defun user/helm-init ()
-  "Initialize helm."
-  (setq-default
-   ;; Idle delays.
-   helm-idle-delay 0.1
-   helm-input-idle-delay 0.0
-   ;; Limit the number of candidates per source to a reasonable amount.
-   helm-candidate-number-limit 75
-   ;; Delay showing results that are off screen.
-   helm-quick-update t
-   ;; Put adaptive history in cache directory.
-   helm-adaptive-history-file (path-join *user-cache-directory* "helm-adaptive-history"))
-
-  ;;; (Hooks) ;;;
-  ;; Since Helm depends on `eieio', enable it after package initialization.
-  (add-hook 'user/after-init-hook 'user/helm-mode)
-
-  ;;; (Bindings) ;;;
-  (global-set-key [remap find-file] 'helm-find-files)
-  (global-set-key [remap switch-to-buffer] 'helm-buffers-list)
-  (global-set-key [remap execute-extended-command] 'helm-M-x)
-
-  (user/bind-key-global :nav :context 'user/helm-navigate)
-  (user/bind-key-global :doc :apropos 'user/helm-apropos)
-  (user/bind-key-global :emacs :elisp-search 'helm-info-elisp))
-
-
 (defun user/helm-swoop-init ()
   "Initialize Helm Swoop."
   (setq-default
@@ -138,6 +111,38 @@
     ;; From helm-swoop to helm-multi-swoop-all.
     (define-key helm-swoop-map
       (user/get-key :basic :swoop) 'helm-multi-swoop-all-from-helm-swoop)))
+
+
+(defun user/helm-init ()
+  "Initialize helm."
+  (setq-default
+   ;; Idle delays.
+   helm-idle-delay 0.1
+   helm-input-idle-delay 0.0
+   ;; Limit the number of candidates per source to a reasonable amount.
+   helm-candidate-number-limit 75
+   ;; Delay showing results that are off screen.
+   helm-quick-update t
+   ;; Put adaptive history in cache directory.
+   helm-adaptive-history-file (path-join *user-cache-directory* "helm-adaptive-history"))
+
+  (after-load 'popwin
+    (add-to-list
+     'popwin:special-display-config
+     '("helm" :regexp t :height 0.4 :position bottom)))
+
+  ;;; (Hooks) ;;;
+  ;; Since Helm depends on `eieio', enable it after package initialization.
+  (add-hook 'user/after-init-hook 'user/helm-mode)
+
+  ;;; (Bindings) ;;;
+  (global-set-key [remap find-file] 'helm-find-files)
+  (global-set-key [remap switch-to-buffer] 'helm-buffers-list)
+  (global-set-key [remap execute-extended-command] 'helm-M-x)
+
+  (user/bind-key-global :nav :context 'user/helm-navigate)
+  (user/bind-key-global :doc :apropos 'user/helm-apropos)
+  (user/bind-key-global :emacs :elisp-search 'helm-info-elisp))
 
 
 (require-package '(:name helm :after (user/helm-init)))
