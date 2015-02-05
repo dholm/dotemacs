@@ -98,7 +98,7 @@
 
     (add-to-list
      'gnus-parameters
-     `(,(concat "nnimap " email-address ":[Gmail]/.*")
+     `(,(concat email-address ".*")
        (display . all)
        (posting-style
         (name ,fullname)
@@ -139,7 +139,16 @@
    nnmail-split-fancy
    '(|
      ;; Split followups based on parent's message id.
-     (: nnmail-split-fancy-with-parent))))
+     (: nnmail-split-fancy-with-parent)))
+
+  (after-load 'nnmail
+    (add-many-to-list
+     ;; Add keywords for matching articles while splitting.
+     'nnmail-split-abbrev-alist
+     ;; Mailing lists.
+     '(list . "list-id")
+     ;; Subject.
+     '(subject . "subject"))))
 
 
 (defun user/nnfolder-init ()
