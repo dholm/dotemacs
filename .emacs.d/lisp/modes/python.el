@@ -43,6 +43,16 @@
     (user/bind-key-local :code :auto-complete 'jedi:complete)))
 
 
+(with-executable 'bpython
+  (defun user/bpython-term ()
+    "Launch or switch to a `bpython' buffer."
+    (interactive)
+    (if (not (get-buffer "*bpython*"))
+        (progn
+          (ansi-term "bpython" "bpython"))
+      (switch-to-buffer "*bpython*"))))
+
+
 (defun user/python-mode-cedet-hook ()
   "CEDET hook for Python mode."
   (with-feature 'semantic/wisent/python

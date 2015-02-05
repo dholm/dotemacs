@@ -14,7 +14,7 @@
   "Shell mode common hook."
   (with-feature 'ansi-color
     ;; Enable ANSI colors for comint.
-    (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)))
+    (ansi-color-for-comint-mode-on)))
 
 
 (defun user/shell-mode-hook ()
