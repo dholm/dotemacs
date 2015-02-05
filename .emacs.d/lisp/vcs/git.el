@@ -71,6 +71,14 @@
 
 (defun user/git-init ()
   "Initialize Git support."
+  (after-load 'popwin
+    ;; Use popwin for certain Magit buffers.
+    (add-many-to-list
+     'popwin:special-display-config
+     '("*magit-edit-log*" :noselect t :height 0.2 :width 80)
+     '("*magit-process*" :noselect t :height 0.2 :width 80)))
+
+  ;;; (Hooks) ;;;
   (add-hook 'git-commit-mode-hook 'user/git-commit-mode-hook)
 
   ;;; (Packages) ;;;
