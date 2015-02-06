@@ -157,6 +157,12 @@
    srecode-map-save-file (path-join *user-cache-directory* "srecode-map.el")))
 
 
+(defun user/ede-compdb-init ()
+  "Initialize EDE-compdb."
+  (after-load 'ede
+    (require 'ede-compdb)))
+
+
 (defun user/cedet-init ()
   "Initialize CEDET."
   (setq-default
@@ -180,6 +186,7 @@
 (require-package '(:name cedet
                          :before (user/cedet-before-init)
                          :after (user/cedet-init)))
+(require-package '(:name ede-compdb :after (user/ede-compdb-init)))
 
 
 (provide 'utilities/cedet)
