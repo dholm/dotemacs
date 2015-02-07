@@ -4,11 +4,16 @@
 
 (defun user/ede-project (path)
   "Get the EDE project for PATH."
-  (with-feature 'ede/cpp-root
-    (let ((project (ede-current-project (expand-file-name path))))
-      (when (and (featurep 'ede/cpp-root)
-                 (ede-cpp-root-project-p project))
-        project))))
+  (let ((project (ede-current-project (expand-file-name path))))
+    (cond
+     ((and (featurep 'ede/cpp-root)
+           (ede-cpp-root-project-p project) project))
+     ((and (featurep 'ede/generic)
+           (ede-generic-makefile-project-p project)) project)
+     ((and (featurep 'ede/generic)
+           (ede-generic-cmake-project-p project)) project)
+     ((and (featurep 'ede/linux)
+           (ede-linux-project-p project)) project))))
 
 
 (defun user/ede-project-include-paths (project)
