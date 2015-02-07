@@ -94,8 +94,8 @@
   (user/cedet-gnu-idutils-create/update))
 
 
-(defun user/semantic-init-hook ()
-  "Semantic initialization hook."
+(defun user/semantic-mode-hook ()
+  "Semantic mode hook."
   (unless user/semantic-initialized
     ;; Enable [ec]tags support.
     (with-feature 'semantic/ectags/util
@@ -131,8 +131,8 @@
     (setq user/semantic-initialized t)))
 
 
-(defun user/ede-init-hook ()
-  "EDE initialization hook."
+(defun user/ede-minor-mode-hook ()
+  "EDE minor mode hook."
   (unless user/ede-initialized
     ;; Enable CScope if available.
     (with-feature 'cedet-cscope
@@ -140,6 +140,12 @@
         ;; Use CScope as a source for EDE.
         (setq ede-locate-setup-options
               '(ede-locate-cscope ede-locate-base))))
+
+    (with-feature 'auto-complete-c-headers
+      (setq
+       ;; Configure include path for auto completion.
+       achead:get-include-directories-function
+       'ede-object-system-include-path))
 
     (ede-enable-generic-projects)
 
@@ -180,8 +186,8 @@
     ;; Register missing autoloads
     (autoload 'wisent-ruby-default-setup "wisent-ruby"))
 
-  (add-hook 'ede-minor-mode-hook 'user/ede-init-hook)
-  (add-hook 'semantic-mode-hook 'user/semantic-init-hook))
+  (add-hook 'ede-minor-mode-hook 'user/ede-minor-mode-hook)
+  (add-hook 'semantic-mode-hook 'user/semantic-mode-hook))
 
 (require-package '(:name cedet
                          :before (user/cedet-before-init)

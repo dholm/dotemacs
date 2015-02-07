@@ -43,6 +43,9 @@
       ;; Better auto completion.
       (irony-mode t)))
 
+  (with-feature 'auto-complete-c-headers
+    (add-ac-sources 'ac-source-c-headers))
+
   ;;; (Bindings) ;;;
   (when (feature-p 'iasm-mode)
     (user/bind-key-local :code :library-list 'iasm-disasm-link-buffer)
@@ -125,6 +128,7 @@
   (add-magic-mode 'c++-mode 'user/c++-header-file-p)
 
   ;;; (Packages) ;;;
+  (require-package '(:name auto-complete-c-headers))
   (when (and (executable-find "cmake")
              (executable-find "clang")
              (executable-find "llvm-config"))
