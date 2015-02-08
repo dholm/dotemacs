@@ -22,17 +22,17 @@
   (semantic-mode t)
 
   ;; Scan source code automatically during idle time.
-  (global-semantic-idle-scheduler-mode t)
+  (semantic-idle-scheduler-mode t)
   ;; Highlight the first line of the current tag.
-  (global-semantic-highlight-func-mode t)
+  (semantic-highlight-func-mode t)
   ;; Initiate inline completion automatically during idle time.
-  (global-semantic-idle-completions-mode t)
+  (semantic-idle-completions-mode t)
   ;; Show breadcrumbs during idle time.
-  (global-semantic-idle-breadcrumbs-mode t)
+  (semantic-idle-breadcrumbs-mode t)
   ;; Breadcrumbs should be sticky.
-  (global-semantic-stickyfunc-mode t)
+  (semantic-stickyfunc-mode t)
   ;; Show summary of tag at point during idle time.
-  (global-semantic-idle-summary-mode t)
+  (semantic-idle-summary-mode t)
 
   ;; Use semantic as a source for auto complete.
   (add-ac-sources 'ac-source-semantic)
@@ -46,7 +46,7 @@
 
   ;;; (SemanticDB) ;;;
   (with-feature 'semantic/db
-    (global-semanticdb-minor-mode t))
+    (semanticdb-minor-mode t))
 
   ;;; (Context Menu) ;;;
   (when (and (featurep 'cedet-devel-load) (display-graphic-p))
