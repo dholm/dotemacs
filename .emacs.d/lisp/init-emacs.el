@@ -9,6 +9,8 @@
 (make-directory *user-data-directory* t)
 
 (setq-default
+ ;; Lines of history in the message buffer.
+ message-log-max 10000
  ;; Reduce number of pauses due to garbage collection.
  gc-cons-threshold (* 50 1024 1024)
  gc-cons-percentage 0.5
