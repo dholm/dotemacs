@@ -176,17 +176,6 @@
     (message "Namazu not found, mail will not be indexed.")))
 
 
-(defun user/mu-cite-init ()
-  "Initialize mu-cite."
-  (setq-default
-   ;; Citation format.
-   mu-cite-top-format '("On " date ", " full-name " wrote:\n")
-   ;; Use > as prefix.
-   mu-cite-prefix-format (quote ("> ")))
-
-  (add-hook 'mail-citation-hook 'mu-cite-original))
-
-
 (defun user/wanderlust-set-gmail-user (fullname username)
   "Configure Wanderlust to use \"FULLNAME\" <USERNAME@gmail.com>."
   (let ((email-address (concat username "@gmail.com"))
@@ -401,7 +390,6 @@ Gmail {
   (set-file-modes *user-wanderlust-cache-directory* #o0700)
 
   (require-package '(:name wanderlust :after (user/wanderlust-init)))
-  (require-package '(:name mu-cite :after (user/mu-cite-init)))
   (require-package '(:name bbdbv3-wl))
   (when (display-graphic-p)
     (require-package '(:name wl-gravatar))))

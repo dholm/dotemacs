@@ -59,6 +59,20 @@
     (eudc-expand-inline)))
 
 
+(defun user/mu-cite-init ()
+  "Initialize mu-cite."
+  (setq-default
+   ;; Citation format.
+   mu-cite-top-format '("On " date ", " full-name " wrote:\n")
+   ;; Use > as prefix.
+   mu-cite-prefix-format (quote ("> "))
+   ;; Default message citation function.
+   message-cite-function 'mu-cite-original)
+
+  ;;; (Hooks) ;;;
+  (add-hook 'mail-citation-hook 'mu-cite-original))
+
+
 (defun user/message-mode-init ()
   "Initialize message mode."
   (setq-default
@@ -78,7 +92,10 @@
   (add-hook 'message-send-hook 'user/message-send-hook)
 
   ;; Register auto mode.
-  (add-auto-mode 'message-mode "\\.eml$"))
+  (add-auto-mode 'message-mode "\\.eml$")
+
+  ;;; (Packages) ;;;
+  (require-package '(:name mu-cite :after (user/mu-cite-init))))
 
 (user/message-mode-init)
 
