@@ -43,6 +43,7 @@
 (defun user/asm-mode-init ()
   "Initialize assembly mode."
   (add-hook 'asm-mode-hook 'user/asm-mode-hook)
+  (add-auto-mode 'asm-mode "\\.[ia]65$")
 
   ;;; (Packages) ;;;
   (require-package '(:name iasm-mode :after (user/iasm-mode-init))))
