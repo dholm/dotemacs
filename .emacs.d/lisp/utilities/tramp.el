@@ -13,7 +13,9 @@
    ;; Persistency files.
    tramp-persistency-file-name (path-join *user-cache-directory* "tramp")
    ;; Auto save storage.
-   tramp-auto-save-directory (path-join *user-auto-save-directory* "tramp"))
+   tramp-auto-save-directory (path-join *user-auto-save-directory* "tramp")
+   ;; SSH is properly configured to share connections.
+   tramp-use-ssh-controlmaster-options nil)
 
   ;; Load SSH configuration
   (after-load 'tramp
