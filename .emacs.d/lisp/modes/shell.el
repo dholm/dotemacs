@@ -14,7 +14,10 @@
   "Shell mode common hook."
   (with-feature 'ansi-color
     ;; Enable ANSI colors for comint.
-    (ansi-color-for-comint-mode-on)))
+    (ansi-color-for-comint-mode-on))
+
+  (with-feature 'shelldoc
+    (shelldoc-minor-mode-on)))
 
 
 (defun user/shell-mode-hook ()
@@ -33,6 +36,7 @@
 
   ;;; (Packages) ;;;
   (require-package '(:name bash-completion))
+  (require-package '(:name shelldoc))
   (require-package '(:name shell-command
                            :type emacswiki
                            :website "https://raw.github.com/emacsmirror/emacswiki.org/master/shell-command.el"))
