@@ -19,9 +19,12 @@
 
   ;;; (Hooks) ;;;
   (add-hook 'diary-display-function 'diary-fancy-display)
-  (add-hook 'calendar-today-visible-hook 'calendar-mark-today))
+  (add-hook 'calendar-today-visible-hook 'calendar-mark-today)
 
-(user/calc-init)
+  ;;; (Packages) ;;;
+  (require-package '(:name excorporate)))
+
+(user/calendar-init)
 
 
 (provide 'apps/calendar)
