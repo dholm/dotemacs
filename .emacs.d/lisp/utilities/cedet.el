@@ -190,6 +190,7 @@
                          :before (user/cedet-before-init)
                          :after (user/cedet-init)))
 (require-package '(:name ede-compdb :after (user/ede-compdb-init)))
+(require-package '(:name semantic-stickyfunc-enhance))
 
 
 (provide 'utilities/cedet)
