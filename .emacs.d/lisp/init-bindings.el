@@ -247,7 +247,7 @@
                (:bookmark-next . "C-c b n")
                (:bookmark-prev . "C-c b p")
 
-               (:comment . (user/code-prefix "-"))
+               (:comment . "M-;")
                (:document . (user/code-prefix "="))
                (:join-line . ((if (display-graphic-p) "C-x C-6" "C-x C-^")))
                (:align . ((if (display-graphic-p) "C-x C-5" "C-x C-]")))
