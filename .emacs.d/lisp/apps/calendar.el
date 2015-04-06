@@ -109,6 +109,22 @@
            )))
 
 
+(defun user/calfw-init ()
+  "Initialize calfw."
+  (setq-default
+   ;; Use `fill-region' to wrap long lines.
+   cfw:render-line-breaker 'cfw:render-line-breaker-wordwrap
+   ;; Use unicode to render calendar
+   cfw:fchar-junction ?╋
+   cfw:fchar-vertical-line ?┃
+   cfw:fchar-horizontal-line ?━
+   cfw:fchar-left-junction ?┣
+   cfw:fchar-right-junction ?┫
+   cfw:fchar-top-junction ?┯
+   cfw:fchar-top-left-corner ?┏
+   cfw:fchar-top-right-corner ?┓))
+
+
 (defun user/calendar-init ()
   "Initialize calendar."
   (let ((diary-data-store (path-join *user-org-data-directory* "diary.org")))
@@ -135,6 +151,7 @@
   (add-hook 'calendar-today-visible-hook 'calendar-mark-today)
 
   ;;; (Packages) ;;;
+  (require-package '(:name calfw :after (user/calfw-init)))
   (require-package '(:name excorporate)))
 
 (user/calendar-init)
