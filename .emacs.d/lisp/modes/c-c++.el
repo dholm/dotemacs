@@ -71,7 +71,12 @@
        '("hh" . ("cpp" "cc"))
        '("cc" . ("h" "hh" "hpp")))
 
-      (user/bind-key-local :nav :switch-spec-impl 'eassist-switch-h-cpp))))
+      (user/bind-key-local :nav :switch-spec-impl 'eassist-switch-h-cpp)))
+
+  (with-feature 'function-args
+    (function-args-mode t)
+    (after-load 'diminish
+      (diminish 'function-args-mode))))
 
 
 (defun user/c-mode-font-lock-if0 (limit)
@@ -133,6 +138,7 @@
              (executable-find "clang")
              (executable-find "llvm-config"))
     (require-package '(:name irony-mode :after (user/irony-mode-init))))
+  (require-package '(:name function-args))
   (require-package '(:name google-c-style)))
 
 (user/c-c++-mode-init)
