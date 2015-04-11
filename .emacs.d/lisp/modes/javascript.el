@@ -29,6 +29,7 @@
 (defun user/javascript-mode-cedet-hook ()
   "JavaScript CEDET support hook."
   (with-feature 'semantic/wisent/javascript
+    (wisent-javascript-setup-parser)
     (user/cedet-hook)))
 
 
