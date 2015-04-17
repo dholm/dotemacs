@@ -438,6 +438,10 @@
   (user/nnmail-init)
   (user/nnfolder-init)
 
+  (after-load 'gnus
+    (with-feature 'fullframe
+      (fullframe gnus gnus-group-exit nil)))
+
   (setq-default
    ;; Archive using nnfolder.
    gnus-message-archive-method
