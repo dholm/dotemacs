@@ -90,6 +90,15 @@
   (user/bind-key-global :apps :agenda 'org-agenda))
 
 
+(defun user/org-open-at-point (&optional arg)
+  "Like `org-open-at-point' but will use external browser with prefix ARG."
+  (interactive "P")
+  (if (not arg)
+      (org-open-at-point)
+      (let ((browse-url-browser-function #'browse-url-default-browser))
+        (org-open-at-point))))
+
+
 (defun user/org-annotate-file-storage-file ()
   "Get the path to the annotation storage file."
   (let ((path (path-abs-buffer))
@@ -378,7 +387,9 @@
   (add-hook 'org-mode-hook 'user/org-mode-hook)
 
   ;;; (Bindings) ;;;
-  (user/bind-key-global :apps :capture-task 'org-capture))
+  (user/bind-key-global :apps :capture-task 'org-capture)
+  (after-load 'org
+    (define-key org-mode-map (kbd "C-c C-o") #'user/org-open-at-point)))
 
 
 (defun user/org-sync-init ()
