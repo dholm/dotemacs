@@ -6,8 +6,10 @@
   "Programming mode hook."
   (user/fundamental-mode-hook)
 
-  ;; Run spell-checker in programming mode.
-  (flyspell-prog-mode)
+  ;; Protect against missing dictionary.
+  (try-eval
+      ;; Run spell-checker in programming mode.
+      (flyspell-prog-mode))
 
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :comment (if (feature-p 'comment-dwim-2)

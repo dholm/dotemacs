@@ -17,8 +17,10 @@
    ;; Indent using spaces.
    indent-tabs-mode nil)
 
-  ;; Run spell-checker.
-  (flyspell-mode t)
+  ;; Protect against missing dictionary.
+  (try-eval
+      ;; Run spell-checker in programming mode.
+      (flyspell-mode t))
 
   (with-feature 'pandoc-mode
     (pandoc-mode t))
