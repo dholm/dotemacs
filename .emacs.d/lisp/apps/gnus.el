@@ -94,7 +94,8 @@
               (nnimap-expunge-on-close always)
               (gnus-check-new-newsgroups nil)
               (gnus-ignored-newsgroups
-               "^to\\.\\|^[0-9.\t]+\\( \\|$\\)\\|^[\”]\”[#’()]")))
+               "^to\\.\\|^[0-9.\t]+\\( \\|$\\)\\|^[\”]\”[#’()]")
+              (nnir-search-engine imap)))
 
     (add-to-list
      'gnus-parameters
@@ -158,6 +159,36 @@
    nnfolder-directory (path-join *user-gnus-data-directory* "mail" "archive")
    nnfolder-active-file (path-join *user-gnus-data-directory*
                                    "mail" "archive" "active")))
+
+
+(defun user/nnir-init ()
+  "Initialize nnir."
+  (with-executable 'swish-e
+    (setq-default
+     ;; Set search engine to Swish-E.
+     nnir-search-engine 'swish-e
+     nnir-swish-e-index-files (list
+                               (path-join *user-gnus-data-directory* "index.swish")))
+
+    (defun user/swish-e-create/update-mail-index ()
+      "Create or update mail index using Swish-E."
+      (interactive)
+      (eq
+       (call-process-shell-command "swish-e" nil nil nil "-i" message-directory
+                                   "-f" (first nnir-swish-e-index-files) "-e")
+       0)))
+
+  (after-load 'gnus
+    (require 'nnir)
+    (when (and (eq system-type 'darwin) (feature-p 'nnir-spotlight))
+      ;; Enable Spotlight search on Darwin.
+      (require 'nnir-spotlight)
+      (setq-default
+       nnir-method-default-engines
+       '((nnmaildir . spotlight)
+         (nnml . spotlight)
+         (nntp . gmane))
+       nnir-spotlight-prefix message-directory))))
 
 
 (defun user/gnus-score-init ()
@@ -437,10 +468,15 @@
   (user/gnus-score-init)
   (user/nnmail-init)
   (user/nnfolder-init)
+  (user/nnir-init)
 
   (after-load 'gnus
     (with-feature 'fullframe
-      (fullframe gnus gnus-group-exit nil)))
+      (fullframe gnus gnus-group-exit nil))
+
+    (when (feature-p 'gnus-x-gm-raw)
+      ;; GMail search.
+      (require 'gnus-x-gm-raw)))
 
   (setq-default
    ;; Archive using nnfolder.
@@ -476,10 +512,15 @@
   (add-hook 'message-sent-hook 'user/gnus-message-sent-hook))
 
 (require-package '(:name gnus :after (user/gnus-init)))
+(require-package '(:name gnus-alias))
+(require-package '(:name gnus-summary-ext))
+(require-package '(:name gnus-x-gm-raw))
 (with-executable 'gpgsm
   (require-package '(:name jl-smime)))
 (when (display-graphic-p)
   (require-package '(:name gnus-gravatar)))
+(when (eq system-type 'darwin)
+  (require-package '(:name nnir-spotlight)))
 
 
 (provide 'apps/gnus)
