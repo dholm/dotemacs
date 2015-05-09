@@ -23,7 +23,9 @@
   "Initialize makefile mode."
   (add-hook 'makefile-mode-hook 'user/makefile-mode-hook)
 
-  (add-auto-mode 'makefile-mode "\\.mak$"))
+  (add-auto-mode 'makefile-mode "\\.mak$")
+  ;; Watcom make.
+  (add-auto-mode 'makefile-mode "\\.mif$" "\\.wat$"))
 
 (user/makefile-mode-init)
 
