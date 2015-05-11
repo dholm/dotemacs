@@ -4,6 +4,10 @@
 
 (defun user/asm-mode-hook ()
   "Assembly mode hook."
+  (setq
+   ;; Indent using tabs by default.
+   indent-tabs-mode t)
+
   (user/gnu-global-enable))
 
 
