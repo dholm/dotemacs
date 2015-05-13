@@ -11,11 +11,14 @@
 ;; Sets some decent defaults for makefile-mode
 (defun user/makefile-mode-hook ()
   "Initialize makefile mode."
-  ;; Load CEDET for makefiles
+  ;; Load CEDET for makefiles.
   (user/makefile-mode-cedet-hook)
-  ;; Use tabs for indent
-  (setq indent-tabs-mode t)
-  ;; Separate camel-case into separate words
+  (setq
+   ;; Use tabs for indent.
+   indent-tabs-mode t)
+  ;; Disable whitespace mode settings that don't make sense in makefiles.
+  (user/whitespace-disable-style '(indentation space-after-tab))
+  ;; Separate camel-case into separate words.
   (subword-mode t))
 
 

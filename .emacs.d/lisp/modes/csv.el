@@ -9,8 +9,7 @@
    truncate-lines t)
 
   (turn-off-auto-fill)
-  (when (memq 'lines whitespace-style)
-    (whitespace-toggle-options '(lines))))
+  (user/whitespace-disable-style '(lines)))
 
 
 (defun user/csv-mode-init ()
