@@ -67,6 +67,7 @@
   (add-hook 'ede-compdb-project-rescan-hook 'user/ede-flycheck-setup))
 
 (require-package '(:name flycheck :after (user/flycheck-init)))
+(require-package '(:name flycheck-pos-tip))
 
 
 (provide 'utilities/flycheck)
