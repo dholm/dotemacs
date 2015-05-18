@@ -15,6 +15,9 @@
    ldap-ldapsearch-args '("-tt" "-LLL" "-x"))
 
   (after-load 'ldap
+    ;; Treat the displayName attribute as a string.
+    (add-to-list 'ldap-attribute-syntaxes-alist '(displayname . 15))
+
     (eudc-protocol-set
      'eudc-inline-expansion-format
      '("%s <%s>" displayName email)
