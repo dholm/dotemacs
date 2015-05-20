@@ -2,6 +2,19 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/eudc-expand-inline ()
+  "Expand entry at point using EUDC."
+  (interactive)
+  (if (eq eudc-protocol 'ldap)
+      (progn (move-end-of-line 1)
+             (insert "*")
+             (unless (condition-case nil
+                         (eudc-expand-inline)
+                       (error nil))
+               (backward-delete-char-untabify 1)))
+    (eudc-expand-inline)))
+
+
 (defun user/eudc-init ()
   "Initialize EUDC."
   (setq-default
