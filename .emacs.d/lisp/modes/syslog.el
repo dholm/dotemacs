@@ -5,7 +5,11 @@
 (defun user/syslog-mode-hook ()
   "Hook for syslog-mode."
   ;; There is no need to spell check log files.
-  (flyspell-mode-off))
+  (flyspell-mode-off)
+
+  ;;; (Bindings) ;;;
+  (local-set-key (kbd "f") 'syslog-filter-lines)
+  (local-set-key (kbd "F") 'hide-lines-show-all))
 
 
 (defun user/syslog-mode-init ()
