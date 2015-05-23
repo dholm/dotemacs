@@ -350,6 +350,7 @@
                (:agenda . (user/apps-prefix "a"))
                (:notes . (user/apps-prefix "n"))
                (:capture-task . (user/apps-prefix "t"))
+               (:information-db . (user/apps-prefix "D"))
 
                (:browse . (user/apps-prefix "b"))
                (:browse-external . (user/apps-prefix "B"))
