@@ -26,6 +26,22 @@
   (hl-line-mode t))
 
 
+(defun user/gnus-article-display-hook ()
+  "Gnus article display hook."
+  ;; Translate articles that are quoted printable.
+  (gnus-article-de-quoted-unreadable)
+  ;; Emphasize text according to settings.
+  (gnus-article-emphasize)
+  ;; Hide un-interesting headers.
+  (gnus-article-hide-boring-headers)
+  ;; Hide un-wanted headers.
+  (gnus-article-hide-headers-if-wanted)
+  ;; Highlight the current article.
+  (gnus-article-highlight)
+  ;; Highlight cited text
+  (gnus-article-highlight-citation))
+
+
 (defun user/gnus-agent-plugged-hook ()
   "Gnus agent plugged mode hook."
   (setq
@@ -385,6 +401,11 @@
       (lambda () (interactive) (scroll-other-window 1)))))
 
 
+(defun user/gnus-article-init ()
+  "Initialize Gnus article mode."
+  (add-hook 'gnus-article-display-hook 'user/gnus-article-display-hook))
+
+
 (defun user/gnus-agent-init ()
   "Initialize Gnus agent."
   (setq-default
@@ -463,6 +484,7 @@
   ;; Initialize Gnus modules.
   (user/gnus-agent-init)
   (user/gnus-mime-init)
+  (user/gnus-article-init)
   (user/gnus-summary-init)
   (user/gnus-groups-init)
   (user/gnus-score-init)
