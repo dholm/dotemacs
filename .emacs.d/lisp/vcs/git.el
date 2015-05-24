@@ -45,7 +45,9 @@
    ;; Automatically show process buffer if git takes too long to execute.
    magit-process-popup-time 30
    ;; Show fine differences for currently selected hunk.
-   magit-diff-refine-hunk t)
+   magit-diff-refine-hunk t
+   ;; Suppress Magit upgrade warning.
+   magit-last-seen-setup-instructions "1.4.0")
 
   (after-load 'magit
     (with-feature 'fullframe
