@@ -44,7 +44,6 @@
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :basic :open-file 'find-file)
-  (user/bind-key-global :basic :view-file 'view-file)
   (user/bind-key-global :basic :open-buffer 'switch-to-buffer)
   (user/bind-key-global :basic :save 'save-buffer)
   (user/bind-key-global :basic :save-as 'write-file)
