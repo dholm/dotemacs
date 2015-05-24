@@ -69,6 +69,13 @@
   (setq-default git-messenger:show-detail t))
 
 
+(defun user/gerrit-download-init ()
+  "Initialize gerrit download."
+  (after-load 'gnus
+    (require 'gerrit-download)
+    (gerrit-download-insinuate-gnus)))
+
+
 (defun user/git-init ()
   "Initialize Git support."
   (after-load 'popwin
@@ -97,7 +104,7 @@
     (require-package '(:name git-gutter-fringe :after (user/git-gutter-fringe-init))))
   (require-package '(:name git-messenger :after (user/git-messenger-init)))
   (with-executable 'git-review
-    (require-package '(:name gerrit-download)))
+    (require-package '(:name gerrit-download :after (user/gerrit-download-init))))
   (when (feature-p 'helm)
     (require-package '(:name helm-ls-git))
     (require-package '(:name helm-open-github))))
