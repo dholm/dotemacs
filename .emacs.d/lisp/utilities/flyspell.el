@@ -2,13 +2,21 @@
 ;;; Commentary:
 ;;; Code:
 
+(defconst *user-auto-dictionary-buffer-limit* (* 128 1024)
+  "Maximum buffer size for automatic dictionary detection.")
+
+
 (defun user/flyspell-mode-common-hook ()
   "Hook for fly spell common mode."
+  (if (> (buffer-size) *user-auto-dictionary-buffer-limit*)
+      ;; Disables automatic dictionary detection in large buffers.
+      (auto-dictionary-mode -1)
+    (with-feature 'flyspell-lazy
+      ;; Enables flyspell lazy mode for small buffers.
+      (flyspell-lazy-mode t)))
+
   (after-load 'diminish
     (diminish 'flyspell-mode))
-
-  (with-feature 'flyspell-lazy
-    (flyspell-lazy-mode t))
 
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :spellcheck-word 'ispell-word)
