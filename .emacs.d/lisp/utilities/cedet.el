@@ -2,6 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
+(defconst *user-cedet-ectags-enabled* nil)
+(defconst *user-cedet-cscope-enabled* nil)
+(defconst *user-cedet-gnu-global-enabled* t)
+
+
 (defun user/cedet-hook ()
   "Hook for modes with CEDET support."
   ;;; (EDE) ;;;
@@ -128,26 +133,30 @@
 (defun user/semantic-init ()
   "Initialize Semantic."
   (after-load 'semantic
-    ;; Enable [ec]tags support.
-    (with-feature 'semantic/ectags/util
-      (when (and (fboundp 'cedet-ectag-version-check)
-                 (cedet-ectag-version-check t))
-        (semantic-load-enable-primary-ectags-support)))
+    (when *user-cedet-ectags-enabled*
+      ;; Enable [ec]tags support.
+      (with-feature 'semantic/ectags/util
+        (when (and (fboundp 'cedet-ectag-version-check)
+                   (cedet-ectag-version-check t))
+          (semantic-load-enable-primary-ectags-support))))
 
-    (with-feature 'cedet-cscope
-      (when (cedet-cscope-version-check t)
-        (after-load 'semantic/db
-          ;; Use CScope as a database for SemanticDB.
-          (when (fboundp 'semanticdb-enable-cscope-databases)
-            (semanticdb-enable-cscope-databases)))))
+    (when *user-cedet-cscope-enabled*
+      ;; Enable CScope support.
+      (with-feature 'cedet-cscope
+        (when (cedet-cscope-version-check t)
+          (after-load 'semantic/db
+            ;; Use CScope as a database for SemanticDB.
+            (when (fboundp 'semanticdb-enable-cscope-databases)
+              (semanticdb-enable-cscope-databases))))))
 
-    ;; Enable GNU Global if available.
-    (with-feature 'cedet-global
-      (when (and (fboundp 'cedet-gnu-global-version-check)
-                 (cedet-gnu-global-version-check t))
-        ;; Register as SemanticDB source.
-        (semanticdb-enable-gnu-global-databases 'c-mode)
-        (semanticdb-enable-gnu-global-databases 'c++-mode)))
+    (when *user-cedet-gnu-global-enabled*
+      ;; Enable GNU Global if available.
+      (with-feature 'cedet-global
+        (when (and (fboundp 'cedet-gnu-global-version-check)
+                   (cedet-gnu-global-version-check t))
+          ;; Register as SemanticDB source.
+          (semanticdb-enable-gnu-global-databases 'c-mode)
+          (semanticdb-enable-gnu-global-databases 'c++-mode))))
 
     ;; Register languages from contrib.
     (add-to-list 'semantic-new-buffer-setup-functions
