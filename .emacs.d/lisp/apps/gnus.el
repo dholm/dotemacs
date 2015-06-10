@@ -42,6 +42,12 @@
   (gnus-article-highlight-citation))
 
 
+(defun user/gnus-article-prepare-hook ()
+  "Gnus article display hook."
+  (when (featurep 'bbdb)
+    (user/bbdb-display-record)))
+
+
 (defun user/gnus-agent-plugged-hook ()
   "Gnus agent plugged mode hook."
   (setq
@@ -66,16 +72,28 @@
 (defun user/gnus-startup-hook ()
   "Gnus startup hook."
   ;; Enable BBDB.
-  (bbdb-initialize 'gnus)
+  (bbdb-initialize 'gnus 'message)
+  ;; Automatically add seen subjects to notes.
+  (add-to-list 'bbdb-auto-notes-rules
+               '("Subject" (".*" subjects user/gnus-bbdb-subject-canonicalize
+                            nil)))
+  ;; Automatically create entries in BBDB.
+  (bbdb-mua-auto-update-init 'gnus 'message)
+  (setq
+   bbdb-mua-update-interactive-p '(query . create)
+   bbdb-mua-auto-update-p 'create)
+
   (when (feature-p 'google-contacts)
     ;; Google Contacts for Gnus.
     (require 'google-contacts-gnus))
+
   ;; Enable S/MIME via EasyPG.
   (epa-file-enable)
   (when (feature-p 'jl-smime)
     ;; S/MIME LDAP support.
     (require 'ldap)
     (load "jl-smime"))
+
   (with-feature 'gnus-dired
     ;; Attach files using dired.
     (turn-on-gnus-dired-mode)))
@@ -205,6 +223,15 @@
          (nnml . spotlight)
          (nntp . gmane))
        nnir-spotlight-prefix message-directory))))
+
+
+(defun user/gnus-bbdb-subject-canonicalize (subject)
+  "Canonicalize SUBJECT."
+  (let ((newsubject (message-strip-subject-trailing-was
+                     (message-strip-subject-encoded-words
+                      (message-strip-subject-re
+                       (mail-decode-encoded-word-string subject))))))
+    newsubject))
 
 
 (defun user/gnus-score-init ()
@@ -403,6 +430,8 @@
 
 (defun user/gnus-article-init ()
   "Initialize Gnus article mode."
+  (after-load 'gnus-art
+    (add-hook 'gnus-article-prepare-hook 'user/gnus-article-prepare-hook))
   (add-hook 'gnus-article-display-hook 'user/gnus-article-display-hook))
 
 

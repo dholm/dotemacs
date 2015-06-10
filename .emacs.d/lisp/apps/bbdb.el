@@ -12,22 +12,43 @@
   (bbdb-initialize))
 
 
+(defun user/bbdb-create-or-update-notes ()
+  "Auto create records, or update if they exist."
+  (let (done elt)
+    (while (and (setq elt (pop rest)) (not done))
+      (dolist (header (if (stringp (car elt)) (list (car elt)) (car elt)))
+        (if (bbdb-message-header-re header (cdr elt))
+            (setq done t))))
+    (if done 'create 'update)))
+
+
+(defun user/bbdb-display-record ()
+  "Display appropriate BBDB record for the current message."
+  (unless
+      (bbdb-mua-display-records nil 'search)
+    ;; No record found, close the BBDB popup
+    (let ((window (get-buffer-window bbdb-buffer-name)))
+      (when window (delete-window window)))))
+
+
 (defun user/bbdb-init ()
   "Initialize BBDB."
   (setq-default
    ;; Set up location of database.
    bbdb-file *user-bbdb-database*
-   ;; Automatically save seen addresses.
-   bbdb-offer-save 1
+   ;; Automatically save database without asking.
+   bbdb-notice-auto-save-file t
    ;; Use popups for address completion.
    bbdb-use-pop-up t
-   ;; Pop up horizontally.
+   ;; Try to fit popup horizontally.
    bbdb-mua-pop-up 'horiz
-   bbdb-mua-pop-up-window-size 10
-   bbdb-horiz-pop-up-window-size '(80 . 03)
-   bbdb-electric-p t
+   ;; Size of popup.
+   bbdb-popup-target-lines 1
+   bbdb-mua-pop-up-window-size 2
    ;; Cycle through completions.
    bbdb-complete-name-allow-cycling t
+   ;; Hide pop-up after completion.
+   bbdb-completion-display-record nil
    ;; Always use full name.
    bbdb-dwim-net-address-allow-redundancy t
    bbdb-quiet-about-name-mismatches 2
@@ -53,16 +74,21 @@
    ;; Ignore certain addresses when adding to address book.
    bbdb/mail-auto-create-p 'bbdb-ignore-some-messages-hook
    bbdb-ignore-some-messages-alist
-   '(("From" . "no.*reply\\|DAEMON\\|daemon")))
+   '(("From" . "no.*reply\\|DAEMON\\|daemon"))
+   ;; Fields to auto-populate in notes.
+   bbdb-auto-notes-rules
+   (list
+    '("Organization" (".*" organization "\\1" nil))
+    '("Newsgroups" ("[^,]+" newsgroups identity nil))
+    '("Xref" ("[^ ]+ \\([^ :]+\\):[0-9]+" newsgroups "\\1" nil))
+    '("User-Agent" (".*" mailer identity nil))
+    '("X-Mailer" (".*" mailer identity nil))
+    '("X-Newsreader" (".*" mailer identity nil)))
+   bbdb-update-records-p 'user/bbdb-create-or-update-notes)
+
 
   ;; Add notes when updating a record.
-  (add-hook 'bbdb-notice-mail-hook 'bbdb-auto-notes)
-  (setq-default bbdb-auto-notes-rules
-                (list
-                 '("Organization" (".*" organization "\\1" nil))
-                 '("User-Agent" (".*" mailer identity nil))
-                 '("X-Mailer" (".*" mailer identity nil))
-                 '("X-Newsreader" (".*" mailer identity nil)))))
+  (add-hook 'bbdb-notice-mail-hook 'bbdb-auto-notes))
 
 (require-package '(:name bbdb :after (user/bbdb-init)))
 
