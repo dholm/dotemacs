@@ -51,7 +51,7 @@
 (defun user/bbdbv3-wl-init-hook ()
   "BBDBv3 Wanderlust initiatlization hook."
   (with-feature 'bbdbV3-wl
-    (user/bbdb-init-hook)))
+    (bbdb-initialize)))
 
 
 (defun user/wl-init-hook ()

@@ -7,9 +7,11 @@
   "Path to user's BBDB file.")
 
 
-(defun user/bbdb-init-hook ()
+(defun user/bbdb-initialize-hook ()
   "BBDB initialization hook."
-  (bbdb-initialize))
+  (when (feature-p 'bbdb-vcard)
+    ;; Load vCard support.
+    (require 'bbdb-vcard)))
 
 
 (defun user/bbdb-create-or-update-notes ()
@@ -86,11 +88,13 @@
     '("X-Newsreader" (".*" mailer identity nil)))
    bbdb-update-records-p 'user/bbdb-create-or-update-notes)
 
-
+  ;;; (Hooks) ;;;
   ;; Add notes when updating a record.
-  (add-hook 'bbdb-notice-mail-hook 'bbdb-auto-notes))
+  (add-hook 'bbdb-notice-mail-hook 'bbdb-auto-notes)
+  (add-hook 'bbdb-initialize-hook 'user/bbdb-initialize-hook))
 
 (require-package '(:name bbdb :after (user/bbdb-init)))
+(require-package '(:name bbdb-vcard))
 
 
 (provide 'apps/bbdb)
