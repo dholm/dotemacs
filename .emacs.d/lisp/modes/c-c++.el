@@ -31,7 +31,8 @@
     ;; Match context to open parentheses.
     (paren-toggle-open-paren-context t))
 
-  (when (feature-p 'helm-etags-plus)
+  (when (and *user-cedet-ectags-enabled*
+             (feature-p 'helm-etags-plus))
     ;; Automatically update tags.
     (turn-on-ctags-auto-update-mode))
 
