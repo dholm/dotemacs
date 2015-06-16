@@ -15,7 +15,9 @@
    ;; Auto save storage.
    tramp-auto-save-directory (path-join *user-auto-save-directory* "tramp")
    ;; SSH is properly configured to share connections.
-   tramp-use-ssh-controlmaster-options nil)
+   tramp-use-ssh-controlmaster-options nil
+   ;; Allow reading dir-local on remote system.
+   enable-remote-dir-locals t)
 
   ;; Load SSH configuration
   (after-load 'tramp
@@ -26,7 +28,11 @@
              (lambda (x) (not (file-exists-p x)))
              `(,(path-join "/" "etc" "ssh_config")
                ,(path-join "/" "etc" "ssh" "ssh_config")
-               ,(path-join *user-home-directory* ".ssh" "config")))))))
+               ,(path-join *user-home-directory* ".ssh" "config")))))
+
+    ;; Preserve PATH on remote host.
+    (setq tramp-remote-path (delete 'tramp-default-remote-path tramp-remote-path))
+    (add-to-list 'tramp-remote-path 'tramp-own-remote-path)))
 
 (require-package '(:name tramp :after (user/tramp-init)))
 
