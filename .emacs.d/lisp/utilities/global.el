@@ -40,10 +40,10 @@
   (with-executable 'global
     (with-project-root project-root nil
       (cond
-       ((require 'cedet-global nil :noerror)
-        (cedet-gnu-global-create/update-database project-root))
        ((require 'ggtags nil :noerror)
-        (ggtags-create-tags project-root))))))
+        (ggtags-create-tags project-root))
+       ((require 'cedet-global nil :noerror)
+        (cedet-gnu-global-create/update-database project-root))))))
 
 
 (defun user/helm-gtags-init ()
