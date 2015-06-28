@@ -17,6 +17,10 @@
   (after-load 'dtrt-indent
     (dtrt-indent-mode t))
 
+  (with-feature 'annotate
+    ;; Enable annotations.
+    (annotate-mode t))
+
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :align 'align-current)
   (when (feature-p 'helm)
