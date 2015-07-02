@@ -10,7 +10,9 @@
   "Initialize annotate.el."
   (setq-default
    ;; Set path to where annotations are stored.
-   annotate-file *user-annotations-file*))
+   annotate-file *user-annotations-file*
+   ;; Disable status messages.
+   annotate-use-messages nil))
 
 (require-package '(:name annotate.el :after (user/annotate.el-init)))
 
