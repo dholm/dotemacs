@@ -63,11 +63,21 @@
   (add-hook 'tern-mode-hook 'user/tern-mode-hook))
 
 
+(defun user/ac-html-init ()
+  "Initialize ac-html."
+  (after-load 'web-mode
+    (add-to-list 'web-mode-ac-sources-alist
+                 '("html" . (ac-source-html-attribute-value
+                             ac-source-html-tag
+                             ac-source-html-attribute)))))
+
+
 (defun user/web-init ()
   "Initialize web development."
   (require-package '(:name web-mode :after (user/web-mode-init)))
   (with-executable 'npm
     (require-package '(:name tern :after (user/tern-init))))
+  (require-package '(:name ac-html :after (user/ac-html-init)))
   (require-package '(:name skewer-mode))
   (require-package '(:name tidy)))
 
