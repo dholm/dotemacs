@@ -36,7 +36,9 @@
 (when (featurep 'el-get)
   (setq-default
    el-get-user-package-directory (path-join user-emacs-directory "init")
-   el-get-verbose el-get-safe-mode))
+   el-get-verbose el-get-safe-mode
+   ;; Don't produce system notifications.
+   el-get-notify-type 'message))
 
 
 (defun require-package (package)
