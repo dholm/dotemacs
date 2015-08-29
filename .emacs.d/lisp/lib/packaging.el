@@ -12,12 +12,13 @@
   :type 'hook)
 
 
-;; Configure ELPA repositories
 (with-feature 'package
-  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                           ("marmalade" . "http://marmalade-repo.org/packages/")
-                           ("melpa" . "http://melpa.milkbox.net/packages/")))
-  (package-initialize))
+  ;; Configure ELPA repositories
+  (add-many-to-list
+   'package-archives
+   '("gnu" . "http://elpa.gnu.org/packages/")
+   '("marmalade" . "http://marmalade-repo.org/packages/")
+   '("melpa" . "http://melpa.milkbox.net/packages/")))
 
 
 ;; Configure and load el-get
@@ -56,8 +57,10 @@
   (let ((package-list (user/package-list)))
     (if el-get-safe-mode
         (el-get 'sync package-list)
-      (el-get nil package-list))
-    (run-hooks 'user/after-init-hook)))
+      (el-get nil package-list)))
+  (when (featurep 'package)
+    (package-initialize))
+  (run-hooks 'user/after-init-hook))
 
 
 (defun user/load-from-package (package &rest path)
