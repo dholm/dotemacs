@@ -13,8 +13,6 @@
 
 
 (require-package '(:name swig-mode
-                         :type github
-                         :pkgname "dholm/swig-mode"
                          :after (user/swig-mode-init)))
 
 
