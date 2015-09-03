@@ -19,7 +19,10 @@
   ;; Disable whitespace mode settings that don't make sense in makefiles.
   (user/whitespace-disable-style '(indentation space-after-tab))
   ;; Separate camel-case into separate words.
-  (subword-mode t))
+  (subword-mode t)
+  ;; Support for documentation in Doxygen format.
+  (with-feature 'doxymacs
+    (doxymacs-mode t)))
 
 
 (defun user/makefile-mode-init ()
