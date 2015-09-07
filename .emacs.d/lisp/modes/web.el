@@ -9,7 +9,10 @@
    indent-tabs-mode nil)
 
   (with-feature 'pandoc-mode
-    (pandoc-mode t)))
+    (pandoc-mode t))
+
+  (with-feature 'guide-key
+    (guide-key/add-local-highlight-command-regexp "web-mode-")))
 
 
 (defmacro user/add-web-mode-hook (engine function)

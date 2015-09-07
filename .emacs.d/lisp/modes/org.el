@@ -32,6 +32,12 @@
                          "[0-9]+[.)][ \t] +\\)\\|[ \t]*[:|]\\|"
                          "^[ \t]+\\[[0-9]\\{4\\}-"))
 
+  (with-feature 'guide-key
+    ;; org-mode specific key guides.
+    (guide-key/add-local-guide-key-sequence "C-c")
+    (guide-key/add-local-guide-key-sequence "C-c C-x")
+    (guide-key/add-local-highlight-command-regexp "org-"))
+
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :context-promote 'org-shiftup)
   (user/bind-key-local :code :context-demote 'org-shiftdown))

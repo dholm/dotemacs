@@ -3,7 +3,9 @@
 ;;; Code:
 
 (defun user/markdown-mode-hook ()
-  "Markdown mode hook.")
+  "Markdown mode hook."
+  (with-feature 'guide-key
+    (guide-key/add-local-highlight-command-regexp "markdown-")))
 
 
 (defun user/markdown-mode-init ()
