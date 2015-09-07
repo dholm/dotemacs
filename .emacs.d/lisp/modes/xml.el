@@ -81,7 +81,8 @@
   ;; XML modes.
   (add-magic-mode 'nxml-mode "<\\?xml")
   (add-auto-mode 'nxml-mode
-                 "\\.xml$" "\\.xsd$" "\\.xslt$" "\\.rss$" "\\.svg$" "\\.plist$")
+                 "\\.xml$" "\\.xsd$" "\\.xslt$" "\\.rss$" "\\.svg$" "\\.plist$"
+                 "\\.rng$" "\\.rnc$")
 
   ;; Enable hide/show support for XML.
   (add-to-list
