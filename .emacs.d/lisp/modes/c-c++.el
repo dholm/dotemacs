@@ -121,6 +121,29 @@
       (irony-enable 'ac))))
 
 
+(defun user/cflow-init ()
+  "Initialize cflow."
+  (defun user/cflow-function (function-name)
+    "Get call graph of inputed function. "
+    (interactive (list (car (senator-jump-interactive "Function name: " nil nil nil))))
+    (let* ((file-name (if (tramp-tramp-file-p buffer-file-name)
+                          (tramp-file-name-localname
+                           (tramp-dissect-file-name buffer-file-name))
+                        buffer-file-name))
+           (cmd (format "cflow -b -n -T --main=\"%s\" %s" function-name file-name))
+           (cflow-buf-name (format "**cflow-%s:%s**"
+                                   (file-name-nondirectory buffer-file-name)
+                                   function-name))
+           (cflow-buf (get-buffer-create cflow-buf-name)))
+      (set-buffer cflow-buf)
+      (setq buffer-read-only nil)
+      (erase-buffer)
+      (insert (shell-command-to-string cmd))
+      (pop-to-buffer cflow-buf)
+      (goto-char (point-min))
+      (cflow-mode))))
+
+
 (defun user/c-c++-mode-init ()
   "Initialize C/C++ mode."
   (after-load 'cc-mode
@@ -140,7 +163,9 @@
              (executable-find "llvm-config"))
     (require-package '(:name irony-mode :after (user/irony-mode-init))))
   (require-package '(:name function-args))
-  (require-package '(:name google-c-style)))
+  (require-package '(:name google-c-style))
+  (when (executable-find "cflow")
+    (require-package '(:name cflow :after (user/cflow-init)))))
 
 (user/c-c++-mode-init)
 
