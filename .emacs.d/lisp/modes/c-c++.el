@@ -39,6 +39,11 @@
   (user/gnu-global-enable)
   (user/cscope-enable)
 
+  (with-feature 'cpputils-cmake
+    (when (derived-mode-p 'c-mode 'c++-mode)
+      ;; Enable CMake C/C++ utilities.
+      (cppcm-reload-all)))
+
   (with-feature 'irony
     (when (member major-mode irony-supported-major-modes)
       ;; Better auto completion.
@@ -162,9 +167,11 @@
              (executable-find "clang")
              (executable-find "llvm-config"))
     (require-package '(:name irony-mode :after (user/irony-mode-init))))
+  (with-executable 'cmake
+    (require-package '(:name cpputils-cmake)))
   (require-package '(:name function-args))
   (require-package '(:name google-c-style))
-  (when (executable-find "cflow")
+  (with-executable 'cflow
     (require-package '(:name cflow :after (user/cflow-init)))))
 
 (user/c-c++-mode-init)
