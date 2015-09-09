@@ -85,6 +85,20 @@
       (diminish 'function-args-mode))))
 
 
+(defun user/irony-mode-hook ()
+  "Mode hook for irony."
+  ;; Load flags from compilation database.
+  (irony-cdb-autosetup-compile-options)
+
+  ;;; (Bindings) ;;;
+  (define-key irony-mode-map [remap completion-at-point]
+    'irony-completion-at-point-async)
+  (define-key irony-mode-map [remap complete-symbol]
+    'irony-completion-at-point-async)
+  (define-key irony-mode-map (user/get-key :code :auto-complete)
+    'irony-completion-at-point-async))
+
+
 (defun user/c-mode-font-lock-if0 (limit)
   "Propertize '#if 0' regions, up to LIMIT in size, as comments."
   (save-restriction
@@ -123,7 +137,10 @@
   "Initialize irony mode."
   (after-load 'irony-mode
     (when (feature-p 'auto-complete)
-      (irony-enable 'ac))))
+      (irony-enable 'ac))
+
+    ;;; (Hooks) ;;;
+    (add-hook 'irony-mode-hook 'user/irony-mode-hook)))
 
 
 (defun user/cflow-init ()
