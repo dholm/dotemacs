@@ -34,44 +34,67 @@
     (el-get-elpa-build-local-recipes)))
 
 
-(when (featurep 'el-get)
+(defun user/package-as-el-get (package)
+  "Convert PACKAGE into el-get format."
+  (append
+   `(:name ,(plist-get package :name))
+   (when (plist-member package :before)
+     `(:before ,(plist-get package :before)))
+   (when (plist-member package :after)
+     `(:after ,(plist-get package :after)))
+   (when (plist-member package :type)
+     `(:type ,(plist-get package :type))
+     (cond
+      ((plist-member package :url) `(:url ,(plist-get package :url)))
+      ((plist-member package :pkgname) `(:pkgname ,(plist-get package :pkgname)))))))
+
+
+(defun user/el-get-init ()
+  "Initialize el-get as package manager."
   (setq-default
    el-get-user-package-directory (path-join user-emacs-directory "init")
    el-get-verbose el-get-safe-mode
    ;; Don't produce system notifications.
-   el-get-notify-type 'message))
+   el-get-notify-type 'message)
+
+  (defun require-package (package)
+    "Add the specified PACKAGE to el-get-sources."
+    (add-to-list 'el-get-sources (user/package-as-el-get package)))
+
+  (defun user/package-list ()
+    "Get the list of registered packages from el-get."
+    (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources)))
+
+  (defun user/sync-packages ()
+    "Sync all required packages."
+    (let ((package-list (user/package-list)))
+      (if el-get-safe-mode
+          (el-get 'sync package-list)
+        (el-get nil package-list)))
+    (when (featurep 'package)
+      (package-initialize))
+    (run-hooks 'user/after-init-hook))
+
+  ;; Make sure el-get is registered so that el-get-cleanup doesn't remove it
+  (require-package '(:name el-get)))
 
 
-(defun require-package (package)
-  "Add the specified PACKAGE to el-get-sources."
-  (setq el-get-sources (append el-get-sources `(,package))))
+(defun user/nil-package-init ()
+  "Initialize nil as package manager."
+  (defun require-package (package)
+    "Add the specified PACKAGE to nil.")
+
+  (defun user/package-list ()
+    "Get the list of registered packages from nil.")
+
+  (defun user/sync-packages ()
+    "Sync all required packages."
+    (run-hooks 'user/after-init-hook)))
 
 
-(defun user/package-list ()
-  "Get the list of registered packages."
-  (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources)))
-
-
-(defun user/sync-packages ()
-  "Sync all required packages."
-  (let ((package-list (user/package-list)))
-    (if el-get-safe-mode
-        (el-get 'sync package-list)
-      (el-get nil package-list)))
-  (when (featurep 'package)
-    (package-initialize))
-  (run-hooks 'user/after-init-hook))
-
-
-(defun user/load-from-package (package &rest path)
-  "Load file from PACKAGE at PATH."
-  (when (el-get-package-is-installed package)
-    (let ((package-path (el-get-load-path package)))
-      (load (path-join package-path path) :noerror))))
-
-
-;; Make sure el-get is registered so that el-get-cleanup doesn't remove it
-(require-package '(:name el-get))
+(cond
+ ((featurep 'el-get) (user/el-get-init))
+ (t (user/nil-package-init)))
 
 
 (provide 'lib/packaging)
