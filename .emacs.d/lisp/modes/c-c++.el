@@ -56,6 +56,8 @@
   (when (feature-p 'iasm-mode)
     (user/bind-key-local :code :library-list 'iasm-disasm-link-buffer)
     (user/bind-key-local :code :disassemble 'iasm-goto-disasm-buffer))
+  (with-feature 'clang-format
+    (user/bind-key-local :code :tidy 'clang-format-region))
   (with-executable 'gdb
     (user/bind-key-local :debug :start 'realgud-gdb)))
 
@@ -186,6 +188,8 @@
     (require-package '(:name irony-mode :after (user/irony-mode-init))))
   (with-executable 'cmake
     (require-package '(:name cpputils-cmake)))
+  (with-executable 'clang
+    (require-package '(:name clang-format)))
   (require-package '(:name function-args))
   (require-package '(:name google-c-style))
   (with-executable 'cflow
