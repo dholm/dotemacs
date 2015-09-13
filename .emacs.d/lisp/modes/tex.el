@@ -23,6 +23,7 @@
   (turn-on-reftex)
   (outline-minor-mode t)
   (visual-line-mode t)
+  (user/smartparens-enable)
 
   (when (feature-p 'mic-paren)
     ;; Match context to quoted parentheses.
@@ -183,6 +184,15 @@ Makes it easier to version control LaTeX-files."
     (setq mode-compile-modes-alist
           (append '((latex-mode . (tex-compile kill-compilation)))
                   mode-compile-modes-alist)))
+
+  (after-load 'smartparens
+    (sp-with-modes '(tex-mode plain-tex-mode latex-mode)
+      (sp-local-tag "i" "\"<" "\">")
+      (sp-local-pair "\\[" " \\]")
+      (sp-local-pair "\\(" " \\)")
+      (sp-local-pair "\\{" " \\}")
+      (sp-local-pair "\\left(" " \\right)")
+      (sp-local-pair "\\left\\{" " \\right\\}")))
 
   ;; Set up hooks.
   (add-hook 'tex-mode-hook 'user/tex-mode-hook)

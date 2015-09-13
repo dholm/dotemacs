@@ -52,6 +52,8 @@
   (with-feature 'auto-complete-c-headers
     (add-ac-sources 'ac-source-c-headers))
 
+  (user/smartparens-enable)
+
   ;;; (Bindings) ;;;
   (when (feature-p 'iasm-mode)
     (user/bind-key-local :code :library-list 'iasm-disasm-link-buffer)
@@ -174,6 +176,13 @@
     (add-many-to-list 'c-default-style
                       '(c-mode . "K&R")
                       '(c++-mode . "Stroustrup")))
+
+  (after-load 'smartparens
+    (sp-with-modes '(c-mode c++-mode)
+      ;; Automatically add another newline before closing curly brace on enter.
+      (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
+      (sp-local-pair "/*" "*/" :post-handlers '((" | " "SPC")
+                                                ("* ||\n[i]" "RET")))))
 
   (add-hook 'c-mode-common-hook 'user/c-mode-common-hook)
 

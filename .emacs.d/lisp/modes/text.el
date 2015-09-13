@@ -6,6 +6,8 @@
   "Text mode hook."
   (user/fundamental-mode-hook)
 
+  (user/smartparens-enable)
+
   (setq
    ;; Colons are followed by two spaces.
    colon-double-space t
@@ -31,6 +33,10 @@
 
 (defun user/text-mode-init ()
   "Initialize generic text editing mode."
+  (after-load 'smartparens
+    (sp-with-modes '(text-mode)
+      (sp-local-pair "`" "'" :actions '(insert wrap))))
+
   (add-hook 'text-mode-hook 'user/text-mode-hook))
 
 (user/text-mode-init)

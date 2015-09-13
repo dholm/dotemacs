@@ -9,6 +9,8 @@
   ;; Enable editing of camel case
   (subword-mode t)
 
+  (user/smartparens-enable)
+
   (with-feature 'ac-ghc-mod
     (add-ac-sources 'ac-source-ghc-module 'ac-source-ghc-symbol
                     'ac-source-ghc-pragmas 'ac-source-ghc-langexts))
@@ -40,6 +42,18 @@
 
 (defun user/haskell-mode-init ()
   "Initialize Haskell mode."
+  (after-load 'smartparens
+    (defun user/haskell-after-symbol-p (_id action _context)
+      (when (eq action 'insert)
+        (save-excursion
+          (backward-char 1)
+          (looking-back "\\sw\\|\\s_\\|\\s'"))))
+
+    (sp-with-modes '(haskell-mode)
+      (sp-local-pair "'" nil :unless '(user/haskell-after-symbol-p))
+      (sp-local-pair "\\(" nil :actions nil)))
+
+  ;;; (Packages) ;;;
   (require-package '(:name haskell-mode))
   (require-package '(:name ghci-completion))
   (require-package '(:name hi2))

@@ -22,6 +22,8 @@
   (unless (derived-mode-p 'text-mode)
     (user/text-mode-hook))
 
+  (user/smartparens-enable)
+
   ;; Proper filling of org-mode text, form:
   ;;  * http://lists.gnu.org/archive/html/emacs-orgmode/2008-01/msg00375.html
   (org-set-local 'paragraph-separate
@@ -389,6 +391,24 @@
   (user/org-annotate-file-init)
   (user/org-mobile-init)
 
+  (after-load 'smartparens
+    (defun sp--org-skip-asterisk (ms mb me)
+      (or (and (= (line-beginning-position) mb)
+               (eq 32 (char-after (1+ mb))))
+          (and (= (1+ (line-beginning-position)) me)
+               (eq 32 (char-after me)))))
+
+    (sp-with-modes 'org-mode
+      (sp-local-pair "*" "*" :actions '(insert wrap)
+                     :unless '(sp-point-after-word-p sp-point-at-bol-p)
+                     :wrap "C-*" :skip-match 'sp--org-skip-asterisk)
+      (sp-local-pair "_" "_" :unless '(sp-point-after-word-p) :wrap "C-_")
+      (sp-local-pair "/" "/" :unless '(sp-point-after-word-p) :post-handlers '(("[d1]" "SPC")))
+      (sp-local-pair "~" "~" :unless '(sp-point-after-word-p) :post-handlers '(("[d1]" "SPC")))
+      (sp-local-pair "=" "=" :unless '(sp-point-after-word-p) :post-handlers '(("[d1]" "SPC")))
+      (sp-local-pair "«" "»")))
+
+  ;;; (Hooks) ;;;
   (add-hook 'org-load-hook 'user/org-load-hook)
   (add-hook 'org-mode-hook 'user/org-mode-hook)
 
