@@ -29,6 +29,12 @@
       (diminish 'ggtags-mode))
     (ggtags-mode t)
 
+    (unless (and (boundp 'imenu-create-index-function)
+                 imenu-create-index-function)
+      (setq-local
+       ;; Use ggtags to generate imenu.
+       imenu-create-index-function #'ggtags-build-imenu-index))
+
     (setq-local
      ;; Enable Eldoc support.
      eldoc-documentation-function #'ggtags-eldoc-function)))
