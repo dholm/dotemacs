@@ -49,6 +49,9 @@
       ;; Better auto completion.
       (irony-mode t)))
 
+  (with-feature 'rtags-ac
+    (add-ac-sources 'ac-source-rtags))
+
   (with-feature 'auto-complete-c-headers
     (add-ac-sources 'ac-source-c-headers))
 

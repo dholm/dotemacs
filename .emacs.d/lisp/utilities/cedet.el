@@ -71,13 +71,9 @@
         ;; Register as auto-completion source.
         (add-ac-sources 'ac-source-gtags)))
 
+    (user/tags-try-enable)
+
     ;;; (Bindings) ;;;
-    (user/bind-key-local :code :update-index 'user/cedet-create/update-all)
-    (when (feature-p 'helm)
-      (user/bind-key-local :nav :functions/toc 'helm-semantic-or-imenu))
-    (unless (and (boundp 'helm-gtags-mode) helm-gtags-mode)
-      (user/bind-key-local :nav :find-symbol 'semantic-symref-find-tags-by-regexp)
-      (user/bind-key-local :nav :references 'semantic-symref))
     (user/bind-key-local :nav :jump-spec-impl 'semantic-analyze-proto-impl-toggle)
     (user/bind-key-local :doc :describe 'semantic-ia-show-doc)))
 
@@ -89,14 +85,6 @@
      ;; Configure include path for auto completion.
      achead:get-include-directories-function
      'ede-object-system-include-path)))
-
-
-(defun user/cedet-create/update-all ()
-  "Create or update all databases at current project root."
-  (interactive)
-  (user/cscope-create/update)
-  (user/gnu-global-create/update)
-  (user/cedet-gnu-idutils-create/update))
 
 
 (defun user/cedet-before-init ()

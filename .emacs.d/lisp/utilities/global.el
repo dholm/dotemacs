@@ -9,12 +9,7 @@
     (setq-default
      helm-gtags-auto-update t
      helm-gtags-tag-location (user/gnu-global-tags-location
-                              (buffer-file-name))))
-
-  ;;; (Bindings) ;;;
-  (user/bind-key-local :nav :find-symbol 'helm-gtags-select)
-  (user/bind-key-local :nav :go-back 'helm-gtags-pop-stack)
-  (user/bind-key-local :nav :references 'helm-gtags-find-rtag))
+                              (buffer-file-name)))))
 
 
 (defun user/gnu-global-enable ()
@@ -37,7 +32,9 @@
 
     (setq-local
      ;; Enable Eldoc support.
-     eldoc-documentation-function #'ggtags-eldoc-function)))
+     eldoc-documentation-function #'ggtags-eldoc-function))
+
+  (user/tags-try-enable))
 
 
 (defun user/gnu-global-create/update ()
