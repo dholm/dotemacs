@@ -7,6 +7,11 @@
   (file-truename (or (buffer-file-name) default-directory)))
 
 
+(defun path-dirname (path)
+  "Get the parent directory of PATH."
+  (file-name-directory (directory-file-name path)))
+
+
 (defun path-join (root &rest dirs)
   "Join paths together starting at ROOT and proceeding with DIRS.
 Ex: (path-join \"/tmp\" \"a\" \"b\" \"c\") => /tmp/a/b/c"

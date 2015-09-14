@@ -11,13 +11,25 @@
 (defconst *user-home-directory*
   (getenv-or "HOME" (concat (expand-file-name "~") "/"))
   "Path to user home directory.")
+(defconst *user-local-directory*
+  (if (getenv "XDG_DATA_HOME")
+      (path-dirname (getenv "XDG_DATA_HOME"))
+    (path-join *user-home-directory* ".local"))
+  "Path to user's local store.")
+(defconst *user-config-directory*
+  (path-join (getenv-or "XDG_CONFIG_HOME"
+                        (path-join *user-home-directory* ".config"))
+             "emacs")
+  "Path to user's local cache store.")
 (defconst *user-data-directory*
-  (getenv-or "XDG_DATA_HOME"
-             (path-join *user-home-directory* ".local" "share" "emacs"))
+  (path-join (getenv-or "XDG_DATA_HOME"
+                        (path-join *user-local-directory* "share"))
+             "emacs")
   "Path to user's local data store.")
 (defconst *user-cache-directory*
-  (getenv-or "XDG_CACHE_HOME"
-             (path-join *user-home-directory* ".cache" "emacs"))
+  (path-join (getenv-or "XDG_CACHE_HOME"
+                        (path-join *user-home-directory* ".cache"))
+             "emacs")
   "Path to user's local cache store.")
 (defconst *user-documents-directory*
   (path-join *user-home-directory* "Documents")

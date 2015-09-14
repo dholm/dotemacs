@@ -142,6 +142,10 @@
 
 (defun user/irony-mode-init ()
   "Initialize irony mode."
+  (setq-default
+   ;; Install irony server in user's local path.
+   irony-user-dir *user-local-directory*)
+
   (after-load 'irony-mode
     (when (feature-p 'auto-complete)
       (irony-enable 'ac))
