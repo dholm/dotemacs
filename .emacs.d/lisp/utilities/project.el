@@ -14,7 +14,9 @@
        ((and (featurep 'ede/generic)
              (ede-generic-cmake-project-p project)) project)
        ((and (featurep 'ede/linux)
-             (ede-linux-project-p project)) project)))))
+             (ede-linux-project-p project)) project)
+       ((and (featurep 'ede-compdb)
+             (ede-compdb-project-p project)) project)))))
 
 
 (defun user/ede-project-include-paths (project)
