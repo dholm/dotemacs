@@ -173,6 +173,13 @@
       (cflow-mode))))
 
 
+(defun user/cpputils-cmake-init ()
+  "Initialize cpputils CMake."
+  (setq-default
+   ;; Disable Flymake.
+   cppcm-write-flymake-makefile nil))
+
+
 (defun user/c-c++-mode-init ()
   "Initialize C/C++ mode."
   (after-load 'cc-mode
@@ -199,7 +206,7 @@
              (executable-find "llvm-config"))
     (require-package '(:name irony-mode :after (user/irony-mode-init))))
   (with-executable 'cmake
-    (require-package '(:name cpputils-cmake)))
+    (require-package '(:name cpputils-cmake :after (user/cpputils-cmake-init))))
   (with-executable 'clang
     (require-package '(:name clang-format)))
   (require-package '(:name function-args))
