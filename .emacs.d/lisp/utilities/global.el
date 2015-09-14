@@ -66,6 +66,10 @@
 
 (defun user/global-init ()
   "Initialize GNU Global support."
+  (add-to-list
+   ;; Don't invoke debugger if global can't find its tags.
+   'debug-ignored-errors "global: GTAGS not found")
+
   ;;; (Packages) ;;;
   (require-package '(:name helm-gtags :after (user/helm-gtags-init)))
   (require-package '(:name ggtags)))
