@@ -20,7 +20,6 @@
 
     (sp-with-modes '(markdown-mode gfm-mode rst-mode)
       (sp-local-pair "*" "*" :wrap "C-*" :skip-match 'sp--gfm-skip-asterisk)
-      (sp-local-pair "_" "_" :wrap "C-_")
       (sp-local-pair "`" "`")
       (sp-local-tag "2" "**" "**")
       (sp-local-tag "s" "```scheme" "```")
