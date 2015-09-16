@@ -64,13 +64,6 @@
     ;; Use semantic as a source for auto complete.
     (add-ac-sources 'ac-source-semantic)
 
-    ;; Use GNU GLOBAL as a source for auto complete.
-    (with-feature 'cedet-global
-      (when (and (fboundp 'cedet-gnu-global-version-check)
-                 (cedet-gnu-global-version-check t))
-        ;; Register as auto-completion source.
-        (add-ac-sources 'ac-source-gtags)))
-
     (user/tags-try-enable)
 
     ;;; (Bindings) ;;;

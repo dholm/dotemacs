@@ -31,8 +31,16 @@
        imenu-create-index-function #'ggtags-build-imenu-index))
 
     (setq-local
+     ;; Use as source for `hippie-exp'.
+     hippie-expand-try-functions-list
+     (cons 'ggtags-try-complete-tag hippie-expand-try-functions-list))
+
+    (setq-local
      ;; Enable Eldoc support.
      eldoc-documentation-function #'ggtags-eldoc-function))
+
+  ;; Register as auto-completion source.
+  (add-ac-sources 'ac-source-gtags)
 
   (user/tags-try-enable))
 
