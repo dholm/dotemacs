@@ -140,7 +140,7 @@
     (user/bind-key-global :nav :follow-symbol 'user/tag-follow)
     (user/bind-key-local :nav :find-symbol 'user/tag-find)
     (user/bind-key-local :nav :references 'user/tag-references-at-point)
-    (user/bind-key-local :nav :references 'user/tag-find-references)
+    (user/bind-key-local :nav :find-references 'user/tag-find-references)
     (user/bind-key-local :basic :open-file-context 'user/tag-find-file)
     (user/bind-key-local :nav :go-back 'user/tag-pop)))
 

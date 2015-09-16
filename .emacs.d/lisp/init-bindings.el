@@ -230,6 +230,7 @@
               (:find-symbol . ("C-l s"))
               (:jump-spec-impl . ("C-l i"))
               (:references . ("C-l r"))
+              (:find-references . ("C-l M-r"))
               (:switch-spec-impl . ("C-l h"))
               (:functions/toc . ("C-l t"))
               (:history . ("C-l h"))
