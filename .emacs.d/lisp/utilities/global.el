@@ -37,12 +37,21 @@
   (user/tags-try-enable))
 
 
+(defsubst user/gnu-global-query-label ()
+  "Query for GNU GLOBAL label."
+  (let ((labels '("default" "native" "user" "ctags" "pygments")))
+    (completing-read "GTAGSLABEL(Default: default): " labels nil t nil nil
+                     "default")))
+
+
 (defun user/gnu-global-create/update ()
   "Create or update GNU GLOBAL database at current project root."
   (interactive)
   (with-executable 'global
     (with-project-root project-root nil
       (cond
+       ((require 'helm-gtags nil :noerror)
+        (helm-gtags-create-tags project-root (user/gnu-global-query-label)))
        ((require 'ggtags nil :noerror)
         (ggtags-create-tags project-root))
        ((require 'cedet-global nil :noerror)
