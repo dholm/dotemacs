@@ -45,6 +45,7 @@
   (user/bind-key-global :basic :selection-start 'set-mark-command)
   (user/bind-key-global :basic :copy 'kill-ring-save)
   (user/bind-key-global :basic :cut 'kill-region)
+  (user/bind-key-global :basic :cut-expr 'kill-sexp)
   (user/bind-key-global :basic :paste 'yank)
   (user/bind-key-global :basic :cycle-paste 'yank-pop)
 
@@ -55,9 +56,6 @@
     (global-set-key [remap kill-ring-save] 'clipboard-kill-ring-save))
   (when (fboundp 'clipboard-yank)
     (global-set-key [remap yank] 'clipboard-yank))
-
-  ;; Put backspace on C-h like in terminal.
-  (global-set-key (kbd "C-h") 'delete-backward-char)
 
   ;;; (Packages) ;;;
   (require-package '(:name expand-region :after (user/expand-region-init)))

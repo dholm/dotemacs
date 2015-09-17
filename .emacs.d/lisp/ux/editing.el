@@ -49,6 +49,12 @@ mode that sets `syntax-ppss' properly."
   ;;; (Bindings) ;;;
   (global-set-key [remap move-beginning-of-line] 'beginning-or-indentation)
   (global-set-key [remap move-end-of-line] 'end-of-line-or-code)
+  (user/bind-key-global :basic :forward-word 'forward-word)
+  (user/bind-key-global :basic :backward-word 'backward-word)
+  (user/bind-key-global :basic :forward-expr 'forward-sexp)
+  (user/bind-key-global :basic :backward-expr 'backward-sexp)
+  (user/bind-key-global :basic :del-char-left 'delete-backward-char)
+  (user/bind-key-global :basic :del-char-right 'delete-char)
   (user/bind-key-global :code :join-line 'join-line)
   (user/bind-key-global :code :fill-paragraph 'fill-paragraph))
 

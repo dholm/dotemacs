@@ -140,6 +140,13 @@
                 (:undo . "C-_")
                 (:redo . "M-_")
 
+                (:forward-word . "M-f")
+                (:backward-word . "M-b")
+                (:forward-expr . "C-M-f")
+                (:backward-expr . "C-M-b")
+                (:del-char-left . "C-h")
+                (:del-char-right . "C-d")
+
                 (:search-forward . "C-s")
                 (:search-backward . "C-r")
                 (:search-files . ("C-l M-f"))
@@ -155,6 +162,8 @@
 
                 (:copy . "C-x C-w")
                 (:cut . "C-x C-k")
+                (:copy-expr . "C-M-w")
+                (:cut-expr . "C-M-k")
                 (:paste . "C-y")
                 (:cycle-paste . "M-y")
                 (:cut-word-left . "C-w")
@@ -262,6 +271,8 @@
                (:complete . "RETURN")
                (:try-complete . "TAB")
                (:auto-complete . "C-TAB")
+
+               (:unwrap-expr . "C-M-d")
 
                (:context-promote . (user/code-prefix "P"))
                (:context-demote . (user/code-prefix "N"))
