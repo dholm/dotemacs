@@ -2,6 +2,15 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/tramp-before-init ()
+  "Initialization before loading tramp."
+  (setq-default
+   ;; Persistency files.
+   tramp-persistency-file-name (path-join *user-cache-directory* "tramp")
+   ;; Auto save storage.
+   tramp-auto-save-directory (path-join *user-auto-save-directory* "tramp")))
+
+
 (defun user/tramp-init ()
   "Initialize tramp."
   (setq-default
@@ -10,10 +19,6 @@
    ;; Cache passwords.
    password-cache t
    password-cache-expiry 1000
-   ;; Persistency files.
-   tramp-persistency-file-name (path-join *user-cache-directory* "tramp")
-   ;; Auto save storage.
-   tramp-auto-save-directory (path-join *user-auto-save-directory* "tramp")
    ;; SSH is properly configured to share connections.
    tramp-use-ssh-controlmaster-options nil
    ;; Allow reading dir-local on remote system.
@@ -34,7 +39,9 @@
     (setq tramp-remote-path (delete 'tramp-default-remote-path tramp-remote-path))
     (add-to-list 'tramp-remote-path 'tramp-own-remote-path)))
 
-(require-package '(:name tramp :after (user/tramp-init)))
+(require-package '(:name tramp
+                         :before (user/tramp-before-init)
+                         :after (user/tramp-init)))
 
 
 (provide 'utilities/tramp)
