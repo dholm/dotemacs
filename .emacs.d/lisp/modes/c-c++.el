@@ -94,6 +94,12 @@
 
 (defun user/irony-mode-hook ()
   "Mode hook for irony."
+  (with-feature 'irony-eldoc
+    (irony-eldoc t))
+
+  (with-feature 'flycheck-irony
+    (flycheck-irony-setup))
+
   ;; Load flags from compilation database.
   (irony-cdb-autosetup-compile-options)
 
@@ -208,7 +214,9 @@
   (when (and (executable-find "cmake")
              (executable-find "clang")
              (executable-find "llvm-config"))
-    (require-package '(:name irony-mode :after (user/irony-mode-init))))
+    (require-package '(:name irony-mode :after (user/irony-mode-init)))
+    (require-package '(:name irony-eldoc))
+    (require-package '(:name flycheck-irony)))
   (with-executable 'cmake
     (require-package '(:name cpputils-cmake :after (user/cpputils-cmake-init))))
   (with-executable 'clang
