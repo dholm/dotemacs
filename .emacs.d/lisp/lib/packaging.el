@@ -42,11 +42,14 @@
      `(:before ,(plist-get package :before)))
    (when (plist-member package :after)
      `(:after ,(plist-get package :after)))
+   (when (plist-member package :prepare)
+     `(:prepare ,(plist-get package :prepare)))
    (when (plist-member package :type)
-     `(:type ,(plist-get package :type))
-     (cond
-      ((plist-member package :url) `(:url ,(plist-get package :url)))
-      ((plist-member package :pkgname) `(:pkgname ,(plist-get package :pkgname)))))))
+     (append
+      `(:type ,(plist-get package :type))
+      (cond
+       ((plist-member package :url) `(:url ,(plist-get package :url)))
+       ((plist-member package :pkgname) `(:pkgname ,(plist-get package :pkgname))))))))
 
 
 (defun user/el-get-init ()
