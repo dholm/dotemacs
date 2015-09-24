@@ -4,21 +4,11 @@
 
 (defun user/message-mode-hook ()
   "Message mode hook."
+  (user/mail-mode-hook)
+
   (setq
-   ;; RFC2822 2.1.1 Line Length Limits (including CRLF).
-   fill-column (- 78 2)
-   ;; Fold lines that are too long.
-   truncate-lines nil
    ;; Select abbrev table for message mode.
    local-abbrev-table message-mode-abbrev-table)
-
-  ;; Use org structured editing.
-  (orgstruct-mode t)
-  (orgstruct++-mode t)
-  (orgtbl-mode t)
-
-  ;; Enable footnotes.
-  (footnote-mode t)
 
   ;; Enable BBDB.
   (bbdb-initialize 'message)
@@ -28,8 +18,6 @@
     (require 'google-contacts-message))
 
   ;;; (Bindings) ;;;
-  (user/bind-key-local :code :try-complete 'user/eudc-expand-inline)
-  (user/bind-key-local :code :compile 'org-mime-htmlize)
   ;; Ensure C-x # is used to save and close message.
   (local-set-key (kbd "C-x #") 'user/server-save))
 
@@ -44,20 +32,6 @@
   "Outgoing message setup hook."
   ;; Load Emacs directory client.
   (eudc-load-eudc))
-
-
-(defun user/mu-cite-init ()
-  "Initialize mu-cite."
-  (setq-default
-   ;; Citation format.
-   mu-cite-top-format '("On " date ", " full-name " wrote:\n")
-   ;; Use > as prefix.
-   mu-cite-prefix-format (quote ("> "))
-   ;; Default message citation function.
-   message-cite-function 'mu-cite-original)
-
-  ;;; (Hooks) ;;;
-  (add-hook 'mail-citation-hook 'mu-cite-original))
 
 
 (defun user/message-mode-init ()
@@ -79,10 +53,7 @@
   (add-hook 'message-send-hook 'user/message-send-hook)
 
   ;; Register auto mode.
-  (add-auto-mode 'message-mode "\\.eml$")
-
-  ;;; (Packages) ;;;
-  (require-package '(:name mu-cite :after (user/mu-cite-init))))
+  (add-auto-mode 'message-mode "\\.eml$"))
 
 (user/message-mode-init)
 

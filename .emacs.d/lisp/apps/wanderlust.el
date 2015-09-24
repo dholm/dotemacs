@@ -22,10 +22,7 @@
 
 
 (defun user/wl-draft-mode-hook ()
-  "Wanderlust draft mode hook."
-  ;;; (Bindings) ;;;
-  (user/bind-key-local :code :try-complete 'user/eudc-expand-inline)
-  (user/bind-key-local :code :compile 'org-mime-htmlize))
+  "Wanderlust draft mode hook.")
 
 
 (defun user/mime-edit-mode-hook ()
