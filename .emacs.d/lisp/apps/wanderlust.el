@@ -23,8 +23,8 @@
 
 (defun user/wl-draft-mode-hook ()
   "Wanderlust draft mode hook."
- ;;; (Bindings) ;;;
-  (user/bind-key-local :code :try-complete 'bbdb-complete-name)
+  ;;; (Bindings) ;;;
+  (user/bind-key-local :code :try-complete 'user/eudc-expand-inline)
   (user/bind-key-local :code :compile 'org-mime-htmlize))
 
 
@@ -56,6 +56,9 @@
 
 (defun user/wl-init-hook ()
   "Wanderlust initialization hook."
+  ;; Load Emacs directory client.
+  (eudc-load-eudc)
+
   (when (el-get-package-is-installed 'bbdbv3-wl)
     (user/bbdbv3-wl-init-hook))
 
