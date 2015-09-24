@@ -15,6 +15,12 @@
 
 (defun user/ediff-startup-hook ()
   "Ediff startup hook."
+  (setq-default
+   ;; Split window differently depending on frame width.
+   ediff-split-window-function (if (> (frame-width) (* 2 80))
+                                   'split-window-horizontally
+                                 'split-window-vertically))
+
   ;; Go to the first difference on startup.
   (ediff-next-difference))
 
@@ -53,10 +59,6 @@
 (defun user/ediff-init ()
   "Initialize ediff."
   (setq-default
-   ;; Split window differently depending on frame width.
-   ediff-split-window-function (if (> (frame-width) (* 2 80))
-                                   'split-window-horizontally
-                                 'split-window-vertically)
    ;; Don't create a separate frame for ediff.
    ediff-window-setup-function 'ediff-setup-windows-plain
    ;; Ignore changes in whitespace.
@@ -64,10 +66,12 @@
    ediff-ignore-similar-regions t)
 
   ;; Go to first difference on start.
-  (add-hook 'ediff-startup-hook 'user/ediff-startup-hook))
+  (add-hook 'ediff-startup-hook 'user/ediff-startup-hook)
 
-(after-load 'ediff
-  (user/ediff-init))
+  ;;; (Packages) ;;;
+  (require-package '(:name ztree)))
+
+(user/ediff-init)
 
 
 (provide 'utilities/ediff)
