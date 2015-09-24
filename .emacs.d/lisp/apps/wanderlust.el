@@ -76,7 +76,8 @@
       'wl-draft-kill
       'mail-send-hook))
 
- ;;; (Bindings) ;;;
+  ;;; (Bindings) ;;;
+  (define-key wl-draft-mode-map "\C-l" nil)
   ;; Cite original email by default.
   (define-key wl-summary-mode-map (kbd "A") 'wl-summary-reply)
   (define-key wl-summary-mode-map (kbd "a") 'wl-summary-reply-with-citation))
@@ -112,7 +113,7 @@
    '((type . text)
      (subtype . html)
      (body . visible)
-     (body-presentation-method . mime-shm-preview-text/html))))
+     (body-presentation-method . mime-shr-preview-text/html))))
 
 
 (defun user/semi-w3m-init ()
