@@ -6,15 +6,18 @@
   "Initialize auth-source."
   (setq-default
    auth-sources
-   `((:source ,(path-join *user-data-directory* "authinfo.gpg")
-              :host t :protocol t)
-     (:source ,(path-join *user-data-directory* "authinfo")
-              :host t :protocol t)))
+   `(,(path-join *user-data-directory* "authinfo.gpg")
+
+     ,(path-join *user-data-directory* "authinfo")))
 
   (dolist (source auth-sources)
-    (let ((file (plist-get source :source)))
-      (when (file-exists-p file)
-        (set-file-modes file #o0600)))))
+    (when (file-exists-p source)
+      (set-file-modes source #o0600)))
+
+  (when (eq system-type 'darwin)
+    (add-many-to-list 'auth-sources
+                      'macos-keychain-internet
+                      'macos-keychain-generic)))
 
 (user/auth-source-init)
 
