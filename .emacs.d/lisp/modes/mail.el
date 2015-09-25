@@ -14,7 +14,6 @@
 
   ;; Use org structured editing.
   (orgstruct-mode t)
-  (orgstruct++-mode t)
   (orgtbl-mode t)
 
   ;; Enable footnotes.
