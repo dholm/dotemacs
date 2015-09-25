@@ -253,13 +253,45 @@ Gmail {
         (write-region (point-min) (point-max) folders-file)))))
 
 
+(defun user/wl-summary-line-attached ()
+  "Summary-line formatter for attachments."
+  (let ((content-type (or (elmo-message-entity-field
+                           wl-message-entity 'content-type) ""))
+        (case-fold-search t))
+    (cond
+     ((string-match "multipart/mixed" content-type) "@")
+     ((string-match "multipart/encrypted" content-type) "?")
+     ((string-match "multipart/signed" content-type) "#")
+     ((string-match "multipart/" content-type) "%")
+     (t ""))))
+
+
+(defun user/wl-summary-line-where-is-my-address ()
+  "Summary-line formatter for mail explicitly including user."
+  (cond
+   ((catch 'found
+      (dolist (cc (elmo-message-entity-field wl-message-entity 'cc))
+        (when (wl-address-user-mail-address-p cc)
+          (throw 'found t))))
+    "C")
+   ((catch 'found
+      (dolist (to (elmo-message-entity-field wl-message-entity 'to))
+        (when (wl-address-user-mail-address-p to)
+          (throw 'found t))))
+    "T")
+   ((wl-address-user-mail-address-p
+     (elmo-message-entity-field wl-message-entity 'from))
+    "F")
+   (t "")))
+
+
 (defun user/wanderlust-set-summary-guides ()
   "Set Wanderlust summary thread guides."
   (if (eq default-terminal-coding-system 'utf-8)
       (setq-default
        wl-thread-indent-level 2
-       wl-thread-have-younger-brother-str "├─┳─"
-       wl-thread-vertical-str             "┃"
+       wl-thread-have-younger-brother-str "├─┬─"
+       wl-thread-vertical-str             "│"
        wl-thread-youngest-child-str       "╰───"
        wl-thread-horizontal-str           "─"
        wl-thread-space-str                " ")
@@ -272,15 +304,107 @@ Gmail {
      wl-thread-space-str                " ")))
 
 
+(defun user/wanderlust-message-init ()
+  "Initialize Wanderlust message view mode."
+  (setq-default
+   ;; Message window size.
+   wl-message-window-size '(1 . 3)
+   ;; Field lists.
+   wl-message-ignored-field-list '("^.*")
+   wl-message-visible-field-list '("^\\(To\\|Cc\\):" "^Subject:"
+                                   "^\\(From\\|Reply-To\\):" "^Organization:"
+                                   "^X-Attribution:" "^\\(Posted\\|Date\\):"
+                                   "^\\(Posted\\|Date\\):"
+                                   "^\\(User-Agent\\|X-Mailer\\):")
+   wl-message-sort-field-list    '("^From:" "^Organization:" "^X-Attribution:"
+                                   "^Subject:" "^Date:" "^To:" "^Cc:"))
+
+  ;; Support for reading flowed emails.
+  (add-hook 'mime-display-text/plain-hook 'user/mime-display-text/plain-hook)
+
+  (when (and (display-graphic-p)
+             (el-get-package-is-installed 'wl-gravatar))
+    (setq-default
+     ;; Insert gravatar as email X-Face.
+     wl-highlight-x-face-function 'wl-gravatar-insert))
+
+  ;;; (Hooks) ;;;
+  (add-hook 'wl-message-redisplay-hook 'user/wl-message-redisplay-hook)
+  (add-hook 'wl-message-buffer-created-hook
+            'user/wl-message-buffer-created-hook))
+
+
+(defun user/wanderlust-draft-init ()
+  "Initialize Wanderlust draft mode."
+  (setq-default
+   ;; Raise a new frame when creating a draft.
+   wl-draft-use-frame t
+   ;; Automatically save drafts every two minutes.
+   wl-auto-save-drafts-interval 120.0
+   ;; Sane forward tag.
+   wl-forward-subject-prefix "Fwd: "
+   ;; Automatically select the correct template based on folder.
+   wl-draft-config-matchone t)
+
+  ;; Support for writing flowed emails.
+  (after-load 'wl-mime
+    (mime-edit-insert-tag "text" "plain" "; format=flowed"))
+
+  ;;; (Hooks) ;;;
+  ;; Pick email account template when opening a draft.
+  (add-hook 'wl-mail-setup-hook 'wl-draft-config-exec)
+  ;; Don't apply email account template when sending draft, otherwise switching
+  ;; templates won't work.
+  (remove-hook 'wl-draft-send-hook 'wl-draft-config-exec)
+  (add-hook 'wl-draft-mode-hook 'user/wl-draft-mode-hook))
+
+
+(defun user/wanderlust-summary-init ()
+  "Initialize Wanderlust summary mode."
+  (setq-default
+   ;; Set verbose summary.
+   wl-summary-width nil
+   wl-summary-line-format
+   "%T%P%M/%D(%W)%h:%m %-4S %t%[%17(%c %f%) %]%1i%1@%#%~%s "
+   wl-folder-summary-line-format-alist
+   '(("^+" . "%n%T%P%M/%D(%W)%h:%m %-4S %t%[%17(%c %f%) %]%1i%1@%#%~%s ")
+     ("^file:" . "%T%P %17f %-5S %Y/%M/%D(%W) %h:%m %s "))
+   ;; Format of mode-line entry.
+   wl-summary-mode-line-format "WL:%n/%u/%a{%t}%f"
+   ;; Display TO rather than FROM in "Sent" folders.
+   wl-summary-showto-folder-regexp ".*Sent.*"
+   ;; Divide thread if subject has changed.
+   wl-summary-divide-thread-when-subject-changed t
+   ;; List of marks to display in summary.
+   wl-summary-incorporate-marks '("N" "U" "!" "A" "$")
+
+   ;;; (Folders) ;;;
+   ;; Show folders in a pane to the left.
+   wl-stay-folder-window nil
+   wl-folder-window-width 45
+   ;; Asynchronously update folders.
+   wl-folder-check-async t)
+
+  (after-load 'wl-summary
+    (add-many-to-list
+     'wl-summary-line-format-spec-alist
+     ;; Email to user formatter.
+     '(?i (user/wl-summary-line-where-is-my-address))
+     ;; Attachment formatter.
+     '(?@ (user/wl-summary-line-attached))))
+
+  ;; Set up guides in summary mode.
+  (user/wanderlust-set-summary-guides)
+
+  ;;; (Hooks) ;;;
+  (add-hook 'wl-folder-mode-hook 'user/wl-folder-mode-hook)
+  (add-hook 'wl-summary-mode-hook 'user/wl-summary-mode-hook))
+
+
 (defun user/wanderlust-init ()
   "Initialize Wanderlust."
-  (el-get-eval-after-load 'semi
-    (user/semi-init))
-  (after-load 'elmo
-    (user/elmo-init))
-
   (setq-default
-  ;;; (Basic Configuration) ;;;
+   ;;; (Basic Configuration) ;;;
    ;; Put configuration into wanderlust data directory.
    wl-init-file (path-join *user-wanderlust-data-directory* "init.el")
    wl-folders-file (path-join *user-wanderlust-data-directory* "folders")
@@ -295,90 +419,32 @@ Gmail {
    wl-biff-use-idle-timer t
    ;; Let SMTP server handle Message-ID.
    wl-insert-message-id nil
-   ;; Message window size.
-   wl-message-window-size '(1 . 3)
    ;; Quit without asking.
    wl-interactive-exit nil
 
-  ;;; (Folders) ;;;
-   ;; Show folders in a pane to the left.
-   wl-stay-folder-window nil
-   wl-folder-window-width 45
-   ;; Asynchronously update folders.
-   wl-folder-check-async t
-
-  ;;; (Summary) ;;;
-   ;; Set verbose summary.
-   wl-summary-width nil
-   wl-summary-line-format "%T%P%M/%D(%W)%h:%m %[ %17f %]%[%1@%] %t%C%s"
-   ;; Display TO rather than FROM in "Sent" folders.
-   wl-summary-showto-folder-regexp ".*Sent.*"
-   ;; Divide thread if subject has changed.
-   wl-summary-divide-thread-when-subject-changed t
-
-  ;;; (Messages) ;;;
-   ;; Field lists.
-   wl-message-ignored-field-list '("^.*")
-   wl-message-visible-field-list '("^\\(To\\|Cc\\):" "^Subject:"
-                                   "^\\(From\\|Reply-To\\):" "^Organization:"
-                                   "^X-Attribution:" "^\\(Posted\\|Date\\):"
-                                   "^\\(Posted\\|Date\\):"
-                                   "^\\(User-Agent\\|X-Mailer\\):")
-   wl-message-sort-field-list    '("^From:" "^Organization:" "^X-Attribution:"
-                                   "^Subject:" "^Date:" "^To:" "^Cc:")
-
-  ;;; (Drafts) ;;;
-   ;; Raise a new frame when creating a draft.
-   wl-draft-use-frame t
-   ;; Automatically save drafts every two minutes.
-   wl-auto-save-drafts-interval 120.0
-   ;; Sane forward tag.
-   wl-forward-subject-prefix "Fwd: "
-   ;; Automatically select the correct template based on folder.
-   wl-draft-config-matchone t)
-
-  ;; Support for writing/reading flowed emails.
-  (add-hook 'mime-display-text/plain-hook 'user/mime-display-text/plain-hook)
-  (after-load 'wl-mime
-    (mime-edit-insert-tag "text" "plain" "; format=flowed"))
-
-  ;; Set up guides in summary mode.
-  (user/wanderlust-set-summary-guides)
-
-  (when (and (display-graphic-p)
-             (el-get-package-is-installed 'wl-gravatar))
-    (setq-default
-     ;; Insert gravatar as email X-Face.
-     wl-highlight-x-face-function 'wl-gravatar-insert))
-
-  (after-load 'wl
-    (with-feature 'fullframe
-      (fullframe wl wl-exit nil)))
-
-  (setq-default
+   ;;; (Modeline) ;;;
    ;; Show mail status in mode line.
    global-mode-string (cons '(wl-modeline-biff-status
                               wl-modeline-biff-state-on
                               wl-modeline-biff-state-off) global-mode-string))
 
-  ;; Pick email account template when opening a draft.
-  (add-hook 'wl-mail-setup-hook 'wl-draft-config-exec)
-  ;; Don't apply email account template when sending draft, otherwise switching
-  ;; templates won't work.
-  (remove-hook 'wl-draft-send-hook 'wl-draft-config-exec)
+  ;; Initialize Wanderlust components.
+  (el-get-eval-after-load 'semi
+    (user/semi-init))
+  (after-load 'elmo
+    (user/elmo-init))
+  (user/wanderlust-summary-init)
+  (user/wanderlust-message-init)
+  (user/wanderlust-draft-init)
+
+  (after-load 'wl
+    (with-feature 'fullframe
+      (fullframe wl wl-exit nil)))
 
   ;; Configuration hooks.
   (add-hook 'wl-init-hook 'user/wl-init-hook)
-  (add-hook 'wl-message-redisplay-hook 'user/wl-message-redisplay-hook)
-  (add-hook 'wl-message-buffer-created-hook
-            'user/wl-message-buffer-created-hook)
 
-  ;; Mode hooks.
-  (add-hook 'wl-folder-mode-hook 'user/wl-folder-mode-hook)
-  (add-hook 'wl-summary-mode-hook 'user/wl-summary-mode-hook)
-  (add-hook 'wl-draft-mode-hook 'user/wl-draft-mode-hook)
-
- ;;; (Bindings) ;;;
+  ;;; (Bindings) ;;;
   (user/bind-key-global :apps :email 'wl))
 
 
