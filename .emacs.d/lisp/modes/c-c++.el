@@ -192,6 +192,11 @@
 
 (defun user/c-c++-mode-init ()
   "Initialize C/C++ mode."
+  (setq-default
+   ;; Support completion using tab.
+   c-tab-always-indent nil
+   c-insert-tab-function 'indent-for-tab-command)
+
   (after-load 'cc-mode
     (add-many-to-list 'c-default-style
                       '(c-mode . "K&R")

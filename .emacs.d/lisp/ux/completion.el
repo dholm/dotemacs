@@ -6,6 +6,23 @@
   (require 'cl))
 
 
+(defun user/auto-complete-mode-hook ()
+  "Auto complete mode hook."
+  (setq
+   ;; Insert auto-complete into `completion-at-point'.
+   completion-at-point-functions
+   (cons 'user/auto-complete-at-point
+         (remove 'user/auto-complete-at-point completion-at-point-functions))))
+
+
+(defun user/auto-complete-at-point ()
+  "Complete thing at point using `auto-complete'."
+  (when (and (not (minibufferp))
+             (boundp 'auto-complete-mode)
+             auto-complete-mode)
+    #'auto-complete))
+
+
 (defun ac-pcomplete ()
   "Auto-complete source for pcomplete."
   ;; eshell uses `insert-and-inherit' to insert a \t if no completion
@@ -69,16 +86,16 @@
 
   (setq-default
    ;; Limit the number of candidates.
-   ac-candidate-limit 20
+   ac-candidate-limit 40
    ;; Delay until narrowing completions.
    ac-delay 0.5
-   ;; Automatically start completion after two characters.
-   ac-auto-start 2
+   ;; Do not trigger completion automatically.
+   ac-auto-start nil
    ;; Use fuzzy matching.
    ac-fuzzy-enable t
    ac-use-fuzzy t
-   ;; Automatically show menu after 400ms.
-   ac-auto-show-menu 0.4
+   ;; Do not pop up menu automatically.
+   ac-auto-show-menu nil
    ;; Allow normal navigation keys in menu.
    ac-use-menu-map t
    ;; Do not auto-expand common candidates.
@@ -96,6 +113,9 @@
   (dolist (hook (list 'lisp-interaction-mode-hook
                       'ielm-mode-hook))
     (add-hook hook 'ac-emacs-lisp-mode-setup))
+
+  ;;; (Hooks) ;;;
+  (add-hook 'auto-complete-mode-hook 'user/auto-complete-mode-hook)
 
   ;;; (Bindings) ;;;
   (ac-set-trigger-key (user/get-key :code :try-complete))
@@ -138,8 +158,8 @@
 (defun user/completion-init ()
   "Initialize automatic code completion."
   (setq
-   ;; Do not fall back to complete if auto-complete is unavailable.
-   tab-always-indent t
+   ;; Activate completion on tab.
+   tab-always-indent 'complete
    ;; Cycle completions in minibuffer below a certain threshold.
    completion-cycle-threshold 5)
 

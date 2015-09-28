@@ -49,8 +49,6 @@
   (when (semantic-active-p)
     ;; Scan source code automatically during idle time.
     (semantic-idle-scheduler-mode t)
-    ;; Initiate inline completion automatically during idle time.
-    (semantic-idle-completions-mode t)
     ;; Show breadcrumbs during idle time.
     (semantic-idle-breadcrumbs-mode t)
     ;; Show summary of tag at point during idle time.
