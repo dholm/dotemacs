@@ -5,7 +5,7 @@
 (defun user/flycheck-mode-hook ()
   "Flycheck mode hook."
   ;;; (Bindings) ;;;
-  (user/bind-key-local :code :warnings/errors 'flycheck-list-errors)
+  (user/bind-key-local :code :warnings/errors 'helm-flycheck)
   (user/bind-key-local :nav :next 'flycheck-next-error))
 
 
@@ -68,6 +68,7 @@
 
 (require-package '(:name flycheck :after (user/flycheck-init)))
 (require-package '(:name flycheck-pos-tip))
+(require-package '(:name helm-c-flycheck))
 
 
 (provide 'utilities/flycheck)
