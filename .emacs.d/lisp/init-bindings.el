@@ -283,6 +283,7 @@
                (:warnings/errors . (user/code-prefix "E"))
                (:spellcheck-word . (user/code-prefix "s"))
                (:spellcheck-add-word . (user/code-prefix "S"))
+               (:thesaurus-lookup . (user/code-prefix "t"))
 
                (:update-index . (user/code-prefix "i"))
 
