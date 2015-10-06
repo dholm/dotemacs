@@ -134,6 +134,8 @@
   (setq-default
    ;; Don't split large mails.
    mime-edit-split-message nil
+   ;; Decrypt encrypted emails automatically.
+   mime-pgp-decrypt-when-preview t
    ;; MIME type priorities.
    mime-view-type-subtype-score-alist
    '(((text . plain) . 4)
