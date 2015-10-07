@@ -367,9 +367,9 @@ Gmail {
    ;; Set verbose summary.
    wl-summary-width nil
    wl-summary-line-format
-   "%T%P │%Y-%M-%D %h:%m│ %17(%f%) │%-4S│%4i│%1@ %c%~%t%#%~%s "
+   "%T%P │%Y-%M-%D %h:%m│ %17(%f%) │%-4S│%4i│%1@ %t%~%c%~%#%~%s "
    wl-folder-summary-line-format-alist
-   '(("^+" . "%n%T%P │%Y-%M-%D %h:%m│ %17(%f%) │%-4S││%4i│%1@ %c%~%t%#%~%s ")
+   '(("^+" . "%n%T%P │%Y-%M-%D %h:%m│ %17(%f%) │%-4S││%4i│%1@ %t%~%c%~%#%~%s ")
      ("^file:" . "%T%P %17f %-5S %Y/%M/%D(%W) %h:%m %s "))
    ;; Format of mode-line entry.
    wl-summary-mode-line-format "WL:%n/%u/%a{%t}%f"
