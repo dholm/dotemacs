@@ -318,8 +318,8 @@ Gmail {
                                    "^X-Attribution:" "^\\(Posted\\|Date\\):"
                                    "^\\(Posted\\|Date\\):"
                                    "^\\(User-Agent\\|X-Mailer\\):")
-   wl-message-sort-field-list    '("^From:" "^Organization:" "^X-Attribution:"
-                                   "^Subject:" "^Date:" "^To:" "^Cc:"))
+   ;; Allow sort on visible fields.
+   wl-message-sort-field-list wl-message-visible-field-list)
 
   ;; Support for reading flowed emails.
   (add-hook 'mime-display-text/plain-hook 'user/mime-display-text/plain-hook)
