@@ -31,8 +31,40 @@
   (user/bind-key-local :debug :show-value 'gud-print))
 
 
+(defun user/realgud-mode-hook ()
+  "GDB gud mode hook."
+  ;;; (Bindings) ;;;
+  ;; Breakpoints
+  (user/bind-key-local :debug :break 'realgud:cmd-break)
+  (user/bind-key-local :debug :watch 'realgud:cmd-watch)
+
+  ;; Stepping
+  (user/bind-key-local :debug :step 'realgud:cmd-step)
+  (user/bind-key-local :debug :step-instruction 'realgud:cmd-stepi)
+  (user/bind-key-local :debug :next 'realgud:cmd-next)
+
+  ;; Execution
+  (user/bind-key-local :debug :run 'realgud:cmd-restart)
+  (user/bind-key-local :debug :continue 'realgud:cmd-continue)
+  (user/bind-key-local :debug :continue-stack 'realgud:cmd-finish)
+  (user/bind-key-local :debug :continue-until 'realgud:cmd-until)
+
+  ;; Stack frames
+  (user/bind-key-local :debug :stack-up 'realgud:cmd-older-frame)
+  (user/bind-key-local :debug :stack-down 'realgud:cmd-newer-frame)
+
+  ;; Printing
+  (user/bind-key-local :debug :show-value 'realgud:cmd-print))
+
+
 (defun user/gdb-mode-hook ()
   "GDB mode hook.")
+
+
+(defun user/realgud-init ()
+  "Initialize realgud."
+  ;;; (Hooks) ;;;
+  (add-hook 'realgud-mode-hook 'user/realgud-mode-hook))
 
 
 (defun user/gud-init ()
@@ -54,7 +86,10 @@
 
   ;;; (Hooks) ;;;
   (add-hook 'gud-mode-hook 'user/gud-mode-hook)
-  (add-hook 'gdb-mode-hook 'user/gdb-mode-hook))
+  (add-hook 'gdb-mode-hook 'user/gdb-mode-hook)
+
+  ;;; (Packages) ;;;
+  (require-package '(:name realgud :after (user/realgud-init))))
 
 (user/gud-init)
 
