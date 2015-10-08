@@ -1,9 +1,11 @@
-;;; gdb.el --- initializes GDB modes
+;;; gud.el --- Initializes GUD debugger
 ;;; Commentary:
 ;;; Code:
 
 (defun user/gud-mode-hook ()
   "GDB gud mode hook."
+  (gud-tooltip-mode t)
+
   ;;; (Bindings) ;;;
   ;; Breakpoints
   (user/bind-key-local :debug :break 'gud-break)
@@ -33,11 +35,7 @@
   "GDB mode hook.")
 
 
-(defun user/gdb-script-mode-hook ()
-  "GDB script mode hook.")
-
-
-(defun user/gdb-modes-init ()
+(defun user/gud-init ()
   "Initialize GDB modes."
   ;; Configure gdb-mode
   (setq-default
@@ -54,15 +52,12 @@
    ;; Enable tooltips in gud mode
    gud-tooltip-mode t)
 
-  (add-auto-mode 'gdb-script-mode "\\.gdb$" "\\.gdbinit$")
-
+  ;;; (Hooks) ;;;
   (add-hook 'gud-mode-hook 'user/gud-mode-hook)
-  (add-hook 'gdb-mode-hook 'user/gdb-mode-hook)
-  (add-hook 'gdb-script-mode-hook 'user/gdb-script-mode-hook))
+  (add-hook 'gdb-mode-hook 'user/gdb-mode-hook))
 
-(with-executable 'gdb
-  (user/gdb-modes-init))
+(user/gud-init)
 
 
-(provide 'modes/gdb)
-;;; gdb.el ends here
+(provide 'apps/gud)
+;;; gud.el ends here
