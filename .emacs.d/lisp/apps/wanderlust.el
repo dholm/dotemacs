@@ -306,6 +306,14 @@ Gmail {
      wl-thread-space-str                " ")))
 
 
+(defun user/wanderlust-summary-refile (&optional folder)
+  "Refile the current message to FOLDER; if FOLDER is nil, use the default."
+  (interactive)
+  (wl-summary-refile (wl-summary-message-number) folder)
+  (wl-summary-next)
+  (message "%s" (concat "Refiled to " folder)))
+
+
 (defun user/wanderlust-message-init ()
   "Initialize Wanderlust message view mode."
   (setq-default

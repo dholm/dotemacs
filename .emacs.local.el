@@ -37,7 +37,13 @@
 ;; Email setup.
 (after-load 'wl
   ;; Wanderlust
-  (user/wanderlust-set-gmail-user "John Doe" "john.doe"))
+  (user/wanderlust-set-gmail-user "John Doe" "john.doe")
+  ;;; (Bindings) ;;;
+  (define-key wl-summary-mode-map (kbd "b a") ;; => Archive
+    '(lambda ()
+       (interactive)
+       (user/wanderlust-summary-refile "%Archive"))))
+
 (after-load 'gnus
   ;; Gnus
   (user/gnus-set-gmail-user "John Doe" "john.doe")
