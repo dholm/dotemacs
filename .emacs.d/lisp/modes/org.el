@@ -84,9 +84,14 @@
     ;; Ensure that agenda data store exists.
     (make-directory agenda-data-store t))
 
-  ;; Load org agenda.
+  (after-load 'org
+    ;; Load org agenda.
+    (add-to-list 'org-modules 'org-agenda))
+
   (after-load 'org-agenda
-    (add-to-list 'org-modules 'org))
+    (with-feature 'org-alert
+      ;; Enable alerts for scheduled items.
+      (org-alert-enable)))
 
   (when (not noninteractive)
     ;; When running in batch, don't setup windows.
@@ -442,7 +447,9 @@
   ;;; (Packages) ;;;
   (require-package '(:name org-mode :after (user/org-mode-init)))
   (require-package '(:name org-sync :after (user/org-sync-init)))
-  (require-package '(:name org-caldav)))
+  (require-package '(:name orgmode-mediawiki))
+  (require-package '(:name org-caldav))
+  (require-package '(:name org-alert)))
 
 (user/org-init)
 
