@@ -26,10 +26,7 @@
 
 
 (defun user/mime-edit-mode-hook ()
-  "Wanderlust mime edit mode hook."
-  ;; Enable org structured editing.
-  (turn-on-orgstruct)
-  (turn-on-orgstruct++))
+  "Wanderlust mime edit mode hook.")
 
 
 (defun user/wl-message-buffer-created-hook ()
