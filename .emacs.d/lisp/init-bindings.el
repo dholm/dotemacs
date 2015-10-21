@@ -227,6 +227,9 @@
               (:go-forward . ("C-l f"))
               (:go-back . ("C-l b"))
 
+              (:scroll-up . "M-n")
+              (:scroll-down . "M-p")
+
               (:context-cycle . ("C-l C-c"))
               (:context-forward . ("C-l C-f"))
               (:context-backward . ("C-l C-b"))
