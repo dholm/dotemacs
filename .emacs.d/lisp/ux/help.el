@@ -21,6 +21,7 @@
 
 (defun user/help-init ()
   "Initialize Emacs help."
+  (user/bind-key-global :emacs :describe-face 'describe-face)
   (user/bind-key-global :emacs :describe-function 'describe-function)
   (user/bind-key-global :emacs :describe-variable 'describe-variable)
   (user/bind-key-global :emacs :describe-symbol 'info-lookup-symbol)

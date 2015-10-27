@@ -175,6 +175,7 @@
      (:emacs . ((:describe-bindings . (user/help-prefix "b"))
                 (:describe-coding . (user/help-prefix "C"))
                 (:describe-char . (user/help-prefix "c"))
+                (:describe-face . (user/help-prefix "F"))
                 (:describe-function . (user/help-prefix "f"))
                 (:describe-key . (user/help-prefix "k"))
                 (:describe-key-extensive . (user/help-prefix "K"))
