@@ -82,6 +82,9 @@
      '("*magit-edit-log*" :noselect t :height 0.2 :width 80)
      '("*magit-process*" :noselect t :height 0.2 :width 80)))
 
+  ;; Automatic conf-mode expressions.
+  (add-auto-mode 'conf-mode "\\.git\\(config\\|attributes\\|ignore\\)\\(\\.local\\)?$")
+
   ;;; (Hooks) ;;;
   (add-hook 'git-commit-mode-hook 'user/git-commit-mode-hook)
 
