@@ -2,116 +2,130 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/ede-project (path)
-  "Get the EDE project for PATH."
-  (when (featurep 'ede)
-    (let ((project (ede-current-project (expand-file-name path))))
-      (cond
-       ((and (featurep 'ede/cpp-root)
-             (ede-cpp-root-project-p project) project))
-       ((and (featurep 'ede/generic)
-             (ede-generic-makefile-project-p project)) project)
-       ((and (featurep 'ede/generic)
-             (ede-generic-cmake-project-p project)) project)
-       ((and (featurep 'ede/linux)
-             (ede-linux-project-p project)) project)
-       ((and (featurep 'ede-compdb)
-             (ede-compdb-project-p project)) project)))))
+(after-load 'eieio
+  (defclass user/proj ()
+    ()
+    "Project class.")
+
+  (defgeneric user/proj-name ((project user/proj))
+    "Get the PROJECT name.")
+
+  (defgeneric user/proj-root ((project user/proj))
+    "Get the PROJECT root path.")
+
+  (defgeneric user/proj-include-paths ((project user/proj))
+    "Get the include paths for PROJECT.")
+
+  (defgeneric user/proj-build ((project user/proj))
+    "Build PROJECT.")
+
+  (defmethod user/proj-name ((project user/proj))
+    (file-name-nondirectory
+     (directory-file-name (user/proj-root project))))
+
+  (defmethod user/proj-include-paths ((project user/proj)))
+
+  (after-load 'ede
+    (defclass user/ede-proj (user/proj)
+      ((ede :initarg :ede :initform nil
+            :documentation "EDE project instance."))
+      "EDE project class.")
+
+    (defmethod user/proj-from-path :static ((project user/ede-proj) &rest args)
+      "Constructor for EDE project at path in ARGS."
+      (when (featurep 'ede)
+        (let ((ede-proj (ede-current-project (expand-file-name (first args)))))
+          (when (cl-some (lambda (args)
+                           (and (featurep (first args))
+                                (funcall (second args) ede-proj)))
+                         '((ede/cpp-root ede-cpp-root-project-p)
+                           (ede/generic ede-generic-makefile-project-p)
+                           (ede/generic ede-generic-cmake-project-p)
+                           (ede/linux ede-linux-project-p)
+                           (ede-compdb ede-compdb-project-p)))
+            (make-instance 'user/ede-proj :ede ede-proj)))))
+
+    (defmethod user/proj-name ((project user/ede-proj))
+      (ede-name (oref project :ede)))
+
+    (defmethod user/proj-root ((project user/ede-proj))
+      (ede-project-root-directory (oref project :ede)))
+
+    (defmethod user/proj-include-paths ((project user/ede-proj))
+      (let ((root-path (user/proj-root project))
+            (include-paths (oref (oref project :ede) include-path)))
+        (mapcar #'(lambda (path) (expand-file-name path root-path))
+                include-paths)))
+
+    (defmethod user/proj-build ((project user/ede-proj))
+      (let ((ede-proj (oref project :ede)))
+        (project-compile-project
+         ede-proj
+         (read-string "Build command: " (oref ede-proj compile-command))))))
+
+  (after-load 'projectile
+    (defclass user/projectile-proj (user/proj)
+      ((root-path :initarg :root-path
+                  :type string
+                  :documentation "Project root path."))
+      "Projectile project class.")
+
+    (defmethod user/proj-from-path :static ((project user/projectile-proj) &rest args)
+      "Constructor for projectile project at path in ARGS."
+      (let ((default-directory (file-name-as-directory (first args)))
+            (projectile-require-project-root nil))
+        (when (projectile-project-p)
+          (make-instance 'user/projectile-proj :root-path (projectile-project-root)))))
+
+    (defmethod user/proj-root ((project user/projectile-proj))
+      (oref project :root-path)))
+
+  (after-load 'vc
+    (defclass user/vc-proj (user/proj)
+      ((root-path :initarg :root-path
+                  :type string
+                  :documentation "Project root path."))
+      "VC project class.")
+
+    (defmethod user/proj-from-path :static ((project user/vc-proj) &rest args)
+      "Constructor for VC project at path in ARGS."
+      (let* ((vc-backend (and (fboundp 'vc-responsible-backend)
+                              (ignore-errors
+                                (vc-responsible-backend
+                                 (file-truename (first args))))))
+             (root-path (and vc-backend
+                             (vc-call-backend
+                              vc-backend 'root (file-truename (first args))))))
+        (when root-path
+              (make-instance 'user/vc-proj :root-path root-path))))
+
+    (defmethod user/proj-root ((project user/vc-proj))
+      (oref project :root-path)))
+
+  (defmethod user/proj-from-path :static ((project user/proj) &rest args)
+    "Constructor for project at path in ARGS."
+    (let ((f (lambda (proj-type)
+               (funcall #'user/proj-from-path proj-type (first args))))
+          (proj-types '(user/ede-proj user/projectile-proj user/vc-proj)))
+      (cl-some f proj-types))))
 
 
-(defun user/ede-project-include-paths (project)
-  "List of include paths for EDE PROJECT."
-  (when project
-    (let ((root-path (ede-project-root-directory project))
-          (include-paths (oref project include-path)))
-      (mapcar #'(lambda (path) (expand-file-name path root-path))
-              include-paths))))
-
-
-(defun user/projectile-project-root (path)
-  "Use projectile to locate root from PATH."
-  (with-feature 'projectile
-    (file-truename
-     (let ((dir (file-truename path)))
-       (or (--reduce-from
-            (or acc (funcall it dir)) nil
-            projectile-project-root-files-functions)
-           path)))))
-
-
-(defun user/project-root (path)
-  "Get the project root for PATH, if it exists."
-  (when path
-    (let ((ede-proj (user/ede-project (file-truename path)))
-          (vc-backend (and (fboundp 'vc-responsible-backend)
-                           (ignore-errors
-                             (vc-responsible-backend (file-truename path))))))
-      (cond
-       (ede-proj (ede-project-root-directory ede-proj))
-       (vc-backend (vc-call-backend vc-backend 'root (file-truename path)))
-       (t (user/projectile-project-root path))))))
-
-
-(defun user/project-include-paths (path)
-  "Get the project include paths for PATH, if it exists."
-  (when path
-    (let ((ede-proj (user/ede-project (file-truename path))))
-      (cond
-       (ede-proj (user/ede-project-include-paths ede-proj))
-       (t nil)))))
-
-
-(defun user/project-name (path)
-  "Name of project at PATH."
-  (when path
-    (let ((ede-proj (user/ede-project (file-truename path))))
-      (cond
-       (ede-proj (ede-name ede-proj))
-       (t (file-name-nondirectory
-           (directory-file-name (user/projectile-project-root path))))))))
-
-
-(defun user/project-p (path)
-  "Check if PATH is under project control."
-  (user/project-root path))
+(defmacro with-project (project &optional path &rest body)
+  "Bind PROJECT for PATH and evaluate BODY if project exists."
+  (declare (indent defun)
+           (debug let))
+  `(let ((,project (user/proj-from-path user/proj (or ,path (path-abs-buffer)))))
+     (when ,project
+       ,@body)))
 
 
 (defmacro with-project-root (project-root &optional path &rest body)
   "Bind PROJECT-ROOT for PATH and evaluate BODY if project exists."
   (declare (indent defun)
            (debug let))
-  `(let ((,project-root (user/project-root (or ,path (path-abs-buffer)))))
-     (when ,project-root
+  `(with-project project path
+     (let ((,project-root (user/proj-root project)))
        ,@body)))
-
-
-(defmacro with-ede-project (ede-project &optional path &rest body)
-  "Bind EDE-PROJECT for PATH and evaluate BODY if project exists."
-  (declare (indent defun)
-           (debug with-project-root))
-  `(let ((,ede-project (user/ede-project
-                        (user/project-root (or ,path (path-abs-buffer))))))
-     (when ,ede-project
-       ,@body)))
-
-
-(defun user/project-root-p (path)
-  "Check if PATH represents a project root."
-  (with-project-root proj-root path
-    (and path proj-root (equal (file-truename path) (file-truename proj-root)))))
-
-
-(defun user/gnu-global-tags-location (path)
-  "Get the location of Global's database from PATH, if it exists."
-  (with-project-root proj-root path
-    (when (file-exists-p (path-join proj-root "GTAGS"))
-      proj-root)))
-
-
-(defun user/gnu-global-tags-p (path)
-  "Check if a GNU Global tag database exists for project in PATH."
-  (when (user/gnu-global-tags-location path)
-    t))
 
 
 (provide 'utilities/project)

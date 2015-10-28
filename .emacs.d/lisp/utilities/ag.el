@@ -12,8 +12,10 @@
 (defun user/ag-init ()
   "Initialize ag."
   (setq-default
-   ag-project-root-function '(lambda ()
-                               (user/project-root (path-abs-buffer))))
+   ag-project-root-function
+   '(lambda ()
+      (with-project project (path-buffer-abs)
+        (user/proj-root project))))
 
   (after-load 'ag
     ;; Search inside compressed files.

@@ -38,13 +38,13 @@
       (add-to-list 'helm-sources 'helm-source-emacs-lisp-expectations)
       (add-to-list 'helm-sources 'helm-source-emacs-lisp-toplevels))
 
-    (when (user/project-p current-file)
+    (with-project project current-file
       ;; Bookmarks.
       (add-to-list 'helm-sources 'helm-source-bookmarks)
       ;; Semantic.
       (with-feature 'helm-semantic
-        (if (user/ede-project current-file)
-            (add-to-list 'helm-sources 'helm-source-semantic))))
+        (when (user/proj-from-path user/ede-proj current-file)
+          (add-to-list 'helm-sources 'helm-source-semantic))))
 
     (helm-other-buffer helm-sources "*helm-navigate-prog*")))
 

@@ -12,6 +12,19 @@
                               (buffer-file-name)))))
 
 
+(defun user/gnu-global-tags-location (path)
+  "Get the location of Global's database from PATH, if it exists."
+  (with-project-root proj-root path
+    (when (file-exists-p (path-join proj-root "GTAGS"))
+      proj-root)))
+
+
+(defun user/gnu-global-tags-p (path)
+  "Check if a GNU Global tag database exists for project in PATH."
+  (when (user/gnu-global-tags-location path)
+    t))
+
+
 (defun user/gnu-global-enable ()
   "Activate GNU Global in current major mode."
   (with-feature 'helm-gtags

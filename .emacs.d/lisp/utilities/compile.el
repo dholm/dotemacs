@@ -17,11 +17,9 @@
 (defun user/compile ()
   "Compile current context."
   (interactive)
-  (let ((ede-proj (user/ede-project (path-abs-buffer))))
+  (let ((ede-proj (user/proj-from-path user/ede-proj (path-abs-buffer))))
     (cond
-     (ede-proj (project-compile-project ede-proj
-                                        (read-string "Build command: "
-                                                     (oref ede-proj compile-command))))
+     (ede-proj (user/proj-build ede-proj))
      ((fboundp 'mode-compile) (call-interactively 'mode-compile))
      (t (call-interactively 'compile)))))
 

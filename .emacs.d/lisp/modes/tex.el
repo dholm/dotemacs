@@ -148,8 +148,10 @@ Makes it easier to version control LaTeX-files."
 (defun user/ebib-init ()
   "Initialize Ebib."
   (setq-default
-   ebib-file-search-dirs '(lambda ()
-                            (user/project-root (path-buffer-abs)))))
+   ebib-file-search-dirs
+   '(lambda ()
+      (with-project project (path-buffer-abs)
+        (user/proj-root project)))))
 
 
 (defun user/zotelo-init ()
