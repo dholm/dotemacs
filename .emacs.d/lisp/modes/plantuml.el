@@ -2,11 +2,22 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/plantuml-mode-init ()
-  "Initialize PlantUML mode.")
+(defun user/puml-mode-hook ()
+  "PlantUML mode hook."
+  ;;; (Bindings) ;;;
+  (user/bind-key-global :code :auto-complete 'puml-complete-symbol)
+  (user/bind-key-global :code :compile 'puml-preview))
+
+
+(defun user/puml-mode-init ()
+  "Initialize PlantUML mode."
+  (add-auto-mode 'puml-mode "\\.puml$" "\\.plantuml$")
+
+  ;;; (Hooks) ;;;
+  (add-hook 'puml-mode-hook 'user/puml-mode-hook))
 
 (with-executable 'java
-  (require-package '(:name plantuml-mode :after (user/plantuml-mode-init))))
+  (require-package '(:name puml-mode :after (user/puml-mode-init))))
 
 
 (provide 'modes/plantuml)
