@@ -22,6 +22,9 @@
   (unless (derived-mode-p 'text-mode)
     (user/text-mode-hook))
 
+  (when (feature-p 'polymode)
+    (poly-org-mode t))
+
   (user/smartparens-enable)
 
   ;; Proper filling of org-mode text, form:

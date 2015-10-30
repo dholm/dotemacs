@@ -92,9 +92,20 @@
   (add-hook 'ess-R-post-run-hook 'user/ess-R-post-run-hook)
 
   ;; Register auto modes.
-  (add-auto-mode 'R-mode "\\.R$")
-  (add-auto-mode 'Rd-mode "\\.Rd$")
-  (add-auto-mode 'Rnw-mode "\\.Rnw$")
+  (if (feature-p 'polymode)
+      (progn
+        (add-auto-mode 'poly-noweb+r-mode "\\.Snw$" "\\.Rnw")
+        (add-auto-mode 'poly-markdown+r-mode "\\.Rmd")
+        (add-auto-mode 'poly-rapport-mode "\\.rapport")
+        (add-auto-mode 'poly-html+r-mode "\\.Rhtml")
+        (add-auto-mode 'poly-brew+r-mode "\\.Rbrew")
+        (add-auto-mode 'poly-r+c++-mode "\\.Rcpp")
+        (add-auto-mode 'poly-c++r-mode "\\.cppR"))
+    (progn
+      (add-auto-mode 'R-mode "\\.R$")
+      (add-auto-mode 'Rd-mode "\\.Rd$")
+      (add-auto-mode 'Rnw-mode "\\.Rnw$")))
+
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :statistics 'R))

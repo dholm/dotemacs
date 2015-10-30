@@ -56,9 +56,15 @@
    '(("django" . user/current-buffer-django-p)
      ("php" . "\\.php[3-5]?")))
 
-  (add-hook 'web-mode-hook 'user/web-mode-hook)
+  (when (feature-p 'polymode)
+    (add-auto-mode 'poly-javascript-erb-mode "\\.js\\.erb$")
+    (add-auto-mode 'poly-coffee-erb-mode "\\.coffee\\.erb$")
+    (add-auto-mode 'poly-html-erb-mode "\\.html\\.erb$"))
 
-  (add-auto-mode 'web-mode "\\.html?$" "\\.phtml$" "\\.php[3-5]?$"))
+  (add-auto-mode 'web-mode "\\.html?$" "\\.phtml$" "\\.php[3-5]?$")
+
+  ;;; (Hooks) ;;;
+  (add-hook 'web-mode-hook 'user/web-mode-hook))
 
 
 (defun user/tern-init ()

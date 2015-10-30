@@ -9,10 +9,15 @@
 
 (defun user/verilog-mode-init ()
   "Initialize Verilog mode."
-  (require-package '(:name verilog-mode))
-  (require-package '(:name auto-complete-verilog))
+  (when (feature-p 'polymode)
+    (add-auto-mode 'poly-verilog+perl-mode "\\.sv$" "\\.svh$"))
 
-  (add-hook 'verilog-mode-hook 'user/verilog-mode-hook))
+  ;;; (Hooks) ;;;
+  (add-hook 'verilog-mode-hook 'user/verilog-mode-hook)
+
+  ;;; (Packages) ;;;
+  (require-package '(:name verilog-mode))
+  (require-package '(:name auto-complete-verilog)))
 
 (user/verilog-mode-init)
 
