@@ -105,7 +105,8 @@
   (defmethod user/proj-from-path :static ((project user/proj) &rest args)
     "Constructor for project at path in ARGS."
     (let ((f (lambda (proj-type)
-               (funcall #'user/proj-from-path proj-type (first args))))
+               (when (fboundp proj-type)
+                 (funcall #'user/proj-from-path proj-type (first args)))))
           (proj-types '(user/ede-proj user/projectile-proj user/vc-proj)))
       (cl-some f proj-types))))
 
