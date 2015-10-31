@@ -3,7 +3,7 @@
 ;;; Code:
 
 (defun user/c-mode-common-hook ()
-  "C mode common hook."
+  "C-like languages mode hook."
   (setq
    ;; Indent using four spaces.
    c-basic-offset 4)
@@ -12,14 +12,6 @@
   ;; Stroustrup styles so that they are indented one level beyond
   ;; the switch.
   (c-set-offset 'case-label '+)
-
-  ;; Propertize "#if 0" regions as comments.
-  (font-lock-add-keywords
-   nil
-   '((user/c-mode-font-lock-if0 (0 font-lock-comment-face prepend))) 'add-to-end)
-
-  ;; Load CEDET
-  (user/c-mode-cedet-hook)
 
   ;; Enable Doxygen support.
   (doxygen-mode t)
@@ -39,10 +31,26 @@
   (user/gnu-global-enable)
   (user/cscope-enable)
 
+  ;; Enable YouCompleteMe.
+  (user/ycmd-enable)
+
+  (user/smartparens-enable))
+
+
+(defun user/c-mode-hook ()
+  "C mode hook."
+  ;; Propertize "#if 0" regions as comments.
+  (font-lock-add-keywords
+   nil
+   '((user/c-mode-font-lock-if0 (0 font-lock-comment-face prepend)))
+   'add-to-end)
+
+  ;; Load CEDET
+  (user/c-mode-cedet-hook)
+
   (with-feature 'cpputils-cmake
-    (when (derived-mode-p 'c-mode 'c++-mode)
-      ;; Enable CMake C/C++ utilities.
-      (cppcm-reload-all)))
+    ;; Enable CMake C/C++ utilities.
+    (cppcm-reload-all))
 
   (with-feature 'irony
     (when (member major-mode irony-supported-major-modes)
@@ -54,11 +62,6 @@
 
   (with-feature 'auto-complete-c-headers
     (add-ac-sources 'ac-source-c-headers))
-
-  ;; Enable YouCompleteMe.
-  (user/ycmd-enable)
-
-  (user/smartparens-enable)
 
   ;;; (Bindings) ;;;
   (when (feature-p 'iasm-mode)
@@ -213,6 +216,7 @@
                                                 ("* ||\n[i]" "RET")))))
 
   (add-hook 'c-mode-common-hook 'user/c-mode-common-hook)
+  (add-hook 'c-mode-hook 'user/c-mode-hook)
 
   ;; Detect if inside a C++ header file.
   (add-magic-mode 'c++-mode 'user/c++-header-file-p)
