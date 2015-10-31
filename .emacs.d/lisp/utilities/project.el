@@ -124,7 +124,7 @@
   "Bind PROJECT-ROOT for PATH and evaluate BODY if project exists."
   (declare (indent defun)
            (debug let))
-  `(with-project project path
+  `(with-project project (or ,path (path-abs-buffer))
      (let ((,project-root (user/proj-root project)))
        ,@body)))
 
