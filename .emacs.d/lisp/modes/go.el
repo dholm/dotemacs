@@ -19,6 +19,9 @@
   (when (feature-p 'go-oracle)
     (go-oracle-mode t))
 
+  ;; Enable YouCompleteMe.
+  (user/ycmd-enable)
+
   ;;; (Bindings) ;;;
   (user/bind-key-local :doc :describe 'godef-describe)
   (user/bind-key-local :doc :reference 'godoc)

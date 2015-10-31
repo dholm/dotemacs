@@ -29,6 +29,9 @@
   ;; ElDoc shows function documentation as you type
   (eldoc-mode t)
 
+  ;; Enable YouCompleteMe.
+  (user/ycmd-enable)
+
   ;;; (Bindings) ;;;
   (when (feature-p 'nose)
     (user/bind-key-local :code :test 'nosetests-all))

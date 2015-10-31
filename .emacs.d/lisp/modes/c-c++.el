@@ -55,6 +55,9 @@
   (with-feature 'auto-complete-c-headers
     (add-ac-sources 'ac-source-c-headers))
 
+  ;; Enable YouCompleteMe.
+  (user/ycmd-enable)
+
   (user/smartparens-enable)
 
   ;;; (Bindings) ;;;
