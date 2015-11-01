@@ -140,6 +140,8 @@
                 (:undo . "C-_")
                 (:redo . "M-_")
 
+                (:forward-line . "C-n")
+                (:backward-line . "C-p")
                 (:forward-word . "M-f")
                 (:backward-word . "M-b")
                 (:forward-expr . "C-M-f")
@@ -272,7 +274,7 @@
                (:itemize . (user/code-prefix "b"))
                (:enumerate . (user/code-prefix "e"))
 
-               (:complete . "RETURN")
+               (:complete . "TAB")
                (:try-complete . "TAB")
                (:auto-complete . "C-TAB")
 

@@ -230,6 +230,10 @@
    company-global-modes '(not git-commit-mode)
    ;; Show commonly used matches first.
    company-transformers '(company-sort-by-occurrence)
+   ;; Align annotations to the right of tooltip.
+   company-tooltip-align-annotations t
+   ;; Complete even outside of code.
+   company-dabbrev-code-everywhere t
    ;; Active company frontends.
    company-frontends
    '(company-pseudo-tooltip-unless-just-one-frontend
@@ -246,12 +250,21 @@
     (define-key company-active-map
       (user/get-key :code :complete) 'company-complete-selection)
     (define-key company-active-map
-      (user/get-key :code :try-complete) 'company-complete-common-or-selection))
+      (user/get-key :code :try-complete) 'company-complete-common-or-selection)
+    (define-key company-active-map
+      (user/get-key :basic :forward-line) 'company-select-next)
+    (define-key company-active-map
+      (user/get-key :basic :backward-line) 'company-select-previous))
 
   ;; Enable company completion globally.
   (global-company-mode t)
-  (after-load 'diminish
-    (diminish 'company-mode)))
+  (after-load 'company
+    (with-feature 'company-flx
+      ;; Enable fuzzy matching.
+      (company-flx-mode t))
+
+    (after-load 'diminish
+      (diminish 'company-mode))))
 
 
 (defun user/completion-init ()
@@ -268,6 +281,7 @@
   ;;; (Packages) ;;;
   (require-package '(:name auto-complete :after (user/auto-complete-init)))
   (require-package '(:name company-mode :after (user/company-mode-init)))
+  (require-package '(:name company-flx))
   (require-package '(:name company-quickhelp)))
 
 (user/completion-init)
