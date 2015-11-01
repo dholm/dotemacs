@@ -70,13 +70,27 @@
     (user/bind-key-local :doc :describe 'semantic-ia-show-doc)))
 
 
+(defun ede-object-system-include-path ()
+  "Return the system include path for the current buffer."
+  (when (and (boundp 'ede-object) ede-object)
+    (ede-system-include-path ede-object)))
+
+
 (defun user/ede-minor-mode-hook ()
   "EDE minor mode hook."
-  (with-feature 'auto-complete-c-headers
-    (setq
-     ;; Configure include path for auto completion.
-     achead:get-include-directories-function
-     'ede-object-system-include-path)))
+  (cond
+   ((user/auto-complete-p)
+    (with-feature 'auto-complete-c-headers
+      (setq
+       ;; Configure include path for auto completion.
+       achead:get-include-directories-function
+       'ede-object-system-include-path)))
+   ((user/company-mode-p)
+    (with-feature 'auto-complete-c-headers
+      (setq
+       ;; Configure include path for auto completion.
+       company-c-headers-path-system
+       'ede-object-system-include-path)))))
 
 
 (defun user/cedet-before-init ()

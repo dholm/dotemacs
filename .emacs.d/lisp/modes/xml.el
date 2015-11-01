@@ -17,9 +17,10 @@
   "XML mode hook."
   (user/xml-mode-common-hook)
 
-  (with-feature 'auto-complete-nxml
-    ;; Configure nxml auto completion
-    (setq nxml-slash-auto-complete-flag t))
+  (when (user/auto-complete-p)
+    (with-feature 'auto-complete-nxml
+      ;; Configure nxml auto completion
+      (setq nxml-slash-auto-complete-flag t)))
 
   (with-feature 'sgml-mode
     (hs-minor-mode t))

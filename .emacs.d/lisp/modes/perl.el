@@ -6,8 +6,9 @@
   "Perl mode hook."
   (user/gnu-global-enable)
 
-  (auto-complete-mode t)
-  (add-ac-sources 'ac-source-perl-completion))
+  (when (user/auto-complete-p)
+    (with-feature 'perl-completion
+      (add-ac-sources 'ac-source-perl-completion))))
 
 
 (defun user/sepia-mode-hook ()

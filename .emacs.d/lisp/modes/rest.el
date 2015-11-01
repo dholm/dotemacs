@@ -12,9 +12,10 @@
                ;; Clean up adornments
                (rst-straighten-adornments)))
 
-  ;; Enable auto completion.
-  (after-load 'auto-complete
-    (auto-complete-rst-init))
+  (when (user/auto-complete-p)
+    ;; Enable auto completion.
+    (after-load 'auto-complete
+      (auto-complete-rst-init)))
 
   ;;; (Bindings) ;;;
   ;; Lists.

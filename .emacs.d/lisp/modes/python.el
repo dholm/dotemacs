@@ -43,7 +43,8 @@
     (when (feature-p 'helm)
       (user/bind-key-local :nav :references 'helm-jedi-related-names))
     (user/bind-key-local :doc :describe 'jedi:show-doc)
-    (user/bind-key-local :code :auto-complete 'jedi:complete)))
+    (unless (or (user/auto-complete-p) (user/company-mode-p))
+      (user/bind-key-local :code :auto-complete 'jedi:complete))))
 
 
 (with-executable 'bpython

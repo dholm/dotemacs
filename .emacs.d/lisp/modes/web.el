@@ -8,6 +8,10 @@
    ;; Don't indent using tabs by default.
    indent-tabs-mode nil)
 
+  (when (user/company-mode-p)
+    (with-feature 'company-web
+      (add-company-sources 'company-web-html)))
+
   (with-feature 'pandoc-mode
     (pandoc-mode t))
 
@@ -85,8 +89,10 @@
   "Initialize web development."
   (require-package '(:name web-mode :after (user/web-mode-init)))
   (with-executable 'npm
-    (require-package '(:name tern :after (user/tern-init))))
+    (require-package '(:name tern :after (user/tern-init)))
+    (require-package '(:name company-tern)))
   (require-package '(:name ac-html :after (user/ac-html-init)))
+  (require-package '(:name company-web))
   (require-package '(:name skewer-mode))
   (require-package '(:name tidy)))
 

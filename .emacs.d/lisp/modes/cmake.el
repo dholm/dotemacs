@@ -8,10 +8,7 @@
     (user/prog-mode-hook))
 
   ;; Separate camel-case into separate words.
-  (subword-mode t)
-
-  ;; Enable auto-complete.
-  (auto-complete-mode t))
+  (subword-mode t))
 
 
 (defun user/cmake-mode-init ()

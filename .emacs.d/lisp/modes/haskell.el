@@ -11,9 +11,14 @@
 
   (user/smartparens-enable)
 
-  (with-feature 'ac-ghc-mod
-    (add-ac-sources 'ac-source-ghc-module 'ac-source-ghc-symbol
-                    'ac-source-ghc-pragmas 'ac-source-ghc-langexts))
+  (cond
+   ((user/auto-complete-p)
+    (with-feature 'ac-ghc-mod
+      (add-ac-sources 'ac-source-ghc-module 'ac-source-ghc-symbol
+                      'ac-source-ghc-pragmas 'ac-source-ghc-langexts)))
+   ((user/company-mode-p)
+    (with-feature 'company-ghc
+      (add-company-sources 'company-ghc))))
 
   ;;; (Bindings) ;;;
   (user/bind-key-local :doc :reference 'hoogle))
@@ -62,6 +67,7 @@
   (require-package '(:name structured-haskell-mode))
   (require-package '(:name ghc-mod))
   (require-package '(:name ac-ghc-mod))
+  (require-package '(:name company-ghc))
 
   (add-hook 'haskell-mode-hook 'user/haskell-mode-hook)
   (add-hook 'inferior-haskell-mode-hook 'user/inferior-haskell-mode-hook))

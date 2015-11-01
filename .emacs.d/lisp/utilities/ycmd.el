@@ -13,8 +13,13 @@
   (interactive)
   (with-feature 'ycmd
     (ycmd-mode t)
-    (with-feature 'auto-complete-ycmd
-      (add-ac-sources 'ac-source-ycmd))))
+    (cond
+     ((user/auto-complete-p)
+      (with-feature 'auto-complete-ycmd
+        (add-ac-sources 'ac-source-ycmd)))
+     ((user/company-mode-p)
+      (with-feature 'company-ycmd
+        (add-company-sources 'company-ycmd))))))
 
 
 (defun user/ycmd-init ()

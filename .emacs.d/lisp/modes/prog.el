@@ -11,6 +11,11 @@
       ;; Run spell-checker in programming mode.
       (flyspell-prog-mode))
 
+  ;; Try to enable completion system.
+  (cond
+   ((user/auto-complete-p) (auto-complete-mode t))
+   ((user/company-mode-p) (company-mode t)))
+
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :comment (if (feature-p 'comment-dwim-2)
                                           'comment-dwim-2 'comment-dwim)))

@@ -19,8 +19,14 @@
   (when (feature-p 'go-oracle)
     (go-oracle-mode t))
 
-  ;; Enable YouCompleteMe.
-  (user/ycmd-enable)
+  (cond
+   ((user/company-mode-p)
+    (with-feature 'company-go
+      (set
+       (make-local-variable 'company-backends)
+       '(company-go))))
+   ((user/auto-complete-p)
+    (user/ycmd-enable)))
 
   ;;; (Bindings) ;;;
   (user/bind-key-local :doc :describe 'godef-describe)
@@ -41,6 +47,7 @@
 (with-executable 'go
   (require-package '(:name go-mode :after (user/go-mode-init)))
   (require-package '(:name go-autocomplete))
+  (require-package '(:name go-company))
   (require-package '(:name go-eldoc))
   (require-package '(:name go-test))
   (require-package '(:name go-projectile))

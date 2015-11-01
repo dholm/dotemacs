@@ -25,6 +25,15 @@
   (visual-line-mode t)
   (user/smartparens-enable)
 
+  ;; Completion backends.
+  (cond
+   ((user/auto-complete-p)
+    (with-feature 'ac-math
+      (add-ac-modes 'latex-mode 'LaTeX-mode)))
+   ((user/company-mode-p)
+    (with-feature 'company-math
+      (add-company-sources 'company-math-symbols-latex 'company-latex-commands))))
+
   (when (feature-p 'mic-paren)
     ;; Match context to quoted parentheses.
     (paren-toggle-matching-quoted-paren t)
@@ -50,10 +59,11 @@
   ;; Enable TeX math macros.
   (LaTeX-math-mode t)
 
-  ;; Enable auto-completion systems.
-  (when (el-get-package-is-installed 'ac-math)
-    (add-ac-sources 'ac-source-math-unicode 'ac-source-math-latex
-                    'ac-source-latex-commands))
+  (when (user/auto-complete-p)
+    ;; Enable auto-complete.
+    (with-feature 'ac-math
+      (add-ac-sources 'ac-source-math-unicode 'ac-source-math-latex
+                      'ac-source-latex-commands)))
 
   ;; Activate improved sentence filling.
   (ad-activate 'LaTeX-fill-region-as-paragraph)
@@ -111,6 +121,12 @@
   (after-load 'preview
     ;; Support previewing of TikZ.
     (add-to-list 'preview-default-preamble "\\PreviewEnvironment{tikzpicture}" t))
+
+  (after-load 'auctex
+    (when (user/company-mode-p)
+      (with-feature 'company-auctex
+        ;; Enable company AUCTeX completion.
+        (company-auctex-init))))
 
   (cond
    ((eq system-type 'darwin)
@@ -171,8 +187,7 @@ Makes it easier to version control LaTeX-files."
   "Initialize math auto completion."
   (setq-default
    ;; Enable unicode math input.
-   ac-math-unicode-in-math-p t)
-  (add-ac-modes 'latex-mode 'LaTeX-mode))
+   ac-math-unicode-in-math-p t))
 
 
 (defun user/tex-mode-init ()
@@ -209,6 +224,8 @@ Makes it easier to version control LaTeX-files."
   (require-package '(:name zotelo :after (user/zotelo-init)))
   (require-package '(:name ac-math :after (user/ac-math-init)))
   (require-package '(:name auto-complete-latex :after (user/auto-complete-latex)))
+  (require-package '(:name company-auctex))
+  (require-package '(:name company-math))
   (require-package '(:name ltx-help)))
 
 

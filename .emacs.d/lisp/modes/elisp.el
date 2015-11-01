@@ -15,8 +15,13 @@
     (after-load 'diminish
       (diminish 'elisp-slime-nav-mode)))
 
-  (with-feature 'auto-complete-emacs-lisp
-    (ac-emacs-lisp-mode-setup))
+  (cond
+   ((user/auto-complete-p)
+    (with-feature 'auto-complete-emacs-lisp
+      (ac-emacs-lisp-mode-setup)))
+   ((user/company-mode-p)
+    (with-feature 'company-elisp
+      (add-company-sources 'company-elisp))))
 
   ;;; (Bindings) ;;;
   (with-feature 'popwin

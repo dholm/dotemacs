@@ -16,9 +16,10 @@
   ;; Bring in CEDET.
   (user/cedet-hook)
   (with-feature 'omnisharp
-    (omnisharp-mode t)
     (eldoc-mode t)
-    (add-ac-sources 'ac-source-omnisharp)))
+    (add-ac-sources 'ac-source-omnisharp)
+    (add-company-sources 'company-omnisharp)
+    (omnisharp-mode t)))
 
 
 (defun user/sln-mode-init ()

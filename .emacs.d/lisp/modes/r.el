@@ -68,8 +68,6 @@
 (defun user/ess-init ()
   "Initialize Emacs Speaks Statistics."
   (setq-default
-   ;; Use auto completion in ESS modes.
-   ess-use-auto-complete t
    ;; The default ESS dialect is R.
    ess-dialect "R"
    ;; Use ElDoc in all ESS modes.
@@ -84,6 +82,16 @@
    ess-local-process-name "R"
    ;; Enable ElDoc support.
    ess-use-eldoc t)
+
+  (cond
+   ((user/auto-complete-p)
+    (setq-default
+     ;; Use auto completion in ESS modes.
+     ess-use-auto-complete t))
+   ((user/company-mode-p)
+    (setq-default
+     ;; Use company mode completion in ESS modes.
+     ess-use-company t)))
 
   ;; Register mode hooks.
   (add-hook 'ess-mode-hook 'user/ess-mode-hook)
@@ -105,7 +113,6 @@
       (add-auto-mode 'R-mode "\\.R$")
       (add-auto-mode 'Rd-mode "\\.Rd$")
       (add-auto-mode 'Rnw-mode "\\.Rnw$")))
-
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :statistics 'R))

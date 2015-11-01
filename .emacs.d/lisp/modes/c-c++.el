@@ -57,11 +57,17 @@
       ;; Better auto completion.
       (irony-mode t)))
 
-  (with-feature 'rtags-ac
-    (add-ac-sources 'ac-source-rtags))
+  (when (user/auto-complete-p)
+    (with-feature 'rtags-ac
+      (add-ac-sources 'ac-source-rtags))
+    (with-feature 'auto-complete-c-headers
+      (add-ac-sources 'ac-source-c-headers)))
 
-  (with-feature 'auto-complete-c-headers
-    (add-ac-sources 'ac-source-c-headers))
+  (when (user/company-mode-p)
+    (with-feature 'company-rtags
+      (add-company-sources 'company-rtags))
+    (with-feature 'company-c-headers
+      (add-company-sources 'company-c-headers)))
 
   ;;; (Bindings) ;;;
   (when (feature-p 'iasm-mode)
@@ -159,7 +165,7 @@
    irony-user-dir *user-local-directory*)
 
   (after-load 'irony-mode
-    (when (feature-p 'auto-complete)
+    (when (user/auto-complete-p)
       (irony-enable 'ac))
 
     ;;; (Hooks) ;;;
@@ -223,6 +229,7 @@
 
   ;;; (Packages) ;;;
   (require-package '(:name auto-complete-c-headers))
+  (require-package '(:name company-c-headers))
   (when (and (executable-find "cmake")
              (executable-find "clang")
              (executable-find "llvm-config"))
