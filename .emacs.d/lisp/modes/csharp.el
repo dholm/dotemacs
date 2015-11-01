@@ -2,6 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
+(defconst *user-omnisharp-path*
+  (path-join *user-home-directory* ".local" "opt" "omnisharp"))
+
+
 (defun user/csharp-mode-hook ()
   "C# mode hook."
   (unless (derived-mode-p 'prog-mode)
@@ -27,6 +31,12 @@
   (add-auto-mode 'sln-mode "\\.sln$"))
 
 
+(defun user/omnisharp-init ()
+  "Initialize omnisharp."
+  (setq-default
+   omnisharp-server-executable-path (path-join *user-omnisharp-path* "omnisharp")))
+
+
 (defun user/csharp-mode-init ()
   "Initialize C# mode."
   (add-hook 'csharp-mode-hook 'user/csharp-mode-hook)
@@ -40,7 +50,8 @@
 
   ;;; (Packages) ;;;
   (require-package '(:name csharp-mode))
-  (require-package '(:name omnisharp-mode))
+  (when (file-exists-p *user-omnisharp-path*)
+    (require-package '(:name omnisharp-mode :after (user/omnisharp-init))))
   (require-package '(:name sln-mode :after (user/sln-mode-init))))
 
 (user/csharp-mode-init)
