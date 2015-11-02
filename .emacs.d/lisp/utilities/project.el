@@ -42,7 +42,7 @@
                            (ede/generic ede-generic-makefile-project-p)
                            (ede/generic ede-generic-cmake-project-p)
                            (ede/linux ede-linux-project-p)
-                           (ede-compdb ede-compdb-project-p)))
+                           (ede/compdb ede-compdb-project-p)))
             (make-instance 'user/ede-proj :ede ede-proj)))))
 
     (defmethod user/proj-name ((project user/ede-proj))
