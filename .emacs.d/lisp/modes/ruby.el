@@ -21,6 +21,9 @@
   ;; Separate camel-case into separate words
   (subword-mode t)
 
+  ;; Enable YouCompleteMe.
+  (user/ycmd-enable)
+
   ;;; (Bindings) ;;;
   (define-key ruby-mode-map (kbd "TAB") 'indent-for-tab-command)
   (with-feature 'yari

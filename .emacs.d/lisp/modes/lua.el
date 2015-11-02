@@ -6,6 +6,9 @@
   "Lua mode hook."
   (user/gnu-global-enable)
 
+  ;; Enable YouCompleteMe.
+  (user/ycmd-enable)
+
   (when (el-get-package-is-installed 'lua-block)
     (lua-block-mode t)))
 

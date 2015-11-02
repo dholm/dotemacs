@@ -18,6 +18,9 @@
     ;; Enable wrangler refactoring tool.
     (erlang-wrangler-on))
 
+  ;; Enable YouCompleteMe.
+  (user/ycmd-enable)
+
   ;; Bring in CEDET.
   (user/cedet-hook))
 

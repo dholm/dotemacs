@@ -14,6 +14,9 @@
   (user/gnu-global-enable)
   (user/smartparens-enable)
 
+  ;; Enable YouCompleteMe.
+  (user/ycmd-enable)
+
   ;; Separate camel-case into separate words
   (subword-mode t))
 

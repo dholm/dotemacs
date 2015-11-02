@@ -6,6 +6,9 @@
   "Perl mode hook."
   (user/gnu-global-enable)
 
+  ;; Enable YouCompleteMe.
+  (user/ycmd-enable)
+
   (when (user/auto-complete-p)
     (with-feature 'perl-completion
       (add-ac-sources 'ac-source-perl-completion))))

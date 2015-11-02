@@ -6,6 +6,9 @@
   "Scala mode hook."
   (user/smartparens-enable)
 
+  ;; Enable YouCompleteMe.
+  (user/ycmd-enable)
+
   (when (el-get-package-is-installed 'ensime)
     (ensime-scala-mode-hook)))
 
