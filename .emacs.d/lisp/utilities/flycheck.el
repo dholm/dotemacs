@@ -19,7 +19,7 @@
       (setq
        flycheck-clang-includes (get-includes comp)
        flycheck-clang-definitions (get-defines comp)
-       flycheck-clang-include-path (get-include-path comp t))
+       flycheck-clang-include-path (oref comp include-path-common))
 
       (when (string-match " -std=\\([^ ]+\\)" cmd)
         (setq
