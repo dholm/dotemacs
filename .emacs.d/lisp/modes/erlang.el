@@ -6,6 +6,10 @@
   "Erlang mode hook."
   (user/gnu-global-enable)
 
+  (with-feature 'rainbow-delimiters
+    ;; Enable rainbow delimiters.
+    (rainbow-delimiters-mode t))
+
   (with-feature 'edts-mode
     ;; Enable Erlang Development Tool Suite.
     (edts-mode t))
@@ -18,9 +22,19 @@
   (user/cedet-hook))
 
 
+(defun user/elixir-mode-hook ()
+  "Erlang Elixir mode hook."
+  (user/erlang-mode-hook)
+
+  (with-feature 'alchemist
+    (alchemist-mode t)))
+
+
 (defun user/erlang-mode-init ()
   "Initialize Erlang mode."
+  ;;; (Hooks) ;;;
   (add-hook 'erlang-mode-hook 'user/erlang-mode-hook)
+  (add-hook 'elixir-mode-hook 'user/elixir-mode-hook)
 
   (after-load 'erlang-mode
     (with-feature 'edts
@@ -33,8 +47,9 @@
   (require-package '(:name erlang-mode :after (user/erlang-mode-init)))
   (require-package '(:name edts))
   (require-package '(:name distel))
-  (require-package '(:name wrangler)))
-
+  (require-package '(:name wrangler))
+  (with-executable 'elixir
+    (require-package '(:name alchemist))))
 
 (provide 'modes/erlang)
 ;;; erlang.el ends here
