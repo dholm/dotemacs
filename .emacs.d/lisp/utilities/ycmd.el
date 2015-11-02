@@ -19,7 +19,13 @@
         (add-ac-sources 'ac-source-ycmd)))
      ((user/company-mode-p)
       (with-feature 'company-ycmd
-        (add-company-sources 'company-ycmd))))))
+        (add-company-sources 'company-ycmd))))
+
+    (when (and (boundp 'flycheck-mode) flycheck-mode)
+      ;; Integrate ycmd with flycheck.
+      (with-feature 'flycheck-ycmd
+        (add-hook 'ycmd-file-parse-result-hook 'flycheck-ycmd--cache-parse-results)
+        (add-to-list 'flycheck-checkers 'ycmd)))))
 
 
 (defun user/ycmd-init ()
