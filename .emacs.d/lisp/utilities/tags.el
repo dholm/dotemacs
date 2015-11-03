@@ -17,8 +17,8 @@
 
 (defun user/use-helm-gtags ()
   "Check if helm-gtags can be used."
-  (and (boundp 'helm-gtags-mode)
-       helm-gtags-mode))
+  (and (boundp 'helm-gtags-mode) helm-gtags-mode
+       (boundp 'helm-gtags-tag-location) helm-gtags-tag-location))
 
 
 (defun user/use-semantic ()
@@ -59,7 +59,9 @@
   "Follow tag at point using best available method."
   (interactive)
   (user/eval-until-move
-   '(((and (user/use-rtags) (not rtags-last-request-not-indexed))
+   '(((eq major-mode 'emacs-lisp-mode)
+      (call-interactively 'elisp-slime-nav-find-elisp-thing-at-point))
+     ((and (user/use-rtags) (not rtags-last-request-not-indexed))
       (rtags-find-symbol-at-point))
      ((user/use-helm-gtags)
       (call-interactively 'helm-gtags-dwim))
