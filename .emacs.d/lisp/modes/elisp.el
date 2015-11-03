@@ -31,6 +31,7 @@
     (user/bind-key-local :code :macro-expand 'macrostep-expand))
 
   (user/bind-key-local :doc :reference 'elisp-index-search)
+  (user/bind-key-local :doc :describe 'user/elisp-describe-thing-in-popup)
   (user/bind-key-local :doc :describe-function 'describe-function)
   (user/bind-key-local :doc :describe-variable 'describe-variable)
 
@@ -53,6 +54,24 @@
       (rainbow-delimiters-mode))
     (when (el-get-package-is-installed 'paredit)
       (enable-paredit-mode))))
+
+
+(defun user/elisp-describe-thing-in-popup ()
+  "Describe elisp thing at point in a popup."
+  (interactive)
+  (with-feature 'popup
+    (let* ((thing (symbol-at-point))
+           (help-xref-following t)
+           (description (with-temp-buffer
+                          (help-mode)
+                          (help-xref-interned thing)
+                          (buffer-string))))
+      (popup-tip description
+                 :point (point)
+                 :around t
+                 :height 30
+                 :scroll-bar t
+                 :margin t))))
 
 
 (defun user/eldoc-eval-init ()
