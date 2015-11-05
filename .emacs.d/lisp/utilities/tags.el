@@ -134,7 +134,8 @@
             (user/use-helm-gtags)
             (user/use-semantic))
     (when (feature-p 'rtags)
-      (rtags-start-process-unless-running))
+      (ignore-errors
+        (rtags-start-process-unless-running)))
 
     ;;; (Bindings) ;;;
     (user/bind-key-local :code :update-index 'user/tag-update-index)
