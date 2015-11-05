@@ -10,6 +10,10 @@
     ;; Enable rainbow delimiters.
     (rainbow-delimiters-mode t))
 
+  (with-feature 'distel
+    ;; Enable erlang node integration.
+    (erlang-extended-mode t))
+
   (with-feature 'edts-mode
     ;; Enable Erlang Development Tool Suite.
     (edts-mode t))
