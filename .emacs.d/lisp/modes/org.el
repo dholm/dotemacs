@@ -292,6 +292,11 @@
    ;; Allow alphabetical lists.
    org-alphabetical-lists t)
 
+  (when (eq default-terminal-coding-system 'utf-8)
+    (setq-default
+     ;; Prettify content using UTF-8.
+     org-pretty-entities t))
+
   (setq-default
    ;; State transitions (http://doc.norang.ca/org-mode.html).
    org-todo-keywords
