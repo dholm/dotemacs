@@ -6,10 +6,19 @@
   "Mode hook for helm-gtags."
   ;; Automatically update GNU Global database if it exists.
   (when (user/gnu-global-tags-p (buffer-file-name))
-    (setq-default
-     helm-gtags-auto-update t
+    (setq
+     helm-gtags-auto-update (not (and (boundp 'ggtags-update-on-save)
+                                      ggtags-update-on-save))
      helm-gtags-tag-location (user/gnu-global-tags-location
                               (buffer-file-name)))))
+
+
+(defun user/ggtags-mode-hook ()
+  "Mode hook for ggtags."
+  (when (user/gnu-global-tags-p (buffer-file-name))
+    (setq
+     ggtags-update-on-save (not (and (boundp 'helm-gtags-auto-update)
+                                     helm-gtags-auto-update)))))
 
 
 (defun user/gnu-global-tags-location (path)
@@ -95,7 +104,14 @@
    ;; Pulse at point after jump.
    helm-gtags-pulse-at-cursor t)
 
+  ;;; (Hooks) ;;;
   (add-hook 'helm-gtags-mode-hook 'user/helm-gtags-mode-hook))
+
+
+(defun user/ggtags-init ()
+  "Initialize ggtags."
+  ;;; (Hooks) ;;;
+  (add-hook 'ggtags-mode-hook 'user/ggtags-mode-hook))
 
 
 (defun user/global-init ()
@@ -106,7 +122,7 @@
 
   ;;; (Packages) ;;;
   (require-package '(:name helm-gtags :after (user/helm-gtags-init)))
-  (require-package '(:name ggtags)))
+  (require-package '(:name ggtags :after (user/ggtags-init))))
 
 (with-executable 'global
   (user/global-init))
