@@ -25,8 +25,9 @@
 
 (defun user/smartparens-enable ()
   "Enable smartparens in current mode."
-  (show-smartparens-mode t)
-  (smartparens-mode t))
+  (when (feature-p 'smartparens)
+    (show-smartparens-mode t)
+    (smartparens-mode t)))
 
 
 (defun user/smartparens-init ()
