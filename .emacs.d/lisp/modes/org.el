@@ -22,20 +22,20 @@
   (unless (derived-mode-p 'text-mode)
     (user/text-mode-hook))
 
+  (setq
+   ;; Proper filling of org-mode text, form:
+   ;;  * http://lists.gnu.org/archive/html/emacs-orgmode/2008-01/msg00375.html
+   paragraph-separate
+   "\f\\|\\*+ \\|[ ]*$\\| [ \t]*[:|]\\|^[ \t]+\\[[0-9]\\{4\\}-"
+   paragraph-start
+   (concat "\f\\|[ ]*$\\|\\*+ \\|\f\\|[ \t]*\\([-+*][ \t]+\\|"
+           "[0-9]+[.)][ \t] +\\)\\|[ \t]*[:|]\\|"
+           "^[ \t]+\\[[0-9]\\{4\\}-"))
+
   (when (feature-p 'polymode)
     (poly-org-mode t))
 
   (user/smartparens-enable)
-
-  ;; Proper filling of org-mode text, form:
-  ;;  * http://lists.gnu.org/archive/html/emacs-orgmode/2008-01/msg00375.html
-  (org-set-local 'paragraph-separate
-                 "\f\\|\\*+ \\|[ ]*$\\| [ \t]*[:|]\\|^[ \t]+\\[[0-9]\\{4\\}-")
-  ;; The paragraph starter includes hand-formatted lists.
-  (org-set-local 'paragraph-start
-                 (concat "\f\\|[ ]*$\\|\\*+ \\|\f\\|[ \t]*\\([-+*][ \t]+\\|"
-                         "[0-9]+[.)][ \t] +\\)\\|[ \t]*[:|]\\|"
-                         "^[ \t]+\\[[0-9]\\{4\\}-"))
 
   (with-feature 'guide-key
     ;; org-mode specific key guides.
@@ -193,7 +193,7 @@
                       ;; Emacs Lisp support.
                       '(emacs-lisp . t)
                       ;; Shell script support.
-                      '(sh . t))
+                      '(shell . t))
 
     (with-executable 'ditaa
       (add-to-list 'org-babel-load-languages '(ditaa . t)))
