@@ -32,9 +32,6 @@
            "[0-9]+[.)][ \t] +\\)\\|[ \t]*[:|]\\|"
            "^[ \t]+\\[[0-9]\\{4\\}-"))
 
-  (when (feature-p 'polymode)
-    (poly-org-mode t))
-
   (user/smartparens-enable)
 
   (with-feature 'guide-key
