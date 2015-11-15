@@ -2,6 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/cua-mode-hook ()
+  "CUA mode hook."
+  (define-key cua--rectangle-keymap (kbd "C-o") nil))
+
+
 (defun user/expand-region-init ()
   "Initialize expand region."
   ;;; (Bindings) ;;;
@@ -36,6 +41,12 @@
 
     ;; Set middle mouse button to paste from primary X11 selection.
     (global-set-key [mouse-2] 'mouse-yank-primary))
+
+  ;;; (Hooks) ;;;
+  (add-hook 'cua-mode-hook 'user/cua-mode-hook)
+
+  ;; Enable CUA selection mode for nicer rectangle selection.
+  (cua-selection-mode t)
 
   ;;; (Bindings) ;;;
   ;; Delete words with C/M-w and rebind kill/yank region to C-x C-k/C-x C-w.
