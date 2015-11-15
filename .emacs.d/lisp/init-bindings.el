@@ -162,6 +162,11 @@
                 (:selection-all . "C-c M-.")
                 (:selection-edit-lines . "C-c M-e")
 
+                (:widen . (user/view-prefix "n w"))
+                (:narrow-to-page . (user/view-prefix "n p"))
+                (:narrow-to-region . (user/view-prefix "n r"))
+                (:narrow-to-function . (user/view-prefix "n f"))
+
                 (:copy . "C-x C-w")
                 (:cut . "C-x C-k")
                 (:copy-expr . "C-M-w")

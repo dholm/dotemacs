@@ -46,6 +46,15 @@ mode that sets `syntax-ppss' properly."
      ;; Use right option key for writing special characters.
      mac-right-option-modifier nil))
 
+  ;; Enable narrowing.
+  (put 'narrow-to-region 'disabled nil)
+  (put 'narrow-to-page 'disabled nil)
+  (put 'narrow-to-defun 'disabled nil)
+
+  ;; Enable case modification.
+  (put 'upcase-region 'disabled nil)
+  (put 'downcase-region 'disabled nil)
+
   ;;; (Bindings) ;;;
   (global-set-key [remap move-beginning-of-line] 'beginning-or-indentation)
   (global-set-key [remap move-end-of-line] 'end-of-line-or-code)
@@ -55,6 +64,10 @@ mode that sets `syntax-ppss' properly."
   (user/bind-key-global :basic :backward-expr 'backward-sexp)
   (user/bind-key-global :basic :del-char-left 'delete-backward-char)
   (user/bind-key-global :basic :del-char-right 'delete-char)
+  (user/bind-key-global :basic :widen 'widen)
+  (user/bind-key-global :basic :narrow-to-page 'narrow-to-page)
+  (user/bind-key-global :basic :narrow-to-region 'narrow-to-region)
+  (user/bind-key-global :basic :narrow-to-function 'narrow-to-defun)
   (user/bind-key-global :code :join-line 'join-line)
   (user/bind-key-global :code :fill-paragraph 'fill-paragraph))
 
