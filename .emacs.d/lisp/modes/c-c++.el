@@ -12,6 +12,8 @@
   ;; Stroustrup styles so that they are indented one level beyond
   ;; the switch.
   (c-set-offset 'case-label '+)
+  ;; Don't indent when inside `extern "<lang>"'.
+  (c-set-offset 'inextern-lang 0)
 
   ;; Enable Doxygen support.
   (doxygen-mode t)
