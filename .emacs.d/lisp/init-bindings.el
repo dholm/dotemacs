@@ -183,6 +183,7 @@
                 (:describe-coding . (user/help-prefix "C"))
                 (:describe-char . (user/help-prefix "c"))
                 (:describe-face . (user/help-prefix "F"))
+                (:describe-all-faces . (user/help-prefix "M-f"))
                 (:describe-function . (user/help-prefix "f"))
                 (:describe-key . (user/help-prefix "k"))
                 (:describe-key-extensive . (user/help-prefix "K"))
