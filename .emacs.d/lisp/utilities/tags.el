@@ -61,7 +61,8 @@
   (user/eval-until-move
    '(((eq major-mode 'emacs-lisp-mode)
       (call-interactively 'elisp-slime-nav-find-elisp-thing-at-point))
-     ((and (user/use-rtags) (not rtags-last-request-not-indexed))
+     ((and (user/use-rtags) (and (boundp 'rtags-last-request-not-indexed)
+                                 (not rtags-last-request-not-indexed)))
       (rtags-find-symbol-at-point))
      ((user/use-helm-gtags)
       (call-interactively 'helm-gtags-dwim))
@@ -73,7 +74,8 @@
   "Find references at current point."
   (interactive)
   (user/eval-until-move
-   '(((and (user/use-rtags (not rtags-last-request-not-indexed)))
+   '(((and (user/use-rtags (and (boundp 'rtags-last-request-not-indexed)
+                                (not rtags-last-request-not-indexed))))
       (rtags-find-references-at-point))
      ((user/use-helm-gtags)
       (call-interactively 'helm-gtags-find-rtag))
