@@ -4,9 +4,10 @@
 
 (defun user/vc-find-file-hook ()
   "Find file hook for version controlled files."
-  (when (vc-working-revision (buffer-file-name))
-    ;; Automatically refresh version controlled files.
-    (auto-revert-mode t)))
+  (with-feature 'vc
+    (when (vc-working-revision (buffer-file-name))
+      ;; Automatically refresh version controlled files.
+      (auto-revert-mode t))))
 
 
 (defun user/vc-log-edit-hook ()
