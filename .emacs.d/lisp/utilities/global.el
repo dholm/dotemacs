@@ -18,7 +18,11 @@
   (when (user/gnu-global-tags-p (buffer-file-name))
     (setq
      ggtags-update-on-save (not (and (boundp 'helm-gtags-auto-update)
-                                     helm-gtags-auto-update)))))
+                                     helm-gtags-auto-update))))
+
+  (when (tramp-tramp-file-p (buffer-file-name (current-buffer)))
+    ;; Disable eldoc in tramp buffers.
+    (remove-function (local 'eldoc-documentation-function) 'ggtags-eldoc-function)))
 
 
 (defun user/gnu-global-tags-location (path)
@@ -55,11 +59,7 @@
     (setq-local
      ;; Use as source for `hippie-exp'.
      hippie-expand-try-functions-list
-     (cons 'ggtags-try-complete-tag hippie-expand-try-functions-list))
-
-    (setq-local
-     ;; Enable Eldoc support.
-     eldoc-documentation-function #'ggtags-eldoc-function))
+     (cons 'ggtags-try-complete-tag hippie-expand-try-functions-list)))
 
   (with-feature 'semantic/db-global
     ;; Enable semantic GNU/GLOBAL database.
@@ -110,6 +110,10 @@
 
 (defun user/ggtags-init ()
   "Initialize ggtags."
+  (setq-default
+   ;; Never use global to highlight tags.
+   ggtags-highlight-tag nil)
+
   ;;; (Hooks) ;;;
   (add-hook 'ggtags-mode-hook 'user/ggtags-mode-hook))
 
