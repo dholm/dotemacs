@@ -21,8 +21,8 @@
    password-cache-expiry 1000
    ;; SSH is properly configured to share connections.
    tramp-use-ssh-controlmaster-options nil
-   ;; Allow reading dir-local on remote system.
-   enable-remote-dir-locals t)
+   ;; Skip looking for dir-local on remote system to speed up tramp.
+   enable-remote-dir-locals nil)
 
   ;; Load SSH configuration
   (after-load 'tramp
