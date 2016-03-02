@@ -25,6 +25,12 @@
   "Wanderlust draft mode hook.")
 
 
+(defun user/mime-view-mode-hook ()
+  "Wanderlust mime view mode hook."
+  ;;; (Bindings) ;;;
+  (user/bind-key-local :nav :open 'mime-preview-toggle-content))
+
+
 (defun user/mime-edit-mode-hook ()
   "Wanderlust mime edit mode hook.")
 
@@ -154,6 +160,7 @@
        (subtype . calendar)
        (method . user/icalendar-import-mime-text))))
 
+  (add-hook 'mime-view-mode-hook 'user/mime-view-mode-hook)
   (add-hook 'mime-edit-mode-hook 'user/mime-edit-mode-hook))
 
 
