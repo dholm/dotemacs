@@ -102,6 +102,7 @@
     (require-package '(:name gerrit-download :after (user/gerrit-download-init))))
   (when (feature-p 'helm)
     (require-package '(:name helm-ls-git))
+    (require-package '(:name helm-git-grep))
     (require-package '(:name helm-open-github))))
 
 (with-executable 'git

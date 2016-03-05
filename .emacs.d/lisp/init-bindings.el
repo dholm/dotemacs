@@ -340,6 +340,7 @@
               (:next-action . (user/vcs-prefix "SPC"))
               (:mergetool . (user/vcs-prefix "m"))
 
+              (:search . (user/vcs-prefix "M-s"))
               (:time-machine . (user/vcs-prefix "t"))))
 
      ;;; (Utilities) ;;;

@@ -14,6 +14,7 @@
              (:add-buffer . (lambda ()
                               (magit-run-git "add" (path-abs-buffer))))
              (:mergetool . magit-ediff)
+             (:search . helm-git-grep)
              (:time-machine . (lambda ()
                                 (when (feature-p 'git-timemachine)
                                   (call-interactively 'git-timemachine))))))
@@ -100,6 +101,12 @@
   (user/vcs-command :mergetool))
 
 
+(defun user/vcs-search ()
+  "Run VCS time machine on the current buffer."
+  (interactive)
+  (user/vcs-command :search))
+
+
 (defun user/vcs-time-machine ()
   "Run VCS time machine on the current buffer."
   (interactive)
@@ -123,6 +130,7 @@
   (user/bind-key-global :vcs :add-buffer 'user/vcs-add-buffer)
   (user/bind-key-global :vcs :mergetool 'user/vcs-mergetool)
 
+  (user/bind-key-global :vcs :search 'user/vcs-search)
   (user/bind-key-global :vcs :time-machine 'user/vcs-time-machine))
 
 (user/vcs-bindings-init)
