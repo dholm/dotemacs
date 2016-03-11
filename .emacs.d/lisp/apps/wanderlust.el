@@ -42,6 +42,14 @@
    truncate-lines nil))
 
 
+(defun user/wanderlust-notify-hook ()
+  "Wanderlust email notification hook."
+  (cond
+   ((feature-p 'alert)
+    (alert "You've got mail." :severity 'trivial))
+   (t (ding))))
+
+
 (defun user/wl-message-redisplay-hook ()
   "Wanderlust message redisplay hook."
   (when (display-graphic-p)
@@ -431,6 +439,8 @@ Gmail {
    ;; Check for mail when idle.
    wl-biff-check-interval 180
    wl-biff-use-idle-timer t
+   ;; Set notification function.
+   wl-biff-notify-hook 'user/wanderlust-notify-hook
    ;; Let SMTP server handle Message-ID.
    wl-insert-message-id nil
    ;; Quit without asking.
