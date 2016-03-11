@@ -48,7 +48,7 @@
   (after-load 'bbdb
     (eudc-protocol-set
      'eudc-inline-expansion-format
-     '("%s %s <%s> {%s}" firstname lastname net company)
+     '("%s %s <%s>" firstname lastname net)
      'bbdb)
     (eudc-protocol-set
      'eudc-inline-query-format
