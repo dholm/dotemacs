@@ -70,8 +70,14 @@
     (setq-default
      ;; Agenda data store.
      org-agenda-files `(,agenda-data-store)
+     ;; Ignore agenda files that are unavailable.
+     org-agenda-skip-unavailable-files t
+     ;; Restore window configuration when done with the agenda.
+     org-agenda-restore-windows-after-quit t
      ;; Start on Monday.
      org-agenda-start-on-weekday 1
+     ;; Show month by default.
+     org-agenda-span 'month
      ;; Don't display scheduled todos.
      org-agenda-todo-ignore-scheduled 'future
      ;; Don't show nested todos.
@@ -83,7 +89,11 @@
      ;; Position the habit graph to the right.
      org-habit-graph-column 50
      ;; Include Emacs' Diary in org-agenda.
-     org-agenda-include-diary t)
+     org-agenda-include-diary t
+     ;; Switch window when opening org-agenda.
+     org-agenda-window-setup 'other-window
+     ;; Display indirect buffers in the "current" window.
+     org-indirect-buffer-display 'current-window)
 
     ;; Ensure that agenda data store exists.
     (make-directory agenda-data-store t))
