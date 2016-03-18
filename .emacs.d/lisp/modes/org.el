@@ -71,7 +71,7 @@
      ;; Agenda data store.
      org-agenda-files `(,agenda-data-store)
      ;; Start on Monday.
-     org-agenda-start-on-weekday t
+     org-agenda-start-on-weekday 1
      ;; Don't display scheduled todos.
      org-agenda-todo-ignore-scheduled 'future
      ;; Don't show nested todos.
