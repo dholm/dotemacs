@@ -41,6 +41,7 @@
     (guide-key/add-local-highlight-command-regexp "org-"))
 
   ;;; (Bindings) ;;;
+  (user/bind-key-local :basic :open-buffer-context 'org-iswitchb)
   (user/bind-key-local :basic :narrow-to-page 'org-narrow-to-subtree)
   (user/bind-key-local :basic :narrow-to-region 'org-narrow-to-block)
   (user/bind-key-local :basic :narrow-to-function 'org-narrow-to-element)

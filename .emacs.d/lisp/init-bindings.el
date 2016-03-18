@@ -131,6 +131,7 @@
                 (:open-file-context . "C-x f")
                 (:view-file . "C-x C-v")
                 (:open-buffer . "C-x b")
+                (:open-buffer-context . "C-x M-b")
 
                 (:save . "C-x C-s")
                 (:save-as . "C-x M-s")
