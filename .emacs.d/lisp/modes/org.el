@@ -114,7 +114,8 @@
      org-agenda-window-setup 'current-window))
 
   ;;; (Bindings) ;;;
-  (user/bind-key-global :apps :agenda 'org-agenda))
+  (user/bind-key-global :apps :agenda 'org-agenda)
+  (user/bind-key-global :apps :todo 'org-todo-list))
 
 
 (defun user/org-open-at-point (&optional arg)

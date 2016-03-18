@@ -376,7 +376,8 @@
 
                (:agenda . (user/apps-prefix "a"))
                (:notes . (user/apps-prefix "n"))
-               (:capture-task . (user/apps-prefix "t"))
+               (:todo . (user/apps-prefix "t"))
+               (:capture-task . (user/apps-prefix "M-t"))
                (:information-db . (user/apps-prefix "D"))
 
                (:browse . (user/apps-prefix "b"))
