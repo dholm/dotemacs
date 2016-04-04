@@ -162,9 +162,14 @@
     (when (display-graphic-p)
       ;; Replace smileys with icons.
       (add-to-list 'erc-modules 'smiley)
+
       (when (feature-p 'erc-tex)
         ;; Render (La)TeX mathematical expressions.
-        (add-to-list 'erc-modules 'tex))))
+        (add-to-list 'erc-modules 'tex))
+
+      (when (feature-p 'erc-image)
+        ;; Render posted images inline in buffer.
+        (add-to-list 'erc-modules 'image))))
 
   (when (eq default-terminal-coding-system 'utf-8)
     (setq-default
@@ -190,6 +195,7 @@
 (require-package '(:name erc :after (user/erc-init)))
 (require-package '(:name erc-highlight-nicknames))
 (require-package '(:name erc-track-score))
+(require-package '(:name erc-image))
 (require-package '(:name erc-view-log))
 (require-package '(:name erc-crypt))
 (when (display-graphic-p)
