@@ -147,9 +147,9 @@
      ;; Truncate really long irc buffers.
      'truncate)
 
-    (when (feature-p 'erc-highlight-nicknames)
+    (when (feature-p 'erc-colorize)
       ;; Highlight nicknames in chats.
-      (add-to-list 'erc-modules 'highlight-nicknames))
+      (add-to-list 'erc-modules 'colorize))
 
     (when (feature-p 'erc-track-score)
       (setq-default
@@ -193,7 +193,7 @@
   (user/bind-key-global :apps :irc 'erc))
 
 (require-package '(:name erc :after (user/erc-init)))
-(require-package '(:name erc-highlight-nicknames))
+(require-package '(:name erc-colorize))
 (require-package '(:name erc-track-score))
 (require-package '(:name erc-image))
 (require-package '(:name erc-view-log))
