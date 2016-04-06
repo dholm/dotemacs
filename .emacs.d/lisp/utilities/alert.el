@@ -2,6 +2,15 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/alert-style ()
+  "Get the preferred alert style."
+  (cond
+   ((eq system-type 'darwin) 'growl)
+   ((executable-find "notify-send") 'libnotify)
+   ((executable-find "dbus-send") 'notifications)
+   (t 'mode-line)))
+
+
 (defun user/alert-init ()
   "Initialize alert."
   (setq-default
