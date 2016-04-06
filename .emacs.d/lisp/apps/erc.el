@@ -6,6 +6,10 @@
   (path-join *user-cache-directory* "erc")
   "Path to user's erc cache store.")
 
+(defvar *user-erc-noise-regexp*
+  "\\(Logging in:\\|Signing off\\|You're now away\\|Welcome back\\|Setting automatically away\\)"
+  "This regexp matches unwanted noise.")
+
 
 (defface erc-header-line-disconnected
   '((t (:inherit 'flymake-errline)))
@@ -24,13 +28,19 @@
           (t 'erc-header-line-disconnected))))
 
 
-(defun user/erc-global-notify (match-type nick message)
+(defun user/erc-global-notify (&optional match-type nick message)
   "Global notification on MATCH-TYPE when NICK sent a MESSAGE to user."
-  (notifications-notify
-   :title nick
-   :body message
-   :urgency 'low))
-
+  (when (or (null match-type) (not (eq match-type 'fool)))
+    (if (feature-p 'alert)
+        (let (alert-log-messages)
+          (alert (or message (buffer-string))
+                 :severity 'high
+                 :title (concat "ERC: " (or nick (buffer-name)))
+                 :data message))
+      (notifications-notify
+       :title nick
+       :body message
+       :urgency 'low))))
 
 (defun user/erc-prompt ()
   "ERC prompt function."
@@ -41,6 +51,31 @@
                       'front-nonsticky t)
     (erc-propertize (concat "[" (buffer-name) "]") 'read-only t
                     'rear-nonsticky t 'front-nonsticky t)))
+
+
+(defun user/erc-alert-important-p (info)
+  "Check if ERC alert is important based on INFO."
+  (let ((msg (plist-get info :message))
+        (erc-message (plist-get info :data)))
+    (and erc-message
+         (not (or (string-match "^\\** *Users on #" msg)
+                  (string-match *user-erc-noise-regexp* msg))))))
+
+(defun user/erc-alert-init ()
+  "Initialize alert for ERC."
+  ;; Notify user on important events if ERC buffer isn't visible.
+  (alert-add-rule :status 'buried
+                  :mode   'erc-mode
+                  :predicate #'user/erc-alert-important-p
+                  :style (user/alert-style)
+                  :append t)
+  ;; Log all important ERC events to the alert log.
+  (alert-add-rule :mode 'erc-mode
+                  :predicate #'user/erc-alert-important-p
+                  :style 'log
+                  :append t)
+  ;; Ignore remaining events.
+  (alert-add-rule :mode 'erc-mode :style 'ignore :append t))
 
 
 (defun user/erc-init ()
@@ -176,18 +211,21 @@
      ;; As long as the terminal handles it, force UTF-8.
      erc-server-coding-system '(utf-8 . utf-8)))
 
-  ;; Notification on personal messages.
-  (add-hook 'erc-text-matched-hook 'user/erc-global-notify)
-
   ;; Ensure that the log directory exists.
   (make-directory erc-log-channels-directory t)
   (set-file-modes erc-log-channels-directory #o0700)
+
+  (after-load 'alert
+    (user/erc-alert-init))
 
   ;; Hooks.
   (add-hook 'erc-connect-pre-hook (lambda (x) (erc-update-modules)))
   (add-hook 'erc-mode-hook 'user/erc-mode-hook)
   (when (feature-p 'bbdb2erc)
     (add-hook 'bbdb-notice-hook 'bbdb2erc-online-status))
+  ;; Notification on important events.
+  (add-hook 'erc-text-matched-hook 'user/erc-global-notify)
+  (add-hook 'erc-insert-modify-hook 'user/erc-global-notify)
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :irc 'erc))
