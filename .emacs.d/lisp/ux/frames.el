@@ -2,6 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/window-configuration-change-hook ()
+  "Window configuration change hook."
+  (setq
+   ;; Only split frame if it occupies at least 2/3 of the current screen width.
+   split-width-threshold (* (/ (window-total-width (frame-root-window)) 3) 2)))
+
 (defun user/iconify-or-deiconify-frame ()
   "Iconify the selected frame, or deiconify if it's currently an icon."
   (interactive)
@@ -45,8 +51,6 @@
    ;; Inhibit GUI features
    use-file-dialog nil
    user-dialog-box nil
-   ;; Only split frame if it occupies at least 2/3 of the screen width.
-   split-width-threshold (* (/ (window-total-width (frame-root-window)) 3) 2)
    ;; Don't split frames horizontally.
    split-height-threshold nil)
 
@@ -54,6 +58,10 @@
   (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
   (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
   (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+
+  ;;; (Hooks) ;;;
+  (add-to-list 'window-configuration-change-hook
+               'user/window-configuration-change-hook)
 
   ;;; (Bindings) ;;;
   (when (display-graphic-p)
