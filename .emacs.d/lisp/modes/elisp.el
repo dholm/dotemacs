@@ -17,8 +17,7 @@
 
   (cond
    ((user/auto-complete-p)
-    (with-feature 'auto-complete-emacs-lisp
-      (ac-emacs-lisp-mode-setup)))
+    (ac-emacs-lisp-mode-setup))
    ((user/company-mode-p)
     (with-feature 'company-elisp
       (add-company-sources 'company-elisp))))
@@ -100,7 +99,6 @@
 
   ;;; (Packages) ;;;
   (require-package '(:name macrostep))
-  (require-package '(:name auto-complete-emacs-lisp))
   (require-package '(:name elisp-slime-nav))
   (require-package '(:name auto-compile))
   (require-package '(:name eldoc-eval :after (user/eldoc-eval-init))))
