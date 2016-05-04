@@ -106,6 +106,30 @@
       (delete-file calendar-temp-file))))
 
 
+(defun wl-summary-overview-entity-compare-by-reply-date (a b)
+  "Compare message A and B by latest date of replies including thread."
+  (flet ((string-max2 (x y)
+          (cond ((string< x y) y)
+                ('t x)))
+         (thread-number-get-date (x)
+          (timezone-make-date-sortable (elmo-msgdb-overview-entity-get-date
+                                        (elmo-message-entity
+                                         wl-summary-buffer-elmo-folder x))))
+         (thread-get-family (x)
+          (cons x (wl-thread-entity-get-descendant (wl-thread-get-entity x))))
+         (max-reply-date (x)
+          (cond ((eq 'nil x)
+                 'nil)
+                ((eq 'nil (cdr x))
+                 (thread-number-get-date (car x)))
+                ('t
+                 (string-max2 (thread-number-get-date (car x))
+                              (max-reply-date (cdr x)))))))
+    (string<
+     (max-reply-date (thread-get-family (elmo-message-entity-number a)))
+     (max-reply-date (thread-get-family (elmo-message-entity-number b))))))
+
+
 (defun user/mime-display-text/plain-hook ()
   "Plain text display hook."
   (let ((fmt (cdr (assoc "format" (mime-content-type-parameters
@@ -413,7 +437,9 @@ Gmail {
      ;; Email to user formatter.
      '(?i (user/wl-summary-line-where-is-my-address))
      ;; Attachment formatter.
-     '(?@ (user/wl-summary-line-attached))))
+     '(?@ (user/wl-summary-line-attached)))
+
+    (add-to-list 'wl-summary-sort-specs 'reply-date))
 
   ;; Set up guides in summary mode.
   (user/wanderlust-set-summary-guides)
