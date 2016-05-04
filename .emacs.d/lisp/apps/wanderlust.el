@@ -357,8 +357,8 @@ Gmail {
    wl-message-window-size '(1 . 3)
    ;; Field lists.
    wl-message-ignored-field-list '("^.*")
-   wl-message-visible-field-list '("^\\(To\\|Cc\\):" "^Subject:"
-                                   "^\\(From\\|Reply-To\\):" "^Organization:"
+   wl-message-visible-field-list '("^\\(From\\|Reply-To\\):" "^\\(To\\|Cc\\):"
+                                   "^Organization:" "^Subject:"
                                    "^X-Attribution:" "^\\(Posted\\|Date\\):"
                                    "^\\(Posted\\|Date\\):"
                                    "^\\(User-Agent\\|X-Mailer\\):")
