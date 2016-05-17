@@ -439,7 +439,9 @@ Gmail {
      ;; Attachment formatter.
      '(?@ (user/wl-summary-line-attached)))
 
-    (add-to-list 'wl-summary-sort-specs 'reply-date))
+    ;; Sort threads based on the date of the latest reply.
+    (add-to-list 'wl-summary-sort-specs 'reply-date)
+    (setq wl-summary-default-sort-spec 'reply-date))
 
   ;; Set up guides in summary mode.
   (user/wanderlust-set-summary-guides)
