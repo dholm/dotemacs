@@ -238,6 +238,8 @@
     (require-package '(:name irony-mode :after (user/irony-mode-init)))
     (require-package '(:name irony-eldoc))
     (require-package '(:name flycheck-irony)))
+  (with-executable 'pkg-config
+    (require-package '(:name flycheck-pkg-config)))
   (with-executable 'cmake
     (require-package '(:name cpputils-cmake :after (user/cpputils-cmake-init))))
   (with-executable 'clang
