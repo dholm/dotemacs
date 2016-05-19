@@ -561,18 +561,20 @@
 
   ;; Hooks
   (add-hook 'gnus-startup-hook 'user/gnus-startup-hook)
-  (add-hook 'message-sent-hook 'user/gnus-message-sent-hook))
+  (add-hook 'message-sent-hook 'user/gnus-message-sent-hook)
 
-(require-package '(:name gnus :after (user/gnus-init)))
-(require-package '(:name gnus-alias))
-(require-package '(:name gnus-summary-ext))
-(require-package '(:name gnus-x-gm-raw))
-(with-executable 'gpgsm
-  (require-package '(:name jl-smime)))
-(when (display-graphic-p)
-  (require-package '(:name gnus-gravatar)))
-(when (eq system-type 'darwin)
-  (require-package '(:name nnir-spotlight)))
+  ;;; (Packages) ;;;
+  (require-package '(:name gnus-alias))
+  (require-package '(:name gnus-summary-ext))
+  (require-package '(:name gnus-x-gm-raw))
+  (with-executable 'gpgsm
+    (require-package '(:name jl-smime)))
+  (when (display-graphic-p)
+    (require-package '(:name gnus-gravatar)))
+  (when (eq system-type 'darwin)
+    (require-package '(:name nnir-spotlight))))
+
+(user/gnus-init)
 
 
 (provide 'apps/gnus)
