@@ -61,6 +61,11 @@
     ;; Use popwin for Flycheck error list.
     (push '(flycheck-error-list-mode :stick t) popwin:special-display-config))
 
+  (after-load 'flycheck
+    (when (display-graphic-p)
+      ;; Make sure flycheck-pos-tip is loaded.
+      (require 'flycheck-pos-tip nil t)))
+
   ;;; (Hooks) ;;;
   (add-hook 'flycheck-mode-hook 'user/flycheck-mode-hook)
   (add-hook 'ede-minor-mode-hook 'user/ede-flycheck-setup)
