@@ -15,6 +15,7 @@
 
 (with-executable 'rustc
   (require-package '(:name rust-mode :after (user/rust-mode-init)))
+  (require-package '(:name flycheck-rust))
   (require-package '(:name rusti)))
 
 
