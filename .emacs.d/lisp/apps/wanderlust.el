@@ -209,7 +209,9 @@
    ;; ELMO's cache go into the user cache directory.
    elmo-cache-directory (path-join *user-wanderlust-cache-directory* "elmo")
    ;; Use modified UTF-8 for IMAP4.
-   elmo-imap4-use-modified-utf7 t)
+   elmo-imap4-use-modified-utf7 t
+   ;; Maximum size of message to fetch without confirmation.
+   elmo-message-fetch-threshold (* 512 1024))
 
   (unless (executable-find "namazu")
     (message "Namazu not found, mail will not be indexed.")))
