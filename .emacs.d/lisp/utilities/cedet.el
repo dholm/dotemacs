@@ -146,6 +146,11 @@
           (semanticdb-enable-gnu-global-databases 'c-mode)
           (semanticdb-enable-gnu-global-databases 'c++-mode))))
 
+    ;; Disable semantic over Tramp as SemanticDB's save function keeps freezing
+    ;; Emacs.
+    (add-to-list 'semantic-inhibit-functions
+                 (lambda () (tramp-tramp-file-p (buffer-file-name (current-buffer)))))
+
     ;; Register languages from contrib.
     (add-to-list 'semantic-new-buffer-setup-functions
                  '(csharp-mode . wisent-csharp-default-setup)
