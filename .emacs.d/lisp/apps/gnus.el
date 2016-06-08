@@ -569,8 +569,6 @@
   (require-package '(:name gnus-x-gm-raw))
   (with-executable 'gpgsm
     (require-package '(:name jl-smime)))
-  (when (display-graphic-p)
-    (require-package '(:name gnus-gravatar)))
   (when (eq system-type 'darwin)
     (require-package '(:name nnir-spotlight))))
 
