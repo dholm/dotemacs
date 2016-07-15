@@ -61,9 +61,10 @@
      hippie-expand-try-functions-list
      (cons 'ggtags-try-complete-tag hippie-expand-try-functions-list)))
 
-  (with-feature 'semantic/db-global
-    ;; Enable semantic GNU/GLOBAL database.
-    (semanticdb-enable-gnu-global-in-buffer t))
+  (after-load 'semantic
+    (with-feature 'semantic/db-global
+      ;; Enable semantic GNU/GLOBAL database.
+      (semanticdb-enable-gnu-global-in-buffer t)))
 
   ;; Register as auto-completion source.
   (add-ac-sources 'ac-source-gtags)
