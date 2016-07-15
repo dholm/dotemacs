@@ -241,7 +241,8 @@
   (with-executable 'pkg-config
     (require-package '(:name flycheck-pkg-config)))
   (with-executable 'cmake
-    (require-package '(:name cpputils-cmake :after (user/cpputils-cmake-init))))
+    (require-package '(:name cpputils-cmake :after (user/cpputils-cmake-init)))
+    (require-package '(:name cmake-ide)))
   (with-executable 'clang
     (require-package '(:name clang-format)))
   (require-package '(:name function-args))
