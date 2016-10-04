@@ -136,6 +136,24 @@
    cfw:fchar-top-right-corner ?┓))
 
 
+(defun user/appt-disp-window (due-in-min cur-date appt-msg)
+  "Appointment DUE-IN-MIN on CUR-DATE regarding APPT-MSG."
+  (cond
+   ((feature-p 'alert)
+    (alert appt-msg
+           :severity 'high
+           :title (format "Appointment in %s minute(s)" due-in-min)
+           :style (user/alert-style)))
+   (t (appt-disp-window due-in-min cur-date appt-msg))))
+
+
+(defun user/appt-delete-window ()
+  "Undisplay appointment."
+  (cond
+   ((feature-p 'alert) t)
+   (t (appt-delete-window))))
+
+
 (defun user/appt-init ()
   "Initialize appointment notification system."
   (setq-default
@@ -143,7 +161,11 @@
    appt-message-warning-time 5
    appt-display-interval 5
    ;; Show time until next event in mode-line.
-   appt-display-mode-line t))
+   appt-display-mode-line t
+   ;; Appointment display type.
+   appt-display-format 'window
+   appt-disp-window-function 'user/appt-disp-window
+   appt-delete-window-function 'user/appt-delete-window))
 
 
 (defun user/calendar-week-init ()
@@ -184,9 +206,11 @@
      ;; Week starts on Monday.
      calendar-week-start-day 1))
 
-  (user/calendar-week-init)
   (user/swedish-holidays-init)
-  (user/appt-init)
+  (after-load 'calendar
+    (user/calendar-week-init))
+  (after-load 'appt
+    (user/appt-init))
 
   ;;; (Hooks) ;;;
   (add-hook 'diary-display-function 'diary-fancy-display)
