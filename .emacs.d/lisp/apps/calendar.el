@@ -146,6 +146,25 @@
    appt-display-mode-line t))
 
 
+(defun user/calendar-week-init ()
+  "Initialize display of week numbers in calendar."
+  (copy-face 'calendar-weekend-header 'calendar-iso-week-header-face)
+  (copy-face 'calendar-weekend-header 'calendar-iso-week-face)
+
+  (setq-default
+   ;; Week header.
+   calendar-intermonth-header
+   (propertize "Wk" 'font-lock-face 'calendar-iso-week-header-face)
+   ;; Week display.
+   calendar-intermonth-text
+   '(propertize
+     (format "%2d"
+             (car
+              (calendar-iso-from-absolute
+               (calendar-absolute-from-gregorian (list month day year)))))
+     'font-lock-face 'calendar-iso-week-face)))
+
+
 (defun user/calendar-init ()
   "Initialize calendar."
   (let ((diary-data-store (path-join *user-org-data-directory* "diary.org")))
@@ -165,6 +184,7 @@
      ;; Week starts on Monday.
      calendar-week-start-day 1))
 
+  (user/calendar-week-init)
   (user/swedish-holidays-init)
   (user/appt-init)
 
