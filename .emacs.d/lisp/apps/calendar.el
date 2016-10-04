@@ -2,6 +2,17 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/calendar-load-hook ()
+  "Calendar initialization hook."
+  (with-feature 'appt
+    ;; Enable appointment notifications.
+    (appt-activate 1))
+
+  (when (and (boundp 'excorporate-configuration) excorporate-configuration)
+    ;; If excorporate has been configured make sure it's up and running.
+    (excorporate)))
+
+
 (defun user/swedish-easter (year)
   "Calculate the date for Easter in YEAR."
   (let* ((century (1+ (/ year 100)))
@@ -125,6 +136,16 @@
    cfw:fchar-top-right-corner ?┓))
 
 
+(defun user/appt-init ()
+  "Initialize appointment notification system."
+  (setq-default
+   ;; Number of minutes to notify before an event starts.
+   appt-message-warning-time 5
+   appt-display-interval 5
+   ;; Show time until next event in mode-line.
+   appt-display-mode-line t))
+
+
 (defun user/calendar-init ()
   "Initialize calendar."
   (let ((diary-data-store (path-join *user-org-data-directory* "diary.org")))
@@ -145,10 +166,12 @@
      calendar-week-start-day 1))
 
   (user/swedish-holidays-init)
+  (user/appt-init)
 
   ;;; (Hooks) ;;;
   (add-hook 'diary-display-function 'diary-fancy-display)
   (add-hook 'calendar-today-visible-hook 'calendar-mark-today)
+  (add-hook 'calendar-load-hook 'user/calendar-load-hook)
 
   ;;; (Packages) ;;;
   (require-package '(:name calfw :after (user/calfw-init)))

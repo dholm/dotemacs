@@ -49,6 +49,12 @@
   (user/bind-key-local :code :context-demote 'org-shiftdown))
 
 
+(defun user/org-agenda-finalize-hook ()
+  "Org agenda display hook."
+  ;; Enable appointment notifications.
+  (org-agenda-to-appt t))
+
+
 (defun user/org-load-hook ()
   "Org-mode loaded hook."
   (when (not noninteractive)
@@ -102,16 +108,14 @@
     ;; Load org agenda.
     (add-to-list 'org-modules 'org-agenda))
 
-  (after-load 'org-agenda
-    (with-feature 'org-alert
-      ;; Enable alerts for scheduled items.
-      (org-alert-enable)))
-
   (when (not noninteractive)
     ;; When running in batch, don't setup windows.
     (setq-default
      ;; Show agenda in current window.
      org-agenda-window-setup 'current-window))
+
+  ;;; (Hooks) ;;;
+  (add-hook 'org-agenda-finalize-hook 'user/org-agenda-finalize-hook)
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :agenda 'org-agenda)
@@ -466,8 +470,7 @@
   (require-package '(:name org-mode :after (user/org-mode-init)))
   (require-package '(:name org-sync :after (user/org-sync-init)))
   (require-package '(:name orgmode-mediawiki))
-  (require-package '(:name org-caldav))
-  (require-package '(:name org-alert)))
+  (require-package '(:name org-caldav)))
 
 (user/org-init)
 
