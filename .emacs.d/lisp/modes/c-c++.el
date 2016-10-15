@@ -204,17 +204,23 @@
    cppcm-write-flymake-makefile nil))
 
 
+(defun user/cc-mode-init ()
+  "Initialize CC-mode."
+  (after-load 'cc-mode
+    (add-many-to-list
+     'c-default-style
+     ;; Default mode for C.
+     '(c-mode . "K&R")
+     ;; Default mode for C++.
+     '(c++-mode . "Stroustrup"))))
+
+
 (defun user/c-c++-mode-init ()
   "Initialize C/C++ mode."
   (setq-default
    ;; Support completion using tab.
    c-tab-always-indent nil
    c-insert-tab-function 'indent-for-tab-command)
-
-  (after-load 'cc-mode
-    (add-many-to-list 'c-default-style
-                      '(c-mode . "K&R")
-                      '(c++-mode . "Stroustrup")))
 
   (after-load 'smartparens
     (sp-with-modes '(c-mode c++-mode)
@@ -230,6 +236,7 @@
   (add-magic-mode 'c++-mode 'user/c++-header-file-p)
 
   ;;; (Packages) ;;;
+  (require-package '(:name cc-mode :after (user/cc-mode-init)))
   (require-package '(:name auto-complete-c-headers))
   (require-package '(:name company-c-headers))
   (when (and (executable-find "cmake")
