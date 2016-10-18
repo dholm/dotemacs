@@ -29,9 +29,11 @@
 
 (defun user/eval-until-move (cond-list)
   "Evaluate expressions from COND-LIST until point is changed."
-  (let ((start-point (point)))
+  (let ((start-buffer (current-buffer))
+        (start-point (point)))
     (dolist (cond-expr cond-list)
-      (when (eq start-point (point))
+      (when (and (eq start-buffer (current-buffer))
+                 (eq start-point (point)))
         (let ((cnd (first cond-expr))
               (expr (second cond-expr)))
           (when (eval cnd)
@@ -61,9 +63,10 @@
   (user/eval-until-move
    '(((eq major-mode 'emacs-lisp-mode)
       (call-interactively 'elisp-slime-nav-find-elisp-thing-at-point))
-     ((and (user/use-rtags) (and (boundp 'rtags-last-request-not-indexed)
-                                 (not rtags-last-request-not-indexed)))
-      (rtags-find-symbol-at-point))
+     ((and (user/use-rtags)
+           (boundp 'rtags-last-request-not-indexed)
+           (not rtags-last-request-not-indexed))
+      (call-interactively 'rtags-find-symbol-at-point))
      ((user/use-helm-gtags)
       (call-interactively 'helm-gtags-dwim))
      ((user/use-semantic)
