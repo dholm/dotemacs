@@ -5,7 +5,7 @@
 (defun user/use-rtags (&optional filemanager)
   "Check if rtags can be used, optionally with its FILEMANAGER."
   (and
-   (boundp 'rtags-executable-find)
+   (fboundp 'rtags-executable-find)
    (rtags-executable-find "rc")
    (cond ((not (ggtags-current-project-root)) t)
          ((and (not (eq major-mode 'c++-mode))
