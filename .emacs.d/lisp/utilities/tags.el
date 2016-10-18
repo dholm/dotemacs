@@ -150,11 +150,18 @@
     (user/bind-key-local :nav :go-back 'user/tag-pop)))
 
 
+(defun user/rtags-init ()
+  "Initialize rtags."
+  (setq-default
+   ;; Enable Helm when available.
+   rtags-use-helm (feature-p 'helm)))
+
+
 (defun user/tags-init ()
   "Initialize tag support."
   ;;; (Packages) ;;;
   (with-executable 'llvm-config
-    (require-package '(:name rtags)))
+    (require-package '(:name rtags :after (user/rtags-init))))
   (when (feature-p 'helm)
     (require-package '(:name helm-etags-plus))))
 
