@@ -56,6 +56,13 @@
     (define-key magit-status-mode-map (kbd "W") 'user/magit-toggle-whitespace)))
 
 
+(defun user/magit-gerrit-init ()
+  "Initialize magit-gerrit."
+  (setq-default
+   ;; Magit binding for Gerrit commands.
+   magit-gerrit-popup-prefix "G"))
+
+
 (defun user/git-gutter-fringe-init ()
   "Initialize git gutter fringe."
   (setq-default git-gutter-fr:side 'left-fringe))
@@ -64,13 +71,6 @@
 (defun user/git-messenger-init ()
   "Initialize git messenger."
   (setq-default git-messenger:show-detail t))
-
-
-(defun user/gerrit-download-init ()
-  "Initialize gerrit download."
-  (after-load 'gnus
-    (require 'gerrit-download)
-    (gerrit-download-insinuate-gnus)))
 
 
 (defun user/git-init ()
@@ -90,7 +90,7 @@
 
   ;;; (Packages) ;;;
   (require-package '(:name magit :after (user/magit-init)))
-  (require-package '(:name magit-gerrit))
+  (require-package '(:name magit-gerrit :after (user/magit-gerrit-init)))
   (require-package '(:name magit-tramp))
   (require-package '(:name git-timemachine))
 
