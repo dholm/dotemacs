@@ -155,9 +155,15 @@
 
 (defun user/rtags-init ()
   "Initialize rtags."
-  (setq-default
-   ;; Enable Helm when available.
-   rtags-use-helm (feature-p 'helm)))
+  (after-load 'helm
+    (setq-default
+     ;; Enable Helm when available.
+     rtags-use-helm (require 'rtags-helm nil 'noerror)))
+
+  (after-load 'tramp
+    (setq-default
+     ;; Enable tramp after it has been loaded.
+     rtags-tramp-enabled t)))
 
 
 (defun user/tags-init ()
