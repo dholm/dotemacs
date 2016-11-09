@@ -26,6 +26,17 @@
      ("MELPA"        . 5))))
 
 
+;; Bootstrap `use-package'.
+(package-initialize)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(eval-when-compile
+  ;; Load use-package.
+  (require 'use-package))
+
+
 ;; Configure and load el-get
 (add-to-list 'load-path (path-join *user-el-get-directory* "el-get"))
 (unless (require 'el-get nil 'noerror)
@@ -79,8 +90,6 @@
       (if el-get-safe-mode
           (el-get 'sync package-list)
         (el-get nil package-list)))
-    (when (featurep 'package)
-      (package-initialize))
     (run-hooks 'user/after-init-hook))
 
   ;; Make sure el-get is registered so that el-get-cleanup doesn't remove it
