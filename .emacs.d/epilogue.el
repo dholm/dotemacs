@@ -13,6 +13,7 @@
 
 ;; Synchronize all registered packages.
 (user/sync-packages)
+(req-package-finish)
 
 
 ;; Load custom after all packages have been synced.
