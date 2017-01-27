@@ -20,7 +20,8 @@
   (global-set-key [remap list-buffers] 'ibuffer)
 
   ;;; (Packages) ;;;
-  (require-package '(:name ibuffer-vc)))
+  (use-package ibuffer-vc
+    :ensure t))
 
 (user/ibuffer-init)
 

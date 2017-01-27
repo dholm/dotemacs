@@ -39,7 +39,9 @@
     (flycheck-ycmd-setup)))
 
 (when (file-exists-p *user-ycmd-path*)
-  (require-package '(:name emacs-ycmd :after (user/ycmd-init))))
+  (use-package ycmd
+    :ensure t
+    :config (user/ycmd-init)))
 
 
 (provide 'utilities/ycmd)

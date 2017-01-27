@@ -17,7 +17,8 @@
   (add-hook 'diff-mode-hook 'user/diff-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name diff-hl)))
+  (use-package diff-hl
+    :ensure t))
 
 (user/diff-init)
 

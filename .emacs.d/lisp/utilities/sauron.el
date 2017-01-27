@@ -11,7 +11,9 @@
   ;;; (Bindings) ;;;
   (user/bind-key-global :util :notifications 'sauron-toggle-hide-show))
 
-(require-package '(:name sauron :after (user/sauron-init)))
+(use-package sauron
+  :ensure t
+  :config (user/sauron-init))
 
 
 (provide 'utilities/sauron)

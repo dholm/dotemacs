@@ -45,8 +45,11 @@
     (diminish 'auto-fill-function))
 
   ;;; (Packages) ;;;
-  (require-package '(:name rainbow-delimiters))
-  (require-package '(:name mic-paren :after (user/mic-paren-init))))
+  (use-package rainbow-delimiters
+    :ensure t)
+  (use-package mic-paren
+    :ensure t
+    :config (user/mic-paren-init)))
 
 (user/fundamental-mode-init)
 

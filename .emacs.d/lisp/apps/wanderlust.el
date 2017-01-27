@@ -56,19 +56,13 @@
     (smiley-region (point-min) (point-max))))
 
 
-(defun user/bbdbv3-wl-init-hook ()
-  "BBDBv3 Wanderlust initiatlization hook."
-  (with-feature 'bbdbV3-wl
-    (bbdb-initialize)))
-
-
 (defun user/wl-init-hook ()
   "Wanderlust initialization hook."
   ;; Load Emacs directory client.
   (eudc-load-eudc)
 
-  (when (el-get-package-is-installed 'bbdbv3-wl)
-    (user/bbdbv3-wl-init-hook))
+  (with-feature 'bbdb
+    (bbdb-initialize))
 
   (when (feature-p 'org-mode)
     (with-feature 'org-mime
@@ -510,8 +504,9 @@ Gmail {
   (make-directory *user-wanderlust-cache-directory* t)
   (set-file-modes *user-wanderlust-cache-directory* #o0700)
 
-  (require-package '(:name wanderlust :after (user/wanderlust-init)))
-  (require-package '(:name bbdbv3-wl))
+  (use-package wanderlust
+    :defer t
+    :config (user/wanderlust-init))
   (when (display-graphic-p)
     (require-package '(:name wl-gravatar))))
 

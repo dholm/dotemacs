@@ -91,7 +91,9 @@
   (user/bind-key-global :util :ecb-toggle 'user/ecb-toggle-active))
 
 (when (version<= emacs-version "24.4")
-  (require-package '(:name ecb :after (user/ecb-init))))
+  (use-package ecb
+    :ensure t
+    :config (user/ecb-init)))
 
 
 (provide 'utilities/ecb)

@@ -8,7 +8,9 @@
   (user/bind-key-local :code :thesaurus-lookup 'synosaurus-lookup))
 
 (with-executable 'wn
-  (require-package '(:name synosaurus :after (user/synosaurus-init))))
+  (use-package synosaurus
+    :ensure t
+    :config (user/synosaurus-init)))
 
 
 (provide 'utilities/synosaurus)

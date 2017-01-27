@@ -75,15 +75,21 @@
   (add-hook 'lisp-mode-hook 'user/lisp-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name rainbow-delimiters))
-  (require-package '(:name paredit))
-  (require-package '(:name redshank))
+  (use-package rainbow-delimiters
+    :ensure t)
+  (use-package paredit
+    :ensure t)
+  (use-package redshank
+    :ensure t)
 
   (when (or (executable-find "sbcl")
             (executable-find "lisp")
             (executable-find "clisp"))
-    (require-package '(:name slime :after (user/slime-init)))
-    (require-package '(:name ac-slime))))
+    (use-package slime
+      :ensure t
+      :config (user/slime-init))
+    (use-package ac-slime
+      :ensure t)))
 
 (user/lisp-mode-init)
 

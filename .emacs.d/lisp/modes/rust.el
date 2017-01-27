@@ -14,8 +14,11 @@
   (add-hook 'rust-mode-hook 'user/rust-mode-hook))
 
 (with-executable 'rustc
-  (require-package '(:name rust-mode :after (user/rust-mode-init)))
-  (require-package '(:name flycheck-rust))
+  (use-package rust-mode
+    :ensure t
+    :config (user/rust-mode-init))
+  (use-package flycheck-rust
+    :ensure t)
   (require-package '(:name rusti)))
 
 

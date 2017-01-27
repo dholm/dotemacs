@@ -50,7 +50,9 @@
   (add-auto-mode 'asm-mode "\\.[ia]65$")
 
   ;;; (Packages) ;;;
-  (require-package '(:name iasm-mode :after (user/iasm-mode-init))))
+  (use-package iasm-mode
+    :ensure t
+    :config (user/iasm-mode-init)))
 
 (user/asm-mode-init)
 

@@ -19,7 +19,9 @@
 
   (add-hook 'syslog-mode-hook 'user/syslog-mode-hook))
 
-(require-package '(:name syslog-mode :after (user/syslog-mode-init)))
+(use-package syslog-mode
+  :ensure t
+  :config (user/syslog-mode-init))
 
 
 (provide 'modes/syslog)

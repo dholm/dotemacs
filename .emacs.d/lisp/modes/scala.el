@@ -27,7 +27,8 @@
   (require-package '(:name scala-mode2 :after (user/scala-mode2-init)))
 
   (with-executable 'sbt
-    (require-package '(:name ensime))))
+    (use-package ensime
+      :ensure t)))
 
 (with-executable 'scala
   (user/scala-mode-init))

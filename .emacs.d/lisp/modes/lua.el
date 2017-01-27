@@ -15,7 +15,8 @@
 
 (defun user/lua-mode-init ()
   "Initialize Lua mode."
-  (require-package '(:name lua-mode))
+  (use-package lua-mode
+    :ensure t)
   (require-package '(:name lua-block
                            :type emacswiki
                            :website "https://raw.github.com/emacsmirror/emacswiki.org/master/lua-block.el"

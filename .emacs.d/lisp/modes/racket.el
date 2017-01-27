@@ -38,7 +38,9 @@
   (add-hook 'racket-repl-mode-hook 'user/racket-repl-mode-hook))
 
 (with-executable 'racket
-  (require-package '(:name racket-mode :after (user/racket-mode-init))))
+  (use-package racket-mode
+    :ensure t
+    :config (user/racket-mode-init)))
 
 
 (provide 'modes/racket)

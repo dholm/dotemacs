@@ -87,14 +87,24 @@
 
 (defun user/web-init ()
   "Initialize web development."
-  (require-package '(:name web-mode :after (user/web-mode-init)))
+  (use-package web-mode
+    :ensure t
+    :config (user/web-mode-init))
   (with-executable 'npm
-    (require-package '(:name tern :after (user/tern-init)))
-    (require-package '(:name company-tern)))
-  (require-package '(:name ac-html :after (user/ac-html-init)))
-  (require-package '(:name company-web))
-  (require-package '(:name skewer-mode))
-  (require-package '(:name tidy)))
+    (use-package tern
+      :ensure t
+      :config (user/tern-init))
+    (use-package company-tern
+      :ensure t))
+  (use-package ac-html
+    :ensure t
+    :config (user/ac-html-init))
+  (use-package company-web
+    :ensure t)
+  (use-package skewer-mode
+    :ensure t)
+  (use-package tidy
+    :ensure t))
 
 (user/web-init)
 

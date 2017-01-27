@@ -19,7 +19,9 @@
   (user/bind-key-global :basic :open-file-context
                         'direx-project:jump-to-project-root-other-window))
 
-(require-package '(:name direx :after (user/direx-init)))
+(use-package direx
+  :ensure t
+  :config (user/direx-init))
 
 
 (provide 'utilities/direx)

@@ -32,8 +32,12 @@
    minibuffer-message-timeout 5)
 
   ;;; (Packages) ;;;
-  (require-package '(:name popup :after (user/popup-init)))
-  (require-package '(:name popwin :after (user/popwin-init))))
+  (use-package popup
+    :ensure t
+    :config (user/popup-init))
+  (use-package popwin
+    :ensure t
+    :config (user/popwin-init)))
 
 (user/popups-init)
 

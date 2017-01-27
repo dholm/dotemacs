@@ -49,9 +49,12 @@
                  '(csharp-mode . (csharp-invoke-compile-interactively))))
 
   ;;; (Packages) ;;;
-  (require-package '(:name csharp-mode))
+  (use-package csharp-mode
+    :ensure t)
   (when (file-exists-p *user-omnisharp-path*)
-    (require-package '(:name omnisharp-mode :after (user/omnisharp-init))))
+    (use-package omnisharp
+      :ensure t
+      :config (user/omnisharp-init)))
   (require-package '(:name sln-mode :after (user/sln-mode-init))))
 
 (user/csharp-mode-init)

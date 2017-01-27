@@ -564,9 +564,12 @@
   (add-hook 'message-sent-hook 'user/gnus-message-sent-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name gnus-alias))
-  (require-package '(:name gnus-summary-ext))
-  (require-package '(:name gnus-x-gm-raw))
+  (use-package gnus-alias
+    :defer t)
+  (use-package gnus-summary-ext
+    :defer t)
+  (use-package gnus-x-gm-raw
+    :defer t)
   (with-executable 'gpgsm
     (require-package '(:name jl-smime)))
   (when (eq system-type 'darwin)

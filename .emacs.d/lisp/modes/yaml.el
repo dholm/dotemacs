@@ -11,7 +11,9 @@
   ;;; (Hooks) ;;;
   (add-hook 'yaml-mode-hook 'user/yaml-mode-hook))
 
-(require-package '(:name yaml-mode :after (user/yaml-mode-init)))
+(use-package yaml-mode
+  :ensure t
+  :config (user/yaml-mode-init))
 
 
 (provide 'modes/yaml)

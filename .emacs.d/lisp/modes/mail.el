@@ -47,7 +47,9 @@
   (add-hook 'mail-mode-hook 'user/mail-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name mu-cite :after (user/mu-cite-init))))
+  (use-package mu-cite
+    :ensure t
+    :config (user/mu-cite-init)))
 
 (user/mail-mode-init)
 

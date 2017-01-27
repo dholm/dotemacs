@@ -2,7 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(require-package '(:name benchmark-init))
+(use-package benchmark-init
+  :ensure t)
 
 
 (provide 'utilities/benchmark-init)

@@ -11,19 +11,20 @@
   :group 'init
   :type 'hook)
 
-
 (with-feature 'package
   (setq
    ;; Configure GNU/Emacs package repositories.
    package-archives
-   '(("GNU ELPA"     . "https://elpa.gnu.org/packages/")
-     ("MELPA Stable" . "https://stable.melpa.org/packages/")
-     ("MELPA"        . "https://melpa.org/packages/"))
+   '(("GNU ELPA"     . "http://elpa.gnu.org/packages/")
+     ("MELPA Stable" . "http://stable.melpa.org/packages/")
+     ("MELPA"        . "http://melpa.org/packages/")
+     ("marmalade"    . "http://marmalade-repo.org/packages/"))
    ;; Prefer MELPA Stable over GNU over MELPA.
    package-archive-priorities
    '(("MELPA Stable" . 15)
      ("GNU ELPA"     . 10)
-     ("MELPA"        . 5))))
+     ("MELPA"        . 5)
+     ("marmalade"    . 0))))
 
 
 ;; Bootstrap `use-package'.
@@ -36,18 +37,27 @@
   ;; Load use-package.
   (require 'use-package))
 
+(defun user/el-get-before-init ()
+  "Initialize el-get."
+  (setq-default
+   el-get-safe-mode t)
+
+  (add-to-list 'load-path (path-join *user-el-get-directory* "el-get")))
+
+(defun user/el-get-init ()
+  "Configure el-get."
+  (add-to-list 'el-get-recipe-path
+               (path-join *user-el-get-directory* "el-get" "recipes")))
 
 ;; Configure and load el-get
-(add-to-list 'load-path (path-join *user-el-get-directory* "el-get"))
+(user/el-get-before-init)
 (unless (require 'el-get nil 'noerror)
-  (setq el-get-safe-mode t)
   (with-current-buffer
       (url-retrieve-synchronously
        "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
     (let (el-get-master-branch)
       (goto-char (point-max))
-      (eval-print-last-sexp))
-    (el-get-elpa-build-local-recipes)))
+      (eval-print-last-sexp))))
 
 
 (defun user/package-as-el-get (package)

@@ -114,18 +114,30 @@
 (defun user/python-mode-init ()
   "Initialize Python mode."
   ;;; (Packages) ;;;
-  (require-package '(:name python :after (user/python-init)))
-  (require-package '(:name anaconda-mode))
-  (require-package '(:name py-autopep8))
+  (use-package python
+    :ensure t
+    :config (user/python-init))
+  (use-package anaconda-mode
+    :defer t)
+  (use-package py-autopep8
+    :defer t)
   (require-package '(:name ropemacs))
-  (require-package '(:name pymacs))
+  (use-package pymacs
+    :defer t)
   (require-package '(:name pylookup))
-  (require-package '(:name nose))
-  (require-package '(:name python-environment :after (user/python-environment-init)))
-  (require-package '(:name pyvenv))
-  (require-package '(:name jedi :after (user/jedi-init)))
+  (use-package nose
+    :defer t)
+  (use-package python-environment
+    :defer t
+    :config (user/python-environment-init))
+  (use-package pyvenv
+    :defer t)
+  (use-package jedi
+    :defer t
+    :config (user/jedi-init))
   (when (feature-p 'helm)
-    (require-package '(:name helm-pydoc)))
+    (use-package helm-pydoc
+      :defer t))
 
   (add-interpreter-mode 'python-mode "python[0-9.]*")
   (add-hook 'python-mode-hook 'user/python-mode-hook))

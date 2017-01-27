@@ -13,7 +13,9 @@
 
   (add-auto-mode 'adoc-mode "\\.adoc$" "\\.asciidoc$"))
 
-(require-package '(:name adoc-mode :after (user/adoc-mode-init)))
+(use-package adoc-mode
+  :ensure t
+  :config (user/adoc-mode-init))
 
 
 (provide 'modes/asciidoc)

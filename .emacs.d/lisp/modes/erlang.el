@@ -51,12 +51,15 @@
       (distel-setup))))
 
 (with-executable 'erl
-  (require-package '(:name erlang-mode :after (user/erlang-mode-init)))
-  (require-package '(:name edts))
+  (use-package erlang
+    :ensure t
+    :after (user/erlang-mode-init))
+  (use-package edts
+    :ensure t)
   (require-package '(:name distel))
   (require-package '(:name wrangler))
-  (with-executable 'elixir
-    (require-package '(:name alchemist))))
+  (use-package alchemist
+    :ensure t))
 
 (provide 'modes/erlang)
 ;;; erlang.el ends here

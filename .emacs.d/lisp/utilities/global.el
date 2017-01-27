@@ -126,8 +126,12 @@
    'debug-ignored-errors "global: GTAGS not found")
 
   ;;; (Packages) ;;;
-  (require-package '(:name helm-gtags :after (user/helm-gtags-init)))
-  (require-package '(:name ggtags :after (user/ggtags-init))))
+  (use-package helm-gtags
+    :defer t
+    :config (user/helm-gtags-init))
+  (use-package ggtags
+    :defer t
+    :config (user/ggtags-init)))
 
 (with-executable 'global
   (user/global-init))

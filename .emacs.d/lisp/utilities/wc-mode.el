@@ -6,7 +6,9 @@
   "Initialize wc-mode."
   (user/bind-key-global :util :wc-mode 'wc-mode))
 
-(require-package '(:name wc-mode :after (user/wc-mode-init)))
+(use-package wc-mode
+  :ensure t
+  :config (user/wc-mode-init))
 
 
 (provide 'utilities/wc-mode)

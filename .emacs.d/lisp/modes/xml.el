@@ -100,8 +100,7 @@
 
   ;;; (Packages) ;;;
   (require-package '(:name tdtd :after (user/tdtd-init)))
-  (require-package '(:name auto-complete-nxml
-                           :after (user/auto-complete-nxml-init))))
+  (require-package '(:name auto-complete-nxml :after (user/auto-complete-nxml-init))))
 
 (user/xml-mode-init)
 

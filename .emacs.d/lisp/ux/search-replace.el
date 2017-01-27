@@ -34,8 +34,12 @@
   (user/bind-key-global :basic :search-files 'find-grep)
 
   ;;; (Packages) ;;;
-  (require-package '(:name visual-regexp :after (user/visual-regexp-init)))
-  (require-package '(:name anzu :after (user/anzu-init))))
+  (use-package visual-regexp
+    :ensure t
+    :config (user/visual-regexp-init))
+  (use-package anzu
+    :ensure t
+    :config (user/anzu-init)))
 
 (user/search-replace-init)
 

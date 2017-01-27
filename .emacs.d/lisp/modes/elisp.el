@@ -98,10 +98,15 @@
   (add-auto-mode 'emacs-lisp-mode "Carton$")
 
   ;;; (Packages) ;;;
-  (require-package '(:name macrostep))
-  (require-package '(:name elisp-slime-nav))
-  (require-package '(:name auto-compile))
-  (require-package '(:name eldoc-eval :after (user/eldoc-eval-init))))
+  (use-package macrostep
+    :ensure t)
+  (use-package elisp-slime-nav
+    :ensure t)
+  (use-package auto-compile
+    :ensure t)
+  (use-package eldoc-eval
+    :ensure t
+    :config (user/eldoc-eval-init)))
 
 (after-load 'modes/lisp
   (user/elisp-mode-init))

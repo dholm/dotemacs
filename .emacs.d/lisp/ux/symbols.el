@@ -12,11 +12,14 @@
 (defun user/symbols-init ()
   "Initialize Emacs symbol handling."
   ;;; (Packages) ;;;
-  (require-package '(:name page-break-lines :after (user/page-break-lines-init)))
+  (use-package page-break-lines
+    :ensure t
+    :config (user/page-break-lines-init))
 
   (with-feature 'ux/coding
     (when (eq default-terminal-coding-system 'utf-8)
-      (require-package '(:name pretty-mode-plus)))))
+      (use-package pretty-mode-plus
+        :ensure t))))
 
 (user/symbols-init)
 

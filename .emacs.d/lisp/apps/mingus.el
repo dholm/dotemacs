@@ -8,7 +8,9 @@
   (user/bind-key-global :apps :music 'mingus))
 
 (when (fboundp 'define-fringe-bitmap)
-  (require-package '(:name mingus :after (user/mingus-init))))
+  (use-package mingus
+    :defer t
+    :config (user/mingus-init)))
 
 
 (provide 'apps/mingus)

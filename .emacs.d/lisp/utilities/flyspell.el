@@ -95,10 +95,15 @@
           (executable-find "aspell")
           (executable-find "hunspell"))
   (require-package '(:name flyspell :after (user/flyspell-init)))
-  (require-package '(:name flyspell-lazy :after (user/flyspell-lazy-init)))
-  (require-package '(:name auto-dictionary))
+  (use-package flyspell-lazy
+    :ensure t
+    :config (user/flyspell-lazy-init))
+  (use-package auto-dictionary
+    :ensure t)
   (with-executable 'hunspell
-    (require-package '(:name rw-hunspell :after (user/rw-hunspell-init)))))
+    (use-package rw-hunspell
+      :ensure t
+      :config (user/rw-hunspell-init))))
 
 
 (provide 'utilities/flyspell)

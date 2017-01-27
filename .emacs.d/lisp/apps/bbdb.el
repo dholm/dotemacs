@@ -93,8 +93,11 @@
   (add-hook 'bbdb-notice-mail-hook 'bbdb-auto-notes)
   (add-hook 'bbdb-initialize-hook 'user/bbdb-initialize-hook))
 
-(require-package '(:name bbdb :after (user/bbdb-init)))
-(require-package '(:name bbdb-vcard))
+(use-package bbdb
+  :defer t
+  :config (user/bbdb-init))
+(use-package bbdb-vcard
+  :defer t)
 
 
 (provide 'apps/bbdb)

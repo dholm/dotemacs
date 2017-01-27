@@ -12,7 +12,9 @@
   (add-hook 'pandoc-mode 'user/pandoc-mode-hook))
 
 (with-executable 'pandoc
-  (require-package '(:name pandoc-mode :after (user/pandoc-mode-init))))
+  (use-package pandoc-mode
+    :ensure t
+    :config (user/pandoc-mode-init)))
 
 
 (provide 'utilities/pandoc)

@@ -261,10 +261,7 @@
   (after-load 'company
     (with-feature 'company-flx
       ;; Enable fuzzy matching.
-      (company-flx-mode t))
-
-    (after-load 'diminish
-      (diminish 'company-mode))))
+      (company-flx-mode t))))
 
 
 (defun user/completion-init ()
@@ -280,9 +277,14 @@
 
   ;;; (Packages) ;;;
   (require-package '(:name auto-complete :after (user/auto-complete-init)))
-  (require-package '(:name company-mode :after (user/company-mode-init)))
-  (require-package '(:name company-flx))
-  (require-package '(:name company-quickhelp)))
+  (use-package company
+    :ensure t
+    :diminish company-mode
+    :config (user/company-mode-init))
+  (use-package company-flx
+    :ensure t)
+  (use-package company-quickhelp
+    :ensure t))
 
 (user/completion-init)
 

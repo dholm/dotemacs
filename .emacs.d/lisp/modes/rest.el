@@ -41,7 +41,8 @@
   (add-hook 'rst-mode-hook 'user/rst-mode-hook))
 
 (require-package '(:name rst-mode :after (user/rst-mode-init)))
-(require-package '(:name auto-complete-rst))
+(use-package auto-complete-rst
+  :ensure t)
 
 
 (provide 'modes/rest)

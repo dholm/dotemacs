@@ -25,7 +25,8 @@
   (add-hook 'user/after-init-hook 'user/server-after-init-hook)
 
   (when (display-graphic-p)
-    (require-package '(:name edit-server))))
+    (use-package edit-server
+      :ensure t)))
 
 (unless (eq system-type 'darwin)
   ;; Emacs clients regularly causes Emacs to crash on Darwin.

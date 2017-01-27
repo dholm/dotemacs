@@ -62,10 +62,13 @@
 (defun user/bookmarks-init ()
   "Initialize bookmarks in Emacs."
   ;;; (Packages) ;;;
-  (require-package '(:name bm :after (user/visible-bookmarks-init)))
-  (require-package '(:name bookmark+
-                           :before (user/bookmark+-before-init)
-                           :after (user/bookmark+-init))))
+  (use-package bm
+    :ensure t
+    :config (user/visible-bookmarks-init))
+  (use-package bookmark+
+    :ensure t
+    :init (user/bookmark+-before-init)
+    :config (user/bookmark+-init)))
 
 (user/bookmarks-init)
 

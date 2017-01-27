@@ -39,7 +39,9 @@
   ;;; (Hooks) ;;;
   (add-hook 'smartparens-mode-hook 'user/smartparens-mode-hook))
 
-(require-package '(:name smartparens :after (user/smartparens-init)))
+(use-package smartparens
+  :ensure t
+  :config (user/smartparens-init))
 
 
 (provide 'utilities/smartparens)

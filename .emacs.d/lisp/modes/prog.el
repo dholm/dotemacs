@@ -26,7 +26,8 @@
   (add-hook 'prog-mode-hook 'user/prog-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name comment-dwim-2)))
+  (use-package comment-dwim-2
+    :ensure t))
 
 (user/prog-mode-init)
 

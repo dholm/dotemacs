@@ -63,7 +63,13 @@
   (user/bind-key-global :code :compile 'user/compile)
 
   ;;; (Packages) ;;;
-  (require-package '(:name mode-compile :after (user/mode-compile-init))))
+  (use-package mode-compile
+    :defer t
+    :config
+    ;; Ensure byte-run has been loaded or mode-compile will override
+    ;; `define-obsolete-variable-alias'.
+    (when (load "byte-run.el" nil :noerror)
+      (user/mode-compile-init))))
 
 (user/compile-init)
 

@@ -42,10 +42,15 @@
 
 (defun user/ruby-mode-init ()
   "Initialize Ruby mode."
-  (require-package '(:name ruby-mode))
-  (require-package '(:name robe-mode :after (user/robe-init)))
-  (require-package '(:name inf-ruby))
-  (require-package '(:name yari))
+  (use-package ruby-mode
+    :ensure t)
+  (use-package robe
+    :ensure t
+    :config (user/robe-init))
+  (use-package inf-ruby
+    :ensure t)
+  (use-package yari
+    :ensure t)
 
   (add-hook 'ruby-mode-hook 'user/ruby-mode-hook))
 

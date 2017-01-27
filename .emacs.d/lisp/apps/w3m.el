@@ -81,7 +81,9 @@
 
 (unless (feature-p 'eww)
   (with-executable 'w3m
-    (require-package '(:name emacs-w3m :after (user/w3m-init)))))
+    (use-package w3m
+      :defer t
+      :config (user/w3m-init))))
 
 
 (provide 'apps/w3m)

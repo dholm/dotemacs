@@ -175,7 +175,7 @@ Makes it easier to version control LaTeX-files."
   (add-hook 'TeX-mode-hook 'zotelo-minor-mode))
 
 
-(defun user/auto-complete-latex ()
+(defun user/auto-complete-latex-init ()
   "Initialize LaTeX auto completion."
   (setq-default
    ac-l-dict-directory (path-join (el-get-package-directory
@@ -219,18 +219,29 @@ Makes it easier to version control LaTeX-files."
   (add-hook 'bibtex-mode-hook 'user/bibtex-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name auctex :after (user/auctex-init)))
-  (require-package '(:name ebib :after (user/ebib-init)))
-  (require-package '(:name zotelo :after (user/zotelo-init)))
-  (require-package '(:name ac-math :after (user/ac-math-init)))
-  (require-package '(:name auto-complete-latex :after (user/auto-complete-latex)))
-  (require-package '(:name company-auctex))
-  (require-package '(:name company-math))
+  (use-package auctex
+    :defer t
+    :config (user/auctex-init))
+  (use-package ebib
+    :defer t
+    :config (user/ebib-init))
+  (use-package zotelo
+    :defer t
+    :config (user/zotelo-init))
+  (use-package ac-math
+    :defer t
+    :config (user/ac-math-init))
+  (require-package
+   '(:name auto-complete-latex :after (user/auto-complete-latex-init)))
+  (use-package company-auctex
+    :defer t)
+  (use-package company-math
+    :defer t)
   (require-package '(:name ltx-help)))
 
 
 (when (or (executable-find "tex")
-         (executable-find "latex"))
+          (executable-find "latex"))
   (user/tex-mode-init))
 
 

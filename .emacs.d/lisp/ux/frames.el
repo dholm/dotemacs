@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/window-configuration-change-hook ()
+(defun user/window-inituration-change-hook ()
   "Window configuration change hook."
   (setq
    ;; Only split frame if it occupies at least 2/3 of the current screen width.
@@ -61,7 +61,7 @@
 
   ;;; (Hooks) ;;;
   (add-to-list 'window-configuration-change-hook
-               'user/window-configuration-change-hook)
+               'user/window-inituration-change-hook)
 
   ;;; (Bindings) ;;;
   (when (display-graphic-p)
@@ -73,8 +73,11 @@
   (user/bind-key-global :emacs :shrink-horizontal 'shrink-window-horizontally)
 
   ;;; (Packages) ;;;
-  (require-package '(:name fullframe))
-  (require-package '(:name transpose-frame :after (user/transpose-frame-init))))
+  (use-package fullframe
+    :ensure t)
+  (use-package transpose-frame
+    :ensure t
+    :config (user/transpose-frame-init)))
 
 (user/frames-init)
 

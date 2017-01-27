@@ -10,7 +10,9 @@
 
 (defun user/dash-app-init ()
   "Initialize Dash support for Emacs."
-  (require-package '(:name dash-at-point :after (user/dash-at-point-init))))
+  (use-package dash-at-point
+    :ensure t
+    :config (user/dash-at-point-init)))
 
 (when (osx-app-installed-p "com.kapeli.dash")
   (user/dash-app-init))

@@ -81,9 +81,6 @@
     (with-feature 'helm-descbinds
       (helm-descbinds-mode t))
 
-    (after-load 'diminish
-      (diminish 'helm-mode))
-
     ;; Filter out boring buffers.
     (dolist (pattern
              (list "\\*clang-complete" "\\*CEDET global" "\\*tramp/scpc"
@@ -142,13 +139,20 @@
 
   (user/bind-key-global :nav :context 'user/helm-navigate)
   (user/bind-key-global :doc :apropos 'user/helm-apropos)
-  (user/bind-key-global :emacs :elisp-search 'helm-info-elisp))
+  (user/bind-key-global :emacs :elisp-search 'helm-info-elisp)
 
+  ;;; (Packages) ;;;
+  (use-package helm-descbinds
+    :ensure t)
+  (use-package helm-swoop
+    :ensure t
+    :config (user/helm-swoop-init)))
 
-(require-package '(:name helm :after (user/helm-init)))
-(require-package '(:name helm-descbinds))
+(use-package helm
+  :ensure t
+  :diminish helm-mode
+  :config (user/helm-init))
 (require-package '(:name helm-build-command))
-(require-package '(:name helm-swoop :after (user/helm-swoop-init)))
 
 
 (provide 'utilities/helm)

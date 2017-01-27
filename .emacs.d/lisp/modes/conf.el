@@ -18,7 +18,9 @@
 
   ;;; (Packages) ;;;
   (with-executable 'nginx
-    (require-package '(:name nginx-mode :after (user/nginx-mode-init)))))
+    (use-package nginx-mode
+      :ensure t
+      :config (user/nginx-mode-init))))
 
 (user/conf-mode-init)
 

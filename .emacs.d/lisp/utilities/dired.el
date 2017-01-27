@@ -4,7 +4,7 @@
 
 (defun user/dired-mode-hook ()
   "Mode hook for dired."
-  (with-feature 'emacs-async
+  (with-feature 'async
     ;; Asynchronous operations in dired.
     (dired-async-mode t))
 
@@ -38,7 +38,8 @@
    dired-listing-switches "-alh")
 
   ;;; (Packages) ;;;
-  (require-package '(:name dired-k))
+  (use-package dired-k
+    :ensure t)
 
   ;;; (Bindings) ;;;
   ;; Do not open new buffers when going down or up a directory.
@@ -50,8 +51,11 @@
     (define-key dired-mode-map [double-mouse-1] 'dired-find-file))
 
   ;;; (Packages) ;;;
-  (require-package '(:name emacs-async))
-  (require-package '(:name dired-efap :after (user/dired-efap-init))))
+  (use-package async
+    :ensure t)
+  (use-package dired-efap
+    :ensure t
+    :config (user/dired-efap-init)))
 
 (user/dired-init)
 

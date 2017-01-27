@@ -7,7 +7,9 @@
   ;;; (Bindings) ;;;
   (global-set-key [f3] 'fci-mode))
 
-(require-package '(:name fill-column-indicator :after (user/fill-column-indicator-init)))
+(use-package fill-column-indicator
+  :ensure t
+  :config (user/fill-column-indicator-init))
 
 
 (provide 'utilities/fill-column-indicator)

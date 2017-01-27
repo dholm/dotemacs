@@ -21,7 +21,9 @@
   (add-auto-mode 'irfc-mode "/rfc[0-9]+\\.txt\\'"))
 
 
-(require-package '(:name irfc :after (user/irfc-init)))
+(use-package irfc
+  :ensure t
+  :config (user/irfc-init))
 
 
 (provide 'modes/rfc)

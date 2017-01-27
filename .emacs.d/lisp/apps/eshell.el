@@ -103,7 +103,8 @@
   (user/bind-key-global :apps :shell 'user/raise-eshell)
 
   ;;; (Packages) ;;;
-  (require-package '(:name eshell-manual)))
+  (use-package eshell-manual
+    :defer t))
 
 (user/eshell-init)
 

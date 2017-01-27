@@ -21,7 +21,9 @@
 
 (when (and (display-graphic-p)
            (pkg-config-has-p "poppler-glib"))
-  (require-package '(:name pdf-tools :after (user/pdf-tools-init))))
+  (use-package pdf-tools
+    :ensure t
+    :config (user/pdf-tools-init)))
 
 
 (provide 'modes/pdf)

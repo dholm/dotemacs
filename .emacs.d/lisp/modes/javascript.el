@@ -83,8 +83,12 @@
   (add-hook 'inferior-js-mode-hook 'user/inferior-javascript-mode-hook)
   (add-auto-mode 'javascript-mode "\\.json$")
 
-  (require-package '(:name js3-mode :after (user/js3-mode-init)))
-  (require-package '(:name js-comint :after (user/js-comint-init))))
+  (use-package js3-mode
+    :ensure t
+    :config (user/js3-mode-init))
+  (use-package js-comint
+    :ensure t
+    :config (user/js-comint-init)))
 
 (user/javascript-mode-init)
 

@@ -10,7 +10,9 @@
   "Initialize GLSL mode."
   (add-hook 'glsl-mode-hook 'user/glsl-mode-hook))
 
-(require-package '(:name glsl-mode :after (user/glsl-mode-init)))
+(use-package glsl-mode
+  :ensure t
+  :config (user/glsl-mode-init))
 
 
 (provide 'modes/glsl)

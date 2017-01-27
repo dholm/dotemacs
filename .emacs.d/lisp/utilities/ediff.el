@@ -69,7 +69,8 @@
   (add-hook 'ediff-startup-hook 'user/ediff-startup-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name ztree)))
+  (use-package ztree
+    :ensure t))
 
 (user/ediff-init)
 

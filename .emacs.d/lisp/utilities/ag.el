@@ -29,8 +29,12 @@
 
 (with-executable 'ag
   (when (feature-p 'helm)
-    (require-package '(:name helm-ag :after (user/helm-ag-init))))
-  (require-package '(:name ag :after (user/ag-init))))
+    (use-package helm-ag
+      :ensure t
+      :after (user/helm-ag-init)))
+  (use-package ag
+    :ensure t
+    :config (user/ag-init)))
 
 
 (provide 'utilities/ag)

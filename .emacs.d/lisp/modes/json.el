@@ -6,7 +6,9 @@
   "Initilize JSON mode."
   (add-auto-mode 'json-mode "\\.bowerrc$"))
 
-(require-package '(:name json-mode :after (user/json-mode-init)))
+(use-package json-mode
+  :ensure t
+  :config (user/json-mode-init))
 
 
 (provide 'modes/json)

@@ -28,8 +28,11 @@
    ido-default-buffer-method 'selected-window)
 
   ;;; (Packages) ;;;
-  (require-package '(:name flx :after (user/flx-init)))
-  (require-package '(:name ido-vertical-mode)))
+  (use-package flx
+    :ensure t
+    :config (user/flx-init))
+  (use-package ido-vertical-mode
+    :ensure t))
 
 (user/ido-init)
 

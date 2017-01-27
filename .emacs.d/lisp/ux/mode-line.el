@@ -11,7 +11,12 @@
    sml/shorten-directory t
    sml/shorten-mode t
    sml/name-width 25
-   sml/mode-width 'full)
+   sml/mode-width 'full
+   ;; Don't use projectile by default.
+   sml/use-projectile-p nil)
+
+  (after-load 'projectile
+    (setq sml/use-projectile-p 'after-prefixes))
 
   (after-load 'solarized-theme
     (sml/setup)))
@@ -44,8 +49,11 @@
       (display-battery-mode t)))
 
   ;;; (Packages) ;;;
-  (require-package '(:name diminish))
-  (require-package '(:name smart-mode-line :after (user/smart-mode-line-init))))
+  (use-package diminish
+    :ensure t)
+  (use-package smart-mode-line
+    :ensure t
+    :config (user/smart-mode-line-init)))
 
 (user/modeline-init)
 

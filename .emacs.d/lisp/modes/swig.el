@@ -12,8 +12,7 @@
   (add-auto-mode 'swig-mode "\\.swg$"))
 
 
-(require-package '(:name swig-mode
-                         :after (user/swig-mode-init)))
+(require-package '(:name swig-mode :after (user/swig-mode-init)))
 
 
 (provide 'modes/swig)

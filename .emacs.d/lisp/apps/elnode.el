@@ -15,7 +15,9 @@
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :elnode 'elnode-start))
 
-(require-package '(:name elnode :after (user/elnode-init)))
+(use-package elnode
+  :defer t
+  :config (user/elnode-init))
 (require-package '(:name elnode-org :after (user/elnode-init)))
 
 

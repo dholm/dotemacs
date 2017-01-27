@@ -467,10 +467,16 @@
   (autoload 'org-add-link-type "org" "" t)
 
   ;;; (Packages) ;;;
-  (require-package '(:name org-mode :after (user/org-mode-init)))
-  (require-package '(:name org-sync :after (user/org-sync-init)))
-  (require-package '(:name orgmode-mediawiki))
-  (require-package '(:name org-caldav)))
+  (use-package org
+    :ensure t
+    :config (user/org-mode-init))
+  (use-package org-sync
+    :defer t
+    :config (user/org-sync-init))
+  (use-package ox-mediawiki
+    :defer t)
+  (use-package org-caldav
+    :defer t))
 
 (user/org-init)
 

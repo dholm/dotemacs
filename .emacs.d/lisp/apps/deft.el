@@ -33,7 +33,9 @@
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :notes 'deft))
 
-(require-package '(:name deft :after (user/deft-init)))
+(use-package deft
+  :defer t
+  :config (user/deft-init))
 
 
 (provide 'apps/deft)

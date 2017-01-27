@@ -19,7 +19,9 @@
   (add-auto-mode 'cmake-mode "\\.cmake$"))
 
 (with-executable 'cmake
-  (require-package '(:name cmake-mode :after (user/cmake-mode-init))))
+  (use-package cmake-mode
+    :ensure t
+    :config (user/cmake-mode-init)))
 
 
 (provide 'modes/cmake)

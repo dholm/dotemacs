@@ -21,7 +21,8 @@
   (add-hook 'outline-minor-mode-hook 'user/outline-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name outline-magic)))
+  (use-package outline-magic
+    :ensure t))
 
 (user/outline-mode-init)
 

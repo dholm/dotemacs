@@ -17,7 +17,9 @@
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :stack-exchange 'sx-search))
 
-(require-package '(:name sx :after (user/sx-init)))
+(use-package sx
+  :defer t
+  :config (user/sx-init))
 
 
 (provide 'apps/sx)

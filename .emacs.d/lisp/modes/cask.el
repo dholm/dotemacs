@@ -18,7 +18,9 @@
   ;;; (Hooks) ;;;
   (add-hook 'cask-mode-hook 'user/cask-mode-hook))
 
-(require-package '(:name cask-mode :after (user/cask-mode-init)))
+(use-package cask-mode
+  :ensure t
+  :config (user/cask-mode-init))
 
 
 (provide 'modes/cask)

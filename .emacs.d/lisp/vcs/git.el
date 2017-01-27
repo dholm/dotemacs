@@ -53,7 +53,14 @@
 
   ;;; (Bindings) ;;;
   (after-load 'magit
-    (define-key magit-status-mode-map (kbd "W") 'user/magit-toggle-whitespace)))
+    (define-key magit-status-mode-map (kbd "W") 'user/magit-toggle-whitespace))
+
+  ;;; (Packages) ;;;
+  (use-package magit-gerrit
+    :ensure t
+    :config (user/magit-gerrit-init))
+  (use-package magit-tramp
+    :ensure t))
 
 
 (defun user/magit-gerrit-init ()
@@ -89,21 +96,31 @@
   (add-hook 'git-commit-mode-hook 'user/git-commit-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name magit :after (user/magit-init)))
-  (require-package '(:name magit-gerrit :after (user/magit-gerrit-init)))
-  (require-package '(:name magit-tramp))
-  (require-package '(:name git-timemachine))
+  (use-package magit
+    :ensure t
+    :config (user/magit-init))
+  (use-package git-timemachine
+    :ensure t)
 
-  (require-package '(:name git-gutter))
+  (use-package git-gutter
+    :ensure t)
   (when (display-graphic-p)
-    (require-package '(:name git-gutter-fringe :after (user/git-gutter-fringe-init))))
-  (require-package '(:name git-messenger :after (user/git-messenger-init)))
-  (with-executable 'git-review
-    (require-package '(:name gerrit-download :after (user/gerrit-download-init))))
+    (use-package git-gutter-fringe
+      :ensure t
+      :config (user/git-gutter-fringe-init)))
+  (use-package git-messenger
+    :ensure t
+    :config (user/git-messenger-init))
   (when (feature-p 'helm)
-    (require-package '(:name helm-ls-git))
-    (require-package '(:name helm-git-grep))
-    (require-package '(:name helm-open-github))))
+    (use-package helm-ls-git
+      :ensure t)
+    (use-package helm-git-grep
+      :ensure t
+      :commands helm-git-grep)
+    (use-package helm-open-github
+      :ensure t)
+    (use-package helm-hunks
+      :ensure t)))
 
 (with-executable 'git
   (user/git-init))
