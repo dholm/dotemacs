@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(require-package '(:name benchmark-init))
+(req-package benchmark-init)
 
 
 (provide 'utilities/benchmark-init)

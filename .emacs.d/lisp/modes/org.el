@@ -260,7 +260,7 @@
                         'latex))))
 
 
-(defun user/org-mode-init ()
+(defun user/org-init ()
   "Initialize org mode."
   (setq-default
    ;; Org data store.
@@ -467,10 +467,12 @@
   (autoload 'org-add-link-type "org" "" t)
 
   ;;; (Packages) ;;;
-  (require-package '(:name org-mode :after (user/org-mode-init)))
-  (require-package '(:name org-sync :after (user/org-sync-init)))
-  (require-package '(:name orgmode-mediawiki))
-  (require-package '(:name org-caldav)))
+  (req-package org
+    :config (user/org-init))
+  (req-package org-sync
+    :config (user/org-sync-init))
+  (req-package ox-mediawiki)
+  (req-package org-caldav))
 
 (user/org-init)
 

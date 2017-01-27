@@ -23,7 +23,8 @@
   (add-auto-mode 'csv-mode "\\.[Cc][Ss][Vv]$")
   (add-hook 'csv-mode-hook 'user/csv-mode-hook))
 
-(require-package '(:name csv-mode :after (user/csv-mode-init)))
+(req-package csv-mode
+  :config (user/csv-mode-init))
 
 
 (provide 'modes/csv)

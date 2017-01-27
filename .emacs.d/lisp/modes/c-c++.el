@@ -236,26 +236,32 @@
   (add-magic-mode 'c++-mode 'user/c++-header-file-p)
 
   ;;; (Packages) ;;;
-  (require-package '(:name cc-mode :after (user/cc-mode-init)))
-  (require-package '(:name auto-complete-c-headers))
-  (require-package '(:name company-c-headers))
+  (req-package cc-mode
+    :loader :built-in
+    :config (user/cc-mode-init))
+  (req-package auto-complete-c-headers)
+  (req-package company-c-headers)
   (when (and (executable-find "cmake")
              (executable-find "clang")
              (executable-find "llvm-config"))
-    (require-package '(:name irony-mode :after (user/irony-mode-init)))
-    (require-package '(:name irony-eldoc))
-    (require-package '(:name flycheck-irony)))
+    (req-package irony
+      :config (user/irony-mode-init))
+    (req-package irony-eldoc)
+    (req-package flycheck-irony))
   (with-executable 'pkg-config
-    (require-package '(:name flycheck-pkg-config)))
+    (req-package flycheck-pkg-config))
   (with-executable 'cmake
-    (require-package '(:name cpputils-cmake :after (user/cpputils-cmake-init)))
-    (require-package '(:name cmake-ide)))
+    (req-package cpputils-cmake
+      :config (user/cpputils-cmake-init))
+    (req-package cmake-ide))
   (with-executable 'clang
-    (require-package '(:name clang-format)))
-  (require-package '(:name function-args))
-  (require-package '(:name google-c-style))
+    (req-package clang-format))
+  (req-package function-args)
+  (req-package google-c-style)
   (with-executable 'cflow
-    (require-package '(:name cflow :after (user/cflow-init)))))
+    (req-package cflow
+      :loader :el-get
+      :config (user/cflow-init))))
 
 (user/c-c++-mode-init)
 

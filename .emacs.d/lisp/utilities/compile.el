@@ -63,7 +63,8 @@
   (user/bind-key-global :code :compile 'user/compile)
 
   ;;; (Packages) ;;;
-  (require-package '(:name mode-compile :after (user/mode-compile-init))))
+  (req-package mode-compile
+    :config (user/mode-compile-init)))
 
 (user/compile-init)
 

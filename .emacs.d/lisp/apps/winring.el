@@ -10,8 +10,9 @@
   (when (feature-p 'zoom-window)
     (define-key winring-map (kbd "z") 'zoom-window-zoom)))
 
-(require-package '(:name winring :after (user/winring-init)))
-(require-package '(:name zoom-window))
+(req-package winring
+  :config (user/winring-init))
+(req-package zoom-window)
 
 
 (provide 'apps/winring)

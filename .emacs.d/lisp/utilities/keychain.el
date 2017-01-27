@@ -3,7 +3,7 @@
 ;;; Code:
 
 (with-executable 'keychain
-  (require-package '(:name keychain-environment)))
+  (req-package keychain-environment))
 
 
 (provide 'utilities/keychain)

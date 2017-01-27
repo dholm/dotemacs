@@ -218,8 +218,9 @@
   (add-hook 'calendar-load-hook 'user/calendar-load-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name calfw :after (user/calfw-init)))
-  (require-package '(:name excorporate)))
+  (req-package calfw
+    :config (user/calfw-init))
+  (req-package excorporate))
 
 (user/calendar-init)
 

@@ -24,10 +24,12 @@
     (sp-with-modes '(scala-mode)
       (sp-local-pair "'" nil :actions nil)))
 
-  (require-package '(:name scala-mode2 :after (user/scala-mode2-init)))
+  (req-package scala-mode2
+    :loader :el-get
+    :config (user/scala-mode2-init))
 
   (with-executable 'sbt
-    (require-package '(:name ensime))))
+    (req-package ensime)))
 
 (with-executable 'scala
   (user/scala-mode-init))

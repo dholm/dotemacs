@@ -99,9 +99,11 @@
   (add-hook 'nxml-mode-hook 'user/nxml-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name tdtd :after (user/tdtd-init)))
-  (require-package '(:name auto-complete-nxml
-                           :after (user/auto-complete-nxml-init))))
+  (req-package tdtd
+    :loader :el-get
+    :config (user/tdtd-init))
+  (req-package auto-complete-nxml
+    :config (user/auto-complete-nxml-init)))
 
 (user/xml-mode-init)
 

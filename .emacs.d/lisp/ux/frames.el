@@ -73,8 +73,9 @@
   (user/bind-key-global :emacs :shrink-horizontal 'shrink-window-horizontally)
 
   ;;; (Packages) ;;;
-  (require-package '(:name fullframe))
-  (require-package '(:name transpose-frame :after (user/transpose-frame-init))))
+  (req-package fullframe)
+  (req-package transpose-frame
+    :config (user/transpose-frame-init)))
 
 (user/frames-init)
 

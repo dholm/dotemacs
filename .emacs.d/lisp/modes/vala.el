@@ -13,7 +13,8 @@
   (add-hook 'vala-mode-hook 'user/vala-mode-hook))
 
 (with-executable 'valac
-  (require-package '(:name vala-mode :after (user/vala-mode-init))))
+  (req-package vala-mode
+    :config (user/vala-mode-init)))
 
 
 (provide 'modes/vala)

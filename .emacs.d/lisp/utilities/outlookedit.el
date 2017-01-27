@@ -3,7 +3,8 @@
 ;;; Code:
 
 (when (eq system-type 'windows-nt)
-  (require-package '(:name outlookedit :features (outlookedit))))
+  (req-package outlookedit
+    :loader :el-get))
 
 
 (provide 'utilities/outlookedit)

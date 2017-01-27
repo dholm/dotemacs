@@ -15,7 +15,9 @@
 
 (when (and (pkg-config-has-p "libxml-2.0")
            (pkg-config-has-p "purple"))
-  (require-package '(:name elim :after (user/elim-init))))
+  (req-package elim
+    :loader :el-get
+    :config (user/elim-init)))
 
 
 (provide 'apps/elim)

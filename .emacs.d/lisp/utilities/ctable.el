@@ -7,7 +7,8 @@
   ;; Register autoload for lib/benchmark
   (autoload 'make-ctbl:cmodel "ctable"))
 
-(require-package '(:name ctable :after (user/ctable-init)))
+(req-package ctable
+  :config (user/ctable-init))
 
 
 (provide 'utilities/ctable)

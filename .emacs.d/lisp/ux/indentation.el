@@ -11,8 +11,10 @@
 
 (defun user/indentation-init ()
   "Initialize Emacs indentation behavior."
-  (require-package '(:name dtrt-indent :after (user/dtrt-indent-init)))
-  (require-package '(:name smarttabs)))
+  (req-package dtrt-indent
+    :config (user/dtrt-indent-init))
+  (req-package smarttabs
+    :loader :el-get))
 
 (user/indentation-init)
 

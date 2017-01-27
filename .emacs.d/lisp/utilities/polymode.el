@@ -5,7 +5,8 @@
 (defun user/polymode-init ()
   "Initialize Polymode.")
 
-(require-package '(:name polymode :after (user/polymode-init)))
+(req-package polymode
+  :config (user/polymode-init))
 
 
 (provide 'utilities/polymode)

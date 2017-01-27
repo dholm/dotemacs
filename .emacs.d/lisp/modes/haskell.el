@@ -59,15 +59,18 @@
       (sp-local-pair "\\(" nil :actions nil)))
 
   ;;; (Packages) ;;;
-  (require-package '(:name haskell-mode))
-  (require-package '(:name ghci-completion))
-  (require-package '(:name hi2))
-  (require-package '(:name flycheck-hdevtools))
-  (require-package '(:name flycheck-haskell))
-  (require-package '(:name structured-haskell-mode))
-  (require-package '(:name ghc-mod))
-  (require-package '(:name ac-ghc-mod))
-  (require-package '(:name company-ghc))
+  (req-package haskell-mode)
+  (req-package ghci-completion)
+  (req-package hi2)
+  (req-package flycheck-hdevtools)
+  (req-package flycheck-haskell)
+  (req-package structured-haskell-mode
+    :loader :el-get)
+  (req-package ghc-mod
+    :loader :el-get)
+  (req-package ac-ghc-mod
+    :loader :el-get)
+  (req-package company-ghc)
 
   (add-hook 'haskell-mode-hook 'user/haskell-mode-hook)
   (add-hook 'inferior-haskell-mode-hook 'user/inferior-haskell-mode-hook))

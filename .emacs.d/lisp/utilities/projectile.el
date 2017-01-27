@@ -26,7 +26,8 @@
   ;;; (Bindings) ;;;
   (user/bind-key-global :basic :open-file-context 'projectile-find-file))
 
-(require-package '(:name projectile :after (user/projectile-init)))
+(req-package projectile
+  :config (user/projectile-init))
 
 
 (provide 'utilities/projectile)

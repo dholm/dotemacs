@@ -12,8 +12,9 @@
 
 (defun user/llvm-mode-init ()
   "Initialize LLVM mode."
-  (require-package '(:name llvm-mode))
-  (require-package '(:name tablegen-mode))
+  (req-package llvm-mode)
+  (req-package tablegen-mode
+    :loader :el-get)
 
   (add-hook 'llvm-mode-hook 'user/llvm-mode-hook)
   (add-hook 'tablegen-mode-hook 'user/tablegen-mode-hook))

@@ -39,9 +39,10 @@
     (setq tramp-remote-path (delete 'tramp-default-remote-path tramp-remote-path))
     (add-to-list 'tramp-remote-path 'tramp-own-remote-path)))
 
-(require-package '(:name tramp
-                         :before (user/tramp-before-init)
-                         :after (user/tramp-init)))
+(req-package tramp
+  :require dash
+  :init (user/tramp-before-init)
+  :config (user/tramp-init))
 
 
 (provide 'utilities/tramp)

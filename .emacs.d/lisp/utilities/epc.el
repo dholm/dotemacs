@@ -5,7 +5,8 @@
 (defun user/epc-init ()
   "Initialize EPC.")
 
-(require-package '(:name epc :after (user/epc-init)))
+(req-package epc
+  :config (user/epc-init))
 
 
 (provide 'utilities/epc)

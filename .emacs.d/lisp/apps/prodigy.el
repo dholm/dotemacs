@@ -7,7 +7,8 @@
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :services 'prodigy))
 
-(require-package '(:name prodigy :after (user/prodigy-init)))
+(req-package prodigy
+  :config (user/prodigy-init))
 
 
 (provide 'apps/prodigy)

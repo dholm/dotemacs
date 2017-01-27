@@ -19,7 +19,8 @@
    ;; Disable log.
    alert-log-messages nil))
 
-(require-package '(:name alert :after (user/alert-init)))
+(req-package alert
+  :config (user/alert-init))
 
 
 (provide 'utilities/alert)

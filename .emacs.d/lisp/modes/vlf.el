@@ -6,14 +6,15 @@
   "View large file mode hook.")
 
 
-(defun user/vlfi-init ()
+(defun user/vlf-init ()
   "Initialize view large file mode."
   (add-hook 'vlf-mode-hook 'user/vlf-mode-hook)
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :basic :view-file 'vlf))
 
-(require-package '(:name vlfi :after (user/vlfi-init)))
+(req-package vlf
+  :config (user/vlf-init))
 
 
 (provide 'modes/vlf)

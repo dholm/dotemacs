@@ -12,7 +12,8 @@
   (add-hook 'systemtap-mode-hook 'user/systemtap-mode-hook))
 
 (with-executable 'stap
-  (require-package '(:name systemtap-mode :after (user/systemtap-mode-init))))
+  (req-package systemtap-mode
+    :config (user/systemtap-mode-init)))
 
 
 (provide 'modes/systemtap)

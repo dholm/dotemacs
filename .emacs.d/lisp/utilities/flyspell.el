@@ -94,11 +94,15 @@
 (when (or (executable-find "ispell")
           (executable-find "aspell")
           (executable-find "hunspell"))
-  (require-package '(:name flyspell :after (user/flyspell-init)))
-  (require-package '(:name flyspell-lazy :after (user/flyspell-lazy-init)))
-  (require-package '(:name auto-dictionary))
+  (req-package flyspell
+    :loader :el-get
+    :config (user/flyspell-init))
+  (req-package flyspell-lazy
+    :config (user/flyspell-lazy-init))
+  (req-package auto-dictionary)
   (with-executable 'hunspell
-    (require-package '(:name rw-hunspell :after (user/rw-hunspell-init)))))
+    (req-package rw-hunspell
+      :config (user/rw-hunspell-init))))
 
 
 (provide 'utilities/flyspell)

@@ -6,12 +6,13 @@
   "systemd mode hook.")
 
 
-(defun user/systemd-mode-init ()
+(defun user/systemd-init ()
   "Initialize systemd mode."
   ;;; (Hooks) ;;;
   (add-hook 'systemd-mode-hook 'user/systemd-mode-hook))
 
-(require-package '(:name systemd-mode :after (user/systemd-mode-init)))
+(req-package systemd
+  :config (user/systemd-init))
 
 
 (provide 'modes/systemd)

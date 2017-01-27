@@ -89,21 +89,24 @@
   (add-hook 'git-commit-mode-hook 'user/git-commit-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name magit :after (user/magit-init)))
-  (require-package '(:name magit-gerrit :after (user/magit-gerrit-init)))
-  (require-package '(:name magit-tramp))
-  (require-package '(:name git-timemachine))
+  (req-package magit
+    :config (user/magit-init))
+  (req-package magit-gerrit
+    :config (user/magit-gerrit-init))
+  (req-package magit-tramp)
+  (req-package git-timemachine)
 
-  (require-package '(:name git-gutter))
+  (req-package git-gutter)
   (when (display-graphic-p)
-    (require-package '(:name git-gutter-fringe :after (user/git-gutter-fringe-init))))
-  (require-package '(:name git-messenger :after (user/git-messenger-init)))
-  (with-executable 'git-review
-    (require-package '(:name gerrit-download :after (user/gerrit-download-init))))
+    (req-package git-gutter-fringe
+      :config (user/git-gutter-fringe-init)))
+  (req-package git-messenger
+    :config (user/git-messenger-init))
   (when (feature-p 'helm)
-    (require-package '(:name helm-ls-git))
-    (require-package '(:name helm-git-grep))
-    (require-package '(:name helm-open-github))))
+    (req-package helm-ls-git)
+    (req-package helm-git-grep)
+    (req-package helm-open-github)
+    (req-package helm-hunks)))
 
 (with-executable 'git
   (user/git-init))

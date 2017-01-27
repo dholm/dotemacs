@@ -18,7 +18,8 @@
 
   (add-auto-mode 'jam-mode "\\.jam$" "Jamfile.*"))
 
-(require-package '(:name jam-mode :after (user/jam-mode-init)))
+(req-package jam-mode
+  :config (user/jam-mode-init))
 
 
 (provide 'modes/jam)

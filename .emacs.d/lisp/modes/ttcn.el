@@ -13,7 +13,9 @@
   (add-hook 'ttcn3-mode-hook 'user/ttcn3-mode-hook))
 
 
-(require-package '(:name ttcn-mode :after (user/ttcn-mode-init)))
+(req-package ttcn-mode
+  :loader :el-get
+  :config (user/ttcn-mode-init))
 
 
 (provide 'modes/ttcn)

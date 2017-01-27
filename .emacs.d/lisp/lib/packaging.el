@@ -24,14 +24,13 @@
 ;; Configure and load el-get
 (add-to-list 'load-path (path-join *user-el-get-directory* "el-get"))
 (unless (require 'el-get nil 'noerror)
+  (req-package el-get
+  :force t
+  :init
   (setq el-get-safe-mode t)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (let (el-get-master-branch)
-      (goto-char (point-max))
-      (eval-print-last-sexp))
-    (el-get-elpa-build-local-recipes)))
+  :config
+  (add-to-list 'el-get-recipe-path (path-join *user-el-get-directory* "el-get" "recipes"))
+  (el-get 'sync)))
 
 
 (defun user/package-as-el-get (package)
@@ -76,10 +75,7 @@
         (el-get nil package-list)))
     (when (featurep 'package)
       (package-initialize))
-    (run-hooks 'user/after-init-hook))
-
-  ;; Make sure el-get is registered so that el-get-cleanup doesn't remove it
-  (require-package '(:name el-get)))
+    (run-hooks 'user/after-init-hook)))
 
 
 (defun user/nil-package-init ()

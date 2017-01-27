@@ -26,14 +26,11 @@
   (add-hook 'css-mode-hook 'user/css-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name showcss-mode))
-  (require-package '(:name rainbow-mode
-                           :type http
-                           :url "http://elpa.gnu.org/packages/rainbow-mode-0.9.el"
-                           :build '(("mv" "rainbow-mode-0.9.el" "rainbow-mode.el"))
-                           :compile "rainbow-mode.el"))
+  (req-package showcss-mode
+    :loader :el-get)
+  (req-package rainbow-mode)
   (when (feature-p 'helm)
-    (require-package '(:name helm-css-scss))))
+    (req-package helm-css-scss)))
 
 (user/css-mode-init)
 

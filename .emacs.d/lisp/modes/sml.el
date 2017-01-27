@@ -17,7 +17,8 @@
   (add-hook 'sml-mode-hook 'user/sml-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name sml-mode :after (user/sml-mode-init))))
+  (req-package sml-mode
+    :config (user/sml-mode-init)))
 
 (with-executable 'sml
   (user/sml-mode-init))

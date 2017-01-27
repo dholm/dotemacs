@@ -17,7 +17,9 @@
   (add-hook 'puml-mode-hook 'user/puml-mode-hook))
 
 (with-executable 'java
-  (require-package '(:name puml-mode :after (user/puml-mode-init))))
+  (req-package puml-mode
+    :loader :el-get
+    :config (user/puml-mode-init)))
 
 
 (provide 'modes/plantuml)

@@ -175,7 +175,7 @@ Makes it easier to version control LaTeX-files."
   (add-hook 'TeX-mode-hook 'zotelo-minor-mode))
 
 
-(defun user/auto-complete-latex ()
+(defun user/auto-complete-latex-init ()
   "Initialize LaTeX auto completion."
   (setq-default
    ac-l-dict-directory (path-join (el-get-package-directory
@@ -219,14 +219,21 @@ Makes it easier to version control LaTeX-files."
   (add-hook 'bibtex-mode-hook 'user/bibtex-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name auctex :after (user/auctex-init)))
-  (require-package '(:name ebib :after (user/ebib-init)))
-  (require-package '(:name zotelo :after (user/zotelo-init)))
-  (require-package '(:name ac-math :after (user/ac-math-init)))
-  (require-package '(:name auto-complete-latex :after (user/auto-complete-latex)))
-  (require-package '(:name company-auctex))
-  (require-package '(:name company-math))
-  (require-package '(:name ltx-help)))
+  (req-package auctex
+    :config (user/auctex-init))
+  (req-package ebib
+    :config (user/ebib-init))
+  (req-package zotelo
+    :config (user/zotelo-init))
+  (req-package ac-math
+    :config (user/ac-math-init))
+  (req-package auto-complete-latex
+    :loader :el-get
+    :config (user/auto-complete-latex-init))
+  (req-package company-auctex)
+  (req-package company-math)
+  (req-package ltx-help
+    :loader :el-get))
 
 
 (when (or (executable-find "tex")

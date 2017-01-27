@@ -41,7 +41,9 @@
     (define-key calc-mode-map [mouse-2] 'calc-yank))
 
   ;;; (Packages) ;;;
-  (require-package '(:name easy-convert :after (user/easy-convert-init))))
+  (req-package easy-convert
+    :loader :el-get
+    :config (user/easy-convert-init)))
 
 (user/calc-init)
 

@@ -170,9 +170,10 @@
   "Initialize tag support."
   ;;; (Packages) ;;;
   (with-executable 'llvm-config
-    (require-package '(:name rtags :after (user/rtags-init))))
+    (req-package rtags
+      :config (user/rtags-init)))
   (when (feature-p 'helm)
-    (require-package '(:name helm-etags-plus))))
+    (req-package helm-etags-plus)))
 
 (user/tags-init)
 

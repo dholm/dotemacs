@@ -4,7 +4,8 @@
 
 (defun user/growl-init ()
   "Initialize Growl support for Emacs."
-  (require-package '(:name growl)))
+  (req-package growl
+    :loader :el-get))
 
 (when (osx-app-installed-p "com.growl.growlhelperapp")
   (user/growl-init))

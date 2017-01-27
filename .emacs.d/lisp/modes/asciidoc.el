@@ -13,7 +13,8 @@
 
   (add-auto-mode 'adoc-mode "\\.adoc$" "\\.asciidoc$"))
 
-(require-package '(:name adoc-mode :after (user/adoc-mode-init)))
+(req-package adoc-mode
+  :config (user/adoc-mode-init))
 
 
 (provide 'modes/asciidoc)

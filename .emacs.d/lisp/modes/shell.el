@@ -35,11 +35,9 @@
   "Initialize shell modes."
 
   ;;; (Packages) ;;;
-  (require-package '(:name bash-completion))
-  (require-package '(:name shelldoc))
-  (require-package '(:name shell-command
-                           :type emacswiki
-                           :website "https://raw.github.com/emacsmirror/emacswiki.org/master/shell-command.el"))
+  (req-package bash-completion)
+  (req-package shelldoc)
+  (req-package shell-command)
 
   (add-hook 'sh-mode-hook 'user/sh-mode-hook)
   (add-hook 'shell-mode-hook 'user/shell-mode-hook))

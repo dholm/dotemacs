@@ -12,8 +12,9 @@
   (add-auto-mode 'swig-mode "\\.swg$"))
 
 
-(require-package '(:name swig-mode
-                         :after (user/swig-mode-init)))
+(req-package swig-mode
+  :loader :el-get
+  :config (user/swig-mode-init))
 
 
 (provide 'modes/swig)

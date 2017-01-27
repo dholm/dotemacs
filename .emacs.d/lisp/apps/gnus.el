@@ -564,13 +564,15 @@
   (add-hook 'message-sent-hook 'user/gnus-message-sent-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name gnus-alias))
-  (require-package '(:name gnus-summary-ext))
-  (require-package '(:name gnus-x-gm-raw))
+  (req-package gnus-alias)
+  (req-package gnus-summary-ext)
+  (req-package gnus-x-gm-raw)
   (with-executable 'gpgsm
-    (require-package '(:name jl-smime)))
+    (req-package jl-smime
+      :loader :el-get))
   (when (eq system-type 'darwin)
-    (require-package '(:name nnir-spotlight))))
+    (req-package nnir-spotlight
+      :loader :el-get)))
 
 (user/gnus-init)
 

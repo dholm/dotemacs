@@ -103,7 +103,7 @@
   (user/bind-key-global :apps :shell 'user/raise-eshell)
 
   ;;; (Packages) ;;;
-  (require-package '(:name eshell-manual)))
+  (req-package eshell-manual))
 
 (user/eshell-init)
 

@@ -21,11 +21,11 @@
 
 (defun user/perl-mode-init ()
   "Initialize Perl mode."
-  (require-package '(:name cperl-mode))
-  (require-package '(:name sepia))
-  (require-package '(:name perl-completion
-                           :type emacswiki
-                           :website "https://raw.github.com/emacsmirror/emacswiki.org/master/perl-completion.el"))
+  (req-package cperl-mode
+    :loader :el-get)
+  (req-package sepia
+    :loader :el-get)
+  (req-package perl-completion)
 
   ;; Use Sepia as the default perl mode.
   (defalias 'perl-mode 'sepia-mode)

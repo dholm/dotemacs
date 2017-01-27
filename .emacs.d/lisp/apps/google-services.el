@@ -21,8 +21,10 @@
    oauth2-token-file
    (path-join *user-google-services-data-directory* "oauth2.plstore"))
 
-  (require-package '(:name google-contacts))
-  (require-package '(:name google-calendar :after (user/google-calendar-init))))
+  (req-package google-contacts)
+  (req-package google-calendar
+    :loader :el-get
+    :config (user/google-calendar-init)))
 
 (user/google-services-init)
 

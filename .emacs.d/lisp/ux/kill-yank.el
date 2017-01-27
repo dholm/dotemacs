@@ -69,9 +69,11 @@
     (global-set-key [remap yank] 'clipboard-yank))
 
   ;;; (Packages) ;;;
-  (require-package '(:name expand-region :after (user/expand-region-init)))
-  (require-package '(:name multiple-cursors :after (user/multiple-cursors-init)))
-  (require-package '(:name rect-mark)))
+  (req-package expand-region
+    :config (user/expand-region-init))
+  (req-package multiple-cursors
+    :config (user/multiple-cursors-init))
+  (req-package rect-mark))
 
 (user/kill-yank-init)
 

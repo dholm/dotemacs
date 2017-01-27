@@ -16,7 +16,7 @@
   (add-hook 'octave-mode-hook 'user/octave-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name ac-octave)))
+  (req-package ac-octave))
 
 (with-executable 'octave
   (user/octave-init))

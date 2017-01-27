@@ -188,10 +188,11 @@
     (user/ede-init)
     (user/semantic-init)))
 
-(require-package '(:name cedet
-                         :before (user/cedet-before-init)
-                         :after (user/cedet-init)))
-(require-package '(:name semantic-stickyfunc-enhance))
+(req-package cedet
+  :loader :el-get
+  :init (user/cedet-before-init)
+  :config (user/cedet-init))
+(req-package stickyfunc-enhance)
 
 
 (provide 'utilities/cedet)

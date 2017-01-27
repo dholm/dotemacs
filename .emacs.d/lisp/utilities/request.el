@@ -8,7 +8,8 @@
    ;; Request cache store.
    request-storage-directory (path-join *user-cache-directory* "request")))
 
-(require-package '(:name request :after (user/request-init)))
+(req-package request
+  :config (user/request-init))
 
 
 (provide 'utilities/request)

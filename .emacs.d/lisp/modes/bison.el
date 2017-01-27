@@ -10,7 +10,8 @@
   "Initialize Bison mode."
   (add-hook 'bison-mode-hook 'user/bison-mode-hook))
 
-(require-package '(:name bison-mode :after (user/bison-mode-init)))
+(req-package bison-mode
+  :config (user/bison-mode-init))
 
 
 (provide 'modes/bison)

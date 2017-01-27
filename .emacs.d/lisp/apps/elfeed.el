@@ -7,7 +7,8 @@
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :feed-reader 'elfeed))
 
-(require-package '(:name elfeed :after (user/elfeed-init)))
+(req-package elfeed
+  :config (user/elfeed-init))
 
 
 (provide 'apps/elfeed)

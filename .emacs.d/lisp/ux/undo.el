@@ -47,7 +47,8 @@
   (user/bind-key-global :basic :undo 'undo)
 
   ;;; (Packages) ;;;
-  (require-package '(:name undo-tree :after (user/undo-tree-init))))
+  (req-package undo-tree
+    :config (user/undo-tree-init)))
 
 (user/undo-init)
 

@@ -53,8 +53,10 @@
 
   ;;; (Packages) ;;;
   (when (pkg-config-has-p "libxml-2.0")
-    (require-package '(:name doxymacs)))
-  (require-package '(:name doc-mode-nschum)))
+    (req-package doxymacs
+      :loader :el-get))
+  (req-package doc-mode-nschum
+    :loader :el-get))
 
 (with-executable 'doxygen
   (user/doxygen-mode-init))

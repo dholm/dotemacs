@@ -12,7 +12,8 @@
   (add-auto-mode 'gnuplot-mode "\\.gp$"))
 
 (with-executable 'gnuplot
-  (require-package '(:name gnuplot-mode :after (user/gnuplot-mode-init))))
+  (req-package gnuplot-mode
+    :config (user/gnuplot-mode-init)))
 
 
 (provide 'modes/gnuplot)

@@ -17,7 +17,9 @@
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :information-db 'ee))
 
-(require-package '(:name ee :after (user/ee-init)))
+(req-package ee
+  :loader :el-get
+  :config (user/ee-init))
 
 
 (provide 'apps/ee)

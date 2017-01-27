@@ -40,8 +40,10 @@
   ;; Register mode hook.
   (add-hook 'rst-mode-hook 'user/rst-mode-hook))
 
-(require-package '(:name rst-mode :after (user/rst-mode-init)))
-(require-package '(:name auto-complete-rst))
+(req-package rst-mode
+  :loader :el-get
+  :config (user/rst-mode-init))
+(req-package auto-complete-rst)
 
 
 (provide 'modes/rest)

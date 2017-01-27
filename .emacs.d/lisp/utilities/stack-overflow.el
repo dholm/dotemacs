@@ -14,7 +14,8 @@
   (add-hook 'prog-mode-hook 'user/stack-overflow-prog-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name emacs-sos)))
+  (req-package emacs-sos
+    :loader :el-get))
 
 (user/stack-overflow-init)
 

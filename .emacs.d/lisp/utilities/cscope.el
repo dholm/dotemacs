@@ -39,8 +39,9 @@
 (defun user/cscope-init ()
   "Initialize CScope support."
   ;;; (Packages) ;;;
-  (require-package '(:name xcscope :after (user/xcscope-init)))
-  (require-package '(:name helm-cscope)))
+  (req-package xcscope
+    :config (user/xcscope-init))
+  (req-package helm-cscope))
 
 (with-executable 'cscope
   (user/cscope-init))

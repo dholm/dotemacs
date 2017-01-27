@@ -38,7 +38,7 @@
      message-send-mail-function 'smtpmail-send-it))
 
   ;;; (Packages) ;;;
-  (require-package '(:name smtpmail-multi)))
+  (req-package smtpmail-multi))
 
 (user/smtpmail-init)
 

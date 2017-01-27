@@ -71,9 +71,10 @@
   (add-hook 'ede-minor-mode-hook 'user/ede-flycheck-setup)
   (add-hook 'ede-compdb-project-rescan-hook 'user/ede-flycheck-setup))
 
-(require-package '(:name flycheck :after (user/flycheck-init)))
-(require-package '(:name flycheck-pos-tip))
-(require-package '(:name helm-c-flycheck))
+(req-package flycheck
+  :config (user/flycheck-init))
+(req-package flycheck-pos-tip)
+(req-package helm-c-flycheck)
 
 
 (provide 'utilities/flycheck)

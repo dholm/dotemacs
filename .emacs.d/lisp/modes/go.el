@@ -45,15 +45,17 @@
   (add-hook 'go-mode-hook 'user/go-mode-hook))
 
 (with-executable 'go
-  (require-package '(:name go-mode :after (user/go-mode-init)))
-  (require-package '(:name go-autocomplete))
-  (require-package '(:name go-company))
-  (require-package '(:name go-eldoc))
-  (require-package '(:name go-test))
-  (require-package '(:name go-projectile))
-  (require-package '(:name go-oracle))
+  (req-package go-mode
+    :config (user/go-mode-init))
+  (req-package go-autocomplete)
+  (req-package company-go)
+  (req-package go-eldoc)
+  (req-package gotest)
+  (req-package go-projectile)
+  (req-package go-oracle
+    :loader :el-get)
   (when (feature-p 'helm)
-    (require-package '(:name helm-go-package))))
+    (req-package helm-go-package)))
 
 
 (provide 'modes/go)

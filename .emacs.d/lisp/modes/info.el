@@ -21,7 +21,8 @@
 
 (defun user/info-mode-init ()
   "Initialize info mode."
-  (require-package '(:name info+ :type emacswiki :after (user/info+-init)))
+  (req-package info+
+    :config (user/info+-init))
 
   (add-hook 'Info-mode-hook 'user/info-mode-hook))
 

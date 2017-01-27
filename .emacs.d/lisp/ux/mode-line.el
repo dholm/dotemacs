@@ -44,8 +44,9 @@
       (display-battery-mode t)))
 
   ;;; (Packages) ;;;
-  (require-package '(:name diminish))
-  (require-package '(:name smart-mode-line :after (user/smart-mode-line-init))))
+  (req-package diminish)
+  (req-package smart-mode-line
+    :config (user/smart-mode-line-init)))
 
 (user/modeline-init)
 

@@ -118,9 +118,11 @@
   (user/bind-key-global :apps :statistics 'R))
 
 (with-executable 'R
-  (require-package '(:name ess :after (user/ess-init)))
-  (require-package '(:name ess-smart-underscore))
-  (require-package '(:name ac-R :after (user/ac-R-init))))
+  (req-package ess
+    :config (user/ess-init))
+  (req-package ess-smart-underscore)
+  (req-package ac-R
+    :config (user/ac-R-init)))
 
 
 (provide 'modes/r)

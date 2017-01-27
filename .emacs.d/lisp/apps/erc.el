@@ -230,16 +230,18 @@
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :irc 'erc))
 
-(require-package '(:name erc :after (user/erc-init)))
-(require-package '(:name erc-colorize))
-(require-package '(:name erc-track-score))
-(require-package '(:name erc-image))
-(require-package '(:name erc-view-log))
-(require-package '(:name erc-crypt))
+(req-package erc
+  :config (user/erc-init))
+(req-package erc-colorize)
+(req-package erc-track-score)
+(req-package erc-image)
+(req-package erc-view-log
+  :loader :el-get)
+(req-package erc-crypt)
 (when (display-graphic-p)
-  (require-package '(:name erc-tex)))
+  (req-package erc-tex))
 (when (feature-p 'bbdb)
-  (require-package '(:name bbdb2erc)))
+  (req-package bbdb2erc))
 (with-executable 'bitlbee
   (after-load 'prodigy
     (prodigy-define-service

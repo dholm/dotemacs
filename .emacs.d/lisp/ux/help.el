@@ -44,9 +44,10 @@
   (user/bind-key-global :emacs :tutorial 'help-with-tutorial)
 
   ;;; (Packages) ;;;
-  (require-package '(:name guide-key :after (user/guide-key-init)))
+  (req-package guide-key
+    :config (user/guide-key-init))
   (when (display-graphic-p)
-    (require-package '(:name guide-key-tip))))
+    (req-package guide-key-tip)))
 
 (user/help-init)
 

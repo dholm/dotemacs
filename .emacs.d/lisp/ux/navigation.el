@@ -43,8 +43,10 @@
   (user/bind-key-global :nav :go-back 'pop-global-mark)
 
   ;;; (Packages) ;;;
-  (require-package '(:name ace-jump-mode :after (user/ace-jump-mode-init)))
-  (require-package '(:name smart-forward :after (user/smart-forward-init))))
+  (req-package ace-jump-mode
+    :config (user/ace-jump-mode-init))
+  (req-package smart-forward
+    :config (user/smart-forward-init)))
 
 (user/navigation-init)
 

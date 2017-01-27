@@ -50,9 +50,11 @@
   (add-hook 'doc-view-mode-hook 'user/doc-view-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name doc-present))
+  (req-package doc-present
+    :loader :el-get)
   (when (display-graphic-p)
-    (require-package '(:name doc-view-fit-to-page))))
+    (req-package doc-view-fit-to-page
+      :loader :el-get)))
 
 (user/doc-view-init)
 

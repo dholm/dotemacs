@@ -145,9 +145,6 @@
     ;; Don't forcibly enable auto-complete.
     (global-auto-complete-mode -1))
 
-  (after-load 'diminish
-    (diminish 'auto-complete-mode))
-
   (setq-default
    ;; Limit the number of candidates.
    ac-candidate-limit 40
@@ -261,10 +258,7 @@
   (after-load 'company
     (with-feature 'company-flx
       ;; Enable fuzzy matching.
-      (company-flx-mode t))
-
-    (after-load 'diminish
-      (diminish 'company-mode))))
+      (company-flx-mode t))))
 
 
 (defun user/completion-init ()
@@ -279,10 +273,15 @@
   (add-to-list 'completion-styles 'initials t)
 
   ;;; (Packages) ;;;
-  (require-package '(:name auto-complete :after (user/auto-complete-init)))
-  (require-package '(:name company-mode :after (user/company-mode-init)))
-  (require-package '(:name company-flx))
-  (require-package '(:name company-quickhelp)))
+  (req-package auto-complete
+    :loader :el-get
+    :diminish auto-complete-mode
+    :config (user/auto-complete-init))
+  (req-package company
+    :diminish company-mode
+    :config (user/company-mode-init))
+  (req-package company-flx)
+  (req-package company-quickhelp))
 
 (user/completion-init)
 

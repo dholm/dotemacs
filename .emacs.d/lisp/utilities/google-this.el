@@ -13,7 +13,8 @@
   (user/bind-key-global :util :google-at-point 'google-this)
   (user/bind-key-global :util :google-selection 'google-region))
 
-(require-package '(:name google-this :after (user/google-this-init)))
+(req-package google-this
+  :config (user/google-this-init))
 
 
 (provide 'utilities/google-this)

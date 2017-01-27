@@ -9,7 +9,8 @@
 
 (defun user/vhdl-mode-init ()
   "Initialize VHDL mode."
-  (require-package '(:name vhdl-mode))
+  (req-package vhdl-mode
+    :loader :el-get)
 
   (add-hook 'vhdl-mode-hook 'user/vhdl-mode-hook))
 

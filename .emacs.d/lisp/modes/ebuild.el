@@ -8,7 +8,8 @@
 
 (defun user/ebuild-mode-init ()
   "Initialize Gentoo ebuild mode."
-  (require-package '(:name ebuild-mode))
+  (req-package ebuild-mode
+    :loader :el-get)
 
   (add-hook 'ebuild-mode-hook 'user/ebuild-mode-hook))
 

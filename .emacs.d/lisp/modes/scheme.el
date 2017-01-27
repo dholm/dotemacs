@@ -69,9 +69,11 @@
   (add-hook 'scheme-mode-hook 'user/scheme-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name geiser :after (user/geiser-init)))
-  (require-package '(:name quack :after (user/quack-init)))
-  (require-package '(:name ac-geiser)))
+  (req-package geiser
+    :config (user/geiser-init))
+  (req-package quack
+    :config (user/quack-init))
+  (req-package ac-geiser))
 
 (user/scheme-mode-init)
 

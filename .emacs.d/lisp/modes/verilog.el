@@ -16,8 +16,10 @@
   (add-hook 'verilog-mode-hook 'user/verilog-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name verilog-mode))
-  (require-package '(:name auto-complete-verilog)))
+  (req-package verilog-mode
+    :loader :el-get)
+  (req-package auto-complete-verilog
+    :loader :el-get))
 
 (user/verilog-mode-init)
 

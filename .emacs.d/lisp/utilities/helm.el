@@ -145,10 +145,13 @@
   (user/bind-key-global :emacs :elisp-search 'helm-info-elisp))
 
 
-(require-package '(:name helm :after (user/helm-init)))
-(require-package '(:name helm-descbinds))
-(require-package '(:name helm-build-command))
-(require-package '(:name helm-swoop :after (user/helm-swoop-init)))
+(req-package helm
+  :config (user/helm-init))
+(req-package helm-descbinds)
+(req-package helm-build-command
+  :loader :el-get)
+(req-package helm-swoop
+  :config (user/helm-swoop-init))
 
 
 (provide 'utilities/helm)

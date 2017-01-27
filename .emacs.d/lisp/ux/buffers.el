@@ -51,7 +51,9 @@
   (user/bind-key-global :basic :quit 'save-buffers-kill-terminal)
 
   ;;; (Packages) ;;;
-  (require-package '(:name keep-buffers :after (user/keep-buffers-init))))
+  (req-package keep-buffers
+    :loader :el-get
+    :config (user/keep-buffers-init)))
 
 (user/buffers-init)
 
