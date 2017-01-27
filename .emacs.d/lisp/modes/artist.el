@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/artist-mode-hook ()
+(defun user--artist-mode-hook ()
   "Artist mode hook."
   ;;; (Bindings) ;;;
   (local-set-key (kbd "C-c C-a C-s") 'user/artist-select-setting))
@@ -28,15 +28,15 @@
                             ("Spray-chars" . spray-chars))))))))
 
 
-(defun user/artist-mode-init ()
+(defun user--artist-mode-config ()
   "Initialize artist mode."
   ;;; (Hooks) ;;;
-  (add-hook 'picture-mode-hook 'user/artist-mode-hook)
+  (add-hook 'picture-mode-hook 'user--artist-mode-hook)
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :util :draw 'artist-mode))
 
-(user/artist-mode-init)
+(user--artist-mode-config)
 
 
 (provide 'modes/artist)

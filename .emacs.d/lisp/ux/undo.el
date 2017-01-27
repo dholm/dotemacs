@@ -7,7 +7,7 @@
   "Path to user's undo-tree cache store.")
 
 
-(defun user/undo-tree-init ()
+(defun user--undo-tree-config ()
   "Initialize undo-tree."
   ;; Ensure that cache store exists.
   (make-directory *user-undo-tree-cache-directory* t)
@@ -41,16 +41,16 @@
   (user/bind-key-global :util :undo-tree 'undo-tree-visualize))
 
 
-(defun user/undo-init ()
+(defun user--undo-config ()
   "Initialize Emacs undo."
   ;;; (Bindings) ;;;
   (user/bind-key-global :basic :undo 'undo)
 
   ;;; (Packages) ;;;
   (req-package undo-tree
-    :config (user/undo-tree-init)))
+    :config (user--undo-tree-config)))
 
-(user/undo-init)
+(user--undo-config)
 
 
 (provide 'ux/undo)

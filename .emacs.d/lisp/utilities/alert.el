@@ -11,7 +11,7 @@
    (t 'mode-line)))
 
 
-(defun user/alert-init ()
+(defun user--alert-config ()
   "Initialize alert."
   (setq-default
    ;; Send alerts to alert buffer.
@@ -20,7 +20,7 @@
    alert-log-messages nil))
 
 (req-package alert
-  :config (user/alert-init))
+  :config (user--alert-config))
 
 
 (provide 'utilities/alert)

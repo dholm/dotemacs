@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/vc-find-file-hook ()
+(defun user--vc-find-file-hook ()
   "Find file hook for version controlled files."
   (with-feature 'vc
     (when (vc-working-revision (buffer-file-name))
@@ -10,7 +10,7 @@
       (auto-revert-mode t))))
 
 
-(defun user/vc-log-edit-hook ()
+(defun user--vc-log-edit-hook ()
   "Version control log editing hook."
   ;; Limited whitespace style.
   (setq-local whitespace-style '(face lines-tail))
@@ -28,7 +28,7 @@
   (local-set-key (kbd "C-x #") 'user/server-save))
 
 
-(defun user/vc-init ()
+(defun user--vc-config ()
   "Initialize Emacs version control package."
   (after-load 'vc-annotate
     (with-feature 'fullframe
@@ -41,9 +41,9 @@
     (after-load 'diminish
       (diminish 'auto-revert-mode)))
 
-  (add-hook 'find-file-hook 'user/vc-find-file-hook))
+  (add-hook 'find-file-hook 'user--vc-find-file-hook))
 
-(user/vc-init)
+(user--vc-config)
 
 
 (provide 'vcs/vc)

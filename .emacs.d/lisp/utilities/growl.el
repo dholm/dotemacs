@@ -2,13 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/growl-init ()
+(defun user--growl-config ()
   "Initialize Growl support for Emacs."
   (req-package growl
     :loader :el-get))
 
 (when (osx-app-installed-p "com.growl.growlhelperapp")
-  (user/growl-init))
+  (user--growl-config))
 
 
 (provide 'utilities/growl)

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/sauron-init ()
+(defun user--sauron-config ()
   "Initialize Sauron event tracker."
   (setq-default
    ;; Display sauron in current frame.
@@ -12,7 +12,7 @@
   (user/bind-key-global :util :notifications 'sauron-toggle-hide-show))
 
 (req-package sauron
-  :config (user/sauron-init))
+  :config (user--sauron-config))
 
 
 (provide 'utilities/sauron)

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/rst-mode-hook ()
+(defun user--rst-mode-hook ()
   "Hook for reStructuredText mode."
   ;; Hook on save.
   (add-hook 'write-contents-functions
@@ -29,7 +29,7 @@
   (user/bind-key-local :code :compile 'rst-compile))
 
 
-(defun user/rst-mode-init ()
+(defun user--rst-mode-config ()
   "Initialize reStructuredText mode."
   ;; Register auto modes.
   (add-auto-mode 'rst-mode "\\.rst$" "\\.rest$")
@@ -38,11 +38,11 @@
   (add-hook 'rst-adjust-hook 'rst-toc-update)
 
   ;; Register mode hook.
-  (add-hook 'rst-mode-hook 'user/rst-mode-hook))
+  (add-hook 'rst-mode-hook 'user--rst-mode-hook))
 
 (req-package rst-mode
   :loader :el-get
-  :config (user/rst-mode-init))
+  :config (user--rst-mode-config))
 (req-package auto-complete-rst)
 
 

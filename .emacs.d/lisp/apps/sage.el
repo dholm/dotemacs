@@ -2,15 +2,15 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/sage-startup-hook ()
+(defun user--sage-startup-hook ()
   "Sage startup hook."
   ;; Support typeset output.
   (sage-view))
 
 
-(defun user/sage-mode-init ()
+(defun user--sage-mode-config ()
   "Initialize Sage mode."
-  (add-hook 'sage-startup-after-prompt-hook 'user/sage-startup-hook)
+  (add-hook 'sage-startup-after-prompt-hook 'user--sage-startup-hook)
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :sage 'sage))
@@ -18,7 +18,7 @@
 (with-executable 'sage
   (req-package sage-mode
     :loader :el-get
-    :config (user/sage-mode-init)))
+    :config (user--sage-mode-config)))
 
 
 (provide 'apps/sage)

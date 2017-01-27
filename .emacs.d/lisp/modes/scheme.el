@@ -2,9 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/scheme-mode-hook ()
+(defun user--scheme-mode-hook ()
   "Scheme mode hook."
-  (user/cedet-hook)
+  (user--cedet-hook)
   (semantic-default-scheme-setup)
 
   (user/gnu-global-enable)
@@ -22,7 +22,7 @@
     (call-interactively 'run-geiser)))
 
 
-(defun user/geiser-mode-hook ()
+(defun user--geiser-mode-hook ()
   "Geiser mode hook."
   (with-feature 'ac-geiser
     (ac-geiser-setup))
@@ -36,7 +36,7 @@
   (user/bind-key-local :code :macro-expand 'geiser-expand-definition))
 
 
-(defun user/geiser-repl-mode-hook ()
+(defun user--geiser-repl-mode-hook ()
   "Geiser REPL mode hook."
   (enable-paredit-mode)
   (rainbow-delimiters-mode t)
@@ -45,37 +45,37 @@
     (ac-geiser-setup)))
 
 
-(defun user/geiser-init ()
+(defun user--geiser-config ()
   "Initialize Geiser."
   (when (feature-p 'ac-geiser)
     (after-load 'geiser
       (add-ac-modes 'geiser-repl-mode)))
 
   ;;; (Hooks) ;;;
-  (add-hook 'geiser-mode-hook 'user/geiser-mode-hook)
-  (add-hook 'geiser-repl-mode-hook 'user/geiser-repl-mode-hook))
+  (add-hook 'geiser-mode-hook 'user--geiser-mode-hook)
+  (add-hook 'geiser-repl-mode-hook 'user--geiser-repl-mode-hook))
 
 
-(defun user/quack-init ()
+(defun user--quack-config ()
   "Initialize Quack."
   (setq-default
    ;; Use Emacs-style fontification.
    quack-fontify-style 'emacs))
 
 
-(defun user/scheme-mode-init ()
+(defun user--scheme-mode-config ()
   "Initialize Scheme mode."
   ;;; (Hooks) ;;;
-  (add-hook 'scheme-mode-hook 'user/scheme-mode-hook)
+  (add-hook 'scheme-mode-hook 'user--scheme-mode-hook)
 
   ;;; (Packages) ;;;
   (req-package geiser
-    :config (user/geiser-init))
+    :config (user--geiser-config))
   (req-package quack
-    :config (user/quack-init))
+    :config (user--quack-config))
   (req-package ac-geiser))
 
-(user/scheme-mode-init)
+(user--scheme-mode-config)
 
 
 (provide 'modes/scheme)

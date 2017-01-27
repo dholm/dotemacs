@@ -11,7 +11,7 @@
   "Path to user's w3m cache store.")
 
 
-(defun user/w3m-display-hook (url)
+(defun user--w3m-display-hook (url)
   "W3M display hook for URL."
   (rename-buffer
    (format "*w3m: %s*" (or w3m-current-title w3m-current-url)) t)
@@ -33,7 +33,7 @@
         (delete-file filename)))))
 
 
-(defun user/w3m-init ()
+(defun user--w3m-config ()
   "Initialize w3m."
   (setq-default
    ;; Set up data paths.
@@ -77,12 +77,12 @@
 
   (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
 
-  (add-hook 'w3m-display-hook 'user/w3m-display-hook))
+  (add-hook 'w3m-display-hook 'user--w3m-display-hook))
 
 (unless (feature-p 'eww)
   (with-executable 'w3m
     (req-package w3m
-      :config (user/w3m-init))))
+      :config (user--w3m-config))))
 
 
 (provide 'apps/w3m)

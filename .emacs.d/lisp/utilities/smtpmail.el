@@ -22,7 +22,7 @@
        mail-host-address "gmail.com"))))
 
 
-(defun user/smtpmail-init ()
+(defun user--smtpmail-config ()
   "Initialize smtpmail."
   (setq-default
    ;; Use smtpmail as the default method of sending email.
@@ -40,7 +40,7 @@
   ;;; (Packages) ;;;
   (req-package smtpmail-multi))
 
-(user/smtpmail-init)
+(user--smtpmail-config)
 
 
 (provide 'utilities/smtpmail)

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/direx-init ()
+(defun user--direx-config ()
   "Initialize direx."
   (setq
    ;; Use the functionality from utilities/project to locate project root
@@ -20,7 +20,7 @@
                         'direx-project:jump-to-project-root-other-window))
 
 (req-package direx
-  :config (user/direx-init))
+  :config (user--direx-config))
 
 
 (provide 'utilities/direx)

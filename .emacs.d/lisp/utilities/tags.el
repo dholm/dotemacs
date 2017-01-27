@@ -153,7 +153,7 @@
     (user/bind-key-local :nav :go-back 'user/tag-pop)))
 
 
-(defun user/rtags-init ()
+(defun user--rtags-config ()
   "Initialize rtags."
   (after-load 'helm
     (setq-default
@@ -166,16 +166,16 @@
      rtags-tramp-enabled t)))
 
 
-(defun user/tags-init ()
+(defun user--tags-config ()
   "Initialize tag support."
   ;;; (Packages) ;;;
   (with-executable 'llvm-config
     (req-package rtags
-      :config (user/rtags-init)))
+      :config (user--rtags-config)))
   (when (feature-p 'helm)
     (req-package helm-etags-plus)))
 
-(user/tags-init)
+(user--tags-config)
 
 
 (provide 'utilities/tags)

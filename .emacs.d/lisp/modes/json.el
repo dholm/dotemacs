@@ -2,12 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/json-mode-init ()
+(defun user--json-mode-config ()
   "Initilize JSON mode."
   (add-auto-mode 'json-mode "\\.bowerrc$"))
 
 (req-package json-mode
-  :config (user/json-mode-init))
+  :config (user--json-mode-config))
 
 
 (provide 'modes/json)

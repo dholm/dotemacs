@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/dired-mode-hook ()
+(defun user--dired-mode-hook ()
   "Mode hook for dired."
   (with-feature 'async
     ;; Asynchronous operations in dired.
@@ -13,7 +13,7 @@
     (guide-key/add-local-guide-key-sequence "%")))
 
 
-(defun user/dired-efap-init ()
+(defun user--dired-efap-config ()
   "Initialize dired-efap."
   (after-load 'dired
     ;; Load dired-efap when dired is loaded.
@@ -25,7 +25,7 @@
     (define-key dired-mode-map [down-mouse-1] 'dired-efap-click)))
 
 
-(defun user/dired-init ()
+(defun user--dired-config ()
   "Initialize dired."
   (setq-default
    ;; Always copy recursively without asking.
@@ -52,9 +52,9 @@
   ;;; (Packages) ;;;
   (req-package async)
   (req-package dired-efap
-    :config (user/dired-efap-init)))
+    :config (user--dired-efap-config)))
 
-(user/dired-init)
+(user--dired-config)
 
 
 (provide 'utilities/dired)

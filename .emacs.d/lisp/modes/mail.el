@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/mail-mode-hook ()
+(defun user--mail-mode-hook ()
   "Mail mode hook."
   (setq
    ;; RFC2822 2.1.1 Line Length Limits (including CRLF).
@@ -27,7 +27,7 @@
   (user/bind-key-local :code :compile 'org-mime-htmlize))
 
 
-(defun user/mu-cite-init ()
+(defun user--mu-cite-config ()
   "Initialize mu-cite."
   (setq-default
    ;; Citation format.
@@ -41,16 +41,16 @@
   (add-hook 'mail-citation-hook 'mu-cite-original))
 
 
-(defun user/mail-mode-init ()
+(defun user--mail-mode-config ()
   "Initialize mail mode."
   ;; Hooks
-  (add-hook 'mail-mode-hook 'user/mail-mode-hook)
+  (add-hook 'mail-mode-hook 'user--mail-mode-hook)
 
   ;;; (Packages) ;;;
   (req-package mu-cite
-    :config (user/mu-cite-init)))
+    :config (user--mu-cite-config)))
 
-(user/mail-mode-init)
+(user--mail-mode-config)
 
 
 (provide 'modes/mail)

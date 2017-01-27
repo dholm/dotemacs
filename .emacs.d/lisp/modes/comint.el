@@ -2,11 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/comint-mode-hook ()
+(defun user--comint-mode-hook ()
   "Comint mode hook.")
 
 
-(defun user/comint-init ()
+(defun user--comint-config ()
   "Initialize comint mode."
   (setq-default
    ;; Scroll automatically on new output.
@@ -22,7 +22,7 @@
    ;; Don't store duplicates in history.
    comint-input-ignoredups t)
 
-  (add-hook 'comint-mode-hook 'user/comint-mode-hook)
+  (add-hook 'comint-mode-hook 'user--comint-mode-hook)
 
   ;;; (Bindings) ;;;
   ;; Cycling through command history.
@@ -32,7 +32,7 @@
   (define-key comint-mode-map [C-left] 'comint-bol))
 
 (after-load 'comint
-  (user/comint-init))
+  (user--comint-config))
 
 
 (provide 'modes/comint)

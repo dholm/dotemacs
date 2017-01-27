@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/cask-mode-hook ()
+(defun user--cask-mode-hook ()
   "Cask mode hook."
   (with-feature 'rainbow-delimiters
     (rainbow-delimiters-mode t))
@@ -13,13 +13,13 @@
       (diminish 'paredit-mode))))
 
 
-(defun user/cask-mode-init ()
+(defun user--cask-mode-config ()
   "Initialize Cask mode."
   ;;; (Hooks) ;;;
-  (add-hook 'cask-mode-hook 'user/cask-mode-hook))
+  (add-hook 'cask-mode-hook 'user--cask-mode-hook))
 
 (req-package cask-mode
-  :config (user/cask-mode-init))
+  :config (user--cask-mode-config))
 
 
 (provide 'modes/cask)

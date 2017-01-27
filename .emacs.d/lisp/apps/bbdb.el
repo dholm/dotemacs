@@ -7,7 +7,7 @@
   "Path to user's BBDB file.")
 
 
-(defun user/bbdb-initialize-hook ()
+(defun user--bbdb-configialize-hook ()
   "BBDB initialization hook."
   (when (feature-p 'bbdb-vcard)
     ;; Load vCard support.
@@ -33,7 +33,7 @@
       (when window (delete-window window)))))
 
 
-(defun user/bbdb-init ()
+(defun user--bbdb-config ()
   "Initialize BBDB."
   (setq-default
    ;; Set up location of database.
@@ -91,10 +91,10 @@
   ;;; (Hooks) ;;;
   ;; Add notes when updating a record.
   (add-hook 'bbdb-notice-mail-hook 'bbdb-auto-notes)
-  (add-hook 'bbdb-initialize-hook 'user/bbdb-initialize-hook))
+  (add-hook 'bbdb-initialize-hook 'user--bbdb-configialize-hook))
 
 (req-package bbdb
-  :config (user/bbdb-init))
+  :config (user--bbdb-config))
 (req-package bbdb-vcard)
 
 

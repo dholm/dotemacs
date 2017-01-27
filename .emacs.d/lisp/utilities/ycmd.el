@@ -28,7 +28,7 @@
         (add-to-list 'flycheck-checkers 'ycmd)))))
 
 
-(defun user/ycmd-init ()
+(defun user--ycmd-config ()
   "Initialize ycmd."
   (setq-default
    ycmd-server-command `("python" ,(path-join *user-ycmd-path* "ycmd"))
@@ -40,7 +40,7 @@
 
 (when (file-exists-p *user-ycmd-path*)
   (req-package ycmd
-    :config (user/ycmd-init)))
+    :config (user--ycmd-config)))
 
 
 (provide 'utilities/ycmd)

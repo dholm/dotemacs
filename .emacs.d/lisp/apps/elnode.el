@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/elnode-init ()
+(defun user--elnode-config ()
   "Initialize Elnode."
   (setq-default
    ;; Do not start server automatically.
@@ -16,10 +16,10 @@
   (user/bind-key-global :apps :elnode 'elnode-start))
 
 (req-package elnode
-  :config (user/elnode-init))
+  :config (user--elnode-config))
 (req-package elnode-org
   :loader :el-get
-  :config (user/elnode-init))
+  :config (user--elnode-config))
 
 
 (provide 'apps/elnode)

@@ -2,14 +2,14 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/profiler-report-mode-hook ()
+(defun user--profiler-report-mode-hook ()
   "Profiler report mode hook."
   ;;; (Bindings) ;;;
   (user/bind-key-local :basic :save 'profiler-report-write-profile)
   (user/bind-key-local :basic :save-as 'profiler-report-write-profile))
 
 
-(defun user/profiler-init ()
+(defun user--profiler-config ()
   "Initialize Emacs profiler."
   (setq-default
    ;; The maximum number distinct of call-stacks to save.
@@ -17,7 +17,7 @@
    ;; Maximum call-stack depth to record.
    profiler-max-stack-depth 32)
 
-  (add-hook 'profiler-report-mode-hook 'user/profiler-report-mode-hook)
+  (add-hook 'profiler-report-mode-hook 'user--profiler-report-mode-hook)
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :emacs :profiler-start 'profiler-start)
@@ -25,7 +25,7 @@
   (user/bind-key-global :emacs :profiler-report 'profiler-report))
 
 (when (fboundp 'profiler-start)
-  (user/profiler-init))
+  (user--profiler-config))
 
 
 (provide 'utilities/profiler)

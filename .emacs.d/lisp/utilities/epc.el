@@ -2,11 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/epc-init ()
+(defun user--epc-config ()
   "Initialize EPC.")
 
 (req-package epc
-  :config (user/epc-init))
+  :config (user--epc-config))
 
 
 (provide 'utilities/epc)

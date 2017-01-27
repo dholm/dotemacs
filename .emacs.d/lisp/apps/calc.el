@@ -2,13 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/easy-convert-init ()
+(defun user--easy-convert-config ()
   "Initialize easy conversion package."
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :convert-unit 'easy-convert-interactive))
 
 
-(defun user/calc-init ()
+(defun user--calc-config ()
   "Initialize calculator."
   (setq-default
    ;; Location of user calculator configuration.
@@ -43,9 +43,9 @@
   ;;; (Packages) ;;;
   (req-package easy-convert
     :loader :el-get
-    :config (user/easy-convert-init)))
+    :config (user--easy-convert-config)))
 
-(user/calc-init)
+(user--calc-config)
 
 
 (provide 'apps/calc)

@@ -4,7 +4,7 @@
 
 (defconst *user-url-cache-directory* (path-join *user-cache-directory* "url"))
 
-(defun user/url-init ()
+(defun user--url-config ()
   "Initialize url package."
   (setq-default
    ;; Set up cache directory.
@@ -14,7 +14,7 @@
    ;; Automatically cache all documents.
    url-automatic-caching t))
 
-(user/url-init)
+(user--url-config)
 
 
 (provide 'utilities/url)

@@ -2,11 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/php-mode-hook ()
+(defun user--php-mode-hook ()
   "PHP mode hook."
   ;; Bring in CEDET.
   (with-feature 'cedet
-    (user/cedet-hook)
+    (user--cedet-hook)
     (when (derived-mode-p 'web-mode)
       ;; In web-mode CEDET doesn't automatically load PHP support.
       (wisent-php-default-setup)))
@@ -21,10 +21,10 @@
   (subword-mode t))
 
 
-(defun user/php-mode-init ()
+(defun user--php-mode-config ()
   "Initialize PHP mode."
   (after-load 'web-mode
-    (user/add-web-mode-hook 'php 'user/php-mode-hook))
+    (user--add-web-mode-hook 'php 'user/php-mode-hook))
 
   (after-load 'smartparens
     (defun user/php-handle-docstring (&rest _ignored)
@@ -55,7 +55,7 @@
       (sp-local-pair "(" nil :prefix "\\(\\sw\\|\\s_\\)*"))))
 
 (with-executable 'php
-  (user/php-mode-init))
+  (user--php-mode-config))
 
 
 (provide 'modes/php)

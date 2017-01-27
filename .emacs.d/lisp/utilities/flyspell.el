@@ -6,7 +6,7 @@
   "Maximum buffer size for automatic dictionary detection.")
 
 
-(defun user/flyspell-mode-common-hook ()
+(defun user--flyspell-mode-common-hook ()
   "Hook for fly spell common mode."
   (if (> (buffer-size) *user-auto-dictionary-buffer-limit*)
       ;; Disables automatic dictionary detection in large buffers.
@@ -23,14 +23,14 @@
   (user/bind-key-local :code :spellcheck-add-word 'user/flyspell-add-word-to-dict))
 
 
-(defun user/flyspell-mode-hook ()
+(defun user--flyspell-mode-hook ()
   "Hook for fly spell mode."
-  (user/flyspell-mode-common-hook))
+  (user--flyspell-mode-common-hook))
 
 
-(defun user/flyspell-prog-mode-hook ()
+(defun user--flyspell-prog-mode-hook ()
   "Hook for fly spell prog mode."
-  (user/flyspell-mode-common-hook))
+  (user--flyspell-mode-common-hook))
 
 
 (defun user/flyspell-add-word-to-dict ()
@@ -50,7 +50,7 @@
     (ispell-pdict-save t)))
 
 
-(defun user/flyspell-lazy-init ()
+(defun user--flyspell-lazy-config ()
   "Initialize fly spell lazy."
   (setq-default
    ;; Idle timeout before running spell check on region.
@@ -59,7 +59,7 @@
    flyspell-lazy-window-idle-seconds 60))
 
 
-(defun user/rw-hunspell-init ()
+(defun user--rw-hunspell-config ()
   "Initialize rw-hunspell."
   (after-load 'ispell
     (when ispell-really-hunspell
@@ -67,7 +67,7 @@
       (rw-hunspell-setup))))
 
 
-(defun user/flyspell-init ()
+(defun user--flyspell-config ()
   "Initialize fly spell."
   (setq-default
    ;; Be silent when checking words.
@@ -88,21 +88,21 @@
      ;; Improve performance by reducing suggestions.
      ispell-extra-args '("--sug-mode=ultra" "--dont-suggest"))))
 
-  (add-hook 'flyspell-mode-hook 'user/flyspell-mode-hook)
-  (add-hook 'flyspell-prog-mode-hook 'user/flyspell-prog-mode-hook))
+  (add-hook 'flyspell-mode-hook 'user--flyspell-mode-hook)
+  (add-hook 'flyspell-prog-mode-hook 'user--flyspell-prog-mode-hook))
 
 (when (or (executable-find "ispell")
           (executable-find "aspell")
           (executable-find "hunspell"))
   (req-package flyspell
     :loader :el-get
-    :config (user/flyspell-init))
+    :config (user--flyspell-config))
   (req-package flyspell-lazy
-    :config (user/flyspell-lazy-init))
+    :config (user--flyspell-lazy-config))
   (req-package auto-dictionary)
   (with-executable 'hunspell
     (req-package rw-hunspell
-      :config (user/rw-hunspell-init))))
+      :config (user--rw-hunspell-config))))
 
 
 (provide 'utilities/flyspell)

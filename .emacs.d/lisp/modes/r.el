@@ -2,18 +2,18 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/R-mode-hook ()
+(defun user--R-mode-hook ()
   "R programming mode hook."
   (unless (derived-mode-p 'prog-mode)
     (run-hooks 'prog-mode-hook)))
 
 
-(defun user/ess-mode-hook ()
+(defun user--ess-mode-hook ()
   "ESS mode hook."
-  (user/ess-mode-common-hook))
+  (user--ess-mode-common-hook))
 
 
-(defun user/ess-mode-common-hook ()
+(defun user--ess-mode-common-hook ()
   "ESS common mode hook."
   (when (el-get-package-is-installed 'ac-R)
     (ess-ac-init))
@@ -27,12 +27,12 @@
   (local-set-key [remap yank] 'yank))
 
 
-(defun user/inferior-ess-mode-hook ()
+(defun user--inferior-ess-mode-hook ()
   "Inferior ESS mode hook."
-  (user/ess-mode-common-hook))
+  (user--ess-mode-common-hook))
 
 
-(defun user/ess-R-post-run-hook ()
+(defun user--ess-R-post-run-hook ()
   "ESS R post run hook."
   ;; Make R expand to the full width of the buffer.
   (ess-execute-screen-options))
@@ -60,12 +60,12 @@
       (call-interactively 'ess-eval-line-and-step)))
 
 
-(defun user/ac-R-init ()
+(defun user--ac-R-config ()
   "Initialize R auto completion."
   (autoload 'ess-ac-init "ac-R"))
 
 
-(defun user/ess-init ()
+(defun user--ess-config ()
   "Initialize Emacs Speaks Statistics."
   (setq-default
    ;; The default ESS dialect is R.
@@ -94,10 +94,10 @@
      ess-use-company t)))
 
   ;; Register mode hooks.
-  (add-hook 'ess-mode-hook 'user/ess-mode-hook)
-  (add-hook 'inferior-ess-mode-hook 'user/inferior-ess-mode-hook)
-  (add-hook 'R-mode-hook 'user/R-mode-hook)
-  (add-hook 'ess-R-post-run-hook 'user/ess-R-post-run-hook)
+  (add-hook 'ess-mode-hook 'user--ess-mode-hook)
+  (add-hook 'inferior-ess-mode-hook 'user--inferior-ess-mode-hook)
+  (add-hook 'R-mode-hook 'user--R-mode-hook)
+  (add-hook 'ess-R-post-run-hook 'user--ess-R-post-run-hook)
 
   ;; Register auto modes.
   (if (feature-p 'polymode)
@@ -119,10 +119,10 @@
 
 (with-executable 'R
   (req-package ess
-    :config (user/ess-init))
+    :config (user--ess-config))
   (req-package ess-smart-underscore)
   (req-package ac-R
-    :config (user/ac-R-init)))
+    :config (user--ac-R-config)))
 
 
 (provide 'modes/r)

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/winring-init ()
+(defun user--winring-config ()
   "Initialize winring."
   (winring-initialize)
 
@@ -11,7 +11,7 @@
     (define-key winring-map (kbd "z") 'zoom-window-zoom)))
 
 (req-package winring
-  :config (user/winring-init))
+  :config (user--winring-config))
 (req-package zoom-window)
 
 

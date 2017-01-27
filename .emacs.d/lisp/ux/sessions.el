@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/recentf-init ()
+(defun user--recentf-config ()
   "Initialize Emacs recent files history."
   (setq-default
    recentf-max-saved-items 1000
@@ -15,7 +15,7 @@
     (recentf-mode t)))
 
 
-(defun user/savehist-init ()
+(defun user--savehist-config ()
   "Initialize Emacs save history."
   (setq-default
    savehist-additional-variables '(search-ring regexp-search-ring kill-ring)
@@ -24,7 +24,7 @@
   (savehist-mode t))
 
 
-(defun user/saveplace-init ()
+(defun user--saveplace-config ()
   "Initialize Emacs buffer location history."
   (with-feature 'saveplace
     (setq-default
@@ -34,13 +34,13 @@
      save-place t)))
 
 
-(defun user/sessions-init ()
+(defun user--sessions-config ()
   "Initialize Emacs session management."
-  (user/recentf-init)
-  (user/savehist-init)
-  (user/saveplace-init))
+  (user--recentf-config)
+  (user--savehist-config)
+  (user--saveplace-config))
 
-(user/sessions-init)
+(user--sessions-config)
 
 
 (provide 'ux/sessions)

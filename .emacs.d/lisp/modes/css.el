@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/css-mode-hook ()
+(defun user--css-mode-hook ()
   "CSS mode hook."
   (setq-default
    cssm-indent-function #'cssm-c-style-indenter
@@ -21,9 +21,9 @@
   (user/bind-key-local :nav :go-back 'helm-css-scss-back-to-last-point))
 
 
-(defun user/css-mode-init ()
+(defun user--css-mode-config ()
   "Initialize CSS mode."
-  (add-hook 'css-mode-hook 'user/css-mode-hook)
+  (add-hook 'css-mode-hook 'user--css-mode-hook)
 
   ;;; (Packages) ;;;
   (req-package showcss-mode
@@ -32,7 +32,7 @@
   (when (feature-p 'helm)
     (req-package helm-css-scss)))
 
-(user/css-mode-init)
+(user--css-mode-config)
 
 
 (provide 'modes/css)

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/auth-source-init ()
+(defun user--auth-source-config ()
   "Initialize auth-source."
   (setq-default
    auth-sources
@@ -19,7 +19,7 @@
                       'macos-keychain-internet
                       'macos-keychain-generic)))
 
-(user/auth-source-init)
+(user--auth-source-config)
 
 
 (provide 'utilities/auth-source)

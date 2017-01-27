@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/proced-init ()
+(defun user--proced-config ()
   "Initialize proced."
   (setq-default
    ;; Show all processes.
@@ -20,7 +20,7 @@
   (user/bind-key-global :apps :processes 'proced))
 
 (unless (eq system-type 'darwin)
-  (user/proced-init))
+  (user--proced-config))
 
 
 (provide 'apps/proced)

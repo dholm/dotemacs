@@ -2,13 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/view-mode-init ()
+(defun user--view-mode-config ()
   "Initialize view mode."
   (setq-default
    ;; Open read-only files in view-mode by default.
    view-read-only t))
 
-(user/view-mode-init)
+(user--view-mode-config)
 
 
 (provide 'modes/view)

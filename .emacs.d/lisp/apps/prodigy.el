@@ -2,13 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/prodigy-init ()
+(defun user--prodigy-config ()
   "Initialize prodigy."
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :services 'prodigy))
 
 (req-package prodigy
-  :config (user/prodigy-init))
+  :config (user--prodigy-config))
 
 
 (provide 'apps/prodigy)

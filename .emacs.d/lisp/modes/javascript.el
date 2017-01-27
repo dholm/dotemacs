@@ -2,10 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/javascript-mode-common-hook ()
+(defun user--javascript-mode-common-hook ()
   "JavaScript common mode hook."
   ;; Load CEDET
-  (user/javascript-mode-cedet-hook)
+  (user--javascript-mode-cedet-hook)
 
   (user/gnu-global-enable)
 
@@ -15,34 +15,34 @@
   (tern-mode t))
 
 
-(defun user/javascript-mode-hook ()
+(defun user--javascript-mode-hook ()
   "JavaScript mode hook."
-  (user/javascript-mode-common-hook))
+  (user--javascript-mode-common-hook))
 
 
-(defun user/inferior-js-mode-hook ()
+(defun user--inferior-js-mode-hook ()
   "Inferior JavaScript mode hook."
   ;; Support ANSI colors.
   (ansi-color-for-comint-mode-on))
 
 
-(defun user/js3-mode-hook ()
+(defun user--js3-mode-hook ()
   "JS3 mode hook."
-  (user/javascript-mode-common-hook)
+  (user--javascript-mode-common-hook)
   ;; Enable smart indentation
   (smart-tabs-mode t)
   ;; Enable Flycheck
   (flycheck-mode t))
 
 
-(defun user/javascript-mode-cedet-hook ()
+(defun user--javascript-mode-cedet-hook ()
   "JavaScript CEDET support hook."
   (with-feature 'semantic/wisent/javascript
     (wisent-javascript-setup-parser)
-    (user/cedet-hook)))
+    (user--cedet-hook)))
 
 
-(defun user/js-comint-init ()
+(defun user--js-comint-config ()
   "Initialize `js-comint'."
   (setq-default
    ;; Set JavaScript inferior.
@@ -57,7 +57,7 @@
   (setenv "NODE_NO_READLINE" "1"))
 
 
-(defun user/js3-mode-init ()
+(defun user--js3-mode-config ()
   "Initialize js3 mode."
   (setq-default
    ;; Configure indentation
@@ -72,23 +72,23 @@
    ;; Disable error parsing in favor of Flycheck
    js3-strict-missing-semi-warning nil)
 
-  (add-hook 'js3-mode-hook 'user/js3-mode-hook)
+  (add-hook 'js3-mode-hook 'user--js3-mode-hook)
   (add-auto-mode 'js3-mode "\\.js$")
   (add-magic-mode 'js3-mode "#!/usr/bin/env node"))
 
 
-(defun user/javascript-mode-init ()
+(defun user--javascript-mode-config ()
   "Initialize JavaScript mode."
-  (add-hook 'javascript-mode-hook 'user/javascript-mode-hook)
-  (add-hook 'inferior-js-mode-hook 'user/inferior-javascript-mode-hook)
+  (add-hook 'javascript-mode-hook 'user--javascript-mode-hook)
+  (add-hook 'inferior-js-mode-hook 'user--inferior-javascript-mode-hook)
   (add-auto-mode 'javascript-mode "\\.json$")
 
   (req-package js3-mode
-    :config (user/js3-mode-init))
+    :config (user--js3-mode-config))
   (req-package js-comint
-    :config (user/js-comint-init)))
+    :config (user--js-comint-config)))
 
-(user/javascript-mode-init)
+(user--javascript-mode-config)
 
 
 (provide 'modes/javascript)

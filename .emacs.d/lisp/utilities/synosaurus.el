@@ -2,14 +2,14 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/synosaurus-init ()
+(defun user--synosaurus-config ()
   "Initialize synosaurus."
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :thesaurus-lookup 'synosaurus-lookup))
 
 (with-executable 'wn
   (req-package synosaurus
-    :config (user/synosaurus-init)))
+    :config (user--synosaurus-config)))
 
 
 (provide 'utilities/synosaurus)

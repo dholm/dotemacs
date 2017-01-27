@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/coding-init ()
+(defun user--coding-config ()
   "Initialize coding system."
   ;; Prefer UTF-8 if there is a choice
   (prefer-coding-system 'utf-8)
@@ -22,7 +22,7 @@
   (user/bind-key-global :emacs :describe-char 'describe-char)
   (user/bind-key-global :emacs :describe-language 'describe-language-environment))
 
-(user/coding-init)
+(user--coding-config)
 
 
 (provide 'ux/coding)

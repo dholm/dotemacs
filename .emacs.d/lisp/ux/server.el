@@ -9,7 +9,7 @@
   (server-edit))
 
 
-(defun user/server-after-init-hook ()
+(defun user--server-after-config-hook ()
   "Initialize Emacs server after init has completed."
   (with-feature 'server
     (unless (server-running-p)
@@ -20,16 +20,16 @@
         (edit-server-start)))))
 
 
-(defun user/server-init ()
+(defun user--server-config ()
   "Initialize Emacs server functions."
-  (add-hook 'user/after-init-hook 'user/server-after-init-hook)
+  (add-hook 'user--after-init-hook 'user--server-after-config-hook)
 
   (when (display-graphic-p)
     (req-package edit-server)))
 
 (unless (eq system-type 'darwin)
   ;; Emacs clients regularly causes Emacs to crash on Darwin.
-  (user/server-init))
+  (user--server-config))
 
 
 (provide 'ux/server)

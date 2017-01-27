@@ -2,24 +2,24 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/page-break-lines-init ()
+(defun user--page-break-lines-config ()
   "Initialize page break lines."
   (global-page-break-lines-mode t)
   (after-load 'diminish
     (diminish 'page-break-lines-mode)))
 
 
-(defun user/symbols-init ()
+(defun user--symbols-config ()
   "Initialize Emacs symbol handling."
   ;;; (Packages) ;;;
   (req-package page-break-lines
-    :config (user/page-break-lines-init))
+    :config (user--page-break-lines-config))
 
   (with-feature 'ux/coding
     (when (eq default-terminal-coding-system 'utf-8)
       (req-package pretty-mode-plus))))
 
-(user/symbols-init)
+(user--symbols-config)
 
 
 (provide 'ux/symbols)

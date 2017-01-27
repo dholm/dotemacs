@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/doc-view-mode-hook ()
+(defun user--doc-view-mode-hook ()
   "Document viewer mode hook."
   ;;; (Bindings) ;;;
   (when (feature-p 'doc-view-fit-to-page)
@@ -14,7 +14,7 @@
   (user/bind-key-local :nav :go-back 'doc-view-scroll-down-or-previous-page))
 
 
-(defun user/doc-view-init ()
+(defun user--doc-view-config ()
   "Initialize document viewer."
   (setq-default
    ;; Render documents in high resolution.
@@ -47,7 +47,7 @@
     (mapc (lambda (pattern)
             (add-auto-mode 'doc-view-mode-maybe pattern)) patterns))
 
-  (add-hook 'doc-view-mode-hook 'user/doc-view-mode-hook)
+  (add-hook 'doc-view-mode-hook 'user--doc-view-mode-hook)
 
   ;;; (Packages) ;;;
   (req-package doc-present
@@ -56,7 +56,7 @@
     (req-package doc-view-fit-to-page
       :loader :el-get)))
 
-(user/doc-view-init)
+(user--doc-view-config)
 
 
 (provide 'modes/doc-view)

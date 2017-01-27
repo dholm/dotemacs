@@ -11,38 +11,38 @@
   "Path to user's Wanderlust cache store.")
 
 
-(defun user/wl-folder-mode-hook ()
+(defun user--wl-folder-mode-hook ()
   "Wanderlust folder mode hook."
   (hl-line-mode t))
 
 
-(defun user/wl-summary-mode-hook ()
+(defun user--wl-summary-mode-hook ()
   "Wanderlust summary mode hook."
   (hl-line-mode t))
 
 
-(defun user/wl-draft-mode-hook ()
+(defun user--wl-draft-mode-hook ()
   "Wanderlust draft mode hook.")
 
 
-(defun user/mime-view-mode-hook ()
+(defun user--mime-view-mode-hook ()
   "Wanderlust mime view mode hook."
   ;;; (Bindings) ;;;
   (user/bind-key-local :nav :open 'mime-preview-toggle-content))
 
 
-(defun user/mime-edit-mode-hook ()
+(defun user--mime-edit-mode-hook ()
   "Wanderlust mime edit mode hook.")
 
 
-(defun user/wl-message-buffer-created-hook ()
+(defun user--wl-message-buffer-created-hook ()
   "Wanderlust message buffer created hook."
   (setq
    ;; Fold lines that are too long.
    truncate-lines nil))
 
 
-(defun user/wanderlust-notify-hook ()
+(defun user--wanderlust-notify-hook ()
   "Wanderlust email notification hook."
   (cond
    ((feature-p 'alert)
@@ -50,13 +50,13 @@
    (t (ding))))
 
 
-(defun user/wl-message-redisplay-hook ()
+(defun user--wl-message-redisplay-hook ()
   "Wanderlust message redisplay hook."
   (when (display-graphic-p)
     (smiley-region (point-min) (point-max))))
 
 
-(defun user/wl-init-hook ()
+(defun user--wl-config-hook ()
   "Wanderlust initialization hook."
   ;; Load Emacs directory client.
   (eudc-load-eudc)
@@ -124,7 +124,7 @@
      (max-reply-date (thread-get-family (elmo-message-entity-number b))))))
 
 
-(defun user/mime-display-text/plain-hook ()
+(defun user--mime-display-text/plain-hook ()
   "Plain text display hook."
   (let ((fmt (cdr (assoc "format" (mime-content-type-parameters
                                    (mime-entity-content-type entity))))))
@@ -132,7 +132,7 @@
       (fill-flowed))))
 
 
-(defun user/semi-shr-init ()
+(defun user--semi-shr-config ()
   "Configure SEMI to use SHR."
   (autoload 'mime-shr-preview-text/html "mime-shr")
 
@@ -145,7 +145,7 @@
      (body-presentation-method . mime-shr-preview-text/html))))
 
 
-(defun user/semi-w3m-init ()
+(defun user--semi-w3m-config ()
   "Configure SEMI to use w3m."
   (autoload 'mime-w3m-preview-text/html "mime-w3m")
 
@@ -158,7 +158,7 @@
      (body-presentation-method . mime-w3m-preview-text/html))))
 
 
-(defun user/semi-init ()
+(defun user--semi-config ()
   "Initialize SEMI."
   (setq-default
    ;; Don't split large mails.
@@ -174,8 +174,8 @@
 
   (after-load 'mime-view
     (cond
-     ((feature-p 'mime-shr) (user/semi-shr-init))
-     ((feature-p 'emacs-w3m) (user/semi-w3m-init)))
+     ((feature-p 'mime-shr) (user--semi-shr-config))
+     ((feature-p 'emacs-w3m) (user--semi-w3m-config)))
 
     (set-alist 'mime-view-type-subtype-score-alist '(text . html) 3)
 
@@ -186,11 +186,11 @@
        (subtype . calendar)
        (method . user/icalendar-import-mime-text))))
 
-  (add-hook 'mime-view-mode-hook 'user/mime-view-mode-hook)
-  (add-hook 'mime-edit-mode-hook 'user/mime-edit-mode-hook))
+  (add-hook 'mime-view-mode-hook 'user--mime-view-mode-hook)
+  (add-hook 'mime-edit-mode-hook 'user--mime-edit-mode-hook))
 
 
-(defun user/elmo-init ()
+(defun user--elmo-config ()
   "Initialize ELMO."
   (setq-default
    ;; Put message database in data directory.
@@ -346,7 +346,7 @@ Gmail {
   (message "%s" (concat "Refiled to " folder)))
 
 
-(defun user/wanderlust-message-init ()
+(defun user--wanderlust-message-config ()
   "Initialize Wanderlust message view mode."
   (setq-default
    ;; Message window size.
@@ -362,7 +362,7 @@ Gmail {
    wl-message-sort-field-list wl-message-visible-field-list)
 
   ;; Support for reading flowed emails.
-  (add-hook 'mime-display-text/plain-hook 'user/mime-display-text/plain-hook)
+  (add-hook 'mime-display-text/plain-hook 'user--mime-display-text/plain-hook)
 
   (when (and (display-graphic-p)
              (el-get-package-is-installed 'wl-gravatar))
@@ -371,12 +371,12 @@ Gmail {
      wl-highlight-x-face-function 'wl-gravatar-insert))
 
   ;;; (Hooks) ;;;
-  (add-hook 'wl-message-redisplay-hook 'user/wl-message-redisplay-hook)
+  (add-hook 'wl-message-redisplay-hook 'user--wl-message-redisplay-hook)
   (add-hook 'wl-message-buffer-created-hook
-            'user/wl-message-buffer-created-hook))
+            'user--wl-message-buffer-created-hook))
 
 
-(defun user/wanderlust-draft-init ()
+(defun user--wanderlust-draft-config ()
   "Initialize Wanderlust draft mode."
   (setq-default
    ;; Raise a new frame when creating a draft.
@@ -398,10 +398,10 @@ Gmail {
   ;; Don't apply email account template when sending draft, otherwise switching
   ;; templates won't work.
   (remove-hook 'wl-draft-send-hook 'wl-draft-config-exec)
-  (add-hook 'wl-draft-mode-hook 'user/wl-draft-mode-hook))
+  (add-hook 'wl-draft-mode-hook 'user--wl-draft-mode-hook))
 
 
-(defun user/wanderlust-summary-init ()
+(defun user--wanderlust-summary-config ()
   "Initialize Wanderlust summary mode."
   (setq-default
    ;; Set verbose summary.
@@ -443,11 +443,11 @@ Gmail {
   (user/wanderlust-set-summary-guides)
 
   ;;; (Hooks) ;;;
-  (add-hook 'wl-folder-mode-hook 'user/wl-folder-mode-hook)
-  (add-hook 'wl-summary-mode-hook 'user/wl-summary-mode-hook))
+  (add-hook 'wl-folder-mode-hook 'user--wl-folder-mode-hook)
+  (add-hook 'wl-summary-mode-hook 'user--wl-summary-mode-hook))
 
 
-(defun user/wanderlust-init ()
+(defun user--wanderlust-config ()
   "Initialize Wanderlust."
   (setq-default
    ;;; (Basic Configuration) ;;;
@@ -464,7 +464,7 @@ Gmail {
    wl-biff-check-interval 180
    wl-biff-use-idle-timer t
    ;; Set notification function.
-   wl-biff-notify-hook 'user/wanderlust-notify-hook
+   wl-biff-notify-hook 'user--wanderlust-notify-hook
    ;; Let SMTP server handle Message-ID.
    wl-insert-message-id nil
    ;; Quit without asking.
@@ -478,25 +478,25 @@ Gmail {
 
   ;; Initialize Wanderlust components.
   (el-get-eval-after-load 'semi
-    (user/semi-init))
+    (user--semi-config))
   (after-load 'elmo
-    (user/elmo-init))
-  (user/wanderlust-summary-init)
-  (user/wanderlust-message-init)
-  (user/wanderlust-draft-init)
+    (user--elmo-config))
+  (user--wanderlust-summary-config)
+  (user--wanderlust-message-config)
+  (user--wanderlust-draft-config)
 
   (after-load 'wl
     (with-feature 'fullframe
       (fullframe wl wl-exit nil)))
 
   ;; Configuration hooks.
-  (add-hook 'wl-init-hook 'user/wl-init-hook)
+  (add-hook 'wl-init-hook 'user--wl-config-hook)
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :email 'wl))
 
 
-(defun user/wl-init ()
+(defun user--wl-config ()
   "Initialize wanderlust."
   ;; Create data and cache stores.
   (make-directory *user-wanderlust-data-directory* t)
@@ -505,12 +505,12 @@ Gmail {
   (set-file-modes *user-wanderlust-cache-directory* #o0700)
 
   (req-package wanderlust
-    :config (user/wanderlust-init))
+    :config (user--wanderlust-config))
   (when (display-graphic-p)
     (req-package wl-gravatar
       :loader :el-get)))
 
-(user/wl-init)
+(user--wl-config)
 
 
 (provide 'apps/wanderlust)

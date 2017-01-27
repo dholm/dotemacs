@@ -6,14 +6,14 @@
   (require 'cl))
 
 
-(defun user/ediff-mode-hook ()
+(defun user--ediff-mode-hook ()
   "Ediff mode hook."
   (setq
    ;; Don't wrap long lines.
    truncate-lines t))
 
 
-(defun user/ediff-startup-hook ()
+(defun user--ediff-startup-hook ()
   "Ediff startup hook."
   (setq-default
    ;; Split window differently depending on frame width.
@@ -56,7 +56,7 @@
     (ediff local remote)))
 
 
-(defun user/ediff-init ()
+(defun user--ediff-config ()
   "Initialize ediff."
   (setq-default
    ;; Don't create a separate frame for ediff.
@@ -66,12 +66,12 @@
    ediff-ignore-similar-regions t)
 
   ;; Go to first difference on start.
-  (add-hook 'ediff-startup-hook 'user/ediff-startup-hook)
+  (add-hook 'ediff-startup-hook 'user--ediff-startup-hook)
 
   ;;; (Packages) ;;;
   (req-package ztree))
 
-(user/ediff-init)
+(user--ediff-config)
 
 
 (provide 'utilities/ediff)

@@ -96,7 +96,7 @@
       (add-to-list 'helm-boring-file-regexp-list pattern))))
 
 
-(defun user/helm-swoop-init ()
+(defun user--helm-swoop-config ()
   "Initialize Helm Swoop."
   (setq-default
    ;; Split window vertically when swooping.
@@ -113,7 +113,7 @@
       (user/get-key :basic :swoop) 'helm-multi-swoop-all-from-helm-swoop)))
 
 
-(defun user/helm-init ()
+(defun user--helm-config ()
   "Initialize helm."
   (setq-default
    ;; Idle delays.
@@ -133,7 +133,7 @@
 
   ;;; (Hooks) ;;;
   ;; Since Helm depends on `eieio', enable it after package initialization.
-  (add-hook 'user/after-init-hook 'user/helm-mode)
+  (add-hook 'user--after-config-hook 'user/helm-mode)
 
   ;;; (Bindings) ;;;
   (global-set-key [remap find-file] 'helm-find-files)
@@ -146,12 +146,12 @@
 
 
 (req-package helm
-  :config (user/helm-init))
+  :config (user--helm-config))
 (req-package helm-descbinds)
 (req-package helm-build-command
   :loader :el-get)
 (req-package helm-swoop
-  :config (user/helm-swoop-init))
+  :config (user--helm-swoop-config))
 
 
 (provide 'utilities/helm)

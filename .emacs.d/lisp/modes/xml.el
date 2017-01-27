@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/xml-mode-common-hook ()
+(defun user--xml-mode-common-hook ()
   "XML common mode hook."
   ;; Outline XML support.
   (setq
@@ -13,9 +13,9 @@
   (user/bind-key-local :code :tidy 'user/xml-tidy-buffer-or-region))
 
 
-(defun user/nxml-mode-hook ()
+(defun user--nxml-mode-hook ()
   "XML mode hook."
-  (user/xml-mode-common-hook)
+  (user--xml-mode-common-hook)
 
   (when (user/auto-complete-p)
     (with-feature 'auto-complete-nxml
@@ -32,9 +32,9 @@
   (local-set-key (kbd "<return>") 'newline-and-indent))
 
 
-(defun user/dtd-mode-hook ()
+(defun user--dtd-mode-hook ()
   "DTD mode hook."
-  (user/xml-mode-common-hook)
+  (user--xml-mode-common-hook)
 
   (with-feature 'tidy
     (tidy-build-menu dtd-mode-map)))
@@ -60,21 +60,21 @@
     (indent-region begin end)))
 
 
-(defun user/auto-complete-nxml-init ()
+(defun user--auto-complete-nxml-config ()
   "Initialize auto completion for nxml mode."
   (add-ac-modes 'nxml-mode))
 
 
-(defun user/tdtd-init ()
+(defun user--tdtd-config ()
   "Initialize tdtd."
   ;; DTD modes.
   (add-auto-mode 'dtd-mode "\\.dtd$")
 
   ;;; (Hooks) ;;;
-  (add-hook 'dtd-mode-hook 'user/dtd-mode-hook))
+  (add-hook 'dtd-mode-hook 'user--dtd-mode-hook))
 
 
-(defun user/xml-mode-init ()
+(defun user--xml-mode-config ()
   "Initialize xml mode."
   ;; Use nxml-mode for XML
   (fset 'xml-mode 'nxml-mode)
@@ -96,16 +96,16 @@
      sgml-skip-tag-forward nil))
 
   ;;; (Hooks) ;;;
-  (add-hook 'nxml-mode-hook 'user/nxml-mode-hook)
+  (add-hook 'nxml-mode-hook 'user--nxml-mode-hook)
 
   ;;; (Packages) ;;;
   (req-package tdtd
     :loader :el-get
-    :config (user/tdtd-init))
+    :config (user--tdtd-config))
   (req-package auto-complete-nxml
-    :config (user/auto-complete-nxml-init)))
+    :config (user--auto-complete-nxml-config)))
 
-(user/xml-mode-init)
+(user--xml-mode-config)
 
 
 (provide 'modes/xml)

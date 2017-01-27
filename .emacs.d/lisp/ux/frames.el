@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/window-configuration-change-hook ()
+(defun user--window-configuration-change-hook ()
   "Window configuration change hook."
   (setq
    ;; Only split frame if it occupies at least 2/3 of the current screen width.
@@ -33,7 +33,7 @@
       (delete-window)))
 
 
-(defun user/transpose-frame-init ()
+(defun user--transpose-frame-config ()
   "Initialize transpose-frame."
   ;;; (Bindings) ;;;
   (user/bind-key-global :emacs :flip-frame 'flip-frame)
@@ -42,7 +42,7 @@
   (user/bind-key-global :emacs :rotate-frame-backward 'rotate-frame-anticlockwise))
 
 
-(defun user/frames-init ()
+(defun user--frames-config ()
   "Initialize Emacs frames."
   (setq-default
    ;; Do not show the splash screen or message
@@ -61,7 +61,7 @@
 
   ;;; (Hooks) ;;;
   (add-to-list 'window-configuration-change-hook
-               'user/window-configuration-change-hook)
+               'user--window-configuration-change-hook)
 
   ;;; (Bindings) ;;;
   (when (display-graphic-p)
@@ -75,9 +75,9 @@
   ;;; (Packages) ;;;
   (req-package fullframe)
   (req-package transpose-frame
-    :config (user/transpose-frame-init)))
+    :config (user--transpose-frame-config)))
 
-(user/frames-init)
+(user--frames-config)
 
 
 (provide 'ux/frames)

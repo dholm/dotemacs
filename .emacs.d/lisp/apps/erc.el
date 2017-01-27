@@ -17,7 +17,7 @@
   :group 'erc-faces)
 
 
-(defun user/erc-mode-hook ()
+(defun user--erc-mode-hook ()
   "Mode hook for erc.")
 
 
@@ -61,7 +61,7 @@
          (not (or (string-match "^\\** *Users on #" msg)
                   (string-match *user-erc-noise-regexp* msg))))))
 
-(defun user/erc-alert-init ()
+(defun user--erc-alert-config ()
   "Initialize alert for ERC."
   ;; Notify user on important events if ERC buffer isn't visible.
   (alert-add-rule :status 'buried
@@ -78,7 +78,7 @@
   (alert-add-rule :mode 'erc-mode :style 'ignore :append t))
 
 
-(defun user/erc-init ()
+(defun user--erc-config ()
   "Initialize erc."
   (setq-default
    ;; Close ERC buffers on quit.
@@ -216,11 +216,11 @@
   (set-file-modes erc-log-channels-directory #o0700)
 
   (after-load 'alert
-    (user/erc-alert-init))
+    (user--erc-alert-config))
 
   ;; Hooks.
   (add-hook 'erc-connect-pre-hook (lambda (x) (erc-update-modules)))
-  (add-hook 'erc-mode-hook 'user/erc-mode-hook)
+  (add-hook 'erc-mode-hook 'user--erc-mode-hook)
   (when (feature-p 'bbdb2erc)
     (add-hook 'bbdb-notice-hook 'bbdb2erc-online-status))
   ;; Notification on important events.
@@ -231,7 +231,7 @@
   (user/bind-key-global :apps :irc 'erc))
 
 (req-package erc
-  :config (user/erc-init))
+  :config (user--erc-config))
 (req-package erc-colorize)
 (req-package erc-track-score)
 (req-package erc-image)

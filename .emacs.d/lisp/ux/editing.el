@@ -36,7 +36,7 @@ mode that sets `syntax-ppss' properly."
           (t (move-end-of-line arg)))))
 
 
-(defun user/editing-init ()
+(defun user--editing-config ()
   "Initialize editing in Emacs."
   (when (eq window-system 'ns)
     (setq
@@ -71,7 +71,7 @@ mode that sets `syntax-ppss' properly."
   (user/bind-key-global :code :join-line 'join-line)
   (user/bind-key-global :code :fill-paragraph 'fill-paragraph))
 
-(user/editing-init)
+(user--editing-config)
 
 
 (provide 'ux/editing)

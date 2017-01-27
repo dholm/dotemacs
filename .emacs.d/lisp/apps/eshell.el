@@ -6,9 +6,9 @@
                                              "shell"))
 
 
-(defun user/eshell-mode-hook ()
+(defun user--eshell-mode-hook ()
   "Mode hook for eshell."
-  (user/shell-mode-common-hook)
+  (user--shell-mode-common-hook)
 
   (turn-on-eldoc-mode)
 
@@ -59,7 +59,7 @@
           (eshell-reset)))))
 
 
-(defun user/eshell-init ()
+(defun user--eshell-config ()
   "Initialize the Emacs shell."
   (setq-default
    ;; Set the path to the shell cache store.
@@ -97,7 +97,7 @@
   (add-ac-modes 'eshell-mode)
 
   ;;; (Hooks) ;;;
-  (add-hook 'eshell-mode-hook 'user/eshell-mode-hook)
+  (add-hook 'eshell-mode-hook 'user--eshell-mode-hook)
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :shell 'user/raise-eshell)
@@ -105,7 +105,7 @@
   ;;; (Packages) ;;;
   (req-package eshell-manual))
 
-(user/eshell-init)
+(user--eshell-config)
 
 
 (provide 'apps/eshell)

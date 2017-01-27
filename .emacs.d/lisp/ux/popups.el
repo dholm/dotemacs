@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/popup-init ()
+(defun user--popup-config ()
   "Initialize popup."
   ;; Install workaround for whitespace-mode bug.
   (after-load 'modes/whitespace
@@ -15,7 +15,7 @@
       (user/whitespace-mode-suppress nil))))
 
 
-(defun user/popwin-init ()
+(defun user--popwin-config ()
   "Initialize popwin."
   (with-feature 'popwin
     (popwin-mode t)
@@ -25,7 +25,7 @@
     (user/bind-key-global :util :popwin-buffer 'popwin:popup-buffer)))
 
 
-(defun user/popups-init ()
+(defun user--popups-config ()
   "Initialize Emacs popups."
   (setq-default
    ;; Timeout for messages shown in minibuffer.
@@ -33,11 +33,11 @@
 
   ;;; (Packages) ;;;
   (req-package popup
-    :config (user/popup-init))
+    :config (user--popup-config))
   (req-package popwin
-    :config (user/popwin-init)))
+    :config (user--popwin-config)))
 
-(user/popups-init)
+(user--popups-config)
 
 
 (provide 'ux/popups)

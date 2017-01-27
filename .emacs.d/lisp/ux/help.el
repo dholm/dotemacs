@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/guide-key-init ()
+(defun user--guide-key-config ()
   "Initialize guide key."
   (setq-default
    ;; Register all the prefix keys.
@@ -19,7 +19,7 @@
     (diminish 'guide-key-mode)))
 
 
-(defun user/help-init ()
+(defun user--help-config ()
   "Initialize Emacs help."
   (user/bind-key-global :emacs :describe-face 'describe-face)
   (user/bind-key-global :emacs :describe-all-faces 'list-faces-display)
@@ -45,11 +45,11 @@
 
   ;;; (Packages) ;;;
   (req-package guide-key
-    :config (user/guide-key-init))
+    :config (user--guide-key-config))
   (when (display-graphic-p)
     (req-package guide-key-tip)))
 
-(user/help-init)
+(user--help-config)
 
 
 (provide 'ux/help)

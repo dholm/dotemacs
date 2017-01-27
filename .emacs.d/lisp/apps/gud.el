@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/gud-mode-hook ()
+(defun user--gud-mode-hook ()
   "GDB gud mode hook."
   (gud-tooltip-mode t)
 
@@ -31,11 +31,11 @@
   (user/bind-key-local :debug :show-value 'gud-print))
 
 
-(defun user/gdb-mode-hook ()
+(defun user--gdb-mode-hook ()
   "GDB mode hook.")
 
 
-(defun user/gud-init ()
+(defun user--gud-config ()
   "Initialize GDB modes."
   ;; Configure gdb-mode
   (setq-default
@@ -53,10 +53,10 @@
    gud-tooltip-mode t)
 
   ;;; (Hooks) ;;;
-  (add-hook 'gud-mode-hook 'user/gud-mode-hook)
-  (add-hook 'gdb-mode-hook 'user/gdb-mode-hook))
+  (add-hook 'gud-mode-hook 'user--gud-mode-hook)
+  (add-hook 'gdb-mode-hook 'user--gdb-mode-hook))
 
-(user/gud-init)
+(user--gud-config)
 
 
 (provide 'apps/gud)

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/scala-mode-hook ()
+(defun user--scala-mode-hook ()
   "Scala mode hook."
   (user/smartparens-enable)
 
@@ -13,12 +13,12 @@
     (ensime-scala-mode-hook)))
 
 
-(defun user/scala-mode2-init ()
+(defun user--scala-mode2-config ()
   "Initialize scala mode 2."
-  (add-hook 'scala-mode-hook 'user/scala-mode-hook))
+  (add-hook 'scala-mode-hook 'user--scala-mode-hook))
 
 
-(defun user/scala-mode-init ()
+(defun user--scala-mode-config ()
   "Initialize Scala mode."
   (after-load 'smartparens
     (sp-with-modes '(scala-mode)
@@ -26,13 +26,13 @@
 
   (req-package scala-mode2
     :loader :el-get
-    :config (user/scala-mode2-init))
+    :config (user--scala-mode2-config))
 
   (with-executable 'sbt
     (req-package ensime)))
 
 (with-executable 'scala
-  (user/scala-mode-init))
+  (user--scala-mode-config))
 
 
 (provide 'modes/scala)

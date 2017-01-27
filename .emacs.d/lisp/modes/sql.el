@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/sql-mode-hook ()
+(defun user--sql-mode-hook ()
   "SQL mode hook.")
 
 
@@ -19,11 +19,11 @@
         (user/sqli-buffer)))))
 
 
-(defun user/sql-init ()
+(defun user--sql-config ()
   "Initialize SQL mode."
-  (add-hook 'sql-mode-hook 'user/sql-mode-hook))
+  (add-hook 'sql-mode-hook 'user--sql-mode-hook))
 
-(user/sql-init)
+(user--sql-config)
 
 
 (provide 'modes/sql)

@@ -17,10 +17,10 @@
   "Interval of OrgMobile sync in seconds.")
 
 
-(defun user/org-mode-hook ()
+(defun user--org-mode-hook ()
   "Org mode hook."
   (unless (derived-mode-p 'text-mode)
-    (user/text-mode-hook))
+    (user--text-mode-hook))
 
   (setq
    ;; Proper filling of org-mode text, form:
@@ -49,13 +49,13 @@
   (user/bind-key-local :code :context-demote 'org-shiftdown))
 
 
-(defun user/org-agenda-finalize-hook ()
+(defun user--org-agenda-finalize-hook ()
   "Org agenda display hook."
   ;; Enable appointment notifications.
   (org-agenda-to-appt t))
 
 
-(defun user/org-load-hook ()
+(defun user--org-load-hook ()
   "Org-mode loaded hook."
   (when (not noninteractive)
     ;; Resume clocking tasks when Emacs is restarted.
@@ -70,7 +70,7 @@
                                org-babel-load-languages))
 
 
-(defun user/org-agenda-init ()
+(defun user--org-agenda-config ()
   "Initialize org agenda."
   (let ((agenda-data-store (path-join *user-org-data-directory* "agendas")))
     (setq-default
@@ -115,7 +115,7 @@
      org-agenda-window-setup 'current-window))
 
   ;;; (Hooks) ;;;
-  (add-hook 'org-agenda-finalize-hook 'user/org-agenda-finalize-hook)
+  (add-hook 'org-agenda-finalize-hook 'user--org-agenda-finalize-hook)
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :agenda 'org-agenda)
@@ -148,7 +148,7 @@
                                :default-config-keywords popwin-config))))
 
 
-(defun user/org-annotate-file-init ()
+(defun user--org-annotate-file-config ()
   "Initialize org mode file annotation."
   (setq-default
    ;; Add link to current line number.
@@ -186,7 +186,7 @@
   (cancel-timer user/org-mobile-sync-timer))
 
 
-(defun user/org-mobile-init ()
+(defun user--org-mobile-config ()
   "Initialize org mobile."
   (setq-default
    ;; Location of TODO items to sync.
@@ -197,7 +197,7 @@
    org-mobile-force-id-on-agenda-items nil))
 
 
-(defun user/org-babel-init ()
+(defun user--org-babel-config ()
   "Initialize org babel."
   (setq-default
    ;; Don't ask for validation.
@@ -236,7 +236,7 @@
       (add-to-list 'org-babel-load-languages '(ruby . t)))))
 
 
-(defun user/org-export-init ()
+(defun user--org-export-config ()
   "Initialize org export."
   (setq-default
    ;; Export as UTF-8.
@@ -260,7 +260,7 @@
                         'latex))))
 
 
-(defun user/org-init ()
+(defun user--org-config ()
   "Initialize org mode."
   (setq-default
    ;; Org data store.
@@ -412,11 +412,11 @@
      ;; Display inline images when starting up.
      org-startup-with-inline-images t))
 
-  (user/org-babel-init)
-  (user/org-export-init)
-  (user/org-agenda-init)
-  (user/org-annotate-file-init)
-  (user/org-mobile-init)
+  (user--org-babel-config)
+  (user--org-export-config)
+  (user--org-agenda-config)
+  (user--org-annotate-file-config)
+  (user--org-mobile-config)
 
   (after-load 'smartparens
     (defun sp--org-skip-asterisk (ms mb me)
@@ -435,8 +435,8 @@
       (sp-local-pair "«" "»")))
 
   ;;; (Hooks) ;;;
-  (add-hook 'org-load-hook 'user/org-load-hook)
-  (add-hook 'org-mode-hook 'user/org-mode-hook)
+  (add-hook 'org-load-hook 'user--org-load-hook)
+  (add-hook 'org-mode-hook 'user--org-mode-hook)
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :capture-task 'org-capture)
@@ -444,7 +444,7 @@
     (define-key org-mode-map (kbd "C-c C-o") #'user/org-open-at-point)))
 
 
-(defun user/org-sync-init ()
+(defun user--org-sync-config ()
   "Initialize org sync."
   (setq-default
    ;; Org sync cache store.
@@ -457,7 +457,7 @@
     (load "os-github")))
 
 
-(defun user/org-init ()
+(defun user--org-config ()
   "Initialize org mode."
   ;; Create data and cache stores.
   (make-directory *user-org-data-directory* t)
@@ -468,13 +468,13 @@
 
   ;;; (Packages) ;;;
   (req-package org
-    :config (user/org-init))
+    :config (user--org-config))
   (req-package org-sync
-    :config (user/org-sync-init))
+    :config (user--org-sync-config))
   (req-package ox-mediawiki)
   (req-package org-caldav))
 
-(user/org-init)
+(user--org-config)
 
 
 (provide 'modes/org)

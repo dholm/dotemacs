@@ -2,12 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/pdf-view-mode-hook ()
+(defun user--pdf-view-mode-hook ()
   "PDF view mode hook."
   (user/bind-key-local :nav :goto-line 'pdf-view-goto-page))
 
 
-(defun user/pdf-tools-init ()
+(defun user--pdf-tools-config ()
   "Initialize PDF tools."
   (setq-default
    ;; Fit page to view by default.
@@ -17,12 +17,12 @@
   (add-auto-mode 'pdf-view-mode "\\.pdf$")
 
   ;;; (Hooks) ;;;
-  (add-hook 'pdf-view-mode-hook 'user/pdf-view-mode-hook))
+  (add-hook 'pdf-view-mode-hook 'user--pdf-view-mode-hook))
 
 (when (and (display-graphic-p)
            (pkg-config-has-p "poppler-glib"))
   (req-package pdf-tools
-    :config (user/pdf-tools-init)))
+    :config (user--pdf-tools-config)))
 
 
 (provide 'modes/pdf)

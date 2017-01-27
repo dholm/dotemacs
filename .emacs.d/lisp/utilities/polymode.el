@@ -2,11 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/polymode-init ()
+(defun user--polymode-config ()
   "Initialize Polymode.")
 
 (req-package polymode
-  :config (user/polymode-init))
+  :config (user--polymode-config))
 
 
 (provide 'utilities/polymode)

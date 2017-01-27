@@ -15,7 +15,7 @@
   :type '(hook))
 
 
-(defun user/doxygen-mode-hook ()
+(defun user--doxygen-mode-hook ()
   "Mode hook for Doxygen."
   (with-feature 'doxymacs
     ;; Enable doxymacs font lock.
@@ -47,9 +47,9 @@
     (run-hooks 'doxygen-mode-hook)))
 
 
-(defun user/doxygen-mode-init ()
+(defun user--doxygen-mode-config ()
   "Initialize Doxygen mode."
-  (add-hook 'doxygen-mode-hook 'user/doxygen-mode-hook)
+  (add-hook 'doxygen-mode-hook 'user--doxygen-mode-hook)
 
   ;;; (Packages) ;;;
   (when (pkg-config-has-p "libxml-2.0")
@@ -59,7 +59,7 @@
     :loader :el-get))
 
 (with-executable 'doxygen
-  (user/doxygen-mode-init))
+  (user--doxygen-mode-config))
 
 
 (provide 'utilities/doxygen)

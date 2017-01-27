@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/ido-mode-hook ()
+(defun user--ido-mode-hook ()
   "Mode hook for ido."
   (when (feature-p 'flx)
     (flx-ido-mode t))
@@ -10,14 +10,14 @@
     (ido-vertical-mode t)))
 
 
-(defun user/flx-init ()
+(defun user--flx-config ()
   "Initialize FLX."
   (setq-default
    ;; Flex has its own highlights.
    ido-use-faces nil))
 
 
-(defun user/ido-init ()
+(defun user--ido-config ()
   "Initialize ido."
   (setq-default
    ;; Enable fuzzy matching
@@ -29,10 +29,10 @@
 
   ;;; (Packages) ;;;
   (req-package flx
-    :config (user/flx-init))
+    :config (user--flx-config))
   (req-package ido-vertical-mode))
 
-(user/ido-init)
+(user--ido-config)
 
 
 (provide 'utilities/ido)

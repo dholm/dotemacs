@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/flycheck-mode-hook ()
+(defun user--flycheck-mode-hook ()
   "Flycheck mode hook."
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :warnings/errors 'helm-flycheck)
@@ -43,12 +43,12 @@
         (setq flycheck-clang-blocks t)))))
 
 
-(defun user/flycheck-color-mode-line-init ()
+(defun user--flycheck-color-mode-line-config ()
   "Initialize flycheck color mode."
   (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
 
 
-(defun user/flycheck-init ()
+(defun user--flycheck-config ()
   "Initialize flycheck."
   (setq-default
    ;; Wait five seconds before starting checker
@@ -67,12 +67,12 @@
       (require 'flycheck-pos-tip nil t)))
 
   ;;; (Hooks) ;;;
-  (add-hook 'flycheck-mode-hook 'user/flycheck-mode-hook)
+  (add-hook 'flycheck-mode-hook 'user--flycheck-mode-hook)
   (add-hook 'ede-minor-mode-hook 'user/ede-flycheck-setup)
   (add-hook 'ede-compdb-project-rescan-hook 'user/ede-flycheck-setup))
 
 (req-package flycheck
-  :config (user/flycheck-init))
+  :config (user--flycheck-config))
 (req-package flycheck-pos-tip)
 (req-package helm-c-flycheck)
 

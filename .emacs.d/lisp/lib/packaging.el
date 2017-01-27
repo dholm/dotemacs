@@ -6,7 +6,7 @@
   "List of package definitions for el-get.")
 (defvar el-get-safe-mode nil
   "Start el-get in safe mode.")
-(defcustom user/after-init-hook nil
+(defcustom user--after-config-hook nil
   "Hook that is run after both Emacs and package manager have completed init."
   :group 'init
   :type 'hook)
@@ -51,7 +51,7 @@
        ((plist-member package :pkgname) `(:pkgname ,(plist-get package :pkgname))))))))
 
 
-(defun user/el-get-init ()
+(defun user--el-get-config ()
   "Initialize el-get as package manager."
   (setq-default
    el-get-user-package-directory (path-join user-emacs-directory "init")
@@ -75,10 +75,10 @@
         (el-get nil package-list)))
     (when (featurep 'package)
       (package-initialize))
-    (run-hooks 'user/after-init-hook)))
+    (run-hooks 'user--after-config-hook)))
 
 
-(defun user/nil-package-init ()
+(defun user--nil-package-config ()
   "Initialize nil as package manager."
   (defun require-package (package)
     "Add the specified PACKAGE to nil.")
@@ -88,12 +88,12 @@
 
   (defun user/sync-packages ()
     "Sync all required packages."
-    (run-hooks 'user/after-init-hook)))
+    (run-hooks 'user--after-config-hook)))
 
 
 (cond
- ((featurep 'el-get) (user/el-get-init))
- (t (user/nil-package-init)))
+ ((featurep 'el-get) (user--el-get-config))
+ (t (user--nil-package-config)))
 
 
 (provide 'lib/packaging)

@@ -7,7 +7,7 @@
   "Path to user's ee data store.")
 
 
-(defun user/ee-init ()
+(defun user--ee-config ()
   "Initialize ee."
   (setq-default
    ;; Database storage location.
@@ -19,7 +19,7 @@
 
 (req-package ee
   :loader :el-get
-  :config (user/ee-init))
+  :config (user--ee-config))
 
 
 (provide 'apps/ee)

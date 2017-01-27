@@ -2,18 +2,18 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/cua-mode-hook ()
+(defun user--cua-mode-hook ()
   "CUA mode hook."
   (define-key cua--rectangle-keymap (kbd "C-o") nil))
 
 
-(defun user/expand-region-init ()
+(defun user--expand-region-config ()
   "Initialize expand region."
   ;;; (Bindings) ;;;
   (user/bind-key-global :basic :selection-expand 'er/expand-region))
 
 
-(defun user/multiple-cursors-init ()
+(defun user--multiple-cursors-config ()
   "Initialize multiple cursors."
   ;;; (Bindings) ;;;
   (user/bind-key-global :basic :selection-next 'mc/mark-next-like-this)
@@ -22,7 +22,7 @@
   (user/bind-key-global :basic :selection-edit-lines 'mc/edit-lines))
 
 
-(defun user/kill-yank-init ()
+(defun user--kill-yank-config ()
   "Initialize copy/paste."
   (setq-default
    ;; Mouse selection should not automatically go to kill ring.
@@ -43,7 +43,7 @@
     (global-set-key [mouse-2] 'mouse-yank-primary))
 
   ;;; (Hooks) ;;;
-  (add-hook 'cua-mode-hook 'user/cua-mode-hook)
+  (add-hook 'cua-mode-hook 'user--cua-mode-hook)
 
   ;; Enable CUA selection mode for nicer rectangle selection.
   (cua-selection-mode t)
@@ -70,12 +70,12 @@
 
   ;;; (Packages) ;;;
   (req-package expand-region
-    :config (user/expand-region-init))
+    :config (user--expand-region-config))
   (req-package multiple-cursors
-    :config (user/multiple-cursors-init))
+    :config (user--multiple-cursors-config))
   (req-package rect-mark))
 
-(user/kill-yank-init)
+(user--kill-yank-config)
 
 
 (provide 'ux/kill-yank)

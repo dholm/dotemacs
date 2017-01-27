@@ -2,18 +2,18 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/verilog-mode-hook ()
+(defun user--verilog-mode-hook ()
   "Verilog mode hook."
   (user/gnu-global-enable))
 
 
-(defun user/verilog-mode-init ()
+(defun user--verilog-mode-config ()
   "Initialize Verilog mode."
   (when (feature-p 'polymode)
     (add-auto-mode 'poly-verilog+perl-mode "\\.sv$" "\\.svh$"))
 
   ;;; (Hooks) ;;;
-  (add-hook 'verilog-mode-hook 'user/verilog-mode-hook)
+  (add-hook 'verilog-mode-hook 'user--verilog-mode-hook)
 
   ;;; (Packages) ;;;
   (req-package verilog-mode
@@ -21,7 +21,7 @@
   (req-package auto-complete-verilog
     :loader :el-get))
 
-(user/verilog-mode-init)
+(user--verilog-mode-config)
 
 
 (provide 'modes/verilog)
