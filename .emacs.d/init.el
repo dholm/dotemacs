@@ -2,6 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
+;; Bring in package.
+(setq-default
+  package--init-file-ensured t
+  package-enable-at-startup nil)
+(require 'package)
+
 (eval-and-compile
   ;; Load Emacs init prologue.
   (load (expand-file-name "prologue.el" user-emacs-directory)))

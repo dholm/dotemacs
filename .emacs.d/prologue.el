@@ -2,28 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'package)
-(setq package-enable-at-startup nil)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
-
-(package-initialize)
-
-;; Bootstrap `req-package'.
-(unless (package-installed-p 'req-package)
-  (package-refresh-contents)
-  (package-install 'req-package))
-
 (eval-when-compile
   (defconst *user-emacs-lisp-directory*
     (expand-file-name "lisp" user-emacs-directory)
     "Path to user Emacs Lisp directory.")
 
   ;; Allow Emacs to find configuration files.
-  (add-to-list 'load-path *user-emacs-lisp-directory*)
-
-  ;; Load req-package.
-  (require 'req-package))
+  (add-to-list 'load-path *user-emacs-lisp-directory*))
 
 
 ;; Bring in constants used throughout initialization.

@@ -21,6 +21,18 @@
    '("melpa" . "http://melpa.milkbox.net/packages/")))
 
 
+;; Bootstrap `req-package'.
+(package-initialize)
+(unless (package-installed-p 'req-package)
+  (package-refresh-contents)
+  (package-install 'req-package))
+
+(eval-when-compile
+  (setq-default req-package-log-level 'trace)
+  ;; Load req-package.
+  (require 'req-package))
+
+
 ;; Configure and load el-get
 (add-to-list 'load-path (path-join *user-el-get-directory* "el-get"))
 (unless (require 'el-get nil 'noerror)
@@ -30,6 +42,11 @@
   (setq el-get-safe-mode t)
   :config
   (add-to-list 'el-get-recipe-path (path-join *user-el-get-directory* "el-get" "recipes"))
+  (setq-default
+   el-get-user-package-directory (path-join user-emacs-directory "init")
+   el-get-verbose el-get-safe-mode
+   ;; Don't produce system notifications.
+   el-get-notify-type 'message)
   (el-get 'sync)))
 
 
@@ -53,12 +70,6 @@
 
 (defun user--el-get-config ()
   "Initialize el-get as package manager."
-  (setq-default
-   el-get-user-package-directory (path-join user-emacs-directory "init")
-   el-get-verbose el-get-safe-mode
-   ;; Don't produce system notifications.
-   el-get-notify-type 'message)
-
   (defun require-package (package)
     "Add the specified PACKAGE to el-get-sources."
     (add-to-list 'el-get-sources (user/package-as-el-get package)))
