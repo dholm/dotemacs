@@ -27,7 +27,7 @@
 (defun user/haskell-mode-hook ()
   "Haskell mode hook."
   (user/generic-haskell-mode-hook)
-  (if (el-get-package-is-installed 'hi2)
+  (if (feature-p 'hi2)
       (turn-on-hi2)
     (turn-on-haskell-indentation))
 

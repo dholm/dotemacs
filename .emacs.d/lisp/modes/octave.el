@@ -4,7 +4,7 @@
 
 (defun user/octave-mode-hook ()
   "Initialize Octave mode."
-  (when (el-get-package-is-installed 'ac-octave)
+  (when (feature-p 'ac-octave)
     (add-ac-sources 'ac-octave))
 
   (eldoc-mode t))

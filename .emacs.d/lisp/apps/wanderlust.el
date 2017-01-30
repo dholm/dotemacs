@@ -70,7 +70,7 @@
   (when (el-get-package-is-installed 'bbdbv3-wl)
     (user/bbdbv3-wl-init-hook))
 
-  (when (el-get-package-is-installed 'org-mode)
+  (when (feature-p 'org-mode)
     (with-feature 'org-mime
       (setq-default
        org-mime-library 'semi)))
@@ -371,7 +371,7 @@ Gmail {
   (add-hook 'mime-display-text/plain-hook 'user/mime-display-text/plain-hook)
 
   (when (and (display-graphic-p)
-             (el-get-package-is-installed 'wl-gravatar))
+             (feature-p 'wl-gravatar))
     (setq-default
      ;; Insert gravatar as email X-Face.
      wl-highlight-x-face-function 'wl-gravatar-insert))

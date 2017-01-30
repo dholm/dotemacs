@@ -25,7 +25,10 @@
 (defun feature-p (feature)
   "Check if FEATURE is available."
   (or (featurep feature)
-      (el-get-package-is-installed feature)
+      (when (functionp 'el-get-package-is-installed)
+        (el-get-package-is-installed feature))
+      (when (functionp 'package-installed-p)
+        (package-installed-p feature))
       (locate-library (symbol-name feature))))
 
 

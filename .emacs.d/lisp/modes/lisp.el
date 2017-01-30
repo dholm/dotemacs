@@ -43,7 +43,7 @@
 
 (defun user/slime-mode-hook ()
   "SLIME mode hook."
-  (when (el-get-package-is-installed 'ac-slime)
+  (when (feature-p 'ac-slime)
     (set-up-slime-ac)))
 
 

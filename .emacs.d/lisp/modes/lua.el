@@ -9,7 +9,7 @@
   ;; Enable YouCompleteMe.
   (user/ycmd-enable)
 
-  (when (el-get-package-is-installed 'lua-block)
+  (when (feature-p 'lua-block)
     (lua-block-mode t)))
 
 

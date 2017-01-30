@@ -16,7 +16,7 @@
       (server-start)
 
       (when (and (display-graphic-p)
-                 (el-get-package-is-installed 'edit-server))
+                 (feature-p 'edit-server))
         (edit-server-start)))))
 
 

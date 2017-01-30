@@ -9,7 +9,7 @@
   ;; Enable YouCompleteMe.
   (user/ycmd-enable)
 
-  (when (el-get-package-is-installed 'ensime)
+  (when (feature-p 'ensime)
     (ensime-scala-mode-hook)))
 
 

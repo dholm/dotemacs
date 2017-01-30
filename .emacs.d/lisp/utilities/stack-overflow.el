@@ -5,7 +5,7 @@
 (defun user/stack-overflow-prog-mode-hook ()
   "Prog mode hook for Stack Overflow."
   ;;; (Bindings) ;;;
-  (when (el-get-package-is-installed 'emacs-sos)
+  (when (feature-p 'emacs-sos)
     (user/bind-key-local :util :stack-overflow-search 'sos)))
 
 

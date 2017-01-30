@@ -13,7 +13,7 @@
   (when (and (display-graphic-p)
              (not user/tex-preview-setup))
     ;; Setup LaTeX preview.
-    (if (el-get-package-is-installed 'sage-mode)
+    (if (feature-p 'sage-mode)
         (after-load 'sage
           ;; If Sage is available, it must be loaded first.
           (LaTeX-preview-setup))
@@ -40,17 +40,17 @@
     ;; Match paired delimiters.
     (paren-toggle-matching-paired-delimiter t))
 
-  (when (el-get-package-is-installed 'mode-compile)
+  (when (feature-p 'mode-compile)
     ;; Override AUCTeX in favor of mode-compile.
     (kill-local-variable 'compile-command))
 
   ;;; (Bindings) ;;;
-  (when (el-get-package-is-installed 'ltx-help)
+  (when (feature-p 'ltx-help)
     (user/bind-key-local :doc :reference 'latex-help))
   (user/bind-key-local :nav :functions/toc 'reftex-toc)
   (when (display-graphic-p)
     (user/bind-key-local :code :run 'preview-document))
-  (when (el-get-package-is-installed 'ebib)
+  (when (feature-p 'ebib)
     (user/bind-key-local :nav :references 'ebib)))
 
 

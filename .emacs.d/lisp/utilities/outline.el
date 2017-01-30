@@ -5,7 +5,7 @@
 (defun user/outline-mode-hook ()
   "Hook for outline mode."
   ;;; (Bindings) ;;;
-  (when (el-get-package-is-installed 'outline-magic)
+  (when (feature-p 'outline-magic)
     (user/bind-key-local :nav :context-cycle 'outline-cycle)
     (user/bind-key-local :nav :context-up 'outline-move-subtree-up)
     (user/bind-key-local :nav :context-down 'outline-move-subtree-down)

@@ -49,9 +49,9 @@
 (defun user/minibuffer-setup-hook ()
   "Emacs minibuffer hook."
   (when (eq this-command 'eval-expression)
-    (when (el-get-package-is-installed 'rainbow-delimiters)
+    (when (feature-p 'rainbow-delimiters)
       (rainbow-delimiters-mode))
-    (when (el-get-package-is-installed 'paredit)
+    (when (feature-p 'paredit)
       (enable-paredit-mode))))
 
 

@@ -20,7 +20,7 @@
     (anaconda-mode t))
 
   ;; Enable Jedi
-  (when (el-get-package-is-installed 'jedi)
+  (when (feature-p 'jedi)
     (jedi:setup))
 
   ;; Separate camel-case into separate words

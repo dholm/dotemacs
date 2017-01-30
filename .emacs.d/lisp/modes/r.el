@@ -15,7 +15,7 @@
 
 (defun user/ess-mode-common-hook ()
   "ESS common mode hook."
-  (when (el-get-package-is-installed 'ac-R)
+  (when (feature-p 'ac-R)
     (ess-ac-init))
 
   ;;; (Bindings) ;;;
