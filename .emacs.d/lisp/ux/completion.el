@@ -6,12 +6,12 @@
   (require 'cl))
 
 
-(defun user/auto-complete-mode-hook ()
+(defun user--auto-complete-mode-hook ()
   "Auto complete mode hook."
   (user/complete-at-point-install))
 
 
-(defun user/company-mode-hook ()
+(defun user--company-mode-hook ()
   "Company mode hook."
   (user/complete-at-point-install)
 
@@ -137,7 +137,7 @@
         (error "Declaration of ac-modes is missing!")))))
 
 
-(defun user/auto-complete-init ()
+(defun user--auto-complete-config ()
   "Initialize auto-complete."
   (with-feature 'auto-complete-config
     ;; Load default configuration.
@@ -179,7 +179,7 @@
     (add-hook hook 'ac-emacs-lisp-mode-setup))
 
   ;;; (Hooks) ;;;
-  (add-hook 'auto-complete-mode-hook 'user/auto-complete-mode-hook)
+  (add-hook 'auto-complete-mode-hook 'user--auto-complete-mode-hook)
 
   ;;; (Bindings) ;;;
   (ac-set-trigger-key (user/get-key :code :try-complete))
@@ -219,7 +219,7 @@
        (append sources company-backends)))))
 
 
-(defun user/company-mode-init ()
+(defun user--company-mode-config ()
   "Initialize company mode."
   (setq-default
    ;; Do not trigger completion automatically.
@@ -243,7 +243,7 @@
    company-quickhelp-delay 0.5)
 
   ;;; (Hooks) ;;;
-  (add-hook 'company-mode-hook 'user/company-mode-hook)
+  (add-hook 'company-mode-hook 'user--company-mode-hook)
 
   ;;; (Bindings) ;;;
   (after-load 'company
@@ -264,7 +264,7 @@
       (company-flx-mode t))))
 
 
-(defun user/completion-init ()
+(defun user--completion-config ()
   "Initialize automatic code completion."
   (setq
    ;; Activate completion on tab.
@@ -276,17 +276,17 @@
   (add-to-list 'completion-styles 'initials t)
 
   ;;; (Packages) ;;;
-  (require-package '(:name auto-complete :after (user/auto-complete-init)))
+  (require-package '(:name auto-complete :after (user--auto-complete-config)))
   (use-package company
     :ensure t
     :diminish company-mode
-    :config (user/company-mode-init))
+    :config (user--company-mode-config))
   (use-package company-flx
     :ensure t)
   (use-package company-quickhelp
     :ensure t))
 
-(user/completion-init)
+(user--completion-config)
 
 
 (provide 'ux/completion)

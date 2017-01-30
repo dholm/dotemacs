@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/sauron-init ()
+(defun user--sauron-config ()
   "Initialize Sauron event tracker."
   (setq-default
    ;; Display sauron in current frame.
@@ -13,7 +13,7 @@
 
 (use-package sauron
   :ensure t
-  :config (user/sauron-init))
+  :config (user--sauron-config))
 
 
 (provide 'utilities/sauron)

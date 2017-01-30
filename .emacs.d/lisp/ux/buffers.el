@@ -27,13 +27,13 @@
   (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 
 
-(defun user/keep-buffers-init ()
+(defun user--keep-buffers-config ()
   "Initialize keep-buffers."
   ;; Protect certain buffers from being killed.
   (keep-buffers-mode t))
 
 
-(defun user/buffers-init ()
+(defun user--buffers-config ()
   "Initialize Emacs buffers."
   (setq-default
    ;; Set up uniquify's style.
@@ -51,9 +51,9 @@
   (user/bind-key-global :basic :quit 'save-buffers-kill-terminal)
 
   ;;; (Packages) ;;;
-  (require-package '(:name keep-buffers :after (user/keep-buffers-init))))
+  (require-package '(:name keep-buffers :after (user--keep-buffers-config))))
 
-(user/buffers-init)
+(user--buffers-config)
 
 
 (provide 'ux/buffers)

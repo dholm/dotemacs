@@ -2,12 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/abbrev-init ()
+(defun user--abbrev-config ()
   "Initialize abbrev."
   (setq-default
    abbrev-file-name (path-join *user-data-directory* "abbrev_defs")))
 
-(user/abbrev-init)
+(user--abbrev-config)
 
 
 (provide 'utilities/abbrev)

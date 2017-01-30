@@ -2,25 +2,25 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/diff-mode-hook ()
+(defun user--diff-mode-hook ()
   "Diff mode hook."
   (with-feature 'diff-hl
     (turn-on-diff-hl-mode)))
 
 
-(defun user/diff-init ()
+(defun user--diff-config ()
   "Initialize Emacs diff support."
   (setq-default
    ;; Use unified diffs by default.
    diff-switches "-u")
 
-  (add-hook 'diff-mode-hook 'user/diff-mode-hook)
+  (add-hook 'diff-mode-hook 'user--diff-mode-hook)
 
   ;;; (Packages) ;;;
   (use-package diff-hl
     :ensure t))
 
-(user/diff-init)
+(user--diff-config)
 
 
 (provide 'utilities/diff)

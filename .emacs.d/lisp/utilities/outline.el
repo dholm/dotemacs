@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/outline-mode-hook ()
+(defun user--outline-mode-hook ()
   "Hook for outline mode."
   ;;; (Bindings) ;;;
   (when (feature-p 'outline-magic)
@@ -15,16 +15,16 @@
   (user/bind-key-local :nav :context-backward 'outline-previous-heading))
 
 
-(defun user/outline-mode-init ()
+(defun user--outline-mode-config ()
   "Initialize outline mode."
-  (add-hook 'outline-mode-hook 'user/outline-mode-hook)
-  (add-hook 'outline-minor-mode-hook 'user/outline-mode-hook)
+  (add-hook 'outline-mode-hook 'user--outline-mode-hook)
+  (add-hook 'outline-minor-mode-hook 'user--outline-mode-hook)
 
   ;;; (Packages) ;;;
   (use-package outline-magic
     :ensure t))
 
-(user/outline-mode-init)
+(user--outline-mode-config)
 
 
 (provide 'utilities/outline)

@@ -5,7 +5,7 @@
 (defvar user/ecb-active nil "Current state of ECB.")
 
 
-(defun user/ecb-activate-hook ()
+(defun user--ecb-activate-hook ()
   "ECB activation hook."
   (setq user/ecb-active t)
 
@@ -26,7 +26,7 @@
   (user/bind-key-local :code :compilation-result 'user/ecb-toggle-compile-window))
 
 
-(defun user/ecb-deactivate-hook ()
+(defun user--ecb-deactivate-hook ()
   "ECB deactivation hook."
   (setq user/ecb-active nil)
   (popwin-mode t))
@@ -52,7 +52,7 @@
         (ecb-goto-window-compilation)))))
 
 
-(defun user/ecb-init ()
+(defun user--ecb-config ()
   "Initialize Emacs code browser."
   ;; ECB version checking code is very old so that it thinks that the latest
   ;; CEDET/Emacs is not new enough when in fact it is years newer than the
@@ -84,8 +84,8 @@
       ;; Use a slightly smaller face for the ECB tree-buffers.
       (set-face-attribute 'ecb-default-general-face nil :height 0.8)))
 
-  (add-hook 'ecb-activate-hook 'user/ecb-activate-hook)
-  (add-hook 'ecb-deactivate-hook 'user/ecb-deactivate-hook)
+  (add-hook 'ecb-activate-hook 'user--ecb-activate-hook)
+  (add-hook 'ecb-deactivate-hook 'user--ecb-deactivate-hook)
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :util :ecb-toggle 'user/ecb-toggle-active))
@@ -93,7 +93,7 @@
 (when (version<= emacs-version "24.4")
   (use-package ecb
     :ensure t
-    :config (user/ecb-init)))
+    :config (user--ecb-config)))
 
 
 (provide 'utilities/ecb)

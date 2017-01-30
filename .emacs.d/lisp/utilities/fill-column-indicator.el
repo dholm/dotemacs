@@ -2,14 +2,14 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/fill-column-indicator-init ()
+(defun user--fill-column-indicator-config ()
   "Initialize fill column indicator."
   ;;; (Bindings) ;;;
   (global-set-key [f3] 'fci-mode))
 
 (use-package fill-column-indicator
   :ensure t
-  :config (user/fill-column-indicator-init))
+  :config (user--fill-column-indicator-config))
 
 
 (provide 'utilities/fill-column-indicator)

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/elim-init ()
+(defun user--elim-config ()
   "Initialize elim."
   (setq-default
    lui-max-buffer-size 30000
@@ -15,7 +15,7 @@
 
 (when (and (pkg-config-has-p "libxml-2.0")
            (pkg-config-has-p "purple"))
-  (require-package '(:name elim :after (user/elim-init))))
+  (require-package '(:name elim :after (user--elim-config))))
 
 
 (provide 'apps/elim)

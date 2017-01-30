@@ -2,9 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/text-mode-hook ()
+(defun user--text-mode-hook ()
   "Text mode hook."
-  (user/fundamental-mode-hook)
+  (user--fundamental-mode-hook)
 
   (user/smartparens-enable)
 
@@ -31,15 +31,15 @@
   (user/bind-key-local :code :fill-paragraph 'fill-paragraph))
 
 
-(defun user/text-mode-init ()
+(defun user--text-mode-config ()
   "Initialize generic text editing mode."
   (after-load 'smartparens
     (sp-with-modes '(text-mode)
       (sp-local-pair "`" "'" :actions '(insert wrap))))
 
-  (add-hook 'text-mode-hook 'user/text-mode-hook))
+  (add-hook 'text-mode-hook 'user--text-mode-hook))
 
-(user/text-mode-init)
+(user--text-mode-config)
 
 
 (provide 'modes/text)

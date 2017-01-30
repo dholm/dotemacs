@@ -113,7 +113,7 @@
   (user/vcs-command :time-machine))
 
 
-(defun user/vcs-bindings-init ()
+(defun user--vcs-bindings-config ()
   "Initialize smart VCS bindings."
   ;; Need autoload for bindings to work.
   (autoload 'vc-responsible-backend "vc.el")
@@ -133,7 +133,7 @@
   (user/bind-key-global :vcs :search 'user/vcs-search)
   (user/bind-key-global :vcs :time-machine 'user/vcs-time-machine))
 
-(user/vcs-bindings-init)
+(user--vcs-bindings-config)
 
 
 (provide 'vcs/bindings)

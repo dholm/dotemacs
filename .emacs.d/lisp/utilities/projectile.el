@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/projectile-init ()
+(defun user--projectile-config ()
   "Initialize projectile."
   (setq-default
    ;; Projectile bookmarks.
@@ -28,7 +28,7 @@
 
 (use-package projectile
   :ensure t
-  :config (user/projectile-init))
+  :config (user--projectile-config))
 
 
 (provide 'utilities/projectile)

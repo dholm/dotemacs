@@ -6,13 +6,13 @@
   (path-join *user-documents-directory* "Notes")
   "Path to user's notes data store.")
 
-(defun user/deft-mode-hook ()
+(defun user--deft-mode-hook ()
   "Deft mode hook."
   ;;; (Bindings) ;;;
   (user/bind-key-local :basic :open-file-context 'deft-find-file))
 
 
-(defun user/deft-init ()
+(defun user--deft-config ()
   "Initialize deft."
   ;; Ensure that notes store exists.
   (make-directory *user-notes-data-directory* t)
@@ -28,14 +28,14 @@
    ;; Auto-save idle interval in seconds.
    deft-auto-save-interval 30.0)
 
-  (add-hook 'deft-mode-hook 'user/deft-mode-hook)
+  (add-hook 'deft-mode-hook 'user--deft-mode-hook)
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :notes 'deft))
 
 (use-package deft
   :defer t
-  :config (user/deft-init))
+  :config (user--deft-config))
 
 
 (provide 'apps/deft)

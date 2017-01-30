@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/web-mode-hook ()
+(defun user--web-mode-hook ()
   "Web mode hook."
   (setq
    ;; Don't indent using tabs by default.
@@ -19,7 +19,7 @@
     (guide-key/add-local-highlight-command-regexp "web-mode-")))
 
 
-(defmacro user/add-web-mode-hook (engine function)
+(defmacro user--add-web-mode-hook (engine function)
   "In web mode hook, when using ENGINE, evaluate FUNCTION."
   `(add-hook 'web-mode-hook
              (lambda ()
@@ -27,7 +27,7 @@
                  (funcall ,function)))))
 
 
-(defun user/tern-mode-hook ()
+(defun user--tern-mode-hook ()
   "Tern mode hook."
   (tern-ac-setup)
 
@@ -44,7 +44,7 @@
                                    "{% block\\|{% csrf_token %}") nil t)))
 
 
-(defun user/web-mode-init ()
+(defun user--web-mode-config ()
   "Initialize web mode."
   (setq-default
    ;; Indent HTML automatically.
@@ -68,15 +68,15 @@
   (add-auto-mode 'web-mode "\\.html?$" "\\.phtml$" "\\.php[3-5]?$")
 
   ;;; (Hooks) ;;;
-  (add-hook 'web-mode-hook 'user/web-mode-hook))
+  (add-hook 'web-mode-hook 'user--web-mode-hook))
 
 
-(defun user/tern-init ()
+(defun user--tern-config ()
   "Initialize tern."
-  (add-hook 'tern-mode-hook 'user/tern-mode-hook))
+  (add-hook 'tern-mode-hook 'user--tern-mode-hook))
 
 
-(defun user/ac-html-init ()
+(defun user--ac-html-config ()
   "Initialize ac-html."
   (after-load 'web-mode
     (add-to-list 'web-mode-ac-sources-alist
@@ -85,20 +85,20 @@
                              ac-source-html-attribute)))))
 
 
-(defun user/web-init ()
+(defun user--web-config ()
   "Initialize web development."
   (use-package web-mode
     :ensure t
-    :config (user/web-mode-init))
+    :config (user--web-mode-config))
   (with-executable 'npm
     (use-package tern
       :ensure t
-      :config (user/tern-init))
+      :config (user--tern-config))
     (use-package company-tern
       :ensure t))
   (use-package ac-html
     :ensure t
-    :config (user/ac-html-init))
+    :config (user--ac-html-config))
   (use-package company-web
     :ensure t)
   (use-package skewer-mode
@@ -106,7 +106,7 @@
   (use-package tidy
     :ensure t))
 
-(user/web-init)
+(user--web-config)
 
 
 (provide 'modes/web)

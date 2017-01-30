@@ -21,13 +21,13 @@
     (user/ediff-mergetool))))
 
 
-(defun user/emacs-basic-init ()
+(defun user--emacs-basic-config ()
   "Initialize basic Emacs."
   ;; Register switch hook handler.
   (add-command-switch
    'user/emacs-vcstool-handler "--difftool" "--mergetool"))
 
-(user/emacs-basic-init)
+(user--emacs-basic-config)
 
 
 ;; Load Emacs init epilogue.

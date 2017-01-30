@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/fundamental-mode-hook ()
+(defun user--fundamental-mode-hook ()
   "Fundamental mode hook."
   ;; Automatically break long lines.
   (auto-fill-mode t)
@@ -27,12 +27,12 @@
     (user/bind-key-local :nav :functions/toc 'helm-imenu)))
 
 
-(defun user/mic-paren-init ()
+(defun user--mic-paren-config ()
   "Initialize mic-paren."
   (paren-activate))
 
 
-(defun user/fundamental-mode-init ()
+(defun user--fundamental-mode-config ()
   "Initialize Emacs fundamental mode."
   (setq-default
    ;; When using fill-paragraph or auto-fill-mode break lines at 80 characters by
@@ -49,9 +49,9 @@
     :ensure t)
   (use-package mic-paren
     :ensure t
-    :config (user/mic-paren-init)))
+    :config (user--mic-paren-config)))
 
-(user/fundamental-mode-init)
+(user--fundamental-mode-config)
 
 
 (provide 'modes/fundamental)

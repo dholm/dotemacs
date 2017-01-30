@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/erlang-mode-hook ()
+(defun user--erlang-mode-hook ()
   "Erlang mode hook."
   (user/gnu-global-enable)
 
@@ -26,22 +26,22 @@
   (user/ycmd-enable)
 
   ;; Bring in CEDET.
-  (user/cedet-hook))
+  (user--cedet-hook))
 
 
-(defun user/elixir-mode-hook ()
+(defun user--elixir-mode-hook ()
   "Erlang Elixir mode hook."
-  (user/erlang-mode-hook)
+  (user--erlang-mode-hook)
 
   (with-feature 'alchemist
     (alchemist-mode t)))
 
 
-(defun user/erlang-mode-init ()
+(defun user--erlang-mode-config ()
   "Initialize Erlang mode."
   ;;; (Hooks) ;;;
-  (add-hook 'erlang-mode-hook 'user/erlang-mode-hook)
-  (add-hook 'elixir-mode-hook 'user/elixir-mode-hook)
+  (add-hook 'erlang-mode-hook 'user--erlang-mode-hook)
+  (add-hook 'elixir-mode-hook 'user--elixir-mode-hook)
 
   (after-load 'erlang-mode
     (with-feature 'edts
@@ -53,7 +53,7 @@
 (with-executable 'erl
   (use-package erlang
     :ensure t
-    :after (user/erlang-mode-init))
+    :after (user--erlang-mode-config))
   (use-package edts
     :ensure t)
   (require-package '(:name distel))

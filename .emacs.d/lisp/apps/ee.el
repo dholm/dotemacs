@@ -7,7 +7,7 @@
   "Path to user's ee data store.")
 
 
-(defun user/ee-init ()
+(defun user--ee-config ()
   "Initialize ee."
   (setq-default
    ;; Database storage location.
@@ -17,7 +17,7 @@
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :information-db 'ee))
 
-(require-package '(:name ee :after (user/ee-init)))
+(require-package '(:name ee :after (user--ee-config)))
 
 
 (provide 'apps/ee)

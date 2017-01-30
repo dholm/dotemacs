@@ -2,12 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/term-mode-hook ()
+(defun user--term-mode-hook ()
   "Term mode hook."
-  (user/shell-mode-common-hook))
+  (user--shell-mode-common-hook))
 
 
-(defun user/term-exec-hook ()
+(defun user--term-exec-hook ()
   "Term startup hook."
   ;; Automatically close buffer when finished.
   (let* ((buf (current-buffer))
@@ -19,17 +19,17 @@
             (kill-buffer ,buf))))))
 
 
-(defun user/term-init ()
+(defun user--term-config ()
   "Initialize the Emacs terminal."
   ;;; (Hooks) ;;;
-  (add-hook 'term-exec-hook 'user/term-exec-hook)
-  (add-hook 'term-mode-hook 'user/term-mode-hook)
+  (add-hook 'term-exec-hook 'user--term-exec-hook)
+  (add-hook 'term-mode-hook 'user--term-mode-hook)
 
   ;;; (Bindings) ;;;
   (after-load 'term
     (define-key term-raw-map (kbd "C-c C-y") 'term-paste)))
 
-(user/term-init)
+(user--term-config)
 
 
 (provide 'utilities/term)

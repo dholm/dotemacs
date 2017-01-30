@@ -2,9 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/message-mode-hook ()
+(defun user--message-mode-hook ()
   "Message mode hook."
-  (user/mail-mode-hook)
+  (user--mail-mode-hook)
 
   (setq
    ;; Select abbrev table for message mode.
@@ -22,19 +22,19 @@
   (local-set-key (kbd "C-x #") 'user/server-save))
 
 
-(defun user/message-send-hook ()
+(defun user--message-send-hook ()
   "Hook run when sending a message."
   ;; Normalize all footnotes in message.
   (org-footnote-normalize))
 
 
-(defun user/message-setup-hook ()
+(defun user--message-setup-hook ()
   "Outgoing message setup hook."
   ;; Load Emacs directory client.
   (eudc-load-eudc))
 
 
-(defun user/message-mode-init ()
+(defun user--message-mode-config ()
   "Initialize message mode."
   (setq-default
    ;; Kill buffer after message is sent.
@@ -48,14 +48,14 @@
    message-generate-headers-first t)
 
   ;; Hooks
-  (add-hook 'message-mode-hook 'user/message-mode-hook)
-  (add-hook 'message-setup-hook 'user/message-setup-hook)
-  (add-hook 'message-send-hook 'user/message-send-hook)
+  (add-hook 'message-mode-hook 'user--message-mode-hook)
+  (add-hook 'message-setup-hook 'user--message-setup-hook)
+  (add-hook 'message-send-hook 'user--message-send-hook)
 
   ;; Register auto mode.
   (add-auto-mode 'message-mode "\\.eml$"))
 
-(user/message-mode-init)
+(user--message-mode-config)
 
 
 (provide 'modes/message)

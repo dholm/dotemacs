@@ -2,14 +2,14 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/helm-ag-init ()
+(defun user--helm-ag-config ()
   "Initialize helm-ag."
   (setq-default
    ;; Insert word at point as search term.
    helm-ag-insert-at-point 'word))
 
 
-(defun user/ag-init ()
+(defun user--ag-config ()
   "Initialize ag."
   (setq-default
    ag-project-root-function
@@ -31,10 +31,10 @@
   (when (feature-p 'helm)
     (use-package helm-ag
       :ensure t
-      :after (user/helm-ag-init)))
+      :after (user--helm-ag-config)))
   (use-package ag
     :ensure t
-    :config (user/ag-init)))
+    :config (user--ag-config)))
 
 
 (provide 'utilities/ag)

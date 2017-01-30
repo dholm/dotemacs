@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/sh-mode-hook ()
+(defun user--sh-mode-hook ()
   "Initialize mode for shell script editing."
   (setq-default
    ;; Indent with four spaces.
@@ -10,7 +10,7 @@
    sh-indentation 4))
 
 
-(defun user/shell-mode-common-hook ()
+(defun user--shell-mode-common-hook ()
   "Shell mode common hook."
   (with-feature 'ansi-color
     ;; Enable ANSI colors for comint.
@@ -20,9 +20,9 @@
     (shelldoc-minor-mode-on)))
 
 
-(defun user/shell-mode-hook ()
+(defun user--shell-mode-hook ()
   "Initialize mode for interactive shell."
-  (user/shell-mode-common-hook)
+  (user--shell-mode-common-hook)
 
   (setq-default
    ;; Set up to use Bash with input echoing.
@@ -31,7 +31,7 @@
    comint-process-echoes t))
 
 
-(defun user/shell-mode-init ()
+(defun user--shell-mode-config ()
   "Initialize shell modes."
 
   ;;; (Packages) ;;;
@@ -42,10 +42,10 @@
   (use-package shell-command
     :ensure t)
 
-  (add-hook 'sh-mode-hook 'user/sh-mode-hook)
-  (add-hook 'shell-mode-hook 'user/shell-mode-hook))
+  (add-hook 'sh-mode-hook 'user--sh-mode-hook)
+  (add-hook 'shell-mode-hook 'user--shell-mode-hook))
 
-(user/shell-mode-init)
+(user--shell-mode-config)
 
 
 (provide 'modes/shell)

@@ -2,18 +2,18 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/systemd-mode-hook ()
+(defun user--systemd-mode-hook ()
   "systemd mode hook.")
 
 
-(defun user/systemd-init ()
+(defun user--systemd-config ()
   "Initialize systemd mode."
   ;;; (Hooks) ;;;
-  (add-hook 'systemd-mode-hook 'user/systemd-mode-hook))
+  (add-hook 'systemd-mode-hook 'user--systemd-mode-hook))
 
 (use-package systemd
   :ensure t
-  :config (user/systemd-init))
+  :config (user--systemd-config))
 
 
 (provide 'modes/systemd)

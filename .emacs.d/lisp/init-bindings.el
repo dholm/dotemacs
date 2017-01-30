@@ -122,7 +122,7 @@
   t)
 
 
-(defun user/global-keymap-init ()
+(defun user--global-keymap-config ()
   "Initialize the global keymap."
   (setq
    user/global-keymap
@@ -401,21 +401,21 @@
                (:sage . (user/apps-prefix "S")))))))
 
 
-(defun user/bindings-init ()
+(defun user--bindings-config ()
   "Initialize key bindings."
   (global-unset-key (kbd "C-l"))
   (define-prefix-command 'ctl-l-map)
   (global-set-key (kbd "C-l") 'ctl-l-map)
 
   ;; Initialize global keymap.
-  (user/global-keymap-init)
+  (user--global-keymap-config)
 
   ;;; (Bindings) ;;;
   ;; Alias C-x C-m to M-x which is a bit awkward to reach.
   (global-set-key (kbd "C-x C-m") 'execute-extended-command)
   (global-set-key (kbd "C-x m") 'execute-extended-command))
 
-(user/bindings-init)
+(user--bindings-config)
 
 
 (provide 'init-bindings)

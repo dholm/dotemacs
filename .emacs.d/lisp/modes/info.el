@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/info-mode-hook ()
+(defun user--info-mode-hook ()
   "Info mode hook."
   (when (feature-p 'info+)
     (require 'info+))
@@ -11,7 +11,7 @@
   (user/bind-key-local :nav :go-back 'Info-history-back))
 
 
-(defun user/info+-init ()
+(defun user--info+-config ()
   "Initialize info+."
   (setq-default
    ;; Enable breadcrumbs in header line.
@@ -19,15 +19,15 @@
    Info-breadcrumbs-in-mode-line-mode nil))
 
 
-(defun user/info-mode-init ()
+(defun user--info-mode-config ()
   "Initialize info mode."
   (use-package info+
     :ensure t
-    :config (user/info+-init))
+    :config (user--info+-config))
 
-  (add-hook 'Info-mode-hook 'user/info-mode-hook))
+  (add-hook 'Info-mode-hook 'user--info-mode-hook))
 
-(user/info-mode-init)
+(user--info-mode-config)
 
 
 (provide 'modes/info)

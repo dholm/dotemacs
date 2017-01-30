@@ -6,7 +6,7 @@
   "List of package definitions for el-get.")
 (defvar el-get-safe-mode nil
   "Start el-get in safe mode.")
-(defcustom user/after-init-hook nil
+(defcustom user--after-init-hook nil
   "Hook that is run after both Emacs and package manager have completed init."
   :group 'init
   :type 'hook)
@@ -37,20 +37,20 @@
   ;; Load use-package.
   (require 'use-package))
 
-(defun user/el-get-before-init ()
+(defun user--el-get-init ()
   "Initialize el-get."
   (setq-default
    el-get-safe-mode t)
 
   (add-to-list 'load-path (path-join *user-el-get-directory* "el-get")))
 
-(defun user/el-get-init ()
+(defun user--el-get-config ()
   "Configure el-get."
   (add-to-list 'el-get-recipe-path
                (path-join *user-el-get-directory* "el-get" "recipes")))
 
 ;; Configure and load el-get
-(user/el-get-before-init)
+(user--el-get-init)
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
       (url-retrieve-synchronously
@@ -58,6 +58,7 @@
     (let (el-get-master-branch)
       (goto-char (point-max))
       (eval-print-last-sexp))))
+(user--el-get-config)
 
 
 (defun user/package-as-el-get (package)
@@ -78,7 +79,7 @@
        ((plist-member package :pkgname) `(:pkgname ,(plist-get package :pkgname))))))))
 
 
-(defun user/el-get-init ()
+(defun user--el-get-config ()
   "Initialize el-get as package manager."
   (setq-default
    el-get-user-package-directory (path-join user-emacs-directory "init")
@@ -100,13 +101,13 @@
       (if el-get-safe-mode
           (el-get 'sync package-list)
         (el-get nil package-list)))
-    (run-hooks 'user/after-init-hook))
+    (run-hooks 'user--after-init-hook))
 
   ;; Make sure el-get is registered so that el-get-cleanup doesn't remove it
   (require-package '(:name el-get)))
 
 
-(defun user/nil-package-init ()
+(defun user--nil-package-config ()
   "Initialize nil as package manager."
   (defun require-package (package)
     "Add the specified PACKAGE to nil.")
@@ -116,12 +117,12 @@
 
   (defun user/sync-packages ()
     "Sync all required packages."
-    (run-hooks 'user/after-init-hook)))
+    (run-hooks 'user--after-init-hook)))
 
 
 (cond
- ((featurep 'el-get) (user/el-get-init))
- (t (user/nil-package-init)))
+ ((featurep 'el-get) (user--el-get-config))
+ (t (user--nil-package-config)))
 
 
 (provide 'lib/packaging)

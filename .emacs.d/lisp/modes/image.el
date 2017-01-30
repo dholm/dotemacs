@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/image-mode-hook ()
+(defun user--image-mode-hook ()
   "Image mode hook."
   ;;; (Bindings) ;;;
   (local-set-key (kbd "M-f") (lambda () (interactive) (image-forward-hscroll 10)))
@@ -11,12 +11,12 @@
   (local-set-key (kbd "M-n") (lambda () (interactive) (image-next-line 5))))
 
 
-(defun user/image-mode-init ()
+(defun user--image-mode-config ()
   "Initialize image mode."
   ;;; (Hooks) ;;;
-  (add-hook 'image-mode-hook 'user/image-mode-hook))
+  (add-hook 'image-mode-hook 'user--image-mode-hook))
 
-(user/image-mode-init)
+(user--image-mode-config)
 
 
 (provide 'modes/image)

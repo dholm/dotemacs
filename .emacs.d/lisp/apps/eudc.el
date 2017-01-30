@@ -17,7 +17,7 @@
     (replace-match "")))
 
 
-(defun user/eudc-init ()
+(defun user--eudc-config ()
   "Initialize EUDC."
   (setq-default
    ;; Only return default attributes for current server.
@@ -57,7 +57,7 @@
     (add-to-list 'eudc-server-hotlist '("localhost" . bbdb))))
 
 (after-load 'eudc
-  (user/eudc-init))
+  (user--eudc-config))
 
 
 (provide 'apps/eudc)

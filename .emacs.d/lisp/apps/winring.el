@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/winring-init ()
+(defun user--winring-config ()
   "Initialize winring."
   (winring-initialize)
 
@@ -12,7 +12,7 @@
 
 (use-package winring
   :defer t
-  :config (user/winring-init))
+  :config (user--winring-config))
 (use-package zoom-window
   :defer t)
 

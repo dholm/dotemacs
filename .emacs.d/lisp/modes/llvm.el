@@ -2,24 +2,24 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/llvm-mode-hook ()
+(defun user--llvm-mode-hook ()
   "LLVM mode hook.")
 
 
-(defun user/tablegen-mode-hook ()
+(defun user--tablegen-mode-hook ()
   "TableGen mode hook.")
 
 
-(defun user/llvm-mode-init ()
+(defun user--llvm-mode-config ()
   "Initialize LLVM mode."
   (use-package llvm-mode
     :ensure t)
   (require-package '(:name tablegen-mode))
 
-  (add-hook 'llvm-mode-hook 'user/llvm-mode-hook)
-  (add-hook 'tablegen-mode-hook 'user/tablegen-mode-hook))
+  (add-hook 'llvm-mode-hook 'user--llvm-mode-hook)
+  (add-hook 'tablegen-mode-hook 'user--tablegen-mode-hook))
 
-(user/llvm-mode-init)
+(user--llvm-mode-config)
 
 
 (provide 'modes/llvm)

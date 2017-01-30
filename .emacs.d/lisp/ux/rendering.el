@@ -6,7 +6,7 @@
   "Maximum buffer size for maximum font lock decorations.")
 
 
-(defun user/rendering-find-file-hook ()
+(defun user--rendering-find-file-hook ()
   "Rendering hook for `find-file'."
   (when (> (buffer-size) *user-fast-font-lock-buffer-limit*)
     (setq
@@ -16,7 +16,7 @@
     (font-lock-refresh-defaults)))
 
 
-(defun user/rendering-init ()
+(defun user--rendering-config ()
   "Setup Emacs user interface rendering."
   (after-load 'font-lock
     ;; Allow reduction of decoration level in large buffers.
@@ -41,12 +41,12 @@
    bidi-display-reordering nil)
 
   ;;; (Hooks) ;;;
-  (add-hook 'find-file-hook 'user/rendering-find-file-hook)
+  (add-hook 'find-file-hook 'user--rendering-find-file-hook)
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :emacs :redraw 'redraw-display))
 
-(user/rendering-init)
+(user--rendering-config)
 
 
 (provide 'ux/rendering)

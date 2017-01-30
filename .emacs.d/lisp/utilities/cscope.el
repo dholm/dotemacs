@@ -27,7 +27,7 @@
     (helm-cscope-mode t)))
 
 
-(defun user/xcscope-init ()
+(defun user--xcscope-config ()
   "Initialize xcscope."
   (setq-default
    ;; Always index recursively.
@@ -36,17 +36,17 @@
    cscope-display-cscope-buffer nil))
 
 
-(defun user/cscope-init ()
+(defun user--cscope-config ()
   "Initialize CScope support."
   ;;; (Packages) ;;;
   (use-package xcscope
     :ensure t
-    :config (user/xcscope-init))
+    :config (user--xcscope-config))
   (use-package helm-cscope
     :ensure t))
 
 (with-executable 'cscope
-  (user/cscope-init))
+  (user--cscope-config))
 
 
 (provide 'utilities/cscope)

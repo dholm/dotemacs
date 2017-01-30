@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/direx-init ()
+(defun user--direx-config ()
   "Initialize direx."
   (setq
    ;; Use the functionality from utilities/project to locate project root
@@ -21,7 +21,7 @@
 
 (use-package direx
   :ensure t
-  :config (user/direx-init))
+  :config (user--direx-config))
 
 
 (provide 'utilities/direx)

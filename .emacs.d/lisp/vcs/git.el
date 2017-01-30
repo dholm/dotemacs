@@ -2,10 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/git-commit-mode-hook ()
+(defun user--git-commit-mode-hook ()
   "Git commit mode hook."
   ;; Run the shared log edit hook.
-  (user/vc-log-edit-hook)
+  (user--vc-log-edit-hook)
 
   ;;; (Bindings) ;;;
   ;; Override C-x # for Git.
@@ -15,7 +15,7 @@
   (local-set-key (kbd "C-c C-k") 'git-commit-abort))
 
 
-(defun user/magit-mode-hook ()
+(defun user--magit-mode-hook ()
   "Magit mode hook.")
 
 
@@ -32,7 +32,7 @@
   (magit-refresh))
 
 
-(defun user/magit-init ()
+(defun user--magit-config ()
   "Initialize Magit."
   (setq-default
    ;; Do not save buffers.
@@ -49,7 +49,7 @@
       ;; Full frame Magit status.
       (fullframe magit-status magit-mode-quit-window nil)))
 
-  (add-hook 'magit-mode-hook 'user/magit-mode-hook)
+  (add-hook 'magit-mode-hook 'user--magit-mode-hook)
 
   ;;; (Bindings) ;;;
   (after-load 'magit
@@ -58,29 +58,29 @@
   ;;; (Packages) ;;;
   (use-package magit-gerrit
     :ensure t
-    :config (user/magit-gerrit-init))
+    :config (user--magit-gerrit-config))
   (use-package magit-tramp
     :ensure t))
 
 
-(defun user/magit-gerrit-init ()
+(defun user--magit-gerrit-config ()
   "Initialize magit-gerrit."
   (setq-default
    ;; Magit binding for Gerrit commands.
    magit-gerrit-popup-prefix "G"))
 
 
-(defun user/git-gutter-fringe-init ()
+(defun user--git-gutter-fringe-config ()
   "Initialize git gutter fringe."
   (setq-default git-gutter-fr:side 'left-fringe))
 
 
-(defun user/git-messenger-init ()
+(defun user--git-messenger-config ()
   "Initialize git messenger."
   (setq-default git-messenger:show-detail t))
 
 
-(defun user/git-init ()
+(defun user--git-config ()
   "Initialize Git support."
   (after-load 'popwin
     ;; Use popwin for certain Magit buffers.
@@ -93,12 +93,12 @@
   (add-auto-mode 'conf-mode "\\.git\\(config\\|attributes\\|ignore\\)\\(\\.local\\)?$")
 
   ;;; (Hooks) ;;;
-  (add-hook 'git-commit-mode-hook 'user/git-commit-mode-hook)
+  (add-hook 'git-commit-mode-hook 'user--git-commit-mode-hook)
 
   ;;; (Packages) ;;;
   (use-package magit
     :ensure t
-    :config (user/magit-init))
+    :config (user--magit-config))
   (use-package git-timemachine
     :ensure t)
 
@@ -107,10 +107,10 @@
   (when (display-graphic-p)
     (use-package git-gutter-fringe
       :ensure t
-      :config (user/git-gutter-fringe-init)))
+      :config (user--git-gutter-fringe-config)))
   (use-package git-messenger
     :ensure t
-    :config (user/git-messenger-init))
+    :config (user--git-messenger-config))
   (when (feature-p 'helm)
     (use-package helm-ls-git
       :ensure t)
@@ -123,7 +123,7 @@
       :ensure t)))
 
 (with-executable 'git
-  (user/git-init))
+  (user--git-config))
 
 
 (provide 'vcs/git)

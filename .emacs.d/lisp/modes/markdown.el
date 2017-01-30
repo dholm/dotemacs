@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/markdown-mode-hook ()
+(defun user--markdown-mode-hook ()
   "Markdown mode hook."
   (user/smartparens-enable)
 
@@ -13,7 +13,7 @@
     (guide-key/add-local-highlight-command-regexp "markdown-")))
 
 
-(defun user/markdown-mode-init ()
+(defun user--markdown-mode-config ()
   "Initialize markdown mode."
   (after-load 'smartparens
     (defun sp--gfm-skip-asterisk (ms mb me)
@@ -29,11 +29,11 @@
       (sp-local-tag "<"  "<_>" "</_>" :transform 'sp-match-sgml-tags)))
 
   ;;; (Hooks) ;;;
-  (add-hook 'markdown-mode-hook 'user/markdown-mode-hook))
+  (add-hook 'markdown-mode-hook 'user--markdown-mode-hook))
 
 (use-package markdown-mode
   :ensure t
-  :config (user/markdown-mode-init))
+  :config (user--markdown-mode-config))
 (with-executable 'npm
   (require-package '(:name livedown)))
 

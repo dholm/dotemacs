@@ -2,17 +2,17 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/bison-mode-hook ()
+(defun user--bison-mode-hook ()
   "Bison mode hook.")
 
 
-(defun user/bison-mode-init ()
+(defun user--bison-mode-config ()
   "Initialize Bison mode."
-  (add-hook 'bison-mode-hook 'user/bison-mode-hook))
+  (add-hook 'bison-mode-hook 'user--bison-mode-hook))
 
 (use-package bison-mode
   :ensure t
-  :config (user/bison-mode-init))
+  :config (user--bison-mode-config))
 
 
 (provide 'modes/bison)

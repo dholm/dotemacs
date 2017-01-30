@@ -2,20 +2,20 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/dash-at-point-init ()
+(defun user--dash-at-point-config ()
   "Initialize Dash-at-point."
   ;;; (Bindings) ;;;
   (user/bind-key-global :doc :reference 'dash-at-point))
 
 
-(defun user/dash-app-init ()
+(defun user--dash-app-config ()
   "Initialize Dash support for Emacs."
   (use-package dash-at-point
     :ensure t
-    :config (user/dash-at-point-init)))
+    :config (user--dash-at-point-config)))
 
 (when (osx-app-installed-p "com.kapeli.dash")
-  (user/dash-app-init))
+  (user--dash-app-config))
 
 
 (provide 'utilities/dash-app)

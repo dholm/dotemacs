@@ -2,20 +2,20 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/vala-mode-hook ()
+(defun user--vala-mode-hook ()
   "Vala mode hook."
   ;; Bring in CEDET.
-  (user/cedet-hook))
+  (user--cedet-hook))
 
 
-(defun user/vala-mode-init ()
+(defun user--vala-mode-config ()
   "Initialize Vala mode."
-  (add-hook 'vala-mode-hook 'user/vala-mode-hook))
+  (add-hook 'vala-mode-hook 'user--vala-mode-hook))
 
 (with-executable 'valac
   (use-package vala-mode
     :ensure t
-    :config (user/vala-mode-init)))
+    :config (user--vala-mode-config)))
 
 
 (provide 'modes/vala)

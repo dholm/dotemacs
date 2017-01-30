@@ -18,7 +18,7 @@
     (call-interactively 'browse-url)))
 
 
-(defun user/browser-init ()
+(defun user--browser-config ()
   "Initialize web browsing in Emacs."
   (let ((browser
          (cond ((feature-p 'eww) (assq :eww user/browser-alist))
@@ -34,7 +34,7 @@
                           (cdr (assq :browse-url external-browser)))
     (user/bind-key-global :nav :open 'browse-url-at-point)))
 
-(user/browser-init)
+(user--browser-config)
 
 
 (provide 'apps/browser)

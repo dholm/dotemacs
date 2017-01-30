@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/solarized-init ()
+(defun user--solarized-config ()
   "Initialize Solarized theme."
   (when window-system
     (setq-default
@@ -14,7 +14,7 @@
   (load-theme 'solarized t))
 
 
-(defun user/theme-init ()
+(defun user--theme-config ()
   "Initialize Emacs theme."
   (when (display-graphic-p)
     (cond
@@ -39,9 +39,9 @@
                            :type github
                            :pkgname "dholm/solarized-theme"
                            :prepare (add-to-list 'custom-theme-load-path default-directory)
-                           :after (user/solarized-init))))
+                           :after (user--solarized-config))))
 
-(user/theme-init)
+(user--theme-config)
 
 
 (provide 'ux/theme)

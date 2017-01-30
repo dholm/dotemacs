@@ -2,18 +2,18 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/ttcn3-mode-hook ()
+(defun user--ttcn3-mode-hook ()
   "TTCN mode hook."
   ;; Separate camel-case into separate words
   (subword-mode t))
 
 
-(defun user/ttcn-mode-init ()
+(defun user--ttcn-mode-config ()
   "Initialize TTCN mode."
-  (add-hook 'ttcn3-mode-hook 'user/ttcn3-mode-hook))
+  (add-hook 'ttcn3-mode-hook 'user--ttcn3-mode-hook))
 
 
-(require-package '(:name ttcn-mode :after (user/ttcn-mode-init)))
+(require-package '(:name ttcn-mode :after (user--ttcn-mode-config)))
 
 
 (provide 'modes/ttcn)

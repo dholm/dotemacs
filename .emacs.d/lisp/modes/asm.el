@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/asm-mode-hook ()
+(defun user--asm-mode-hook ()
   "Assembly mode hook."
   (setq
    ;; Indent using tabs by default.
@@ -37,24 +37,24 @@
   (set (make-local-variable 'comment-start) (string asm-comment-char)))
 
 
-(defun user/iasm-mode-init ()
+(defun user--iasm-mode-config ()
   "Initialize interactive assmelby mode."
   ;;; (Bindings) ;;;
   (user/bind-key-global :code :library-list 'iasm-ldd)
   (user/bind-key-global :code :disassemble 'iasm-disasm))
 
 
-(defun user/asm-mode-init ()
+(defun user--asm-mode-config ()
   "Initialize assembly mode."
-  (add-hook 'asm-mode-hook 'user/asm-mode-hook)
+  (add-hook 'asm-mode-hook 'user--asm-mode-hook)
   (add-auto-mode 'asm-mode "\\.[ia]65$")
 
   ;;; (Packages) ;;;
   (use-package iasm-mode
     :ensure t
-    :config (user/iasm-mode-init)))
+    :config (user--iasm-mode-config)))
 
-(user/asm-mode-init)
+(user--asm-mode-config)
 
 
 (provide 'modes/asm)

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/csv-mode-hook ()
+(defun user--csv-mode-hook ()
   "CSV mode hook."
   (setq
    ;; Do not wrap long lines.
@@ -12,7 +12,7 @@
   (user/whitespace-disable-style '(lines)))
 
 
-(defun user/csv-mode-init ()
+(defun user--csv-mode-config ()
   "Initialize CSV mode."
   (setq-default
    ;; Default separators for CSV files.
@@ -21,11 +21,11 @@
    csv-header-lines 1)
 
   (add-auto-mode 'csv-mode "\\.[Cc][Ss][Vv]$")
-  (add-hook 'csv-mode-hook 'user/csv-mode-hook))
+  (add-hook 'csv-mode-hook 'user--csv-mode-hook))
 
 (use-package csv-mode
   :ensure t
-  :config (user/csv-mode-init))
+  :config (user--csv-mode-config))
 
 
 (provide 'modes/csv)

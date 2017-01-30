@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/scrolling-init ()
+(defun user--scrolling-config ()
   "Configure Emacs buffer scrolling."
   (setq-default
    ;; Set distance in line from margin before scrolling commences.
@@ -21,7 +21,7 @@
   ;;; (Bindings) ;;;
   (user/bind-key-global :emacs :recenter 'recenter))
 
-(user/scrolling-init)
+(user--scrolling-config)
 
 
 (provide 'ux/scrolling)

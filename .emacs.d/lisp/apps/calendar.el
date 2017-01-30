@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/calendar-load-hook ()
+(defun user--calendar-load-hook ()
   "Calendar initialization hook."
   (with-feature 'appt
     ;; Enable appointment notifications.
@@ -32,7 +32,7 @@
     (calendar-dayname-on-or-before 0 (+ paschal-moon 7))))
 
 
-(defun user/swedish-holidays-init ()
+(defun user--swedish-holidays-config ()
   "Initialize swedish holidays."
   (setq-default
    ;; General swedish holidays.
@@ -120,7 +120,7 @@
            )))
 
 
-(defun user/calfw-init ()
+(defun user--calfw-config ()
   "Initialize calfw."
   (setq-default
    ;; Use `fill-region' to wrap long lines.
@@ -154,7 +154,7 @@
    (t (appt-delete-window))))
 
 
-(defun user/appt-init ()
+(defun user--appt-config ()
   "Initialize appointment notification system."
   (setq-default
    ;; Number of minutes to notify before an event starts.
@@ -168,7 +168,7 @@
    appt-delete-window-function 'user/appt-delete-window))
 
 
-(defun user/calendar-week-init ()
+(defun user--calendar-week-config ()
   "Initialize display of week numbers in calendar."
   (copy-face 'calendar-weekend-header 'calendar-iso-week-header-face)
   (copy-face 'calendar-weekend-header 'calendar-iso-week-face)
@@ -187,7 +187,7 @@
      'font-lock-face 'calendar-iso-week-face)))
 
 
-(defun user/calendar-init ()
+(defun user--calendar-config ()
   "Initialize calendar."
   (let ((diary-data-store (path-join *user-org-data-directory* "diary.org")))
     (setq-default
@@ -206,25 +206,25 @@
      ;; Week starts on Monday.
      calendar-week-start-day 1))
 
-  (user/swedish-holidays-init)
+  (user--swedish-holidays-config)
   (after-load 'calendar
-    (user/calendar-week-init))
+    (user--calendar-week-config))
   (after-load 'appt
-    (user/appt-init))
+    (user--appt-config))
 
   ;;; (Hooks) ;;;
   (add-hook 'diary-display-function 'diary-fancy-display)
   (add-hook 'calendar-today-visible-hook 'calendar-mark-today)
-  (add-hook 'calendar-load-hook 'user/calendar-load-hook)
+  (add-hook 'calendar-load-hook 'user--calendar-load-hook)
 
   ;;; (Packages) ;;;
   (use-package calfw
     :defer t
-    :config (user/calfw-init))
+    :config (user--calfw-config))
   (use-package excorporate
     :defer t))
 
-(user/calendar-init)
+(user--calendar-config)
 
 
 (provide 'apps/calendar)

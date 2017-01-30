@@ -74,7 +74,7 @@
       "Constructor for projectile project at path in ARGS."
       (let ((default-directory (file-name-as-directory (first args)))
             (projectile-require-project-root nil))
-        (when (projectile-project-p)
+        (when (and (feature-p 'projectile) (projectile-project-p))
           (make-instance 'user/projectile-proj :root-path (projectile-project-root)))))
 
     (defmethod user/proj-root ((project user/projectile-proj))

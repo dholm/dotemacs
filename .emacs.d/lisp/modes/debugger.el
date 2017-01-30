@@ -2,17 +2,17 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/debugger-mode-hook ()
+(defun user--debugger-mode-hook ()
   "Debugger mode hook."
   (hl-line-mode t))
 
 
-(defun user/debugger-init ()
+(defun user--debugger-config ()
   "Initialize debugger mode."
-  (add-hook 'debugger-mode-hook 'user/debugger-mode-hook))
+  (add-hook 'debugger-mode-hook 'user--debugger-mode-hook))
 
 (after-load 'debug
-  (user/debugger-init))
+  (user--debugger-config))
 
 
 (provide 'modes/debugger)

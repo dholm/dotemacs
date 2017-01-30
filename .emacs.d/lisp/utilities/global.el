@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/helm-gtags-mode-hook ()
+(defun user--helm-gtags-mode-hook ()
   "Mode hook for helm-gtags."
   ;; Automatically update GNU Global database if it exists.
   (when (user/gnu-global-tags-p (buffer-file-name))
@@ -13,7 +13,7 @@
                               (buffer-file-name)))))
 
 
-(defun user/ggtags-mode-hook ()
+(defun user--ggtags-mode-hook ()
   "Mode hook for ggtags."
   (when (user/gnu-global-tags-p (buffer-file-name))
     (setq
@@ -93,7 +93,7 @@
         (cedet-gnu-global-create/update-database project-root))))))
 
 
-(defun user/helm-gtags-init ()
+(defun user--helm-gtags-config ()
   "Initialize helm-gtags."
   (setq-default
    ;; Don't care about case when searching tags.
@@ -106,20 +106,20 @@
    helm-gtags-pulse-at-cursor t)
 
   ;;; (Hooks) ;;;
-  (add-hook 'helm-gtags-mode-hook 'user/helm-gtags-mode-hook))
+  (add-hook 'helm-gtags-mode-hook 'user--helm-gtags-mode-hook))
 
 
-(defun user/ggtags-init ()
+(defun user--ggtags-config ()
   "Initialize ggtags."
   (setq-default
    ;; Never use global to highlight tags.
    ggtags-highlight-tag nil)
 
   ;;; (Hooks) ;;;
-  (add-hook 'ggtags-mode-hook 'user/ggtags-mode-hook))
+  (add-hook 'ggtags-mode-hook 'user--ggtags-mode-hook))
 
 
-(defun user/global-init ()
+(defun user--global-config ()
   "Initialize GNU Global support."
   (add-to-list
    ;; Don't invoke debugger if global can't find its tags.
@@ -128,13 +128,13 @@
   ;;; (Packages) ;;;
   (use-package helm-gtags
     :defer t
-    :config (user/helm-gtags-init))
+    :config (user--helm-gtags-config))
   (use-package ggtags
     :defer t
-    :config (user/ggtags-init)))
+    :config (user--ggtags-config)))
 
 (with-executable 'global
-  (user/global-init))
+  (user--global-config))
 
 
 (provide 'utilities/global)

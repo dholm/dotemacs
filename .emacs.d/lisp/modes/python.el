@@ -2,10 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/python-mode-hook ()
+(defun user--python-mode-hook ()
   "Python mode hook."
   ;; Load CEDET
-  (user/python-mode-cedet-hook)
+  (user--python-mode-cedet-hook)
 
   (user/gnu-global-enable)
 
@@ -57,13 +57,13 @@
       (switch-to-buffer "*bpython*"))))
 
 
-(defun user/python-mode-cedet-hook ()
+(defun user--python-mode-cedet-hook ()
   "CEDET hook for Python mode."
   (with-feature 'semantic/wisent/python
-    (user/cedet-hook)))
+    (user--cedet-hook)))
 
 
-(defun user/jedi-init ()
+(defun user--jedi-config ()
   "Initialize jedi."
   (setq-default
    ;; Don't install Jedi's bindings.
@@ -74,7 +74,7 @@
    jedi:tooltip-method '(popup)))
 
 
-(defun user/python-init ()
+(defun user--python-config ()
   "Initialize python."
   (setq-default
    ;; Don't try to guess the indentation.
@@ -94,7 +94,7 @@
   (add-auto-mode 'python-mode "SConstruct" "SConscript"))
 
 
-(defun user/pymacs-init ()
+(defun user--pymacs-config ()
   "Initialize PyMacs."
   (setq-default
    ropemacs-guess-project t
@@ -103,7 +103,7 @@
    ropemacs-codeassist-maxfixes 3))
 
 
-(defun user/python-environment-init ()
+(defun user--python-environment-config ()
   "Initialize Python environment package."
   (setq-default
    ;; Locate of Python environment store.
@@ -111,12 +111,12 @@
                                            "python-environment")))
 
 
-(defun user/python-mode-init ()
+(defun user--python-mode-config ()
   "Initialize Python mode."
   ;;; (Packages) ;;;
   (use-package python
     :ensure t
-    :config (user/python-init))
+    :config (user--python-config))
   (use-package anaconda-mode
     :defer t)
   (use-package py-autopep8
@@ -129,21 +129,21 @@
     :defer t)
   (use-package python-environment
     :defer t
-    :config (user/python-environment-init))
+    :config (user--python-environment-config))
   (use-package pyvenv
     :defer t)
   (use-package jedi
     :defer t
-    :config (user/jedi-init))
+    :config (user--jedi-config))
   (when (feature-p 'helm)
     (use-package helm-pydoc
       :defer t))
 
   (add-interpreter-mode 'python-mode "python[0-9.]*")
-  (add-hook 'python-mode-hook 'user/python-mode-hook))
+  (add-hook 'python-mode-hook 'user--python-mode-hook))
 
 (with-executable 'python
-  (user/python-mode-init))
+  (user--python-mode-config))
 
 
 (provide 'modes/python)

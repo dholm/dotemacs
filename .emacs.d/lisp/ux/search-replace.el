@@ -2,21 +2,21 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/visual-regexp-init ()
+(defun user--visual-regexp-config ()
   "Initialize visual regexp."
   ;;; (Bindings) ;;;
   (global-set-key [remap query-replace-regexp] 'vr/query-replace)
   (global-set-key [remap replace-regexp] 'vr/replace))
 
 
-(defun user/anzu-init ()
+(defun user--anzu-config ()
   "Initialize anzu."
   (global-anzu-mode t)
   (after-load 'diminish
     (diminish 'anzu-mode)))
 
 
-(defun user/search-replace-init ()
+(defun user--search-replace-config ()
   "Initialize Emacs search and replace."
   (setq-default
    ;; Highlight matches when using grep.
@@ -36,12 +36,12 @@
   ;;; (Packages) ;;;
   (use-package visual-regexp
     :ensure t
-    :config (user/visual-regexp-init))
+    :config (user--visual-regexp-config))
   (use-package anzu
     :ensure t
-    :config (user/anzu-init)))
+    :config (user--anzu-config)))
 
-(user/search-replace-init)
+(user--search-replace-config)
 
 
 (provide 'ux/search-replace)

@@ -2,20 +2,20 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/adoc-mode-hook ()
+(defun user--adoc-mode-hook ()
   "AsciiDoc mode hook."
-  (user/text-mode-hook))
+  (user--text-mode-hook))
 
 
-(defun user/adoc-mode-init ()
+(defun user--adoc-mode-config ()
   "Initialize AsciiDoc mode."
-  (add-hook 'adoc-mode-hook 'user/adoc-mode-hook)
+  (add-hook 'adoc-mode-hook 'user--adoc-mode-hook)
 
   (add-auto-mode 'adoc-mode "\\.adoc$" "\\.asciidoc$"))
 
 (use-package adoc-mode
   :ensure t
-  :config (user/adoc-mode-init))
+  :config (user--adoc-mode-config))
 
 
 (provide 'modes/asciidoc)

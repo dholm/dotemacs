@@ -9,7 +9,7 @@
                                                  "bookmark-menu-state.el"))
 
 
-(defun user/visible-bookmarks-init ()
+(defun user--visible-bookmarks-config ()
   "Initialize visible bookmarks."
   (setq-default
    ;; Persistent bookmarks.
@@ -34,7 +34,7 @@
   (user/bind-key-global :code :bookmark-prev 'bm-previous))
 
 
-(defun user/bookmark+-before-init ()
+(defun user--bookmark+-init ()
   "Setup before loading bookmark+."
   (setq-default
    ;; Enable versioned backups.
@@ -48,7 +48,7 @@
    bookmark-default-file *bookmark+-data-file*))
 
 
-(defun user/bookmark+-init ()
+(defun user--bookmark+-config ()
   "Initialize bookmark+."
   ;;; (Bindings) ;;;
   ;; Bind bookmarks to C-c b
@@ -59,18 +59,18 @@
   (define-key bookmark-map (kbd "t") 'bmkp-add-tags))
 
 
-(defun user/bookmarks-init ()
+(defun user--bookmarks-config ()
   "Initialize bookmarks in Emacs."
   ;;; (Packages) ;;;
   (use-package bm
-    :ensure t
-    :config (user/visible-bookmarks-init))
+    :defer t
+    :config (user--visible-bookmarks-config))
   (use-package bookmark+
-    :ensure t
-    :init (user/bookmark+-before-init)
-    :config (user/bookmark+-init)))
+    :defer t
+    :init (user--bookmark+-init)
+    :config (user--bookmark+-config)))
 
-(user/bookmarks-init)
+(user--bookmarks-config)
 
 
 (provide 'utilities/bookmarks)

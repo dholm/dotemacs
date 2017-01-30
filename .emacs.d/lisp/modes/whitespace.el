@@ -7,7 +7,7 @@
 (make-variable-buffer-local 'user/prev-whitespace-mode-suppressed)
 
 
-(defun user/whitespace-mode-hook ()
+(defun user--whitespace-mode-hook ()
   "Whitespace mode hook."
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :whitespace-auto-cleanup
@@ -45,7 +45,7 @@
            (if (member 'auto-cleanup whitespace-action) "enabled" "disabled"))))
 
 
-(defun user/whitespace-init ()
+(defun user--whitespace-config ()
   "Initialize whitespace mode."
   (setq-default
    ;; Maximum allowed line length.
@@ -91,9 +91,9 @@
             (whitespace-tab-width tab-width))
         ad-do-it)))
 
-  (add-hook 'whitespace-mode-hook 'user/whitespace-mode-hook))
+  (add-hook 'whitespace-mode-hook 'user--whitespace-mode-hook))
 
-(user/whitespace-init)
+(user--whitespace-config)
 
 
 (provide 'modes/whitespace)

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/request-init ()
+(defun user--request-config ()
   "Initialize request."
   (setq-default
    ;; Request cache store.
@@ -10,7 +10,7 @@
 
 (use-package request
   :ensure t
-  :config (user/request-init))
+  :config (user--request-config))
 
 
 (provide 'utilities/request)

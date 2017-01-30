@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/google-this-init ()
+(defun user--google-this-config ()
   "Initialize Google this."
   (google-this-mode t)
   (after-load 'diminish
@@ -15,7 +15,7 @@
 
 (use-package google-this
   :ensure t
-  :config (user/google-this-init))
+  :config (user--google-this-config))
 
 
 (provide 'utilities/google-this)

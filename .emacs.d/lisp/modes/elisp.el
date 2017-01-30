@@ -2,9 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/emacs-lisp-mode-hook ()
+(defun user--emacs-lisp-mode-hook ()
   "Emacs Lisp mode hook."
-  (user/lisp-mode-common-hook)
+  (user--lisp-mode-common-hook)
 
   (with-feature 'auto-compile
     (auto-compile-on-save-mode t)
@@ -41,12 +41,12 @@
   (user/bind-key-local :debug :step 'debugger-step-through))
 
 
-(defun user/ielm-mode-hook ()
+(defun user--ielm-mode-hook ()
   "Interactive Emacs Lisp mode hook."
-  (user/emacs-lisp-mode-hook))
+  (user--emacs-lisp-mode-hook))
 
 
-(defun user/minibuffer-setup-hook ()
+(defun user--minibuffer-setup-hook ()
   "Emacs minibuffer hook."
   (when (eq this-command 'eval-expression)
     (when (feature-p 'rainbow-delimiters)
@@ -73,27 +73,27 @@
                  :margin t))))
 
 
-(defun user/eldoc-eval-init ()
+(defun user--eldoc-eval-config ()
   "Initialize eldoc eval."
   (eldoc-in-minibuffer-mode t))
 
 
-(defun user/ielm-init ()
+(defun user--ielm-config ()
   "Initialize interactive elisp mode."
   ;; Use auto-completion even in inferior elisp mode.
   (add-ac-modes 'inferior-emacs-lisp-mode)
 
-  (add-hook 'ielm-mode-hook 'user/ielm-mode-hook))
+  (add-hook 'ielm-mode-hook 'user--ielm-mode-hook))
 
 
-(defun user/elisp-mode-init ()
+(defun user--elisp-mode-config ()
   "Initialize Emacs Lisp modes."
   (after-load 'ielm
-    (user/ielm-init))
+    (user--ielm-config))
 
   ;;; (Hooks) ;;;
-  (add-hook 'emacs-lisp-mode-hook 'user/emacs-lisp-mode-hook)
-  (add-hook 'minibuffer-setup-hook 'user/minibuffer-setup-hook)
+  (add-hook 'emacs-lisp-mode-hook 'user--emacs-lisp-mode-hook)
+  (add-hook 'minibuffer-setup-hook 'user--minibuffer-setup-hook)
 
   (add-auto-mode 'emacs-lisp-mode "Carton$")
 
@@ -106,10 +106,10 @@
     :ensure t)
   (use-package eldoc-eval
     :ensure t
-    :config (user/eldoc-eval-init)))
+    :config (user--eldoc-eval-config)))
 
 (after-load 'modes/lisp
-  (user/elisp-mode-init))
+  (user--elisp-mode-config))
 
 
 (provide 'modes/elisp)

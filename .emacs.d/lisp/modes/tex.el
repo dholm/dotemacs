@@ -6,7 +6,7 @@
   "Non-nil if preview has been set up.")
 
 
-(defun user/tex-mode-hook ()
+(defun user--tex-mode-hook ()
   "TeX mode hook."
   (user/gnu-global-enable)
 
@@ -54,7 +54,7 @@
     (user/bind-key-local :nav :references 'ebib)))
 
 
-(defun user/latex-mode-hook ()
+(defun user--latex-mode-hook ()
   "LaTeX mode hook."
   ;; Enable TeX math macros.
   (LaTeX-math-mode t)
@@ -72,11 +72,11 @@
   (local-set-key [remap fill-paragraph] 'LaTeX-fill-paragraph))
 
 
-(defun user/bibtex-mode-hook ()
+(defun user--bibtex-mode-hook ()
   "BibTeX mode hook.")
 
 
-(defun user/auctex-init ()
+(defun user--auctex-config ()
   "Initialize AUCTeX."
   (setq-default
    ;; Use synctex to communicate with LaTeX.
@@ -161,7 +161,7 @@ Makes it easier to version control LaTeX-files."
       (set-marker to-marker nil))))
 
 
-(defun user/ebib-init ()
+(defun user--ebib-config ()
   "Initialize Ebib."
   (setq-default
    ebib-file-search-dirs
@@ -170,12 +170,12 @@ Makes it easier to version control LaTeX-files."
         (user/proj-root project)))))
 
 
-(defun user/zotelo-init ()
+(defun user--zotelo-config ()
   "Initialize Zotelo."
   (add-hook 'TeX-mode-hook 'zotelo-minor-mode))
 
 
-(defun user/auto-complete-latex-init ()
+(defun user--auto-complete-latex-config ()
   "Initialize LaTeX auto completion."
   (setq-default
    ac-l-dict-directory (path-join (el-get-package-directory
@@ -183,14 +183,14 @@ Makes it easier to version control LaTeX-files."
   (add-ac-modes 'latex-mode 'LaTeX-mode))
 
 
-(defun user/ac-math-init ()
+(defun user--ac-math-config ()
   "Initialize math auto completion."
   (setq-default
    ;; Enable unicode math input.
    ac-math-unicode-in-math-p t))
 
 
-(defun user/tex-mode-init ()
+(defun user--tex-mode-config ()
   "Initialize generic text editing mode."
   (setq-default
    ;; (BibTeX) ;;
@@ -212,27 +212,27 @@ Makes it easier to version control LaTeX-files."
       (sp-local-pair "\\left\\{" " \\right\\}")))
 
   ;; Set up hooks.
-  (add-hook 'tex-mode-hook 'user/tex-mode-hook)
-  (add-hook 'TeX-mode-hook 'user/tex-mode-hook)
-  (add-hook 'latex-mode-hook 'user/latex-mode-hook)
-  (add-hook 'LaTeX-mode-hook 'user/latex-mode-hook)
-  (add-hook 'bibtex-mode-hook 'user/bibtex-mode-hook)
+  (add-hook 'tex-mode-hook 'user--tex-mode-hook)
+  (add-hook 'TeX-mode-hook 'user--tex-mode-hook)
+  (add-hook 'latex-mode-hook 'user--latex-mode-hook)
+  (add-hook 'LaTeX-mode-hook 'user--latex-mode-hook)
+  (add-hook 'bibtex-mode-hook 'user--bibtex-mode-hook)
 
   ;;; (Packages) ;;;
   (use-package auctex
     :defer t
-    :config (user/auctex-init))
+    :config (user--auctex-config))
   (use-package ebib
     :defer t
-    :config (user/ebib-init))
+    :config (user--ebib-config))
   (use-package zotelo
     :defer t
-    :config (user/zotelo-init))
+    :config (user--zotelo-config))
   (use-package ac-math
     :defer t
-    :config (user/ac-math-init))
+    :config (user--ac-math-config))
   (require-package
-   '(:name auto-complete-latex :after (user/auto-complete-latex-init)))
+   '(:name auto-complete-latex :after (user--auto-complete-latex-config)))
   (use-package company-auctex
     :defer t)
   (use-package company-math
@@ -242,7 +242,7 @@ Makes it easier to version control LaTeX-files."
 
 (when (or (executable-find "tex")
           (executable-find "latex"))
-  (user/tex-mode-init))
+  (user--tex-mode-config))
 
 
 (provide 'modes/tex)

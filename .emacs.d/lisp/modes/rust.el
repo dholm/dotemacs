@@ -2,21 +2,21 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/rust-mode-hook ()
+(defun user--rust-mode-hook ()
   "Rust mode hook."
   (with-feature 'rusti
     (rusti-minor-mode t)))
 
 
-(defun user/rust-mode-init ()
+(defun user--rust-mode-config ()
   "Initialize Rust mode."
   ;;; (Hooks) ;;;
-  (add-hook 'rust-mode-hook 'user/rust-mode-hook))
+  (add-hook 'rust-mode-hook 'user--rust-mode-hook))
 
 (with-executable 'rustc
   (use-package rust-mode
     :ensure t
-    :config (user/rust-mode-init))
+    :config (user--rust-mode-config))
   (use-package flycheck-rust
     :ensure t)
   (require-package '(:name rusti)))

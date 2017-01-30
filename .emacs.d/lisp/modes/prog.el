@@ -2,9 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/prog-mode-hook ()
+(defun user--prog-mode-hook ()
   "Programming mode hook."
-  (user/fundamental-mode-hook)
+  (user--fundamental-mode-hook)
 
   ;; Protect against missing dictionary.
   (try-eval
@@ -21,15 +21,15 @@
                                           'comment-dwim-2 'comment-dwim)))
 
 
-(defun user/prog-mode-init ()
+(defun user--prog-mode-config ()
   "Initialize generic programming mode."
-  (add-hook 'prog-mode-hook 'user/prog-mode-hook)
+  (add-hook 'prog-mode-hook 'user--prog-mode-hook)
 
   ;;; (Packages) ;;;
   (use-package comment-dwim-2
     :ensure t))
 
-(user/prog-mode-init)
+(user--prog-mode-config)
 
 
 (provide 'modes/prog)

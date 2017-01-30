@@ -7,7 +7,7 @@
 (defconst *user-cedet-gnu-global-enabled* t)
 
 
-(defun user/cedet-hook ()
+(defun user--cedet-hook ()
   "Hook for modes with CEDET support."
   ;;; (EDE) ;;;
   ;; Don't use with-feature here in case el-get hasn't initialized CEDET yet.
@@ -45,7 +45,7 @@
         (message (format "GNU idutils database updated at %S" proj-root))))))
 
 
-(defun user/semantic-mode-hook ()
+(defun user--semantic-mode-hook ()
   "Semantic mode hook."
   (when (semantic-active-p)
     ;; Scan source code automatically during idle time.
@@ -76,7 +76,7 @@
     (ede-system-include-path ede-object)))
 
 
-(defun user/ede-minor-mode-hook ()
+(defun user--ede-minor-mode-hook ()
   "EDE minor mode hook."
   (cond
    ((user/auto-complete-p)
@@ -93,7 +93,7 @@
        'ede-object-system-include-path)))))
 
 
-(defun user/cedet-before-init ()
+(defun user--cedet-init ()
   "Setup before loading CEDET."
   (setq-default
    ;; Set up paths to caches
@@ -104,7 +104,7 @@
    srecode-map-save-file (path-join *user-cache-directory* "srecode-map.el")))
 
 
-(defun user/ede-init ()
+(defun user--ede-config ()
   "Initialize EDE."
   (after-load 'cedet-contrib-load
     ;; Enable CScope if available.
@@ -115,10 +115,10 @@
               '(ede-locate-cscope ede-locate-base)))))
 
   ;;; (Hooks) ;;;
-  (add-hook 'ede-minor-mode-hook 'user/ede-minor-mode-hook))
+  (add-hook 'ede-minor-mode-hook 'user--ede-minor-mode-hook))
 
 
-(defun user/semantic-init ()
+(defun user--semantic-config ()
   "Initialize Semantic."
   (after-load 'semantic
     (when *user-cedet-ectags-enabled*
@@ -165,10 +165,10 @@
       (global-semanticdb-minor-mode t)))
 
   ;;; (Hooks) ;;;
-  (add-hook 'semantic-mode-hook 'user/semantic-mode-hook))
+  (add-hook 'semantic-mode-hook 'user--semantic-mode-hook))
 
 
-(defun user/cedet-init ()
+(defun user--cedet-config ()
   "Initialize CEDET."
   (setq-default
    ;; Nice looking breadcrumbs.
@@ -185,10 +185,10 @@
     ;; Register missing autoloads
     (autoload 'wisent-ruby-default-setup "wisent-ruby")
 
-    (user/ede-init)
-    (user/semantic-init)))
+    (user--ede-config)
+    (user--semantic-config)))
 
-(require-package '(:name cedet :before (user/cedet-init) :after (user/cedet-before-init)))
+(require-package '(:name cedet :before (user--cedet-init) :after (user--cedet-config)))
 (use-package stickyfunc-enhance
   :ensure t)
 

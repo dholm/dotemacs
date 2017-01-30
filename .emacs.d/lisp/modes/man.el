@@ -7,7 +7,7 @@
  "Path to user's man cache store.")
 
 
-(defun user/woman-init ()
+(defun user--woman-config ()
   "Initialize Emacs WoMan."
   (setq-default
    ;; WoMan cache store.
@@ -23,22 +23,22 @@
     (user/bind-key-global :doc :manual 'man)))
 
 
-(defun user/man-mode-init ()
+(defun user--man-mode-config ()
   "Initialize Emacs man-mode."
   (setq-default
    ;; Make man-mode wrap lines at half the width of Emacs.
    Man-width (/ (window-total-width (frame-root-window)) 2)))
 
 
-(defun user/man-init ()
+(defun user--man-config ()
   "Initialize Emacs man support."
-  (user/man-mode-init)
-  (user/woman-init)
+  (user--man-mode-config)
+  (user--woman-config)
 
   (make-directory *user-man-cache-directory* t))
 
 (with-executable 'man
-  (user/man-init))
+  (user--man-config))
 
 
 (provide 'modes/man)

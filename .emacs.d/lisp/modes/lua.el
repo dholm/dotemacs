@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/lua-mode-hook ()
+(defun user--lua-mode-hook ()
   "Lua mode hook."
   (user/gnu-global-enable)
 
@@ -13,7 +13,7 @@
     (lua-block-mode t)))
 
 
-(defun user/lua-mode-init ()
+(defun user--lua-mode-config ()
   "Initialize Lua mode."
   (use-package lua-mode
     :ensure t)
@@ -25,10 +25,10 @@
                                       (autoload 'lua-block-mode "lua-block" nil
                                         t))))
 
-  (add-hook 'lua-mode-hook 'user/lua-mode-hook))
+  (add-hook 'lua-mode-hook 'user--lua-mode-hook))
 
 (with-executable 'lua
-  (user/lua-mode-init))
+  (user--lua-mode-config))
 
 
 (provide 'modes/lua)

@@ -2,13 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/lisp-mode-common-hook ()
+(defun user--lisp-mode-common-hook ()
   "Lisp mode hook."
   (setq-local
    ;; Indent using spaces.
    indent-tabs-mode nil)
 
-  (user/cedet-hook)
+  (user--cedet-hook)
 
   (user/gnu-global-enable)
 
@@ -36,18 +36,18 @@
   (user/bind-key-local :code :eval-expression 'eval-last-sexp))
 
 
-(defun user/lisp-mode-hook ()
+(defun user--lisp-mode-hook ()
   "Lisp mode hook."
-  (user/lisp-mode-common-hook))
+  (user--lisp-mode-common-hook))
 
 
-(defun user/slime-mode-hook ()
+(defun user--slime-mode-hook ()
   "SLIME mode hook."
   (when (feature-p 'ac-slime)
     (set-up-slime-ac)))
 
 
-(defun user/slime-init ()
+(defun user--slime-config ()
   "Initialize SLIME."
   (setq-default
    slime-protocol-version 'ignore
@@ -65,14 +65,14 @@
 
   (slime-setup '(slime-repl))
 
-  (add-hook 'slime-mode-hook 'user/slime-mode-hook)
-  (add-hook 'slime-repl-mode-hook 'user/slime-mode-hook))
+  (add-hook 'slime-mode-hook 'user--slime-mode-hook)
+  (add-hook 'slime-repl-mode-hook 'user--slime-mode-hook))
 
 
-(defun user/lisp-mode-init ()
+(defun user--lisp-mode-config ()
   "Initialize Lisp modes."
   ;;; (Hooks) ;;;
-  (add-hook 'lisp-mode-hook 'user/lisp-mode-hook)
+  (add-hook 'lisp-mode-hook 'user--lisp-mode-hook)
 
   ;;; (Packages) ;;;
   (use-package rainbow-delimiters
@@ -87,11 +87,11 @@
             (executable-find "clisp"))
     (use-package slime
       :ensure t
-      :config (user/slime-init))
+      :config (user--slime-config))
     (use-package ac-slime
       :ensure t)))
 
-(user/lisp-mode-init)
+(user--lisp-mode-config)
 
 
 (provide 'modes/lisp)

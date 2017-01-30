@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/go-mode-hook ()
+(defun user--go-mode-hook ()
   "Go mode hook."
   ;; Automatic code fixes before saving
   (add-hook 'write-contents-functions
@@ -40,14 +40,14 @@
     (local-set-key [remap go-import-add] 'helm-go-package)))
 
 
-(defun user/go-mode-init ()
+(defun user--go-mode-config ()
   "Initialize Go mode."
-  (add-hook 'go-mode-hook 'user/go-mode-hook))
+  (add-hook 'go-mode-hook 'user--go-mode-hook))
 
 (with-executable 'go
   (use-package go-mode
     :ensure t
-    :config (user/go-mode-init))
+    :config (user--go-mode-config))
   (use-package go-autocomplete
     :ensure t)
   (use-package company-go

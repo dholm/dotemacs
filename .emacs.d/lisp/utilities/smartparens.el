@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/smartparens-mode-hook ()
+(defun user--smartparens-mode-hook ()
   "Mode hook for smartparens."
   ;;; (Bindings) ;;;
   ;; Marking.
@@ -30,18 +30,18 @@
     (smartparens-mode t)))
 
 
-(defun user/smartparens-init ()
+(defun user--smartparens-config ()
   "Initialize smartparens."
   (setq-default
    ;; Even kill whitespace with `sp-hybrid-kill'.
    sp-hybrid-kill-excessive-whitespace t)
 
   ;;; (Hooks) ;;;
-  (add-hook 'smartparens-mode-hook 'user/smartparens-mode-hook))
+  (add-hook 'smartparens-mode-hook 'user--smartparens-mode-hook))
 
 (use-package smartparens
   :ensure t
-  :config (user/smartparens-init))
+  :config (user--smartparens-config))
 
 
 (provide 'utilities/smartparens)

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/tramp-before-init ()
+(defun user--tramp-init ()
   "Initialization before loading tramp."
   (setq-default
    ;; Persistency files.
@@ -11,7 +11,7 @@
    tramp-auto-save-directory (path-join *user-auto-save-directory* "tramp")))
 
 
-(defun user/tramp-init ()
+(defun user--tramp-config ()
   "Initialize tramp."
   (setq-default
    ;; Default file transfer method.
@@ -42,8 +42,8 @@
 
 (use-package tramp
   :ensure t
-  :init (user/tramp-before-init)
-  :config (user/tramp-init))
+  :init (user--tramp-init)
+  :config (user--tramp-config))
 
 
 (provide 'utilities/tramp)

@@ -7,14 +7,14 @@
   "Path to user's Google services data store.")
 
 
-(defun user/google-calendar-init ()
+(defun user--google-calendar-config ()
   "Initialize Google Calendar."
   (setq-default
    google-calendar/calendars-files
    (path-join *user-google-services-data-directory* "calendar.org")))
 
 
-(defun user/google-services-init ()
+(defun user--google-services-config ()
   "Initialize Google services."
   (setq-default
    ;; Store OAuth2 token in data store.
@@ -23,9 +23,9 @@
 
   (use-package google-contacts
     :defer t)
-  (require-package '(:name google-calendar :after (user/google-calendar-init))))
+  (require-package '(:name google-calendar :after (user--google-calendar-config))))
 
-(user/google-services-init)
+(user--google-services-config)
 
 
 (provide 'apps/google-services)

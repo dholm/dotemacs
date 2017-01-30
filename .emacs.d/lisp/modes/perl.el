@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/perl-mode-hook ()
+(defun user--perl-mode-hook ()
   "Perl mode hook."
   (user/gnu-global-enable)
 
@@ -14,12 +14,12 @@
       (add-ac-sources 'ac-source-perl-completion))))
 
 
-(defun user/sepia-mode-hook ()
+(defun user--sepia-mode-hook ()
   "Sepia mode hook."
-  (user/perl-mode-hook))
+  (user--perl-mode-hook))
 
 
-(defun user/perl-mode-init ()
+(defun user--perl-mode-config ()
   "Initialize Perl mode."
   (require-package '(:name cperl-mode))
   (require-package '(:name sepia))
@@ -29,11 +29,11 @@
   ;; Use Sepia as the default perl mode.
   (defalias 'perl-mode 'sepia-mode)
 
-  (add-hook 'perl-mode-hook 'user/perl-mode-hook)
-  (add-hook 'sepia-mode-hook 'user/sepia-mode-hook))
+  (add-hook 'perl-mode-hook 'user--perl-mode-hook)
+  (add-hook 'sepia-mode-hook 'user--sepia-mode-hook))
 
 (with-executable 'perl
-  (user/perl-mode-init))
+  (user--perl-mode-config))
 
 
 (provide 'modes/perl)

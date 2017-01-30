@@ -11,7 +11,7 @@
   "Path to user's Gnus cache store.")
 
 
-(defun user/gnus-group-mode-hook ()
+(defun user--gnus-group-mode-hook ()
   "Gnus group mode hook."
   (setq header-line-format "    Ticked    New     Unread   Group")
   (gnus-topic-mode t)
@@ -21,12 +21,12 @@
   (define-key gnus-group-mode-map (kbd "v s") 'user/gnus-mailsync))
 
 
-(defun user/gnus-summary-mode-hook ()
+(defun user--gnus-summary-mode-hook ()
   "Gnus summary mode hook."
   (hl-line-mode t))
 
 
-(defun user/gnus-article-display-hook ()
+(defun user--gnus-article-display-hook ()
   "Gnus article display hook."
   ;; Translate articles that are quoted printable.
   (gnus-article-de-quoted-unreadable)
@@ -42,34 +42,34 @@
   (gnus-article-highlight-citation))
 
 
-(defun user/gnus-article-prepare-hook ()
+(defun user--gnus-article-prepare-hook ()
   "Gnus article display hook."
   (when (featurep 'bbdb)
     (user/bbdb-display-record)))
 
 
-(defun user/gnus-agent-plugged-hook ()
+(defun user--gnus-agent-plugged-hook ()
   "Gnus agent plugged mode hook."
   (setq
    ;; Stop queueing email.
    smtpmail-queue-mail nil))
 
 
-(defun user/gnus-agent-unplugged-hook ()
+(defun user--gnus-agent-unplugged-hook ()
   "Gnus agent unplugged mode hook."
   (setq
    ;; Start queueing email.
    smtpmail-queue-mail t))
 
 
-(defun user/gnus-message-sent-hook ()
+(defun user--gnus-message-sent-hook ()
   "Message sent hook for Gnus."
   ;; Increase score for followups to a sent article.
   (gnus-score-followup-article)
   (gnus-score-followup-thread))
 
 
-(defun user/gnus-startup-hook ()
+(defun user--gnus-startup-hook ()
   "Gnus startup hook."
   ;; Enable BBDB.
   (bbdb-initialize 'gnus 'message)
@@ -153,7 +153,7 @@
     (user/smtpmail-set-gmail-user fullname username)))
 
 
-(defun user/nnmail-init ()
+(defun user--nnmail-config ()
   "Initialize nnmail."
   (setq-default
    ;; Stop splitting at first matching rule.
@@ -186,7 +186,7 @@
      '(subject . "subject"))))
 
 
-(defun user/nnfolder-init ()
+(defun user--nnfolder-config ()
   "Initialize nnfolder."
   (setq-default
    ;; nnfolder data store.
@@ -195,7 +195,7 @@
                                    "mail" "archive" "active")))
 
 
-(defun user/nnir-init ()
+(defun user--nnir-config ()
   "Initialize nnir."
   (with-executable 'swish-e
     (setq-default
@@ -234,7 +234,7 @@
     newsubject))
 
 
-(defun user/gnus-score-init ()
+(defun user--gnus-score-config ()
   "Initialize Gnus scoring system."
   (setq-default
    ;; Gnus article scoring entries.
@@ -261,7 +261,7 @@
    nnheader-file-name-translation-alist '((?[ . ?_) (?] . ?_))))
 
 
-(defun user/gnus-mime-init ()
+(defun user--gnus-mime-config ()
   "Initialize Gnus MIME."
   (setq-default
    ;; Default location for downloaded attachments.
@@ -327,7 +327,7 @@
       (add-to-list 'mm-attachment-override-types "image/.*"))))
 
 
-(defun user/gnus-groups-init ()
+(defun user--gnus-groups-config ()
   "Initialize Gnus group mode."
   (setq-default
    ;; Groups format.
@@ -365,10 +365,10 @@
     (smtpmail-send-queued-mail))
 
   ;;; (Hooks) ;;;
-  (add-hook 'gnus-group-mode-hook 'user/gnus-group-mode-hook))
+  (add-hook 'gnus-group-mode-hook 'user--gnus-group-mode-hook))
 
 
-(defun user/gnus-summary-init ()
+(defun user--gnus-summary-config ()
   "Initialize Gnus summary."
   (setq-default
    ;; Summary format.
@@ -418,7 +418,7 @@
      gnus-sum-thread-tree-single-leaf     "\\-> "))
 
   ;;; (Hooks) ;;;
-  (add-hook 'gnus-summary-mode-hook 'user/gnus-summary-mode-hook)
+  (add-hook 'gnus-summary-mode-hook 'user--gnus-summary-mode-hook)
 
   ;;; (Bindings) ;;;
   (after-load 'gnus
@@ -428,14 +428,14 @@
       (lambda () (interactive) (scroll-other-window 1)))))
 
 
-(defun user/gnus-article-init ()
+(defun user--gnus-article-config ()
   "Initialize Gnus article mode."
   (after-load 'gnus-art
-    (add-hook 'gnus-article-prepare-hook 'user/gnus-article-prepare-hook))
-  (add-hook 'gnus-article-display-hook 'user/gnus-article-display-hook))
+    (add-hook 'gnus-article-prepare-hook 'user--gnus-article-prepare-hook))
+  (add-hook 'gnus-article-display-hook 'user--gnus-article-display-hook))
 
 
-(defun user/gnus-agent-init ()
+(defun user--gnus-agent-config ()
   "Initialize Gnus agent."
   (setq-default
    ;; Automatically go online when plugged in.
@@ -452,7 +452,7 @@
     (setq smtpmail-queue-mail t)))
 
 
-(defun user/gnus-init ()
+(defun user--gnus-config ()
   "Initialize Gnus."
   (setq-default
    ;; Make Gnus the default mail reader.
@@ -512,15 +512,15 @@
    gnus-fetch-old-headers t)
 
   ;; Initialize Gnus modules.
-  (user/gnus-agent-init)
-  (user/gnus-mime-init)
-  (user/gnus-article-init)
-  (user/gnus-summary-init)
-  (user/gnus-groups-init)
-  (user/gnus-score-init)
-  (user/nnmail-init)
-  (user/nnfolder-init)
-  (user/nnir-init)
+  (user--gnus-agent-config)
+  (user--gnus-mime-config)
+  (user--gnus-article-config)
+  (user--gnus-summary-config)
+  (user--gnus-groups-config)
+  (user--gnus-score-config)
+  (user--nnmail-config)
+  (user--nnfolder-config)
+  (user--nnir-config)
 
   (after-load 'gnus
     (with-feature 'fullframe
@@ -560,8 +560,8 @@
   (set-file-modes *user-gnus-cache-directory* #o0700)
 
   ;; Hooks
-  (add-hook 'gnus-startup-hook 'user/gnus-startup-hook)
-  (add-hook 'message-sent-hook 'user/gnus-message-sent-hook)
+  (add-hook 'gnus-startup-hook 'user--gnus-startup-hook)
+  (add-hook 'message-sent-hook 'user--gnus-message-sent-hook)
 
   ;;; (Packages) ;;;
   (use-package gnus-alias
@@ -575,7 +575,7 @@
   (when (eq system-type 'darwin)
     (require-package '(:name nnir-spotlight))))
 
-(user/gnus-init)
+(user--gnus-config)
 
 
 (provide 'apps/gnus)

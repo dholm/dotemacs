@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/racket-mode-hook ()
+(defun user--racket-mode-hook ()
   "Racket mode hook."
   (enable-paredit-mode)
 
@@ -25,22 +25,22 @@
   (user/bind-key-local :code :test 'racket-test))
 
 
-(defun user/racket-repl-mode-hook ()
+(defun user--racket-repl-mode-hook ()
   "Racket REPL mode hook."
   (enable-paredit-mode)
   (rainbow-delimiters-mode t))
 
 
-(defun user/racket-mode-init ()
+(defun user--racket-mode-config ()
   "Initialize Racket mode."
   ;;; (Hooks) ;;;
-  (add-hook 'racket-mode-hook 'user/racket-mode-hook)
-  (add-hook 'racket-repl-mode-hook 'user/racket-repl-mode-hook))
+  (add-hook 'racket-mode-hook 'user--racket-mode-hook)
+  (add-hook 'racket-repl-mode-hook 'user--racket-repl-mode-hook))
 
 (with-executable 'racket
   (use-package racket-mode
     :ensure t
-    :config (user/racket-mode-init)))
+    :config (user--racket-mode-config)))
 
 
 (provide 'modes/racket)

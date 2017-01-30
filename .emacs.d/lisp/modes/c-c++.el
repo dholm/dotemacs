@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/c-mode-common-hook ()
+(defun user--c-mode-common-hook ()
   "C-like languages mode hook."
   (setq
    ;; Indent using four spaces.
@@ -39,7 +39,7 @@
   (user/smartparens-enable))
 
 
-(defun user/c-mode-hook ()
+(defun user--c-mode-hook ()
   "C mode hook."
   ;; Propertize "#if 0" regions as comments.
   (font-lock-add-keywords
@@ -48,7 +48,7 @@
    'add-to-end)
 
   ;; Load CEDET
-  (user/c-mode-cedet-hook)
+  (user--c-mode-cedet-hook)
 
   (with-feature 'cpputils-cmake
     ;; Enable CMake C/C++ utilities.
@@ -81,14 +81,14 @@
     (user/bind-key-local :debug :start 'realgud-gdb)))
 
 
-(defun user/c-mode-cedet-hook ()
+(defun user--c-mode-cedet-hook ()
   "C mode CEDET hook."
   (with-feature 'semantic/bovine/c
     ;; Load extra semantic helpers.
     (require 'semantic/bovine/gcc)
     (require 'semantic/bovine/clang nil :noerror)
 
-    (user/cedet-hook)
+    (user--cedet-hook)
 
     ;;; (Bindings) ;;;
     (with-feature 'eassist
@@ -106,7 +106,7 @@
       (diminish 'function-args-mode))))
 
 
-(defun user/irony-mode-hook ()
+(defun user--irony-mode-hook ()
   "Mode hook for irony."
   (with-feature 'irony-eldoc
     (irony-eldoc t))
@@ -160,7 +160,7 @@
        (re-search-forward "\\_<class\\_>" nil t))))
 
 
-(defun user/irony-mode-init ()
+(defun user--irony-mode-config ()
   "Initialize irony mode."
   (setq-default
    ;; Install irony server in user's local path.
@@ -171,10 +171,10 @@
       (irony-enable 'ac))
 
     ;;; (Hooks) ;;;
-    (add-hook 'irony-mode-hook 'user/irony-mode-hook)))
+    (add-hook 'irony-mode-hook 'user--irony-mode-hook)))
 
 
-(defun user/cflow-init ()
+(defun user--cflow-config ()
   "Initialize cflow."
   (defun user/cflow-function (function-name)
     "Get call graph of inputed function. "
@@ -197,14 +197,14 @@
       (cflow-mode))))
 
 
-(defun user/cpputils-cmake-init ()
+(defun user--cpputils-cmake-config ()
   "Initialize cpputils CMake."
   (setq-default
    ;; Disable Flymake.
    cppcm-write-flymake-makefile nil))
 
 
-(defun user/cc-mode-init ()
+(defun user--cc-mode-config ()
   "Initialize CC-mode."
   (after-load 'cc-mode
     (add-many-to-list
@@ -215,7 +215,7 @@
      '(c++-mode . "Stroustrup"))))
 
 
-(defun user/c-c++-mode-init ()
+(defun user--c-c++-mode-config ()
   "Initialize C/C++ mode."
   (setq-default
    ;; Support completion using tab.
@@ -229,15 +229,15 @@
       (sp-local-pair "/*" "*/" :post-handlers '((" | " "SPC")
                                                 ("* ||\n[i]" "RET")))))
 
-  (add-hook 'c-mode-common-hook 'user/c-mode-common-hook)
-  (add-hook 'c-mode-hook 'user/c-mode-hook)
+  (add-hook 'c-mode-common-hook 'user--c-mode-common-hook)
+  (add-hook 'c-mode-hook 'user--c-mode-hook)
 
   ;; Detect if inside a C++ header file.
   (add-magic-mode 'c++-mode 'user/c++-header-file-p)
 
   ;;; (Packages) ;;;
   (after-load 'cc-mode
-    (user/cc-mode-init))
+    (user--cc-mode-config))
   (use-package auto-complete-c-headers
     :ensure t)
   (use-package company-c-headers
@@ -247,7 +247,7 @@
              (executable-find "llvm-config"))
     (use-package irony
       :ensure t
-      :config (user/irony-mode-init))
+      :config (user--irony-mode-config))
     (use-package irony-eldoc
       :ensure t)
     (use-package flycheck-irony
@@ -258,7 +258,7 @@
   (with-executable 'cmake
     (use-package cpputils-cmake
       :ensure t
-      :config (user/cpputils-cmake-init))
+      :config (user--cpputils-cmake-config))
     (use-package cmake-ide
       :ensure t))
   (with-executable 'clang
@@ -269,9 +269,9 @@
   (use-package google-c-style
     :ensure t)
   (with-executable 'cflow
-    (require-package '(:name cflow :after (user/cflow-init)))))
+    (require-package '(:name cflow :after (user--cflow-config)))))
 
-(user/c-c++-mode-init)
+(user--c-c++-mode-config)
 
 
 (provide 'modes/c-c++)

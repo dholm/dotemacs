@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/hs-minor-mode-hook ()
+(defun user--hs-minor-mode-hook ()
   "Minor mode hook for Hide Show."
   ;;; (Bindings) ;;;
   (local-set-key (kbd "C-c SPC") 'user/hs-toggle-level)
@@ -19,12 +19,12 @@
   (hs-hide-level 1))
 
 
-(defun user/hideshow-init ()
+(defun user--hideshow-config ()
   "Initialize Hide Show mode."
   ;;; (Hooks) ;;;
-  (add-hook 'hs-minor-mode-hook 'user/hs-minor-mode-hook))
+  (add-hook 'hs-minor-mode-hook 'user--hs-minor-mode-hook))
 
-(user/hideshow-init)
+(user--hideshow-config)
 
 (provide 'utilities/hideshow)
 ;;; hideshow.el ends here

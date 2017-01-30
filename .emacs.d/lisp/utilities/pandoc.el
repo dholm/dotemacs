@@ -2,19 +2,19 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/pandoc-mode-hook ()
+(defun user--pandoc-mode-hook ()
   "Pandoc mode hook."
   (pandoc-load-default-settings))
 
 
-(defun user/pandoc-mode-init ()
+(defun user--pandoc-mode-config ()
   "Initialize Pandoc mode."
-  (add-hook 'pandoc-mode 'user/pandoc-mode-hook))
+  (add-hook 'pandoc-mode 'user--pandoc-mode-hook))
 
 (with-executable 'pandoc
   (use-package pandoc-mode
     :ensure t
-    :config (user/pandoc-mode-init)))
+    :config (user--pandoc-mode-config)))
 
 
 (provide 'utilities/pandoc)

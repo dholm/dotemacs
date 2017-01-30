@@ -6,7 +6,7 @@
  (path-join *user-cache-directory* "sx")
  "Path to user's Stack Exchange cache store.")
 
-(defun user/sx-init ()
+(defun user--sx-config ()
   "Initialize sx."
   (setq-default
    ;; Set up sx cache store.
@@ -19,7 +19,7 @@
 
 (use-package sx
   :defer t
-  :config (user/sx-init))
+  :config (user--sx-config))
 
 
 (provide 'apps/sx)

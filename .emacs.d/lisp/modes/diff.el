@@ -2,13 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/diff-mode-hook ()
+(defun user--diff-mode-hook ()
   "Diff mode hook."
   ;; Highlight changes in detail.
   (diff-auto-refine-mode t))
 
 
-(defun user/diff-mode-init ()
+(defun user--diff-mode-config ()
   "Initialize Diff mode."
   (setq-default
    ;; Open patches in read-only mode by default.
@@ -17,9 +17,9 @@
   ;; Diff modes.
   (add-auto-mode 'diff-mode "/patch$")
 
-  (add-hook 'diff-mode-hook 'user/diff-mode-hook))
+  (add-hook 'diff-mode-hook 'user--diff-mode-hook))
 
-(user/diff-mode-init)
+(user--diff-mode-config)
 
 
 (provide 'modes/csv)

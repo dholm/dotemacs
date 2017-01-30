@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/prompts-init ()
+(defun user--prompts-config ()
   "Initialize Emacs prompting."
   (setq-default
    ;; Always follow links to version controlled files.
@@ -21,7 +21,7 @@
     (with-feature 'cl-lib
       (cl-flet ((process-list ())) ad-do-it))))
 
-(user/prompts-init)
+(user--prompts-config)
 
 
 (provide 'ux/prompts)

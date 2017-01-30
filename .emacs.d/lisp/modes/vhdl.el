@@ -2,18 +2,18 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/vhdl-mode-hook ()
+(defun user--vhdl-mode-hook ()
   "VHDL mode hook."
   (user/gnu-global-enable))
 
 
-(defun user/vhdl-mode-init ()
+(defun user--vhdl-mode-config ()
   "Initialize VHDL mode."
   (require-package '(:name vhdl-mode))
 
-  (add-hook 'vhdl-mode-hook 'user/vhdl-mode-hook))
+  (add-hook 'vhdl-mode-hook 'user--vhdl-mode-hook))
 
-(user/vhdl-mode-init)
+(user--vhdl-mode-config)
 
 
 (provide 'modes/vhdl)

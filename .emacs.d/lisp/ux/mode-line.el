@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user/smart-mode-line-init ()
+(defun user--smart-mode-line-config ()
   "Initialize smart mode line."
   (setq-default
    ;; Configure theme.
@@ -22,7 +22,7 @@
     (sml/setup)))
 
 
-(defun user/modeline-init ()
+(defun user--modeline-config ()
   "Initialize Emacs mode line."
   (setq-default
    ;; Show row and column numbers.
@@ -53,9 +53,9 @@
     :ensure t)
   (use-package smart-mode-line
     :ensure t
-    :config (user/smart-mode-line-init)))
+    :config (user--smart-mode-line-config)))
 
-(user/modeline-init)
+(user--modeline-config)
 
 
 (provide 'ux/mode-line)
