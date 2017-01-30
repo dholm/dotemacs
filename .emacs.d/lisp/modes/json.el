@@ -7,7 +7,7 @@
   (add-auto-mode 'json-mode "\\.bowerrc$"))
 
 (use-package json-mode
-  :ensure t
+  :defer t
   :config (user--json-mode-config))
 
 

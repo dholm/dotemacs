@@ -115,7 +115,7 @@
   "Initialize Python mode."
   ;;; (Packages) ;;;
   (use-package python
-    :ensure t
+    :defer t
     :config (user--python-config))
   (use-package anaconda-mode
     :defer t)

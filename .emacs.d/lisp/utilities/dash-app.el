@@ -11,7 +11,7 @@
 (defun user--dash-app-config ()
   "Initialize Dash support for Emacs."
   (use-package dash-at-point
-    :ensure t
+    :defer t
     :config (user--dash-at-point-config)))
 
 (when (osx-app-installed-p "com.kapeli.dash")

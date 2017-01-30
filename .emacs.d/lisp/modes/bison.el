@@ -11,7 +11,7 @@
   (add-hook 'bison-mode-hook 'user--bison-mode-hook))
 
 (use-package bison-mode
-  :ensure t
+  :defer t
   :config (user--bison-mode-config))
 
 

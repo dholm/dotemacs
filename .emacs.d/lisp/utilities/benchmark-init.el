@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package benchmark-init
-  :ensure t)
+  :defer t)
 
 
 (provide 'utilities/benchmark-init)

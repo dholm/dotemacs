@@ -70,7 +70,7 @@
 
   ;;; (Packages) ;;;
   (use-package ztree
-    :ensure t))
+    :defer t))
 
 (user--ediff-config)
 

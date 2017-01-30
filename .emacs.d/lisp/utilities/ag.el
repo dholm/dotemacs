@@ -30,10 +30,10 @@
 (with-executable 'ag
   (when (feature-p 'helm)
     (use-package helm-ag
-      :ensure t
+      :defer t
       :after (user--helm-ag-config)))
   (use-package ag
-    :ensure t
+    :defer t
     :config (user--ag-config)))
 
 

@@ -39,7 +39,7 @@
 
   ;;; (Packages) ;;;
   (use-package dired-k
-    :ensure t)
+    :defer t)
 
   ;;; (Bindings) ;;;
   ;; Do not open new buffers when going down or up a directory.
@@ -52,9 +52,9 @@
 
   ;;; (Packages) ;;;
   (use-package async
-    :ensure t)
+    :defer t)
   (use-package dired-efap
-    :ensure t
+    :defer t
     :config (user--dired-efap-config)))
 
 (user--dired-config)

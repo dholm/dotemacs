@@ -6,7 +6,7 @@
   "Initialize Polymode.")
 
 (use-package polymode
-  :ensure t
+  :defer t
   :config (user--polymode-config))
 
 

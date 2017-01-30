@@ -28,7 +28,7 @@
 
   (with-executable 'sbt
     (use-package ensime
-      :ensure t)))
+      :defer t)))
 
 (with-executable 'scala
   (user--scala-mode-config))

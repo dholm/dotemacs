@@ -84,10 +84,10 @@
   (add-auto-mode 'javascript-mode "\\.json$")
 
   (use-package js3-mode
-    :ensure t
+    :defer t
     :config (user--js3-mode-config))
   (use-package js-comint
-    :ensure t
+    :defer t
     :config (user--js-comint-config)))
 
 (user--javascript-mode-config)

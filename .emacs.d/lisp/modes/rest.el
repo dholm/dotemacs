@@ -42,7 +42,7 @@
 
 (require-package '(:name rst-mode :after (user--rst-mode-config)))
 (use-package auto-complete-rst
-  :ensure t)
+  :defer t)
 
 
 (provide 'modes/rest)

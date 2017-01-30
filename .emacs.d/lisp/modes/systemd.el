@@ -12,7 +12,7 @@
   (add-hook 'systemd-mode-hook 'user--systemd-mode-hook))
 
 (use-package systemd
-  :ensure t
+  :defer t
   :config (user--systemd-config))
 
 

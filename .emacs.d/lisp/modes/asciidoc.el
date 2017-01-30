@@ -14,7 +14,7 @@
   (add-auto-mode 'adoc-mode "\\.adoc$" "\\.asciidoc$"))
 
 (use-package adoc-mode
-  :ensure t
+  :defer t
   :config (user--adoc-mode-config))
 
 

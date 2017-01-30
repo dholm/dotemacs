@@ -46,22 +46,22 @@
 
 (with-executable 'go
   (use-package go-mode
-    :ensure t
+    :defer t
     :config (user--go-mode-config))
   (use-package go-autocomplete
-    :ensure t)
+    :defer t)
   (use-package company-go
-    :ensure t)
+    :defer t)
   (use-package go-eldoc
-    :ensure t)
+    :defer t)
   (use-package gotest
-    :ensure t)
+    :defer t)
   (use-package go-projectile
-    :ensure t)
+    :defer t)
   (require-package '(:name go-oracle))
   (when (feature-p 'helm)
     (use-package helm-go-package
-      :ensure t)))
+      :defer t)))
 
 
 (provide 'modes/go)

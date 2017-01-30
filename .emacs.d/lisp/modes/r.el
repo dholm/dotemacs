@@ -119,12 +119,12 @@
 
 (with-executable 'R
   (use-package ess
-    :ensure t
+    :defer t
     :config (user--ess-config))
   (use-package ess-smart-underscore
-    :ensure t)
+    :defer t)
   (use-package ac-R
-    :ensure t
+    :defer t
     :config (user--ac-R-config)))
 
 

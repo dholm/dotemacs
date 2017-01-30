@@ -171,11 +171,11 @@
   ;;; (Packages) ;;;
   (with-executable 'llvm-config
     (use-package rtags
-      :ensure t
+      :defer t
       :config (user--rtags-config)))
   (when (feature-p 'helm)
     (use-package helm-etags-plus
-      :ensure t)))
+      :defer t)))
 
 (user--tags-config)
 

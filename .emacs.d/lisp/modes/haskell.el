@@ -60,20 +60,20 @@
 
   ;;; (Packages) ;;;
   (use-package haskell-mode
-    :ensure t)
+    :defer t)
   (use-package ghci-completion
-    :ensure t)
+    :defer t)
   (use-package hi2
-    :ensure t)
+    :defer t)
   (use-package flycheck-hdevtools
-    :ensure t)
+    :defer t)
   (use-package flycheck-haskell
-    :ensure t)
+    :defer t)
   (require-package '(:name structured-haskell-mode))
   (require-package '(:name ghc-mod))
   (require-package '(:name ac-ghc-mod))
   (use-package company-ghc
-    :ensure t)
+    :defer t)
 
   (add-hook 'haskell-mode-hook 'user--haskell-mode-hook)
   (add-hook 'inferior-haskell-mode-hook 'user--inferior-haskell-mode-hook))

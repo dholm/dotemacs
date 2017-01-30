@@ -43,14 +43,14 @@
 (defun user--ruby-mode-config ()
   "Initialize Ruby mode."
   (use-package ruby-mode
-    :ensure t)
+    :defer t)
   (use-package robe
-    :ensure t
+    :defer t
     :config (user--robe-config))
   (use-package inf-ruby
-    :ensure t)
+    :defer t)
   (use-package yari
-    :ensure t)
+    :defer t)
 
   (add-hook 'ruby-mode-hook 'user--ruby-mode-hook))
 

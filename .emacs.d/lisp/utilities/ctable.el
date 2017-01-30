@@ -8,7 +8,7 @@
   (autoload 'make-ctbl:cmodel "ctable"))
 
 (use-package ctable
-  :ensure t
+  :defer t
   :config (user--ctable-config))
 
 

@@ -18,7 +18,7 @@
 
   ;;; (Packages) ;;;
   (use-package sml-mode
-    :ensure t
+    :defer t
     :config (user--sml-mode-config)))
 
 (with-executable 'sml

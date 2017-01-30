@@ -6,7 +6,7 @@
   "Initialize EPC.")
 
 (use-package epc
-  :ensure t
+  :defer t
   :config (user--epc-config))
 
 

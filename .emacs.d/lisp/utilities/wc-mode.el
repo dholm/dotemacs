@@ -7,7 +7,7 @@
   (user/bind-key-global :util :wc-mode 'wc-mode))
 
 (use-package wc-mode
-  :ensure t
+  :defer t
   :config (user--wc-mode-config))
 
 

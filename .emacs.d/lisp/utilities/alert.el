@@ -20,7 +20,7 @@
    alert-log-messages nil))
 
 (use-package alert
-  :ensure t
+  :defer t
   :config (user--alert-config))
 
 

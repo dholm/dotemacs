@@ -88,23 +88,23 @@
 (defun user--web-config ()
   "Initialize web development."
   (use-package web-mode
-    :ensure t
+    :defer t
     :config (user--web-mode-config))
   (with-executable 'npm
     (use-package tern
-      :ensure t
+      :defer t
       :config (user--tern-config))
     (use-package company-tern
-      :ensure t))
+      :defer t))
   (use-package ac-html
-    :ensure t
+    :defer t
     :config (user--ac-html-config))
   (use-package company-web
-    :ensure t)
+    :defer t)
   (use-package skewer-mode
-    :ensure t)
+    :defer t)
   (use-package tidy
-    :ensure t))
+    :defer t))
 
 (user--web-config)
 

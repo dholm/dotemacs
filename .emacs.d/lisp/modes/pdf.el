@@ -22,7 +22,7 @@
 (when (and (display-graphic-p)
            (pkg-config-has-p "poppler-glib"))
   (use-package pdf-tools
-    :ensure t
+    :defer t
     :config (user--pdf-tools-config)))
 
 

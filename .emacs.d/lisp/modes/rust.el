@@ -15,10 +15,10 @@
 
 (with-executable 'rustc
   (use-package rust-mode
-    :ensure t
+    :defer t
     :config (user--rust-mode-config))
   (use-package flycheck-rust
-    :ensure t)
+    :defer t)
   (require-package '(:name rusti)))
 
 

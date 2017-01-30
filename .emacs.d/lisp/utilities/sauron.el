@@ -12,7 +12,7 @@
   (user/bind-key-global :util :notifications 'sauron-toggle-hide-show))
 
 (use-package sauron
-  :ensure t
+  :defer t
   :config (user--sauron-config))
 
 

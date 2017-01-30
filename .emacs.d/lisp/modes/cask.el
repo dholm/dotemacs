@@ -19,7 +19,7 @@
   (add-hook 'cask-mode-hook 'user--cask-mode-hook))
 
 (use-package cask-mode
-  :ensure t
+  :defer t
   :config (user--cask-mode-config))
 
 

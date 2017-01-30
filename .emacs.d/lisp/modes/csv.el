@@ -24,7 +24,7 @@
   (add-hook 'csv-mode-hook 'user--csv-mode-hook))
 
 (use-package csv-mode
-  :ensure t
+  :defer t
   :config (user--csv-mode-config))
 
 

@@ -39,7 +39,7 @@
 
 (with-executable 'racket
   (use-package racket-mode
-    :ensure t
+    :defer t
     :config (user--racket-mode-config)))
 
 

@@ -50,10 +50,10 @@
 
   ;;; (Packages) ;;;
   (use-package csharp-mode
-    :ensure t)
+    :defer t)
   (when (file-exists-p *user-omnisharp-path*)
     (use-package omnisharp
-      :ensure t
+      :defer t
       :config (user--omnisharp-config)))
   (require-package '(:name sln-mode :after (user--sln-mode-config))))
 

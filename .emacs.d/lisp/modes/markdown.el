@@ -32,7 +32,7 @@
   (add-hook 'markdown-mode-hook 'user--markdown-mode-hook))
 
 (use-package markdown-mode
-  :ensure t
+  :defer t
   :config (user--markdown-mode-config))
 (with-executable 'npm
   (require-package '(:name livedown)))

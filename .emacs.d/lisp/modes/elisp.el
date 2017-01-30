@@ -99,9 +99,9 @@
 
   ;;; (Packages) ;;;
   (use-package macrostep
-    :ensure t)
+    :defer t)
   (use-package elisp-slime-nav
-    :ensure t)
+    :defer t)
   (use-package auto-compile
     :ensure t)
   (use-package eldoc-eval

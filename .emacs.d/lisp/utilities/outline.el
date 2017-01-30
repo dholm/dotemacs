@@ -22,7 +22,7 @@
 
   ;;; (Packages) ;;;
   (use-package outline-magic
-    :ensure t))
+    :defer t))
 
 (user--outline-mode-config)
 

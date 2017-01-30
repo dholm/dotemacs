@@ -14,7 +14,7 @@
   (user/bind-key-global :basic :view-file 'vlf))
 
 (use-package vlf
-  :ensure t
+  :defer t
   :config (user--vlf-config))
 
 

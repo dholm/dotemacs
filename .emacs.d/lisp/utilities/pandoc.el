@@ -13,7 +13,7 @@
 
 (with-executable 'pandoc
   (use-package pandoc-mode
-    :ensure t
+    :defer t
     :config (user--pandoc-mode-config)))
 
 

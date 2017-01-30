@@ -86,10 +86,10 @@
             (executable-find "lisp")
             (executable-find "clisp"))
     (use-package slime
-      :ensure t
+      :defer t
       :config (user--slime-config))
     (use-package ac-slime
-      :ensure t)))
+      :defer t)))
 
 (user--lisp-mode-config)
 

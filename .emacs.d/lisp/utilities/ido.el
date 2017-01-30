@@ -29,10 +29,10 @@
 
   ;;; (Packages) ;;;
   (use-package flx
-    :ensure t
+    :defer t
     :config (user--flx-config))
   (use-package ido-vertical-mode
-    :ensure t))
+    :defer t))
 
 (user--ido-config)
 

@@ -48,7 +48,7 @@
 
   ;;; (Packages) ;;;
   (use-package mu-cite
-    :ensure t
+    :defer t
     :config (user--mu-cite-config)))
 
 (user--mail-mode-config)

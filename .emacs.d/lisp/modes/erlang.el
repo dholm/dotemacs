@@ -52,14 +52,14 @@
 
 (with-executable 'erl
   (use-package erlang
-    :ensure t
+    :defer t
     :after (user--erlang-mode-config))
   (use-package edts
-    :ensure t)
+    :defer t)
   (require-package '(:name distel))
   (require-package '(:name wrangler))
   (use-package alchemist
-    :ensure t))
+    :defer t))
 
 (provide 'modes/erlang)
 ;;; erlang.el ends here

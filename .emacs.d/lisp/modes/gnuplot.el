@@ -13,7 +13,7 @@
 
 (with-executable 'gnuplot
   (use-package gnuplot-mode
-    :ensure t
+    :defer t
     :config (user--gnuplot-mode-config)))
 
 

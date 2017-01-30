@@ -19,7 +19,7 @@
   ;;; (Packages) ;;;
   (with-executable 'nginx
     (use-package nginx-mode
-      :ensure t
+      :defer t
       :config (user--nginx-mode-config))))
 
 (user--conf-mode-config)

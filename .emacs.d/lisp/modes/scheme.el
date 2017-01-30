@@ -70,13 +70,13 @@
 
   ;;; (Packages) ;;;
   (use-package geiser
-    :ensure t
+    :defer t
     :config (user--geiser-config))
   (use-package quack
-    :ensure t
+    :defer t
     :config (user--quack-config))
   (use-package ac-geiser
-    :ensure t))
+    :defer t))
 
 (user--scheme-mode-config)
 

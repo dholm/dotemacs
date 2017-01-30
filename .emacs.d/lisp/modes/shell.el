@@ -36,11 +36,11 @@
 
   ;;; (Packages) ;;;
   (use-package bash-completion
-    :ensure t)
+    :defer t)
   (use-package shelldoc
-    :ensure t)
+    :defer t)
   (use-package shell-command
-    :ensure t)
+    :defer t)
 
   (add-hook 'sh-mode-hook 'user--sh-mode-hook)
   (add-hook 'shell-mode-hook 'user--shell-mode-hook))

@@ -20,7 +20,7 @@
   (add-hook 'syslog-mode-hook 'user--syslog-mode-hook))
 
 (use-package syslog-mode
-  :ensure t
+  :defer t
   :config (user--syslog-mode-config))
 
 

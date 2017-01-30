@@ -13,7 +13,7 @@
 
 (with-executable 'stap
   (use-package systemtap-mode
-    :ensure t
+    :defer t
     :config (user--systemtap-mode-config)))
 
 

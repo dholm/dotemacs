@@ -51,7 +51,7 @@
 
   ;;; (Packages) ;;;
   (use-package iasm-mode
-    :ensure t
+    :defer t
     :config (user--iasm-mode-config)))
 
 (user--asm-mode-config)

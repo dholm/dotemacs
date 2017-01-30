@@ -40,10 +40,10 @@
   "Initialize CScope support."
   ;;; (Packages) ;;;
   (use-package xcscope
-    :ensure t
+    :defer t
     :config (user--xcscope-config))
   (use-package helm-cscope
-    :ensure t))
+    :defer t))
 
 (with-executable 'cscope
   (user--cscope-config))

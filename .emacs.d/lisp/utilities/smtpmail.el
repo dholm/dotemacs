@@ -39,7 +39,7 @@
 
   ;;; (Packages) ;;;
   (use-package smtpmail-multi
-    :ensure t))
+    :defer t))
 
 (user--smtpmail-config)
 

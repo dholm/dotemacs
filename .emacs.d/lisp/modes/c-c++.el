@@ -239,35 +239,35 @@
   (after-load 'cc-mode
     (user--cc-mode-config))
   (use-package auto-complete-c-headers
-    :ensure t)
+    :defer t)
   (use-package company-c-headers
-    :ensure t)
+    :defer t)
   (when (and (executable-find "cmake")
              (executable-find "clang")
              (executable-find "llvm-config"))
     (use-package irony
-      :ensure t
+      :defer t
       :config (user--irony-mode-config))
     (use-package irony-eldoc
-      :ensure t)
+      :defer t)
     (use-package flycheck-irony
-      :ensure t))
+      :defer t))
   (with-executable 'pkg-config
     (use-package flycheck-pkg-config
-      :ensure t))
+      :defer t))
   (with-executable 'cmake
     (use-package cpputils-cmake
-      :ensure t
+      :defer t
       :config (user--cpputils-cmake-config))
     (use-package cmake-ide
-      :ensure t))
+      :defer t))
   (with-executable 'clang
     (use-package clang-format
-      :ensure t))
+      :defer t))
   (use-package function-args
     :ensure t)
   (use-package google-c-style
-    :ensure t)
+    :defer t)
   (with-executable 'cflow
     (require-package '(:name cflow :after (user--cflow-config)))))
 

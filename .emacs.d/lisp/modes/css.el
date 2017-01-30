@@ -28,10 +28,10 @@
   ;;; (Packages) ;;;
   (require-package '(:name showcss-mode))
   (use-package rainbow-mode
-    :ensure t)
+    :defer t)
   (when (feature-p 'helm)
     (use-package helm-css-scss
-      :ensure t)))
+      :defer t)))
 
 (user--css-mode-config)
 

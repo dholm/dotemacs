@@ -27,7 +27,7 @@
   (user/bind-key-global :basic :open-file-context 'projectile-find-file))
 
 (use-package projectile
-  :ensure t
+  :defer t
   :config (user--projectile-config))
 
 

@@ -14,7 +14,7 @@
   (user/bind-key-global :util :google-selection 'google-region))
 
 (use-package google-this
-  :ensure t
+  :defer t
   :config (user--google-this-config))
 
 

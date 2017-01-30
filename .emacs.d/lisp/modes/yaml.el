@@ -12,7 +12,7 @@
   (add-hook 'yaml-mode-hook 'user--yaml-mode-hook))
 
 (use-package yaml-mode
-  :ensure t
+  :defer t
   :config (user--yaml-mode-config))
 
 

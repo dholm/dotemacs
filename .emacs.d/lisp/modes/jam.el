@@ -19,7 +19,7 @@
   (add-auto-mode 'jam-mode "\\.jam$" "Jamfile.*"))
 
 (use-package jam-mode
-  :ensure t
+  :defer t
   :config (user--jam-mode-config))
 
 

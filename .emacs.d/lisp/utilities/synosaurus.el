@@ -9,7 +9,7 @@
 
 (with-executable 'wn
   (use-package synosaurus
-    :ensure t
+    :defer t
     :config (user--synosaurus-config)))
 
 

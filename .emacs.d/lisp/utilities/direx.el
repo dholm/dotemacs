@@ -20,7 +20,7 @@
                         'direx-project:jump-to-project-root-other-window))
 
 (use-package direx
-  :ensure t
+  :defer t
   :config (user--direx-config))
 
 

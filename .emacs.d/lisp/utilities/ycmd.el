@@ -40,7 +40,7 @@
 
 (when (file-exists-p *user-ycmd-path*)
   (use-package ycmd
-    :ensure t
+    :defer t
     :config (user--ycmd-config)))
 
 

@@ -92,7 +92,7 @@
 
 (when (version<= emacs-version "24.4")
   (use-package ecb
-    :ensure t
+    :defer t
     :config (user--ecb-config)))
 
 

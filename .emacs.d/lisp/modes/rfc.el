@@ -22,7 +22,7 @@
 
 
 (use-package irfc
-  :ensure t
+  :defer t
   :config (user--irfc-config))
 
 

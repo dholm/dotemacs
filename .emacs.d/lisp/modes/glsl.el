@@ -11,7 +11,7 @@
   (add-hook 'glsl-mode-hook 'user--glsl-mode-hook))
 
 (use-package glsl-mode
-  :ensure t
+  :defer t
   :config (user--glsl-mode-config))
 
 

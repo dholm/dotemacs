@@ -9,7 +9,7 @@
    request-storage-directory (path-join *user-cache-directory* "request")))
 
 (use-package request
-  :ensure t
+  :defer t
   :config (user--request-config))
 
 

@@ -14,7 +14,7 @@
 
 (with-executable 'valac
   (use-package vala-mode
-    :ensure t
+    :defer t
     :config (user--vala-mode-config)))
 
 

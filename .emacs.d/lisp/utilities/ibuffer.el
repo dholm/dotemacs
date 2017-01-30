@@ -21,7 +21,7 @@
 
   ;;; (Packages) ;;;
   (use-package ibuffer-vc
-    :ensure t))
+    :defer t))
 
 (user--ibuffer-config)
 

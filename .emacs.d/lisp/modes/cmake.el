@@ -20,7 +20,7 @@
 
 (with-executable 'cmake
   (use-package cmake-mode
-    :ensure t
+    :defer t
     :config (user--cmake-mode-config)))
 
 
