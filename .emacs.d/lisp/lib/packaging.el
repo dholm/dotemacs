@@ -13,12 +13,17 @@
 
 
 (with-feature 'package
-  ;; Configure ELPA repositories
-  (add-many-to-list
-   'package-archives
-   '("gnu" . "http://elpa.gnu.org/packages/")
-   '("marmalade" . "http://marmalade-repo.org/packages/")
-   '("melpa" . "http://melpa.milkbox.net/packages/")))
+  (setq
+   ;; Configure GNU/Emacs package repositories.
+   package-archives
+   '(("GNU ELPA"     . "https://elpa.gnu.org/packages/")
+     ("MELPA Stable" . "https://stable.melpa.org/packages/")
+     ("MELPA"        . "https://melpa.org/packages/"))
+   ;; Prefer MELPA Stable over GNU over MELPA.
+   package-archive-priorities
+   '(("MELPA Stable" . 15)
+     ("GNU ELPA"     . 10)
+     ("MELPA"        . 5))))
 
 
 ;; Configure and load el-get
