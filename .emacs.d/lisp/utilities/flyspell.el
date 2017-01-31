@@ -95,6 +95,10 @@
           (executable-find "aspell")
           (executable-find "hunspell"))
   (require-package '(:name flyspell :after (user--flyspell-config)))
+  (when (feature-p 'flyspell)
+    (use-package helm-flyspell
+      :ensure t
+      :bind ("C-c c s" . helm-flyspell-correct)))
   (use-package flyspell-lazy
     :ensure t
     :config (user--flyspell-lazy-config))
