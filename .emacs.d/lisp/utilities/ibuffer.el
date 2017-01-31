@@ -14,17 +14,15 @@
   (setq-default
    ibuffer-filter-group-name-face 'font-lock-doc-face)
 
-  (add-hook 'ibuffer-hook 'user--ibuffer-hook)
+  (add-hook 'ibuffer-hook 'user--ibuffer-hook))
 
-  ;;; (Bindings) ;;;
-  (global-set-key [remap list-buffers] 'ibuffer)
+(use-package ibuffer
+  :bind* (([remap list-buffers] . ibuffer))
+  :config (user--ibuffer-config))
 
-  ;;; (Packages) ;;;
-  (use-package ibuffer-vc
-    :defer t))
-
-(user--ibuffer-config)
-
+(use-package ibuffer-vc
+  :after ibuffer
+  :defer t)
 
 (provide 'utilities/ibuffer)
 ;;; ibuffer.el ends here

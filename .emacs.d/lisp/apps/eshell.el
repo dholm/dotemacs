@@ -104,7 +104,25 @@
 
   ;;; (Packages) ;;;
   (use-package eshell-manual
-    :defer t))
+    :defer t)
+  (when (feature-p 'helm)
+    (use-package helm-shell
+      :ensure helm
+      :defer t
+      :init
+      ;; Shell history
+      (add-hook 'eshell-mode-hook
+                (lambda ()
+                  (bind-key "C-c C-l"
+                            #'helm-eshell-history
+                            eshell-mode-map)))
+      (bind-key "C-c C-l" #'helm-comint-input-ring shell-mode-map)
+
+      ;; Completion with helm
+      (add-hook 'eshell-mode-hook
+                (lambda ()
+                  (bind-key [remap eshell-pcomplete]
+                            'helm-esh-pcomplete eshell-mode-map))))))
 
 (user--eshell-config)
 

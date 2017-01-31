@@ -22,9 +22,7 @@
   (user/bind-key-local :code :eval-buffer 'ess-eval-buffer)
   (user/bind-key-local :code :eval-function 'ess-eval-function)
   (user/bind-key-local :code :eval-selection 'user/ess-eval-region)
-  (user/bind-key-local :code :eval-expression 'ess-eval-line)
-  ;; Workaround issue with ess yank.
-  (local-set-key [remap yank] 'yank))
+  (user/bind-key-local :code :eval-expression 'ess-eval-line))
 
 
 (defun user--inferior-ess-mode-hook ()
@@ -120,6 +118,9 @@
 (with-executable 'R
   (use-package ess
     :defer t
+    :bind (:map ess-mode-map
+           ;; Workaround issue with ess yank.
+           ([remap yank] . yank))
     :config (user--ess-config))
   (use-package ess-smart-underscore
     :defer t)

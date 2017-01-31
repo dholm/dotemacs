@@ -118,10 +118,6 @@
   (irony-cdb-autosetup-compile-options)
 
   ;;; (Bindings) ;;;
-  (define-key irony-mode-map [remap completion-at-point]
-    'irony-completion-at-point-async)
-  (define-key irony-mode-map [remap complete-symbol]
-    'irony-completion-at-point-async)
   (define-key irony-mode-map (user/get-key :code :auto-complete)
     'irony-completion-at-point-async))
 
@@ -247,6 +243,9 @@
              (executable-find "llvm-config"))
     (use-package irony
       :defer t
+      :bind (:map irony-mode-map
+             ([remap completion-at-point] . irony-completion-at-point-async)
+             ([remap complete-symbol] . irony-completion-at-point-async))
       :config (user--irony-mode-config))
     (use-package irony-eldoc
       :defer t)

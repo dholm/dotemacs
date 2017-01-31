@@ -66,10 +66,7 @@
                       'ac-source-latex-commands)))
 
   ;; Activate improved sentence filling.
-  (ad-activate 'LaTeX-fill-region-as-paragraph)
-
-  ;;; (Bindings) ;;;
-  (local-set-key [remap fill-paragraph] 'LaTeX-fill-paragraph))
+  (ad-activate 'LaTeX-fill-region-as-paragraph))
 
 
 (defun user--bibtex-mode-hook ()
@@ -221,6 +218,8 @@ Makes it easier to version control LaTeX-files."
   ;;; (Packages) ;;;
   (use-package auctex
     :defer t
+    :bind (:map LaTeX-mode-map
+           ([remap fill-paragraph] . LaTeX-fill-paragraph))
     :config (user--auctex-config))
   (use-package ebib
     :defer t

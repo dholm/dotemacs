@@ -35,7 +35,12 @@
   (user--man-mode-config)
   (user--woman-config)
 
-  (make-directory *user-man-cache-directory* t))
+  (make-directory *user-man-cache-directory* t)
+
+  ;;; (Packages) ;;;
+  (when (feature-p 'helm)
+    (use-package helm-man
+      :ensure helm)))
 
 (with-executable 'man
   (user--man-config))

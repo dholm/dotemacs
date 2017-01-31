@@ -106,7 +106,15 @@
     :ensure t)
   (use-package eldoc-eval
     :ensure t
-    :config (user--eldoc-eval-config)))
+    :config (user--eldoc-eval-config))
+  (use-package helm-elisp
+    :ensure helm
+    :bind (("C-c h a" . helm-apropos)
+           ("C-c h l" . helm-locate-library))
+    :config
+    (setq
+     helm-apropos-fuzzy-match t
+     helm-lisp-fuzzy-completion t)))
 
 (after-load 'modes/lisp
   (user--elisp-mode-config))

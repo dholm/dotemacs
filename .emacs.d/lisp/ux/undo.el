@@ -34,8 +34,6 @@
     (setq ad-return-value (concat ad-return-value ".gz")))
 
   ;;; (Bindings) ;;;
-  (global-set-key [remap undo] 'undo-tree-undo)
-  (global-set-key [remap redo] 'undo-tree-redo)
   (user/bind-key-global :basic :undo 'undo-tree-undo)
   (user/bind-key-global :basic :redo 'undo-tree-redo)
   (user/bind-key-global :util :undo-tree 'undo-tree-visualize))
@@ -49,6 +47,8 @@
   ;;; (Packages) ;;;
   (use-package undo-tree
     :ensure t
+    :bind* (([remap undo] . undo-tree-undo)
+            ([remap redo] . undo-tree-redo))
     :config (user--undo-tree-config)))
 
 (user--undo-config)

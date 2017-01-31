@@ -21,10 +21,17 @@
 
 (defun user--info-mode-config ()
   "Initialize info mode."
+  ;;; (Packages) ;;;
   (use-package info+
     :ensure t
     :config (user--info+-config))
 
+  (use-package helm-info
+    :ensure helm
+    :bind (("C-c h h e" . helm-info-emacs)
+           ("C-c h h i" . helm-info-at-point)))
+
+  ;;; (Hooks) ;;;
   (add-hook 'Info-mode-hook 'user--info-mode-hook))
 
 (user--info-mode-config)

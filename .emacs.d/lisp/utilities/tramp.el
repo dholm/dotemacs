@@ -26,15 +26,14 @@
 
   ;; Load SSH configuration
   (after-load 'tramp
-    (after-load 'dash
-      (tramp-set-completion-function
-       "ssh" (mapcar
-              (lambda (x) (list 'tramp-parse-sconfig x))
-              (-remove
-               (lambda (x) (not (file-exists-p x)))
-               `(,(path-join "/" "etc" "ssh_config")
-                 ,(path-join "/" "etc" "ssh" "ssh_config")
-                 ,(path-join *user-home-directory* ".ssh" "config"))))))
+    (tramp-set-completion-function
+     "ssh" (mapcar
+            (lambda (x) (list 'tramp-parse-sconfig x))
+            (-remove
+             (lambda (x) (not (file-exists-p x)))
+             `(,(path-join "/" "etc" "ssh_config")
+               ,(path-join "/" "etc" "ssh" "ssh_config")
+               ,(path-join *user-home-directory* ".ssh" "config")))))
 
     ;; Preserve PATH on remote host.
     (setq tramp-remote-path (delete 'tramp-default-remote-path tramp-remote-path))
@@ -42,6 +41,7 @@
 
 (use-package tramp
   :ensure t
+  :after dash
   :init (user--tramp-init)
   :config (user--tramp-config))
 

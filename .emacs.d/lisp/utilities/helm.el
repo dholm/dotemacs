@@ -111,7 +111,7 @@
 
 
 (defun user--helm-config ()
-  "Initialize helm."
+  "Configure helm."
   (setq-default
    ;; Idle delays.
    helm-idle-delay 0.1
@@ -133,10 +133,6 @@
   (add-hook 'user--after-init-hook 'user/helm-mode)
 
   ;;; (Bindings) ;;;
-  (global-set-key [remap find-file] 'helm-find-files)
-  (global-set-key [remap switch-to-buffer] 'helm-mini)
-  (global-set-key [remap execute-extended-command] 'helm-M-x)
-
   (user/bind-key-global :nav :context 'user/helm-navigate)
   (user/bind-key-global :doc :apropos 'user/helm-apropos)
   (user/bind-key-global :emacs :elisp-search 'helm-info-elisp)
@@ -152,6 +148,73 @@
   :ensure t
   :diminish helm-mode
   :config (user--helm-config))
+
+(use-package helm-command
+  :ensure helm
+  :bind* ([remap execute-extended-command] . helm-M-x))
+
+(use-package helm-files
+  :ensure helm
+  :bind* (([remap find-file] . helm-find-files)
+          :map helm-find-files-map
+          ("C-k" . helm-ff-persistent-delete))
+  :config
+  ;; `helm-recentf-fuzzy-match' is set via Customize
+  ;; Reason: https://emacs.stackexchange.com/a/106/5514
+  (setq
+   helm-ff-file-name-history-use-recentf t
+   ;; Don't prompt for new buffer.
+   helm-ff-newfile-prompt-p nil
+   helm-input-idle-delay 0.1
+   ;; Don't show boring files.
+   helm-ff-skip-boring-files t
+   ;; Search for library in `require' and `declare-function' sexp.
+   helm-ff-search-library-in-sexp t
+   ;; Auto-complete in find-files.
+   helm-ff-auto-update-initial-value t))
+
+(use-package helm-misc
+  :ensure helm
+  :bind* ([remap switch-to-buffer] . helm-mini))
+
+(use-package helm-buffers
+  :ensure helm
+  :bind (:map helm-buffer-map
+         ("C-k" . helm-buffer-run-kill-persistent))
+  :config
+  (setq helm-buffers-fuzzy-matching t))
+
+(use-package helm-ring
+  :ensure helm
+  :bind* (([remap yank-pop] . helm-show-kill-ring)
+          ("C-c SPC" . helm-all-mark-rings)))
+
+(use-package helm-imenu
+  :ensure helm
+  :bind (("C-c n i" . helm-imenu-in-all-buffers)
+         ("C-c n t" . helm-imenu))
+  :config
+  (setq
+   helm-imenu-fuzzy-match t
+   helm-imenu-execute-action-at-once-if-one nil))
+
+(use-package helm-bookmarks
+  :ensure helm
+  :bind ("C-x r l" . helm-filtered-bookmarks))
+
+(use-package helm-pages
+  :ensure t
+  :bind ("C-c n P" . helm-pages))
+
+(use-package helm-eval
+  :ensure helm
+  :bind (("C-c h M-:" . helm-eval-expression-with-eldoc)
+         ("C-c h *" . helm-calcul-expression)))
+
+(use-package helm-external
+  :ensure helm
+  :bind ("C-c h x" . helm-run-external-command))
+
 (require-package '(:name helm-build-command))
 
 

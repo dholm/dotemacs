@@ -447,7 +447,7 @@ Gmail {
   (add-hook 'wl-summary-mode-hook 'user--wl-summary-mode-hook))
 
 
-(defun user--wanderlust-config ()
+(defun user--wanderlust-init ()
   "Initialize Wanderlust."
   (setq-default
    ;;; (Basic Configuration) ;;;
@@ -485,15 +485,18 @@ Gmail {
   (user--wanderlust-message-config)
   (user--wanderlust-draft-config)
 
-  (after-load 'wl
-    (with-feature 'fullframe
-      (fullframe wl wl-exit nil)))
-
+  ;;; (Hooks) ;;;
   ;; Configuration hooks.
   (add-hook 'wl-init-hook 'user--wl-config-hook)
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :email 'wl))
+
+
+(defun user--wanderlust-config ()
+  "Configure wanderlust."
+  (with-feature 'fullframe
+    (fullframe wl wl-exit nil)))
 
 
 (defun user--wl-config ()
@@ -505,10 +508,15 @@ Gmail {
   (set-file-modes *user-wanderlust-cache-directory* #o0700)
 
   (use-package wanderlust
-    :defer t
+    :init (user--wanderlust-init)
     :config (user--wanderlust-config))
   (when (display-graphic-p)
-    (require-package '(:name wl-gravatar))))
+    ;; Override recipe so that Wanderlust is loaded by package.el.
+    (require-package '(:name wl-gravatar
+                             :type github
+                             :pkgname "dabrahams/wl-gravatar"
+                             :depends (gravatar)
+                             :prepare (autoload 'wl-gravatar-insert "wl-gravatar")))))
 
 (user--wl-config)
 

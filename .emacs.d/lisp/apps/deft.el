@@ -13,7 +13,7 @@
 
 
 (defun user--deft-config ()
-  "Initialize deft."
+  "Configure deft."
   ;; Ensure that notes store exists.
   (make-directory *user-notes-data-directory* t)
 
@@ -28,13 +28,19 @@
    ;; Auto-save idle interval in seconds.
    deft-auto-save-interval 30.0)
 
-  (add-hook 'deft-mode-hook 'user--deft-mode-hook)
+  ;;; (Hook) ;;;
+  (add-hook 'deft-mode-hook 'user--deft-mode-hook))
 
+
+(defun user--deft-init ()
+  "Initialize deft."
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :notes 'deft))
 
+
 (use-package deft
-  :defer t
+  :commands deft
+  :init (user--deft-init)
   :config (user--deft-config))
 
 

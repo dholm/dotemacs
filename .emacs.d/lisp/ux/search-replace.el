@@ -2,13 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--visual-regexp-config ()
-  "Initialize visual regexp."
-  ;;; (Bindings) ;;;
-  (global-set-key [remap query-replace-regexp] 'vr/query-replace)
-  (global-set-key [remap replace-regexp] 'vr/replace))
-
-
 (defun user--anzu-config ()
   "Initialize anzu."
   (global-anzu-mode t)
@@ -36,7 +29,8 @@
   ;;; (Packages) ;;;
   (use-package visual-regexp
     :ensure t
-    :config (user--visual-regexp-config))
+    :bind* (([remap query-replace-regexp] . vr/query-replace)
+            ([remap replace-regexp] . vr/replace)))
   (use-package anzu
     :ensure t
     :config (user--anzu-config)))

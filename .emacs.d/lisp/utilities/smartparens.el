@@ -18,7 +18,6 @@
   (user/bind-key-local :code :comment 'sp-comment)
 
   ;; Killing.
-  (local-set-key [remap kill-line] 'sp-kill-hybrid-sexp)
   (user/bind-key-local :basic :cut-expr 'sp-kill-sexp)
   (user/bind-key-local :basic :copy-expr 'sp-copy-sexp))
 
@@ -41,6 +40,8 @@
 
 (use-package smartparens
   :ensure t
+  :bind (:map smartparens-mode-map
+         ([remap kill-line] . sp-kill-hybrid-sexp))
   :config (user--smartparens-config))
 
 

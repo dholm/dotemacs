@@ -35,9 +35,7 @@
   (user/bind-key-local :nav :switch-spec-impl 'go-goto-imports)
   (user/bind-key-local :debug :start 'realgud-gub)
   (when (feature-p 'go-test)
-    (user/bind-key-local :code :test 'go-test-current-file))
-  (when (feature-p 'helm-go-package)
-    (local-set-key [remap go-import-add] 'helm-go-package)))
+    (user/bind-key-local :code :test 'go-test-current-file)))
 
 
 (defun user--go-mode-config ()
@@ -61,7 +59,8 @@
   (require-package '(:name go-oracle))
   (when (feature-p 'helm)
     (use-package helm-go-package
-      :defer t)))
+      :bind (:map go-mode-map
+             ([remap go-import-add] . helm-go-package)))))
 
 
 (provide 'modes/go)
