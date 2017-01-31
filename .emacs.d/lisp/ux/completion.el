@@ -15,11 +15,6 @@
   "Company mode hook."
   (user/complete-at-point-install)
 
-  (when (display-graphic-p)
-    (with-feature 'company-quickhelp
-      ;; Enable help popups.
-      (company-quickhelp-mode t)))
-
   ;;; (Bindings) ;;;
   (when (current-local-map)
     (define-key (current-local-map) (user/get-key :code :auto-complete) 'company-complete)))
@@ -148,7 +143,7 @@
   (after-load 'diminish
     (diminish 'auto-complete-mode))
 
-  (setq-default
+  (validate-setq
    ;; Limit the number of candidates.
    ac-candidate-limit 40
    ;; Delay until narrowing completions.
@@ -183,7 +178,7 @@
 
   ;;; (Bindings) ;;;
   (ac-set-trigger-key (user/get-key :code :try-complete))
-  (setq-default
+  (validate-setq
    ac-completing-map
    (let ((map (make-sparse-keymap)))
      ;; Expand on tab.
@@ -221,26 +216,20 @@
 
 (defun user--company-mode-config ()
   "Initialize company mode."
-  (setq-default
+  (validate-setq
    ;; Do not trigger completion automatically.
    company-idle-delay nil
    ;; Complete immediately.
    company-minimum-prefix-length 0
-   ;; Disable completion in certain modes.
-   company-global-modes '(not git-commit-mode)
    ;; Show commonly used matches first.
    company-transformers '(company-sort-by-occurrence)
    ;; Align annotations to the right of tooltip.
    company-tooltip-align-annotations t
-   ;; Complete even outside of code.
-   company-dabbrev-code-everywhere t
    ;; Active company frontends.
    company-frontends
    '(company-pseudo-tooltip-unless-just-one-frontend
      company-preview-frontend
-     company-echo-metadata-frontend)
-   ;; Show quick help popup after half a second.
-   company-quickhelp-delay 0.5)
+     company-echo-metadata-frontend))
 
   ;;; (Hooks) ;;;
   (add-hook 'company-mode-hook 'user--company-mode-hook)
@@ -281,10 +270,23 @@
     :ensure t
     :diminish company-mode
     :config (user--company-mode-config))
+  (use-package company-dabbrev-code
+    :ensure company
+    :config
+    (validate-setq
+     ;; Complete even outside of code.
+     company-dabbrev-code-everywhere t))
   (use-package company-flx
     :ensure t)
   (use-package company-quickhelp
-    :ensure t))
+    :ensure company
+    :if window-system
+    :config
+    (validate-setq
+     ;; Show quick help popup after half a second.
+     company-quickhelp-delay 0.5)
+
+    (add-hook 'company-mode-hook 'company-quickhelp-mode t)))
 
 (user--completion-config)
 

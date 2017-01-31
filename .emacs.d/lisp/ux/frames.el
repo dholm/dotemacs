@@ -44,13 +44,12 @@
 
 (defun user--frames-config ()
   "Initialize Emacs frames."
-  (setq-default
+  (validate-setq
    ;; Do not show the splash screen or message
    inhibit-startup-screen t
-   inhibit-startup-echo-area-message t
+   inhibit-startup-echo-area-message (getenv "USER")
    ;; Inhibit GUI features
    use-file-dialog nil
-   user-dialog-box nil
    ;; Don't split frames horizontally.
    split-height-threshold nil)
 

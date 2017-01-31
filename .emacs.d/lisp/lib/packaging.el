@@ -29,17 +29,19 @@
 
 ;; Bootstrap `use-package'.
 (package-initialize)
-(unless (package-installed-p 'use-package)
+(unless (and (package-installed-p 'use-package) (package-installed-p 'validate))
   (package-refresh-contents)
-  (package-install 'use-package))
+  (package-install 'use-package)
+  (package-install 'validate))
 
 (eval-when-compile
   ;; Load use-package.
-  (require 'use-package))
+  (require 'use-package)
+  (require 'validate))
 
 (defun user--el-get-init ()
   "Initialize el-get."
-  (setq-default
+  (validate-setq
    el-get-safe-mode t)
 
   (add-to-list 'load-path (path-join *user-el-get-directory* "el-get")))
@@ -81,7 +83,7 @@
 
 (defun user--el-get-config ()
   "Initialize el-get as package manager."
-  (setq-default
+  (validate-setq
    el-get-user-package-directory (path-join user-emacs-directory "init")
    el-get-verbose el-get-safe-mode
    ;; Don't produce system notifications.

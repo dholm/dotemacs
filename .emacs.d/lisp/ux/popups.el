@@ -27,7 +27,7 @@
 
 (defun user--popups-config ()
   "Initialize Emacs popups."
-  (setq-default
+  (validate-setq
    ;; Timeout for messages shown in minibuffer.
    minibuffer-message-timeout 5)
 

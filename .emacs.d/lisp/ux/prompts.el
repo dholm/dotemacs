@@ -4,7 +4,7 @@
 
 (defun user--prompts-config ()
   "Initialize Emacs prompting."
-  (setq-default
+  (validate-setq
    ;; Always follow links to version controlled files.
    vc-follow-symlinks t)
 
@@ -12,7 +12,7 @@
   (fset 'yes-or-no-p 'y-or-n-p)
 
   (when (display-graphic-p)
-    (setq-default
+    (validate-setq
      ;; Don't use graphical dialog boxes when prompting.
      use-dialog-box nil))
 

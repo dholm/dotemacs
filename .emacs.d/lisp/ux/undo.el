@@ -7,19 +7,25 @@
   "Path to user's undo-tree cache store.")
 
 
-(defun user--undo-tree-config ()
-  "Initialize undo-tree."
+;;; (Bindings) ;;;
+(user/bind-key-global :basic :undo 'undo)
+
+(use-package undo-tree
+  :ensure t
+  :bind* (([remap undo] . undo-tree-undo)
+          ([remap redo] . undo-tree-redo))
+  :config
   ;; Ensure that cache store exists.
   (make-directory *user-undo-tree-cache-directory* t)
 
-  (setq-default
+  (validate-setq
    ;; Set up undo history cache store.
    undo-tree-history-directory-alist
    `((".*" . ,*user-undo-tree-cache-directory*))
    ;; Persistent undo history.
    undo-tree-auto-save-history t
    ;; Don't display in mode-line.
-   undo-tree-mode-lighter nil
+   undo-tree-mode-lighter ""
    ;; Display time stamps in visualizer by default.
    undo-tree-visualizer-timestamps t
    ;; Display diffs in visualizer by default.
@@ -30,28 +36,13 @@
 
   ;; Compress undo history.
   (defadvice undo-tree-make-history-save-file-name
-    (after undo-tree activate)
-    (setq ad-return-value (concat ad-return-value ".gz")))
+      (after undo-tree activate)
+    (validate-setq ad-return-value (concat ad-return-value ".gz")))
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :basic :undo 'undo-tree-undo)
   (user/bind-key-global :basic :redo 'undo-tree-redo)
   (user/bind-key-global :util :undo-tree 'undo-tree-visualize))
-
-
-(defun user--undo-config ()
-  "Initialize Emacs undo."
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :basic :undo 'undo)
-
-  ;;; (Packages) ;;;
-  (use-package undo-tree
-    :ensure t
-    :bind* (([remap undo] . undo-tree-undo)
-            ([remap redo] . undo-tree-redo))
-    :config (user--undo-tree-config)))
-
-(user--undo-config)
 
 
 (provide 'ux/undo)

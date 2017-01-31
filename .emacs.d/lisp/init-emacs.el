@@ -8,7 +8,7 @@
 (make-directory *user-cache-directory* t)
 (make-directory *user-data-directory* t)
 
-(setq-default
+(validate-setq
  ;; Lines of history in the message buffer.
  message-log-max 10000
  ;; Reduce number of pauses due to garbage collection.

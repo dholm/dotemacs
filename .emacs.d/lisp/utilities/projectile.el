@@ -11,7 +11,9 @@
    ;; Projectile cache store.
    projectile-cache-file (path-join *user-cache-directory* "projectile")
    ;; Use default completion that will usually be provided by Helm.
-   projectile-completion-system 'default)
+   projectile-completion-system 'default
+   ;; Enable in smart mode line.
+   sml/use-projectile-p 'after-prefixes)
 
   (with-executable 'ctags-exuberant
     (setq-default
@@ -20,14 +22,13 @@
 
   ;; Enable projectile globally.
   (projectile-global-mode)
-  (after-load 'diminish
-    (diminish 'projectile-mode))
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :basic :open-file-context 'projectile-find-file))
 
 (use-package projectile
   :defer t
+  :diminish projectile-mode
   :config (user--projectile-config))
 
 

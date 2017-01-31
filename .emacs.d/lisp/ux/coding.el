@@ -14,7 +14,7 @@
     (when (eq window-system 'x)
       ;; Treat X11 clipboard input as UTF-8 string first; compound text next,
       ;; etc.
-      (setq-default
+      (validate-setq
        x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))))
 
   ;;; (Bindings) ;;;

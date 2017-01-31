@@ -4,7 +4,7 @@
 
 (defun user--dtrt-indent-config ()
   "Initialize dtrt indent."
-  (setq-default
+  (validate-setq
    dtrt-indent-verbosity 0
    global-mode-string (delq 'dtrt-indent-mode-line-info global-mode-string)))
 

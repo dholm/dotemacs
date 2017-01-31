@@ -24,12 +24,12 @@
 
 (defun user--kill-yank-config ()
   "Initialize copy/paste."
-  (setq-default
+  (validate-setq
    ;; Mouse selection should not automatically go to kill ring.
    mouse-drag-copy-region nil)
 
   (when (eq window-system 'x)
-    (setq-default
+    (validate-setq
      ;; Don't inject mouse selection into X11 clipboard.
      mouse-drag-copy-region nil
      ;; Do not interact with X11 primary selection.

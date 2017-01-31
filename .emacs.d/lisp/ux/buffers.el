@@ -35,7 +35,7 @@
 
 (defun user--buffers-config ()
   "Initialize Emacs buffers."
-  (setq-default
+  (validate-setq
    ;; Set up uniquify's style.
    uniquify-buffer-name-style 'reverse
    uniquify-separator " • "

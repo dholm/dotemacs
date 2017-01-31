@@ -11,9 +11,7 @@
 
 (defun user--search-replace-config ()
   "Initialize Emacs search and replace."
-  (setq-default
-   ;; Highlight matches when using grep.
-   grep-highlight-matches t
+  (validate-setq
    ;; Highlight all visible matches.
    search-highlight t
    query-replace-highlight t
@@ -33,7 +31,13 @@
             ([remap replace-regexp] . vr/replace)))
   (use-package anzu
     :ensure t
-    :config (user--anzu-config)))
+    :config (user--anzu-config))
+  (use-package grep
+    :ensure t
+    :config
+    (validate-setq
+     ;; Highlight matches when using grep.
+     grep-highlight-matches t)))
 
 (user--search-replace-config)
 

@@ -12,7 +12,7 @@
 
 (defun user--backups-config ()
   "Initialize Emacs backup system."
-  (setq-default
+  (validate-setq
    ;; Put backups in the cache directory
    backup-directory-alist `((".*" . ,*user-backup-directory*))
    ;; Version-control backup files
@@ -25,7 +25,7 @@
    ;; Always backup by copy
    backup-by-copying t)
 
-  (setq-default
+  (validate-setq
    ;; Auto-save every minute or 300 events
    auto-save-interval 300
    auto-save-timeout 60

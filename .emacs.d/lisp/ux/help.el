@@ -4,19 +4,15 @@
 
 (defun user--guide-key-config ()
   "Initialize guide key."
-  (setq-default
+  (validate-setq
    ;; Register all the prefix keys.
    guide-key/recursive-key-sequence-flag t
    guide-key/guide-key-sequence user/prefix-list
    ;; Number of seconds until help is shown.
-   guide-key/idle-delay 1.0
-   ;; Tooltips should only be used in graphical mode.
-   guide-key-tip/enabled (display-graphic-p))
+   guide-key/idle-delay 1.0)
 
   ;; Enable guide key.
-  (guide-key-mode t)
-  (after-load 'diminish
-    (diminish 'guide-key-mode)))
+  (guide-key-mode t))
 
 
 (defun user--help-config ()
@@ -46,10 +42,16 @@
   ;;; (Packages) ;;;
   (use-package guide-key
     :ensure t
+    :diminish guide-key-mode
     :config (user--guide-key-config))
-  (when (display-graphic-p)
-    (use-package guide-key-tip
-      :ensure t)))
+
+  (use-package guide-key-tip
+    :ensure guide-key
+    :if window-system
+    :config
+    (validate-setq
+     ;; Tooltips should only be used in graphical mode.
+     guide-key-tip/enabled t)))
 
 (user--help-config)
 

@@ -22,7 +22,7 @@
     ;; Allow reduction of decoration level in large buffers.
     (make-variable-buffer-local 'font-lock-maximum-decoration))
 
-  (setq-default
+  (validate-setq
    ;; Redraw the entire screen before checking for pending input events.
    ;; This will improve performance in general but might degrade performance of
    ;; key repeat.
