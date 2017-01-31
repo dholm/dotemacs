@@ -55,6 +55,12 @@ mode that sets `syntax-ppss' properly."
   (put 'upcase-region 'disabled nil)
   (put 'downcase-region 'disabled nil)
 
+  ;;; (Packages) ;;;
+  (when (feature-p 'helm)
+    (use-package helm-unicode
+      :ensure t
+      :bind ("C-c h 8" . helm-unicode)))
+
   ;;; (Bindings) ;;;
   (global-set-key [remap move-beginning-of-line] 'beginning-or-indentation)
   (global-set-key [remap move-end-of-line] 'end-of-line-or-code)
