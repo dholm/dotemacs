@@ -34,7 +34,7 @@
 
 (defun user--swedish-holidays-config ()
   "Initialize swedish holidays."
-  (setq-default
+  (validate-setq
    ;; General swedish holidays.
    holiday-general-holidays
    '((holiday-fixed 1 1 "New Year's Day")
@@ -109,7 +109,7 @@
      (holiday-fixed 12 10 "Nobel Day")
      (holiday-fixed 12 13 "Lucia")))
 
-  (setq-default
+  (validate-setq
    ;; List of holidays to display in calendar.
    calendar-holidays
    (append holiday-general-holidays
@@ -122,7 +122,7 @@
 
 (defun user--calfw-config ()
   "Initialize calfw."
-  (setq-default
+  (validate-setq
    ;; Use `fill-region' to wrap long lines.
    cfw:render-line-breaker 'cfw:render-line-breaker-wordwrap
    ;; Use unicode to render calendar
@@ -156,7 +156,7 @@
 
 (defun user--appt-config ()
   "Initialize appointment notification system."
-  (setq-default
+  (validate-setq
    ;; Number of minutes to notify before an event starts.
    appt-message-warning-time 5
    appt-display-interval 5
@@ -173,7 +173,7 @@
   (copy-face 'calendar-weekend-header 'calendar-iso-week-header-face)
   (copy-face 'calendar-weekend-header 'calendar-iso-week-face)
 
-  (setq-default
+  (validate-setq
    ;; Week header.
    calendar-intermonth-header
    (propertize "Wk" 'font-lock-face 'calendar-iso-week-header-face)
@@ -190,7 +190,7 @@
 (defun user--calendar-config ()
   "Initialize calendar."
   (let ((diary-data-store (path-join *user-org-data-directory* "diary.org")))
-    (setq-default
+    (validate-setq
      ;; Date style should be ISO.
      calendar-date-style 'iso
      ;; Diary data store.
@@ -201,31 +201,42 @@
      calendar-mark-diary-entries-flag t
      ;; Mark holidays in calendar.
      calendar-mark-holidays-flag t
-     ;; Display one week of entries from current date.
-     diary-number-of-entries 7
      ;; Week starts on Monday.
      calendar-week-start-day 1))
 
-  (user--swedish-holidays-config)
-  (after-load 'calendar
-    (user--calendar-week-config))
-  (after-load 'appt
-    (user--appt-config))
+  (user--calendar-week-config)
 
   ;;; (Hooks) ;;;
-  (add-hook 'diary-display-function 'diary-fancy-display)
   (add-hook 'calendar-today-visible-hook 'calendar-mark-today)
-  (add-hook 'calendar-load-hook 'user--calendar-load-hook)
+  (add-hook 'calendar-load-hook 'user--calendar-load-hook))
 
-  ;;; (Packages) ;;;
-  (use-package calfw
-    :defer t
-    :config (user--calfw-config))
-  (use-package excorporate
-    :defer t))
+(use-package calendar
+  :defer t
+  :config (user--calendar-config))
 
-(user--calendar-config)
+(use-package holidays
+  :ensure calendar
+  :config (user--swedish-holidays-config))
 
+(use-package diary-lib
+  :ensure calendar
+  :config
+  (validate-setq
+   ;; Display one week of entries from current date.
+   diary-number-of-entries 7)
+  ;;; (Hooks) ;;;
+  (add-hook 'diary-display-function 'diary-fancy-display))
+
+(use-package appt
+  :ensure diary-lib
+  :config (user--appt-config))
+
+(use-package calfw
+  :defer t
+  :config (user--calfw-config))
+
+(use-package excorporate
+  :defer t)
 
 (provide 'apps/calendar)
 ;;; calendar.el ends here

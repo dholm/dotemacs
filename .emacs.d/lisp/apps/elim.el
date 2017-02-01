@@ -4,11 +4,14 @@
 
 (defun user--elim-config ()
   "Initialize elim."
-  (setq-default
-   lui-max-buffer-size 30000
-   lui-flyspell-p t
-   lui-flyspell-alist '(("." "american"))
-   elim-directory (path-join *user-cache-directory* "elim"))
+  (after-load 'lui
+    (validate-setq
+     lui-max-buffer-size 30000
+     lui-flyspell-p t
+     lui-flyspell-alist '(("." "american"))))
+  (after-load 'elim
+    (validate-setq
+     elim-directory (path-join *user-cache-directory* "elim")))
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :instant-messenger 'garak))

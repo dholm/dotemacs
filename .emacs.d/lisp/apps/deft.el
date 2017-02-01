@@ -17,12 +17,9 @@
   ;; Ensure that notes store exists.
   (make-directory *user-notes-data-directory* t)
 
-  (setq-default
+  (validate-setq
    ;; The path to where notes will be stored.
    deft-directory *user-notes-data-directory*
-   ;; Set the default note format.
-   deft-extension "org"
-   deft-text-mode 'org-mode
    ;; Enforce good file naming.
    deft-use-filename-as-title t
    ;; Auto-save idle interval in seconds.

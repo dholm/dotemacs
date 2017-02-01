@@ -4,7 +4,7 @@
 
 (defun user--elnode-config ()
   "Initialize Elnode."
-  (setq-default
+  (validate-setq
    ;; Do not start server automatically.
    elnode-do-init nil
    ;; Don't spam *Messages* with error logs.
@@ -18,7 +18,7 @@
 (use-package elnode
   :defer t
   :config (user--elnode-config))
-(require-package '(:name elnode-org :after (user--elnode-config)))
+(require-package '(:name elnode-org))
 
 
 (provide 'apps/elnode)

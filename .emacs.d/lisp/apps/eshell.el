@@ -61,22 +61,9 @@
 
 (defun user--eshell-config ()
   "Initialize the Emacs shell."
-  (setq-default
+  (validate-setq
    ;; Set the path to the shell cache store.
-   eshell-directory-name *shell-cache-directory*
-   ;; And the shell login script.
-   eshell-login-script (path-join *user-home-directory* ".eshellrc")
-   ;; Set eshell prompt.
-   eshell-prompt-function 'user/shell-prompt
-   eshell-highlight-prompt nil
-   eshell-prompt-regexp "^[^#$\n]*[#$] "
-   ;; Set a decent history size.
-   eshell-history-size 10000
-   eshell-save-history-on-exit t
-   ;; Announce the terminal type.
-   eshell-term-name "eterm-color"
-   ;; Allow using buffer names directly in redirection.
-   eshell-buffer-shorthand t)
+   eshell-directory-name *shell-cache-directory*)
 
   (after-load 'esh-module
     (add-many-to-list 'eshell-modules-list
@@ -100,31 +87,59 @@
   (add-hook 'eshell-mode-hook 'user--eshell-mode-hook)
 
   ;;; (Bindings) ;;;
-  (user/bind-key-global :apps :shell 'user/raise-eshell)
+  (user/bind-key-global :apps :shell 'user/raise-eshell))
 
-  ;;; (Packages) ;;;
-  (use-package eshell-manual
-    :defer t)
-  (when (feature-p 'helm)
-    (use-package helm-shell
-      :ensure helm
-      :defer t
-      :init
-      ;; Shell history
-      (add-hook 'eshell-mode-hook
-                (lambda ()
-                  (bind-key "C-c C-l"
-                            #'helm-eshell-history
-                            eshell-mode-map)))
-      (bind-key "C-c C-l" #'helm-comint-input-ring shell-mode-map)
+(use-package eshell
+  :defer t
+  :config (user--eshell-config))
+(use-package em-script
+  :after eshell
+  :config
+  (validate-setq
+   ;; And the shell login script.
+   eshell-login-script (path-join *user-home-directory* ".eshellrc")))
+(use-package em-prompt
+  :after eshell
+  :config
+  (validate-setq
+   ;; Set eshell prompt.
+   eshell-prompt-function 'user/shell-prompt
+   eshell-highlight-prompt nil
+   eshell-prompt-regexp "^[^#$\n]*[#$] "))
+(use-package em-hist
+  :after eshell
+  :config
+  (validate-setq
+   ;; Set a decent history size.
+   eshell-history-size 10000
+   eshell-save-history-on-exit t))
+(use-package em-term
+  :after eshell
+  :config
+  (validate-setq
+   ;; Announce the terminal type.
+   eshell-term-name "eterm-color"))
 
-      ;; Completion with helm
-      (add-hook 'eshell-mode-hook
-                (lambda ()
-                  (bind-key [remap eshell-pcomplete]
-                            'helm-esh-pcomplete eshell-mode-map))))))
+(use-package eshell-manual
+  :ensure eshell
+  :defer t)
+(use-package helm-shell
+  :ensure helm
+  :defer t
+  :init
+  ;; Shell history
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+              (bind-key "C-c C-l"
+                        #'helm-eshell-history
+                        eshell-mode-map)))
+  (bind-key "C-c C-l" #'helm-comint-input-ring shell-mode-map)
 
-(user--eshell-config)
+  ;; Completion with helm
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+              (bind-key [remap eshell-pcomplete]
+                        'helm-esh-pcomplete eshell-mode-map))))
 
 
 (provide 'apps/eshell)

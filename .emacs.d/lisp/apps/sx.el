@@ -8,7 +8,7 @@
 
 (defun user--sx-config ()
   "Initialize sx."
-  (setq-default
+  (validate-setq
    ;; Set up sx cache store.
    sx-cache-directory *user-sx-cache-directory*)
 

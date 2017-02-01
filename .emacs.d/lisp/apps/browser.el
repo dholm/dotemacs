@@ -25,7 +25,7 @@
                ((feature-p 'emacs-w3m) (assq :w3m user/browser-alist))
                (t (assq :default user/browser-alist))))
         (external-browser (assq :default user/browser-alist)))
-    (setq-default
+    (validate-setq
      browse-url-browser-function (cdr (assq :browse-url browser)))
 
     ;;; (Bindings) ;;;

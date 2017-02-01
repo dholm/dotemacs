@@ -35,28 +35,26 @@
   "GDB mode hook.")
 
 
-(defun user--gud-config ()
-  "Initialize GDB modes."
-  ;; Configure gdb-mode
-  (setq-default
+(use-package gdb-mi
+  :defer t
+  :config
+  (validate-setq
    ;; Enable many windows
    gdb-many-windows t
    ;; Use a separate buffer for IO
    gdb-use-separate-io-buffer t
    gdb-show-main t)
+  (add-hook 'gdb-mode-hook 'user--gdb-mode-hook))
 
-  ;; Configure gud-mode
-  (setq-default
+(use-package gud
+  :defer t
+  :config
+  (validate-setq
    ;; Do not change the working directory before running inferior
    gud-chdir-before-run nil
    ;; Enable tooltips in gud mode
    gud-tooltip-mode t)
-
-  ;;; (Hooks) ;;;
-  (add-hook 'gud-mode-hook 'user--gud-mode-hook)
-  (add-hook 'gdb-mode-hook 'user--gdb-mode-hook))
-
-(user--gud-config)
+  (add-hook 'gud-mode-hook 'user--gud-mode-hook))
 
 
 (provide 'apps/gud)

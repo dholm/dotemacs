@@ -56,6 +56,17 @@
     (smiley-region (point-min) (point-max))))
 
 
+(defun user--wl-mail-setup-hook ()
+  "Setup hook for new emails."
+  ;; Pick email account template when opening a draft.
+  (add-hook 'wl-mail-setup-hook 'wl-draft-config-exec)
+
+  ;; Set format to flowed.
+  (save-excursion
+    (mail-text)
+    (mime-edit-insert-tag "text" "plain" "; format=flowed")))
+
+
 (defun user--wl-config-hook ()
   "Wanderlust initialization hook."
   ;; Load Emacs directory client.
@@ -66,7 +77,7 @@
 
   (when (feature-p 'org-mode)
     (with-feature 'org-mime
-      (setq-default
+      (validate-setq
        org-mime-library 'semi)))
 
   ;; Set up wanderlust as the default mail user agent.
@@ -160,7 +171,7 @@
 
 (defun user--semi-config ()
   "Initialize SEMI."
-  (setq-default
+  (validate-setq
    ;; Don't split large mails.
    mime-edit-split-message nil
    ;; Decrypt encrypted emails automatically.
@@ -188,27 +199,6 @@
 
   (add-hook 'mime-view-mode-hook 'user--mime-view-mode-hook)
   (add-hook 'mime-edit-mode-hook 'user--mime-edit-mode-hook))
-
-
-(defun user--elmo-config ()
-  "Initialize ELMO."
-  (setq-default
-   ;; Put message database in data directory.
-   elmo-msgdb-directory (path-join *user-wanderlust-data-directory* "elmo")
-   ;; Folders go in data directory too.
-   elmo-localdir-folder-path *user-wanderlust-data-directory*
-   elmo-maildir-folder-path *user-wanderlust-data-directory*
-   elmo-search-namazu-default-index-path *user-wanderlust-data-directory*
-   elmo-archive-folder-path *user-wanderlust-data-directory*
-   ;; ELMO's cache go into the user cache directory.
-   elmo-cache-directory (path-join *user-wanderlust-cache-directory* "elmo")
-   ;; Use modified UTF-8 for IMAP4.
-   elmo-imap4-use-modified-utf7 t
-   ;; Maximum size of message to fetch without confirmation.
-   elmo-message-fetch-threshold (* 512 1024))
-
-  (unless (executable-find "namazu")
-    (message "Namazu not found, mail will not be indexed.")))
 
 
 (defun user/wanderlust-set-gmail-user (fullname username)
@@ -322,14 +312,14 @@ Gmail {
 (defun user/wanderlust-set-summary-guides ()
   "Set Wanderlust summary thread guides."
   (if (eq default-terminal-coding-system 'utf-8)
-      (setq-default
+      (validate-setq
        wl-thread-indent-level 2
        wl-thread-have-younger-brother-str "├─┬─"
        wl-thread-vertical-str             "│"
        wl-thread-youngest-child-str       "╰───"
        wl-thread-horizontal-str           "─"
        wl-thread-space-str                " ")
-    (setq-default
+    (validate-setq
      wl-thread-indent-level 2
      wl-thread-have-younger-brother-str "+"
      wl-thread-youngest-child-str       "+"
@@ -346,9 +336,57 @@ Gmail {
   (message "%s" (concat "Refiled to " folder)))
 
 
-(defun user--wanderlust-message-config ()
-  "Initialize Wanderlust message view mode."
-  (setq-default
+(use-package wanderlust
+  :defer t
+  :init
+  ;; Create data and cache stores.
+  (make-directory *user-wanderlust-data-directory* t)
+  (set-file-modes *user-wanderlust-data-directory* #o0700)
+  (make-directory *user-wanderlust-cache-directory* t)
+  (set-file-modes *user-wanderlust-cache-directory* #o0700)
+  ;;; (Hooks) ;;;
+  (add-hook 'wl-init-hook 'user--wl-config-hook)
+  ;;; (Bindings) ;;;
+  (user/bind-key-global :apps :email 'wl)  :config)
+
+(use-package wl
+  :after wanderlust
+  :config
+  (with-feature 'fullframe
+    (fullframe wl wl-exit nil))
+  ;;; (Hooks) ;;;
+  ;; Support for writing flowed emails.
+  (add-hook 'wl-draft-mode-hook 'user--wl-draft-mode-hook))
+
+(use-package wl-vars
+  :after wanderlust
+  :config
+  (validate-setq
+   ;;; (Basic Configuration) ;;;
+   ;; Put configuration into wanderlust data directory.
+   wl-init-file (path-join *user-wanderlust-data-directory* "init.el")
+   wl-folders-file (path-join *user-wanderlust-data-directory* "folders")
+   wl-address-file (path-join *user-wanderlust-data-directory* "addresses")
+   ;; Put temporary files in cache directories.
+   wl-temporary-file-directory *user-wanderlust-cache-directory*
+   ;;; (Wanderlust) ;;;
+   ;; Mark sent mails as read.
+   wl-fcc-force-as-read t
+   ;; Check for mail when idle.
+   wl-biff-check-interval 180
+   wl-biff-use-idle-timer t
+   ;; Set notification function.
+   wl-biff-notify-hook 'user--wanderlust-notify-hook
+   ;; Let SMTP server handle Message-ID.
+   wl-insert-message-id nil
+   ;; Quit without asking.
+   wl-interactive-exit nil
+   ;;; (Modeline) ;;;
+   ;; Show mail status in mode line.
+   global-mode-string (cons '(wl-modeline-biff-status
+                              wl-modeline-biff-state-on
+                              wl-modeline-biff-state-off) global-mode-string)
+   ;;; (Messages) ;;;
    ;; Message window size.
    wl-message-window-size '(1 . 3)
    ;; Field lists.
@@ -359,26 +397,8 @@ Gmail {
                                    "^\\(Posted\\|Date\\):"
                                    "^\\(User-Agent\\|X-Mailer\\):")
    ;; Allow sort on visible fields.
-   wl-message-sort-field-list wl-message-visible-field-list)
-
-  ;; Support for reading flowed emails.
-  (add-hook 'mime-display-text/plain-hook 'user--mime-display-text/plain-hook)
-
-  (when (and (display-graphic-p)
-             (feature-p 'wl-gravatar))
-    (setq-default
-     ;; Insert gravatar as email X-Face.
-     wl-highlight-x-face-function 'wl-gravatar-insert))
-
-  ;;; (Hooks) ;;;
-  (add-hook 'wl-message-redisplay-hook 'user--wl-message-redisplay-hook)
-  (add-hook 'wl-message-buffer-created-hook
-            'user--wl-message-buffer-created-hook))
-
-
-(defun user--wanderlust-draft-config ()
-  "Initialize Wanderlust draft mode."
-  (setq-default
+   wl-message-sort-field-list wl-message-visible-field-list
+   ;;; (Drafts) ;;;
    ;; Raise a new frame when creating a draft.
    wl-draft-use-frame t
    ;; Automatically save drafts every two minutes.
@@ -386,24 +406,8 @@ Gmail {
    ;; Sane forward tag.
    wl-forward-subject-prefix "Fwd: "
    ;; Automatically select the correct template based on folder.
-   wl-draft-config-matchone t)
-
-  ;; Support for writing flowed emails.
-  (after-load 'wl-mime
-    (mime-edit-insert-tag "text" "plain" "; format=flowed"))
-
-  ;;; (Hooks) ;;;
-  ;; Pick email account template when opening a draft.
-  (add-hook 'wl-mail-setup-hook 'wl-draft-config-exec)
-  ;; Don't apply email account template when sending draft, otherwise switching
-  ;; templates won't work.
-  (remove-hook 'wl-draft-send-hook 'wl-draft-config-exec)
-  (add-hook 'wl-draft-mode-hook 'user--wl-draft-mode-hook))
-
-
-(defun user--wanderlust-summary-config ()
-  "Initialize Wanderlust summary mode."
-  (setq-default
+   wl-draft-config-matchone t
+   ;;; (Summary) ;;;
    ;; Set verbose summary.
    wl-summary-width nil
    wl-summary-line-format
@@ -419,106 +423,116 @@ Gmail {
    wl-summary-divide-thread-when-subject-changed t
    ;; List of marks to display in summary.
    wl-summary-incorporate-marks '("N" "U" "!" "A" "$")
-
-   ;;; (Folders) ;;;
+   ;; (Folders) ;;
    ;; Show folders in a pane to the left.
    wl-stay-folder-window nil
    wl-folder-window-width 45
    ;; Asynchronously update folders.
    wl-folder-check-async t)
 
-  (after-load 'wl-summary
-    (add-many-to-list
-     'wl-summary-line-format-spec-alist
-     ;; Email to user formatter.
-     '(?i (user/wl-summary-line-where-is-my-address))
-     ;; Attachment formatter.
-     '(?@ (user/wl-summary-line-attached)))
+  (add-many-to-list
+   'wl-summary-line-format-spec-alist
+   ;; Email to user formatter.
+   '(?i (user/wl-summary-line-where-is-my-address))
+   ;; Attachment formatter.
+   '(?@ (user/wl-summary-line-attached)))
 
-    ;; Sort threads based on the date of the latest reply.
-    (add-to-list 'wl-summary-sort-specs 'reply-date)
-    (setq wl-summary-default-sort-spec 'reply-date))
-
-  ;; Set up guides in summary mode.
-  (user/wanderlust-set-summary-guides)
+  (when (display-graphic-p)
+    (with-feature 'wl-gravatar
+      (validate-setq
+       ;; Insert gravatar as email X-Face.
+       wl-highlight-x-face-function 'wl-gravatar-insert)))
 
   ;;; (Hooks) ;;;
+  (add-hook 'wl-message-redisplay-hook 'user--wl-message-redisplay-hook)
+  (add-hook 'wl-message-buffer-created-hook
+            'user--wl-message-buffer-created-hook)
+  ;;; (Drafts) ;;;
+  (add-hook 'wl-mail-setup-hook 'user--wl-mail-setup-hook)
+  ;; Don't apply email account template when sending draft, otherwise switching
+  ;; templates won't work.
+  (remove-hook 'wl-draft-send-hook 'wl-draft-config-exec)
+  ;;; (Summary) ;;;
   (add-hook 'wl-folder-mode-hook 'user--wl-folder-mode-hook)
   (add-hook 'wl-summary-mode-hook 'user--wl-summary-mode-hook))
 
+(use-package wl-summary
+  :after wl
+  :config
+  ;; Sort threads based on the date of the latest reply.
+  (add-to-list 'wl-summary-sort-specs 'reply-date)
+  (setq wl-summary-default-sort-spec 'reply-date)
 
-(defun user--wanderlust-init ()
-  "Initialize Wanderlust."
-  (setq-default
-   ;;; (Basic Configuration) ;;;
-   ;; Put configuration into wanderlust data directory.
-   wl-init-file (path-join *user-wanderlust-data-directory* "init.el")
-   wl-folders-file (path-join *user-wanderlust-data-directory* "folders")
-   wl-address-file (path-join *user-wanderlust-data-directory* "addresses")
-   ;; Put temporary files in cache directories.
-   wl-temporary-file-directory *user-wanderlust-cache-directory*
-   ssl-certificate-directory (path-join *user-cache-directory* "certs")
-   ;; Mark sent mails as read.
-   wl-fcc-force-as-read t
-   ;; Check for mail when idle.
-   wl-biff-check-interval 180
-   wl-biff-use-idle-timer t
-   ;; Set notification function.
-   wl-biff-notify-hook 'user--wanderlust-notify-hook
-   ;; Let SMTP server handle Message-ID.
-   wl-insert-message-id nil
-   ;; Quit without asking.
-   wl-interactive-exit nil
+  ;; Set up guides in summary mode.
+  (user/wanderlust-set-summary-guides))
 
-   ;;; (Modeline) ;;;
-   ;; Show mail status in mode line.
-   global-mode-string (cons '(wl-modeline-biff-status
-                              wl-modeline-biff-state-on
-                              wl-modeline-biff-state-off) global-mode-string))
+(use-package semi
+  :after wanderlust
+  :config (user--semi-config))
 
-  ;; Initialize Wanderlust components.
-  (el-get-eval-after-load 'semi
-    (user--semi-config))
-  (after-load 'elmo
-    (user--elmo-config))
-  (user--wanderlust-summary-config)
-  (user--wanderlust-message-config)
-  (user--wanderlust-draft-config)
+(use-package mime-view
+  :after semi
+  :config
+  ;; Support for reading flowed emails.
+  (add-hook 'mime-display-text/plain-hook 'user--mime-display-text/plain-hook))
 
-  ;;; (Hooks) ;;;
-  ;; Configuration hooks.
-  (add-hook 'wl-init-hook 'user--wl-config-hook)
+(use-package elmo
+  :after wanderlust
+  :config
+  (validate-setq
+   ;; Maximum size of message to fetch without confirmation.
+   elmo-message-fetch-threshold (* 512 1024))
 
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :apps :email 'wl))
+  (unless (executable-find "namazu")
+    (message "Namazu not found, mail will not be indexed.")))
 
+(use-package elmo-vars
+  :after elmo
+  :config
+  (validate-setq
+   ;; Put message database in data directory.
+   elmo-msgdb-directory (path-join *user-wanderlust-data-directory* "elmo")
+   ;; ELMO's cache go into the user cache directory.
+   elmo-cache-directory (path-join *user-wanderlust-cache-directory* "elmo")))
 
-(defun user--wanderlust-config ()
-  "Configure wanderlust."
-  (with-feature 'fullframe
-    (fullframe wl wl-exit nil)))
+(use-package elmo-archive
+  :after elmo
+  :config
+  (validate-setq
+   elmo-archive-folder-path *user-wanderlust-data-directory*))
 
+(use-package elmo-search
+  :after elmo
+  :config
+  (validate-setq
+   elmo-search-namazu-default-index-path *user-wanderlust-data-directory*))
 
-(defun user--wl-config ()
-  "Initialize wanderlust."
-  ;; Create data and cache stores.
-  (make-directory *user-wanderlust-data-directory* t)
-  (set-file-modes *user-wanderlust-data-directory* #o0700)
-  (make-directory *user-wanderlust-cache-directory* t)
-  (set-file-modes *user-wanderlust-cache-directory* #o0700)
+(use-package elmo-localdir
+  :after elmo
+  :config
+  (validate-setq
+   elmo-localdir-folder-path *user-wanderlust-data-directory*))
 
-  (use-package wanderlust
-    :init (user--wanderlust-init)
-    :config (user--wanderlust-config))
-  (when (display-graphic-p)
-    ;; Override recipe so that Wanderlust is loaded by package.el.
-    (require-package '(:name wl-gravatar
-                             :type github
-                             :pkgname "dabrahams/wl-gravatar"
-                             :depends (gravatar)
-                             :prepare (autoload 'wl-gravatar-insert "wl-gravatar")))))
+(use-package elmo-maildir
+  :after elmo
+  :config
+  (validate-setq
+   elmo-maildir-folder-path *user-wanderlust-data-directory*))
 
-(user--wl-config)
+(use-package elmo-imap4
+  :after elmo
+  :config
+  (validate-setq
+   ;; Use modified UTF-8 for IMAP4.
+   elmo-imap4-use-modified-utf7 t))
+
+(when (display-graphic-p)
+  ;; Override recipe so that Wanderlust is loaded by package.el.
+  (require-package '(:name wl-gravatar
+                           :type github
+                           :pkgname "dabrahams/wl-gravatar"
+                           :depends (gravatar)
+                           :prepare (autoload 'wl-gravatar-insert "wl-gravatar"))))
 
 
 (provide 'apps/wanderlust)

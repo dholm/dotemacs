@@ -10,7 +10,7 @@
 
 (defun user--calc-config ()
   "Initialize calculator."
-  (setq-default
+  (validate-setq
    ;; Location of user calculator configuration.
    calc-settings-file (path-join *user-data-directory* "calc.el")
    ;; Increase calc's undo history.
@@ -43,7 +43,9 @@
   ;;; (Packages) ;;;
   (require-package '(:name easy-convert :after (user--easy-convert-config))))
 
-(user--calc-config)
+(use-package calc
+  :defer t
+  :config (user--calc-config))
 
 
 (provide 'apps/calc)

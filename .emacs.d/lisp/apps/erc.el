@@ -80,7 +80,7 @@
 
 (defun user--erc-config ()
   "Initialize erc."
-  (setq-default
+  (validate-setq
    ;; Close ERC buffers on quit.
    erc-kill-buffer-on-part t
    erc-kill-queries-on-quit t
@@ -187,7 +187,7 @@
       (add-to-list 'erc-modules 'colorize))
 
     (when (feature-p 'erc-track-score)
-      (setq-default
+      (validate-setq
        ;; Show channel score.
        erc-track-showcount t)
 
@@ -207,7 +207,7 @@
         (add-to-list 'erc-modules 'image))))
 
   (when (eq default-terminal-coding-system 'utf-8)
-    (setq-default
+    (validate-setq
      ;; As long as the terminal handles it, force UTF-8.
      erc-server-coding-system '(utf-8 . utf-8)))
 

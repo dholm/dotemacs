@@ -35,7 +35,7 @@
 
 (defun user--w3m-config ()
   "Initialize w3m."
-  (setq-default
+  (validate-setq
    ;; Set up data paths.
    w3m-bookmark-file (path-join *user-w3m-data-directory* "bookmarks.html")
    ;; Set up cache paths.
@@ -65,7 +65,7 @@
      " ●" " △" " ●" " ○" " □" " ●" "≪ ↑ ↓ "))
 
   (when (display-graphic-p)
-    (setq-default
+    (validate-setq
      ;; Display graphics in pages.
      w3m-toggle-inline-images-permanently t
      w3m-default-display-inline-images t

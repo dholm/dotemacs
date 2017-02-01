@@ -9,10 +9,11 @@
 
 (defun user--ee-config ()
   "Initialize ee."
-  (setq-default
-   ;; Database storage location.
-   ee-data-directory *user-ee-data-directory*
-   ee-view-data-directory *user-ee-data-directory*)
+  (after-load 'ee
+    (validate-setq
+     ;; Database storage location.
+     ee-data-directory *user-ee-data-directory*
+     ee-view-data-directory *user-ee-data-directory*))
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :information-db 'ee))

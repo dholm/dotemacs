@@ -35,47 +35,32 @@
 
 (defun user--bbdb-config ()
   "Initialize BBDB."
-  (setq-default
+  (validate-setq
    ;; Set up location of database.
    bbdb-file *user-bbdb-database*
    ;; Automatically save database without asking.
-   bbdb-notice-auto-save-file t
-   ;; Use popups for address completion.
-   bbdb-use-pop-up t
+   bbdb-check-auto-save-file t
    ;; Try to fit popup horizontally.
    bbdb-mua-pop-up 'horiz
    ;; Size of popup.
-   bbdb-popup-target-lines 1
    bbdb-mua-pop-up-window-size 2
    ;; Cycle through completions.
-   bbdb-complete-name-allow-cycling t
+   bbdb-complete-mail-allow-cycling t
    ;; Hide pop-up after completion.
    bbdb-completion-display-record nil
-   ;; Always use full name.
-   bbdb-dwim-net-address-allow-redundancy t
-   bbdb-quiet-about-name-mismatches 2
    ;; Automatically add addresses to bbdb.
    bbdb-update-records-p 'create
    bbdb-mua-update-interactive-p '(create . create)
    ;; Don't assume a certain phone number style.
    bbdb-phone-style nil
-   ;; Automatically add address to existing contact.
-   bbdb-always-add-address t
    ;; Add all addresses in an email.
    bbdb-message-all-addresses t
-   ;; Hide redundant network names.
-   bbdb-canonicalize-redundant-net-p t
-   ;; Use cache for better performance.
-   bbdb-message-caching-enabled t
    ;; Allow duplicate entries.
    bbdb-allow-duplicates t
    ;; Allow aliases.
-   bbdb-use-alternate-names t
-   ;; Single-line addresses.
-   bbdb-elided-display t
+   bbdb-add-aka t
    ;; Ignore certain addresses when adding to address book.
-   bbdb/mail-auto-create-p 'bbdb-ignore-some-messages-hook
-   bbdb-ignore-some-messages-alist
+   bbdb-ignore-message-alist
    '(("From" . "no.*reply\\|DAEMON\\|daemon"))
    ;; Fields to auto-populate in notes.
    bbdb-auto-notes-rules
@@ -94,10 +79,11 @@
   (add-hook 'bbdb-initialize-hook 'user--bbdb-configialize-hook))
 
 (use-package bbdb
-  :defer t
+  :ensure t
+  :commands (bbdb-initialize)
   :config (user--bbdb-config))
 (use-package bbdb-vcard
-  :defer t)
+  :after bbdb)
 
 
 (provide 'apps/bbdb)
