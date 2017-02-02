@@ -65,7 +65,7 @@
 
 (defun user--jedi-config ()
   "Initialize jedi."
-  (setq-default
+  (validate-setq
    ;; Don't install Jedi's bindings.
    jedi:setup-keys nil
    ;; Automatically launch completion on dot.
@@ -76,12 +76,12 @@
 
 (defun user--python-config ()
   "Initialize python."
-  (setq-default
+  (validate-setq
    ;; Don't try to guess the indentation.
    python-indent-guess-indent-offset nil)
 
   (with-executable 'ipython
-    (setq-default
+    (validate-setq
      ;; Set IPython as default interpreter.
      python-shell-interpreter "ipython"
      python-shell-interpreter-args ""
@@ -96,7 +96,7 @@
 
 (defun user--pymacs-config ()
   "Initialize PyMacs."
-  (setq-default
+  (validate-setq
    ropemacs-guess-project t
    ropemacs-enable-autoimport t
    ;; Don't generate an error on syntax errors.
@@ -105,7 +105,7 @@
 
 (defun user--python-environment-config ()
   "Initialize Python environment package."
-  (setq-default
+  (validate-setq
    ;; Locate of Python environment store.
    python-environment-directory (path-join *user-cache-directory*
                                            "python-environment")))

@@ -9,7 +9,7 @@
 
 (defun user--pdf-tools-config ()
   "Initialize PDF tools."
-  (setq-default
+  (validate-setq
    ;; Fit page to view by default.
    pdf-view-display-size 'fit-page)
 

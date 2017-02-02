@@ -4,7 +4,7 @@
 
 (defun user--css-mode-hook ()
   "CSS mode hook."
-  (setq-default
+  (validate-setq
    cssm-indent-function #'cssm-c-style-indenter
    cssm-indent-level '4)
 

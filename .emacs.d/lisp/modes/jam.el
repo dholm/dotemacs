@@ -10,7 +10,7 @@
 
 (defun user--jam-mode-config ()
   "Initialize Jam mode."
-  (setq-default
+  (validate-setq
    ;; Default indent width.
    jam-indent-size 4)
 

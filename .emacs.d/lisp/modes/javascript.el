@@ -44,7 +44,7 @@
 
 (defun user--js-comint-config ()
   "Initialize `js-comint'."
-  (setq-default
+  (validate-setq
    ;; Set JavaScript inferior.
    inferior-js-program-command
    (cond
@@ -59,7 +59,7 @@
 
 (defun user--js3-mode-config ()
   "Initialize js3 mode."
-  (setq-default
+  (validate-setq
    ;; Configure indentation
    js3-indent-on-enter-key t
    js3-auto-indent-p t

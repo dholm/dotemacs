@@ -13,7 +13,7 @@
 
 (defun user--info+-config ()
   "Initialize info+."
-  (setq-default
+  (validate-setq
    ;; Enable breadcrumbs in header line.
    Info-breadcrumbs-in-header-flag t
    Info-breadcrumbs-in-mode-line-mode nil))

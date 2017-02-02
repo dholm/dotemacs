@@ -34,7 +34,7 @@
 
 (defun user--fundamental-mode-config ()
   "Initialize Emacs fundamental mode."
-  (setq-default
+  (validate-setq
    ;; When using fill-paragraph or auto-fill-mode break lines at 80 characters by
    ;; default.
    fill-column 80)

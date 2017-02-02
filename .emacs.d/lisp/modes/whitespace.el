@@ -47,7 +47,7 @@
 
 (defun user--whitespace-config ()
   "Initialize whitespace mode."
-  (setq-default
+  (validate-setq
    ;; Maximum allowed line length.
    whitespace-line-column 120
    ;; Cleanup whitespace errors on save.
@@ -70,15 +70,16 @@
      space-before-tab space-after-tab))
 
   (when (eq default-terminal-coding-system 'utf-8)
-    (setq-default
+    ;; Don't use validate-setq due to :inline not being supported.
+    (setq
      ;; Special characters for displaying whitespace.
      whitespace-display-mappings
      '(;; 32 SPACE, 183 MIDDLE DOT 「·」, 46 FULL STOP 「.」
-       (space-mark 32 [183] [46])
+       (space-mark ?\s [183] [46])
        ;; 10 LINE FEED, 9166 RETURN SYMBOL 「⏎」, 36 DOLLAR SIGN 「$」
-       (newline-mark 10 [9166 10] [36 10])
+       (newline-mark ?\n [9166 10] [36 10])
        ;; 9 TAB, 9655 WHITE RIGHT-POINTING TRIANGLE 「▷」, 92 9 CHARACTER TABULATION 「\t」
-       (tab-mark 9 [9655 9] [92 9]))))
+       (tab-mark ?\t [9655 9] [92 9]))))
 
   (after-load 'whitespace
     (after-load 'diminish
@@ -93,7 +94,9 @@
 
   (add-hook 'whitespace-mode-hook 'user--whitespace-mode-hook))
 
-(user--whitespace-config)
+(use-package whitespace
+  :ensure t
+  :config (user--whitespace-config))
 
 
 (provide 'modes/whitespace)

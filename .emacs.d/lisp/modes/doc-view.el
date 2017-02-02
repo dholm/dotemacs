@@ -16,7 +16,7 @@
 
 (defun user--doc-view-config ()
   "Initialize document viewer."
-  (setq-default
+  (validate-setq
    ;; Render documents in high resolution.
    doc-view-resolution 300)
 
@@ -47,14 +47,16 @@
     (mapc (lambda (pattern)
             (add-auto-mode 'doc-view-mode-maybe pattern)) patterns))
 
-  (add-hook 'doc-view-mode-hook 'user--doc-view-mode-hook)
+  (add-hook 'doc-view-mode-hook 'user--doc-view-mode-hook))
 
-  ;;; (Packages) ;;;
-  (require-package '(:name doc-present))
-  (when (display-graphic-p)
-    (require-package '(:name doc-view-fit-to-page))))
+(use-package doc-view
+  :defer t
+  :config (user--doc-view-config))
 
-(user--doc-view-config)
+(require-package '(:name doc-present))
+
+(when (display-graphic-p)
+  (require-package '(:name doc-view-fit-to-page)))
 
 
 (provide 'modes/doc-view)

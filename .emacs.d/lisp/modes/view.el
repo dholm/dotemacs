@@ -4,7 +4,7 @@
 
 (defun user--view-mode-config ()
   "Initialize view mode."
-  (setq-default
+  (validate-setq
    ;; Open read-only files in view-mode by default.
    view-read-only t))
 

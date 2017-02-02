@@ -65,7 +65,7 @@
 
 (defun user--ess-config ()
   "Initialize Emacs Speaks Statistics."
-  (setq-default
+  (validate-setq
    ;; The default ESS dialect is R.
    ess-dialect "R"
    ;; Use ElDoc in all ESS modes.
@@ -83,11 +83,11 @@
 
   (cond
    ((user/auto-complete-p)
-    (setq-default
+    (validate-setq
      ;; Use auto completion in ESS modes.
      ess-use-auto-complete t))
    ((user/company-mode-p)
-    (setq-default
+    (validate-setq
      ;; Use company mode completion in ESS modes.
      ess-use-company t)))
 

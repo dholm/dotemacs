@@ -9,9 +9,9 @@
 
 (defun user--woman-config ()
   "Initialize Emacs WoMan."
-  (setq-default
+  (validate-setq
    ;; WoMan cache store.
-   woman-cache-file-name (path-join *user-man-cache-directory* "wmcache.el")
+   woman-cache-filename (path-join *user-man-cache-directory* "wmcache.el")
    ;; Use highest cache level.
    woman-cache-level 3
    ;; Have WoMan fill the entire frame.
@@ -25,15 +25,17 @@
 
 (defun user--man-mode-config ()
   "Initialize Emacs man-mode."
-  (setq-default
+  (validate-setq
    ;; Make man-mode wrap lines at half the width of Emacs.
    Man-width (/ (window-total-width (frame-root-window)) 2)))
 
 
 (defun user--man-config ()
   "Initialize Emacs man support."
-  (user--man-mode-config)
-  (user--woman-config)
+  (use-package man
+    :config (user--man-mode-config))
+  (use-package woman
+    :config (user--woman-config))
 
   (make-directory *user-man-cache-directory* t)
 

@@ -10,7 +10,7 @@
 
 (defun user--diff-mode-config ()
   "Initialize Diff mode."
-  (setq-default
+  (validate-setq
    ;; Open patches in read-only mode by default.
    diff-default-read-only t)
 

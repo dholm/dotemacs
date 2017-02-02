@@ -33,7 +33,7 @@
 
 (defun user--omnisharp-config ()
   "Initialize omnisharp."
-  (setq-default
+  (validate-setq
    omnisharp-server-executable-path (path-join *user-omnisharp-path* "omnisharp")))
 
 

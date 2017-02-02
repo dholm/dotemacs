@@ -49,12 +49,12 @@
 
 (defun user--slime-config ()
   "Initialize SLIME."
-  (setq-default
+  (validate-setq
    slime-protocol-version 'ignore
    slime-net-coding-system 'utf-8-unix
    slime-complete-symbol*-fancy t)
 
-  (setq-default inferior-lisp-program
+  (validate-setq inferior-lisp-program
                 (cond
                  ((executable-find "sbcl") "sbcl")
                  ((executable-find "lisp") "lisp")

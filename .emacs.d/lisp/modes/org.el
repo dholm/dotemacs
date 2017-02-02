@@ -73,7 +73,7 @@
 (defun user--org-agenda-config ()
   "Initialize org agenda."
   (let ((agenda-data-store (path-join *user-org-data-directory* "agendas")))
-    (setq-default
+    (validate-setq
      ;; Agenda data store.
      org-agenda-files `(,agenda-data-store)
      ;; Ignore agenda files that are unavailable.
@@ -110,7 +110,7 @@
 
   (when (not noninteractive)
     ;; When running in batch, don't setup windows.
-    (setq-default
+    (validate-setq
      ;; Show agenda in current window.
      org-agenda-window-setup 'current-window))
 
@@ -150,7 +150,10 @@
 
 (defun user--org-annotate-file-config ()
   "Initialize org mode file annotation."
-  (setq-default
+  (validate-setq
+   ;; Annotations data store.
+   org-annotate-file-storage-file (path-join *user-org-data-directory*
+                                             "annotations.org")
    ;; Add link to current line number.
    org-annotate-file-add-search t)
 
@@ -188,7 +191,7 @@
 
 (defun user--org-mobile-config ()
   "Initialize org mobile."
-  (setq-default
+  (validate-setq
    ;; Location of TODO items to sync.
    org-mobile-inbox-for-pull org-default-notes-file
    ;; MobileOrg sync directory.
@@ -199,7 +202,7 @@
 
 (defun user--org-babel-config ()
   "Initialize org babel."
-  (setq-default
+  (validate-setq
    ;; Don't ask for validation.
    org-confirm-babel-evaluate nil)
 
@@ -224,7 +227,7 @@
     (with-executable 'perl
       (add-to-list 'org-babel-load-languages '(perl . t)))
     (when (feature-p 'plantuml-mode)
-      (setq-default
+      (validate-setq
        org-plantuml-jar-path (path-join (el-get-package-directory 'plantuml-mode)
                                         "plantuml.jar"))
       (add-to-list 'org-babel-load-languages '(plantuml . t)))
@@ -238,7 +241,7 @@
 
 (defun user--org-export-config ()
   "Initialize org export."
-  (setq-default
+  (validate-setq
    ;; Export as UTF-8.
    org-export-coding-system 'utf-8)
 
@@ -262,17 +265,11 @@
 
 (defun user--org-mode-config ()
   "Initialize org mode."
-  (setq-default
+  (validate-setq
    ;; Org data store.
    org-directory *user-org-data-directory*
    ;; Notes data store.
    org-default-notes-file (path-join *user-org-data-directory* "refile.org")
-   ;; Annotations data store.
-   org-annotate-file-storage-file (path-join *user-org-data-directory*
-                                             "annotations.org")
-   ;; Clock data store.
-   org-clock-persist-file (path-join *user-org-cache-directory*
-                                     "org-clock-save.el")
    ;; Pressing return on a link follows it.
    org-return-follows-link t
    ;; Log time for TODO state changes.
@@ -309,11 +306,11 @@
    org-alphabetical-lists t)
 
   (when (eq default-terminal-coding-system 'utf-8)
-    (setq-default
+    (validate-setq
      ;; Prettify content using UTF-8.
      org-pretty-entities t))
 
-  (setq-default
+  (validate-setq
    ;; State transitions (http://doc.norang.ca/org-mode.html).
    org-todo-keywords
    (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
@@ -387,7 +384,7 @@
 
   (when (not noninteractive)
     ;; When running in batch, don't setup time tracking.
-    (setq-default
+    (validate-setq
      ;; Resume clocking task on clock-in if the clock is open.
      org-clock-in-resume t
      ;; Separate drawers for clocking and logs.
@@ -408,7 +405,7 @@
      org-clock-report-include-clocking-task t))
 
   (when (display-graphic-p)
-    (setq-default
+    (validate-setq
      ;; Display inline images when starting up.
      org-startup-with-inline-images t))
 
@@ -446,7 +443,7 @@
 
 (defun user--org-sync-config ()
   "Initialize org sync."
-  (setq-default
+  (validate-setq
    ;; Org sync cache store.
    os-cache-file (path-join *user-org-cache-directory* "org-sync-cache"))
 
@@ -457,28 +454,32 @@
     (load "os-github")))
 
 
-(defun user--org-config ()
-  "Initialize org mode."
+(use-package org
+  :ensure t
+  :init
   ;; Create data and cache stores.
   (make-directory *user-org-data-directory* t)
   (make-directory *user-org-cache-directory* t)
-
   ;; Fix for EIN if org hasn't been setup yet.
-  (autoload 'org-add-link-type "org" "" t)
+  (autoload 'org-add-link-type "org" "" t))
 
-  ;;; (Packages) ;;;
-  (use-package org
-    :ensure t
-    :config (user--org-mode-config))
-  (use-package org-sync
-    :defer t
-    :config (user--org-sync-config))
-  (use-package ox-mediawiki
-    :defer t)
-  (use-package org-caldav
-    :defer t))
+(use-package org-clock
+  :after org
+  :config
+  (validate-setq
+   ;; Clock data store.
+   org-clock-persist-file (path-join *user-org-cache-directory*
+                                     "org-clock-save.el")))
 
-(user--org-config)
+(use-package org-sync
+  :defer t
+  :config (user--org-sync-config))
+
+(use-package ox-mediawiki
+  :defer t)
+
+(use-package org-caldav
+  :defer t)
 
 
 (provide 'modes/org)

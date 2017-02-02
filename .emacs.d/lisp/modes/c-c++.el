@@ -158,7 +158,7 @@
 
 (defun user--irony-mode-config ()
   "Initialize irony mode."
-  (setq-default
+  (validate-setq
    ;; Install irony server in user's local path.
    irony-user-dir *user-local-directory*)
 
@@ -195,7 +195,7 @@
 
 (defun user--cpputils-cmake-config ()
   "Initialize cpputils CMake."
-  (setq-default
+  (validate-setq
    ;; Disable Flymake.
    cppcm-write-flymake-makefile nil))
 
@@ -213,11 +213,6 @@
 
 (defun user--c-c++-mode-config ()
   "Initialize C/C++ mode."
-  (setq-default
-   ;; Support completion using tab.
-   c-tab-always-indent nil
-   c-insert-tab-function 'indent-for-tab-command)
-
   (after-load 'smartparens
     (sp-with-modes '(c-mode c++-mode)
       ;; Automatically add another newline before closing curly brace on enter.
@@ -232,41 +227,62 @@
   (add-magic-mode 'c++-mode 'user/c++-header-file-p)
 
   ;;; (Packages) ;;;
-  (after-load 'cc-mode
-    (user--cc-mode-config))
+  (use-package cc-mode
+    :defer t
+    :config (user--cc-mode-config))
+
+  (use-package cc-vars
+    :after cc-mode
+    :config
+    (validate-setq
+     ;; Support completion using tab.
+     c-tab-always-indent nil
+     c-insert-tab-function 'indent-for-tab-command))
+
   (use-package auto-complete-c-headers
-    :defer t)
+    :after cc-mode)
+
   (use-package company-c-headers
-    :defer t)
+    :after cc-mode)
+
   (when (and (executable-find "cmake")
              (executable-find "clang")
              (executable-find "llvm-config"))
     (use-package irony
-      :defer t
+      :after cc-mode
       :bind (:map irony-mode-map
              ([remap completion-at-point] . irony-completion-at-point-async)
              ([remap complete-symbol] . irony-completion-at-point-async))
       :config (user--irony-mode-config))
+
     (use-package irony-eldoc
-      :defer t)
+      :after irony)
+
     (use-package flycheck-irony
-      :defer t))
+      :after irony))
+
   (with-executable 'pkg-config
     (use-package flycheck-pkg-config
       :defer t))
+
   (with-executable 'cmake
     (use-package cpputils-cmake
-      :defer t
+      :after cc-mode
       :config (user--cpputils-cmake-config))
+
     (use-package cmake-ide
       :defer t))
+
   (with-executable 'clang
     (use-package clang-format
-      :defer t))
+      :after cc-mode))
+
   (use-package function-args
     :ensure t)
+
   (use-package google-c-style
-    :defer t)
+    :after cc-mode)
+
   (with-executable 'cflow
     (require-package '(:name cflow :after (user--cflow-config)))))
 

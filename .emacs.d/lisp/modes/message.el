@@ -36,7 +36,7 @@
 
 (defun user--message-mode-config ()
   "Initialize message mode."
-  (setq-default
+  (validate-setq
    ;; Kill buffer after message is sent.
    message-kill-buffer-on-exit t
    ;; Citation format.
@@ -55,7 +55,9 @@
   ;; Register auto mode.
   (add-auto-mode 'message-mode "\\.eml$"))
 
-(user--message-mode-config)
+(use-package message
+  :defer t
+  :config (user--message-mode-config))
 
 
 (provide 'modes/message)

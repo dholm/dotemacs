@@ -8,7 +8,7 @@
 
 (defun user--irfc-config ()
   "Initialize irfc."
-  (setq-default
+  (validate-setq
    ;; Put RFCs in user cache directory.
    irfc-directory (path-join *user-cache-directory* "rfcs")
    ;; Load irfc mode automatically.

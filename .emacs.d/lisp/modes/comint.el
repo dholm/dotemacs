@@ -8,7 +8,7 @@
 
 (defun user--comint-config ()
   "Initialize comint mode."
-  (setq-default
+  (validate-setq
    ;; Scroll automatically on new output.
    comint-scroll-to-bottom-on-output 'others
    comint-scroll-show-maximum-output t

@@ -14,7 +14,7 @@
 
 (defun user--csv-mode-config ()
   "Initialize CSV mode."
-  (setq-default
+  (validate-setq
    ;; Default separators for CSV files.
    csv-separators '("," ";" "|" " " "\t")
    ;; Number of lines to consider part of header.

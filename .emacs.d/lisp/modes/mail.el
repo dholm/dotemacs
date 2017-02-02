@@ -29,7 +29,7 @@
 
 (defun user--mu-cite-config ()
   "Initialize mu-cite."
-  (setq-default
+  (validate-setq
    ;; Citation format.
    mu-cite-top-format '("On " date ", " full-name " wrote:\n")
    ;; Use > as prefix.

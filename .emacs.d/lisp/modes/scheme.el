@@ -58,7 +58,7 @@
 
 (defun user--quack-config ()
   "Initialize Quack."
-  (setq-default
+  (validate-setq
    ;; Use Emacs-style fontification.
    quack-fontify-style 'emacs))
 

@@ -46,7 +46,7 @@
 
 (defun user--web-mode-config ()
   "Initialize web mode."
-  (setq-default
+  (validate-setq
    ;; Indent HTML automatically.
    web-mode-indent-style 2
    ;; Indentation offsets.

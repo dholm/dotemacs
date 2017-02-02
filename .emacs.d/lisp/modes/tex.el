@@ -75,7 +75,7 @@
 
 (defun user--auctex-config ()
   "Initialize AUCTeX."
-  (setq-default
+  (validate-setq
    ;; Use synctex to communicate with LaTeX.
    TeX-source-correlate-method 'synctex
    LaTeX-command "latex -synctex=1 -shell-escape"
@@ -127,13 +127,13 @@
 
   (cond
    ((eq system-type 'darwin)
-    (setq-default
+    (validate-setq
      TeX-view-program-list (quote (("Preview" "open -a Preview.app %o")
                                    ("Skim" "open -a Skim.app %o")
                                    ("open" "open %o")))
      TeX-view-program-selection '((output-pdf "Preview"))))
    (t (with-executable 'evince
-        (setq-default
+        (validate-setq
          TeX-view-program-list '(("Evince" "evince --page-index=%(outpage) %o"))
          TeX-view-program-selection '((output-pdf "Evince"))))))
 
@@ -160,7 +160,7 @@ Makes it easier to version control LaTeX-files."
 
 (defun user--ebib-config ()
   "Initialize Ebib."
-  (setq-default
+  (validate-setq
    ebib-file-search-dirs
    '(lambda ()
       (with-project project (path-buffer-abs)
@@ -174,26 +174,23 @@ Makes it easier to version control LaTeX-files."
 
 (defun user--auto-complete-latex-config ()
   "Initialize LaTeX auto completion."
-  (setq-default
-   ac-l-dict-directory (path-join (el-get-package-directory
-                                   'auto-complete-latex) "ac-l-dict"))
+  (after-load 'auto-complete-latex
+    (validate-setq
+     ac-l-dict-directory (path-join (el-get-package-directory
+                                     'auto-complete-latex) "ac-l-dict")))
+
   (add-ac-modes 'latex-mode 'LaTeX-mode))
 
 
 (defun user--ac-math-config ()
   "Initialize math auto completion."
-  (setq-default
+  (validate-setq
    ;; Enable unicode math input.
    ac-math-unicode-in-math-p t))
 
 
 (defun user--tex-mode-config ()
   "Initialize generic text editing mode."
-  (setq-default
-   ;; (BibTeX) ;;
-   bibtex-autokey-name-case-convert 'identity
-   bibtex-autokey-year-length 4)
-
   (after-load 'mode-compile
     (setq mode-compile-modes-alist
           (append '((latex-mode . (tex-compile kill-compilation)))
@@ -216,6 +213,13 @@ Makes it easier to version control LaTeX-files."
   (add-hook 'bibtex-mode-hook 'user--bibtex-mode-hook)
 
   ;;; (Packages) ;;;
+  (use-package bibtex
+    :defer t
+    :config
+    (validate-setq
+     ;; (BibTeX) ;;
+     bibtex-autokey-name-case-convert 'identity
+     bibtex-autokey-year-length 4))
   (use-package auctex
     :defer t
     :bind (:map LaTeX-mode-map
