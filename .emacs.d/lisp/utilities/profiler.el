@@ -11,7 +11,7 @@
 
 (defun user--profiler-config ()
   "Initialize Emacs profiler."
-  (setq-default
+  (validate-setq
    ;; The maximum number distinct of call-stacks to save.
    profiler-log-size 100000
    ;; Maximum call-stack depth to record.

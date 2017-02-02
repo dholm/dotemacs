@@ -10,7 +10,7 @@
 
 (defun user--diff-config ()
   "Initialize Emacs diff support."
-  (setq-default
+  (validate-setq
    ;; Use unified diffs by default.
    diff-switches "-u")
 

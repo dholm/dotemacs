@@ -31,7 +31,7 @@
 
 (defun user--smartparens-config ()
   "Initialize smartparens."
-  (setq-default
+  (validate-setq
    ;; Even kill whitespace with `sp-hybrid-kill'.
    sp-hybrid-kill-excessive-whitespace t)
 

@@ -11,7 +11,7 @@
 
 (defun user--ibuffer-config ()
   "Initialize improved buffer."
-  (setq-default
+  (validate-setq
    ibuffer-filter-group-name-face 'font-lock-doc-face)
 
   (add-hook 'ibuffer-hook 'user--ibuffer-hook))

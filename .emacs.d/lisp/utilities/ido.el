@@ -12,29 +12,32 @@
 
 (defun user--flx-config ()
   "Initialize FLX."
-  (setq-default
-   ;; Flex has its own highlights.
-   ido-use-faces nil))
+  (after-load 'ido
+    (validate-setq
+     ;; Flex has its own highlights.
+     ido-use-faces nil)))
 
 
 (defun user--ido-config ()
   "Initialize ido."
-  (setq-default
+  (validate-setq
    ;; Enable fuzzy matching
    ido-enable-flex-matching t
    ;; Remember buffers that have been open
    ido-use-virtual-buffers t
    ;; Allow the same buffer to be opened in different windows
-   ido-default-buffer-method 'selected-window)
+   ido-default-buffer-method 'selected-window))
 
-  ;;; (Packages) ;;;
-  (use-package flx
-    :defer t
-    :config (user--flx-config))
-  (use-package ido-vertical-mode
-    :defer t))
+(use-package ido
+  :defer t
+  :config (user--ido-config))
 
-(user--ido-config)
+(use-package flx
+  :after ido
+  :config (user--flx-config))
+
+(use-package ido-vertical-mode
+  :after ido)
 
 
 (provide 'utilities/ido)

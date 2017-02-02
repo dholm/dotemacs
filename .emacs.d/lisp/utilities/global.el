@@ -95,7 +95,7 @@
 
 (defun user--helm-gtags-config ()
   "Initialize helm-gtags."
-  (setq-default
+  (validate-setq
    ;; Don't care about case when searching tags.
    helm-gtags-ignore-case t
    ;; When navigating open buffers in r/w mode.
@@ -111,7 +111,7 @@
 
 (defun user--ggtags-config ()
   "Initialize ggtags."
-  (setq-default
+  (validate-setq
    ;; Never use global to highlight tags.
    ggtags-highlight-tag nil)
 

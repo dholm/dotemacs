@@ -26,12 +26,14 @@
 
 (defun user--mode-compile-config ()
   "Initialize mode-compile."
-  (setq-default
+  (validate-setq
    ;; Set a sane compilation frame name.
    mode-compile-other-frame-name "*compilation*"
    ;; Run make with low priority and use multiple processes.
    mode-compile-make-program "nice make"
-   mode-compile-default-make-options "-k -j")
+   mode-compile-default-make-options "-k -j"
+   ;; Save the current buffer on compilation.
+   mode-compile-always-save-buffer-p t)
 
   (after-load 'mode-compile
     (with-executable 'clang
@@ -41,13 +43,11 @@
 
 (defun user--compile-config ()
   "Initialize compile module."
-  (setq-default
+  (validate-setq
    ;; Prevent input in compilation buffer.
    compilation-disable-input nil
    ;; Automatically scroll output.
-   compilation-scroll-output t
-   ;; Save the current buffer on compilation.
-   mode-compile-always-save-buffer-p t)
+   compilation-scroll-output t)
 
   (after-load 'popwin
     (add-to-list
@@ -60,19 +60,19 @@
   (add-hook 'compilation-filter-hook 'user--compilation-filter-hook)
 
   ;;; (Bindings) ;;;
-  (user/bind-key-global :code :compile 'user/compile)
+  (user/bind-key-global :code :compile 'user/compile))
 
-  ;;; (Packages) ;;;
-  (use-package mode-compile
-    :defer t
-    :config
-    ;; Ensure byte-run has been loaded or mode-compile will override
-    ;; `define-obsolete-variable-alias'.
-    (when (load "byte-run.el" nil :noerror)
-      (user--mode-compile-config))))
+(use-package compile
+  :defer t
+  :config (user--compile-config))
 
-(user--compile-config)
-
+(use-package mode-compile
+  :defer t
+  :config
+  ;; Ensure byte-run has been loaded or mode-compile will override
+  ;; `define-obsolete-variable-alias'.
+  (when (load "byte-run.el" nil :noerror)
+    (user--mode-compile-config)))
 
 (provide 'utilities/compile)
 ;;; compile.el ends here

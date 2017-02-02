@@ -4,14 +4,14 @@
 
 (defun user--helm-ag-config ()
   "Initialize helm-ag."
-  (setq-default
+  (validate-setq
    ;; Insert word at point as search term.
    helm-ag-insert-at-point 'word))
 
 
 (defun user--ag-config ()
   "Initialize ag."
-  (setq-default
+  (validate-setq
    ag-project-root-function
    '(lambda ()
       (with-project project (path-buffer-abs)

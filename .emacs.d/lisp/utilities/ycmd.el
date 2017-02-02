@@ -30,7 +30,7 @@
 
 (defun user--ycmd-config ()
   "Initialize ycmd."
-  (setq-default
+  (validate-setq
    ycmd-server-command `("python" ,(path-join *user-ycmd-path* "ycmd"))
    ycmd-global-config *user-ycmd-config*
    ycmd-extra-conf-whitelist (path-join *user-ycmd-path* "cpp/ycm/.ycm_extra_conf.py"))

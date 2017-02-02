@@ -50,7 +50,7 @@
 
 (defun user--flycheck-config ()
   "Initialize flycheck."
-  (setq-default
+  (validate-setq
    ;; Wait five seconds before starting checker
    flycheck-idle-change-delay 5.0)
 

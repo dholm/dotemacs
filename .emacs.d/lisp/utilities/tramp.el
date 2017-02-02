@@ -2,18 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--tramp-init ()
-  "Initialization before loading tramp."
-  (setq-default
-   ;; Persistency files.
-   tramp-persistency-file-name (path-join *user-cache-directory* "tramp")
-   ;; Auto save storage.
-   tramp-auto-save-directory (path-join *user-auto-save-directory* "tramp")))
-
-
 (defun user--tramp-config ()
   "Initialize tramp."
-  (setq-default
+  (validate-setq
+   ;; Auto save storage.
+   tramp-auto-save-directory (path-join *user-auto-save-directory* "tramp")
    ;; Default file transfer method.
    tramp-default-method "ssh"
    ;; Cache passwords.
@@ -42,8 +35,14 @@
 (use-package tramp
   :ensure t
   :after dash
-  :init (user--tramp-init)
   :config (user--tramp-config))
+
+(use-package tramp-cache
+  :after tramp
+  :config
+  (validate-setq
+   ;; Persistency files.
+   tramp-persistency-file-name (path-join *user-cache-directory* "tramp")))
 
 
 (provide 'utilities/tramp)

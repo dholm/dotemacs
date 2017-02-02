@@ -2,16 +2,21 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--tls-config ()
-  "Initialize Emacs TLS communications."
-  (setq-default
-   ;; Default GnuTLS arguments.
-   starttls-extra-arguments '("--priority" "secure256" "--disable-extensions")
+(use-package tls
+  :defer t
+  :config
+  ;; Don't use validate-setq due to :inline not being supported.
+  (setq
    ;; Default to OpenSSL, then fall back to GnuTLS.
    tls-program '("openssl s_client -connect %h:%p -no_ssl2 -ign_eof"
                  "gnutls-cli --priority secure256 --disable-extensions -p %p %h")))
 
-(user--tls-config)
+(use-package starttls
+  :defer t
+  :config
+  (validate-setq
+   ;; Default GnuTLS arguments.
+   starttls-extra-arguments '("--priority" "secure256" "--disable-extensions")))
 
 
 (provide 'utilities/tls)

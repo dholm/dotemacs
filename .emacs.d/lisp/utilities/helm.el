@@ -74,28 +74,26 @@
 
 (defun user/helm-mode ()
   "Start helm-mode."
-  ;; helm-org depends on Flyspell, wait for it to be loaded.
-  (after-load 'flyspell
-    (helm-mode t)
+  (helm-mode t)
 
-    (with-feature 'helm-descbinds
-      (helm-descbinds-mode t))
+  (with-feature 'helm-descbinds
+    (helm-descbinds-mode t))
 
-    ;; Filter out boring buffers.
-    (dolist (pattern
-             (list "\\*clang-complete" "\\*CEDET global" "\\*tramp/scpc"
-                   "\\*epc con" "\\*Pymacs" "\\*Completions\\*"))
-      (add-to-list 'helm-boring-buffer-regexp-list pattern))
+  ;; Filter out boring buffers.
+  (dolist (pattern
+           (list "\\*clang-complete" "\\*CEDET global" "\\*tramp/scpc"
+                 "\\*epc con" "\\*Pymacs" "\\*Completions\\*"))
+    (add-to-list 'helm-boring-buffer-regexp-list pattern))
 
-    ;; Filter out boring files.
-    (dolist (pattern
-             (list "\\.elc$" "\\.pyc$" "^#.+#$" "^G[R]TAGS$" "^GPATH$" "^ID$"))
-      (add-to-list 'helm-boring-file-regexp-list pattern))))
+  ;; Filter out boring files.
+  (dolist (pattern
+           (list "\\.elc$" "\\.pyc$" "^#.+#$" "^G[R]TAGS$" "^GPATH$" "^ID$"))
+    (add-to-list 'helm-boring-file-regexp-list pattern)))
 
 
 (defun user--helm-swoop-config ()
   "Initialize Helm Swoop."
-  (setq-default
+  (validate-setq
    ;; Split window vertically when swooping.
    helm-swoop-split-direction 'split-window-horizontally)
 
@@ -112,16 +110,11 @@
 
 (defun user--helm-config ()
   "Configure helm."
-  (setq-default
+  (validate-setq
    ;; Idle delays.
-   helm-idle-delay 0.1
    helm-input-idle-delay 0.0
    ;; Limit the number of candidates per source to a reasonable amount.
-   helm-candidate-number-limit 75
-   ;; Delay showing results that are off screen.
-   helm-quick-update t
-   ;; Put adaptive history in cache directory.
-   helm-adaptive-history-file (path-join *user-cache-directory* "helm-adaptive-history"))
+   helm-candidate-number-limit 75)
 
   (after-load 'popwin
     (add-to-list
@@ -148,6 +141,13 @@
   :ensure t
   :diminish helm-mode
   :config (user--helm-config))
+
+(use-package helm-adaptive
+  :after helm
+  :config
+  (validate-setq
+   ;; Put adaptive history in cache directory.
+   helm-adaptive-history-file (path-join *user-cache-directory* "helm-adaptive-history")))
 
 (use-package helm-command
   :ensure helm

@@ -57,7 +57,7 @@
   ;; ECB version checking code is very old so that it thinks that the latest
   ;; CEDET/Emacs is not new enough when in fact it is years newer than the
   ;; latest version that it is aware of.  So simply bypass the version check.
-  (setq-default
+  (validate-setq
    ecb-version-check nil
    ecb-tip-of-the-day nil)
 
@@ -68,7 +68,7 @@
               (< emacs-minor-version 3)))
         ad-do-it))
 
-  (setq-default
+  (validate-setq
    ;; ECB layout.
    ecb-layout-name "left6"
    ecb-layout-window-sizes '(("left6"

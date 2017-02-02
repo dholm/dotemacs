@@ -29,7 +29,7 @@
 
 (defun user--xcscope-config ()
   "Initialize xcscope."
-  (setq-default
+  (validate-setq
    ;; Always index recursively.
    cscope-index-recursively t
    ;; Don't display CScope result buffer by default.

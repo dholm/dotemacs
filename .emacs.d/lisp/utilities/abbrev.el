@@ -4,7 +4,7 @@
 
 (defun user--abbrev-config ()
   "Initialize abbrev."
-  (setq-default
+  (validate-setq
    abbrev-file-name (path-join *user-data-directory* "abbrev_defs")))
 
 (user--abbrev-config)

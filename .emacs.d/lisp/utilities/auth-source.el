@@ -4,7 +4,7 @@
 
 (defun user--auth-source-config ()
   "Initialize auth-source."
-  (setq-default
+  (validate-setq
    auth-sources
    `(,(path-join *user-data-directory* "authinfo.gpg")
 
@@ -19,7 +19,9 @@
                       'macos-keychain-internet
                       'macos-keychain-generic)))
 
-(user--auth-source-config)
+(use-package auth-source
+  :defer t
+  :config (user--auth-source-config))
 
 
 (provide 'utilities/auth-source)

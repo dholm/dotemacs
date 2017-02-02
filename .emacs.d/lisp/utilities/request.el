@@ -4,7 +4,7 @@
 
 (defun user--request-config ()
   "Initialize request."
-  (setq-default
+  (validate-setq
    ;; Request cache store.
    request-storage-directory (path-join *user-cache-directory* "request")))
 

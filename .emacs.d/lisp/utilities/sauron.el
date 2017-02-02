@@ -4,7 +4,7 @@
 
 (defun user--sauron-config ()
   "Initialize Sauron event tracker."
-  (setq-default
+  (validate-setq
    ;; Display sauron in current frame.
    sauron-separate-frame nil)
 

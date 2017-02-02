@@ -4,7 +4,7 @@
 
 (defun user--projectile-config ()
   "Initialize projectile."
-  (setq-default
+  (validate-setq
    ;; Projectile bookmarks.
    projectile-known-projects-file (path-join *user-data-directory*
                                              "projectile-bookmarks.eld")
@@ -16,7 +16,7 @@
    sml/use-projectile-p 'after-prefixes)
 
   (with-executable 'ctags-exuberant
-    (setq-default
+    (validate-setq
      ;; Default to exuberant ctags.
      projectile-tags-command "ctags-exuberant -Re %s"))
 

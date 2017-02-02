@@ -52,7 +52,7 @@
 
 (defun user--flyspell-lazy-config ()
   "Initialize fly spell lazy."
-  (setq-default
+  (validate-setq
    ;; Idle timeout before running spell check on region.
    flyspell-lazy-idle-seconds 10
    ;; Idle timeout before running spell check on entire buffer.
@@ -69,24 +69,27 @@
 
 (defun user--flyspell-config ()
   "Initialize fly spell."
-  (setq-default
+  (validate-setq
    ;; Be silent when checking words.
    flyspell-issue-message-flag nil)
 
   (cond
    (;; Disable Hunspell due to issues on some machines.
     (and nil (executable-find "hunspell"))
-    (setq-default
+    (validate-setq
      ispell-program-name "hunspell"
      ispell-really-hunspell t
      ispell-extra-args '("-a" "-i" "utf-8")))
    ((executable-find "aspell")
-    (setq-default
-     ispell-program-name "aspell"
-     ispell-really-aspell t
-     ispell-list-command "--list"
-     ;; Improve performance by reducing suggestions.
-     ispell-extra-args '("--sug-mode=ultra" "--dont-suggest"))))
+    (progn
+      (validate-setq
+       ispell-program-name "aspell"
+       ispell-really-aspell t
+       ;; Improve performance by reducing suggestions.
+       ispell-extra-args '("--sug-mode=ultra" "--dont-suggest"))
+      (when (boundp 'flyspell-list-command)
+        (validate-setq
+         flyspell-list-command "--list")))))
 
   (add-hook 'flyspell-mode-hook 'user--flyspell-mode-hook)
   (add-hook 'flyspell-prog-mode-hook 'user--flyspell-prog-mode-hook))

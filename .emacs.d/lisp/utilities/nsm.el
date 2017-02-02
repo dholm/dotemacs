@@ -12,7 +12,7 @@
   :init
   (make-directory *user-nsm-data-directory* t)
   :config
-  (setq-default
+  (validate-setq
    ;; Location of security manager settings.
    nsm-settings-file
    (path-join *user-nsm-data-directory* "network-security.data")))

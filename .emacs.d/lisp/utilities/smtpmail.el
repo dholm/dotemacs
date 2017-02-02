@@ -24,24 +24,24 @@
 
 (defun user--smtpmail-config ()
   "Initialize smtpmail."
-  (setq-default
+  (validate-setq
    ;; Use smtpmail as the default method of sending email.
    send-mail-function 'smtpmail-send-it
    message-send-mail-function 'smtpmail-send-it
    ;; Queue mail when offline.
-   smtpmail-queue-mail t)
+   smtpmail-queue-mail t))
 
-  (when (feature-p 'smtpmail-multi)
-    (setq-default
-     ;; Use smtpmail-multi as the default method of sending email.
-     send-mail-function 'smtpmail-send-it
-     message-send-mail-function 'smtpmail-send-it))
+(use-package smtpmail
+  :defer t
+  :config (user--smtpmail-config))
 
-  ;;; (Packages) ;;;
-  (use-package smtpmail-multi
-    :defer t))
-
-(user--smtpmail-config)
+(use-package smtpmail-multi
+  :after smtpmail
+  :config
+  (validate-setq
+   ;; Use smtpmail-multi as the default method of sending email.
+   send-mail-function 'smtpmail-send-it
+   message-send-mail-function 'smtpmail-send-it))
 
 
 (provide 'utilities/smtpmail)

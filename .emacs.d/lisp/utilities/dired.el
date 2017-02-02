@@ -27,7 +27,7 @@
 
 (defun user--dired-config ()
   "Initialize dired."
-  (setq-default
+  (validate-setq
    ;; Always copy recursively without asking.
    dired-recursive-copies 'always
    ;; Ask once when recursively deleting a directory.

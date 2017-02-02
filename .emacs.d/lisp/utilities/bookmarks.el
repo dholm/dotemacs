@@ -11,7 +11,7 @@
 
 (defun user--visible-bookmarks-config ()
   "Initialize visible bookmarks."
-  (setq-default
+  (validate-setq
    ;; Persistent bookmarks.
    bm-repository-file *visible-bookmarks-data-file*
    bm-buffer-persistence t)
@@ -34,22 +34,21 @@
   (user/bind-key-global :code :bookmark-prev 'bm-previous))
 
 
-(defun user--bookmark+-init ()
-  "Setup before loading bookmark+."
-  (setq-default
+(defun user--bookmark-config ()
+  "Configure bookmark."
+  (validate-setq
    ;; Enable versioned backups.
    bookmark-version-control t
-   ;; Save bookmarks after ten updates.
-   bmkp-count-multi-mods-as-one-flag t
    bookmark-save-flag 1
-   ;; Put the menu state in the cache directory.
-   bmkp-bmenu-state-file *bookmark+-menu-state-file*
    ;; Put the repository in the data directory.
    bookmark-default-file *bookmark+-data-file*))
 
 
 (defun user--bookmark+-config ()
   "Initialize bookmark+."
+  (validate-setq
+   ;; Save bookmarks after ten updates.
+   bmkp-count-multi-mods-as-one-flag t)
   ;;; (Bindings) ;;;
   ;; Bind bookmarks to C-c b
   (global-set-key (user/get-key :code :bookmark-prefix) 'bookmark-map)
@@ -59,18 +58,24 @@
   (define-key bookmark-map (kbd "t") 'bmkp-add-tags))
 
 
-(defun user--bookmarks-config ()
-  "Initialize bookmarks in Emacs."
-  ;;; (Packages) ;;;
-  (use-package bm
-    :defer t
-    :config (user--visible-bookmarks-config))
-  (use-package bookmark+
-    :defer t
-    :init (user--bookmark+-init)
-    :config (user--bookmark+-config)))
+(use-package bm
+  :defer t
+  :config (user--visible-bookmarks-config))
 
-(user--bookmarks-config)
+(use-package bookmark
+  :defer t
+  :config (user--bookmark-config))
+
+(use-package bookmark+
+  :after bookmark
+  :config (user--bookmark+-config))
+
+(use-package bookmark+-bmu
+  :after bookmark+
+  :config
+  (validate-setq
+   ;; Put the menu state in the cache directory.
+   bmkp-bmenu-state-file *bookmark+-menu-state-file*))
 
 
 (provide 'utilities/bookmarks)

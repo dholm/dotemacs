@@ -13,9 +13,11 @@
 
 (defun user--alert-config ()
   "Initialize alert."
-  (setq-default
+  ;; Undiagnosed issue with validate-setq.
+  (setq
    ;; Send alerts to alert buffer.
-   alert-default-style 'log
+   alert-default-style 'log)
+  (validate-setq
    ;; Disable log.
    alert-log-messages nil))
 

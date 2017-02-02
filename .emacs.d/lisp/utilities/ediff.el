@@ -15,7 +15,7 @@
 
 (defun user--ediff-startup-hook ()
   "Ediff startup hook."
-  (setq-default
+  (validate-setq
    ;; Split window differently depending on frame width.
    ediff-split-window-function (if (> (frame-width) (* 2 80))
                                    'split-window-horizontally
@@ -36,7 +36,7 @@
       (set-buffer-modified-p nil)
       (sit-for 1)))
 
-  (setq-default
+  (validate-setq
    ediff-quit-hook 'kill-emacs
    ediff-quit-merge-hook 'ediff-write-merge-buffer)
 
@@ -58,21 +58,23 @@
 
 (defun user--ediff-config ()
   "Initialize ediff."
-  (setq-default
+  (validate-setq
    ;; Don't create a separate frame for ediff.
    ediff-window-setup-function 'ediff-setup-windows-plain
    ;; Ignore changes in whitespace.
    ediff-diff-options "-w"
    ediff-ignore-similar-regions t)
 
+  ;;; (Hooks) ;;;
   ;; Go to first difference on start.
-  (add-hook 'ediff-startup-hook 'user--ediff-startup-hook)
+  (add-hook 'ediff-startup-hook 'user--ediff-startup-hook))
 
-  ;;; (Packages) ;;;
-  (use-package ztree
-    :defer t))
+(use-package ediff
+  :defer t
+  :config (user--ediff-config))
 
-(user--ediff-config)
+(use-package ztree
+  :after ediff)
 
 
 (provide 'utilities/ediff)

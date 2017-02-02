@@ -156,12 +156,12 @@
 (defun user--rtags-config ()
   "Initialize rtags."
   (after-load 'helm
-    (setq-default
+    (validate-setq
      ;; Enable Helm when available.
      rtags-use-helm (require 'rtags-helm nil 'noerror)))
 
   (after-load 'tramp
-    (setq-default
+    (validate-setq
      ;; Enable tramp after it has been loaded.
      rtags-tramp-enabled t)))
 
