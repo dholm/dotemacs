@@ -34,50 +34,31 @@
 
 (defun user--magit-config ()
   "Initialize Magit."
-  (setq-default
-   ;; Do not save buffers.
-   magit-save-some-buffers nil
+  (validate-setq
    ;; Automatically show process buffer if git takes too long to execute.
    magit-process-popup-time 30
    ;; Show fine differences for currently selected hunk.
-   magit-diff-refine-hunk t
-   ;; Suppress Magit upgrade warning.
-   magit-last-seen-setup-instructions "1.4.0")
+   magit-diff-refine-hunk t)
 
-  (after-load 'magit
-    (with-feature 'fullframe
-      ;; Full frame Magit status.
-      (fullframe magit-status magit-mode-quit-window nil)))
+  (with-feature 'fullframe
+    ;; Full frame Magit status.
+    (fullframe magit-status magit-mode-quit-window nil))
 
+  ;;; (Hooks) ;;;
   (add-hook 'magit-mode-hook 'user--magit-mode-hook)
 
   ;;; (Bindings) ;;;
-  (after-load 'magit
-    (define-key magit-status-mode-map (kbd "W") 'user/magit-toggle-whitespace))
-
-  ;;; (Packages) ;;;
-  (use-package magit-gerrit
-    :ensure t
-    :config (user--magit-gerrit-config))
-  (use-package magit-tramp
-    :ensure t))
-
-
-(defun user--magit-gerrit-config ()
-  "Initialize magit-gerrit."
-  (setq-default
-   ;; Magit binding for Gerrit commands.
-   magit-gerrit-popup-prefix "G"))
+  (define-key magit-status-mode-map (kbd "W") 'user/magit-toggle-whitespace))
 
 
 (defun user--git-gutter-fringe-config ()
   "Initialize git gutter fringe."
-  (setq-default git-gutter-fr:side 'left-fringe))
+  (validate-setq git-gutter-fr:side 'left-fringe))
 
 
 (defun user--git-messenger-config ()
   "Initialize git messenger."
-  (setq-default git-messenger:show-detail t))
+  (validate-setq git-messenger:show-detail t))
 
 
 (defun user--git-config ()
@@ -99,18 +80,28 @@
   (use-package magit
     :ensure t
     :config (user--magit-config))
+
+  (use-package magit-gerrit
+    :after magit)
+
+  (use-package magit-tramp
+    :after magit)
+
   (use-package git-timemachine
     :ensure t)
 
   (use-package git-gutter
     :ensure t)
-  (when (display-graphic-p)
-    (use-package git-gutter-fringe
-      :ensure t
-      :config (user--git-gutter-fringe-config)))
+
+  (use-package git-gutter-fringe
+    :if window-system
+    :after git-gutter
+    :config (user--git-gutter-fringe-config))
+
   (use-package git-messenger
     :ensure t
     :config (user--git-messenger-config))
+
   (when (feature-p 'helm)
     (use-package helm-ls-git
       :ensure t)

@@ -37,7 +37,7 @@
 
   (after-load 'autorevert
     (after-load 'tramp
-      (setq-default auto-revert-remote-files t))
+      (validate-setq auto-revert-remote-files t))
     (after-load 'diminish
       (diminish 'auto-revert-mode)))
 
