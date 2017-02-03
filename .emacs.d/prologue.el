@@ -21,16 +21,12 @@
 (require 'lib/with)
 (require 'lib/utils)
 
-
-;; Install benchmark-init if present.
-(let ((benchmark-init.el (path-join *user-el-get-directory*
-                                    "benchmark-init" "benchmark-init.el")))
-  (when (file-exists-p benchmark-init.el)
-    (load benchmark-init.el)))
-
-
 ;; Set up package management.
 (require 'lib/packaging)
+
+;; Install benchmark-init if present.
+(use-package benchmark-init
+  :ensure t)
 
 ;; Helper functions for bootstrapping Emacs.
 (require 'lib/bootstrap)
