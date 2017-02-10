@@ -20,4 +20,9 @@
   (load *user-custom-file*))
 
 
+;; Disable collection of benchmark data.
+(when (featurep 'benchmark-init)
+  (benchmark-init/deactivate))
+
+
 ;;; epilogue.el ends here
