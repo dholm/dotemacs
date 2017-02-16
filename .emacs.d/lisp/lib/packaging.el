@@ -11,6 +11,7 @@
   :group 'init
   :type 'hook)
 
+
 (with-feature 'package
   (setq
    ;; Configure GNU/Emacs package repositories.
@@ -29,15 +30,25 @@
 
 ;; Bootstrap `use-package'.
 (package-initialize)
-(unless (and (package-installed-p 'use-package) (package-installed-p 'validate))
+(unless (and (package-installed-p 'quelpa-use-package) (package-installed-p 'validate))
   (package-refresh-contents)
-  (package-install 'use-package)
+  (package-install 'quelpa-use-package)
   (package-install 'validate))
 
 (eval-when-compile
   ;; Load use-package.
-  (require 'use-package)
+  (require 'quelpa-use-package)
   (require 'validate))
+
+(use-package quelpa-use-package
+  :ensure t
+  :config
+  (validate-setq
+   ;; Only use quelpa for custom packages.
+   quelpa-checkout-melpa-p nil
+   ;; Only load quelpa on demand.
+   quelpa-use-package-inhibit-loading-quelpa t))
+
 
 (defun user--el-get-init ()
   "Initialize el-get."
