@@ -7,14 +7,6 @@
   "Path to user's Google services data store.")
 
 
-(defun user--google-calendar-config ()
-  "Initialize Google Calendar."
-  (after-load 'google-calendar
-    (validate-setq
-     google-calendar/calendars-files
-     (path-join *user-google-services-data-directory* "calendar.org"))))
-
-
 (use-package oauth2
   :defer t
   :config
@@ -26,8 +18,13 @@
 (use-package google-contacts
   :defer t)
 
-(require-package
- '(:name google-calendar :after (user--google-calendar-config)))
+(use-package google-calendar
+  :requires google-contacts json
+  :quelpa (google-calendar :fetcher github :repo "bateast/google-calendar")
+  :config
+  (validate-setq
+   google-calendar/calendars-files
+   (path-join *user-google-services-data-directory* "calendar.org")))
 
 
 (provide 'apps/google-services)
