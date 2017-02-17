@@ -14,7 +14,10 @@
   (use-package dtrt-indent
     :ensure t
     :config (user--dtrt-indent-config))
-  (require-package '(:name smarttabs)))
+  (use-package smart-tabs-mode
+    :quelpa (smart-tabs-mode
+             :fetcher github
+             :repo "jcsalomon/smarttabs")))
 
 (user--indentation-config)
 

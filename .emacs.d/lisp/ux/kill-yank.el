@@ -75,7 +75,11 @@
   (use-package multiple-cursors
     :ensure t
     :config (user--multiple-cursors-config))
-  (require-package '(:name rect-mark)))
+  (use-package rect-mark
+    :ensure t
+    :quelpa (rect-mark
+             :fetcher wiki
+             :files ("rect-mark.el"))))
 
 (user--kill-yank-config)
 
