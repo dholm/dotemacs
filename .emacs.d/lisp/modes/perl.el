@@ -19,21 +19,24 @@
   (user--perl-mode-hook))
 
 
-(defun user--perl-mode-config ()
-  "Initialize Perl mode."
-  (require-package '(:name cperl-mode))
-  (require-package '(:name sepia))
-  (use-package perl-completion
-    :defer t)
-
+(use-package sepia
+  :init
   ;; Use Sepia as the default perl mode.
   (defalias 'perl-mode 'sepia-mode)
+  :quelpa (sepia
+           :fetcher git
+           :url "http://repo.or.cz/sepia.git")
+  :config
+  ;;; (Packages) ;;;
+  (use-package perl-completion)
 
-  (add-hook 'perl-mode-hook 'user--perl-mode-hook)
+  ;;; (Hooks) ;;;
   (add-hook 'sepia-mode-hook 'user--sepia-mode-hook))
 
-(with-executable 'perl
-  (user--perl-mode-config))
+(use-package perl-mode
+  :defer t
+  :config
+  (add-hook 'perl-mode-hook 'user--perl-mode-hook))
 
 
 (provide 'modes/perl)
