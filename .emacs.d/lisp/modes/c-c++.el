@@ -156,20 +156,6 @@
        (re-search-forward "\\_<class\\_>" nil t))))
 
 
-(defun user--irony-mode-config ()
-  "Initialize irony mode."
-  (validate-setq
-   ;; Install irony server in user's local path.
-   irony-user-dir *user-local-directory*)
-
-  (after-load 'irony-mode
-    (when (user/auto-complete-p)
-      (irony-enable 'ac))
-
-    ;;; (Hooks) ;;;
-    (add-hook 'irony-mode-hook 'user--irony-mode-hook)))
-
-
 (defun user--cflow-config ()
   "Initialize cflow."
   (defun user/cflow-function (function-name)
@@ -193,100 +179,81 @@
       (cflow-mode))))
 
 
-(defun user--cpputils-cmake-config ()
-  "Initialize cpputils CMake."
-  (validate-setq
-   ;; Disable Flymake.
-   cppcm-write-flymake-makefile nil))
+(use-package cc-mode
+  :defer t
+  :config
+  (add-many-to-list
+   'c-default-style
+   ;; Default mode for C.
+   '(c-mode . "K&R")
+   ;; Default mode for C++.
+   '(c++-mode . "Stroustrup"))
 
-
-(defun user--cc-mode-config ()
-  "Initialize CC-mode."
-  (after-load 'cc-mode
-    (add-many-to-list
-     'c-default-style
-     ;; Default mode for C.
-     '(c-mode . "K&R")
-     ;; Default mode for C++.
-     '(c++-mode . "Stroustrup"))))
-
-
-(defun user--c-c++-mode-config ()
-  "Initialize C/C++ mode."
   (after-load 'smartparens
     (sp-with-modes '(c-mode c++-mode)
-      ;; Automatically add another newline before closing curly brace on enter.
-      (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
-      (sp-local-pair "/*" "*/" :post-handlers '((" | " "SPC")
-                                                ("* ||\n[i]" "RET")))))
-
-  (add-hook 'c-mode-common-hook 'user--c-mode-common-hook)
-  (add-hook 'c-mode-hook 'user--c-mode-hook)
-
-  ;; Detect if inside a C++ header file.
-  (add-magic-mode 'c++-mode 'user/c++-header-file-p)
+                   ;; Automatically add another newline before closing curly brace on enter.
+                   (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
+                   (sp-local-pair "/*" "*/" :post-handlers '((" | " "SPC")
+                                                             ("* ||\n[i]" "RET")))))
 
   ;;; (Packages) ;;;
-  (use-package cc-mode
-    :defer t
-    :config (user--cc-mode-config))
-
   (use-package cc-vars
-    :after cc-mode
     :config
     (validate-setq
      ;; Support completion using tab.
      c-tab-always-indent nil
      c-insert-tab-function 'indent-for-tab-command))
 
-  (use-package auto-complete-c-headers
-    :after cc-mode)
-
-  (use-package company-c-headers
-    :after cc-mode)
-
-  (when (and (executable-find "cmake")
-             (executable-find "clang")
-             (executable-find "llvm-config"))
-    (use-package irony
-      :after cc-mode
-      :bind (:map irony-mode-map
-             ([remap completion-at-point] . irony-completion-at-point-async)
-             ([remap complete-symbol] . irony-completion-at-point-async))
-      :config (user--irony-mode-config))
-
-    (use-package irony-eldoc
-      :after irony)
-
-    (use-package flycheck-irony
-      :after irony))
+  (use-package auto-complete-c-headers)
+  (use-package company-c-headers)
 
   (with-executable 'pkg-config
-    (use-package flycheck-pkg-config
-      :defer t))
+    (use-package flycheck-pkg-config))
 
   (with-executable 'cmake
     (use-package cpputils-cmake
-      :after cc-mode
-      :config (user--cpputils-cmake-config))
+      :config
+      (validate-setq
+       ;; Disable Flymake.
+       cppcm-write-flymake-makefile nil))
 
-    (use-package cmake-ide
-      :defer t))
+    (use-package cmake-ide))
 
   (with-executable 'clang
-    (use-package clang-format
-      :after cc-mode))
+    (use-package clang-format)
+
+    (when (and (executable-find "cmake")
+               (executable-find "llvm-config"))
+      (use-package irony
+        :bind (:map irony-mode-map
+                    ([remap completion-at-point] . irony-completion-at-point-async)
+                    ([remap complete-symbol] . irony-completion-at-point-async))
+        :config
+        (validate-setq
+         ;; Install irony server in user's local path.
+         irony-user-dir *user-local-directory*)
+
+        (when (user/auto-complete-p)
+          (irony-enable 'ac))
+
+      ;;; (Hooks) ;;;
+      (add-hook 'irony-mode-hook 'user--irony-mode-hook))
+    (use-package irony-eldoc)
+    (use-package flycheck-irony)))
 
   (use-package function-args
     :ensure t)
 
-  (use-package google-c-style
-    :after cc-mode)
+  (use-package google-c-style)
 
-  (with-executable 'cflow
-    (require-package '(:name cflow :after (user--cflow-config)))))
+  ;;; (Hooks) ;;;
+  (add-hook 'c-mode-common-hook 'user--c-mode-common-hook)
+  (add-hook 'c-mode-hook 'user--c-mode-hook)
+  ;; Detect if inside a C++ header file.
+  (add-magic-mode 'c++-mode 'user/c++-header-file-p))
 
-(user--c-c++-mode-config)
+(with-executable 'cflow
+  (require-package '(:name cflow :after (user--cflow-config))))
 
 
 (provide 'modes/c-c++)
