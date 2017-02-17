@@ -13,22 +13,18 @@
     (lua-block-mode t)))
 
 
-(defun user--lua-mode-config ()
-  "Initialize Lua mode."
-  (use-package lua-mode
-    :defer t)
-  (require-package '(:name lua-block
-                           :type emacswiki
-                           :website "https://raw.github.com/emacsmirror/emacswiki.org/master/lua-block.el"
-                           :depends (lua-mode)
-                           :prepare (progn
-                                      (autoload 'lua-block-mode "lua-block" nil
-                                        t))))
-
-  (add-hook 'lua-mode-hook 'user--lua-mode-hook))
-
 (with-executable 'lua
-  (user--lua-mode-config))
+  (use-package lua-mode
+    :defer t
+    :config
+    (use-package lua-block
+      :require lua-mode
+      :quelpa (lua-block
+               :fetcher wiki
+               :files ("lua-block.el"))
+      :init
+      (autoload 'lua-block-mode "lua-block" nil t))
+    (add-hook 'lua-mode-hook 'user--lua-mode-hook)))
 
 
 (provide 'modes/lua)
