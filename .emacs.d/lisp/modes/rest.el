@@ -29,8 +29,12 @@
   (user/bind-key-local :code :compile 'rst-compile))
 
 
-(defun user--rst-mode-config ()
-  "Initialize reStructuredText mode."
+(use-package rst
+  :defer t
+  :quelpa (rst
+           :fetcher svn
+           :url "http://svn.code.sf.net/p/docutils/code/trunk/docutils/tools/editors/emacs")
+  :config
   ;; Register auto modes.
   (add-auto-mode 'rst-mode "\\.rst$" "\\.rest$")
 
@@ -40,7 +44,6 @@
   ;; Register mode hook.
   (add-hook 'rst-mode-hook 'user--rst-mode-hook))
 
-(require-package '(:name rst-mode :after (user--rst-mode-config)))
 (use-package auto-complete-rst
   :defer t)
 
