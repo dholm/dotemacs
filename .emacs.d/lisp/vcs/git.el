@@ -104,14 +104,14 @@
 
   (when (feature-p 'helm)
     (use-package helm-ls-git
-      :ensure t)
+      :defer t)
     (use-package helm-git-grep
-      :ensure t
+      :defer t
       :commands helm-git-grep)
     (use-package helm-open-github
-      :ensure t)
+      :defer t)
     (use-package helm-hunks
-      :ensure t)))
+      :defer t)))
 
 (with-executable 'git
   (user--git-config))
