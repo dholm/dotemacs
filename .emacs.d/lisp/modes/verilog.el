@@ -17,7 +17,12 @@
 
   ;;; (Packages) ;;;
   (require-package '(:name verilog-mode))
-  (require-package '(:name auto-complete-verilog)))
+  (use-package auto-complete-verilog
+    :defer t
+    :requires auto-complete
+    :quelpa (auto-complete-verilog
+             :fetcher wiki
+             :files ("auto-complete-verilog.el"))))
 
 (user--verilog-mode-config)
 

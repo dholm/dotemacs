@@ -71,7 +71,12 @@
     :defer t)
   (require-package '(:name structured-haskell-mode))
   (require-package '(:name ghc-mod))
-  (require-package '(:name ac-ghc-mod))
+  (use-package ac-ghc-mod
+    :defer t
+    :requires auto-complete
+    :quelpa (ac-ghc-mod
+             :fetcher github
+             :repo "Pitometsu/ac-ghc-mod"))
   (use-package company-ghc
     :defer t)
 

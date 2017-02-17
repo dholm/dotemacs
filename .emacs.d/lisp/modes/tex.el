@@ -172,16 +172,6 @@ Makes it easier to version control LaTeX-files."
   (add-hook 'TeX-mode-hook 'zotelo-minor-mode))
 
 
-(defun user--auto-complete-latex-config ()
-  "Initialize LaTeX auto completion."
-  (after-load 'auto-complete-latex
-    (validate-setq
-     ac-l-dict-directory (path-join (el-get-package-directory
-                                     'auto-complete-latex) "ac-l-dict")))
-
-  (add-ac-modes 'latex-mode 'LaTeX-mode))
-
-
 (defun user--ac-math-config ()
   "Initialize math auto completion."
   (validate-setq
@@ -234,8 +224,18 @@ Makes it easier to version control LaTeX-files."
   (use-package ac-math
     :defer t
     :config (user--ac-math-config))
-  (require-package
-   '(:name auto-complete-latex :after (user--auto-complete-latex-config)))
+  (use-package auto-complete-latex
+    :defer t
+    :requires auto-complete
+    :quelpa (auto-complete-latex
+             :fetcher hg
+             :url "https://bitbucket.org/tequilasunset/auto-complete-latex")
+    :config
+    (validate-setq
+     ac-l-dict-directory (path-join (el-get-package-directory
+                                     'auto-complete-latex)
+                                    "ac-l-dict"))
+    (add-ac-modes 'latex-mode 'LaTeX-mode))
   (use-package company-auctex
     :defer t)
   (use-package company-math

@@ -265,7 +265,14 @@
   (add-to-list 'completion-styles 'initials t)
 
   ;;; (Packages) ;;;
-  (require-package '(:name auto-complete :after (user--auto-complete-config)))
+  (use-package auto-complete
+    :ensure t
+    :requires popup fuzzy
+    :quelpa (auto-complete
+             :fetcher github
+             :repo "auto-complete/auto-complete")
+    :config
+    (user--auto-complete-config))
   (use-package company
     :ensure t
     :diminish company-mode

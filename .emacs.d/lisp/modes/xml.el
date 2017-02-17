@@ -60,11 +60,6 @@
     (indent-region begin end)))
 
 
-(defun user--auto-complete-nxml-config ()
-  "Initialize auto completion for nxml mode."
-  (add-ac-modes 'nxml-mode))
-
-
 (defun user--tdtd-config ()
   "Initialize tdtd."
   ;; DTD modes.
@@ -100,7 +95,11 @@
 
   ;;; (Packages) ;;;
   (require-package '(:name tdtd :after (user--tdtd-config)))
-  (require-package '(:name auto-complete-nxml :after (user--auto-complete-nxml-config))))
+  (use-package auto-complete-nxml
+    :defer t
+    :requires auto-complete
+    :config
+    (add-ac-modes 'nxml-mode)))
 
 (user--xml-mode-config)
 
