@@ -215,7 +215,11 @@
   :ensure helm
   :bind ("C-c h x" . helm-run-external-command))
 
-(require-package '(:name helm-build-command))
+(use-package helm-build-command
+  :ensure helm
+  :quelpa (helm-build-command
+           :fetcher github
+           :repo "tkf/helm-build-command"))
 
 
 (provide 'utilities/helm)

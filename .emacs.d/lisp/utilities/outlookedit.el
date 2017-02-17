@@ -3,7 +3,11 @@
 ;;; Code:
 
 (when (eq system-type 'windows-nt)
-  (require-package '(:name outlookedit)))
+  (use-package outlookedit
+    :defer t
+    :quelpa (outlookedit
+             :fetcher github
+             :repo "dholm/outlookedit")))
 
 
 (provide 'utilities/outlookedit)
