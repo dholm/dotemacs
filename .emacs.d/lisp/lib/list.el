@@ -18,9 +18,10 @@
        (nreverse ,r))))
 
 
-(defun user/filter (condp list)
+(defun user/filter-list (condp list)
   "Return list with elements for which CONDP are non-nil in LIST."
-  (user/filter-form (funcall condp it) list))
+  (delq nil
+        (mapcar (lambda (x) (and (funcall condp x) x)) list)))
 
 
 (defun user/toggle-element (list element)
