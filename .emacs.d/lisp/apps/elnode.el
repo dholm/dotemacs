@@ -18,7 +18,12 @@
 (use-package elnode
   :defer t
   :config (user--elnode-config))
-(require-package '(:name elnode-org))
+(use-package elnode-org
+  :defer t
+  :requires elnode org
+  :quelpa (elnode-org
+           :fetcher github
+           :repo "nicferrier/elnode-org"))
 
 
 (provide 'apps/elnode)
