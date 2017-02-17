@@ -69,8 +69,19 @@
     :defer t)
   (use-package flycheck-haskell
     :defer t)
-  (require-package '(:name structured-haskell-mode))
-  (require-package '(:name ghc-mod))
+  (use-package structured-haskell-mode
+    :defer t
+    :requires haskell-mode
+    :quelpa (structured-haskell-mode
+             :fetcher github
+             :repo "chrisdone/structured-haskell-mode"
+             :files ("elisp/*.el")))
+  (use-package ghc-mod
+    :defer t
+    :quelpa (ghc-mod
+             :fetcher github
+             :repo "kazu-yamamoto/ghc-mod"
+             :files ("elisp/*.el")))
   (use-package ac-ghc-mod
     :defer t
     :requires auto-complete
