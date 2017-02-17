@@ -232,6 +232,9 @@
 
 (use-package erc
   :defer t
+  :quelpa (erc
+           :fetcher git
+           :url "git://git.savannah.gnu.org/erc.git")
   :config (user--erc-config))
 (use-package erc-colorize
   :defer t)
@@ -239,7 +242,12 @@
   :defer t)
 (use-package erc-image
   :defer t)
-(require-package '(:name erc-view-log))
+(use-package erc-view-log
+  :defer t
+  :requires erc
+  :quelpa (erc-view-log
+           :fetcher github
+           :repo "Niluge-KiWi/erc-view-log"))
 (use-package erc-crypt
   :defer t)
 (when (display-graphic-p)
