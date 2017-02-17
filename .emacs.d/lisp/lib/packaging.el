@@ -2,6 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'lib/net)
+
+
 (defvar el-get-sources nil
   "List of package definitions for el-get.")
 (defvar el-get-safe-mode nil
