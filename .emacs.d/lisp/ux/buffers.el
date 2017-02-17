@@ -27,12 +27,6 @@
   (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 
 
-(defun user--keep-buffers-config ()
-  "Initialize keep-buffers."
-  ;; Protect certain buffers from being killed.
-  (keep-buffers-mode t))
-
-
 (defun user--buffers-config ()
   "Initialize Emacs buffers."
   (validate-setq
@@ -48,10 +42,7 @@
   (user/bind-key-global :basic :save 'save-buffer)
   (user/bind-key-global :basic :save-as 'write-file)
   (user/bind-key-global :basic :close 'kill-buffer)
-  (user/bind-key-global :basic :quit 'save-buffers-kill-terminal)
-
-  ;;; (Packages) ;;;
-  (require-package '(:name keep-buffers :after (user--keep-buffers-config))))
+  (user/bind-key-global :basic :quit 'save-buffers-kill-terminal))
 
 (user--buffers-config)
 
