@@ -26,19 +26,9 @@
     (omnisharp-mode t)))
 
 
-(defun user--sln-mode-config ()
-  "Initialize sln mode."
-  (add-auto-mode 'sln-mode "\\.sln$"))
-
-
-(defun user--omnisharp-config ()
-  "Initialize omnisharp."
-  (validate-setq
-   omnisharp-server-executable-path (path-join *user-omnisharp-path* "omnisharp")))
-
-
-(defun user--csharp-mode-config ()
-  "Initialize C# mode."
+(use-package csharp-mode
+  :defer t
+  :config
   (add-hook 'csharp-mode-hook 'user--csharp-mode-hook)
 
   (after-load 'csharp-mode
@@ -49,15 +39,22 @@
                  '(csharp-mode . (csharp-invoke-compile-interactively))))
 
   ;;; (Packages) ;;;
-  (use-package csharp-mode
-    :defer t)
   (when (file-exists-p *user-omnisharp-path*)
     (use-package omnisharp
-      :defer t
-      :config (user--omnisharp-config)))
-  (require-package '(:name sln-mode :after (user--sln-mode-config))))
-
-(user--csharp-mode-config)
+      :config
+      (validate-setq
+       omnisharp-server-executable-path
+       (path-join *user-omnisharp-path* "omnisharp"))))
+  (quelpa '(font-lock-ext
+            :fetcher github
+            :repo "sensorflo/font-lock-ext"))
+  (use-package sln-mode
+    :requires font-lock-ext
+    :quelpa (sln-mode
+             :fetcher github
+             :repo "sensorflo/sln-mode")
+    :config
+    (add-auto-mode 'sln-mode "\\.sln$")))
 
 
 (provide 'modes/csharp)
