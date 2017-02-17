@@ -526,13 +526,12 @@ Gmail {
    ;; Use modified UTF-8 for IMAP4.
    elmo-imap4-use-modified-utf7 t))
 
-(when (display-graphic-p)
-  ;; Override recipe so that Wanderlust is loaded by package.el.
-  (require-package '(:name wl-gravatar
-                           :type github
-                           :pkgname "dabrahams/wl-gravatar"
-                           :depends (gravatar)
-                           :prepare (autoload 'wl-gravatar-insert "wl-gravatar"))))
+(use-package wl-gravatar
+  :if window-system
+  :requires wanderlust
+  :quelpa (wl-gravatar :fetcher github :repo "dabrahams/wl-gravatar")
+  :init
+  (autoload 'wl-gravatar-insert "wl-gravatar"))
 
 
 (provide 'apps/wanderlust)
