@@ -8,18 +8,18 @@
     (rusti-minor-mode t)))
 
 
-(defun user--rust-mode-config ()
-  "Initialize Rust mode."
-  ;;; (Hooks) ;;;
-  (add-hook 'rust-mode-hook 'user--rust-mode-hook))
-
 (with-executable 'rustc
   (use-package rust-mode
-    :defer t
-    :config (user--rust-mode-config))
-  (use-package flycheck-rust
-    :defer t)
-  (require-package '(:name rusti)))
+    :config
+    ;;; (Hooks) ;;;
+    (add-hook 'rust-mode-hook 'user--rust-mode-hook)
+
+    ;;; (Packages) ;;;
+    (use-package flycheck-rust)
+    (use-package rusti
+      :quelpa (rusti
+               :fetcher github
+               :repo "ruediger/rusti.el"))))
 
 
 (provide 'modes/rust)

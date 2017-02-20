@@ -51,12 +51,22 @@
 
 (use-package doc-view
   :defer t
-  :config (user--doc-view-config))
+  :config
+  (user--doc-view-config)
 
-(require-package '(:name doc-present))
+  (use-package doc-present
+    :quelpa (doc-present
+             :fetcher github
+             :repo "dengste/doc-present")
+    :init
+    (autoload 'doc-present "doc-present" nil t)
+    (autoload 'doc-present-mode "doc-present" nil t))
 
-(when (display-graphic-p)
-  (require-package '(:name doc-view-fit-to-page)))
+  (use-package doc-view-fit-page
+    :if window-system
+    :quelpa (doc-view-fit-page
+             :fetcher github
+             :repo "laysakura/doc-view-fit-to-page")))
 
 
 (provide 'modes/doc-view)

@@ -47,17 +47,18 @@
     (run-hooks 'doxygen-mode-hook)))
 
 
-(defun user--doxygen-mode-config ()
-  "Initialize Doxygen mode."
+(with-executable 'doxygen
+  ;;; (Hooks) ;;;
   (add-hook 'doxygen-mode-hook 'user--doxygen-mode-hook)
 
   ;;; (Packages) ;;;
   (when (pkg-config-has-p "libxml-2.0")
     (require-package '(:name doxymacs)))
-  (require-package '(:name doc-mode-nschum)))
-
-(with-executable 'doxygen
-  (user--doxygen-mode-config))
+  (use-package doc-mode
+    :defer t
+    :quelpa (doc-mode
+             :fetcher github
+             :repo "nschum/doc-mode")))
 
 
 (provide 'utilities/doxygen)

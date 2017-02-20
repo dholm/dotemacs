@@ -7,8 +7,14 @@
   (user/gnu-global-enable))
 
 
-(defun user--verilog-mode-config ()
-  "Initialize Verilog mode."
+(use-package verilog-mode
+  :defer t
+  :quelpa (verilog-mode
+           :fetcher url
+           :url "http://www.veripool.org/ftp/verilog-mode.el")
+  :init
+  (add-auto-mode 'verilog-mode "\\.[ds]?vh?$")
+  :config
   (when (feature-p 'polymode)
     (add-auto-mode 'poly-verilog+perl-mode "\\.sv$" "\\.svh$"))
 
@@ -16,15 +22,12 @@
   (add-hook 'verilog-mode-hook 'user--verilog-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name verilog-mode))
   (use-package auto-complete-verilog
     :defer t
     :requires auto-complete
     :quelpa (auto-complete-verilog
              :fetcher wiki
              :files ("auto-complete-verilog.el"))))
-
-(user--verilog-mode-config)
 
 
 (provide 'modes/verilog)

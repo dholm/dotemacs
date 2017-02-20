@@ -2,17 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--ebuild-mode-hook ()
-  "Gentoo ebuild mode hook.")
-
-
-(defun user--ebuild-mode-config ()
-  "Initialize Gentoo ebuild mode."
-  (require-package '(:name ebuild-mode))
-
-  (add-hook 'ebuild-mode-hook 'user--ebuild-mode-hook))
-
-(user--ebuild-mode-config)
+(require-package '(:name ebuild-mode))
 
 
 (provide 'modes/ebuild)
