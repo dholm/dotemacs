@@ -21,19 +21,19 @@
   (user/bind-key-local :nav :go-back 'helm-css-scss-back-to-last-point))
 
 
-(defun user--css-mode-config ()
-  "Initialize CSS mode."
+(use-package css-mode
+  :defer t
+  :config
   (add-hook 'css-mode-hook 'user--css-mode-hook)
 
   ;;; (Packages) ;;;
-  (require-package '(:name showcss-mode))
-  (use-package rainbow-mode
-    :defer t)
+  (use-package showcss-mode
+    :quelpa (showcss-mode
+             :fetcher github
+             :repo "smmcg/showcss-mode"))
+  (use-package rainbow-mode)
   (when (feature-p 'helm)
-    (use-package helm-css-scss
-      :defer t)))
-
-(user--css-mode-config)
+    (use-package helm-css-scss)))
 
 
 (provide 'modes/css)

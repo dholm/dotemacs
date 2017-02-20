@@ -10,16 +10,18 @@
   "TableGen mode hook.")
 
 
-(defun user--llvm-mode-config ()
-  "Initialize LLVM mode."
-  (use-package llvm-mode
-    :defer t)
-  (require-package '(:name tablegen-mode))
-
-  (add-hook 'llvm-mode-hook 'user--llvm-mode-hook)
-  (add-hook 'tablegen-mode-hook 'user--tablegen-mode-hook))
-
-(user--llvm-mode-config)
+(use-package llvm-mode
+  :defer t
+  :config
+  (use-package tablegen-mode
+    :quelpa (tablegen-mode
+             :fetcher url
+             :url "https://raw.githubusercontent.com/llvm-mirror/llvm/master/utils/emacs/tablegen-mode.el")
+    :init
+    (add-auto-mode 'tablegen-mode "\\.td\\'")
+    :config
+    (add-hook 'tablegen-mode-hook 'user--tablegen-mode-hook))
+  (add-hook 'llvm-mode-hook 'user--llvm-mode-hook))
 
 
 (provide 'modes/llvm)

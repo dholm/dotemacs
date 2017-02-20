@@ -7,13 +7,16 @@
   ;; Separate camel-case into separate words
   (subword-mode t))
 
-
-(defun user--ttcn-mode-config ()
-  "Initialize TTCN mode."
+(use-package ttcn-mode
+  :defer t
+  :quelpa (ttcn-mode
+           :fetcher github
+           :repo "dholm/ttcn-el")
+  :init
+  (add-auto-mode 'ttcn-mode "\\.mp$")
+  (add-auto-mode 'ttcn-3-mode "\\.ttcn")
+  :config
   (add-hook 'ttcn3-mode-hook 'user--ttcn3-mode-hook))
-
-
-(require-package '(:name ttcn-mode :after (user--ttcn-mode-config)))
 
 
 (provide 'modes/ttcn)
