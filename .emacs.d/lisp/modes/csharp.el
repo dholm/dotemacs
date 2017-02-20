@@ -28,9 +28,9 @@
 
 (use-package csharp-mode
   :defer t
-  :config
+  :init
   (add-hook 'csharp-mode-hook 'user--csharp-mode-hook)
-
+  :config
   (after-load 'csharp-mode
     (add-to-list 'c-default-style '(csharp-mode . "Google")))
 
@@ -53,7 +53,7 @@
     :quelpa (sln-mode
              :fetcher github
              :repo "sensorflo/sln-mode")
-    :config
+    :init
     (add-auto-mode 'sln-mode "\\.sln$")))
 
 

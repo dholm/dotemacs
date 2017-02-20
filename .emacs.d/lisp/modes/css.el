@@ -23,9 +23,9 @@
 
 (use-package css-mode
   :defer t
-  :config
+  :init
   (add-hook 'css-mode-hook 'user--css-mode-hook)
-
+  :config
   ;;; (Packages) ;;;
   (use-package showcss-mode
     :quelpa (showcss-mode

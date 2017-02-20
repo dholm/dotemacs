@@ -26,32 +26,22 @@
   (user/bind-key-local :code :try-complete 'user/eudc-expand-inline)
   (user/bind-key-local :code :compile 'org-mime-htmlize))
 
-
-(defun user--mu-cite-config ()
-  "Initialize mu-cite."
-  (validate-setq
-   ;; Citation format.
-   mu-cite-top-format '("On " date ", " full-name " wrote:\n")
-   ;; Use > as prefix.
-   mu-cite-prefix-format (quote ("> "))
-   ;; Default message citation function.
-   message-cite-function 'mu-cite-original)
-
-  ;;; (Hooks) ;;;
-  (add-hook 'mail-citation-hook 'mu-cite-original))
-
-
-(defun user--mail-mode-config ()
-  "Initialize mail mode."
-  ;; Hooks
+(use-package sendmail
+  :defer t
+  :init
   (add-hook 'mail-mode-hook 'user--mail-mode-hook)
-
-  ;;; (Packages) ;;;
+  :config
   (use-package mu-cite
-    :defer t
-    :config (user--mu-cite-config)))
-
-(user--mail-mode-config)
+    :init
+    (add-hook 'mail-citation-hook 'mu-cite-original)
+    :config
+    (validate-setq
+     ;; Citation format.
+     mu-cite-top-format '("On " date ", " full-name " wrote:\n")
+     ;; Use > as prefix.
+     mu-cite-prefix-format (quote ("> "))
+     ;; Default message citation function.
+     message-cite-function 'mu-cite-original)))
 
 
 (provide 'modes/mail)

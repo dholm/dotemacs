@@ -27,16 +27,12 @@
                             ("Borders" . borders)
                             ("Spray-chars" . spray-chars))))))))
 
-
-(defun user--artist-mode-config ()
-  "Initialize artist mode."
-  ;;; (Hooks) ;;;
+(use-package artist
+  :defer t
+  :init
   (add-hook 'picture-mode-hook 'user--artist-mode-hook)
 
-  ;;; (Bindings) ;;;
   (user/bind-key-global :util :draw 'artist-mode))
-
-(user--artist-mode-config)
 
 
 (provide 'modes/artist)

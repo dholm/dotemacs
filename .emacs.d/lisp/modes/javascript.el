@@ -41,24 +41,19 @@
     (wisent-javascript-setup-parser)
     (user--cedet-hook)))
 
+(use-package js
+  :defer t
+  :init
+  (add-hook 'javascript-mode-hook 'user--javascript-mode-hook)
+  (add-hook 'inferior-js-mode-hook 'user--inferior-javascript-mode-hook))
 
-(defun user--js-comint-config ()
-  "Initialize `js-comint'."
-  (validate-setq
-   ;; Set JavaScript inferior.
-   inferior-js-program-command
-   (cond
-    ((executable-find "js") (executable-find "js"))
-    ((executable-find "node")
-     (concat (executable-find "node") " --interactive"))
-    (t "java org.mozilla.javascript.tools.shell.Main")))
-
-  ;; Workaround for Node.js prompt.
-  (setenv "NODE_NO_READLINE" "1"))
-
-
-(defun user--js3-mode-config ()
-  "Initialize js3 mode."
+(use-package js3-mode
+  :defer t
+  :init
+  (add-hook 'js3-mode-hook 'user--js3-mode-hook)
+  (add-auto-mode 'js3-mode "\\.js$")
+  (add-magic-mode 'js3-mode "#!/usr/bin/env node")
+  :config
   (validate-setq
    ;; Configure indentation
    js3-indent-on-enter-key t
@@ -72,25 +67,19 @@
    ;; Disable error parsing in favor of Flycheck
    js3-strict-missing-semi-warning nil)
 
-  (add-hook 'js3-mode-hook 'user--js3-mode-hook)
-  (add-auto-mode 'js3-mode "\\.js$")
-  (add-magic-mode 'js3-mode "#!/usr/bin/env node"))
-
-
-(defun user--javascript-mode-config ()
-  "Initialize JavaScript mode."
-  (add-hook 'javascript-mode-hook 'user--javascript-mode-hook)
-  (add-hook 'inferior-js-mode-hook 'user--inferior-javascript-mode-hook)
-  (add-auto-mode 'javascript-mode "\\.json$")
-
-  (use-package js3-mode
-    :defer t
-    :config (user--js3-mode-config))
   (use-package js-comint
-    :defer t
-    :config (user--js-comint-config)))
+    :config
+    (validate-setq
+     ;; Set JavaScript inferior.
+     inferior-js-program-command
+     (cond
+      ((executable-find "js") (executable-find "js"))
+      ((executable-find "node")
+       (concat (executable-find "node") " --interactive"))
+      (t "java org.mozilla.javascript.tools.shell.Main")))
 
-(user--javascript-mode-config)
+    ;; Workaround for Node.js prompt.
+    (setenv "NODE_NO_READLINE" "1")))
 
 
 (provide 'modes/javascript)

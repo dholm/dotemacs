@@ -11,21 +11,17 @@
   (turn-off-auto-fill)
   (user/whitespace-disable-style '(lines)))
 
-
-(defun user--csv-mode-config ()
-  "Initialize CSV mode."
+(use-package csv-mode
+  :defer t
+  :init
+  (add-auto-mode 'csv-mode "\\.[Cc][Ss][Vv]$")
+  (add-hook 'csv-mode-hook 'user--csv-mode-hook)
+  :config
   (validate-setq
    ;; Default separators for CSV files.
    csv-separators '("," ";" "|" " " "\t")
    ;; Number of lines to consider part of header.
-   csv-header-lines 1)
-
-  (add-auto-mode 'csv-mode "\\.[Cc][Ss][Vv]$")
-  (add-hook 'csv-mode-hook 'user--csv-mode-hook))
-
-(use-package csv-mode
-  :defer t
-  :config (user--csv-mode-config))
+   csv-header-lines 1))
 
 
 (provide 'modes/csv)

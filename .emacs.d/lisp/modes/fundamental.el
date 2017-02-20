@@ -27,11 +27,6 @@
     (user/bind-key-local :nav :functions/toc 'helm-imenu)))
 
 
-(defun user--mic-paren-config ()
-  "Initialize mic-paren."
-  (paren-activate))
-
-
 (defun user--fundamental-mode-config ()
   "Initialize Emacs fundamental mode."
   (validate-setq
@@ -48,8 +43,8 @@
   (use-package rainbow-delimiters
     :ensure t)
   (use-package mic-paren
-    :ensure t
-    :config (user--mic-paren-config)))
+    :ensure t)
+  (paren-activate))
 
 (user--fundamental-mode-config)
 

@@ -70,58 +70,6 @@
                                org-babel-load-languages))
 
 
-(defun user--org-agenda-config ()
-  "Initialize org agenda."
-  (let ((agenda-data-store (path-join *user-org-data-directory* "agendas")))
-    (validate-setq
-     ;; Agenda data store.
-     org-agenda-files `(,agenda-data-store)
-     ;; Ignore agenda files that are unavailable.
-     org-agenda-skip-unavailable-files t
-     ;; Restore window configuration when done with the agenda.
-     org-agenda-restore-windows-after-quit t
-     ;; Start on Monday.
-     org-agenda-start-on-weekday 1
-     ;; Show month by default.
-     org-agenda-span 'month
-     ;; Don't display scheduled todos.
-     org-agenda-todo-ignore-scheduled 'future
-     ;; Don't show nested todos.
-     org-agenda-todo-list-sublevels nil
-     ;; Don't dim blocked tasks.
-     org-agenda-dim-blocked-tasks nil
-     ;; Compact block agenda view.
-     org-agenda-compact-blocks t
-     ;; Position the habit graph to the right.
-     org-habit-graph-column 50
-     ;; Include Emacs' Diary in org-agenda.
-     org-agenda-include-diary t
-     ;; Switch window when opening org-agenda.
-     org-agenda-window-setup 'other-window
-     ;; Display indirect buffers in the "current" window.
-     org-indirect-buffer-display 'current-window)
-
-    ;; Ensure that agenda data store exists.
-    (make-directory agenda-data-store t))
-
-  (after-load 'org
-    ;; Load org agenda.
-    (add-to-list 'org-modules 'org-agenda))
-
-  (when (not noninteractive)
-    ;; When running in batch, don't setup windows.
-    (validate-setq
-     ;; Show agenda in current window.
-     org-agenda-window-setup 'current-window))
-
-  ;;; (Hooks) ;;;
-  (add-hook 'org-agenda-finalize-hook 'user--org-agenda-finalize-hook)
-
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :apps :agenda 'org-agenda)
-  (user/bind-key-global :apps :todo 'org-todo-list))
-
-
 (defun user/org-open-at-point (&optional arg)
   "Like `org-open-at-point' but will use external browser with prefix ARG."
   (interactive "P")
@@ -148,25 +96,6 @@
                                :default-config-keywords popwin-config))))
 
 
-(defun user--org-annotate-file-config ()
-  "Initialize org mode file annotation."
-  (validate-setq
-   ;; Annotations data store.
-   org-annotate-file-storage-file (path-join *user-org-data-directory*
-                                             "annotations.org")
-   ;; Add link to current line number.
-   org-annotate-file-add-search t)
-
-  ;; Load file annotation support.
-  (after-load 'org
-    (add-to-list 'org-modules 'org))
-
-  (autoload 'org-annotate-file "org-annotate-file" nil t)
-
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :util :annotate-buffer 'user/org-annotate-file))
-
-
 (defun user/org-mobile-sync-pull-and-push ()
   "Sync OrgMobile directory."
   (org-mobile-pull)
@@ -189,82 +118,22 @@
   (cancel-timer user/org-mobile-sync-timer))
 
 
-(defun user--org-mobile-config ()
-  "Initialize org mobile."
-  (validate-setq
-   ;; Location of TODO items to sync.
-   org-mobile-inbox-for-pull org-default-notes-file
-   ;; MobileOrg sync directory.
-   org-mobile-directory (path-join *user-org-data-directory* "mobile")
-   ;; Custom agenda view.
-   org-mobile-force-id-on-agenda-items nil))
+(use-package org
+  :quelpa (org :fetcher git
+               :url "git://orgmode.org/org-mode.git"
+               :files ("lisp/*.el" "contrib/lisp/*.el" "doc/dir" "doc/*.texi"))
+  :ensure t
+  :init
+  ;; Create data and cache stores.
+  (make-directory *user-org-data-directory* t)
+  (make-directory *user-org-cache-directory* t)
+  ;; Fix for EIN if org hasn't been setup yet.
+  (autoload 'org-add-link-type "org" "" t)
 
-
-(defun user--org-babel-config ()
-  "Initialize org babel."
-  (validate-setq
-   ;; Don't ask for validation.
-   org-confirm-babel-evaluate nil)
-
-  ;; Org babel modules to load by default.
-  (after-load 'org
-    (add-many-to-list 'org-babel-load-languages
-                      ;; Emacs Lisp support.
-                      '(emacs-lisp . t)
-                      ;; Shell script support.
-                      '(shell . t))
-
-    (with-executable 'ditaa
-      (add-to-list 'org-babel-load-languages '(ditaa . t)))
-    (with-executable 'dot
-      (add-to-list 'org-babel-load-languages '(dot . t)))
-    (with-executable 'ghc
-      (add-to-list 'org-babel-load-languages '(haskell . t)))
-    (with-executable 'gnuplot
-      (add-to-list 'org-babel-load-languages '(gnuplot . t)))
-    (with-executable 'latex
-      (add-to-list 'org-babel-load-languages '(latex . t)))
-    (with-executable 'perl
-      (add-to-list 'org-babel-load-languages '(perl . t)))
-    (when (feature-p 'plantuml-mode)
-      (validate-setq
-       org-plantuml-jar-path (path-join (el-get-package-directory 'plantuml-mode)
-                                        "plantuml.jar"))
-      (add-to-list 'org-babel-load-languages '(plantuml . t)))
-    (with-executable 'python
-      (add-to-list 'org-babel-load-languages '(python . t)))
-    (with-executable 'R
-      (add-to-list 'org-babel-load-languages '(R . t)))
-    (with-executable 'ruby
-      (add-to-list 'org-babel-load-languages '(ruby . t)))))
-
-
-(defun user--org-export-config ()
-  "Initialize org export."
-  (validate-setq
-   ;; Export as UTF-8.
-   org-export-coding-system 'utf-8)
-
-  (after-load 'org
-    ;; Org export modules to load by default.
-    (add-many-to-list 'org-export-backends
-                      ;; Ascii support.
-                      'ascii
-                      ;; HTML.
-                      'html
-                      ;; OpenDocument Text support.
-                      'odt)
-
-    (with-executable 'latex
-      (add-many-to-list 'org-export-backends
-                        ;; Beamer presentation export.
-                        'beamer
-                        ;; Plain LaTeX export.
-                        'latex))))
-
-
-(defun user--org-mode-config ()
-  "Initialize org mode."
+  ;;; (Hooks) ;;;
+  (add-hook 'org-load-hook 'user--org-load-hook)
+  (add-hook 'org-mode-hook 'user--org-mode-hook)
+  :config
   (validate-setq
    ;; Org data store.
    org-directory *user-org-data-directory*
@@ -310,7 +179,8 @@
      ;; Prettify content using UTF-8.
      org-pretty-entities t))
 
-  (validate-setq
+  ;; Incompatible with validate-setq.
+  (setq
    ;; State transitions (http://doc.norang.ca/org-mode.html).
    org-todo-keywords
    (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
@@ -324,63 +194,38 @@
            (done ("WAITING") ("HOLD"))
            ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
            ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
-           ("DONE" ("WAITING") ("CANCELLED") ("HOLD"))))
-   ;; Capture templates.
-   org-capture-templates
-   (quote (("t" "todo" entry (file org-default-notes-file)
-            "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-           ("r" "respond" entry (file org-default-notes-file)
-            "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n"
-            :clock-in t :clock-resume t :immediate-finish t)
-           ("n" "note" entry (file org-default-notes-file)
-            "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-           ("j" "Journal" entry
-            (file+datetree (path-join *user-org-data-directory* "diary.org"))
-            "* %?\n%U\n" :clock-in t :clock-resume t)
-           ("w" "org-protocol" entry (file org-default-notes-file)
-            "* TODO Review %c\n%U\n" :immediate-finish t)
-           ("m" "Meeting" entry (file org-default-notes-file)
-            "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-           ("p" "Phone call" entry (file "~/git/org/refile.org")
-            "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
-           ("h" "Habit" entry (file org-default-notes-file)
-            (concat "* NEXT %?\n%U\n%a\n"
-                    "SCHEDULED: "
-                    "%(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n:"
-                    "PROPERTIES:\n:STYLE: habit\n"
-                    ":REPEAT_TO_STATE: NEXT\n:END:\n")))))
+           ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
 
-  (after-load 'org
-    (add-many-to-list 'org-modules
-                      ;; File attachment manager.
-                      'org-attach
-                      ;; Link to BibTeX entries.
-                      'org-bibtex
-                      ;; Link to tags.
-                      'org-ctags
-                      ;; Link to articles and messages in Gnus.
-                      'org-gnus
-                      ;; Habit tracking.
-                      'org-habit
-                      ;; Support links to info pages.
-                      'org-info
-                      ;; Support links to man pages.
-                      'org-man
-                      ;; Export org buffer to MIME email message.
-                      'org-mime
-                      ;; Allow external applications to talk to org.
-                      'org-protocol
-                      ;; Embed source code in org-mode.
-                      'org-src)
+  (add-many-to-list 'org-modules
+                    ;; File attachment manager.
+                    'org-attach
+                    ;; Link to BibTeX entries.
+                    'org-bibtex
+                    ;; Link to tags.
+                    'org-ctags
+                    ;; Link to articles and messages in Gnus.
+                    'org-gnus
+                    ;; Habit tracking.
+                    'org-habit
+                    ;; Support links to info pages.
+                    'org-info
+                    ;; Support links to man pages.
+                    'org-man
+                    ;; Export org buffer to MIME email message.
+                    'org-mime
+                    ;; Allow external applications to talk to org.
+                    'org-protocol
+                    ;; Embed source code in org-mode.
+                    'org-src)
 
-    (when (feature-p 'bbdb)
-      (add-to-list 'org-modules 'org-bbdb))
-    (when (feature-p 'emacs-w3m)
-      (add-to-list 'org-modules 'org-w3m))
-    (when (feature-p 'wanderlust)
-      (add-to-list 'org-modules 'org-wl))
-    (with-executable 'git
-      (add-to-list 'org-modules 'org-git-link)))
+  (when (feature-p 'bbdb)
+    (add-to-list 'org-modules 'org-bbdb))
+  (when (feature-p 'emacs-w3m)
+    (add-to-list 'org-modules 'org-w3m))
+  (when (feature-p 'wanderlust)
+    (add-to-list 'org-modules 'org-wl))
+  (with-executable 'git
+    (add-to-list 'org-modules 'org-git-link))
 
   (when (not noninteractive)
     ;; When running in batch, don't setup time tracking.
@@ -409,11 +254,120 @@
      ;; Display inline images when starting up.
      org-startup-with-inline-images t))
 
-  (user--org-babel-config)
-  (user--org-export-config)
-  (user--org-agenda-config)
-  (user--org-annotate-file-config)
-  (user--org-mobile-config)
+  (use-package org-capture
+    :ensure nil
+    :init
+    (user/bind-key-global :apps :capture-task 'org-capture)
+    :config
+    ;; Incompatible with validate-setq.
+    (setq
+     ;; Capture templates.
+     org-capture-templates
+     (quote (("t" "todo" entry (file org-default-notes-file)
+              "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+             ("r" "respond" entry (file org-default-notes-file)
+              "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n"
+              :clock-in t :clock-resume t :immediate-finish t)
+             ("n" "note" entry (file org-default-notes-file)
+              "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+             ("j" "Journal" entry
+              (file+datetree (path-join *user-org-data-directory* "diary.org"))
+              "* %?\n%U\n" :clock-in t :clock-resume t)
+             ("w" "org-protocol" entry (file org-default-notes-file)
+              "* TODO Review %c\n%U\n" :immediate-finish t)
+             ("m" "Meeting" entry (file org-default-notes-file)
+              "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
+             ("p" "Phone call" entry (file "~/git/org/refile.org")
+              "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
+             ("h" "Habit" entry (file org-default-notes-file)
+              (concat "* NEXT %?\n%U\n%a\n"
+                      "SCHEDULED: "
+                      "%(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n:"
+                      "PROPERTIES:\n:STYLE: habit\n"
+                      ":REPEAT_TO_STATE: NEXT\n:END:\n"))))))
+  (use-package ob-core
+    :ensure nil
+    :config
+    (validate-setq
+     ;; Don't ask for validation.
+     org-confirm-babel-evaluate nil)
+
+    (add-many-to-list
+     'org-babel-load-languages
+     ;; Emacs Lisp support.
+     '(emacs-lisp . t)
+     ;; Shell script support.
+     '(shell . t))
+
+    (with-executable 'ditaa
+      (add-to-list 'org-babel-load-languages '(ditaa . t)))
+    (with-executable 'dot
+      (add-to-list 'org-babel-load-languages '(dot . t)))
+    (with-executable 'ghc
+      (add-to-list 'org-babel-load-languages '(haskell . t)))
+    (with-executable 'gnuplot
+      (add-to-list 'org-babel-load-languages '(gnuplot . t)))
+    (with-executable 'latex
+      (add-to-list 'org-babel-load-languages '(latex . t)))
+    (with-executable 'perl
+      (add-to-list 'org-babel-load-languages '(perl . t)))
+    (when (feature-p 'plantuml-mode)
+      (validate-setq
+       org-plantuml-jar-path (path-join (el-get-package-directory 'plantuml-mode)
+                                        "plantuml.jar"))
+      (add-to-list 'org-babel-load-languages '(plantuml . t)))
+    (with-executable 'python
+      (add-to-list 'org-babel-load-languages '(python . t)))
+    (with-executable 'R
+      (add-to-list 'org-babel-load-languages '(R . t)))
+    (with-executable 'ruby
+      (add-to-list 'org-babel-load-languages '(ruby . t))))
+
+  (use-package ox
+    :ensure nil
+    :config
+    (validate-setq
+     ;; Export as UTF-8.
+     org-export-coding-system 'utf-8)
+
+    ;; Org export modules to load by default.
+    (add-many-to-list
+     'org-export-backends
+     ;; Ascii support.
+     'ascii
+     ;; HTML.
+     'html
+     ;; OpenDocument Text support.
+     'odt)
+
+    (with-executable 'latex
+      (add-many-to-list
+       'org-export-backends
+       ;; Beamer presentation export.
+       'beamer
+       ;; Plain LaTeX export.
+       'latex))
+
+    (use-package ox-mediawiki
+      :defer)
+    (use-package ox-gfm
+      :defer))
+
+  ;; Load org agenda.
+  (add-to-list 'org-modules 'org-agenda)
+
+  (add-to-list 'org-modules 'org)
+
+  (use-package org-mobile
+    :ensure nil
+    :config
+    (validate-setq
+     ;; Location of TODO items to sync.
+     org-mobile-inbox-for-pull org-default-notes-file
+     ;; MobileOrg sync directory.
+     org-mobile-directory (path-join *user-org-data-directory* "mobile")
+     ;; Custom agenda view.
+     org-mobile-force-id-on-agenda-items nil))
 
   (after-load 'smartparens
     (defun sp--org-skip-asterisk (ms mb me)
@@ -431,58 +385,96 @@
       (sp-local-pair "=" "=" :unless '(sp-point-after-word-p) :post-handlers '(("[d1]" "SPC")))
       (sp-local-pair "«" "»")))
 
-  ;;; (Hooks) ;;;
-  (add-hook 'org-load-hook 'user--org-load-hook)
-  (add-hook 'org-mode-hook 'user--org-mode-hook)
-
   ;;; (Bindings) ;;;
-  (user/bind-key-global :apps :capture-task 'org-capture)
-  (after-load 'org
-    (define-key org-mode-map (kbd "C-c C-o") #'user/org-open-at-point)))
+  (define-key org-mode-map (kbd "C-c C-o") #'user/org-open-at-point)
 
+  ;;; (Packages) ;;;
+  (use-package org-clock
+    :ensure nil
+    :config
+    (validate-setq
+     ;; Clock data store.
+     org-clock-persist-file (path-join *user-org-cache-directory*
+                                       "org-clock-save.el")))
 
-(defun user--org-sync-config ()
-  "Initialize org sync."
-  (validate-setq
-   ;; Org sync cache store.
-   os-cache-file (path-join *user-org-cache-directory* "org-sync-cache"))
+  (use-package org-sync
+    :config
+    (validate-setq
+     ;; Org sync cache store.
+     org-sync-cache-file (path-join *user-org-cache-directory* "org-sync-cache"))
 
-  (after-load 'os
     ;; Redmine module.
-    (load "os-rmine")
+    (load "org-sync-redmine")
     ;; GitHub module.
-    (load "os-github")))
+    (load "org-sync-github"))
 
+  (use-package org-caldav
+    :defer))
 
-(use-package org
-  :quelpa (org :fetcher git
-               :url "git://orgmode.org/org-mode.git"
-               :files ("lisp/*.el" "contrib/lisp/*.el" "doc/dir" "doc/*.texi"))
-  :ensure t
+(use-package org-agenda
+  :ensure org-plus-contrib
+  :defer t
   :init
-  ;; Create data and cache stores.
-  (make-directory *user-org-data-directory* t)
-  (make-directory *user-org-cache-directory* t)
-  ;; Fix for EIN if org hasn't been setup yet.
-  (autoload 'org-add-link-type "org" "" t))
+  (add-hook 'org-agenda-finalize-hook 'user--org-agenda-finalize-hook)
 
-(use-package org-clock
-  :after org
+  (user/bind-key-global :apps :agenda 'org-agenda)
+  (user/bind-key-global :apps :todo 'org-todo-list)
+  :config
+  (let ((agenda-data-store (path-join *user-org-data-directory* "agendas")))
+    (validate-setq
+     ;; Agenda data store.
+     org-agenda-files `(,agenda-data-store)
+     ;; Ignore agenda files that are unavailable.
+     org-agenda-skip-unavailable-files t
+     ;; Restore window configuration when done with the agenda.
+     org-agenda-restore-windows-after-quit t
+     ;; Start on Monday.
+     org-agenda-start-on-weekday 1
+     ;; Show month by default.
+     org-agenda-span 'month
+     ;; Don't display scheduled todos.
+     org-agenda-todo-ignore-scheduled 'future
+     ;; Don't show nested todos.
+     org-agenda-todo-list-sublevels nil
+     ;; Don't dim blocked tasks.
+     org-agenda-dim-blocked-tasks nil
+     ;; Compact block agenda view.
+     org-agenda-compact-blocks t
+     ;; Include Emacs' Diary in org-agenda.
+     org-agenda-include-diary t
+     ;; Switch window when opening org-agenda.
+     org-agenda-window-setup 'other-window
+     ;; Display indirect buffers in the "current" window.
+     org-indirect-buffer-display 'current-window)
+
+    ;; Ensure that agenda data store exists.
+    (make-directory agenda-data-store t)
+
+    (when (not noninteractive)
+      ;; When running in batch, don't setup windows.
+      (validate-setq
+       ;; Show agenda in current window.
+       org-agenda-window-setup 'current-window)))
+
+  (use-package org-habit
+    :ensure nil
+    :config
+    (validate-setq
+     ;; Position the habit graph to the right.
+     org-habit-graph-column 50)))
+
+(use-package org-annotate-file
+  :init
+  (autoload 'org-annotate-file "org-annotate-file" nil t)
+
+  (user/bind-key-global :util :annotate-buffer 'user/org-annotate-file)
   :config
   (validate-setq
-   ;; Clock data store.
-   org-clock-persist-file (path-join *user-org-cache-directory*
-                                     "org-clock-save.el")))
-
-(use-package org-sync
-  :defer t
-  :config (user--org-sync-config))
-
-(use-package ox-mediawiki
-  :defer t)
-
-(use-package org-caldav
-  :defer t)
+   ;; Annotations data store.
+   org-annotate-file-storage-file (path-join *user-org-data-directory*
+                                             "annotations.org")
+   ;; Add link to current line number.
+   org-annotate-file-add-search t))
 
 
 (provide 'modes/org)

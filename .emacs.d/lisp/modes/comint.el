@@ -2,12 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--comint-mode-hook ()
-  "Comint mode hook.")
-
-
-(defun user--comint-config ()
-  "Initialize comint mode."
+(use-package comint
+  :defer t
+  :config
   (validate-setq
    ;; Scroll automatically on new output.
    comint-scroll-to-bottom-on-output 'others
@@ -22,17 +19,12 @@
    ;; Don't store duplicates in history.
    comint-input-ignoredups t)
 
-  (add-hook 'comint-mode-hook 'user--comint-mode-hook)
-
   ;;; (Bindings) ;;;
   ;; Cycling through command history.
   (define-key comint-mode-map [up] 'comint-previous-matching-input-from-input)
   (define-key comint-mode-map [down] 'comint-next-matching-input-from-input)
   ;; Skip past prompt.
   (define-key comint-mode-map [C-left] 'comint-bol))
-
-(after-load 'comint
-  (user--comint-config))
 
 
 (provide 'modes/comint)

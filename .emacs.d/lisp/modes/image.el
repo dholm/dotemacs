@@ -11,12 +11,10 @@
   (local-set-key (kbd "M-n") (lambda () (interactive) (image-next-line 5))))
 
 
-(defun user--image-mode-config ()
-  "Initialize image mode."
-  ;;; (Hooks) ;;;
+(use-package image-mode
+  :defer t
+  :init
   (add-hook 'image-mode-hook 'user--image-mode-hook))
-
-(user--image-mode-config)
 
 
 (provide 'modes/image)

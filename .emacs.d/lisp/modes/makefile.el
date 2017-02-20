@@ -24,16 +24,13 @@
   (with-feature 'doxymacs
     (doxymacs-mode t)))
 
-
-(defun user--makefile-mode-config ()
-  "Initialize makefile mode."
+(use-package make-mode
+  :defer t
+  :init
   (add-hook 'makefile-mode-hook 'user--makefile-mode-hook)
-
   (add-auto-mode 'makefile-mode "\\.mak$")
   ;; Watcom make.
   (add-auto-mode 'makefile-mode "\\.mif$" "\\.wat$"))
-
-(user--makefile-mode-config)
 
 
 (provide 'modes/makefile)

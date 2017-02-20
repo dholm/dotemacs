@@ -2,18 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--yaml-mode-hook ()
-  "YAML mode hook.")
-
-
-(defun user--yaml-mode-config ()
-  "Initialize YAML mode."
-  ;;; (Hooks) ;;;
-  (add-hook 'yaml-mode-hook 'user--yaml-mode-hook))
-
 (use-package yaml-mode
-  :defer t
-  :config (user--yaml-mode-config))
+  :defer t)
 
 
 (provide 'modes/yaml)

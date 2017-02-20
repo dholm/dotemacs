@@ -5,8 +5,8 @@
 (defun user--puml-mode-hook ()
   "PlantUML mode hook."
   ;;; (Bindings) ;;;
-  (user/bind-key-global :code :auto-complete 'puml-complete-symbol)
-  (user/bind-key-global :code :compile 'puml-preview))
+  (user/bind-key-local :code :auto-complete 'puml-complete-symbol)
+  (user/bind-key-local :code :compile 'puml-preview))
 
 
 (defun user--puml-mode-config ()

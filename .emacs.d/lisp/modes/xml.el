@@ -69,8 +69,9 @@
   (add-hook 'dtd-mode-hook 'user--dtd-mode-hook))
 
 
-(defun user--xml-mode-config ()
-  "Initialize xml mode."
+(use-package nxml
+  :defer t
+  :init
   ;; Use nxml-mode for XML
   (fset 'xml-mode 'nxml-mode)
 
@@ -80,6 +81,8 @@
                  "\\.xml$" "\\.xsd$" "\\.xslt$" "\\.rss$" "\\.svg$" "\\.plist$"
                  "\\.rng$" "\\.rnc$")
 
+  (add-hook 'nxml-mode-hook 'user--nxml-mode-hook)
+  :config
   ;; Enable hide/show support for XML.
   (add-to-list
    'hs-special-modes-alist
@@ -90,18 +93,13 @@
      "<!--"
      sgml-skip-tag-forward nil))
 
-  ;;; (Hooks) ;;;
-  (add-hook 'nxml-mode-hook 'user--nxml-mode-hook)
-
   ;;; (Packages) ;;;
-  (require-package '(:name tdtd :after (user--tdtd-config)))
   (use-package auto-complete-nxml
-    :defer t
     :requires auto-complete
     :config
     (add-ac-modes 'nxml-mode)))
 
-(user--xml-mode-config)
+(require-package '(:name tdtd :after (user--tdtd-config)))
 
 
 (provide 'modes/xml)

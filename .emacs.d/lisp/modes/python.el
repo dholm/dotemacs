@@ -47,16 +47,6 @@
       (user/bind-key-local :code :auto-complete 'jedi:complete))))
 
 
-(with-executable 'bpython
-  (defun user/bpython-term ()
-    "Launch or switch to a `bpython' buffer."
-    (interactive)
-    (if (not (get-buffer "*bpython*"))
-        (progn
-          (ansi-term "bpython" "bpython"))
-      (switch-to-buffer "*bpython*"))))
-
-
 (defun user--python-mode-cedet-hook ()
   "CEDET hook for Python mode."
   (with-feature 'semantic/wisent/python
@@ -66,6 +56,10 @@
 (with-executable 'python
   (use-package python
     :defer t
+    :init
+    (add-interpreter-mode 'python-mode "python[0-9.]*")
+    (add-hook 'python-mode-hook 'user--python-mode-hook)
+    (add-auto-mode 'python-mode "SConstruct" "SConscript")
     :config
     (validate-setq
      ;; Don't try to guess the indentation.
@@ -82,7 +76,14 @@
        python-shell-completion-module-string-code "';'.join(module_completion('''%s'''))\n"
        python-shell-completion-string-code "';'.join(get_ipython().Completer.all_completions('''%s'''))\n"))
 
-    (add-auto-mode 'python-mode "SConstruct" "SConscript")
+    (with-executable 'bpython
+      (defun user/bpython-term ()
+        "Launch or switch to a `bpython' buffer."
+        (interactive)
+        (if (not (get-buffer "*bpython*"))
+            (progn
+              (ansi-term "bpython" "bpython"))
+          (switch-to-buffer "*bpython*"))))
 
     ;;; (Packages) ;;;
     (use-package anaconda-mode)
@@ -121,11 +122,7 @@
        ;; Use popup package.
        jedi:tooltip-method '(popup)))
     (when (feature-p 'helm)
-      (use-package helm-pydoc))
-
-    ;;; (Hooks) ;;;
-    (add-interpreter-mode 'python-mode "python[0-9.]*")
-    (add-hook 'python-mode-hook 'user--python-mode-hook)))
+      (use-package helm-pydoc))))
 
 
 (provide 'modes/python)

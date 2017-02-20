@@ -31,16 +31,12 @@
   (rainbow-delimiters-mode t))
 
 
-(defun user--racket-mode-config ()
-  "Initialize Racket mode."
-  ;;; (Hooks) ;;;
-  (add-hook 'racket-mode-hook 'user--racket-mode-hook)
-  (add-hook 'racket-repl-mode-hook 'user--racket-repl-mode-hook))
-
 (with-executable 'racket
   (use-package racket-mode
     :defer t
-    :config (user--racket-mode-config)))
+    :init
+    (add-hook 'racket-mode-hook 'user--racket-mode-hook)
+    (add-hook 'racket-repl-mode-hook 'user--racket-repl-mode-hook)))
 
 
 (provide 'modes/racket)

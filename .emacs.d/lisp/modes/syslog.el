@@ -11,17 +11,12 @@
   (local-set-key (kbd "f") 'syslog-filter-lines)
   (local-set-key (kbd "F") 'hide-lines-show-all))
 
-
-(defun user--syslog-mode-config ()
-  "Initialize syslog-mode."
-  ;; Register auto mode for log files.
+(use-package syslog-mode
+  :defer t
+  :init
   (add-auto-mode 'syslog-mode "/var/log.*$" "\\.log$")
 
   (add-hook 'syslog-mode-hook 'user--syslog-mode-hook))
-
-(use-package syslog-mode
-  :defer t
-  :config (user--syslog-mode-config))
 
 
 (provide 'modes/syslog)

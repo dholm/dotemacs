@@ -6,16 +6,12 @@
   "AsciiDoc mode hook."
   (user--text-mode-hook))
 
-
-(defun user--adoc-mode-config ()
-  "Initialize AsciiDoc mode."
+(use-package adoc-mode
+  :defer t
+  :init
   (add-hook 'adoc-mode-hook 'user--adoc-mode-hook)
 
   (add-auto-mode 'adoc-mode "\\.adoc$" "\\.asciidoc$"))
-
-(use-package adoc-mode
-  :defer t
-  :config (user--adoc-mode-config))
 
 
 (provide 'modes/asciidoc)

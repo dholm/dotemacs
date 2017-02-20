@@ -2,19 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--gnuplot-mode-hook ()
-  "Hook for gnuplot mode.")
-
-
-(defun user--gnuplot-mode-config ()
-  "Initialize gnuplot mode."
-  (add-hook 'gnuplot-mode-hook 'user--gnuplot-mode-hook)
-  (add-auto-mode 'gnuplot-mode "\\.gp$"))
-
 (with-executable 'gnuplot
   (use-package gnuplot-mode
     :defer t
-    :config (user--gnuplot-mode-config)))
+    :init
+    (add-auto-mode 'gnuplot-mode "\\.gp$")))
 
 
 (provide 'modes/gnuplot)

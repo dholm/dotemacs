@@ -44,10 +44,14 @@
 
   (turn-on-ghci-completion))
 
-
-(defun user--haskell-mode-config ()
-  "Initialize Haskell mode."
-  (after-load 'smartparens
+(with-executable 'ghc
+  (use-package haskell-mode
+    :defer t
+    :init
+    (add-hook 'haskell-mode-hook 'user--haskell-mode-hook)
+    (add-hook 'inferior-haskell-mode-hook 'user--inferior-haskell-mode-hook)
+    :config
+    (after-load 'smartparens
     (defun user/haskell-after-symbol-p (_id action _context)
       (when (eq action 'insert)
         (save-excursion
@@ -58,44 +62,28 @@
       (sp-local-pair "'" nil :unless '(user/haskell-after-symbol-p))
       (sp-local-pair "\\(" nil :actions nil)))
 
-  ;;; (Packages) ;;;
-  (use-package haskell-mode
-    :defer t)
-  (use-package ghci-completion
-    :defer t)
-  (use-package hi2
-    :defer t)
-  (use-package flycheck-hdevtools
-    :defer t)
-  (use-package flycheck-haskell
-    :defer t)
-  (use-package structured-haskell-mode
-    :defer t
-    :requires haskell-mode
-    :quelpa (structured-haskell-mode
-             :fetcher github
-             :repo "chrisdone/structured-haskell-mode"
-             :files ("elisp/*.el")))
-  (use-package ghc-mod
-    :defer t
-    :quelpa (ghc-mod
-             :fetcher github
-             :repo "kazu-yamamoto/ghc-mod"
-             :files ("elisp/*.el")))
-  (use-package ac-ghc-mod
-    :defer t
-    :requires auto-complete
-    :quelpa (ac-ghc-mod
-             :fetcher github
-             :repo "Pitometsu/ac-ghc-mod"))
-  (use-package company-ghc
-    :defer t)
-
-  (add-hook 'haskell-mode-hook 'user--haskell-mode-hook)
-  (add-hook 'inferior-haskell-mode-hook 'user--inferior-haskell-mode-hook))
-
-(with-executable 'ghc
-  (user--haskell-mode-config))
+    ;;; (Packages) ;;;
+    (use-package ghci-completion)
+    (use-package hi2)
+    (use-package flycheck-hdevtools)
+    (use-package flycheck-haskell)
+    (use-package structured-haskell-mode
+      :requires haskell-mode
+      :quelpa (structured-haskell-mode
+               :fetcher github
+               :repo "chrisdone/structured-haskell-mode"
+               :files ("elisp/*.el")))
+    (use-package ghc-mod
+      :quelpa (ghc-mod
+               :fetcher github
+               :repo "kazu-yamamoto/ghc-mod"
+               :files ("elisp/*.el")))
+    (use-package ac-ghc-mod
+      :requires auto-complete
+      :quelpa (ac-ghc-mod
+               :fetcher github
+               :repo "Pitometsu/ac-ghc-mod"))
+    (use-package company-ghc)))
 
 
 (provide 'modes/haskell)

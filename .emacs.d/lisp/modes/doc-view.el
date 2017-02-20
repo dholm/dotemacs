@@ -13,9 +13,11 @@
   (user/bind-key-local :nav :go-forward 'doc-view-scroll-up-or-next-page)
   (user/bind-key-local :nav :go-back 'doc-view-scroll-down-or-previous-page))
 
-
-(defun user--doc-view-config ()
-  "Initialize document viewer."
+(use-package doc-view
+  :defer t
+  :init
+  (add-hook 'doc-view-mode-hook 'user--doc-view-mode-hook)
+  :config
   (validate-setq
    ;; Render documents in high resolution.
    doc-view-resolution 300)
@@ -46,13 +48,6 @@
     ;; Register doc-view-mode for patterns.
     (mapc (lambda (pattern)
             (add-auto-mode 'doc-view-mode-maybe pattern)) patterns))
-
-  (add-hook 'doc-view-mode-hook 'user--doc-view-mode-hook))
-
-(use-package doc-view
-  :defer t
-  :config
-  (user--doc-view-config)
 
   (use-package doc-present
     :quelpa (doc-present

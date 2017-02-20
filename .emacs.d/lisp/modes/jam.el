@@ -7,20 +7,15 @@
   ;; Use spaces for indent
   (setq indent-tabs-mode nil))
 
-
-(defun user--jam-mode-config ()
-  "Initialize Jam mode."
-  (validate-setq
-   ;; Default indent width.
-   jam-indent-size 4)
-
-  (add-hook 'jam-mode-hook 'user--jam-mode-hook)
-
-  (add-auto-mode 'jam-mode "\\.jam$" "Jamfile.*"))
-
 (use-package jam-mode
   :defer t
-  :config (user--jam-mode-config))
+  :init
+  (add-hook 'jam-mode-hook 'user--jam-mode-hook)
+  (add-auto-mode 'jam-mode "\\.jam$" "Jamfile.*")
+  :config
+  (validate-setq
+   ;; Default indent width.
+   jam-indent-size 4))
 
 
 (provide 'modes/jam)

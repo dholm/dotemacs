@@ -77,6 +77,12 @@
           (executable-find "latex"))
   (use-package tex-mode
     :defer t
+    :init
+    (add-hook 'tex-mode-hook 'user--tex-mode-hook)
+    (add-hook 'TeX-mode-hook 'user--tex-mode-hook)
+    (add-hook 'latex-mode-hook 'user--latex-mode-hook)
+    (add-hook 'LaTeX-mode-hook 'user--latex-mode-hook)
+    (add-hook 'bibtex-mode-hook 'user--bibtex-mode-hook)
     :config
     (after-load 'mode-compile
       (setq mode-compile-modes-alist
@@ -91,13 +97,6 @@
                      (sp-local-pair "\\{" " \\}")
                      (sp-local-pair "\\left(" " \\right)")
                      (sp-local-pair "\\left\\{" " \\right\\}")))
-
-    ;; Set up hooks.
-    (add-hook 'tex-mode-hook 'user--tex-mode-hook)
-    (add-hook 'TeX-mode-hook 'user--tex-mode-hook)
-    (add-hook 'latex-mode-hook 'user--latex-mode-hook)
-    (add-hook 'LaTeX-mode-hook 'user--latex-mode-hook)
-    (add-hook 'bibtex-mode-hook 'user--bibtex-mode-hook)
 
     ;;; (Packages) ;;;
     (use-package bibtex

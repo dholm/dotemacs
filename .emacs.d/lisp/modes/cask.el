@@ -8,19 +8,12 @@
     (rainbow-delimiters-mode t))
 
   (with-feature 'paredit
-    (enable-paredit-mode)
-    (after-load 'diminish
-      (diminish 'paredit-mode))))
-
-
-(defun user--cask-mode-config ()
-  "Initialize Cask mode."
-  ;;; (Hooks) ;;;
-  (add-hook 'cask-mode-hook 'user--cask-mode-hook))
+    (enable-paredit-mode)))
 
 (use-package cask-mode
   :defer t
-  :config (user--cask-mode-config))
+  :init
+  (add-hook 'cask-mode-hook 'user--cask-mode-hook))
 
 
 (provide 'modes/cask)

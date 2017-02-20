@@ -30,22 +30,16 @@
    explicit-bash-args '("-c" "export EMACS=; stty echo; bash")
    comint-process-echoes t))
 
-
-(defun user--shell-mode-config ()
-  "Initialize shell modes."
-
-  ;;; (Packages) ;;;
-  (use-package bash-completion
-    :defer t)
-  (use-package shelldoc
-    :defer t)
-  (use-package shell-command
-    :defer t)
-
+(use-package shell
+  :defer t
+  :init
   (add-hook 'sh-mode-hook 'user--sh-mode-hook)
-  (add-hook 'shell-mode-hook 'user--shell-mode-hook))
-
-(user--shell-mode-config)
+  (add-hook 'shell-mode-hook 'user--shell-mode-hook)
+  :config
+  ;;; (Packages) ;;;
+  (use-package bash-completion)
+  (use-package shelldoc)
+  (use-package shell-command))
 
 
 (provide 'modes/shell)

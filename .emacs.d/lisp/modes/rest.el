@@ -34,7 +34,7 @@
   :quelpa (rst
            :fetcher svn
            :url "http://svn.code.sf.net/p/docutils/code/trunk/docutils/tools/editors/emacs")
-  :config
+  :init
   ;; Register auto modes.
   (add-auto-mode 'rst-mode "\\.rst$" "\\.rest$")
 
@@ -42,10 +42,9 @@
   (add-hook 'rst-adjust-hook 'rst-toc-update)
 
   ;; Register mode hook.
-  (add-hook 'rst-mode-hook 'user--rst-mode-hook))
-
-(use-package auto-complete-rst
-  :defer t)
+  (add-hook 'rst-mode-hook 'user--rst-mode-hook)
+  :config
+  (use-package auto-complete-rst))
 
 
 (provide 'modes/rest)

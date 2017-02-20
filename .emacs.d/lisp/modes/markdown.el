@@ -12,9 +12,11 @@
   (with-feature 'guide-key
     (guide-key/add-local-highlight-command-regexp "markdown-")))
 
-
-(defun user--markdown-mode-config ()
-  "Initialize markdown mode."
+(use-package markdown-mode
+  :defer t
+  :init
+  (add-hook 'markdown-mode-hook 'user--markdown-mode-hook)
+  :config
   (after-load 'smartparens
     (defun sp--gfm-skip-asterisk (ms mb me)
       (save-excursion
@@ -28,14 +30,12 @@
       (sp-local-tag "s" "```scheme" "```")
       (sp-local-tag "<"  "<_>" "</_>" :transform 'sp-match-sgml-tags)))
 
-  ;;; (Hooks) ;;;
-  (add-hook 'markdown-mode-hook 'user--markdown-mode-hook))
-
-(use-package markdown-mode
-  :defer t
-  :config (user--markdown-mode-config))
-(with-executable 'npm
-  (require-package '(:name livedown)))
+  (with-executable 'npm
+    (use-package livedown
+      :quelpa (livedown
+               :fetcher github
+               :repo "shime/emacs-livedown"))
+    (require 'livedown)))
 
 
 (provide 'modes/markdown)

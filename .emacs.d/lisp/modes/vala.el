@@ -7,15 +7,11 @@
   ;; Bring in CEDET.
   (user--cedet-hook))
 
-
-(defun user--vala-mode-config ()
-  "Initialize Vala mode."
-  (add-hook 'vala-mode-hook 'user--vala-mode-hook))
-
 (with-executable 'valac
   (use-package vala-mode
     :defer t
-    :config (user--vala-mode-config)))
+    :init
+    (add-hook 'vala-mode-hook 'user--vala-mode-hook)))
 
 
 (provide 'modes/vala)

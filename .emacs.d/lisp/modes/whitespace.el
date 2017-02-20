@@ -45,8 +45,12 @@
            (if (member 'auto-cleanup whitespace-action) "enabled" "disabled"))))
 
 
-(defun user--whitespace-config ()
-  "Initialize whitespace mode."
+(use-package whitespace
+  :ensure t
+  :diminish whitespace-mode
+  :init
+  (add-hook 'whitespace-mode-hook 'user--whitespace-mode-hook)
+  :config
   (validate-setq
    ;; Maximum allowed line length.
    whitespace-line-column 120
@@ -81,22 +85,12 @@
        ;; 9 TAB, 9655 WHITE RIGHT-POINTING TRIANGLE 「▷」, 92 9 CHARACTER TABULATION 「\t」
        (tab-mark ?\t [9655 9] [92 9]))))
 
-  (after-load 'whitespace
-    (after-load 'diminish
-      (diminish 'whitespace-mode))
-
-    (defadvice whitespace-cleanup (around whitespace-cleanup-indent-tab
-                                          activate)
-      "Fix whitespace-cleanup indent-tabs-mode bug."
-      (let ((whitespace-indent-tabs-mode indent-tabs-mode)
-            (whitespace-tab-width tab-width))
-        ad-do-it)))
-
-  (add-hook 'whitespace-mode-hook 'user--whitespace-mode-hook))
-
-(use-package whitespace
-  :ensure t
-  :config (user--whitespace-config))
+  (defadvice whitespace-cleanup (around whitespace-cleanup-indent-tab
+                                        activate)
+    "Fix whitespace-cleanup indent-tabs-mode bug."
+    (let ((whitespace-indent-tabs-mode indent-tabs-mode)
+          (whitespace-tab-width tab-width))
+      ad-do-it)))
 
 
 (provide 'modes/whitespace)

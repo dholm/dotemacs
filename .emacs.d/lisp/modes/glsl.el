@@ -2,17 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--glsl-mode-hook ()
-  "GLSL mode hook.")
-
-
-(defun user--glsl-mode-config ()
-  "Initialize GLSL mode."
-  (add-hook 'glsl-mode-hook 'user--glsl-mode-hook))
-
 (use-package glsl-mode
-  :defer t
-  :config (user--glsl-mode-config))
+  :defer t)
 
 
 (provide 'modes/glsl)

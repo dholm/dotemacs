@@ -6,24 +6,17 @@
   "PDF view mode hook."
   (user/bind-key-local :nav :goto-line 'pdf-view-goto-page))
 
-
-(defun user--pdf-tools-config ()
-  "Initialize PDF tools."
-  (validate-setq
-   ;; Fit page to view by default.
-   pdf-view-display-size 'fit-page)
-
-  ;; Register auto modes.
-  (add-auto-mode 'pdf-view-mode "\\.pdf$")
-
-  ;;; (Hooks) ;;;
-  (add-hook 'pdf-view-mode-hook 'user--pdf-view-mode-hook))
-
 (when (and (display-graphic-p)
            (pkg-config-has-p "poppler-glib"))
   (use-package pdf-tools
     :defer t
-    :config (user--pdf-tools-config)))
+    :init
+    (add-auto-mode 'pdf-view-mode "\\.pdf$")
+    (add-hook 'pdf-view-mode-hook 'user--pdf-view-mode-hook)
+    :config
+    (validate-setq
+     ;; Fit page to view by default.
+     pdf-view-display-size 'fit-page)))
 
 
 (provide 'modes/pdf)

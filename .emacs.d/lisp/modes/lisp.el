@@ -16,18 +16,12 @@
     (rainbow-delimiters-mode t))
 
   (with-feature 'paredit
-    (enable-paredit-mode)
-    (after-load 'diminish
-      (diminish 'paredit-mode)))
+    (enable-paredit-mode))
 
   (with-feature 'redshank
-    (redshank-mode t)
-    (after-load 'diminish
-      (diminish 'redshank-mode)))
+    (redshank-mode t))
 
   (turn-on-eldoc-mode)
-  (after-load 'diminish
-    (diminish 'eldoc-mode))
 
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :eval-buffer 'eval-buffer)
@@ -46,52 +40,36 @@
   (when (feature-p 'ac-slime)
     (set-up-slime-ac)))
 
-
-(defun user--slime-config ()
-  "Initialize SLIME."
-  (validate-setq
-   slime-protocol-version 'ignore
-   slime-net-coding-system 'utf-8-unix
-   slime-complete-symbol*-fancy t)
-
-  (validate-setq inferior-lisp-program
-                (cond
-                 ((executable-find "sbcl") "sbcl")
-                 ((executable-find "lisp") "lisp")
-                 ((executable-find "clisp") "clisp -K full")
-                 (t inferior-lisp-program)))
-
-  (add-ac-modes 'slime-repl-mode)
-
-  (slime-setup '(slime-repl))
-
-  (add-hook 'slime-mode-hook 'user--slime-mode-hook)
-  (add-hook 'slime-repl-mode-hook 'user--slime-mode-hook))
-
-
-(defun user--lisp-mode-config ()
-  "Initialize Lisp modes."
-  ;;; (Hooks) ;;;
+(use-package lisp-mode
+  :defer t
+  :init
   (add-hook 'lisp-mode-hook 'user--lisp-mode-hook)
+  :config
+  (use-package slime
+    :ensure t
+    :init
+    (add-ac-modes 'slime-repl-mode)
+    (add-hook 'slime-mode-hook 'user--slime-mode-hook)
+    (add-hook 'slime-repl-mode-hook 'user--slime-mode-hook))
+    :config
+    (validate-setq
+     slime-protocol-version 'ignore
+     slime-net-coding-system 'utf-8-unix
+     ;; Set the preferred available inferior lisp program.
+     inferior-lisp-program
+     (cond
+      ((executable-find "sbcl") "sbcl")
+      ((executable-find "lisp") "lisp")
+      ((executable-find "clisp") "clisp -K full")
+      (t inferior-lisp-program)))
 
-  ;;; (Packages) ;;;
-  (use-package rainbow-delimiters
-    :ensure t)
-  (use-package paredit
-    :ensure t)
-  (use-package redshank
-    :ensure t)
+    (with-feature 'slime-c-p-c
+      (validate-setq
+       slime-complete-symbol*-fancy t))
 
-  (when (or (executable-find "sbcl")
-            (executable-find "lisp")
-            (executable-find "clisp"))
-    (use-package slime
-      :defer t
-      :config (user--slime-config))
-    (use-package ac-slime
-      :defer t)))
+    (slime-setup '(slime-repl))
 
-(user--lisp-mode-config)
+    (use-package ac-slime))
 
 
 (provide 'modes/lisp)

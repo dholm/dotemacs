@@ -9,18 +9,13 @@
 
   (eldoc-mode t))
 
-
-(defun user--octave-config ()
-  "Initialize Emacs Octave support."
+(use-package octave
+  :defer t
+  :init
   (add-auto-mode 'octave-mode "\\.m$")
   (add-hook 'octave-mode-hook 'user--octave-mode-hook)
-
-  ;;; (Packages) ;;;
-  (use-package ac-octave
-    :defer t))
-
-(with-executable 'octave
-  (user--octave-config))
+  :config
+  (use-package ac-octave))
 
 
 (provide 'modes/octave)

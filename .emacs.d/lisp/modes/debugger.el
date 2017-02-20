@@ -6,13 +6,10 @@
   "Debugger mode hook."
   (hl-line-mode t))
 
-
-(defun user--debugger-config ()
-  "Initialize debugger mode."
+(use-package debug
+  :defer t
+  :init
   (add-hook 'debugger-mode-hook 'user--debugger-mode-hook))
-
-(after-load 'debug
-  (user--debugger-config))
 
 
 (provide 'modes/debugger)

@@ -57,76 +57,63 @@
   (if (and transient-mark-mode mark-active)
       (call-interactively 'ess-eval-line-and-step)))
 
-
-(defun user--ac-R-config ()
-  "Initialize R auto completion."
-  (autoload 'ess-ac-init "ac-R"))
-
-
-(defun user--ess-config ()
-  "Initialize Emacs Speaks Statistics."
-  (validate-setq
-   ;; The default ESS dialect is R.
-   ess-dialect "R"
-   ;; Use ElDoc in all ESS modes.
-   ess-use-eldoc t
-   ess-eldoc-show-on-symbol t
-   ;; Optimize by only printing results, not code.
-   ess-eval-visibly-p nil
-   ;; Automatically scroll when output reaches bottom of buffer.
-   ess-comint-scroll-to-bottom-on-output t
-   ;; Start R in the current directory.
-   ess-ask-for-ess-directory nil
-   ess-local-process-name "R"
-   ;; Enable ElDoc support.
-   ess-use-eldoc t)
-
-  (cond
-   ((user/auto-complete-p)
-    (validate-setq
-     ;; Use auto completion in ESS modes.
-     ess-use-auto-complete t))
-   ((user/company-mode-p)
-    (validate-setq
-     ;; Use company mode completion in ESS modes.
-     ess-use-company t)))
-
-  ;; Register mode hooks.
-  (add-hook 'ess-mode-hook 'user--ess-mode-hook)
-  (add-hook 'inferior-ess-mode-hook 'user--inferior-ess-mode-hook)
-  (add-hook 'R-mode-hook 'user--R-mode-hook)
-  (add-hook 'ess-R-post-run-hook 'user--ess-R-post-run-hook)
-
-  ;; Register auto modes.
-  (if (feature-p 'polymode)
-      (progn
-        (add-auto-mode 'poly-noweb+r-mode "\\.Snw$" "\\.Rnw")
-        (add-auto-mode 'poly-markdown+r-mode "\\.Rmd")
-        (add-auto-mode 'poly-rapport-mode "\\.rapport")
-        (add-auto-mode 'poly-html+r-mode "\\.Rhtml")
-        (add-auto-mode 'poly-brew+r-mode "\\.Rbrew")
-        (add-auto-mode 'poly-r+c++-mode "\\.Rcpp")
-        (add-auto-mode 'poly-c++r-mode "\\.cppR"))
-    (progn
-      (add-auto-mode 'R-mode "\\.R$")
-      (add-auto-mode 'Rd-mode "\\.Rd$")
-      (add-auto-mode 'Rnw-mode "\\.Rnw$")))
-
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :apps :statistics 'R))
-
 (with-executable 'R
   (use-package ess
     :defer t
     :bind (:map ess-mode-map
            ;; Workaround issue with ess yank.
            ([remap yank] . yank))
-    :config (user--ess-config))
-  (use-package ess-smart-underscore
-    :defer t)
-  (use-package ac-R
-    :defer t
-    :config (user--ac-R-config)))
+    :init
+    (add-hook 'ess-mode-hook 'user--ess-mode-hook)
+    (add-hook 'inferior-ess-mode-hook 'user--inferior-ess-mode-hook)
+    (add-hook 'R-mode-hook 'user--R-mode-hook)
+    (add-hook 'ess-R-post-run-hook 'user--ess-R-post-run-hook)
+    (if (feature-p 'polymode)
+        (progn
+          (add-auto-mode 'poly-noweb+r-mode "\\.Snw$" "\\.Rnw")
+          (add-auto-mode 'poly-markdown+r-mode "\\.Rmd")
+          (add-auto-mode 'poly-rapport-mode "\\.rapport")
+          (add-auto-mode 'poly-html+r-mode "\\.Rhtml")
+          (add-auto-mode 'poly-brew+r-mode "\\.Rbrew")
+          (add-auto-mode 'poly-r+c++-mode "\\.Rcpp")
+          (add-auto-mode 'poly-c++r-mode "\\.cppR"))
+      (progn
+        (add-auto-mode 'R-mode "\\.R$")
+        (add-auto-mode 'Rd-mode "\\.Rd$")
+        (add-auto-mode 'Rnw-mode "\\.Rnw$")))
+
+    (user/bind-key-global :apps :statistics 'R)
+    :config
+    (validate-setq
+     ;; The default ESS dialect is R.
+     ess-dialect "R"
+     ;; Use ElDoc in all ESS modes.
+     ess-use-eldoc t
+     ess-eldoc-show-on-symbol t
+     ;; Optimize by only printing results, not code.
+     ess-eval-visibly-p nil
+     ;; Automatically scroll when output reaches bottom of buffer.
+     ess-comint-scroll-to-bottom-on-output t
+     ;; Start R in the current directory.
+     ess-ask-for-ess-directory nil
+     ess-local-process-name "R"
+     ;; Enable ElDoc support.
+     ess-use-eldoc t)
+
+    (cond
+     ((user/auto-complete-p)
+      (validate-setq
+       ;; Use auto completion in ESS modes.
+       ess-use-auto-complete t))
+     ((user/company-mode-p)
+      (validate-setq
+       ;; Use company mode completion in ESS modes.
+       ess-use-company t)))
+
+    (use-package ess-smart-underscore)
+    (use-package ac-R
+      :init
+      (autoload 'ess-ac-init "ac-R"))))
 
 
 (provide 'modes/r)

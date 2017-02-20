@@ -37,29 +37,24 @@
     (alchemist-mode t)))
 
 
-(defun user--erlang-mode-config ()
-  "Initialize Erlang mode."
-  ;;; (Hooks) ;;;
-  (add-hook 'erlang-mode-hook 'user--erlang-mode-hook)
-  (add-hook 'elixir-mode-hook 'user--elixir-mode-hook)
-
-  (after-load 'erlang-mode
-    (with-feature 'edts
-      (require 'edts-start))
-
-    (with-feature 'distel
-      (distel-setup))))
-
 (with-executable 'erl
   (use-package erlang
     :defer t
-    :after (user--erlang-mode-config))
-  (use-package edts
-    :defer t)
+    :init
+    (add-hook 'erlang-mode-hook 'user--erlang-mode-hook)
+    (add-hook 'elixir-mode-hook 'user--elixir-mode-hook)
+    :config
+    (use-package edts)
+    (require 'edts-start)
+
+    (with-feature 'distel
+      (distel-setup))
+
+    (use-package alchemist))
+
   (require-package '(:name distel))
-  (require-package '(:name wrangler))
-  (use-package alchemist
-    :defer t))
+  (require-package '(:name wrangler)))
+
 
 (provide 'modes/erlang)
 ;;; erlang.el ends here

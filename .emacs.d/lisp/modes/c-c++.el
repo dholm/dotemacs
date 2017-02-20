@@ -101,9 +101,7 @@
       (user/bind-key-local :nav :switch-spec-impl 'eassist-switch-h-cpp)))
 
   (with-feature 'function-args
-    (function-args-mode t)
-    (after-load 'diminish
-      (diminish 'function-args-mode))))
+    (function-args-mode t)))
 
 
 (defun user--irony-mode-hook ()
@@ -181,6 +179,11 @@
 
 (use-package cc-mode
   :defer t
+  :init
+  (add-hook 'c-mode-common-hook 'user--c-mode-common-hook)
+  (add-hook 'c-mode-hook 'user--c-mode-hook)
+  ;; Detect if inside a C++ header file.
+  (add-magic-mode 'c++-mode 'user/c++-header-file-p)
   :config
   (add-many-to-list
    'c-default-style
@@ -228,29 +231,23 @@
         :bind (:map irony-mode-map
                     ([remap completion-at-point] . irony-completion-at-point-async)
                     ([remap complete-symbol] . irony-completion-at-point-async))
+        :diminish irony-mode
+        :init
+        (add-hook 'irony-mode-hook 'user--irony-mode-hook)
         :config
         (validate-setq
          ;; Install irony server in user's local path.
          irony-user-dir *user-local-directory*)
 
         (when (user/auto-complete-p)
-          (irony-enable 'ac))
-
-      ;;; (Hooks) ;;;
-      (add-hook 'irony-mode-hook 'user--irony-mode-hook))
+          (irony-enable 'ac)))
     (use-package irony-eldoc)
     (use-package flycheck-irony)))
 
   (use-package function-args
-    :ensure t)
-
-  (use-package google-c-style)
-
-  ;;; (Hooks) ;;;
-  (add-hook 'c-mode-common-hook 'user--c-mode-common-hook)
-  (add-hook 'c-mode-hook 'user--c-mode-hook)
-  ;; Detect if inside a C++ header file.
-  (add-magic-mode 'c++-mode 'user/c++-header-file-p))
+    :ensure t
+    :diminish function-args-mode)
+  (use-package google-c-style))
 
 (with-executable 'cflow
   (require-package '(:name cflow :after (user--cflow-config))))

@@ -30,16 +30,14 @@
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :fill-paragraph 'fill-paragraph))
 
-
-(defun user--text-mode-config ()
-  "Initialize generic text editing mode."
+(use-package text-mode
+  :defer t
+  :init
+  (add-hook 'text-mode-hook 'user--text-mode-hook)
+  :config
   (after-load 'smartparens
     (sp-with-modes '(text-mode)
-      (sp-local-pair "`" "'" :actions '(insert wrap))))
-
-  (add-hook 'text-mode-hook 'user--text-mode-hook))
-
-(user--text-mode-config)
+      (sp-local-pair "`" "'" :actions '(insert wrap)))))
 
 
 (provide 'modes/text)

@@ -21,21 +21,26 @@
   ;; Ensure C-x # is used to save and close message.
   (local-set-key (kbd "C-x #") 'user/server-save))
 
-
 (defun user--message-send-hook ()
   "Hook run when sending a message."
   ;; Normalize all footnotes in message.
   (org-footnote-normalize))
-
 
 (defun user--message-setup-hook ()
   "Outgoing message setup hook."
   ;; Load Emacs directory client.
   (eudc-load-eudc))
 
+(use-package message
+  :defer t
+  :init
+  (add-hook 'message-mode-hook 'user--message-mode-hook)
+  (add-hook 'message-setup-hook 'user--message-setup-hook)
+  (add-hook 'message-send-hook 'user--message-send-hook)
 
-(defun user--message-mode-config ()
-  "Initialize message mode."
+  ;; Register auto mode.
+  (add-auto-mode 'message-mode "\\.eml$")
+  :config
   (validate-setq
    ;; Kill buffer after message is sent.
    message-kill-buffer-on-exit t
@@ -45,19 +50,7 @@
    ;; Ask for confirmation before sending.
    message-confirm-send t
    ;; Generate headers before editing message.
-   message-generate-headers-first t)
-
-  ;; Hooks
-  (add-hook 'message-mode-hook 'user--message-mode-hook)
-  (add-hook 'message-setup-hook 'user--message-setup-hook)
-  (add-hook 'message-send-hook 'user--message-send-hook)
-
-  ;; Register auto mode.
-  (add-auto-mode 'message-mode "\\.eml$"))
-
-(use-package message
-  :defer t
-  :config (user--message-mode-config))
+   message-generate-headers-first t))
 
 
 (provide 'modes/message)

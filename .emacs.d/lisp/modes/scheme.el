@@ -44,41 +44,24 @@
   (with-feature 'ac-geiser
     (ac-geiser-setup)))
 
-
-(defun user--geiser-config ()
-  "Initialize Geiser."
-  (when (feature-p 'ac-geiser)
-    (after-load 'geiser
-      (add-ac-modes 'geiser-repl-mode)))
-
-  ;;; (Hooks) ;;;
-  (add-hook 'geiser-mode-hook 'user--geiser-mode-hook)
-  (add-hook 'geiser-repl-mode-hook 'user--geiser-repl-mode-hook))
-
-
-(defun user--quack-config ()
-  "Initialize Quack."
-  (validate-setq
-   ;; Use Emacs-style fontification.
-   quack-fontify-style 'emacs))
-
-
-(defun user--scheme-mode-config ()
-  "Initialize Scheme mode."
-  ;;; (Hooks) ;;;
+(use-package scheme
+  :init
   (add-hook 'scheme-mode-hook 'user--scheme-mode-hook)
-
-  ;;; (Packages) ;;;
+  :config
   (use-package geiser
-    :defer t
-    :config (user--geiser-config))
+    :init
+    (add-hook 'geiser-mode-hook 'user--geiser-mode-hook)
+    (add-hook 'geiser-repl-mode-hook 'user--geiser-repl-mode-hook)
+    :config
+    (when (feature-p 'ac-geiser)
+      (after-load 'geiser
+        (add-ac-modes 'geiser-repl-mode))))
   (use-package quack
-    :defer t
-    :config (user--quack-config))
-  (use-package ac-geiser
-    :defer t))
-
-(user--scheme-mode-config)
+    :config
+    (validate-setq
+     ;; Use Emacs-style fontification.
+     quack-fontify-style 'emacs))
+  (use-package ac-geiser))
 
 
 (provide 'modes/scheme)

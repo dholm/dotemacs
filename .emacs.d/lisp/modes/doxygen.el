@@ -38,8 +38,6 @@
       (doxymacs-mode t))
     (with-feature 'doc-mode
       (doc-mode t)
-      (after-load 'diminish
-        (diminish 'doc-mode))
       ;; Disable buffer check from semantic idle scheduler since it tends to
       ;; hang Emacs for a long time.
       (remove-hook 'semantic-after-idle-scheduler-reparse-hooks
@@ -53,12 +51,16 @@
 
   ;;; (Packages) ;;;
   (when (pkg-config-has-p "libxml-2.0")
-    (require-package '(:name doxymacs)))
+    (require-package '(:name doxymacs
+                             :after (after-load 'doxymacs
+                                      (diminish 'doxymacs-mode)))))
+
   (use-package doc-mode
     :defer t
     :quelpa (doc-mode
              :fetcher github
-             :repo "nschum/doc-mode")))
+             :repo "nschum/doc-mode")
+    :diminish doc-mode))
 
 
 (provide 'utilities/doxygen)

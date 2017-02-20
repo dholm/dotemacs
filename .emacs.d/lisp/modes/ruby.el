@@ -34,28 +34,16 @@
   "Robe mode hook."
   (ac-robe-setup))
 
-
-(defun user--robe-config ()
-  "Initialize robe."
-  (add-hook 'robe-mode-hook 'user--robe-mode-hook))
-
-
-(defun user--ruby-mode-config ()
-  "Initialize Ruby mode."
-  (use-package ruby-mode
-    :defer t)
+(use-package ruby-mode
+  :defer t
+  :init
+  (add-hook 'ruby-mode-hook 'user--ruby-mode-hook)
+  :config
   (use-package robe
-    :defer t
-    :config (user--robe-config))
-  (use-package inf-ruby
-    :defer t)
-  (use-package yari
-    :defer t)
-
-  (add-hook 'ruby-mode-hook 'user--ruby-mode-hook))
-
-(with-executable 'ruby
-  (user--ruby-mode-config))
+    :init
+    (add-hook 'robe-mode-hook 'user--robe-mode-hook))
+  (use-package inf-ruby)
+  (use-package yari))
 
 
 (provide 'modes/ruby)

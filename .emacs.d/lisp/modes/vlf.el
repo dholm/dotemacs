@@ -2,20 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--vlf-mode-hook ()
-  "View large file mode hook.")
-
-
-(defun user--vlf-config ()
-  "Initialize view large file mode."
-  (add-hook 'vlf-mode-hook 'user--vlf-mode-hook)
-
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :basic :view-file 'vlf))
-
 (use-package vlf
   :defer t
-  :config (user--vlf-config))
+  :init
+  (user/bind-key-global :basic :view-file 'vlf))
 
 
 (provide 'modes/vlf)

@@ -2,10 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--sql-mode-hook ()
-  "SQL mode hook.")
-
-
 (defun user/sqli-buffer ()
   "Switch to the corresponding sqli buffer."
   (interactive)
@@ -18,12 +14,8 @@
       (when sql-buffer
         (user/sqli-buffer)))))
 
-
-(defun user--sql-config ()
-  "Initialize SQL mode."
-  (add-hook 'sql-mode-hook 'user--sql-mode-hook))
-
-(user--sql-config)
+(use-package sql
+  :defer t)
 
 
 (provide 'modes/sql)

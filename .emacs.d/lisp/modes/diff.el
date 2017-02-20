@@ -7,20 +7,16 @@
   ;; Highlight changes in detail.
   (diff-auto-refine-mode t))
 
-
-(defun user--diff-mode-config ()
-  "Initialize Diff mode."
+(use-package diff-mode
+  :defer t
+  :init
+  (add-auto-mode 'diff-mode "/patch$")
+  (add-hook 'diff-mode-hook 'user--diff-mode-hook)
+  :config
   (validate-setq
    ;; Open patches in read-only mode by default.
-   diff-default-read-only t)
-
-  ;; Diff modes.
-  (add-auto-mode 'diff-mode "/patch$")
-
-  (add-hook 'diff-mode-hook 'user--diff-mode-hook))
-
-(user--diff-mode-config)
+   diff-default-read-only t))
 
 
-(provide 'modes/csv)
+(provide 'modes/diff)
 ;;; diff.el ends here

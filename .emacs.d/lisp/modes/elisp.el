@@ -11,9 +11,7 @@
     (auto-compile-on-load-mode t))
 
   (with-feature 'elisp-slime-nav
-    (elisp-slime-nav-mode t)
-    (after-load 'diminish
-      (diminish 'elisp-slime-nav-mode)))
+    (elisp-slime-nav-mode t))
 
   (cond
    ((user/auto-complete-p)
@@ -72,52 +70,48 @@
                  :scroll-bar t
                  :margin t))))
 
-
-(defun user--eldoc-eval-config ()
-  "Initialize eldoc eval."
-  (eldoc-in-minibuffer-mode t))
-
-
-(defun user--ielm-config ()
-  "Initialize interactive elisp mode."
-  ;; Use auto-completion even in inferior elisp mode.
-  (add-ac-modes 'inferior-emacs-lisp-mode)
-
-  (add-hook 'ielm-mode-hook 'user--ielm-mode-hook))
-
-
-(defun user--elisp-mode-config ()
-  "Initialize Emacs Lisp modes."
-  (after-load 'ielm
-    (user--ielm-config))
-
-  ;;; (Hooks) ;;;
+(use-package elisp-mode
+  :after modes/lisp
+  :init
   (add-hook 'emacs-lisp-mode-hook 'user--emacs-lisp-mode-hook)
   (add-hook 'minibuffer-setup-hook 'user--minibuffer-setup-hook)
 
   (add-auto-mode 'emacs-lisp-mode "Carton$")
+  :config
+  (use-package ielm
+    :init
+    (add-hook 'ielm-mode-hook 'user--ielm-mode-hook)
+    :config
+    ;; Use auto-completion even in inferior elisp mode.
+    (add-ac-modes 'inferior-emacs-lisp-mode))
 
   ;;; (Packages) ;;;
-  (use-package macrostep
-    :defer t)
+  (use-package macrostep)
   (use-package elisp-slime-nav
-    :defer t)
-  (use-package auto-compile
-    :ensure t)
+    :diminish elisp-slime-nav-mode)
+  (use-package auto-compile)
   (use-package eldoc-eval
+    :config
+    (eldoc-in-minibuffer-mode t))
+  (use-package rainbow-delimiters
+    :ensure t)
+  (use-package paredit
     :ensure t
-    :config (user--eldoc-eval-config))
+    :diminish paredit-mode)
+  (use-package redshank
+    :ensure t
+    :diminish redshank-mode)
+  (use-package eldoc
+    :ensure nil
+    :diminish eldoc-mode)
   (use-package helm-elisp
     :ensure helm
     :bind (("C-c h a" . helm-apropos)
            ("C-c h l" . helm-locate-library))
     :config
-    (setq
+    (validate-setq
      helm-apropos-fuzzy-match t
      helm-lisp-fuzzy-completion t)))
-
-(after-load 'modes/lisp
-  (user--elisp-mode-config))
 
 
 (provide 'modes/elisp)

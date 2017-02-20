@@ -16,15 +16,16 @@
 (with-executable 'lua
   (use-package lua-mode
     :defer t
+    :init
+    (add-hook 'lua-mode-hook 'user--lua-mode-hook)
     :config
     (use-package lua-block
-      :require lua-mode
+      :requires lua-mode
       :quelpa (lua-block
                :fetcher wiki
                :files ("lua-block.el"))
       :init
-      (autoload 'lua-block-mode "lua-block" nil t))
-    (add-hook 'lua-mode-hook 'user--lua-mode-hook)))
+      (autoload 'lua-block-mode "lua-block" nil t))))
 
 
 (provide 'modes/lua)

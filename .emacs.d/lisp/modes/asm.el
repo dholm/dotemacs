@@ -37,24 +37,18 @@
   (set (make-local-variable 'comment-start) (string asm-comment-char)))
 
 
-(defun user--iasm-mode-config ()
-  "Initialize interactive assmelby mode."
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :code :library-list 'iasm-ldd)
-  (user/bind-key-global :code :disassemble 'iasm-disasm))
-
-
-(defun user--asm-mode-config ()
-  "Initialize assembly mode."
+(use-package asm-mode
+  :defer t
+  :init
   (add-hook 'asm-mode-hook 'user--asm-mode-hook)
   (add-auto-mode 'asm-mode "\\.[ia]65$")
-
+  :config
   ;;; (Packages) ;;;
   (use-package iasm-mode
-    :defer t
-    :config (user--iasm-mode-config)))
-
-(user--asm-mode-config)
+    :init
+    ;;; (Bindings) ;;;
+    (user/bind-key-local :code :library-list 'iasm-ldd)
+    (user/bind-key-local :code :disassemble 'iasm-disasm)))
 
 
 (provide 'modes/asm)

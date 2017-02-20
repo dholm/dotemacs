@@ -7,13 +7,11 @@
   (with-feature 'rusti
     (rusti-minor-mode t)))
 
-
 (with-executable 'rustc
   (use-package rust-mode
-    :config
-    ;;; (Hooks) ;;;
+    :init
     (add-hook 'rust-mode-hook 'user--rust-mode-hook)
-
+    :config
     ;;; (Packages) ;;;
     (use-package flycheck-rust)
     (use-package rusti

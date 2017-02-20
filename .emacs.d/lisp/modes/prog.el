@@ -21,15 +21,13 @@
                                           'comment-dwim-2 'comment-dwim)))
 
 
-(defun user--prog-mode-config ()
-  "Initialize generic programming mode."
+(use-package prog-mode
+  :init
   (add-hook 'prog-mode-hook 'user--prog-mode-hook)
-
+  :config
   ;;; (Packages) ;;;
   (use-package comment-dwim-2
     :ensure t))
-
-(user--prog-mode-config)
 
 
 (provide 'modes/prog)

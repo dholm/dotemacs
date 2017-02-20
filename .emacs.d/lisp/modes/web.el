@@ -44,8 +44,17 @@
                                    "{% block\\|{% csrf_token %}") nil t)))
 
 
-(defun user--web-mode-config ()
-  "Initialize web mode."
+(use-package web-mode
+  :defer t
+  :init
+  (when (feature-p 'polymode)
+    (add-auto-mode 'poly-javascript-erb-mode "\\.js\\.erb$")
+    (add-auto-mode 'poly-coffee-erb-mode "\\.coffee\\.erb$")
+    (add-auto-mode 'poly-html-erb-mode "\\.html\\.erb$"))
+
+  (add-auto-mode 'web-mode "\\.html?$" "\\.phtml$" "\\.php[3-5]?$")
+  (add-hook 'web-mode-hook 'user--web-mode-hook)
+  :config
   (validate-setq
    ;; Indent HTML automatically.
    web-mode-indent-style 2
@@ -60,53 +69,20 @@
    '(("django" . user/current-buffer-django-p)
      ("php" . "\\.php[3-5]?")))
 
-  (when (feature-p 'polymode)
-    (add-auto-mode 'poly-javascript-erb-mode "\\.js\\.erb$")
-    (add-auto-mode 'poly-coffee-erb-mode "\\.coffee\\.erb$")
-    (add-auto-mode 'poly-html-erb-mode "\\.html\\.erb$"))
-
-  (add-auto-mode 'web-mode "\\.html?$" "\\.phtml$" "\\.php[3-5]?$")
-
-  ;;; (Hooks) ;;;
-  (add-hook 'web-mode-hook 'user--web-mode-hook))
-
-
-(defun user--tern-config ()
-  "Initialize tern."
-  (add-hook 'tern-mode-hook 'user--tern-mode-hook))
-
-
-(defun user--ac-html-config ()
-  "Initialize ac-html."
-  (after-load 'web-mode
+  (with-executable 'npm
+    (use-package tern
+      :init
+      (add-hook 'tern-mode-hook 'user--tern-mode-hook))
+    (use-package company-tern))
+  (use-package ac-html
+    :config
     (add-to-list 'web-mode-ac-sources-alist
                  '("html" . (ac-source-html-attribute-value
                              ac-source-html-tag
-                             ac-source-html-attribute)))))
-
-
-(defun user--web-config ()
-  "Initialize web development."
-  (use-package web-mode
-    :defer t
-    :config (user--web-mode-config))
-  (with-executable 'npm
-    (use-package tern
-      :defer t
-      :config (user--tern-config))
-    (use-package company-tern
-      :defer t))
-  (use-package ac-html
-    :defer t
-    :config (user--ac-html-config))
-  (use-package company-web
-    :defer t)
-  (use-package skewer-mode
-    :defer t)
-  (use-package tidy
-    :defer t))
-
-(user--web-config)
+                             ac-source-html-attribute))))
+  (use-package company-web)
+  (use-package skewer-mode)
+  (use-package tidy))
 
 
 (provide 'modes/web)
