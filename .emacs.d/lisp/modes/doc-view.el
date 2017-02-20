@@ -55,13 +55,10 @@
              :repo "dengste/doc-present")
     :init
     (autoload 'doc-present "doc-present" nil t)
-    (autoload 'doc-present-mode "doc-present" nil t))
+    (autoload 'doc-present-mode "doc-present" nil t)))
 
-  (use-package doc-view-fit-page
-    :if window-system
-    :quelpa (doc-view-fit-page
-             :fetcher github
-             :repo "laysakura/doc-view-fit-to-page")))
+(when (display-graphic-p)
+  (require-package '(:name doc-view-fit-to-page)))
 
 
 (provide 'modes/doc-view)
