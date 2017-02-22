@@ -2,8 +2,18 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--tramp-config ()
-  "Initialize tramp."
+;; Override built-in TRAMP.
+(quelpa '(tramp
+          :fetcher git
+          :url "git://git.savannah.gnu.org/tramp.git"
+          :files ("lisp/*.el" "texi/*.texi")))
+
+(use-package tramp
+  :ensure t
+  :after dash
+  :init
+  (autoload 'tramp-check-proper-method-and-host "tramp.el")
+  :config
   (validate-setq
    ;; Auto save storage.
    tramp-auto-save-directory (path-join *user-auto-save-directory* "tramp")
@@ -15,34 +25,27 @@
    ;; SSH is properly configured to share connections.
    tramp-use-ssh-controlmaster-options nil
    ;; Skip looking for dir-local on remote system to speed up tramp.
-   enable-remote-dir-locals nil)
+   enable-remote-dir-locals nil
+   ;; Preserve PATH on remote host.
+   tramp-remote-path (delete 'tramp-default-remote-path tramp-remote-path))
 
-  ;; Load SSH configuration
-  (after-load 'tramp
-    (tramp-set-completion-function
-     "ssh" (mapcar
-            (lambda (x) (list 'tramp-parse-sconfig x))
-            (-remove
-             (lambda (x) (not (file-exists-p x)))
-             `(,(path-join "/" "etc" "ssh_config")
-               ,(path-join "/" "etc" "ssh" "ssh_config")
-               ,(path-join *user-home-directory* ".ssh" "config")))))
+  ;; Preserve PATH on remote host.
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
 
-    ;; Preserve PATH on remote host.
-    (setq tramp-remote-path (delete 'tramp-default-remote-path tramp-remote-path))
-    (add-to-list 'tramp-remote-path 'tramp-own-remote-path)))
+  (tramp-set-completion-function
+   "ssh" (mapcar
+          (lambda (x) (list 'tramp-parse-sconfig x))
+          (-remove
+           (lambda (x) (not (file-exists-p x)))
+           `(,(path-join "/" "etc" "ssh_config")
+             ,(path-join "/" "etc" "ssh" "ssh_config")
+             ,(path-join *user-home-directory* ".ssh" "config")))))
 
-(use-package tramp
-  :ensure t
-  :after dash
-  :config (user--tramp-config))
-
-(use-package tramp-cache
-  :after tramp
-  :config
-  (validate-setq
-   ;; Persistency files.
-   tramp-persistency-file-name (path-join *user-cache-directory* "tramp")))
+  (use-package tramp-cache
+    :config
+    (validate-setq
+     ;; Persistency files.
+     tramp-persistency-file-name (path-join *user-cache-directory* "tramp"))))
 
 
 (provide 'utilities/tramp)
