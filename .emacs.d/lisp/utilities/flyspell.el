@@ -15,9 +15,6 @@
       ;; Enables flyspell lazy mode for small buffers.
       (flyspell-lazy-mode t)))
 
-  (after-load 'diminish
-    (diminish 'flyspell-mode))
-
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :spellcheck-word 'ispell-word)
   (user/bind-key-local :code :spellcheck-add-word 'user/flyspell-add-word-to-dict))
@@ -49,68 +46,64 @@
           (flyspell-do-correct 'save nil word cursor-location start end opoint)))
     (ispell-pdict-save t)))
 
-
-(defun user--flyspell-lazy-config ()
-  "Initialize fly spell lazy."
-  (validate-setq
-   ;; Idle timeout before running spell check on region.
-   flyspell-lazy-idle-seconds 10
-   ;; Idle timeout before running spell check on entire buffer.
-   flyspell-lazy-window-idle-seconds 60))
-
-
-(defun user--rw-hunspell-config ()
-  "Initialize rw-hunspell."
-  (after-load 'ispell
-    (when ispell-really-hunspell
-      ;; Initialize `rw-hunspell` if Hunspell is in use.
-      (rw-hunspell-setup))))
-
-
-(defun user--flyspell-config ()
-  "Initialize fly spell."
-  (validate-setq
-   ;; Be silent when checking words.
-   flyspell-issue-message-flag nil)
-
-  (cond
-   (;; Disable Hunspell due to issues on some machines.
-    (and nil (executable-find "hunspell"))
-    (validate-setq
-     ispell-program-name "hunspell"
-     ispell-really-hunspell t
-     ispell-extra-args '("-a" "-i" "utf-8")))
-   ((executable-find "aspell")
-    (progn
-      (validate-setq
-       ispell-program-name "aspell"
-       ispell-really-aspell t
-       ;; Improve performance by reducing suggestions.
-       ispell-extra-args '("--sug-mode=ultra" "--dont-suggest"))
-      (when (boundp 'flyspell-list-command)
-        (validate-setq
-         flyspell-list-command "--list")))))
-
-  (add-hook 'flyspell-mode-hook 'user--flyspell-mode-hook)
-  (add-hook 'flyspell-prog-mode-hook 'user--flyspell-prog-mode-hook))
-
 (when (or (executable-find "ispell")
           (executable-find "aspell")
           (executable-find "hunspell"))
-  (require-package '(:name flyspell :after (user--flyspell-config)))
-  (when (feature-p 'flyspell)
+  (require-package '(:name flyspell))
+  (use-package flyspell
+    :ensure nil
+    :defer t
+    :diminish flyspell-mode
+    :init
+    (add-hook 'flyspell-mode-hook 'user--flyspell-mode-hook)
+    (add-hook 'flyspell-prog-mode-hook 'user--flyspell-prog-mode-hook)
+    :config
+    (validate-setq
+     ;; Be silent when checking words.
+     flyspell-issue-message-flag nil)
+
+    (cond
+     (;; Disable Hunspell due to issues on some machines.
+      (and nil (executable-find "hunspell"))
+      (validate-setq
+       ispell-program-name "hunspell"
+       ispell-really-hunspell t
+       ispell-extra-args '("-a" "-i" "utf-8")))
+     ((executable-find "aspell")
+      (progn
+        (validate-setq
+         ispell-program-name "aspell"
+         ispell-really-aspell t
+         ;; Improve performance by reducing suggestions.
+         ispell-extra-args '("--sug-mode=ultra" "--dont-suggest"))
+        (when (boundp 'flyspell-list-command)
+          (validate-setq
+           flyspell-list-command "--list")))))
+
     (use-package helm-flyspell
       :ensure t
-      :bind ("C-c c s" . helm-flyspell-correct)))
-  (use-package flyspell-lazy
-    :ensure t
-    :config (user--flyspell-lazy-config))
-  (use-package auto-dictionary
-    :ensure t)
-  (with-executable 'hunspell
-    (use-package rw-hunspell
+      :bind ("C-c c s" . helm-flyspell-correct))
+
+    (use-package flyspell-lazy
       :ensure t
-      :config (user--rw-hunspell-config))))
+      :config
+      (validate-setq
+       ;; Idle timeout before running spell check on region.
+       flyspell-lazy-idle-seconds 10
+       ;; Idle timeout before running spell check on entire buffer.
+       flyspell-lazy-window-idle-seconds 60))
+
+    (use-package auto-dictionary
+      :ensure t)
+
+    (with-executable 'hunspell
+      (use-package rw-hunspell
+        :ensure t
+        :config
+        (after-load 'ispell
+          (when ispell-really-hunspell
+            ;; Initialize `rw-hunspell` if Hunspell is in use.
+            (rw-hunspell-setup)))))))
 
 
 (provide 'utilities/flyspell)

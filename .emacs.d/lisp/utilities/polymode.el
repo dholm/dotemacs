@@ -2,12 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--polymode-config ()
-  "Initialize Polymode.")
-
 (use-package polymode
-  :defer t
-  :config (user--polymode-config))
+  :defer t)
 
 
 (provide 'utilities/polymode)

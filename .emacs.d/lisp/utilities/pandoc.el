@@ -7,14 +7,12 @@
   (pandoc-load-default-settings))
 
 
-(defun user--pandoc-mode-config ()
-  "Initialize Pandoc mode."
-  (add-hook 'pandoc-mode 'user--pandoc-mode-hook))
-
 (with-executable 'pandoc
   (use-package pandoc-mode
-    :defer t
-    :config (user--pandoc-mode-config)))
+    :defer
+    :diminish pandoc-mode
+    :init
+    (add-hook 'pandoc-mode 'user--pandoc-mode-hook)))
 
 
 (provide 'utilities/pandoc)

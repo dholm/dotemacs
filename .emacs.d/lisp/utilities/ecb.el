@@ -51,49 +51,41 @@
       (when (ecb-compile-window-live-p)
         (ecb-goto-window-compilation)))))
 
-
-(defun user--ecb-config ()
-  "Initialize Emacs code browser."
-  ;; ECB version checking code is very old so that it thinks that the latest
-  ;; CEDET/Emacs is not new enough when in fact it is years newer than the
-  ;; latest version that it is aware of.  So simply bypass the version check.
-  (validate-setq
-   ecb-version-check nil
-   ecb-tip-of-the-day nil)
-
-  (defadvice ecb-check-requirements (around no-version-check activate compile)
-    "AROUND NO-VERSION-CHECK ACTIVATE COMPILE"
-    (if (or (< emacs-major-version 23)
-           (and (= emacs-major-version 23)
-              (< emacs-minor-version 3)))
-        ad-do-it))
-
-  (validate-setq
-   ;; ECB layout.
-   ecb-layout-name "left6"
-   ecb-layout-window-sizes '(("left6"
-                              (ecb-directories-buffer-name 0.17 . 0.41)
-                              (ecb-sources-buffer-name 0.17 . 0.21)
-                              (ecb-methods-buffer-name 0.17 . 0.41)
-                              (ecb-history-buffer-name 0.17 . 0.35)))
-   ecb-show-sources-in-directories-buffer 'always
-   ecb-compile-window-height 12)
-
-  (when (display-graphic-p)
-    (after-load 'ecb-face
-      ;; Use a slightly smaller face for the ECB tree-buffers.
-      (set-face-attribute 'ecb-default-general-face nil :height 0.8)))
-
-  (add-hook 'ecb-activate-hook 'user--ecb-activate-hook)
-  (add-hook 'ecb-deactivate-hook 'user--ecb-deactivate-hook)
-
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :util :ecb-toggle 'user/ecb-toggle-active))
-
 (when (version<= emacs-version "24.4")
   (use-package ecb
     :defer t
-    :config (user--ecb-config)))
+    :init
+    (add-hook 'ecb-activate-hook 'user--ecb-activate-hook)
+    (add-hook 'ecb-deactivate-hook 'user--ecb-deactivate-hook)
+    (user/bind-key-global :util :ecb-toggle 'user/ecb-toggle-active)
+    :config
+    ;; ECB version checking code is very old so that it thinks that the latest
+    ;; CEDET/Emacs is not new enough when in fact it is years newer than the
+    ;; latest version that it is aware of.  So simply bypass the version check.
+    (validate-setq
+     ecb-version-check nil
+     ecb-tip-of-the-day nil
+     ;; ECB layout.
+     ecb-layout-name "left6"
+     ecb-layout-window-sizes '(("left6"
+                                (ecb-directories-buffer-name 0.17 . 0.41)
+                                (ecb-sources-buffer-name 0.17 . 0.21)
+                                (ecb-methods-buffer-name 0.17 . 0.41)
+                                (ecb-history-buffer-name 0.17 . 0.35)))
+     ecb-show-sources-in-directories-buffer 'always
+     ecb-compile-window-height 12)
+
+    (defadvice ecb-check-requirements (around no-version-check activate compile)
+      "AROUND NO-VERSION-CHECK ACTIVATE COMPILE"
+      (if (or (< emacs-major-version 23)
+              (and (= emacs-major-version 23)
+                   (< emacs-minor-version 3)))
+          ad-do-it))
+
+    (when (display-graphic-p)
+      (after-load 'ecb-face
+        ;; Use a slightly smaller face for the ECB tree-buffers.
+        (set-face-attribute 'ecb-default-general-face nil :height 0.8)))))
 
 
 (provide 'utilities/ecb)

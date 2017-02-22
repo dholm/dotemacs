@@ -55,26 +55,25 @@
         (remote (pop command-line-args-left)))
     (ediff local remote)))
 
-
-(defun user--ediff-config ()
-  "Initialize ediff."
+(use-package ediff
+  :defer t
+  :init
+  ;; Go to first difference on start.
+  (add-hook 'ediff-startup-hook 'user--ediff-startup-hook)
+  :config
   (validate-setq
-   ;; Don't create a separate frame for ediff.
-   ediff-window-setup-function 'ediff-setup-windows-plain
    ;; Ignore changes in whitespace.
    ediff-diff-options "-w"
    ediff-ignore-similar-regions t)
 
-  ;;; (Hooks) ;;;
-  ;; Go to first difference on start.
-  (add-hook 'ediff-startup-hook 'user--ediff-startup-hook))
+  (use-package ediff-wind
+    :ensure nil
+    :config
+    (validate-setq
+     ;; Don't create a separate frame for ediff.
+     ediff-window-setup-function 'ediff-setup-windows-plain))
 
-(use-package ediff
-  :defer t
-  :config (user--ediff-config))
-
-(use-package ztree
-  :after ediff)
+  (use-package ztree))
 
 
 (provide 'utilities/ediff)

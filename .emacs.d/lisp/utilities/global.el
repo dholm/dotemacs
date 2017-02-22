@@ -93,48 +93,33 @@
         (cedet-gnu-global-create/update-database project-root))))))
 
 
-(defun user--helm-gtags-config ()
-  "Initialize helm-gtags."
-  (validate-setq
-   ;; Don't care about case when searching tags.
-   helm-gtags-ignore-case t
-   ;; When navigating open buffers in r/w mode.
-   helm-gtags-read-only nil
-   ;; Use input at cursor.
-   helm-gtags-use-input-at-cursor t
-   ;; Pulse at point after jump.
-   helm-gtags-pulse-at-cursor t)
-
-  ;;; (Hooks) ;;;
-  (add-hook 'helm-gtags-mode-hook 'user--helm-gtags-mode-hook))
-
-
-(defun user--ggtags-config ()
-  "Initialize ggtags."
-  (validate-setq
-   ;; Never use global to highlight tags.
-   ggtags-highlight-tag nil)
-
-  ;;; (Hooks) ;;;
-  (add-hook 'ggtags-mode-hook 'user--ggtags-mode-hook))
-
-
-(defun user--global-config ()
-  "Initialize GNU Global support."
+(with-executable 'global
   (add-to-list
    ;; Don't invoke debugger if global can't find its tags.
    'debug-ignored-errors "global: GTAGS not found")
 
-  ;;; (Packages) ;;;
   (use-package helm-gtags
     :defer t
-    :config (user--helm-gtags-config))
+    :init
+    (add-hook 'helm-gtags-mode-hook 'user--helm-gtags-mode-hook)
+    :config
+    (validate-setq
+     ;; Don't care about case when searching tags.
+     helm-gtags-ignore-case t
+     ;; When navigating open buffers in r/w mode.
+     helm-gtags-read-only nil
+     ;; Use input at cursor.
+     helm-gtags-use-input-at-cursor t
+     ;; Pulse at point after jump.
+     helm-gtags-pulse-at-cursor t))
   (use-package ggtags
     :defer t
-    :config (user--ggtags-config)))
-
-(with-executable 'global
-  (user--global-config))
+    :init
+    (add-hook 'ggtags-mode-hook 'user--ggtags-mode-hook)
+    :config
+    (validate-setq
+     ;; Never use global to highlight tags.
+     ggtags-highlight-tag nil)))
 
 
 (provide 'utilities/global)

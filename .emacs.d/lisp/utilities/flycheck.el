@@ -43,43 +43,32 @@
         (setq flycheck-clang-blocks t)))))
 
 
-(defun user--flycheck-color-mode-line-config ()
-  "Initialize flycheck color mode."
-  (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
+(use-package flycheck
+  :ensure t
+  :init
+  (add-hook 'flycheck-mode-hook 'user--flycheck-mode-hook)
+  (add-hook 'ede-minor-mode-hook 'user/ede-flycheck-setup)
+  (add-hook 'ede-compdb-project-rescan-hook 'user/ede-flycheck-setup)
 
-
-(defun user--flycheck-config ()
-  "Initialize flycheck."
+  (global-flycheck-mode t)
+  :config
   (validate-setq
    ;; Wait five seconds before starting checker
    flycheck-idle-change-delay 5.0)
-
-  ;; Enable flycheck globally.
-  (global-flycheck-mode t)
 
   (after-load 'popwin
     ;; Use popwin for Flycheck error list.
     (push '(flycheck-error-list-mode :stick t) popwin:special-display-config))
 
-  (after-load 'flycheck
-    (when (display-graphic-p)
-      ;; Make sure flycheck-pos-tip is loaded.
-      (require 'flycheck-pos-tip nil t)))
-
-  ;;; (Hooks) ;;;
-  (add-hook 'flycheck-mode-hook 'user--flycheck-mode-hook)
-  (add-hook 'ede-minor-mode-hook 'user/ede-flycheck-setup)
-  (add-hook 'ede-compdb-project-rescan-hook 'user/ede-flycheck-setup)
+  (when (display-graphic-p)
+    ;; Make sure flycheck-pos-tip is loaded.
+    (require 'flycheck-pos-tip nil t))
 
   ;;; (Packages) ;;;
   (use-package flycheck-pos-tip
     :ensure t)
   (use-package helm-flycheck
     :ensure t))
-
-(use-package flycheck
-  :ensure t
-  :config (user--flycheck-config))
 
 
 (provide 'utilities/flycheck)

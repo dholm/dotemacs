@@ -12,21 +12,9 @@
     ;; dired specific key guides.
     (guide-key/add-local-guide-key-sequence "%")))
 
-
-(defun user--dired-efap-config ()
-  "Initialize dired-efap."
-  (after-load 'dired
-    ;; Load dired-efap when dired is loaded.
-    (require 'dired-efap))
-
-  ;;; (Bindings) ;;;
-  (define-key dired-mode-map [R] 'dired-efap)
-  (when (display-graphic-p)
-    (define-key dired-mode-map [down-mouse-1] 'dired-efap-click)))
-
-
-(defun user--dired-config ()
-  "Initialize dired."
+(use-package dired
+  :defer t
+  :config
   (validate-setq
    ;; Always copy recursively without asking.
    dired-recursive-copies 'always
@@ -40,6 +28,19 @@
   ;;; (Packages) ;;;
   (use-package dired-k
     :defer t)
+  (use-package async
+    :defer t)
+  (use-package dired-efap
+    :ensure t
+    :init
+    (after-load 'dired
+      ;; Load dired-efap when dired is loaded.
+      (require 'dired-efap))
+    :config
+    ;;; (Bindings) ;;;
+    (define-key dired-mode-map [R] 'dired-efap)
+    (when (display-graphic-p)
+      (define-key dired-mode-map [down-mouse-1] 'dired-efap-click)))
 
   ;;; (Bindings) ;;;
   ;; Do not open new buffers when going down or up a directory.
@@ -48,16 +49,7 @@
                                          (interactive)
                                          (find-alternate-file "..")))
   (when (display-graphic-p)
-    (define-key dired-mode-map [double-mouse-1] 'dired-find-file))
-
-  ;;; (Packages) ;;;
-  (use-package async
-    :defer t)
-  (use-package dired-efap
-    :defer t
-    :config (user--dired-efap-config)))
-
-(user--dired-config)
+    (define-key dired-mode-map [double-mouse-1] 'dired-find-file)))
 
 
 (provide 'utilities/dired)

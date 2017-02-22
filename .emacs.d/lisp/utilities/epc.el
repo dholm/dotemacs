@@ -2,12 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--epc-config ()
-  "Initialize EPC.")
-
 (use-package epc
-  :defer t
-  :config (user--epc-config))
+  :defer t)
 
 
 (provide 'utilities/epc)

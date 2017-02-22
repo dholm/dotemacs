@@ -7,20 +7,16 @@
   (with-feature 'diff-hl
     (turn-on-diff-hl-mode)))
 
-
-(defun user--diff-config ()
-  "Initialize Emacs diff support."
+(use-package diff
+  :init
+  (add-hook 'diff-mode-hook 'user--diff-mode-hook)
+  :config
   (validate-setq
    ;; Use unified diffs by default.
    diff-switches "-u")
 
-  (add-hook 'diff-mode-hook 'user--diff-mode-hook)
-
-  ;;; (Packages) ;;;
   (use-package diff-hl
     :ensure t))
-
-(user--diff-config)
 
 
 (provide 'utilities/diff)

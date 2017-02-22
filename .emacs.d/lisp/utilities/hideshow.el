@@ -19,12 +19,10 @@
   (hs-hide-level 1))
 
 
-(defun user--hideshow-config ()
-  "Initialize Hide Show mode."
-  ;;; (Hooks) ;;;
+(use-package hideshow
+  :init
   (add-hook 'hs-minor-mode-hook 'user--hs-minor-mode-hook))
 
-(user--hideshow-config)
 
 (provide 'utilities/hideshow)
 ;;; hideshow.el ends here

@@ -2,12 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--abbrev-config ()
-  "Initialize abbrev."
+(use-package abbrev
+  :ensure nil
+  :diminish abbrev-mode
+  :config
   (validate-setq
    abbrev-file-name (path-join *user-data-directory* "abbrev_defs")))
-
-(user--abbrev-config)
 
 
 (provide 'utilities/abbrev)

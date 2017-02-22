@@ -2,13 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--wc-mode-config ()
-  "Initialize wc-mode."
-  (user/bind-key-global :util :wc-mode 'wc-mode))
-
 (use-package wc-mode
   :defer t
-  :config (user--wc-mode-config))
+  :init
+  (user/bind-key-global :util :wc-mode 'wc-mode))
 
 
 (provide 'utilities/wc-mode)

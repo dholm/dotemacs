@@ -2,18 +2,14 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--sauron-config ()
-  "Initialize Sauron event tracker."
-  (validate-setq
-   ;; Display sauron in current frame.
-   sauron-separate-frame nil)
-
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :util :notifications 'sauron-toggle-hide-show))
-
 (use-package sauron
   :defer t
-  :config (user--sauron-config))
+  :init
+  (user/bind-key-global :util :notifications 'sauron-toggle-hide-show)
+  :config
+  (validate-setq
+   ;; Display sauron in current frame.
+   sauron-separate-frame nil))
 
 
 (provide 'utilities/sauron)

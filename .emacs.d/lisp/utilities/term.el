@@ -18,18 +18,13 @@
         (if (string= event "finished\n")
             (kill-buffer ,buf))))))
 
-
-(defun user--term-config ()
-  "Initialize the Emacs terminal."
-  ;;; (Hooks) ;;;
+(use-package term
+  :defer t
+  :init
   (add-hook 'term-exec-hook 'user--term-exec-hook)
   (add-hook 'term-mode-hook 'user--term-mode-hook)
-
-  ;;; (Bindings) ;;;
-  (after-load 'term
-    (define-key term-raw-map (kbd "C-c C-y") 'term-paste)))
-
-(user--term-config)
+  :config
+  (define-key term-raw-map (kbd "C-c C-y") 'term-paste))
 
 
 (provide 'utilities/term)

@@ -9,18 +9,11 @@
 
 (defun user--cedet-hook ()
   "Hook for modes with CEDET support."
-  ;;; (EDE) ;;;
-  ;; Don't use with-feature here in case el-get hasn't initialized CEDET yet.
-  (when (featurep 'cedet-devel-load)
-    ;; Enable EDE.
-    (ede-minor-mode t)
+  ;; Enable EDE.
+  (ede-minor-mode t)
 
-    ;; Enable semantic.
-    (semantic-mode t)
-
-    (when (and (featurep 'cedet-devel-load) (display-graphic-p))
-      ;; Enable context menu.
-      (cedet-m3-minor-mode t))))
+  ;; Enable semantic.
+  (semantic-mode t))
 
 
 (defun user/ede-get-local-var (fname var)
@@ -93,119 +86,120 @@
        'ede-object-system-include-path)))))
 
 
-(defun user--cedet-config ()
-  "Initialize CEDET."
-  (after-load 'cedet-devel-load
-    ;; Load the contrib package.
-    (unless (featurep 'cedet-contrib-load)
-      (load (path-join (el-get-package-directory "cedet") "contrib"
-                       "cedet-contrib-load.el")))
-
-    ;; Register missing autoloads
-    (autoload 'wisent-ruby-default-setup "wisent-ruby")))
-
-(require-package '(:name cedet :after (user--cedet-config)))
-
-(use-package ede
-  :defer t
+(use-package cedet
+  :ensure nil
   :config
-  ;;; (Hooks) ;;;
-  (add-hook 'ede-minor-mode-hook 'user--ede-minor-mode-hook))
+  (use-package ede
+    :ensure nil
+    :defer t
+    :init
+    (autoload 'ede-minor-mode "ede" nil t)
+    (add-hook 'ede-minor-mode-hook 'user--ede-minor-mode-hook)
+    :config
+    (use-package ede/base
+      :ensure nil
+      :config
+      (validate-setq
+       ede-project-placeholder-cache-file
+       (path-join *user-cache-directory* "ede-projects.el")))
 
-(use-package ede/base
-  :after ede
-  :config
-  (validate-setq
-   ede-project-placeholder-cache-file (path-join *user-cache-directory*
-                                                 "ede-projects.el")))
+    (use-package ede/locate
+      :ensure nil
+      :config
+      (after-load 'cedet-contrib-load
+        ;; Enable CScope if available.
+        (with-feature 'cedet-cscope
+          (when (cedet-cscope-version-check t)
+            ;; Use CScope as a source for EDE.
+            (setq ede-locate-setup-options
+                  '(ede-locate-cscope ede-locate-base)))))))
 
-(use-package ede/locate
-  :after ede
-  :config
-  (after-load 'cedet-contrib-load
-    ;; Enable CScope if available.
-    (with-feature 'cedet-cscope
-      (when (cedet-cscope-version-check t)
-        ;; Use CScope as a source for EDE.
-        (setq ede-locate-setup-options
-              '(ede-locate-cscope ede-locate-base))))))
 
-(use-package semantic
-  :defer t
-  :config
-  (when *user-cedet-ectags-enabled*
-    ;; Enable [ec]tags support.
-    (with-feature 'semantic/ectags/util
-      (when (and (fboundp 'cedet-ectag-version-check)
-                 (cedet-ectag-version-check t))
-        (semantic-load-enable-primary-ectags-support))))
+  (use-package semantic
+    :ensure nil
+    :defer t
+    :init
+    (add-hook 'semantic-mode-hook 'user--semantic-mode-hook)
+    :config
+    (when *user-cedet-ectags-enabled*
+      ;; Enable [ec]tags support.
+      (with-feature 'semantic/ectags/util
+        (when (and (fboundp 'cedet-ectag-version-check)
+                   (cedet-ectag-version-check t))
+          (semantic-load-enable-primary-ectags-support))))
 
-  (when *user-cedet-cscope-enabled*
-    ;; Enable CScope support.
-    (with-feature 'cedet-cscope
-      (when (cedet-cscope-version-check t)
-        (after-load 'semantic/db
-          ;; Use CScope as a database for SemanticDB.
-          (when (fboundp 'semanticdb-enable-cscope-databases)
-            (semanticdb-enable-cscope-databases))))))
+    (when *user-cedet-cscope-enabled*
+      ;; Enable CScope support.
+      (with-feature 'cedet-cscope
+        (when (cedet-cscope-version-check t)
+          (after-load 'semantic/db
+            ;; Use CScope as a database for SemanticDB.
+            (when (fboundp 'semanticdb-enable-cscope-databases)
+              (semanticdb-enable-cscope-databases))))))
 
-  (when *user-cedet-gnu-global-enabled*
-    ;; Enable GNU Global if available.
-    (with-feature 'cedet-global
-      (when (and (fboundp 'cedet-gnu-global-version-check)
-                 (cedet-gnu-global-version-check t))
-        ;; Register as SemanticDB source.
-        (semanticdb-enable-gnu-global-databases 'c-mode)
-        (semanticdb-enable-gnu-global-databases 'c++-mode))))
+    (when *user-cedet-gnu-global-enabled*
+      ;; Enable GNU Global if available.
+      (with-feature 'cedet-global
+        (when (and (fboundp 'cedet-gnu-global-version-check)
+                   (cedet-gnu-global-version-check t))
+          ;; Register as SemanticDB source.
+          (semanticdb-enable-gnu-global-databases 'c-mode)
+          (semanticdb-enable-gnu-global-databases 'c++-mode))))
 
-  ;; Disable semantic over Tramp as SemanticDB's save function keeps freezing
-  ;; Emacs.
-  (add-to-list 'semantic-inhibit-functions
-               (lambda () (tramp-tramp-file-p (buffer-file-name
-                                               (current-buffer)))))
-  ;; Register languages from contrib.
-  (add-to-list 'semantic-new-buffer-setup-functions
-               '(csharp-mode . wisent-csharp-default-setup)
-               '(vala-mode . wisent-csharp-default-setup))
-  (add-to-list 'semantic-new-buffer-setup-functions
-               '(php-mode . wisent-php-default-setup))
-  (add-to-list 'semantic-new-buffer-setup-functions
-               '(ruby-mode . wisent-ruby-default-setup))
+    ;; Disable semantic over Tramp as SemanticDB's save function keeps freezing
+    ;; Emacs.
+    (add-to-list 'semantic-inhibit-functions
+                 (lambda () (tramp-tramp-file-p (buffer-file-name
+                                                 (current-buffer)))))
+    ;; Ensure semantic is aware that it supports emacs-lisp.
+    (add-to-list 'semantic-new-buffer-setup-functions
+                 '(emacs-lisp-mode . semantic-default-elisp-setup))
+    (with-feature 'cedet-contrib-load
+      ;; Register languages from contrib.
+      (add-to-list 'semantic-new-buffer-setup-functions
+                   '(csharp-mode . wisent-csharp-default-setup)
+                   '(vala-mode . wisent-csharp-default-setup))
+      (add-to-list 'semantic-new-buffer-setup-functions
+                   '(php-mode . wisent-php-default-setup))
+      (add-to-list 'semantic-new-buffer-setup-functions
+                   '(ruby-mode . wisent-ruby-default-setup)))
 
-  ;;; (Hooks) ;;;
-  (add-hook 'semantic-mode-hook 'user--semantic-mode-hook))
+    (use-package semantic/idle
+      :ensure nil
+      :defer t
+      :config
+      (validate-setq
+       ;; Nice looking breadcrumbs.
+       semantic-idle-breadcrumbs-format-tag-function 'semantic-format-tag-summarize
+       semantic-idle-breadcrumbs-separator " ⊃ "
+       semantic-idle-breadcrumbs-header-line-prefix " ≝ "))
 
-(use-package semantic/idle
-  :defer t
-  :config
-  (validate-setq
-   ;; Nice looking breadcrumbs.
-   semantic-idle-breadcrumbs-format-tag-function 'semantic-format-tag-summarize
-   semantic-idle-breadcrumbs-separator " ⊃ "
-   semantic-idle-breadcrumbs-header-line-prefix " ≝ "))
+    (use-package semantic/db
+      :ensure nil
+      :after semantic
+      :init
+      (global-semanticdb-minor-mode t)
+      :config
+      (use-package semantic/db-file
+        :ensure nil
+        :defer t
+        :config
+        (validate-setq
+         semanticdb-default-save-directory (path-join *user-cache-directory*
+                                                      "semanticdb"))))
 
-(use-package semantic/db
-  :after semantic
-  :config
-  ;; Enable persistent cache for Semantic.
-  (global-semanticdb-minor-mode t))
+    (use-package semantic/util-modes
+      :ensure nil
+      :config
+      (use-package stickyfunc-enhance)))
 
-(use-package semantic/db-file
-  :defer t
-  :config
-  (validate-setq
-   semanticdb-default-save-directory (path-join *user-cache-directory*
-                                                "semanticdb")))
-
-(use-package srecode/map
-  :defer t
-  :config
-  (validate-setq
-   ;; Set up paths to caches
-   srecode-map-save-file (path-join *user-cache-directory* "srecode-map.el")))
-
-(use-package stickyfunc-enhance
-  :after semantic/util-modes)
+  (use-package srecode/map
+    :ensure nil
+    :defer t
+    :config
+    (validate-setq
+     ;; Set up paths to caches
+     srecode-map-save-file (path-join *user-cache-directory* "srecode-map.el"))))
 
 
 (provide 'utilities/cedet)

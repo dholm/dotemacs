@@ -8,7 +8,6 @@
   (when (feature-p 'emacs-sos)
     (user/bind-key-local :util :stack-overflow-search 'sos)))
 
-
 (use-package sos
   :defer t
   :init

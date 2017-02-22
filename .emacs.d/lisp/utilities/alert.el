@@ -10,9 +10,9 @@
    ((executable-find "dbus-send") 'notifications)
    (t 'mode-line)))
 
-
-(defun user--alert-config ()
-  "Initialize alert."
+(use-package alert
+  :defer t
+  :config
   ;; Undiagnosed issue with validate-setq.
   (setq
    ;; Send alerts to alert buffer.
@@ -20,10 +20,6 @@
   (validate-setq
    ;; Disable log.
    alert-log-messages nil))
-
-(use-package alert
-  :defer t
-  :config (user--alert-config))
 
 
 (provide 'utilities/alert)

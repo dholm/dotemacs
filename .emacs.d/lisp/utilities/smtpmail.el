@@ -21,27 +21,22 @@
        smtpmail-local-domain "gmail.com"
        mail-host-address "gmail.com"))))
 
-
-(defun user--smtpmail-config ()
-  "Initialize smtpmail."
+(use-package smtpmail
+  :defer t
+  :config
   (validate-setq
    ;; Use smtpmail as the default method of sending email.
    send-mail-function 'smtpmail-send-it
    message-send-mail-function 'smtpmail-send-it
    ;; Queue mail when offline.
-   smtpmail-queue-mail t))
+   smtpmail-queue-mail t)
 
-(use-package smtpmail
-  :defer t
-  :config (user--smtpmail-config))
-
-(use-package smtpmail-multi
-  :after smtpmail
-  :config
-  (validate-setq
-   ;; Use smtpmail-multi as the default method of sending email.
-   send-mail-function 'smtpmail-send-it
-   message-send-mail-function 'smtpmail-send-it))
+  (use-package smtpmail-multi
+    :config
+    (validate-setq
+     ;; Use smtpmail-multi as the default method of sending email.
+     send-mail-function 'smtpmail-send-it
+     message-send-mail-function 'smtpmail-send-it)))
 
 
 (provide 'utilities/smtpmail)

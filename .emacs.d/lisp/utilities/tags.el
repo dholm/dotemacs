@@ -152,32 +152,23 @@
     (user/bind-key-local :basic :open-file-context 'user/tag-find-file)
     (user/bind-key-local :nav :go-back 'user/tag-pop)))
 
+(with-executable 'llvm-config
+  (use-package rtags
+    :defer t
+    :config
+    (after-load 'helm
+      (validate-setq
+       ;; Enable Helm when available.
+       rtags-use-helm (require 'rtags-helm nil 'noerror)))
 
-(defun user--rtags-config ()
-  "Initialize rtags."
-  (after-load 'helm
-    (validate-setq
-     ;; Enable Helm when available.
-     rtags-use-helm (require 'rtags-helm nil 'noerror)))
+    (after-load 'tramp
+      (validate-setq
+       ;; Enable tramp after it has been loaded.
+       rtags-tramp-enabled t))))
 
-  (after-load 'tramp
-    (validate-setq
-     ;; Enable tramp after it has been loaded.
-     rtags-tramp-enabled t)))
-
-
-(defun user--tags-config ()
-  "Initialize tag support."
-  ;;; (Packages) ;;;
-  (with-executable 'llvm-config
-    (use-package rtags
-      :defer t
-      :config (user--rtags-config)))
-  (when (feature-p 'helm)
-    (use-package helm-etags-plus
-      :defer t)))
-
-(user--tags-config)
+(when (feature-p 'helm)
+  (use-package helm-etags-plus
+    :defer t))
 
 
 (provide 'utilities/tags)

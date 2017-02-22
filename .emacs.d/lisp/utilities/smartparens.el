@@ -28,21 +28,17 @@
     (show-smartparens-mode t)
     (smartparens-mode t)))
 
-
-(defun user--smartparens-config ()
-  "Initialize smartparens."
-  (validate-setq
-   ;; Even kill whitespace with `sp-hybrid-kill'.
-   sp-hybrid-kill-excessive-whitespace t)
-
-  ;;; (Hooks) ;;;
-  (add-hook 'smartparens-mode-hook 'user--smartparens-mode-hook))
-
 (use-package smartparens
   :ensure t
+  :diminish smartparens-mode
   :bind (:map smartparens-mode-map
          ([remap kill-line] . sp-kill-hybrid-sexp))
-  :config (user--smartparens-config))
+  :init
+  (add-hook 'smartparens-mode-hook 'user--smartparens-mode-hook)
+  :config
+  (validate-setq
+   ;; Even kill whitespace with `sp-hybrid-kill'.
+   sp-hybrid-kill-excessive-whitespace t))
 
 
 (provide 'utilities/smartparens)

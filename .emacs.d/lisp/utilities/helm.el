@@ -90,26 +90,17 @@
            (list "\\.elc$" "\\.pyc$" "^#.+#$" "^G[R]TAGS$" "^GPATH$" "^ID$"))
     (add-to-list 'helm-boring-file-regexp-list pattern)))
 
+(use-package helm
+  :ensure t
+  :diminish helm-mode
+  :init
+  (user/bind-key-global :nav :context 'user/helm-navigate)
+  (user/bind-key-global :doc :apropos 'user/helm-apropos)
+  (user/bind-key-global :emacs :elisp-search 'helm-info-elisp)
 
-(defun user--helm-swoop-config ()
-  "Initialize Helm Swoop."
-  (validate-setq
-   ;; Split window vertically when swooping.
-   helm-swoop-split-direction 'split-window-horizontally)
-
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :basic :swoop 'helm-swoop)
-  (user/bind-key-global :basic :swoop-multi 'helm-multi-swoop)
-  (define-key isearch-mode-map
-    (user/get-key :basic :swoop) 'helm-swoop-from-isearch)
-  (after-load 'helm-swoop
-    ;; From helm-swoop to helm-multi-swoop-all.
-    (define-key helm-swoop-map
-      (user/get-key :basic :swoop) 'helm-multi-swoop-all-from-helm-swoop)))
-
-
-(defun user--helm-config ()
-  "Configure helm."
+  ;; Since Helm depends on `eieio', enable it after package initialization.
+  (add-hook 'user--after-init-hook 'user/helm-mode)
+  :config
   (validate-setq
    ;; Idle delays.
    helm-input-idle-delay 0.0
@@ -121,105 +112,98 @@
      'popwin:special-display-config
      '("helm" :regexp t :height 0.4 :position bottom)))
 
-  ;;; (Hooks) ;;;
-  ;; Since Helm depends on `eieio', enable it after package initialization.
-  (add-hook 'user--after-init-hook 'user/helm-mode)
-
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :nav :context 'user/helm-navigate)
-  (user/bind-key-global :doc :apropos 'user/helm-apropos)
-  (user/bind-key-global :emacs :elisp-search 'helm-info-elisp)
-
   ;;; (Packages) ;;;
   (use-package helm-descbinds
     :ensure t)
   (use-package helm-swoop
     :ensure t
-    :config (user--helm-swoop-config)))
+    :init
+    (user/bind-key-global :basic :swoop 'helm-swoop)
+    (user/bind-key-global :basic :swoop-multi 'helm-multi-swoop)
+    :config
+    (validate-setq
+     ;; Split window vertically when swooping.
+     helm-swoop-split-direction 'split-window-horizontally)
 
-(use-package helm
-  :ensure t
-  :diminish helm-mode
-  :config (user--helm-config))
+    ;;; (Bindings) ;;;
+    (define-key isearch-mode-map
+      (user/get-key :basic :swoop) 'helm-swoop-from-isearch)
+    (after-load 'helm-swoop
+      ;; From helm-swoop to helm-multi-swoop-all.
+      (define-key helm-swoop-map
+        (user/get-key :basic :swoop)
+        'helm-multi-swoop-all-from-helm-swoop))
 
-(use-package helm-adaptive
-  :after helm
-  :config
-  (validate-setq
-   ;; Put adaptive history in cache directory.
-   helm-adaptive-history-file (path-join *user-cache-directory* "helm-adaptive-history")))
+    ;;; (Packages) ;;;
+    (use-package helm-adaptive
+      :config
+      (validate-setq
+       ;; Put adaptive history in cache directory.
+       helm-adaptive-history-file (path-join *user-cache-directory* "helm-adaptive-history")))
 
-(use-package helm-command
-  :ensure helm
-  :bind* ([remap execute-extended-command] . helm-M-x))
+    (use-package helm-command
+      :bind* ([remap execute-extended-command] . helm-M-x))
 
-(use-package helm-files
-  :ensure helm
-  :bind* (([remap find-file] . helm-find-files)
-          :map helm-find-files-map
-          ("C-k" . helm-ff-persistent-delete))
-  :config
-  ;; `helm-recentf-fuzzy-match' is set via Customize
-  ;; Reason: https://emacs.stackexchange.com/a/106/5514
-  (setq
-   helm-ff-file-name-history-use-recentf t
-   ;; Don't prompt for new buffer.
-   helm-ff-newfile-prompt-p nil
-   helm-input-idle-delay 0.1
-   ;; Don't show boring files.
-   helm-ff-skip-boring-files t
-   ;; Search for library in `require' and `declare-function' sexp.
-   helm-ff-search-library-in-sexp t
-   ;; Auto-complete in find-files.
-   helm-ff-auto-update-initial-value t))
+    (use-package helm-files
+      :bind* (([remap find-file] . helm-find-files)
+              :map helm-find-files-map
+              ("C-k" . helm-ff-persistent-delete))
+      :config
+      ;; `helm-recentf-fuzzy-match' is set via Customize
+      ;; Reason: https://emacs.stackexchange.com/a/106/5514
+      (validate-setq
+       helm-ff-file-name-history-use-recentf t
+       ;; Don't prompt for new buffer.
+       helm-ff-newfile-prompt-p nil
+       helm-input-idle-delay 0.1
+       ;; Don't show boring files.
+       helm-ff-skip-boring-files t
+       ;; Search for library in `require' and `declare-function' sexp.
+       helm-ff-search-library-in-sexp t
+       ;; Auto-complete in find-files.
+       helm-ff-auto-update-initial-value t))
 
-(use-package helm-misc
-  :ensure helm
-  :bind* ([remap switch-to-buffer] . helm-mini))
+    (use-package helm-misc
+      :bind* ([remap switch-to-buffer] . helm-mini))
 
-(use-package helm-buffers
-  :ensure helm
-  :bind (:map helm-buffer-map
-         ("C-k" . helm-buffer-run-kill-persistent))
-  :config
-  (setq helm-buffers-fuzzy-matching t))
+    (use-package helm-buffers
+      :bind (:map helm-buffer-map
+                  ("C-k" . helm-buffer-run-kill-persistent))
+      :config
+      (validate-setq
+       helm-buffers-fuzzy-matching t))
 
-(use-package helm-ring
-  :ensure helm
-  :bind* (([remap yank-pop] . helm-show-kill-ring)
-          ("C-c SPC" . helm-all-mark-rings)))
+    (use-package helm-ring
+      :bind* (([remap yank-pop] . helm-show-kill-ring)
+              ("C-c SPC" . helm-all-mark-rings)))
 
-(use-package helm-imenu
-  :ensure helm
-  :bind (("C-c n i" . helm-imenu-in-all-buffers)
-         ("C-c n t" . helm-imenu))
-  :config
-  (setq
-   helm-imenu-fuzzy-match t
-   helm-imenu-execute-action-at-once-if-one nil))
+    (use-package helm-imenu
+      :bind (("C-c n i" . helm-imenu-in-all-buffers)
+             ("C-c n t" . helm-imenu))
+      :config
+      (validate-setq
+       helm-imenu-fuzzy-match t)
+      ;; Incompatible with validate-setq.
+      (setq
+       helm-imenu-execute-action-at-once-if-one nil))
 
-(use-package helm-bookmarks
-  :ensure helm
-  :bind ("C-x r l" . helm-filtered-bookmarks))
+    (use-package helm-bookmarks
+      :bind ("C-x r l" . helm-filtered-bookmarks))
 
-(use-package helm-pages
-  :ensure t
-  :bind ("C-c n P" . helm-pages))
+    (use-package helm-pages
+      :bind ("C-c n P" . helm-pages))
 
-(use-package helm-eval
-  :ensure helm
-  :bind (("C-c h M-:" . helm-eval-expression-with-eldoc)
-         ("C-c h *" . helm-calcul-expression)))
+    (use-package helm-eval
+      :bind (("C-c h M-:" . helm-eval-expression-with-eldoc)
+             ("C-c h *" . helm-calcul-expression)))
 
-(use-package helm-external
-  :ensure helm
-  :bind ("C-c h x" . helm-run-external-command))
+    (use-package helm-external
+      :bind ("C-c h x" . helm-run-external-command))
 
-(use-package helm-build-command
-  :ensure helm
-  :quelpa (helm-build-command
-           :fetcher github
-           :repo "tkf/helm-build-command"))
+    (use-package helm-build-command
+      :quelpa (helm-build-command
+               :fetcher github
+               :repo "tkf/helm-build-command"))))
 
 
 (provide 'utilities/helm)

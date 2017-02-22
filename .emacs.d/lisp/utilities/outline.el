@@ -14,17 +14,14 @@
   (user/bind-key-local :nav :context-forward 'outline-next-heading)
   (user/bind-key-local :nav :context-backward 'outline-previous-heading))
 
-
-(defun user--outline-mode-config ()
-  "Initialize outline mode."
+(use-package outline
+  :defer t
+  :init
   (add-hook 'outline-mode-hook 'user--outline-mode-hook)
   (add-hook 'outline-minor-mode-hook 'user--outline-mode-hook)
-
-  ;;; (Packages) ;;;
+  :config
   (use-package outline-magic
     :defer t))
-
-(user--outline-mode-config)
 
 
 (provide 'utilities/outline)

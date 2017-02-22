@@ -22,31 +22,21 @@
     (cscope-setup))
 
   (with-feature 'helm-cscope
-    (after-load 'diminish
-      (diminish 'helm-cscope-mode))
     (helm-cscope-mode t)))
 
 
-(defun user--xcscope-config ()
-  "Initialize xcscope."
-  (validate-setq
-   ;; Always index recursively.
-   cscope-index-recursively t
-   ;; Don't display CScope result buffer by default.
-   cscope-display-cscope-buffer nil))
-
-
-(defun user--cscope-config ()
-  "Initialize CScope support."
-  ;;; (Packages) ;;;
+(with-executable 'cscope
   (use-package xcscope
     :defer t
-    :config (user--xcscope-config))
+    :config
+    (validate-setq
+     ;; Always index recursively.
+     cscope-index-recursively t
+     ;; Don't display CScope result buffer by default.
+     cscope-display-cscope-buffer nil))
   (use-package helm-cscope
-    :defer t))
-
-(with-executable 'cscope
-  (user--cscope-config))
+    :defer t
+    :diminish helm-cscope-mode))
 
 
 (provide 'utilities/cscope)
