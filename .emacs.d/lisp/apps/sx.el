@@ -6,20 +6,15 @@
  (path-join *user-cache-directory* "sx")
  "Path to user's Stack Exchange cache store.")
 
-(defun user--sx-config ()
-  "Initialize sx."
+(use-package sx
+  :commands sx-search
+  :init
+  (autoload 'sx-search "sx-load" nil t)
+  (user/bind-key-global :apps :stack-exchange 'sx-search)
+  :config
   (validate-setq
    ;; Set up sx cache store.
-   sx-cache-directory *user-sx-cache-directory*)
-
-  (autoload 'sx-search "sx-load" nil t)
-
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :apps :stack-exchange 'sx-search))
-
-(use-package sx
-  :defer t
-  :config (user--sx-config))
+   sx-cache-directory *user-sx-cache-directory*))
 
 
 (provide 'apps/sx)

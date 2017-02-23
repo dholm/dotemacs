@@ -30,31 +30,25 @@
   ;; Printing
   (user/bind-key-local :debug :show-value 'gud-print))
 
-
-(defun user--gdb-mode-hook ()
-  "GDB mode hook.")
-
-
-(use-package gdb-mi
-  :defer t
-  :config
-  (validate-setq
-   ;; Enable many windows
-   gdb-many-windows t
-   ;; Use a separate buffer for IO
-   gdb-use-separate-io-buffer t
-   gdb-show-main t)
-  (add-hook 'gdb-mode-hook 'user--gdb-mode-hook))
-
 (use-package gud
-  :defer t
+  :commands gud-gdb
+  :init
+  (add-hook 'gud-mode-hook 'user--gud-mode-hook)
   :config
   (validate-setq
    ;; Do not change the working directory before running inferior
    gud-chdir-before-run nil
    ;; Enable tooltips in gud mode
    gud-tooltip-mode t)
-  (add-hook 'gud-mode-hook 'user--gud-mode-hook))
+
+  (use-package gdb-mi
+    :defer t
+    :config
+    (validate-setq
+     ;; Enable many windows
+     gdb-many-windows t
+     ;; Use a separate buffer for IO
+     gdb-show-main t)))
 
 
 (provide 'apps/gud)

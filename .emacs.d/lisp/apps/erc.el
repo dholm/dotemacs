@@ -17,10 +17,6 @@
   :group 'erc-faces)
 
 
-(defun user--erc-mode-hook ()
-  "Mode hook for erc.")
-
-
 (defun erc-update-header-line-show-disconnected ()
   "Use a different face in the header-line when disconnected."
   (erc-with-server-buffer
@@ -61,25 +57,23 @@
          (not (or (string-match "^\\** *Users on #" msg)
                   (string-match *user-erc-noise-regexp* msg))))))
 
-(defun user--erc-alert-config ()
-  "Initialize alert for ERC."
-  ;; Notify user on important events if ERC buffer isn't visible.
-  (alert-add-rule :status 'buried
-                  :mode   'erc-mode
-                  :predicate #'user/erc-alert-important-p
-                  :style (user/alert-style)
-                  :append t)
-  ;; Log all important ERC events to the alert log.
-  (alert-add-rule :mode 'erc-mode
-                  :predicate #'user/erc-alert-important-p
-                  :style 'log
-                  :append t)
-  ;; Ignore remaining events.
-  (alert-add-rule :mode 'erc-mode :style 'ignore :append t))
+(use-package erc
+  :quelpa (erc
+           :fetcher git
+           :url "git://git.savannah.gnu.org/erc.git")
+  :commands erc
+  :init
+  (add-hook 'erc-connect-pre-hook (lambda (x) (erc-update-modules)))
 
+  (when (feature-p 'bbdb2erc)
+    (add-hook 'bbdb-notice-hook 'bbdb2erc-online-status))
+  ;; Notification on important events.
+  (add-hook 'erc-text-matched-hook 'user/erc-global-notify)
+  (add-hook 'erc-insert-modify-hook 'user/erc-global-notify)
 
-(defun user--erc-config ()
-  "Initialize erc."
+  ;;; (Bindings) ;;;
+  (user/bind-key-global :apps :irc 'erc)
+  :config
   (validate-setq
    ;; Close ERC buffers on quit.
    erc-kill-buffer-on-part t
@@ -140,129 +134,111 @@
    ;; Modify the face of the header line when disconnected.
    erc-header-line-face-method 'erc-update-header-line-show-disconnected)
 
-  (after-load 'erc
-    (add-many-to-list
-     'erc-modules
-     ;; Automatically join channels on connect.
-     'autojoin
-     ;; Automatically go away when inactive.
-     'autoaway
-     ;; Handle IRC control characters.
-     'irccontrols
-     ;; Channel listings.
-     'list
-     ;; Automatically log buffers.
-     'log
-     ;; Highlight certain keywords.
-     'match
-     ;; Move to the prompt when typing.
-     'move-to-prompt
-     ;; Automatically detect netsplits.
-     'netsplit
-     ;; IRC networks data.
-     'networks
-     ;; Hide non-irc commands after evaluation.
-     'noncommands
-     ;; Generate notifications for select users.
-     'notify
-     ;; Make displayed lines read-only.
-     'readonly
-     ;; Input history ring.
-     'ring
-     ;; Notification on certain events.
-     'notifications
-     ;; Support for various services (i.e. NickServ).
-     'services
-     ;; Enable spell checking.
-     'spelling
-     ;; Timestamp messages.
-     'stamp
-     ;; Track interesting events.
-     'track
-     ;; Truncate really long irc buffers.
-     'truncate)
+  (add-many-to-list
+   'erc-modules
+   ;; Automatically join channels on connect.
+   'autojoin
+   ;; Automatically go away when inactive.
+   'autoaway
+   ;; Handle IRC control characters.
+   'irccontrols
+   ;; Channel listings.
+   'list
+   ;; Automatically log buffers.
+   'log
+   ;; Highlight certain keywords.
+   'match
+   ;; Move to the prompt when typing.
+   'move-to-prompt
+   ;; Automatically detect netsplits.
+   'netsplit
+   ;; IRC networks data.
+   'networks
+   ;; Hide non-irc commands after evaluation.
+   'noncommands
+   ;; Generate notifications for select users.
+   'notify
+   ;; Make displayed lines read-only.
+   'readonly
+   ;; Input history ring.
+   'ring
+   ;; Notification on certain events.
+   'notifications
+   ;; Support for various services (i.e. NickServ).
+   'services
+   ;; Enable spell checking.
+   'spelling
+   ;; Timestamp messages.
+   'stamp
+   ;; Track interesting events.
+   'track
+   ;; Truncate really long irc buffers.
+   'truncate)
 
-    (when (feature-p 'erc-colorize)
-      ;; Highlight nicknames in chats.
-      (add-to-list 'erc-modules 'colorize))
-
-    (when (feature-p 'erc-track-score)
-      (validate-setq
-       ;; Show channel score.
-       erc-track-showcount t)
-
-      (after-load 'erc-track
-        (erc-track-score-mode t)))
-
-    (when (display-graphic-p)
-      ;; Replace smileys with icons.
-      (add-to-list 'erc-modules 'smiley)
-
-      (when (feature-p 'erc-tex)
-        ;; Render (La)TeX mathematical expressions.
-        (add-to-list 'erc-modules 'tex))
-
-      (when (feature-p 'erc-image)
-        ;; Render posted images inline in buffer.
-        (add-to-list 'erc-modules 'image))))
+  (make-directory erc-log-channels-directory t)
+  (set-file-modes erc-log-channels-directory #o0700)
 
   (when (eq default-terminal-coding-system 'utf-8)
     (validate-setq
      ;; As long as the terminal handles it, force UTF-8.
      erc-server-coding-system '(utf-8 . utf-8)))
 
-  ;; Ensure that the log directory exists.
-  (make-directory erc-log-channels-directory t)
-  (set-file-modes erc-log-channels-directory #o0700)
+  (when (display-graphic-p)
+    ;; Replace smileys with icons.
+    (add-to-list 'erc-modules 'smiley))
 
-  (after-load 'alert
-    (user--erc-alert-config))
+  (use-package erc-colorize
+    :init
+    ;; Highlight nicknames in chats.
+    (add-to-list 'erc-modules 'colorize))
+  (use-package erc-track
+    :config
+    (use-package erc-track-score
+      :config
+      (validate-setq
+       ;; Show channel score.
+       erc-track-showcount t)
 
-  ;; Hooks.
-  (add-hook 'erc-connect-pre-hook (lambda (x) (erc-update-modules)))
-  (add-hook 'erc-mode-hook 'user--erc-mode-hook)
-  (when (feature-p 'bbdb2erc)
-    (add-hook 'bbdb-notice-hook 'bbdb2erc-online-status))
-  ;; Notification on important events.
-  (add-hook 'erc-text-matched-hook 'user/erc-global-notify)
-  (add-hook 'erc-insert-modify-hook 'user/erc-global-notify)
-
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :apps :irc 'erc))
-
-(use-package erc
-  :defer t
-  :quelpa (erc
-           :fetcher git
-           :url "git://git.savannah.gnu.org/erc.git")
-  :config (user--erc-config))
-(use-package erc-colorize
-  :defer t)
-(use-package erc-track-score
-  :defer t)
-(use-package erc-image
-  :defer t)
-(use-package erc-view-log
-  :defer t
-  :requires erc
-  :quelpa (erc-view-log
-           :fetcher github
-           :repo "Niluge-KiWi/erc-view-log"))
-(use-package erc-crypt
-  :defer t)
-(when (display-graphic-p)
+      (erc-track-score-mode t)))
+  (use-package erc-image
+    :if window-system
+    :config
+    ;; Render posted images inline in buffer.
+    (add-to-list 'erc-modules 'image))
+  (use-package erc-view-log
+    :quelpa (erc-view-log
+             :fetcher github
+             :repo "Niluge-KiWi/erc-view-log"))
+  (use-package erc-crypt)
   (use-package erc-tex
-    :defer t))
-(when (feature-p 'bbdb)
-  (use-package bbdb2erc
-    :defer t))
-(with-executable 'bitlbee
-  (after-load 'prodigy
-    (prodigy-define-service
-     :name "Bitlbee"
-     :command "bitlbee"
-     :args '("-n" "-F" "-v" "-d" "~/.bitlbee" "-c" "~/.bitlbee/bitlbee.conf")
-     :cwd "~/.bitlbee")))
+    :if window-system
+    :init
+    ;; Render (La)TeX mathematical expressions.
+    (add-to-list 'erc-modules 'tex))
+  (when (feature-p 'bbdb)
+    (use-package bbdb2erc))
+  (with-executable 'bitlbee
+    (after-load 'prodigy
+      (prodigy-define-service
+       :name "Bitlbee"
+       :command "bitlbee"
+       :args '("-n" "-F" "-v" "-d" "~/.bitlbee" "-c" "~/.bitlbee/bitlbee.conf")
+       :cwd "~/.bitlbee")))
+
+  (with-feature 'alert
+    ;; Notify user on important events if ERC buffer isn't visible.
+    (alert-add-rule :status 'buried
+                    :mode   'erc-mode
+                    :predicate #'user/erc-alert-important-p
+                    :style (user/alert-style)
+                    :append t)
+    ;; Log all important ERC events to the alert log.
+    (alert-add-rule :mode 'erc-mode
+                    :predicate #'user/erc-alert-important-p
+                    :style 'log
+                    :append t)
+    ;; Ignore remaining events.
+    (alert-add-rule :mode 'erc-mode :style 'ignore :append t)))
 
 
 (provide 'apps/erc)

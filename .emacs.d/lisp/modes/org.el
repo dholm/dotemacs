@@ -122,7 +122,7 @@
   :quelpa (org :fetcher git
                :url "git://orgmode.org/org-mode.git"
                :files ("lisp/*.el" "contrib/lisp/*.el" "doc/dir" "doc/*.texi"))
-  :ensure t
+  :commands org-mode
   :init
   ;; Create data and cache stores.
   (make-directory *user-org-data-directory* t)

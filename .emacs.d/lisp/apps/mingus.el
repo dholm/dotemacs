@@ -2,15 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--mingus-config ()
-  "Initialize Mingus."
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :apps :music 'mingus))
-
 (when (fboundp 'define-fringe-bitmap)
   (use-package mingus
     :defer t
-    :config (user--mingus-config)))
+    :init
+    (user/bind-key-global :apps :music 'mingus)))
 
 
 (provide 'apps/mingus)

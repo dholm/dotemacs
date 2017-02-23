@@ -120,22 +120,6 @@
            )))
 
 
-(defun user--calfw-config ()
-  "Initialize calfw."
-  (validate-setq
-   ;; Use `fill-region' to wrap long lines.
-   cfw:render-line-breaker 'cfw:render-line-breaker-wordwrap
-   ;; Use unicode to render calendar
-   cfw:fchar-junction ?╋
-   cfw:fchar-vertical-line ?┃
-   cfw:fchar-horizontal-line ?━
-   cfw:fchar-left-junction ?┣
-   cfw:fchar-right-junction ?┫
-   cfw:fchar-top-junction ?┯
-   cfw:fchar-top-left-corner ?┏
-   cfw:fchar-top-right-corner ?┓))
-
-
 (defun user/appt-disp-window (due-in-min cur-date appt-msg)
   "Appointment DUE-IN-MIN on CUR-DATE regarding APPT-MSG."
   (cond
@@ -152,20 +136,6 @@
   (cond
    ((feature-p 'alert) t)
    (t (appt-delete-window))))
-
-
-(defun user--appt-config ()
-  "Initialize appointment notification system."
-  (validate-setq
-   ;; Number of minutes to notify before an event starts.
-   appt-message-warning-time 5
-   appt-display-interval 5
-   ;; Show time until next event in mode-line.
-   appt-display-mode-line t
-   ;; Appointment display type.
-   appt-display-format 'window
-   appt-disp-window-function 'user/appt-disp-window
-   appt-delete-window-function 'user/appt-delete-window))
 
 
 (defun user--calendar-week-config ()
@@ -186,9 +156,12 @@
                (calendar-absolute-from-gregorian (list month day year)))))
      'font-lock-face 'calendar-iso-week-face)))
 
-
-(defun user--calendar-config ()
-  "Initialize calendar."
+(use-package calendar
+  :commands calendar
+  :init
+  (add-hook 'calendar-today-visible-hook 'calendar-mark-today)
+  (add-hook 'calendar-load-hook 'user--calendar-load-hook)
+  :config
   (let ((diary-data-store (path-join *user-org-data-directory* "diary.org")))
     (validate-setq
      ;; Date style should be ISO.
@@ -206,34 +179,46 @@
 
   (user--calendar-week-config)
 
-  ;;; (Hooks) ;;;
-  (add-hook 'calendar-today-visible-hook 'calendar-mark-today)
-  (add-hook 'calendar-load-hook 'user--calendar-load-hook))
+  (use-package holidays
+    :config
+    (user--swedish-holidays-config))
 
-(use-package calendar
-  :defer t
-  :config (user--calendar-config))
+  (use-package diary-lib
+    :init
+    (add-hook 'diary-display-function 'diary-fancy-display)
+    :config
+    (validate-setq
+     ;; Display one week of entries from current date.
+     diary-number-of-entries 7)
 
-(use-package holidays
-  :ensure calendar
-  :config (user--swedish-holidays-config))
-
-(use-package diary-lib
-  :ensure calendar
-  :config
-  (validate-setq
-   ;; Display one week of entries from current date.
-   diary-number-of-entries 7)
-  ;;; (Hooks) ;;;
-  (add-hook 'diary-display-function 'diary-fancy-display))
-
-(use-package appt
-  :ensure diary-lib
-  :config (user--appt-config))
+    (use-package appt
+      :config
+      (validate-setq
+       ;; Number of minutes to notify before an event starts.
+       appt-message-warning-time 5
+       appt-display-interval 5
+       ;; Show time until next event in mode-line.
+       appt-display-mode-line t
+       ;; Appointment display type.
+       appt-display-format 'window
+       appt-disp-window-function 'user/appt-disp-window
+       appt-delete-window-function 'user/appt-delete-window))))
 
 (use-package calfw
   :defer t
-  :config (user--calfw-config))
+  :config
+  (validate-setq
+   ;; Use `fill-region' to wrap long lines.
+   cfw:render-line-breaker 'cfw:render-line-breaker-wordwrap
+   ;; Use unicode to render calendar
+   cfw:fchar-junction ?╋
+   cfw:fchar-vertical-line ?┃
+   cfw:fchar-horizontal-line ?━
+   cfw:fchar-left-junction ?┣
+   cfw:fchar-right-junction ?┫
+   cfw:fchar-top-junction ?┯
+   cfw:fchar-top-left-corner ?┏
+   cfw:fchar-top-right-corner ?┓))
 
 (use-package excorporate
   :defer t)

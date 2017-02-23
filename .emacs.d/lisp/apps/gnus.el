@@ -164,12 +164,22 @@
 
 
 (use-package gnus
-  :defer t
+  :commands gnus
   :init
   ;; Create data and cache stores.
   (let ((article-dir (path-join *user-gnus-data-directory* "articles")))
     (make-directory article-dir t)
     (set-file-modes article-dir #o0700))
+
+  ;; Protect data and cache stores.
+  (make-directory *user-gnus-data-directory* t)
+  (set-file-modes *user-gnus-data-directory* #o0700)
+  (make-directory *user-gnus-cache-directory* t)
+  (set-file-modes *user-gnus-cache-directory* #o0700)
+
+  ;; Hooks
+  (add-hook 'gnus-startup-hook 'user--gnus-startup-hook)
+  (add-hook 'message-sent-hook 'user--gnus-message-sent-hook)
   :config
   (validate-setq
    ;; Make Gnus the default mail reader.
@@ -206,14 +216,6 @@
     (validate-setq
      smtpmail-queue-dir (path-join *user-gnus-data-directory* "mail" "queued-mail")))
 
-  (after-load 'gnus
-    (with-feature 'fullframe
-      (fullframe gnus gnus-group-exit nil))
-
-    (when (feature-p 'gnus-x-gm-raw)
-      ;; GMail search.
-      (require 'gnus-x-gm-raw)))
-
   (validate-setq
    ;; Archive using nnfolder.
    gnus-message-archive-method
@@ -224,15 +226,8 @@
               (nnfolder-get-new-mail nil)
               (nnfolder-inhibit-expiry t)))
 
-  ;; Protect data and cache stores.
-  (make-directory *user-gnus-data-directory* t)
-  (set-file-modes *user-gnus-data-directory* #o0700)
-  (make-directory *user-gnus-cache-directory* t)
-  (set-file-modes *user-gnus-cache-directory* #o0700)
-
-  ;; Hooks
-  (add-hook 'gnus-startup-hook 'user--gnus-startup-hook)
-  (add-hook 'message-sent-hook 'user--gnus-message-sent-hook)
+  (with-feature 'fullframe
+    (fullframe gnus gnus-group-exit nil))
 
   (use-package gnus-start
     :config
@@ -429,6 +424,10 @@
   (use-package gnus-alias)
   (use-package gnus-summary-ext)
   (use-package gnus-x-gm-raw)
+  (when (feature-p 'gnus-x-gm-raw)
+    ;; GMail search.
+    (require 'gnus-x-gm-raw))
+
   (use-package gnus-gravatar
     :if window-system
     :config

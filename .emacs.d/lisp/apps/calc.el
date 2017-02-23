@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package calc
-  :defer t
+  :commands calc
   :init
   (user/bind-key-global :apps :calculator 'calc)
   :config
@@ -40,6 +40,7 @@
     :quelpa (easy-convert
              :fetcher github
              :repo "Frozenlock/easy-convert")
+    :commands easy-convert-interactive
     :init
     (autoload 'easy-convert-interactive "easy-convert" nil t)
     (user/bind-key-global :apps :convert-unit 'easy-convert-interactive)))

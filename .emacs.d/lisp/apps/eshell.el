@@ -59,70 +59,70 @@
           (eshell-reset)))))
 
 
-(defun user--eshell-config ()
-  "Initialize the Emacs shell."
+(use-package eshell
+  :commands user/raise-eshell
+  :defer t
+  :init
+  (add-hook 'eshell-mode-hook 'user--eshell-mode-hook)
+  (user/bind-key-global :apps :shell 'user/raise-eshell)
+  :config
   (validate-setq
    ;; Set the path to the shell cache store.
    eshell-directory-name *shell-cache-directory*)
 
-  (after-load 'esh-module
-    (add-many-to-list 'eshell-modules-list
-                      ;; Rebind keys while point is in a region of input text.
-                      'eshell-rebind
-                      ;; Smart command output management.
-                      'eshell-smart
-                      ;; Extra alias functions.
-                      'eshell-xtra))
-
-  (after-load 'em-term
-    ;; Commands that should be run using term for better handling of ANSI control
-    ;; codes.
-    (add-many-to-list 'eshell-visual-commands
-                      "htop" "perf" "ssh" "telnet" "tmux"))
+  (use-package esh-module
+    :ensure nil
+    :config
+    (add-many-to-list
+     'eshell-modules-list
+     ;; Rebind keys while point is in a region of input text.
+     'eshell-rebind
+     ;; Smart command output management.
+     'eshell-smart
+     ;; Extra alias functions.
+     'eshell-xtra))
 
   ;; For `ac-source-pcomplete'.
   (add-ac-modes 'eshell-mode)
 
-  ;;; (Hooks) ;;;
-  (add-hook 'eshell-mode-hook 'user--eshell-mode-hook)
+  (use-package em-script
+    :ensure nil
+    :config
+    (validate-setq
+     ;; And the shell login script.
+     eshell-login-script (path-join *user-home-directory* ".eshellrc")))
 
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :apps :shell 'user/raise-eshell))
+  (use-package em-term
+    :ensure nil
+    :config
+    (add-many-to-list
+     ;; Commands that should be run using term for better handling of
+     ;; ANSI control codes.
+     'eshell-visual-commands
+     "htop" "perf" "ssh" "telnet" "tmux"))
 
-(use-package eshell
-  :defer t
-  :config (user--eshell-config))
-(use-package em-script
-  :after eshell
-  :config
-  (validate-setq
-   ;; And the shell login script.
-   eshell-login-script (path-join *user-home-directory* ".eshellrc")))
-(use-package em-prompt
-  :after eshell
-  :config
-  (validate-setq
-   ;; Set eshell prompt.
-   eshell-prompt-function 'user/shell-prompt
-   eshell-highlight-prompt nil
-   eshell-prompt-regexp "^[^#$\n]*[#$] "))
-(use-package em-hist
-  :after eshell
-  :config
-  (validate-setq
-   ;; Set a decent history size.
-   eshell-history-size 10000
-   eshell-save-history-on-exit t))
-(use-package em-term
-  :after eshell
-  :config
-  (validate-setq
-   ;; Announce the terminal type.
-   eshell-term-name "eterm-color"))
+  (use-package em-prompt
+    :ensure nil
+    :config
+    (validate-setq
+     ;; Set eshell prompt.
+     eshell-prompt-function 'user/shell-prompt
+     eshell-highlight-prompt nil
+     eshell-prompt-regexp "^[^#$\n]*[#$] "))
+  (use-package em-hist
+    :ensure nil
+    :config
+    (validate-setq
+     ;; Set a decent history size.
+     eshell-history-size 10000
+     eshell-save-history-on-exit t))
+  (use-package em-term
+    :ensure nil
+    :config
+    (validate-setq
+     ;; Announce the terminal type.
+     eshell-term-name "eterm-color")))
 
-(use-package eshell-manual
-  :ensure eshell
-  :defer t)
 (use-package helm-shell
   :ensure helm
   :defer t
@@ -133,13 +133,15 @@
               (bind-key "C-c C-l"
                         #'helm-eshell-history
                         eshell-mode-map)))
-  (bind-key "C-c C-l" #'helm-comint-input-ring shell-mode-map)
 
   ;; Completion with helm
   (add-hook 'eshell-mode-hook
             (lambda ()
               (bind-key [remap eshell-pcomplete]
-                        'helm-esh-pcomplete eshell-mode-map))))
+                        'helm-esh-pcomplete eshell-mode-map)))
+
+  :config
+  (bind-key "C-c C-l" #'helm-comint-input-ring shell-mode-map))
 
 
 (provide 'apps/eshell)

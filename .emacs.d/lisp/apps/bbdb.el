@@ -32,9 +32,13 @@
     (let ((window (get-buffer-window bbdb-buffer-name)))
       (when window (delete-window window)))))
 
-
-(defun user--bbdb-config ()
-  "Initialize BBDB."
+(use-package bbdb
+  :commands bbdb-initialize
+  :init
+  ;; Add notes when updating a record.
+  (add-hook 'bbdb-notice-mail-hook 'bbdb-auto-notes)
+  (add-hook 'bbdb-initialize-hook 'user--bbdb-configialize-hook)
+  :config
   (validate-setq
    ;; Set up location of database.
    bbdb-file *user-bbdb-database*
@@ -73,17 +77,7 @@
     '("X-Newsreader" (".*" mailer identity nil)))
    bbdb-update-records-p 'user/bbdb-create-or-update-notes)
 
-  ;;; (Hooks) ;;;
-  ;; Add notes when updating a record.
-  (add-hook 'bbdb-notice-mail-hook 'bbdb-auto-notes)
-  (add-hook 'bbdb-initialize-hook 'user--bbdb-configialize-hook))
-
-(use-package bbdb
-  :ensure t
-  :commands (bbdb-initialize)
-  :config (user--bbdb-config))
-(use-package bbdb-vcard
-  :after bbdb)
+  (use-package bbdb-vcard))
 
 
 (provide 'apps/bbdb)

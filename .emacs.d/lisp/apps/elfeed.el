@@ -2,14 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--elfeed-config ()
-  "Initialize elfeed."
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :apps :feed-reader 'elfeed))
-
 (use-package elfeed
-  :defer t
-  :config (user--elfeed-config))
+  :commands elfeed
+  :init
+  (user/bind-key-global :apps :feed-reader 'elfeed))
 
 
 (provide 'apps/elfeed)

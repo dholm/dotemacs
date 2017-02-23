@@ -2,8 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--elnode-config ()
-  "Initialize Elnode."
+(use-package elnode
+  :commands elnode-start
+  :init
+  (user/bind-key-global :apps :elnode 'elnode-start)
+  :config
   (validate-setq
    ;; Do not start server automatically.
    elnode-do-init nil
@@ -12,18 +15,12 @@
    ;; Log store.
    elnode-log-files-directory (path-join *user-cache-directory* "elnode"))
 
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :apps :elnode 'elnode-start))
-
-(use-package elnode
-  :defer t
-  :config (user--elnode-config))
-(use-package elnode-org
-  :defer t
-  :requires elnode org
-  :quelpa (elnode-org
-           :fetcher github
-           :repo "nicferrier/elnode-org"))
+  (use-package elnode-org
+    :quelpa (elnode-org
+             :fetcher github
+             :repo "nicferrier/elnode-org")
+    :defer t
+    :requires elnode org))
 
 
 (provide 'apps/elnode)
