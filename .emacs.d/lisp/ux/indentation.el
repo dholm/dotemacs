@@ -12,7 +12,6 @@
 (defun user--indentation-config ()
   "Initialize Emacs indentation behavior."
   (use-package dtrt-indent
-    :ensure t
     :config (user--dtrt-indent-config))
   (use-package smart-tabs-mode
     :quelpa (smart-tabs-mode

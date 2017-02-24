@@ -8,6 +8,7 @@
     (turn-on-diff-hl-mode)))
 
 (use-package diff
+  :defer t
   :init
   (add-hook 'diff-mode-hook 'user--diff-mode-hook)
   :config
@@ -16,7 +17,7 @@
    diff-switches "-u")
 
   (use-package diff-hl
-    :ensure t))
+    :defer t))
 
 
 (provide 'utilities/diff)

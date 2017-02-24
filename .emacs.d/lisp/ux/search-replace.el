@@ -2,13 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--anzu-config ()
-  "Initialize anzu."
-  (global-anzu-mode t)
-  (after-load 'diminish
-    (diminish 'anzu-mode)))
-
-
 (defun user--search-replace-config ()
   "Initialize Emacs search and replace."
   (validate-setq
@@ -26,14 +19,16 @@
 
   ;;; (Packages) ;;;
   (use-package visual-regexp
-    :ensure t
+    :defer t
     :bind* (([remap query-replace-regexp] . vr/query-replace)
             ([remap replace-regexp] . vr/replace)))
   (use-package anzu
-    :ensure t
-    :config (user--anzu-config))
+    :defer t
+    :diminish anzu-mode
+    :config
+    (global-anzu-mode t))
   (use-package grep
-    :ensure t
+    :defer t
     :config
     (validate-setq
      ;; Highlight matches when using grep.

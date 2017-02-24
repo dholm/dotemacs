@@ -24,9 +24,8 @@
   "Initialize Emacs server functions."
   (add-hook 'user--after-init-hook 'user--server-after-init-hook)
 
-  (when (display-graphic-p)
-    (use-package edit-server
-      :ensure t)))
+  (use-package edit-server
+    :if window-system))
 
 (unless (eq system-type 'darwin)
   ;; Emacs clients regularly causes Emacs to crash on Darwin.

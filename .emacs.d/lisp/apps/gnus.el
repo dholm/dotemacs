@@ -230,6 +230,7 @@
     (fullframe gnus gnus-group-exit nil))
 
   (use-package gnus-start
+    :ensure gnus
     :config
     (validate-setq
      ;; Disable newsreader features.
@@ -238,9 +239,11 @@
      gnus-always-read-dribble-file t))
 
   (use-package gnus-agent
+    :ensure gnus
     :config (user--gnus-agent-config))
 
   (use-package gnus-art
+    :ensure gnus
     :config
     (validate-setq
      ;; Headers visible by default.
@@ -279,6 +282,7 @@
     (add-hook 'gnus-article-prepare-hook 'user--gnus-article-prepare-hook))
 
   (use-package gnus-group
+    :ensure gnus
     :config
     (validate-setq
      ;; Groups format.
@@ -301,6 +305,7 @@
     (add-hook 'gnus-group-mode-hook 'user--gnus-group-mode-hook))
 
   (use-package gnus-sum
+    :ensure gnus
     :config
     (validate-setq
      ;; Date format.
@@ -375,12 +380,14 @@
         (lambda () (interactive) (scroll-other-window 1)))))
 
   (use-package gnus-msg
+    :ensure gnus
     :config
     (validate-setq
      ;; Mark sent messages as read.
      gnus-gcc-mark-as-read t))
 
   (use-package gnus-async
+    :ensure gnus
     :config
     (validate-setq
      ;; Enable asynchronous operations.
@@ -389,6 +396,7 @@
      gnus-use-header-prefetch t))
 
   (use-package gnus-cache
+    :ensure gnus
     :config
     (validate-setq
      ;; Gnus cache store.
@@ -400,6 +408,7 @@
      gnus-cacheable-groups "^nnimap"))
 
   (use-package gnus-score
+    :ensure gnus
     :config
     (validate-setq
      ;; Gnus article scoring entries.
@@ -430,17 +439,20 @@
 
   (use-package gnus-gravatar
     :if window-system
+    :ensure nil
     :config
     (validate-setq
      gnus-gravatar-properties '(:ascent center)))
 
   (use-package nnheader
+    :ensure nil
     :config
     (validate-setq
      ;; Workaround for scoring GMail folder names.
      nnheader-file-name-translation-alist '((?[ . ?_) (?] . ?_))))
 
   (use-package nnfolder
+    :ensure nil
     :init
     (make-directory (path-join *user-gnus-data-directory* "mail"
                                "archive" "active") t)
@@ -456,6 +468,7 @@
                                      "mail" "archive" "active")))
 
   (use-package nnmail
+    :ensure nil
     :config
     (validate-setq
      ;; Stop splitting at first matching rule.
@@ -480,6 +493,7 @@
        '(subject . "subject"))))
 
   (use-package nnimap
+    :ensure nil
     :config
     (validate-setq
      ;; Use the same function to split nnmail and nnimap.
@@ -492,6 +506,7 @@
      nnimap-split-download-body-default t))
 
   (use-package mm-decode
+    :ensure nil
     :config
     (validate-setq
      ;; Default location for downloaded attachments.
@@ -527,6 +542,7 @@
       (add-to-list 'mm-attachment-override-types "image/.*")))
 
   (use-package mm-encode
+    :ensure nil
     :config
     (validate-setq
      ;; Set some sane encoding types.
@@ -541,11 +557,13 @@
        (".*" base64))))
 
   (use-package mm-util
+    :ensure nil
     :config
     (when (eq default-terminal-coding-system 'utf-8)
       (validate-setq mm-coding-system-priorities '(utf-8))))
 
   (use-package smime
+    :ensure nil
     :config
     (let ((ca-directory "/etc/ssl/certs"))
       (when (file-exists-p ca-directory)
@@ -557,6 +575,7 @@
          smime-certificate-directory certificate-directory))))
 
   (use-package mml-smime
+    :ensure nil
     :config
     (validate-setq
      ;; Use EasyPG for signing and encryption of emails.
@@ -575,6 +594,7 @@
       (eval-after-load 'gnus '(load "jl-smime"))))
 
   (use-package nnir
+    :ensure nil
     :config
     (when (eq system-type 'darwin)
       (use-package nnir-spotlight

@@ -9,6 +9,7 @@
 
 (with-executable 'rustc
   (use-package rust-mode
+    :defer t
     :init
     (add-hook 'rust-mode-hook 'user--rust-mode-hook)
     :config

@@ -41,7 +41,6 @@
 
   ;;; (Packages) ;;;
   (use-package guide-key
-    :ensure t
     :diminish guide-key-mode
     :config (user--guide-key-config))
 

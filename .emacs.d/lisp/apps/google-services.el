@@ -1,4 +1,4 @@
-;;; google-services.el --- Support for Google services.
+ ;;; google-services.el --- Support for Google services.
 ;;; Commentary:
 ;;; Code:
 
@@ -17,14 +17,6 @@
 
 (use-package google-contacts
   :defer t)
-
-(use-package google-calendar
-  :requires google-contacts json
-  :quelpa (google-calendar :fetcher github :repo "bateast/google-calendar")
-  :config
-  (validate-setq
-   google-calendar/calendars-files
-   (path-join *user-google-services-data-directory* "calendar.org")))
 
 
 (provide 'apps/google-services)

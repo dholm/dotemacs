@@ -31,6 +31,7 @@
   (user/bind-key-local :code :fill-paragraph 'fill-paragraph))
 
 (use-package text-mode
+  :ensure nil
   :defer t
   :init
   (add-hook 'text-mode-hook 'user--text-mode-hook)

@@ -41,13 +41,9 @@
 (defun user/gnu-global-enable ()
   "Activate GNU Global in current major mode."
   (with-feature 'helm-gtags
-    (after-load 'diminish
-      (diminish 'helm-gtags-mode))
     (helm-gtags-mode t))
 
   (with-feature 'ggtags
-    (after-load 'diminish
-      (diminish 'ggtags-mode))
     (ggtags-mode t)
 
     (unless (and (boundp 'imenu-create-index-function)
@@ -100,6 +96,7 @@
 
   (use-package helm-gtags
     :defer t
+    :diminish helm-gtags-mode
     :init
     (add-hook 'helm-gtags-mode-hook 'user--helm-gtags-mode-hook)
     :config
@@ -112,14 +109,12 @@
      helm-gtags-use-input-at-cursor t
      ;; Pulse at point after jump.
      helm-gtags-pulse-at-cursor t))
+
   (use-package ggtags
     :defer t
+    :diminish ggtags-mode
     :init
-    (add-hook 'ggtags-mode-hook 'user--ggtags-mode-hook)
-    :config
-    (validate-setq
-     ;; Never use global to highlight tags.
-     ggtags-highlight-tag nil)))
+    (add-hook 'ggtags-mode-hook 'user--ggtags-mode-hook)))
 
 
 (provide 'utilities/global)

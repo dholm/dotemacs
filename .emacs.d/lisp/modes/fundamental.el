@@ -40,10 +40,8 @@
     (diminish 'auto-fill-function))
 
   ;;; (Packages) ;;;
-  (use-package rainbow-delimiters
-    :ensure t)
-  (use-package mic-paren
-    :ensure t)
+  (use-package rainbow-delimiters)
+  (use-package mic-paren)
   (paren-activate))
 
 (user--fundamental-mode-config)

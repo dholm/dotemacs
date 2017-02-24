@@ -81,11 +81,9 @@
            flyspell-list-command "--list")))))
 
     (use-package helm-flyspell
-      :ensure t
       :bind ("C-c c s" . helm-flyspell-correct))
 
     (use-package flyspell-lazy
-      :ensure t
       :config
       (validate-setq
        ;; Idle timeout before running spell check on region.
@@ -93,12 +91,10 @@
        ;; Idle timeout before running spell check on entire buffer.
        flyspell-lazy-window-idle-seconds 60))
 
-    (use-package auto-dictionary
-      :ensure t)
+    (use-package auto-dictionary)
 
     (with-executable 'hunspell
       (use-package rw-hunspell
-        :ensure t
         :config
         (after-load 'ispell
           (when ispell-really-hunspell

@@ -23,12 +23,15 @@
   :quelpa (sepia
            :fetcher git
            :url "http://repo.or.cz/sepia.git")
+  :defer t
   :init
   ;; Use Sepia as the default perl mode.
   (defalias 'perl-mode 'sepia-mode)
   :config
   ;;; (Packages) ;;;
-  (use-package perl-completion)
+  (use-package perl-completion
+    :requires anything
+    :defer t)
 
   ;;; (Hooks) ;;;
   (add-hook 'sepia-mode-hook 'user--sepia-mode-hook))

@@ -119,9 +119,8 @@
 
 
 (use-package org
-  :quelpa (org :fetcher git
-               :url "git://orgmode.org/org-mode.git"
-               :files ("lisp/*.el" "contrib/lisp/*.el" "doc/dir" "doc/*.texi"))
+  :ensure org-plus-contrib
+  :defer t
   :commands org-mode
   :init
   ;; Create data and cache stores.
@@ -167,12 +166,8 @@
    org-treat-S-cursor-todo-selection-as-state-change nil
    ;; Allow refile to create parent tasks, with confirmation.
    org-refile-allow-creating-parent-nodes 'confirm
-   ;; Open mailto: links using compose-mail.
-   org-link-mailto-program '(compose-mail "%a" "%s")
    ;; Start in folded view.
-   org-startup-folded t
-   ;; Allow alphabetical lists.
-   org-alphabetical-lists t)
+   org-startup-folded t)
 
   (when (eq default-terminal-coding-system 'utf-8)
     (validate-setq
@@ -232,8 +227,6 @@
     (validate-setq
      ;; Resume clocking task on clock-in if the clock is open.
      org-clock-in-resume t
-     ;; Separate drawers for clocking and logs.
-     org-drawers '("PROPERTIES" "LOGBOOK")
      ;; Save clock data and state changes and notes in the LOGBOOK drawer.
      org-clock-into-drawer t
      ;; Remove clock line if time is zero.
@@ -464,6 +457,8 @@
      org-habit-graph-column 50)))
 
 (use-package org-annotate-file
+  :ensure org-plus-contrib
+  :defer t
   :init
   (autoload 'org-annotate-file "org-annotate-file" nil t)
 

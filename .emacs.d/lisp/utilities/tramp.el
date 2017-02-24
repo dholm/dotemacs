@@ -9,7 +9,6 @@
           :files ("lisp/*.el" "texi/*.texi")))
 
 (use-package tramp
-  :ensure t
   :after dash
   :init
   (autoload 'tramp-check-proper-method-and-host "tramp.el")
@@ -42,6 +41,7 @@
              ,(path-join *user-home-directory* ".ssh" "config")))))
 
   (use-package tramp-cache
+    :ensure tramp
     :config
     (validate-setq
      ;; Persistency files.

@@ -29,19 +29,16 @@
    column-number-mode t)
 
   ;;; (Packages) ;;;
-  (use-package diminish
-    :ensure t)
   ;; Display the current time and system load.
   (use-package time
-    :ensure t
     :config
     (validate-setq
      display-time-24hr-format t
      display-time-day-and-date t)
     (display-time))
+
   ;; Display battery status.
   (use-package battery
-    :ensure t
     :config
     (when (and (functionp battery-status-function)
                (not (string-match-p "N/A" (battery-format "%B" (funcall battery-status-function)))))
@@ -52,7 +49,6 @@
                                " %d°C")))
       (display-battery-mode t)))
   (use-package smart-mode-line
-    :ensure t
     :config (user--smart-mode-line-config)))
 
 (user--modeline-config)

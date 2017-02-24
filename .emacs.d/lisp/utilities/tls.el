@@ -3,6 +3,7 @@
 ;;; Code:
 
 (use-package tls
+  :ensure nil
   :defer t
   :config
   ;; Don't use validate-setq due to :inline not being supported.
@@ -12,6 +13,7 @@
                  "gnutls-cli --priority secure256 --disable-extensions -p %p %h")))
 
 (use-package starttls
+  :ensure nil
   :defer t
   :config
   (validate-setq

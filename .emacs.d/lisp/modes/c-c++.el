@@ -201,6 +201,7 @@
 
   ;;; (Packages) ;;;
   (use-package cc-vars
+    :ensure cc-mode
     :config
     (validate-setq
      ;; Support completion using tab.
@@ -245,7 +246,6 @@
     (use-package flycheck-irony)))
 
   (use-package function-args
-    :ensure t
     :diminish function-args-mode)
   (use-package google-c-style))
 

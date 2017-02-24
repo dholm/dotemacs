@@ -44,6 +44,7 @@
    ;; Put the repository in the data directory.
    bookmark-default-file *bookmark+-data-file*)
   (use-package bookmark+
+    :defer t
     :config
     (validate-setq
      ;; Save bookmarks after ten updates.
@@ -55,6 +56,7 @@
     (define-key bookmark-map (kbd "t") 'bmkp-add-tags)
 
     (use-package bookmark+-bmu
+      :ensure bookmark+
       :config
       (validate-setq
        ;; Put the menu state in the cache directory.

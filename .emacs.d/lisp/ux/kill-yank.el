@@ -6,22 +6,6 @@
   "CUA mode hook."
   (define-key cua--rectangle-keymap (kbd "C-o") nil))
 
-
-(defun user--expand-region-config ()
-  "Initialize expand region."
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :basic :selection-expand 'er/expand-region))
-
-
-(defun user--multiple-cursors-config ()
-  "Initialize multiple cursors."
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :basic :selection-next 'mc/mark-next-like-this)
-  (user/bind-key-global :basic :selection-prev 'mc/mark-previous-like-this)
-  (user/bind-key-global :basic :selection-all 'mc/mark-all-like-this)
-  (user/bind-key-global :basic :selection-edit-lines 'mc/edit-lines))
-
-
 (defun user--kill-yank-config ()
   "Initialize copy/paste."
   (validate-setq
@@ -70,13 +54,17 @@
 
   ;;; (Packages) ;;;
   (use-package expand-region
-    :ensure t
-    :config (user--expand-region-config))
+    :defer t
+    :init
+    (user/bind-key-global :basic :selection-expand 'er/expand-region))
   (use-package multiple-cursors
-    :ensure t
-    :config (user--multiple-cursors-config))
+    :defer t
+    :init
+    (user/bind-key-global :basic :selection-next 'mc/mark-next-like-this)
+    (user/bind-key-global :basic :selection-prev 'mc/mark-previous-like-this)
+    (user/bind-key-global :basic :selection-all 'mc/mark-all-like-this)
+    (user/bind-key-global :basic :selection-edit-lines 'mc/edit-lines))
   (use-package rect-mark
-    :ensure t
     :quelpa (rect-mark
              :fetcher wiki
              :files ("rect-mark.el"))))

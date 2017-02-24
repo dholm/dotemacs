@@ -13,6 +13,7 @@
     (guide-key/add-local-guide-key-sequence "%")))
 
 (use-package dired
+  :ensure nil
   :defer t
   :config
   (validate-setq
@@ -31,7 +32,7 @@
   (use-package async
     :defer t)
   (use-package dired-efap
-    :ensure t
+    :defer t
     :init
     (after-load 'dired
       ;; Load dired-efap when dired is loaded.

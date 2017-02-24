@@ -16,6 +16,7 @@
   (user/bind-key-global :emacs :recenter 'recenter))
 
 (use-package mwheel
+  :ensure nil
   :if window-system
   :config
   (validate-setq

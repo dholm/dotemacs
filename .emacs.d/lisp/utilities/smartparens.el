@@ -29,7 +29,6 @@
     (smartparens-mode t)))
 
 (use-package smartparens
-  :ensure t
   :diminish smartparens-mode
   :bind (:map smartparens-mode-map
          ([remap kill-line] . sp-kill-hybrid-sexp))

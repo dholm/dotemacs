@@ -158,6 +158,7 @@
 
 (use-package calendar
   :commands calendar
+  :defer t
   :init
   (add-hook 'calendar-today-visible-hook 'calendar-mark-today)
   (add-hook 'calendar-load-hook 'user--calendar-load-hook)
@@ -180,10 +181,12 @@
   (user--calendar-week-config)
 
   (use-package holidays
+    :ensure calendar
     :config
     (user--swedish-holidays-config))
 
   (use-package diary-lib
+    :ensure calendar
     :init
     (add-hook 'diary-display-function 'diary-fancy-display)
     :config
@@ -192,6 +195,7 @@
      diary-number-of-entries 7)
 
     (use-package appt
+      :ensure calendar
       :config
       (validate-setq
        ;; Number of minutes to notify before an event starts.

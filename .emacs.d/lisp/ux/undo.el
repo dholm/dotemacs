@@ -11,7 +11,6 @@
 (user/bind-key-global :basic :undo 'undo)
 
 (use-package undo-tree
-  :ensure t
   :bind* (([remap undo] . undo-tree-undo)
           ([remap redo] . undo-tree-redo))
   :config

@@ -33,13 +33,10 @@
 
 
 (use-package recentf
-  :ensure t
   :config (user--recentf-config))
 (use-package savehist
-  :ensure t
   :config (user--savehist-config))
 (use-package saveplace
-  :ensure t
   :config (user--saveplace-config))
 
 

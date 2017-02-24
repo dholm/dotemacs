@@ -17,6 +17,7 @@
   :config
   ;;; (Packages) ;;;
   (use-package info+
+    :defer t
     :config
     (validate-setq
      ;; Enable breadcrumbs in header line.
@@ -24,6 +25,7 @@
      Info-breadcrumbs-in-mode-line-mode nil))
 
   (use-package helm-info
+    :defer t
     :ensure helm
     :bind (("C-c h h e" . helm-info-emacs)
            ("C-c h h i" . helm-info-at-point))))

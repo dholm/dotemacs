@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package fill-column-indicator
-  :ensure t
+  :defer t
   :init
   (global-set-key [f3] 'fci-mode))
 

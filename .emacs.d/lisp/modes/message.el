@@ -32,6 +32,7 @@
   (eudc-load-eudc))
 
 (use-package message
+  :ensure nil
   :defer t
   :init
   (add-hook 'message-mode-hook 'user--message-mode-hook)

@@ -3,6 +3,7 @@
 ;;; Code:
 
 (use-package auth-source
+  :ensure nil
   :defer t
   :config
   (validate-setq

@@ -37,9 +37,12 @@
   (add-hook 'shell-mode-hook 'user--shell-mode-hook)
   :config
   ;;; (Packages) ;;;
-  (use-package bash-completion)
-  (use-package shelldoc)
-  (use-package shell-command))
+  (use-package bash-completion
+    :defer t)
+  (use-package shelldoc
+    :defer t)
+  (use-package shell-command
+    :defer t))
 
 
 (provide 'modes/shell)

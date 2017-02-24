@@ -3,14 +3,12 @@
 ;;; Code:
 
 (use-package winring
-  :ensure t
   :config
   (use-package zoom-window
     :config
     (define-key winring-map (kbd "z") 'zoom-window-zoom)))
 
 (winring-initialize)
-
 
 
 (provide 'apps/winring)

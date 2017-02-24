@@ -3,6 +3,7 @@
 ;;; Code:
 
 (use-package comint
+  :ensure nil
   :defer t
   :config
   (validate-setq

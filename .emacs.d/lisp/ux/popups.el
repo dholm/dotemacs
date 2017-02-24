@@ -33,10 +33,8 @@
 
   ;;; (Packages) ;;;
   (use-package popup
-    :ensure t
     :config (user--popup-config))
   (use-package popwin
-    :ensure t
     :config (user--popwin-config)))
 
 (user--popups-config)

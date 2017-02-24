@@ -3,8 +3,7 @@
 ;;; Code:
 
 (with-executable 'keychain
-  (use-package keychain-environment
-    :ensure t))
+  (use-package keychain-environment))
 
 
 (provide 'utilities/keychain)

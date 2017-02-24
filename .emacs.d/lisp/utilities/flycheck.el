@@ -44,7 +44,6 @@
 
 
 (use-package flycheck
-  :ensure t
   :init
   (add-hook 'flycheck-mode-hook 'user--flycheck-mode-hook)
   (add-hook 'ede-minor-mode-hook 'user/ede-flycheck-setup)
@@ -60,15 +59,14 @@
     ;; Use popwin for Flycheck error list.
     (push '(flycheck-error-list-mode :stick t) popwin:special-display-config))
 
-  (when (display-graphic-p)
+  ;;; (Packages) ;;;
+  (use-package flycheck-pos-tip
+    :if window-system
+    :config
     ;; Make sure flycheck-pos-tip is loaded.
     (require 'flycheck-pos-tip nil t))
 
-  ;;; (Packages) ;;;
-  (use-package flycheck-pos-tip
-    :ensure t)
-  (use-package helm-flycheck
-    :ensure t))
+  (use-package helm-flycheck))
 
 
 (provide 'utilities/flycheck)

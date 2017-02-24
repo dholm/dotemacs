@@ -266,7 +266,6 @@
 
   ;;; (Packages) ;;;
   (use-package auto-complete
-    :ensure t
     :requires popup fuzzy
     :quelpa (auto-complete
              :fetcher github
@@ -274,7 +273,6 @@
     :config
     (user--auto-complete-config))
   (use-package company
-    :ensure t
     :diminish company-mode
     :config (user--company-mode-config))
   (use-package company-dabbrev-code
@@ -283,8 +281,7 @@
     (validate-setq
      ;; Complete even outside of code.
      company-dabbrev-code-everywhere t))
-  (use-package company-flx
-    :ensure t)
+  (use-package company-flx)
   (use-package company-quickhelp
     :ensure company
     :if window-system

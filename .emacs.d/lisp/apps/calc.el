@@ -16,6 +16,7 @@
    calc-highlight-selections-with-faces t)
 
   (use-package calc-units
+    :ensure calc
     :config
     ;; Add additional units for bits and bytes.
     ;; Stolen from: `https://github.com/dalehagglund/emacs.d/blob/master/calc.el'

@@ -13,14 +13,7 @@
    ;; Don't spam *Messages* with error logs.
    elnode-error-log-to-messages nil
    ;; Log store.
-   elnode-log-files-directory (path-join *user-cache-directory* "elnode"))
-
-  (use-package elnode-org
-    :quelpa (elnode-org
-             :fetcher github
-             :repo "nicferrier/elnode-org")
-    :defer t
-    :requires elnode org))
+   elnode-log-files-directory (path-join *user-cache-directory* "elnode")))
 
 
 (provide 'apps/elnode)

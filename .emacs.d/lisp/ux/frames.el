@@ -72,10 +72,8 @@
   (user/bind-key-global :emacs :shrink-horizontal 'shrink-window-horizontally)
 
   ;;; (Packages) ;;;
-  (use-package fullframe
-    :ensure t)
+  (use-package fullframe)
   (use-package transpose-frame
-    :ensure t
     :config (user--transpose-frame-config)))
 
 (user--frames-config)

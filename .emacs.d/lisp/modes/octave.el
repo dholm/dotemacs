@@ -10,12 +10,15 @@
   (eldoc-mode t))
 
 (use-package octave
+  :ensure nil
   :defer t
   :init
   (add-auto-mode 'octave-mode "\\.m$")
   (add-hook 'octave-mode-hook 'user--octave-mode-hook)
   :config
-  (use-package ac-octave))
+  (use-package ac-octave
+    :after auto-complete
+    :defer t))
 
 
 (provide 'modes/octave)

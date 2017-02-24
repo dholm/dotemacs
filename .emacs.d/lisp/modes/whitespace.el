@@ -46,7 +46,6 @@
 
 
 (use-package whitespace
-  :ensure t
   :diminish whitespace-mode
   :init
   (add-hook 'whitespace-mode-hook 'user--whitespace-mode-hook)

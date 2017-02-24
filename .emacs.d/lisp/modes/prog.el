@@ -22,12 +22,12 @@
 
 
 (use-package prog-mode
+  :ensure nil
   :init
   (add-hook 'prog-mode-hook 'user--prog-mode-hook)
   :config
   ;;; (Packages) ;;;
-  (use-package comment-dwim-2
-    :ensure t))
+  (use-package comment-dwim-2))
 
 
 (provide 'modes/prog)

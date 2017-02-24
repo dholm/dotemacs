@@ -44,10 +44,8 @@
 
   ;;; (Packages) ;;;
   (use-package ace-jump-mode
-    :ensure t
     :config (user--ace-jump-mode-config))
   (use-package smart-forward
-    :ensure t
     :config (user--smart-forward-config)))
 
 (user--navigation-config)

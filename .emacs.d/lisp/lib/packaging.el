@@ -22,12 +22,14 @@
    '(("GNU ELPA"     . "http://elpa.gnu.org/packages/")
      ("MELPA Stable" . "http://stable.melpa.org/packages/")
      ("MELPA"        . "http://melpa.org/packages/")
+     ("org"          . "http://orgmode.org/elpa/")
      ("marmalade"    . "http://marmalade-repo.org/packages/"))
    ;; Prefer MELPA Stable over GNU over MELPA.
    package-archive-priorities
-   '(("MELPA Stable" . 15)
-     ("GNU ELPA"     . 10)
-     ("MELPA"        . 5)
+   '(("MELPA Stable" . 20)
+     ("GNU ELPA"     . 15)
+     ("MELPA"        . 10)
+     ("org"          . 5)
      ("marmalade"    . 0))))
 
 
@@ -44,13 +46,17 @@
   (require 'validate))
 
 (use-package quelpa-use-package
-  :ensure t
   :config
   (validate-setq
+   ;; Always ensure packages have been installed.
+   use-package-always-ensure t
    ;; Only use quelpa for custom packages.
    quelpa-checkout-melpa-p nil
    ;; Only load quelpa on demand.
-   quelpa-use-package-inhibit-loading-quelpa t))
+   quelpa-use-package-inhibit-loading-quelpa t)
+
+  ;; Protect quelpa recipes when forcing ensure.
+  (quelpa-use-package-activate-advice))
 
 
 (defun user--el-get-init ()

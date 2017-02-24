@@ -78,7 +78,7 @@
 
   ;;; (Packages) ;;;
   (use-package magit
-    :ensure t
+    :defer t
     :config (user--magit-config))
 
   (use-package magit-gerrit
@@ -88,18 +88,20 @@
     :after magit)
 
   (use-package git-timemachine
-    :ensure t)
+    :defer t)
 
   (use-package git-gutter
-    :ensure t)
+    :defer t)
 
   (use-package git-gutter-fringe
     :if window-system
     :after git-gutter
+    :defer t
     :config (user--git-gutter-fringe-config))
 
   (use-package git-messenger
     :ensure t
+    :defer t
     :config (user--git-messenger-config))
 
   (when (feature-p 'helm)

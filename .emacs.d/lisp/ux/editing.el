@@ -58,7 +58,6 @@ mode that sets `syntax-ppss' properly."
   ;;; (Packages) ;;;
   (when (feature-p 'helm)
     (use-package helm-unicode
-      :ensure t
       :bind ("C-c h 8" . helm-unicode)))
 
   ;;; (Bindings) ;;;

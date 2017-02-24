@@ -41,14 +41,13 @@
     (set-up-slime-ac)))
 
 (use-package lisp-mode
+  :ensure nil
   :defer t
   :init
   (add-hook 'lisp-mode-hook 'user--lisp-mode-hook)
   :config
   (use-package slime
-    :ensure t
     :init
-    (add-ac-modes 'slime-repl-mode)
     (add-hook 'slime-mode-hook 'user--slime-mode-hook)
     (add-hook 'slime-repl-mode-hook 'user--slime-mode-hook))
     :config
@@ -63,13 +62,18 @@
       ((executable-find "clisp") "clisp -K full")
       (t inferior-lisp-program)))
 
-    (with-feature 'slime-c-p-c
+    (use-package slime-c-p-c
+      :ensure slime
+      :defer t
+      :config
       (validate-setq
        slime-complete-symbol*-fancy t))
 
     (slime-setup '(slime-repl))
 
-    (use-package ac-slime))
+    (use-package ac-slime
+      :config
+      (add-ac-modes 'slime-repl-mode)))
 
 
 (provide 'modes/lisp)

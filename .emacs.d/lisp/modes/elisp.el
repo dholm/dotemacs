@@ -4,7 +4,8 @@
 
 (defun user--emacs-lisp-mode-hook ()
   "Emacs Lisp mode hook."
-  (user--lisp-mode-common-hook)
+  (when (fboundp 'user--lisp-mode-common-hook)
+    (user--lisp-mode-common-hook))
 
   (with-feature 'auto-compile
     (auto-compile-on-save-mode t)
@@ -71,7 +72,7 @@
                  :margin t))))
 
 (use-package elisp-mode
-  :after modes/lisp
+  :ensure nil
   :init
   (add-hook 'emacs-lisp-mode-hook 'user--emacs-lisp-mode-hook)
   (add-hook 'minibuffer-setup-hook 'user--minibuffer-setup-hook)
@@ -93,13 +94,10 @@
   (use-package eldoc-eval
     :config
     (eldoc-in-minibuffer-mode t))
-  (use-package rainbow-delimiters
-    :ensure t)
+  (use-package rainbow-delimiters)
   (use-package paredit
-    :ensure t
     :diminish paredit-mode)
   (use-package redshank
-    :ensure t
     :diminish redshank-mode)
   (use-package eldoc
     :ensure nil
