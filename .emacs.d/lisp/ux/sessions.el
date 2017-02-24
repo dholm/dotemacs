@@ -2,42 +2,32 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--recentf-config ()
-  "Initialize Emacs recent files history."
+(use-package recentf
+  :init
+  ;; Prevent entries from loading tramp resulting in the stable
+  ;; version of CEDET being loaded before devel.
+  (add-hook 'user--after-init-hook 'recentf-mode t)
+  :config
   (validate-setq
    recentf-max-saved-items 1000
    recentf-exclude '("/tmp/")
-   recentf-save-file (path-join *user-cache-directory* "recentf"))
+   recentf-save-file (path-join *user-cache-directory* "recentf")))
 
-  ;; Prevent entries from loading tramp resulting in the stable
-  ;; version of CEDET being loaded before devel.
-  (add-hook 'user--after-init-hook 'recentf-mode t))
-
-
-(defun user--savehist-config ()
-  "Initialize Emacs save history."
+(use-package savehist
+  :init
+  (savehist-mode t)
+  :config
   (validate-setq
    savehist-additional-variables '(search-ring regexp-search-ring kill-ring)
-   savehist-file (path-join *user-cache-directory* "savehist"))
+   savehist-file (path-join *user-cache-directory* "savehist")))
 
-  (savehist-mode t))
-
-
-(defun user--saveplace-config ()
-  "Initialize Emacs buffer location history."
+(use-package saveplace
+  :config
   (validate-setq
    ;; Location of saveplace cache store.
    save-place-file (path-join *user-cache-directory* "saveplace")
    ;; Enable.
    save-place t))
-
-
-(use-package recentf
-  :config (user--recentf-config))
-(use-package savehist
-  :config (user--savehist-config))
-(use-package saveplace
-  :config (user--saveplace-config))
 
 
 (provide 'ux/sessions)

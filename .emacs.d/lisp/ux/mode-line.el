@@ -2,25 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--smart-mode-line-config ()
-  "Initialize smart mode line."
-  (validate-setq
-   ;; Configure theme.
-   sml/theme 'automatic
-   ;; Shorten path and modes.
-   sml/shorten-directory t
-   sml/shorten-modes t
-   sml/name-width 25
-   sml/mode-width 'full)
-
-  (after-load 'solarized-theme
-    (sml/setup)
-    (unless (featurep 'projectile)
-      (setq
-       ;; Temporary workaround for sml thinking projectile has been loaded.
-       sml/projectile-loaded-p nil))))
-
-
 (defun user--modeline-config ()
   "Initialize Emacs mode line."
   (validate-setq
@@ -48,8 +29,24 @@
                                  ""
                                " %d°C")))
       (display-battery-mode t)))
+
   (use-package smart-mode-line
-    :config (user--smart-mode-line-config)))
+    :config
+    (validate-setq
+     ;; Configure theme.
+     sml/theme 'automatic
+     ;; Shorten path and modes.
+     sml/shorten-directory t
+     sml/shorten-modes t
+     sml/name-width 25
+     sml/mode-width 'full)
+
+    (after-load 'solarized-theme
+      (sml/setup)
+      (unless (featurep 'projectile)
+        (setq
+         ;; Temporary workaround for sml thinking projectile has been loaded.
+         sml/projectile-loaded-p nil)))))
 
 (user--modeline-config)
 

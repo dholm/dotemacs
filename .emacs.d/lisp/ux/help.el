@@ -2,19 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--guide-key-config ()
-  "Initialize guide key."
-  (validate-setq
-   ;; Register all the prefix keys.
-   guide-key/recursive-key-sequence-flag t
-   guide-key/guide-key-sequence user/prefix-list
-   ;; Number of seconds until help is shown.
-   guide-key/idle-delay 1.0)
-
-  ;; Enable guide key.
-  (guide-key-mode t))
-
-
 (defun user--help-config ()
   "Initialize Emacs help."
   (user/bind-key-global :emacs :describe-face 'describe-face)
@@ -42,7 +29,16 @@
   ;;; (Packages) ;;;
   (use-package guide-key
     :diminish guide-key-mode
-    :config (user--guide-key-config))
+    :config
+    (validate-setq
+     ;; Register all the prefix keys.
+     guide-key/recursive-key-sequence-flag t
+     guide-key/guide-key-sequence user/prefix-list
+     ;; Number of seconds until help is shown.
+     guide-key/idle-delay 1.0)
+
+    ;; Enable guide key.
+    (guide-key-mode t))
 
   (use-package guide-key-tip
     :ensure guide-key

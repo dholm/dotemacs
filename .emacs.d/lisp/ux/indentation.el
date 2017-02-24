@@ -2,17 +2,14 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--dtrt-indent-config ()
-  "Initialize dtrt indent."
-  (validate-setq
-   dtrt-indent-verbosity 0
-   global-mode-string (delq 'dtrt-indent-mode-line-info global-mode-string)))
-
-
 (defun user--indentation-config ()
   "Initialize Emacs indentation behavior."
   (use-package dtrt-indent
-    :config (user--dtrt-indent-config))
+    :config
+    (validate-setq
+     dtrt-indent-verbosity 0
+     global-mode-string (delq 'dtrt-indent-mode-line-info global-mode-string)))
+
   (use-package smart-tabs-mode
     :quelpa (smart-tabs-mode
              :fetcher github

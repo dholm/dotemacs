@@ -14,20 +14,6 @@
   (scroll-up 1))
 
 
-(defun user--ace-jump-mode-config ()
-  "Initialize ace jump mode."
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :util :ace-jump-mode 'ace-jump-mode))
-
-
-(defun user--smart-forward-config ()
-  "Initialize smart-forward."
-  (user/bind-key-global :nav :context-forward 'smart-forward)
-  (user/bind-key-global :nav :context-backward 'smart-backward)
-  (user/bind-key-global :nav :context-up 'smart-up)
-  (user/bind-key-global :nav :context-down 'smart-down))
-
-
 (defun user--navigation-config ()
   "Set up Emacs buffer navigation."
   ;; Enable mouse in iTerm2
@@ -44,9 +30,16 @@
 
   ;;; (Packages) ;;;
   (use-package ace-jump-mode
-    :config (user--ace-jump-mode-config))
+    :defer t
+    :init
+    (user/bind-key-global :util :ace-jump-mode 'ace-jump-mode))
   (use-package smart-forward
-    :config (user--smart-forward-config)))
+    :defer t
+    :init
+    (user/bind-key-global :nav :context-forward 'smart-forward)
+    (user/bind-key-global :nav :context-backward 'smart-backward)
+    (user/bind-key-global :nav :context-up 'smart-up)
+    (user/bind-key-global :nav :context-down 'smart-down)))
 
 (user--navigation-config)
 
