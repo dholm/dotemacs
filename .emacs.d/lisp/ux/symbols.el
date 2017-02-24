@@ -7,7 +7,7 @@
   ;;; (Packages) ;;;
   (use-package page-break-lines
     :diminish page-break-lines-mode
-    :config
+    :init
     (global-page-break-lines-mode t))
 
   (with-feature 'ux/coding

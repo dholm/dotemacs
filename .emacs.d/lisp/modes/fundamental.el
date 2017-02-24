@@ -34,11 +34,6 @@
    ;; default.
    fill-column 80)
 
-  (after-load 'diminish
-    ;; Diminish common modes.
-    (diminish 'abbrev-mode)
-    (diminish 'auto-fill-function))
-
   ;;; (Packages) ;;;
   (use-package rainbow-delimiters)
   (use-package mic-paren)

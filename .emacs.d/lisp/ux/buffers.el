@@ -29,12 +29,15 @@
 
 (defun user--buffers-config ()
   "Initialize Emacs buffers."
-  (validate-setq
-   ;; Set up uniquify's style.
-   uniquify-buffer-name-style 'reverse
-   uniquify-separator " • "
-   uniquify-after-kill-buffer-p t
-   uniquify-ignore-buffers-re "^\\*")
+  (use-package uniquify
+    :ensure nil
+    :config
+    (validate-setq
+     ;; Set up uniquify's style.
+     uniquify-buffer-name-style 'reverse
+     uniquify-separator " • "
+     uniquify-after-kill-buffer-p t
+     uniquify-ignore-buffers-re "^\\*"))
 
   ;;; (Bindings) ;;;
   (user/bind-key-global :basic :open-file 'find-file)

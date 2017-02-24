@@ -14,6 +14,9 @@
   :defer t
   :init
   (add-hook 'Info-mode-hook 'user--info-mode-hook)
+  (user/bind-key-global :emacs :describe-key-extensive
+                        'Info-goto-emacs-key-command-node)
+  (user/bind-key-global :emacs :manual 'info-emacs-manual)
   :config
   ;;; (Packages) ;;;
   (use-package info+

@@ -35,16 +35,11 @@ mode that sets `syntax-ppss' properly."
            (skip-chars-backward " \t"))
           (t (move-end-of-line arg)))))
 
-
 (defun user--editing-config ()
   "Initialize editing in Emacs."
-  (when (eq window-system 'ns)
-    (setq
-     ;; Swap command and option on MacOS X.
-     mac-option-modifier 'alt
-     mac-command-modifier 'meta
-     ;; Use right option key for writing special characters.
-     mac-right-option-modifier nil))
+  (validate-setq
+   ;; Increase history.
+   history-length 1000)
 
   ;; Enable narrowing.
   (put 'narrow-to-region 'disabled nil)
@@ -56,6 +51,21 @@ mode that sets `syntax-ppss' properly."
   (put 'downcase-region 'disabled nil)
 
   ;;; (Packages) ;;;
+  (use-package simple
+    :ensure nil
+    :diminish auto-fill-function)
+
+  (when (eq window-system 'ns)
+    (use-package ns-win
+      :ensure nil
+      :config
+      (validate-setq
+       ;; Swap command and option on MacOS X.
+       mac-option-modifier 'alt
+       mac-command-modifier 'meta
+       ;; Use right option key for writing special characters.
+       mac-right-option-modifier nil)))
+
   (when (feature-p 'helm)
     (use-package helm-unicode
       :bind ("C-c h 8" . helm-unicode)))

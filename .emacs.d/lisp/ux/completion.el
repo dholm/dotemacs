@@ -132,67 +132,6 @@
         (error "Declaration of ac-modes is missing!")))))
 
 
-(defun user--auto-complete-config ()
-  "Initialize auto-complete."
-  (with-feature 'auto-complete-config
-    ;; Load default configuration.
-    (ac-config-default)
-    ;; Don't forcibly enable auto-complete.
-    (global-auto-complete-mode -1))
-
-  (after-load 'diminish
-    (diminish 'auto-complete-mode))
-
-  (validate-setq
-   ;; Limit the number of candidates.
-   ac-candidate-limit 40
-   ;; Delay until narrowing completions.
-   ac-delay 0.5
-   ;; Do not trigger completion automatically.
-   ac-auto-start nil
-   ;; Use fuzzy matching.
-   ac-fuzzy-enable t
-   ac-use-fuzzy t
-   ;; Do not pop up menu automatically.
-   ac-auto-show-menu nil
-   ;; Allow normal navigation keys in menu.
-   ac-use-menu-map t
-   ;; Do not auto-expand common candidates.
-   ac-expand-on-auto-complete nil
-   ;; Show quick help popup after half a second.
-   ac-use-quick-help t
-   ac-quick-help-delay 0.5
-   ;; Store the completion history in the cache directory.
-   ac-comphist-file (path-join *user-cache-directory* "ac-comphist.dat"))
-
-  ;; Install workaround for Flyspell
-  (add-hook 'flymake-mode-hook 'ac-flyspell-workaround)
-
-  ;; Set up auto-complete for lisp-interaction- and ielm-mode.
-  (dolist (hook (list 'lisp-interaction-mode-hook
-                      'ielm-mode-hook))
-    (add-hook hook 'ac-emacs-lisp-mode-setup))
-
-  ;;; (Hooks) ;;;
-  (add-hook 'auto-complete-mode-hook 'user--auto-complete-mode-hook)
-
-  ;;; (Bindings) ;;;
-  (ac-set-trigger-key (user/get-key :code :try-complete))
-  (validate-setq
-   ac-completing-map
-   (let ((map (make-sparse-keymap)))
-     ;; Expand on tab.
-     (define-key map (user/get-key :code :try-complete) 'ac-expand-common)
-     ;; Complete on enter.
-     (define-key map (user/get-key :code :complete) 'ac-complete)
-     ;; Bind configured auto complete key.
-     (define-key map (user/get-key :code :auto-complete) 'auto-complete)
-     ;; Scroll quick-help using M-n/p.
-     (define-key map (kbd "C-M-n") 'ac-quick-help-scroll-down)
-     (define-key map (kbd "C-M-p") 'ac-quick-help-scroll-up)
-     map)))
-
-
 (defun company-complete-common-or-selection ()
   "Insert the common part of all candidates, or the selection."
   (interactive)
@@ -214,45 +153,6 @@
        (append sources company-backends)))))
 
 
-(defun user--company-mode-config ()
-  "Initialize company mode."
-  (validate-setq
-   ;; Do not trigger completion automatically.
-   company-idle-delay nil
-   ;; Complete immediately.
-   company-minimum-prefix-length 0
-   ;; Show commonly used matches first.
-   company-transformers '(company-sort-by-occurrence)
-   ;; Align annotations to the right of tooltip.
-   company-tooltip-align-annotations t
-   ;; Active company frontends.
-   company-frontends
-   '(company-pseudo-tooltip-unless-just-one-frontend
-     company-preview-frontend
-     company-echo-metadata-frontend))
-
-  ;;; (Hooks) ;;;
-  (add-hook 'company-mode-hook 'user--company-mode-hook)
-
-  ;;; (Bindings) ;;;
-  (after-load 'company
-    (define-key company-active-map
-      (user/get-key :code :complete) 'company-complete-selection)
-    (define-key company-active-map
-      (user/get-key :code :try-complete) 'company-complete-common-or-selection)
-    (define-key company-active-map
-      (user/get-key :basic :forward-line) 'company-select-next)
-    (define-key company-active-map
-      (user/get-key :basic :backward-line) 'company-select-previous))
-
-  ;; Enable company completion globally.
-  (global-company-mode t)
-  (after-load 'company
-    (with-feature 'company-flx
-      ;; Enable fuzzy matching.
-      (company-flx-mode t))))
-
-
 (defun user--completion-config ()
   "Initialize automatic code completion."
   (setq
@@ -270,27 +170,108 @@
     :quelpa (auto-complete
              :fetcher github
              :repo "auto-complete/auto-complete")
+    :diminish auto-complete-mode
+    :init
+    (add-hook 'flymake-mode-hook 'ac-flyspell-workaround)
+    (add-hook 'auto-complete-mode-hook 'user--auto-complete-mode-hook)
     :config
-    (user--auto-complete-config))
+    (with-feature 'auto-complete-config
+      ;; Load default configuration.
+      (ac-config-default)
+      ;; Don't forcibly enable auto-complete.
+      (global-auto-complete-mode -1))
+
+    (validate-setq
+     ;; Limit the number of candidates.
+     ac-candidate-limit 40
+     ;; Delay until narrowing completions.
+     ac-delay 0.5
+     ;; Do not trigger completion automatically.
+     ac-auto-start nil
+     ;; Use fuzzy matching.
+     ac-fuzzy-enable t
+     ac-use-fuzzy t
+     ;; Do not pop up menu automatically.
+     ac-auto-show-menu nil
+     ;; Allow normal navigation keys in menu.
+     ac-use-menu-map t
+     ;; Do not auto-expand common candidates.
+     ac-expand-on-auto-complete nil
+     ;; Show quick help popup after half a second.
+     ac-use-quick-help t
+     ac-quick-help-delay 0.5
+     ;; Store the completion history in the cache directory.
+     ac-comphist-file (path-join *user-cache-directory*
+                                 "ac-comphist.dat"))
+
+    ;; Set up auto-complete for lisp-interaction- and ielm-mode.
+    (dolist (hook (list 'lisp-interaction-mode-hook
+                        'ielm-mode-hook))
+      (add-hook hook 'ac-emacs-lisp-mode-setup))
+
+    ;;; (Bindings) ;;;
+    (ac-set-trigger-key (user/get-key :code :try-complete))
+    (validate-setq
+     ac-completing-map
+     (let ((map (make-sparse-keymap)))
+       ;; Expand on tab.
+       (define-key map (user/get-key :code :try-complete) 'ac-expand-common)
+       ;; Complete on enter.
+       (define-key map (user/get-key :code :complete) 'ac-complete)
+       ;; Bind configured auto complete key.
+       (define-key map (user/get-key :code :auto-complete) 'auto-complete)
+       ;; Scroll quick-help using M-n/p.
+       (define-key map (kbd "C-M-n") 'ac-quick-help-scroll-down)
+       (define-key map (kbd "C-M-p") 'ac-quick-help-scroll-up)
+       map)))
+
   (use-package company
     :diminish company-mode
-    :config (user--company-mode-config))
-  (use-package company-dabbrev-code
-    :ensure company
-    :config
-    (validate-setq
-     ;; Complete even outside of code.
-     company-dabbrev-code-everywhere t))
-  (use-package company-flx)
-  (use-package company-quickhelp
-    :ensure company
-    :if window-system
-    :config
-    (validate-setq
-     ;; Show quick help popup after half a second.
-     company-quickhelp-delay 0.5)
+    :init
+    (add-hook 'company-mode-hook 'user--company-mode-hook)
 
-    (add-hook 'company-mode-hook 'company-quickhelp-mode t)))
+    (global-company-mode t)
+    :config
+    (validate-setq
+     ;; Do not trigger completion automatically.
+     company-idle-delay nil
+     ;; Complete immediately.
+     company-minimum-prefix-length 0
+     ;; Show commonly used matches first.
+     company-transformers '(company-sort-by-occurrence)
+     ;; Align annotations to the right of tooltip.
+     company-tooltip-align-annotations t
+     ;; Active company frontends.
+     company-frontends
+     '(company-pseudo-tooltip-unless-just-one-frontend
+       company-preview-frontend
+       company-echo-metadata-frontend))
+
+    (define-key company-active-map
+      (user/get-key :code :complete) 'company-complete-selection)
+    (define-key company-active-map
+      (user/get-key :code :try-complete) 'company-complete-common-or-selection)
+    (define-key company-active-map
+      (user/get-key :basic :forward-line) 'company-select-next)
+    (define-key company-active-map
+      (user/get-key :basic :backward-line) 'company-select-previous)
+
+    (use-package company-dabbrev-code
+      :ensure company
+      :config
+      (validate-setq
+       ;; Complete even outside of code.
+       company-dabbrev-code-everywhere t))
+    (use-package company-flx)
+    (use-package company-quickhelp
+      :if window-system
+      :init
+      (add-hook 'company-mode-hook 'company-quickhelp-mode t)
+      (company-flx-mode t)
+      :config
+      (validate-setq
+       ;; Show quick help popup after half a second.
+       company-quickhelp-delay 0.5))))
 
 (user--completion-config)
 

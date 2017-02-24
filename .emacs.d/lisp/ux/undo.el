@@ -13,6 +13,12 @@
 (use-package undo-tree
   :bind* (([remap undo] . undo-tree-undo)
           ([remap redo] . undo-tree-redo))
+  :init
+  (global-undo-tree-mode t)
+
+  (user/bind-key-global :basic :undo 'undo-tree-undo)
+  (user/bind-key-global :basic :redo 'undo-tree-redo)
+  (user/bind-key-global :util :undo-tree 'undo-tree-visualize)
   :config
   ;; Ensure that cache store exists.
   (make-directory *user-undo-tree-cache-directory* t)
@@ -30,18 +36,10 @@
    ;; Display diffs in visualizer by default.
    undo-tree-visualizer-diff t)
 
-  ;; Enable globally.
-  (global-undo-tree-mode t)
-
   ;; Compress undo history.
   (defadvice undo-tree-make-history-save-file-name
       (after undo-tree activate)
-    (validate-setq ad-return-value (concat ad-return-value ".gz")))
-
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :basic :undo 'undo-tree-undo)
-  (user/bind-key-global :basic :redo 'undo-tree-redo)
-  (user/bind-key-global :util :undo-tree 'undo-tree-visualize))
+    (validate-setq ad-return-value (concat ad-return-value ".gz"))))
 
 
 (provide 'ux/undo)

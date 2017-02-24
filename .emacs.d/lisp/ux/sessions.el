@@ -10,7 +10,7 @@
   :config
   (validate-setq
    recentf-max-saved-items 1000
-   recentf-exclude '("/tmp/")
+   recentf-exclude '("/elpa/" "/tmp/")
    recentf-save-file (path-join *user-cache-directory* "recentf")))
 
 (use-package savehist
@@ -19,7 +19,7 @@
   :config
   (validate-setq
    savehist-additional-variables '(search-ring regexp-search-ring kill-ring)
-   savehist-file (path-join *user-cache-directory* "savehist")))
+   savehist-file (path-join *user-cache-directory* "savehist"))
 
 (use-package saveplace
   :config
@@ -27,7 +27,7 @@
    ;; Location of saveplace cache store.
    save-place-file (path-join *user-cache-directory* "saveplace")
    ;; Enable.
-   save-place t))
+   save-place-mode t))
 
 
 (provide 'ux/sessions)

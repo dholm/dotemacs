@@ -22,17 +22,25 @@
     :defer t
     :bind* (([remap query-replace-regexp] . vr/query-replace)
             ([remap replace-regexp] . vr/replace)))
+
   (use-package anzu
     :defer t
     :diminish anzu-mode
-    :config
+    :init
     (global-anzu-mode t))
+
   (use-package grep
     :defer t
     :config
     (validate-setq
      ;; Highlight matches when using grep.
-     grep-highlight-matches t)))
+     grep-highlight-matches t)
+
+    (when (eq system-type 'darwin)
+      (when-let (gnu-find (executable-find "gfind"))
+        (validate-setq find-program gnu-find)))
+    (when-let (gnu-xargs (executable-find "gxargs"))
+      (validate-setq xargs-program gnu-xargs))))
 
 (user--search-replace-config)
 

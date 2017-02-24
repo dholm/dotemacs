@@ -159,7 +159,7 @@
     (after-load 'helm
       (validate-setq
        ;; Enable Helm when available.
-       rtags-use-helm (require 'rtags-helm nil 'noerror)))
+       rtags-use-helm (when (require 'rtags-helm nil 'noerror) t)))
 
     (after-load 'tramp
       (validate-setq
