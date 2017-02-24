@@ -27,23 +27,23 @@
   ;; Ensure C-x # is used to save and close message.
   (local-set-key (kbd "C-x #") 'user/server-save))
 
+(use-package vc-annotate
+  :ensure nil
+  :defer t
+  :config
+  (with-feature 'fullframe
+    ;; Full frame annotations.
+    (fullframe vc-annotate vc-annotate-mode-quit-window nil)))
 
-(defun user--vc-config ()
-  "Initialize Emacs version control package."
-  (after-load 'vc-annotate
-    (with-feature 'fullframe
-      ;; Full frame annotations.
-      (fullframe vc-annotate vc-annotate-mode-quit-window nil)))
+(use-package autorevert
+  :ensure nil
+  :defer t
+  :diminish auto-revert-mode
+  :config
+  (after-load 'tramp
+    (validate-setq auto-revert-remote-files t)))
 
-  (after-load 'autorevert
-    (after-load 'tramp
-      (validate-setq auto-revert-remote-files t))
-    (after-load 'diminish
-      (diminish 'auto-revert-mode)))
-
-  (add-hook 'find-file-hook 'user--vc-find-file-hook))
-
-(user--vc-config)
+(add-hook 'find-file-hook 'user--vc-find-file-hook)
 
 
 (provide 'vcs/vc)

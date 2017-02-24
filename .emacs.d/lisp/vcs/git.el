@@ -15,10 +15,6 @@
   (local-set-key (kbd "C-c C-k") 'git-commit-abort))
 
 
-(defun user--magit-mode-hook ()
-  "Magit mode hook.")
-
-
 (defun user/magit-toggle-whitespace ()
   "Toggle showing all differences in whitespace when using Magit."
   (interactive)
@@ -32,77 +28,60 @@
   (magit-refresh))
 
 
-(defun user--magit-config ()
-  "Initialize Magit."
-  (validate-setq
-   ;; Automatically show process buffer if git takes too long to execute.
-   magit-process-popup-time 30
-   ;; Show fine differences for currently selected hunk.
-   magit-diff-refine-hunk t)
-
-  (with-feature 'fullframe
-    ;; Full frame Magit status.
-    (fullframe magit-status magit-mode-quit-window nil))
-
-  ;;; (Hooks) ;;;
-  (add-hook 'magit-mode-hook 'user--magit-mode-hook)
-
-  ;;; (Bindings) ;;;
-  (define-key magit-status-mode-map (kbd "W") 'user/magit-toggle-whitespace))
-
-
-(defun user--git-gutter-fringe-config ()
-  "Initialize git gutter fringe."
-  (validate-setq git-gutter-fr:side 'left-fringe))
-
-
-(defun user--git-messenger-config ()
-  "Initialize git messenger."
-  (validate-setq git-messenger:show-detail t))
-
-
 (defun user--git-config ()
   "Initialize Git support."
-  (after-load 'popwin
-    ;; Use popwin for certain Magit buffers.
-    (add-many-to-list
-     'popwin:special-display-config
-     '("*magit-edit-log*" :noselect t :height 0.2 :width 80)
-     '("*magit-process*" :noselect t :height 0.2 :width 80)))
-
   ;; Automatic conf-mode expressions.
   (add-auto-mode 'conf-mode "\\.git\\(config\\|attributes\\|ignore\\)\\(\\.local\\)?$")
 
-  ;;; (Hooks) ;;;
-  (add-hook 'git-commit-mode-hook 'user--git-commit-mode-hook)
+  (use-package git-commit
+    :ensure nil
+    :init
+    (add-hook 'git-commit-mode-hook 'user--git-commit-mode-hook))
 
   ;;; (Packages) ;;;
   (use-package magit
     :defer t
-    :config (user--magit-config))
+    :config
+    (validate-setq
+     ;; Automatically show process buffer if git takes too long to execute.
+     magit-process-popup-time 30
+     ;; Show fine differences for currently selected hunk.
+     magit-diff-refine-hunk t)
 
-  (use-package magit-gerrit
-    :after magit)
+    (after-load 'popwin
+      ;; Use popwin for certain Magit buffers.
+      (add-many-to-list
+       'popwin:special-display-config
+       '("*magit-edit-log*" :noselect t :height 0.2 :width 80)
+       '("*magit-process*" :noselect t :height 0.2 :width 80)))
 
-  (use-package magit-tramp
-    :after magit)
+    (with-feature 'fullframe
+      ;; Full frame Magit status.
+      (fullframe magit-status magit-mode-quit-window nil))
+
+    ;;; (Bindings) ;;;
+    (define-key magit-status-mode-map (kbd "W")
+      'user/magit-toggle-whitespace)
+
+    (use-package magit-gerrit)
+    (use-package magit-tramp))
 
   (use-package git-timemachine
     :defer t)
 
   (use-package git-gutter
-    :defer t)
-
-  (use-package git-gutter-fringe
-    :if window-system
-    :after git-gutter
-    :defer t
-    :config (user--git-gutter-fringe-config))
+    :defer
+    :config
+    (use-package git-gutter-fringe
+      :if window-system
+      :defer
+      :config
+      (validate-setq git-gutter-fr:side 'left-fringe)))
 
   (use-package git-messenger
-    :ensure t
     :defer t
-    :config (user--git-messenger-config))
+    :config
+    (validate-setq git-messenger:show-detail t))
 
   (when (feature-p 'helm)
     (use-package helm-ls-git
