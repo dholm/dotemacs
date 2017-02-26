@@ -64,6 +64,7 @@
   (user/bind-key-global :basic :selection-edit-lines 'mc/edit-lines))
 
 (use-package rect-mark
+  :defer
   :quelpa (rect-mark
            :fetcher wiki
            :files ("rect-mark.el")))

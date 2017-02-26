@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package glsl-mode
-  :defer t)
+  :defer)
 
 
 (provide 'modes/glsl)

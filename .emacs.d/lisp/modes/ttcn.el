@@ -8,7 +8,7 @@
   (subword-mode t))
 
 (use-package ttcn-mode
-  :defer t
+  :defer
   :quelpa (ttcn-mode
            :fetcher github
            :repo "dholm/ttcn-el")

@@ -9,7 +9,7 @@
 (when (and (display-graphic-p)
            (pkg-config-has-p "poppler-glib"))
   (use-package pdf-tools
-    :defer t
+    :defer
     :init
     (add-auto-mode 'pdf-view-mode "\\.pdf$")
     (add-hook 'pdf-view-mode-hook 'user--pdf-view-mode-hook)

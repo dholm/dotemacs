@@ -61,7 +61,7 @@
 
 (use-package eshell
   :commands user/raise-eshell
-  :defer t
+  :defer
   :init
   (add-hook 'eshell-mode-hook 'user--eshell-mode-hook)
   (user/bind-key-global :apps :shell 'user/raise-eshell)
@@ -125,7 +125,7 @@
 
 (use-package helm-shell
   :ensure helm
-  :defer t
+  :defer
   :init
   ;; Shell history
   (add-hook 'eshell-mode-hook

@@ -12,7 +12,7 @@
   (user/whitespace-disable-style '(lines)))
 
 (use-package csv-mode
-  :defer t
+  :defer
   :init
   (add-auto-mode 'csv-mode "\\.[Cc][Ss][Vv]$")
   (add-hook 'csv-mode-hook 'user--csv-mode-hook)

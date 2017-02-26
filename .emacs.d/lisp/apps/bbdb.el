@@ -34,7 +34,7 @@
 
 (use-package bbdb
   :commands bbdb-initialize
-  :defer t
+  :defer
   :init
   ;; Add notes when updating a record.
   (add-hook 'bbdb-notice-mail-hook 'bbdb-auto-notes)
@@ -80,7 +80,7 @@
 
   (use-package bbdb-vcard
     :disabled
-    :defer t))
+    :defer))
 
 
 (provide 'apps/bbdb)

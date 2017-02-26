@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package polymode
-  :defer t)
+  :defer)
 
 
 (provide 'utilities/polymode)

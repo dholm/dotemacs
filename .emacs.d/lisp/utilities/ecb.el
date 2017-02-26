@@ -53,7 +53,7 @@
 
 (when (version<= emacs-version "24.4")
   (use-package ecb
-    :defer t
+    :defer
     :init
     (add-hook 'ecb-activate-hook 'user--ecb-activate-hook)
     (add-hook 'ecb-deactivate-hook 'user--ecb-deactivate-hook)

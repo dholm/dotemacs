@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package systemd
-  :defer t)
+  :defer)
 
 
 (provide 'modes/systemd)

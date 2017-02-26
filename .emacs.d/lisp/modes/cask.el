@@ -11,7 +11,7 @@
     (enable-paredit-mode)))
 
 (use-package cask-mode
-  :defer t
+  :defer
   :init
   (add-hook 'cask-mode-hook 'user--cask-mode-hook))
 

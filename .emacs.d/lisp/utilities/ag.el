@@ -5,13 +5,13 @@
 (with-executable 'ag
   (when (feature-p 'helm)
     (use-package helm-ag
-      :defer t
+      :defer
       :config
       (validate-setq
        ;; Insert word at point as search term.
        helm-ag-insert-at-point 'word)))
   (use-package ag
-    :defer t
+    :defer
     :init
     (if (and (feature-p 'projectile)
              (fboundp 'projectile-ag))

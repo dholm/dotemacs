@@ -42,7 +42,7 @@
 
 
 (use-package web-mode
-  :defer t
+  :defer
   :init
   (when (feature-p 'polymode)
     (add-auto-mode 'poly-javascript-erb-mode "\\.js\\.erb$")

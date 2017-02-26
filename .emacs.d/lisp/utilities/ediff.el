@@ -56,7 +56,7 @@
     (ediff local remote)))
 
 (use-package ediff
-  :defer t
+  :defer
   :init
   ;; Go to first difference on start.
   (add-hook 'ediff-startup-hook 'user--ediff-startup-hook)

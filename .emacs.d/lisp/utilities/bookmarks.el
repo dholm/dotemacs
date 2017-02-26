@@ -9,7 +9,7 @@
                                                  "bookmark-menu-state.el"))
 
 (use-package bm
-  :defer t
+  :defer
   :init
   (user/bind-key-global :code :bookmark-toggle 'bm-toggle)
   (user/bind-key-global :code :bookmark-next 'bm-next)
@@ -32,7 +32,7 @@
   (add-hook 'after-revert-hook 'bm-buffer-restore))
 
 (use-package bookmark
-  :defer t
+  :defer
   :init
   ;; Bind bookmarks to C-c b
   (global-set-key (user/get-key :code :bookmark-prefix) 'bookmark-map)
@@ -44,7 +44,7 @@
    ;; Put the repository in the data directory.
    bookmark-default-file *bookmark+-data-file*)
   (use-package bookmark+
-    :defer t
+    :defer
     :config
     (validate-setq
      ;; Save bookmarks after ten updates.

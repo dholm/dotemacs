@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package yaml-mode
-  :defer t)
+  :defer)
 
 
 (provide 'modes/yaml)

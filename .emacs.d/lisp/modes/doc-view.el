@@ -14,7 +14,7 @@
   (user/bind-key-local :nav :go-back 'doc-view-scroll-down-or-previous-page))
 
 (use-package doc-view
-  :defer t
+  :defer
   :init
   (add-hook 'doc-view-mode-hook 'user--doc-view-mode-hook)
   :config

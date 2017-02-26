@@ -22,7 +22,7 @@
 
 (with-executable 'php
   (use-package php-mode
-    :defer t
+    :defer
     :init
     (after-load 'web-mode
       (user--add-web-mode-hook 'php 'user--php-mode-hook))

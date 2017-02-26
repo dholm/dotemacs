@@ -22,7 +22,7 @@
 
 
 (use-package css-mode
-  :defer t
+  :defer
   :init
   (add-hook 'css-mode-hook 'user--css-mode-hook)
   :config

@@ -7,7 +7,7 @@
   (user/gnu-global-enable))
 
 (use-package vhdl-mode
-  :defer t
+  :defer
   :quelpa (vhdl-mode
            :fetcher url
            :url "https://guest.iis.ee.ethz.ch/~zimmi/emacs/vhdl-mode-3.38.1.tar.gz")

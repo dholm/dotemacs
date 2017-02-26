@@ -30,11 +30,11 @@
 
   ;;; (Packages) ;;;
   (use-package ace-jump-mode
-    :defer t
+    :defer
     :init
     (user/bind-key-global :util :ace-jump-mode 'ace-jump-mode))
   (use-package smart-forward
-    :defer t
+    :defer
     :init
     (user/bind-key-global :nav :context-forward 'smart-forward)
     (user/bind-key-global :nav :context-backward 'smart-backward)

@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package vlf
-  :defer t
+  :defer
   :init
   (user/bind-key-global :basic :view-file 'vlf))
 

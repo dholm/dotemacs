@@ -27,7 +27,7 @@
   (user/bind-key-local :code :compile 'org-mime-htmlize))
 
 (use-package sendmail
-  :defer t
+  :defer
   :init
   (add-hook 'mail-mode-hook 'user--mail-mode-hook)
   :config

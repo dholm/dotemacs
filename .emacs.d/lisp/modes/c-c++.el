@@ -178,7 +178,7 @@
 
 
 (use-package cc-mode
-  :defer t
+  :defer
   :init
   (add-hook 'c-mode-common-hook 'user--c-mode-common-hook)
   (add-hook 'c-mode-hook 'user--c-mode-hook)

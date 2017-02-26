@@ -8,7 +8,7 @@
   (diff-auto-refine-mode t))
 
 (use-package diff-mode
-  :defer t
+  :defer
   :init
   (add-auto-mode 'diff-mode "/patch$")
   (add-hook 'diff-mode-hook 'user--diff-mode-hook)

@@ -30,7 +30,7 @@
 
 
 (use-package rst
-  :defer t
+  :defer
   :quelpa (rst
            :fetcher svn
            :url "http://svn.code.sf.net/p/docutils/code/trunk/docutils/tools/editors/emacs")

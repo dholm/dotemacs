@@ -36,7 +36,7 @@
 
 (with-executable 'go
   (use-package go-mode
-    :defer t
+    :defer
     :init
     (add-hook 'go-mode-hook 'user--go-mode-hook)
     :config

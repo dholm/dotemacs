@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package coverage
-  :defer t)
+  :defer)
 
 
 (provide 'utilities/coverage)

@@ -158,7 +158,7 @@
 
 (use-package calendar
   :commands calendar
-  :defer t
+  :defer
   :init
   (add-hook 'calendar-today-visible-hook 'calendar-mark-today)
   (add-hook 'calendar-load-hook 'user--calendar-load-hook)
@@ -209,7 +209,7 @@
        appt-delete-window-function 'user/appt-delete-window))))
 
 (use-package calfw
-  :defer t
+  :defer
   :config
   (validate-setq
    ;; Use `fill-region' to wrap long lines.
@@ -225,7 +225,7 @@
    cfw:fchar-top-right-corner ?┓))
 
 (use-package excorporate
-  :defer t)
+  :defer)
 
 (provide 'apps/calendar)
 ;;; calendar.el ends here

@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package json-mode
-  :defer t
+  :defer
   :init
   (add-auto-mode 'json-mode "\\.bowerrc$"))
 

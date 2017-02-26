@@ -167,6 +167,7 @@
   ;;; (Packages) ;;;
   (use-package auto-complete
     :requires popup fuzzy
+    :defer
     :quelpa (auto-complete
              :fetcher github
              :repo "auto-complete/auto-complete")

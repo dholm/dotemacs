@@ -18,7 +18,7 @@
 
 
 (use-package eudc
-  :defer t
+  :defer
   :config
   (validate-setq
    ;; Only return default attributes for current server.

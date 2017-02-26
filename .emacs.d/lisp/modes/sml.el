@@ -10,7 +10,7 @@
 
 (with-executable 'sml
   (use-package sml-mode
-    :defer t
+    :defer
     :init
     (add-auto-mode 'sml-mode "\\.[Mm][Ll]$")
     (add-hook 'sml-mode-hook 'user--sml-mode-hook)))

@@ -4,7 +4,7 @@
 
 (use-package tls
   :ensure nil
-  :defer t
+  :defer
   :config
   ;; Don't use validate-setq due to :inline not being supported.
   (setq
@@ -14,7 +14,7 @@
 
 (use-package starttls
   :ensure nil
-  :defer t
+  :defer
   :config
   (validate-setq
    ;; Default GnuTLS arguments.

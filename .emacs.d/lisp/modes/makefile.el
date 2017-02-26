@@ -25,7 +25,7 @@
     (doxymacs-mode t)))
 
 (use-package make-mode
-  :defer t
+  :defer
   :init
   (add-hook 'makefile-mode-hook 'user--makefile-mode-hook)
   (add-auto-mode 'makefile-mode "\\.mak$")

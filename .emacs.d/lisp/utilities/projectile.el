@@ -4,7 +4,7 @@
 
 (use-package projectile
   :diminish projectile-mode
-  :defer t
+  :defer
   :init
   ;;; (Bindings) ;;;
   (user/bind-key-global :basic :open-file-context 'projectile-find-file)

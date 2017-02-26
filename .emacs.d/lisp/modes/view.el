@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package view
-  :defer t
+  :defer
   :config
   (validate-setq
    ;; Open read-only files in view-mode by default.

@@ -13,7 +13,7 @@
 
 (use-package image-mode
   :ensure nil
-  :defer t
+  :defer
   :init
   (add-hook 'image-mode-hook 'user--image-mode-hook))
 

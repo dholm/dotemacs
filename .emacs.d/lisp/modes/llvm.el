@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package llvm-mode
-  :defer t)
+  :defer)
 
 
 (provide 'modes/llvm)

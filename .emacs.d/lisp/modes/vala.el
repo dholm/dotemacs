@@ -9,7 +9,7 @@
 
 (with-executable 'valac
   (use-package vala-mode
-    :defer t
+    :defer
     :init
     (add-hook 'vala-mode-hook 'user--vala-mode-hook)))
 

@@ -22,7 +22,7 @@
        mail-host-address "gmail.com"))))
 
 (use-package smtpmail
-  :defer t
+  :defer
   :config
   (validate-setq
    ;; Use smtpmail as the default method of sending email.

@@ -15,13 +15,13 @@
   (user/bind-key-local :nav :context-backward 'outline-previous-heading))
 
 (use-package outline
-  :defer t
+  :defer
   :init
   (add-hook 'outline-mode-hook 'user--outline-mode-hook)
   (add-hook 'outline-minor-mode-hook 'user--outline-mode-hook)
   :config
   (use-package outline-magic
-    :defer t))
+    :defer))
 
 
 (provide 'utilities/outline)

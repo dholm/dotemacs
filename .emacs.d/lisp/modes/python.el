@@ -55,7 +55,7 @@
 
 (with-executable 'python
   (use-package python
-    :defer t
+    :defer
     :init
     (add-interpreter-mode 'python-mode "python[0-9.]*")
     (add-hook 'python-mode-hook 'user--python-mode-hook)

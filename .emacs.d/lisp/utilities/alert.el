@@ -11,7 +11,7 @@
    (t 'mode-line)))
 
 (use-package alert
-  :defer t
+  :defer
   :config
   ;; Undiagnosed issue with validate-setq.
   (setq

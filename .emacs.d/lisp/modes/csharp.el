@@ -27,7 +27,7 @@
 
 
 (use-package csharp-mode
-  :defer t
+  :defer
   :init
   (add-hook 'csharp-mode-hook 'user--csharp-mode-hook)
   :config

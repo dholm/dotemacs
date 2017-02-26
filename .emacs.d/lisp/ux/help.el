@@ -4,12 +4,14 @@
 
 (use-package faces
   :ensure nil
+  :defer
   :init
   (user/bind-key-global :emacs :describe-face 'describe-face)
   (user/bind-key-global :emacs :describe-all-faces 'list-faces-display))
 
 (use-package help-fns
   :ensure nil
+  :defer
   :init
   (user/bind-key-global :emacs :describe-function 'describe-function)
   (user/bind-key-global :emacs :describe-variable 'describe-variable)
@@ -17,11 +19,13 @@
 
 (use-package info-look
   :ensure nil
+  :defer
   :init
   (user/bind-key-global :emacs :describe-symbol 'info-lookup-symbol))
 
 (use-package help
   :ensure nil
+  :defer
   :init
   (user/bind-key-global :emacs :describe-bindings 'describe-bindings)
   (user/bind-key-global :emacs :describe-key 'describe-key)
@@ -30,21 +34,25 @@
 
 (use-package find-func
   :ensure nil
+  :defer
   :init
   (user/bind-key-global :emacs :find-library 'find-library))
 
 (use-package finder
   :ensure nil
+  :defer
   :init
   (user/bind-key-global :emacs :find-package 'finder-by-keyword))
 
 (use-package menu-bar
   :ensure nil
+  :defer
   :init
   (user/bind-key-global :emacs :elisp-search 'elisp-index-search))
 
 (use-package tutorial
   :ensure nil
+  :defer
   :init
   (user/bind-key-global :emacs :tutorial 'help-with-tutorial))
 

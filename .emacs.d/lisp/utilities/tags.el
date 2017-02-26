@@ -154,7 +154,7 @@
 
 (with-executable 'llvm-config
   (use-package rtags
-    :defer t
+    :defer
     :config
     (after-load 'helm
       (validate-setq
@@ -168,7 +168,7 @@
 
 (when (feature-p 'helm)
   (use-package helm-etags-plus
-    :defer t))
+    :defer))
 
 
 (provide 'utilities/tags)

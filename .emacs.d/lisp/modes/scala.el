@@ -14,7 +14,7 @@
 
 (with-executable 'scala
   (use-package scala-mode
-    :defer t
+    :defer
     :init
     (add-hook 'scala-mode-hook 'user--scala-mode-hook)
     :config

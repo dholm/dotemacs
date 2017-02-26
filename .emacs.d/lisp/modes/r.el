@@ -59,7 +59,7 @@
 
 (with-executable 'R
   (use-package ess
-    :defer t
+    :defer
     :bind (:map ess-mode-map
            ;; Workaround issue with ess yank.
            ([remap yank] . yank))

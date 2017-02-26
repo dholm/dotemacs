@@ -42,13 +42,13 @@
     (user--cedet-hook)))
 
 (use-package js
-  :defer t
+  :defer
   :init
   (add-hook 'javascript-mode-hook 'user--javascript-mode-hook)
   (add-hook 'inferior-js-mode-hook 'user--inferior-javascript-mode-hook))
 
 (use-package js3-mode
-  :defer t
+  :defer
   :init
   (add-hook 'js3-mode-hook 'user--js3-mode-hook)
   (add-auto-mode 'js3-mode "\\.js$")

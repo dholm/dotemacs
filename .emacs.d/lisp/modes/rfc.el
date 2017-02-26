@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package irfc
-  :defer t
+  :defer
   :init
   (add-auto-mode 'irfc-mode "/rfc[0-9]+\\.txt\\'")
   :config

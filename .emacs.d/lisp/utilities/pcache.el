@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package pcache
-  :defer t
+  :defer
   :config
   (validate-setq
    pcache-directory (path-join *user-cache-directory* "pcache")))

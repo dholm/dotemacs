@@ -31,18 +31,18 @@
    comint-process-echoes t))
 
 (use-package shell
-  :defer t
+  :defer
   :init
   (add-hook 'sh-mode-hook 'user--sh-mode-hook)
   (add-hook 'shell-mode-hook 'user--shell-mode-hook)
   :config
   ;;; (Packages) ;;;
   (use-package bash-completion
-    :defer t)
+    :defer)
   (use-package shelldoc
-    :defer t)
+    :defer)
   (use-package shell-command
-    :defer t))
+    :defer))
 
 
 (provide 'modes/shell)

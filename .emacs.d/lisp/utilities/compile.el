@@ -24,7 +24,7 @@
      (t (call-interactively 'compile)))))
 
 (use-package compile
-  :defer t
+  :defer
   :init
   (user/bind-key-global :code :compile 'user/compile)
   :config
@@ -45,7 +45,7 @@
   (add-hook 'compilation-filter-hook 'user--compilation-filter-hook))
 
 (use-package mode-compile
-  :defer t
+  :defer
   :config
   ;; Ensure byte-run has been loaded or mode-compile will override
   ;; `define-obsolete-variable-alias'.

@@ -33,7 +33,7 @@
 
 (use-package message
   :ensure nil
-  :defer t
+  :defer
   :init
   (add-hook 'message-mode-hook 'user--message-mode-hook)
   (add-hook 'message-setup-hook 'user--message-setup-hook)

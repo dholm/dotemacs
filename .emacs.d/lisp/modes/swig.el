@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package swig-mode
-  :defer t
+  :defer
   :quelpa (swig-mode
            :fetcher github
            :repo "dholm/swig-mode")

@@ -113,9 +113,9 @@
 
   ;;; (Packages) ;;;
   (use-package helm-descbinds
-    :defer t)
+    :defer)
   (use-package helm-swoop
-    :defer t
+    :defer
     :init
     (user/bind-key-global :basic :swoop 'helm-swoop)
     (user/bind-key-global :basic :swoop-multi 'helm-multi-swoop)
@@ -194,27 +194,27 @@
 
   (use-package helm-bookmark
     :ensure helm
-    :defer t
+    :defer
     :bind ("C-x r l" . helm-filtered-bookmarks))
 
   (use-package helm-pages
     :ensure helm
-    :defer t
+    :defer
     :bind ("C-c n P" . helm-pages))
 
   (use-package helm-eval
     :ensure helm
-    :defer t
+    :defer
     :bind (("C-c h M-:" . helm-eval-expression-with-eldoc)
            ("C-c h *" . helm-calcul-expression)))
 
   (use-package helm-external
     :ensure helm
-    :defer t
+    :defer
     :bind ("C-c h x" . helm-run-external-command))
 
   (use-package helm-build-command
-    :defer t
+    :defer
     :quelpa (helm-build-command
              :fetcher github
              :repo "tkf/helm-build-command")))

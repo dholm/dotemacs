@@ -70,7 +70,7 @@
 
 
 (use-package nxml
-  :defer t
+  :defer
   :init
   ;; Use nxml-mode for XML
   (fset 'xml-mode 'nxml-mode)

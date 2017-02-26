@@ -4,7 +4,7 @@
 
 (with-executable 'gnuplot
   (use-package gnuplot-mode
-    :defer t
+    :defer
     :init
     (add-auto-mode 'gnuplot-mode "\\.gp$")))
 

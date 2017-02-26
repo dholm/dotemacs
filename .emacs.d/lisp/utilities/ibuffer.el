@@ -17,7 +17,7 @@
    ibuffer-filter-group-name-face 'font-lock-doc-face)
 
   (use-package ibuffer-vc
-  :defer t))
+  :defer))
 
 
 (provide 'utilities/ibuffer)

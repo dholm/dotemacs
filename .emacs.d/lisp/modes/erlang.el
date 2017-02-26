@@ -39,7 +39,7 @@
 
 (with-executable 'erl
   (use-package erlang
-    :defer t
+    :defer
     :init
     (add-hook 'erlang-mode-hook 'user--erlang-mode-hook)
     (add-hook 'elixir-mode-hook 'user--elixir-mode-hook)

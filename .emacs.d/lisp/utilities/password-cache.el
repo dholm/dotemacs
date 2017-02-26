@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package password-cache
-  :defer t
+  :defer
   :config
   (validate-setq
    ;; Keep password cache longer.

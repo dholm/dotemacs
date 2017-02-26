@@ -7,7 +7,7 @@
   (user/gnu-global-enable))
 
 (use-package tcl
-  :defer t
+  :defer
   :init
   ;; Use tcl-mode for expect scripts
   (add-interpreter-mode 'tcl-mode "expect")

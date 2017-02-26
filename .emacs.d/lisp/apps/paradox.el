@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package paradox
-  :defer t
+  :defer
   :init
   (user/bind-key-global :apps :packages 'paradox-list-packages)
   :config

@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package ctable
-  :defer t
+  :defer
   :init
   (autoload 'make-ctbl:cmodel "ctable"))
 

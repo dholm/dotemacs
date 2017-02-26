@@ -4,7 +4,7 @@
 
 (use-package comint
   :ensure nil
-  :defer t
+  :defer
   :config
   (validate-setq
    ;; Scroll automatically on new output.

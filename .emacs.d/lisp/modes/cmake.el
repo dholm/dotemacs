@@ -12,7 +12,7 @@
 
 (with-executable 'cmake
   (use-package cmake-mode
-    :defer t
+    :defer
     :init
     (add-hook 'cmake-mode-hook 'user--cmake-mode-hook)
 

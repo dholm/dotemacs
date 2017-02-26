@@ -4,7 +4,7 @@
 
 (when (eq system-type 'windows-nt)
   (use-package outlookedit
-    :defer t
+    :defer
     :quelpa (outlookedit
              :fetcher github
              :repo "dholm/outlookedit")))

@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package google-this
-  :defer t
+  :defer
   :diminish google-this-mode
   :init
   (user/bind-key-global :util :google 'google-search)

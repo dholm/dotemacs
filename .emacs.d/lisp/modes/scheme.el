@@ -45,12 +45,12 @@
     (ac-geiser-setup)))
 
 (use-package scheme
-  :defer t
+  :defer
   :init
   (add-hook 'scheme-mode-hook 'user--scheme-mode-hook)
   :config
   (use-package geiser
-    :defer t
+    :defer
     :init
     (add-hook 'geiser-mode-hook 'user--geiser-mode-hook)
     (add-hook 'geiser-repl-mode-hook 'user--geiser-repl-mode-hook)
@@ -59,13 +59,13 @@
       (after-load 'geiser
         (add-ac-modes 'geiser-repl-mode))))
   (use-package quack
-    :defer t
+    :defer
     :config
     (validate-setq
      ;; Use Emacs-style fontification.
      quack-fontify-style 'emacs))
   (use-package ac-geiser
-    :defer t))
+    :defer))
 
 
 (provide 'modes/scheme)

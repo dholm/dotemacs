@@ -8,7 +8,7 @@
 
 
 (use-package verilog-mode
-  :defer t
+  :defer
   :quelpa (verilog-mode
            :fetcher url
            :url "http://www.veripool.org/ftp/verilog-mode.el")

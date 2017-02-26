@@ -56,7 +56,7 @@
                                       (diminish 'doxymacs-mode)))))
 
   (use-package doc-mode
-    :defer t
+    :defer
     :quelpa (doc-mode
              :fetcher github
              :repo "nschum/doc-mode")

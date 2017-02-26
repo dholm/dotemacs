@@ -7,14 +7,14 @@
   (user--fundamental-mode-hook))
 
 (use-package conf-mode
-  :defer t
+  :defer
   :init
   (add-hook 'conf-mode-hook 'user--conf-mode-hook)
   :config
   ;;; (Packages) ;;;
   (with-executable 'nginx
     (use-package nginx-mode
-      :defer t
+      :defer
       :init
       (add-auto-mode 'nginx-mode "etc/nginx/.*$"))))
 

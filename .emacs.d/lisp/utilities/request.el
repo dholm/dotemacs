@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package request
-  :defer t
+  :defer
   :config
   (validate-setq
    ;; Request cache store.

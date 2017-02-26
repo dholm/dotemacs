@@ -10,7 +10,7 @@
 
 (use-package dired
   :ensure nil
-  :defer t
+  :defer
   :config
   (validate-setq
    ;; Always copy recursively without asking.
@@ -24,11 +24,11 @@
 
   ;;; (Packages) ;;;
   (use-package dired-k
-    :defer t)
+    :defer)
   (use-package async
-    :defer t)
+    :defer)
   (use-package dired-efap
-    :defer t
+    :defer
     :init
     (after-load 'dired
       ;; Load dired-efap when dired is loaded.

@@ -9,7 +9,7 @@
   (user/bind-key-local :basic :save-as 'profiler-report-write-profile))
 
 (use-package profiler
-  :defer t
+  :defer
   :init
   (add-hook 'profiler-report-mode-hook 'user--profiler-report-mode-hook)
 

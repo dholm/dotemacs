@@ -7,7 +7,7 @@
   (hl-line-mode t))
 
 (use-package debug
-  :defer t
+  :defer
   :init
   (add-hook 'debugger-mode-hook 'user--debugger-mode-hook))
 

@@ -56,7 +56,7 @@
   (require-package '(:name flyspell))
   (use-package flyspell
     :ensure nil
-    :defer t
+    :defer
     :diminish flyspell-mode
     :init
     (add-hook 'flyspell-mode-hook 'user--flyspell-mode-hook)

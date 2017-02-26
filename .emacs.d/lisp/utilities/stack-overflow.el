@@ -9,7 +9,7 @@
     (user/bind-key-local :util :stack-overflow-search 'sos)))
 
 (use-package sos
-  :defer t
+  :defer
   :init
   (add-hook 'prog-mode-hook 'user--stack-overflow-prog-mode-hook))
 

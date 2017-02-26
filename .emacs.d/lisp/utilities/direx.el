@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package direx
-  :defer t
+  :defer
   :init
   (user/bind-key-global :basic :open-file-context
                         'direx-project:jump-to-project-root-other-window)

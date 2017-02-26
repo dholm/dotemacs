@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package sauron
-  :defer t
+  :defer
   :init
   (user/bind-key-global :util :notifications 'sauron-toggle-hide-show)
   :config

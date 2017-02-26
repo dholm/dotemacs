@@ -11,7 +11,7 @@
   (user/bind-key-local :nav :go-back 'Info-history-back))
 
 (use-package info
-  :defer t
+  :defer
   :init
   (add-hook 'Info-mode-hook 'user--info-mode-hook)
   (user/bind-key-global :emacs :describe-key-extensive
@@ -20,7 +20,7 @@
   :config
   ;;; (Packages) ;;;
   (use-package info+
-    :defer t
+    :defer
     :config
     (validate-setq
      ;; Enable breadcrumbs in header line.
@@ -28,11 +28,12 @@
      Info-breadcrumbs-in-mode-line-mode nil))
 
   (use-package niceify-info
+    :defer
     :init
     (add-hook 'Info-selection-hook #'niceify-info))
 
   (use-package helm-info
-    :defer t
+    :defer
     :ensure helm
     :bind (("C-c h h e" . helm-info-emacs)
            ("C-c h h i" . helm-info-at-point))))

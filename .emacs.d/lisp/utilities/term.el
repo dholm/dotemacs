@@ -19,7 +19,7 @@
             (kill-buffer ,buf))))))
 
 (use-package term
-  :defer t
+  :defer
   :init
   (add-hook 'term-exec-hook 'user--term-exec-hook)
   (add-hook 'term-mode-hook 'user--term-mode-hook)

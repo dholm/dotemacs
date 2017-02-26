@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package bison-mode
-  :defer t)
+  :defer)
 
 
 (provide 'modes/bison)

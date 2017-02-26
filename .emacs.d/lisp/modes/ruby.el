@@ -35,7 +35,7 @@
   (ac-robe-setup))
 
 (use-package ruby-mode
-  :defer t
+  :defer
   :init
   (add-hook 'ruby-mode-hook 'user--ruby-mode-hook)
   :config

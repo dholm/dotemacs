@@ -15,7 +15,7 @@
 
 (with-executable 'lua
   (use-package lua-mode
-    :defer t
+    :defer
     :init
     (add-hook 'lua-mode-hook 'user--lua-mode-hook)
     :config

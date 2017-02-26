@@ -27,7 +27,7 @@
 
 (with-executable 'cscope
   (use-package xcscope
-    :defer t
+    :defer
     :config
     (validate-setq
      ;; Always index recursively.
@@ -35,7 +35,7 @@
      ;; Don't display CScope result buffer by default.
      cscope-display-cscope-buffer nil))
   (use-package helm-cscope
-    :defer t
+    :defer
     :diminish helm-cscope-mode))
 
 

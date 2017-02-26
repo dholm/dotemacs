@@ -4,7 +4,7 @@
 
 (with-executable 'wn
   (use-package synosaurus
-    :defer t
+    :defer
     :init
     (user/bind-key-global :code :thesaurus-lookup 'synosaurus-lookup)))
 

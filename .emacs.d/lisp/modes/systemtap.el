@@ -4,7 +4,7 @@
 
 (with-executable 'stap
   (use-package systemtap-mode
-    :defer t))
+    :defer))
 
 
 (provide 'modes/systemtap)

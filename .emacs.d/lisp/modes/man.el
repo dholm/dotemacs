@@ -8,7 +8,7 @@
 
 (with-executable 'man
   (use-package man
-    :defer t
+    :defer
     :config
     (validate-setq
      ;; Make man-mode wrap lines at half the width of Emacs.
@@ -18,7 +18,7 @@
       :ensure helm))
 
   (use-package woman
-    :defer t
+    :defer
     :init
     (make-directory *user-man-cache-directory* t)
     :config

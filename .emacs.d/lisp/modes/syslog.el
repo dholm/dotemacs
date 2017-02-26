@@ -12,7 +12,7 @@
   (local-set-key (kbd "F") 'hide-lines-show-all))
 
 (use-package syslog-mode
-  :defer t
+  :defer
   :init
   (add-auto-mode 'syslog-mode "/var/log.*$" "\\.log$")
 

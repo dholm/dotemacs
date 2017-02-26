@@ -10,7 +10,7 @@
     (ido-vertical-mode t)))
 
 (use-package ido
-  :defer t
+  :defer
   :config
   (validate-setq
    ;; Enable fuzzy matching

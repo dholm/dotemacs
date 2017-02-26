@@ -65,7 +65,7 @@
   ;;; (Packages) ;;;
   (use-package fullframe)
   (use-package transpose-frame
-    :defer t
+    :defer
     :init
     (user/bind-key-global :emacs :flip-frame 'flip-frame)
     (user/bind-key-global :emacs :flop-frame 'flop-frame)

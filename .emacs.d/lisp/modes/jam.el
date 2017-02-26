@@ -8,7 +8,7 @@
   (setq indent-tabs-mode nil))
 
 (use-package jam-mode
-  :defer t
+  :defer
   :init
   (add-hook 'jam-mode-hook 'user--jam-mode-hook)
   (add-auto-mode 'jam-mode "\\.jam$" "Jamfile.*")

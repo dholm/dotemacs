@@ -91,7 +91,7 @@
   :config
   (use-package ede
     :ensure nil
-    :defer t
+    :defer
     :init
     (autoload 'ede-minor-mode "ede" nil t)
     (add-hook 'ede-minor-mode-hook 'user--ede-minor-mode-hook)
@@ -117,7 +117,7 @@
 
   (use-package semantic
     :ensure nil
-    :defer t
+    :defer
     :init
     (add-hook 'semantic-mode-hook 'user--semantic-mode-hook)
     :config
@@ -166,7 +166,7 @@
 
     (use-package semantic/idle
       :ensure nil
-      :defer t
+      :defer
       :config
       (validate-setq
        ;; Nice looking breadcrumbs.
@@ -182,7 +182,7 @@
       :config
       (use-package semantic/db-file
         :ensure nil
-        :defer t
+        :defer
         :config
         (validate-setq
          semanticdb-default-save-directory (path-join *user-cache-directory*
@@ -195,7 +195,7 @@
 
   (use-package srecode/map
     :ensure nil
-    :defer t
+    :defer
     :config
     (validate-setq
      ;; Set up paths to caches

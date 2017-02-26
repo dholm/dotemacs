@@ -7,7 +7,7 @@
   (user--text-mode-hook))
 
 (use-package adoc-mode
-  :defer t
+  :defer
   :init
   (add-hook 'adoc-mode-hook 'user--adoc-mode-hook)
 

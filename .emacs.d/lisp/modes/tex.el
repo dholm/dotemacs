@@ -76,7 +76,7 @@
 (when (or (executable-find "tex")
           (executable-find "latex"))
   (use-package tex-mode
-    :defer t
+    :defer
     :init
     (add-hook 'tex-mode-hook 'user--tex-mode-hook)
     (add-hook 'TeX-mode-hook 'user--tex-mode-hook)

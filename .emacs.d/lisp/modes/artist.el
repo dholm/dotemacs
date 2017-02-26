@@ -28,7 +28,7 @@
                             ("Spray-chars" . spray-chars))))))))
 
 (use-package artist
-  :defer t
+  :defer
   :init
   (add-hook 'picture-mode-hook 'user--artist-mode-hook)
 

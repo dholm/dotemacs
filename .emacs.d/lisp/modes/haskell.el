@@ -46,7 +46,7 @@
 
 (with-executable 'ghc
   (use-package haskell-mode
-    :defer t
+    :defer
     :init
     (add-hook 'haskell-mode-hook 'user--haskell-mode-hook)
     (add-hook 'inferior-haskell-mode-hook 'user--inferior-haskell-mode-hook)

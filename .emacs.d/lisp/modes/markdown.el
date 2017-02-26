@@ -10,7 +10,7 @@
     (poly-markdown-mode t)))
 
 (use-package markdown-mode
-  :defer t
+  :defer
   :init
   (add-hook 'markdown-mode-hook 'user--markdown-mode-hook)
   :config

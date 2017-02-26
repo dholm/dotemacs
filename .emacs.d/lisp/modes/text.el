@@ -33,7 +33,7 @@
 
 (use-package text-mode
   :ensure nil
-  :defer t
+  :defer
   :init
   (add-hook 'text-mode-hook 'user--text-mode-hook)
   :config

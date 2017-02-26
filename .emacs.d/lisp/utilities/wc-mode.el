@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package wc-mode
-  :defer t
+  :defer
   :init
   (user/bind-key-global :util :wc-mode 'wc-mode))
 

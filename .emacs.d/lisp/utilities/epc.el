@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package epc
-  :defer t)
+  :defer)
 
 
 (provide 'utilities/epc)

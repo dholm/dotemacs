@@ -42,7 +42,7 @@
    gud-tooltip-mode t)
 
   (use-package gdb-mi
-    :defer t
+    :defer
     :config
     (validate-setq
      ;; Enable many windows

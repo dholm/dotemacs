@@ -35,7 +35,7 @@
 (unless (feature-p 'eww)
   (with-executable 'w3m
     (use-package w3m
-      :defer t
+      :defer
       :init
       (autoload 'w3m-browse-url "w3m" nil t)
       (add-hook 'w3m-display-hook 'user--w3m-display-hook)

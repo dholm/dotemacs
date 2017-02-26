@@ -29,7 +29,7 @@
 
 (when (file-exists-p *user-ycmd-path*)
   (use-package ycmd
-    :defer t
+    :defer
     :config
     (validate-setq
      ycmd-server-command `("python" ,(path-join *user-ycmd-path* "ycmd"))

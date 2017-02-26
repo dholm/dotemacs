@@ -42,7 +42,7 @@
 
 (use-package lisp-mode
   :ensure nil
-  :defer t
+  :defer
   :init
   (add-hook 'lisp-mode-hook 'user--lisp-mode-hook)
   :config
@@ -64,7 +64,7 @@
 
     (use-package slime-c-p-c
       :ensure slime
-      :defer t
+      :defer
       :config
       (validate-setq
        slime-complete-symbol*-fancy t))

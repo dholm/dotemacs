@@ -114,7 +114,7 @@
 
 (use-package org
   :ensure org-plus-contrib
-  :defer t
+  :defer
   :commands org-mode
   :init
   ;; Create data and cache stores.
@@ -404,7 +404,7 @@
 
 (use-package org-agenda
   :ensure org-plus-contrib
-  :defer t
+  :defer
   :init
   (add-hook 'org-agenda-finalize-hook 'user--org-agenda-finalize-hook)
 
@@ -456,7 +456,7 @@
 
 (use-package org-annotate-file
   :ensure org-plus-contrib
-  :defer t
+  :defer
   :init
   (autoload 'org-annotate-file "org-annotate-file" nil t)
 

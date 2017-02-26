@@ -19,18 +19,18 @@
 
   ;;; (Packages) ;;;
   (use-package visual-regexp
-    :defer t
+    :defer
     :bind* (([remap query-replace-regexp] . vr/query-replace)
             ([remap replace-regexp] . vr/replace)))
 
   (use-package anzu
-    :defer t
+    :defer
     :diminish anzu-mode
     :init
     (global-anzu-mode t))
 
   (use-package grep
-    :defer t
+    :defer
     :config
     (validate-setq
      ;; Highlight matches when using grep.

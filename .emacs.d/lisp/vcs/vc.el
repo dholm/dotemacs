@@ -29,7 +29,7 @@
 
 (use-package vc-annotate
   :ensure nil
-  :defer t
+  :defer
   :config
   (with-feature 'fullframe
     ;; Full frame annotations.
@@ -37,7 +37,7 @@
 
 (use-package autorevert
   :ensure nil
-  :defer t
+  :defer
   :diminish auto-revert-mode
   :config
   (after-load 'tramp

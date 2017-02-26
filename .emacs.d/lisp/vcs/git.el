@@ -40,7 +40,7 @@
 
   ;;; (Packages) ;;;
   (use-package magit
-    :defer t
+    :defer
     :config
     (validate-setq
      ;; Automatically show process buffer if git takes too long to execute.
@@ -67,7 +67,7 @@
     (use-package magit-tramp))
 
   (use-package git-timemachine
-    :defer t)
+    :defer)
 
   (use-package git-gutter
     :defer
@@ -79,20 +79,20 @@
       (validate-setq git-gutter-fr:side 'left-fringe)))
 
   (use-package git-messenger
-    :defer t
+    :defer
     :config
     (validate-setq git-messenger:show-detail t))
 
   (when (feature-p 'helm)
     (use-package helm-ls-git
-      :defer t)
+      :defer)
     (use-package helm-git-grep
-      :defer t
+      :defer
       :commands helm-git-grep)
     (use-package helm-open-github
-      :defer t)
+      :defer)
     (use-package helm-hunks
-      :defer t)))
+      :defer)))
 
 (with-executable 'git
   (user--git-config))

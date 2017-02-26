@@ -15,7 +15,7 @@
         (user/sqli-buffer)))))
 
 (use-package sql
-  :defer t)
+  :defer)
 
 
 (provide 'modes/sql)

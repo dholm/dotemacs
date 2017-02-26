@@ -4,7 +4,7 @@
 
 (when (osx-app-installed-p "com.kapeli.dash")
   (use-package dash-at-point
-    :defer t
+    :defer
     :init
     (user/bind-key-global :doc :reference 'dash-at-point)))
 

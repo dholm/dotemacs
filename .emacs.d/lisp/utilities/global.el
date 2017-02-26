@@ -95,7 +95,7 @@
    'debug-ignored-errors "global: GTAGS not found")
 
   (use-package helm-gtags
-    :defer t
+    :defer
     :diminish helm-gtags-mode
     :init
     (add-hook 'helm-gtags-mode-hook 'user--helm-gtags-mode-hook)
@@ -111,7 +111,7 @@
      helm-gtags-pulse-at-cursor t))
 
   (use-package ggtags
-    :defer t
+    :defer
     :diminish ggtags-mode
     :init
     (add-hook 'ggtags-mode-hook 'user--ggtags-mode-hook)))

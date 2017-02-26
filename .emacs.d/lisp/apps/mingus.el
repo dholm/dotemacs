@@ -4,7 +4,7 @@
 
 (when (fboundp 'define-fringe-bitmap)
   (use-package mingus
-    :defer t
+    :defer
     :init
     (user/bind-key-global :apps :music 'mingus)))
 

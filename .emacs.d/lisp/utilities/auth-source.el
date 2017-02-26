@@ -4,7 +4,7 @@
 
 (use-package auth-source
   :ensure nil
-  :defer t
+  :defer
   :config
   (validate-setq
    auth-sources
