@@ -370,7 +370,9 @@
                (:wc-mode . (user/utilities-prefix "w"))))
 
      ;;; (Applications) ;;;
-     (:apps . ((:shell . (user/apps-prefix "s"))
+     (:apps . ((:packages . (user/apps-prefix "M-p"))
+
+               (:shell . (user/apps-prefix "s"))
                (:processes . (user/apps-prefix "p"))
                (:services . (user/apps-prefix "P"))
 
