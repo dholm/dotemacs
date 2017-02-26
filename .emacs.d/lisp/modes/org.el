@@ -34,12 +34,6 @@
 
   (user/smartparens-enable)
 
-  (with-feature 'guide-key
-    ;; org-mode specific key guides.
-    (guide-key/add-local-guide-key-sequence "C-c")
-    (guide-key/add-local-guide-key-sequence "C-c C-x")
-    (guide-key/add-local-highlight-command-regexp "org-"))
-
   ;;; (Bindings) ;;;
   (user/bind-key-local :basic :open-buffer-context 'org-iswitchb)
   (user/bind-key-local :basic :narrow-to-page 'org-narrow-to-subtree)

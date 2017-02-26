@@ -13,10 +13,7 @@
       (add-company-sources 'company-web-html)))
 
   (with-feature 'pandoc-mode
-    (pandoc-mode t))
-
-  (with-feature 'guide-key
-    (guide-key/add-local-highlight-command-regexp "web-mode-")))
+    (pandoc-mode t)))
 
 
 (defmacro user--add-web-mode-hook (engine function)

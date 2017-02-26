@@ -48,26 +48,41 @@
   :init
   (user/bind-key-global :emacs :tutorial 'help-with-tutorial))
 
-
-(use-package guide-key
-  :diminish guide-key-mode
+(use-package which-key
+  :diminish which-key-mode
+  :init
+  (which-key-mode t)
   :config
   (validate-setq
-   ;; Register all the prefix keys.
-   guide-key/recursive-key-sequence-flag t
-   guide-key/guide-key-sequence user/prefix-list
    ;; Number of seconds until help is shown.
-   guide-key/idle-delay 1.0)
+   which-key-idle-delay 1.0
+   which-key-special-keys
+   '("SPC"
+     "TAB"
+     "RET"
+     "DLT" ; delete key
+     "BS" ; backspace key
+     "ESC"))
 
-  ;; Enable guide key.
-  (guide-key-mode t)
+  (when (eq default-terminal-coding-system 'utf-8)
+    (add-many-to-list
+     'which-key-replacement-alist
+     '(("TAB" . nil)        . ("↹" . nil))
+     '(("RET" . nil)        . ("⏎" . nil))
+     '(("DEL" . nil)        . ("⌫" . nil))
+     '(("deletechar" . nil) . ("⌦" . nil))
+     '(("DEL" . nil)        . ("⇤" . nil))
+     '(("SPC" . nil)        . ("␣" . nil))))
 
-  (use-package guide-key-tip
-    :if window-system
-    :config
-    (validate-setq
-     ;; Tooltips should only be used in graphical mode.
-     guide-key-tip/enabled t)))
+  (which-key-add-key-based-replacements
+    user/view-prefix          "view"
+    user/help-prefix          "help"
+    user/documentation-prefix "doc"
+    user/code-prefix          "code"
+    user/code-eval-prefix     "eval"
+    user/vcs-prefix           "vcs"
+    user/utilities-prefix     "utils"
+    user/apps-prefix          "apps"))
 
 
 (provide 'ux/help)

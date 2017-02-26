@@ -7,10 +7,7 @@
   (user/smartparens-enable)
 
   (when (feature-p 'polymode)
-    (poly-markdown-mode t))
-
-  (with-feature 'guide-key
-    (guide-key/add-local-highlight-command-regexp "markdown-")))
+    (poly-markdown-mode t)))
 
 (use-package markdown-mode
   :defer t

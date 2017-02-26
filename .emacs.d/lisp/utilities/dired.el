@@ -6,11 +6,7 @@
   "Mode hook for dired."
   (with-feature 'async
     ;; Asynchronous operations in dired.
-    (dired-async-mode t))
-
-  (with-feature 'guide-key
-    ;; dired specific key guides.
-    (guide-key/add-local-guide-key-sequence "%")))
+    (dired-async-mode t)))
 
 (use-package dired
   :ensure nil
