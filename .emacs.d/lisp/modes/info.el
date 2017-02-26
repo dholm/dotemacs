@@ -27,6 +27,10 @@
      Info-breadcrumbs-in-header-flag t
      Info-breadcrumbs-in-mode-line-mode nil))
 
+  (use-package niceify-info
+    :init
+    (add-hook 'Info-selection-hook #'niceify-info))
+
   (use-package helm-info
     :defer t
     :ensure helm
