@@ -19,10 +19,11 @@
    ;; Indent using spaces.
    indent-tabs-mode nil)
 
-  ;; Protect against missing dictionary.
-  (try-eval
-      ;; Run spell-checker in programming mode.
-      (flyspell-mode t))
+  (when (user-flyspell-p)
+    ;; Protect against missing dictionary.
+    (try-eval
+        ;; Run spell-checker in programming mode.
+        (flyspell-prog-mode)))
 
   (with-feature 'pandoc-mode
     (pandoc-mode t))

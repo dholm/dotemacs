@@ -46,9 +46,13 @@
           (flyspell-do-correct 'save nil word cursor-location start end opoint)))
     (ispell-pdict-save t)))
 
-(when (or (executable-find "ispell")
-          (executable-find "aspell")
-          (executable-find "hunspell"))
+(defun user-flyspell-p ()
+  "Check if flyspell is available."
+  (or (executable-find "ispell")
+      (executable-find "aspell")
+      (executable-find "hunspell")))
+
+(when (user-flyspell-p)
   (require-package '(:name flyspell))
   (use-package flyspell
     :ensure nil

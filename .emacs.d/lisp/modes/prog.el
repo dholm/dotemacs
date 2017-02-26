@@ -6,10 +6,11 @@
   "Programming mode hook."
   (user--fundamental-mode-hook)
 
-  ;; Protect against missing dictionary.
-  (try-eval
-      ;; Run spell-checker in programming mode.
-      (flyspell-prog-mode))
+  (when (user-flyspell-p)
+    ;; Protect against missing dictionary.
+    (try-eval
+        ;; Run spell-checker in programming mode.
+        (flyspell-prog-mode)))
 
   ;; Try to enable completion system.
   (cond
