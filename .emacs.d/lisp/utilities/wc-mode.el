@@ -1,4 +1,4 @@
-;;; wc-mode.el --- word count in modeline
+;;; wc-mode.el --- word count in modeline -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; global.el --- Set up GNU Global support.
+;;; global.el --- Set up GNU Global support. -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

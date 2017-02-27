@@ -1,4 +1,4 @@
-;;; popups.el --- Configure Emacs popups
+;;; popups.el --- Configure Emacs popups -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

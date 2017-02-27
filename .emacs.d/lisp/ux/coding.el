@@ -1,4 +1,4 @@
-;;; coding.el --- Coding system configuration
+;;; coding.el --- Coding system configuration -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

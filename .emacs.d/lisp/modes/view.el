@@ -1,4 +1,4 @@
-;;; view.el --- Emacs view mode setup
+;;; view.el --- Emacs view mode setup -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

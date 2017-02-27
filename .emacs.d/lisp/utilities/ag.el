@@ -1,4 +1,4 @@
-;;; ag.el --- interface to The Silver Searcher
+;;; ag.el --- interface to The Silver Searcher -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; ebuild.el --- Gentoo ebuild mode support.
+;;; ebuild.el --- Gentoo ebuild mode support. -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; pandoc.el --- Interface to Pandoc
+;;; pandoc.el --- Interface to Pandoc -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

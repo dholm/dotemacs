@@ -1,4 +1,4 @@
-;;; coverage.el --- Code coverage tools
+;;; coverage.el --- Code coverage tools -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; stack-overflow.el --- Stack Overflow search support.
+;;; stack-overflow.el --- Stack Overflow search support. -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

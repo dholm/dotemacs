@@ -1,4 +1,4 @@
-;;; ibuffer --- improved buffer management
+;;; ibuffer --- improved buffer management -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

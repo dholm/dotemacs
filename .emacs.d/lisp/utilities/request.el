@@ -1,4 +1,4 @@
-;;; request.el --- interface to The Silver Searcher
+;;; request.el --- interface to The Silver Searcher -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

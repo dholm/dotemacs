@@ -1,4 +1,4 @@
-;;; makefile.el --- Initializes Makefile mode
+;;; makefile.el --- Initializes Makefile mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

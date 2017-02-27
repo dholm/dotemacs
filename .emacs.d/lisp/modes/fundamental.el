@@ -1,4 +1,4 @@
-;;; fundamental.el --- Base mode of all other major modes
+;;; fundamental.el --- Base mode of all other major modes -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

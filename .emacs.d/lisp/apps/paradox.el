@@ -1,4 +1,4 @@
-;;; paradox.el --- Set up Paradox
+;;; paradox.el --- Set up Paradox -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

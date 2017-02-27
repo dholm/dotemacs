@@ -1,4 +1,4 @@
-;;; env.el --- support functions for working with environment variables
+;;; env.el --- support functions for working with environment variables -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

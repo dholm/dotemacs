@@ -1,4 +1,4 @@
-;;; editing.el --- Configure Emacs editing
+;;; editing.el --- Configure Emacs editing -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

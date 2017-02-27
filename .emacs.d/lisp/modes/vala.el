@@ -1,4 +1,4 @@
-;;; vala.el --- Vala mode support
+;;; vala.el --- Vala mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

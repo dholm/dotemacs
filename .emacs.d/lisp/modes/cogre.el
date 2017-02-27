@@ -1,4 +1,4 @@
-;;; cogre.el --- Initializes COGRE mode
+;;; cogre.el --- Initializes COGRE mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

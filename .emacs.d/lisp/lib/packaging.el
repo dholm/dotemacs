@@ -1,4 +1,4 @@
-;;; packaging.el --- initialize package management
+;;; packaging.el --- initialize package management -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

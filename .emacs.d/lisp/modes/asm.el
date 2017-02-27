@@ -1,4 +1,4 @@
-;;; asm.el --- Initializes assembly mode
+;;; asm.el --- Initializes assembly mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

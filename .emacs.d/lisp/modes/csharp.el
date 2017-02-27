@@ -1,4 +1,4 @@
-;;; csharp.el --- C# mode support
+;;; csharp.el --- C# mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; pdf.el --- Emacs PDF modes
+;;; pdf.el --- Emacs PDF modes -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

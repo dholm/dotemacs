@@ -1,4 +1,4 @@
-;;; systemtap.el --- SystemTap mode support
+;;; systemtap.el --- SystemTap mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

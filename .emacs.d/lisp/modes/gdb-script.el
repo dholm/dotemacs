@@ -1,4 +1,4 @@
-;;; gdb-script.el --- Initializes GDB script mode
+;;; gdb-script.el --- Initializes GDB script mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

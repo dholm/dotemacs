@@ -1,4 +1,4 @@
-;;; completion.el --- Configures automatic code completion
+;;; completion.el --- Configures automatic code completion -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; eshell.el --- Initialize the Emacs shell
+;;; eshell.el --- Initialize the Emacs shell -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; lua.el --- Lua mode support
+;;; lua.el --- Lua mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

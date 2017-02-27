@@ -1,4 +1,4 @@
-;;; comint.el --- Interaction with inferior interpreters
+;;; comint.el --- Interaction with inferior interpreters -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

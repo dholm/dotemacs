@@ -1,4 +1,4 @@
-;;; google-this.el --- Google item under point
+;;; google-this.el --- Google item under point -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

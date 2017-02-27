@@ -1,4 +1,4 @@
-;;; init-bindings.el --- sets up basic Emacs bindings
+;;; init-bindings.el --- sets up basic Emacs bindings -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; sml.el --- Set up SML mode
+;;; sml.el --- Set up SML mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

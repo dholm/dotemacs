@@ -1,4 +1,4 @@
-;;; keychain.el --- Support for ssh keys through keychain
+;;; keychain.el --- Support for ssh keys through keychain -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

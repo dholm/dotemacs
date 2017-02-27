@@ -1,4 +1,4 @@
-;;; vc.el --- Emacs version control package support
+;;; vc.el --- Emacs version control package support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

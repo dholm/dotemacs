@@ -1,4 +1,4 @@
-;;; navigation.el --- Set up Emacs buffer navigation
+;;; navigation.el --- Set up Emacs buffer navigation -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

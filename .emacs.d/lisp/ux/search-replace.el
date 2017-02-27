@@ -1,4 +1,4 @@
-;;; search-replace.el --- Configuration for searching and replacing
+;;; search-replace.el --- Configuration for searching and replacing -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

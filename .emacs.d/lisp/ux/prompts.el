@@ -1,4 +1,4 @@
-;;; prompts.el --- Configure Emacs prompting
+;;; prompts.el --- Configure Emacs prompting -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; csv --- initializes CSV modes
+;;; csv --- initializes CSV modes -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

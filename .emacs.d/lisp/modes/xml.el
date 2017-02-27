@@ -1,4 +1,4 @@
-;;; xml.el --- initializes XML modes
+;;; xml.el --- initializes XML modes -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

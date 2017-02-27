@@ -1,4 +1,4 @@
-;;; doxygen.el --- Doxygen mode support
+;;; doxygen.el --- Doxygen mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

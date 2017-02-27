@@ -1,4 +1,4 @@
-;;; tls.el --- Emacs TLS communication
+;;; tls.el --- Emacs TLS communication -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; init-modes.el --- initializes major modes
+;;; init-modes.el --- initializes major modes -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

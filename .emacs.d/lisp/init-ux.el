@@ -1,4 +1,4 @@
-;;; init-ux.el --- initializes user experience
+;;; init-ux.el --- initializes user experience -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

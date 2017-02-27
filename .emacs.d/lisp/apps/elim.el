@@ -1,4 +1,4 @@
-;;; elim.el --- instant messenger
+;;; elim.el --- instant messenger -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

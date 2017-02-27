@@ -1,4 +1,4 @@
-;;; sx.el --- Set up Stack Exchange for Emacs
+;;; sx.el --- Set up Stack Exchange for Emacs -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; cedet.el --- initializes CEDET
+;;; cedet.el --- initializes CEDET -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; rest --- reStructuredText support
+;;; rest --- reStructuredText support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

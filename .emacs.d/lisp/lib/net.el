@@ -1,4 +1,4 @@
-;;; net.el --- Initialize Emacs networking
+;;; net.el --- Initialize Emacs networking -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; proced.el --- Emacs process manager.
+;;; proced.el --- Emacs process manager. -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

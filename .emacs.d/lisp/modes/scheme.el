@@ -1,4 +1,4 @@
-;;; scheme.el --- Set up Scheme mode
+;;; scheme.el --- Set up Scheme mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

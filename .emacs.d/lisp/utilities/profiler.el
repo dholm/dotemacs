@@ -1,4 +1,4 @@
-;;; profiler.el --- Configure Emacs profiler
+;;; profiler.el --- Configure Emacs profiler -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

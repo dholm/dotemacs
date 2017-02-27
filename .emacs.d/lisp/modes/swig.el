@@ -1,4 +1,4 @@
-;;; swig.el --- SWIG mode support
+;;; swig.el --- SWIG mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

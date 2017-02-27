@@ -1,4 +1,4 @@
-;;; server.el --- Emacs server setup
+;;; server.el --- Emacs server setup -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

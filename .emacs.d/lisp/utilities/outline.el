@@ -1,4 +1,4 @@
-;;; outline.el --- Outline mode support
+;;; outline.el --- Outline mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

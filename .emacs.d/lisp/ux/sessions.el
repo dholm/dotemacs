@@ -1,4 +1,4 @@
-;;; sessions.el --- Set up Emacs to remember things between sessions
+;;; sessions.el --- Set up Emacs to remember things between sessions -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

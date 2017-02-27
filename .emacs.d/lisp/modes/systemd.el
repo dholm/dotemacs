@@ -1,4 +1,4 @@
-;;; systemd.el --- Initializes systemd mode
+;;; systemd.el --- Initializes systemd mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

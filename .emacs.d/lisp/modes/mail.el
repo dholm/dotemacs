@@ -1,4 +1,4 @@
-;;; mail.el --- Major mode for emails
+;;; mail.el --- Major mode for emails -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

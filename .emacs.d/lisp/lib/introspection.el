@@ -1,4 +1,4 @@
-;;; introspection.el --- Emacs introspection
+;;; introspection.el --- Emacs introspection -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

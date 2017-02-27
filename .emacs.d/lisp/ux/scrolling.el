@@ -1,4 +1,4 @@
-;;; scrolling.el --- Configure scrolling in Emacs buffers
+;;; scrolling.el --- Configure scrolling in Emacs buffers -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

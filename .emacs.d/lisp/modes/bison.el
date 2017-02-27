@@ -1,4 +1,4 @@
-;;; bison --- Initializes Bison mode
+;;; bison --- Initializes Bison mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; rfc.el --- RFC mode support
+;;; rfc.el --- RFC mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

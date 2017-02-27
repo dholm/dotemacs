@@ -1,4 +1,4 @@
-;;; alert.el --- Emacs notifications.
+;;; alert.el --- Emacs notifications. -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; undo.el --- Configure Emacs undo
+;;; undo.el --- Configure Emacs undo -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; cscope.el --- Set up CScope support.
+;;; cscope.el --- Set up CScope support. -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

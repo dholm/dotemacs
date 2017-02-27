@@ -1,4 +1,4 @@
-;;; rust.el --- Rust mode support
+;;; rust.el --- Rust mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

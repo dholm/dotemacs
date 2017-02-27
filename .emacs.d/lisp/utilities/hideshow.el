@@ -1,4 +1,4 @@
-;;; hideshow.el --- Configure hide show
+;;; hideshow.el --- Configure hide show -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

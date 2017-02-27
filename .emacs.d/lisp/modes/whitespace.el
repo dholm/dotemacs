@@ -1,4 +1,4 @@
-;;; whitespace.el --- whitespace mode support
+;;; whitespace.el --- whitespace mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

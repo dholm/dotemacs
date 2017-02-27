@@ -1,4 +1,4 @@
-;;; helm.el --- improved Emacs control
+;;; helm.el --- improved Emacs control -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

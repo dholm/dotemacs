@@ -1,4 +1,4 @@
-;;; synosaurus.el --- Thesaurus for Emacs.
+;;; synosaurus.el --- Thesaurus for Emacs. -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

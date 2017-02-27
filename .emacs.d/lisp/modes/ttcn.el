@@ -1,4 +1,4 @@
-;;; ttcn.el --- initializes TTCN modes
+;;; ttcn.el --- initializes TTCN modes -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

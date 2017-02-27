@@ -1,4 +1,4 @@
-;;; backups.el --- Emacs backup system
+;;; backups.el --- Emacs backup system -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

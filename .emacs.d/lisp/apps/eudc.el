@@ -1,4 +1,4 @@
-;;; eudc.el --- Configure the Emacs Unified Directory Client
+;;; eudc.el --- Configure the Emacs Unified Directory Client -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

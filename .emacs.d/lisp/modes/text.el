@@ -1,4 +1,4 @@
-;;; text.el --- text mode support
+;;; text.el --- text mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

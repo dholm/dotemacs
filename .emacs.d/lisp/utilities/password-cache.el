@@ -1,4 +1,4 @@
-;;; password-cache.el --- Emacs password cache
+;;; password-cache.el --- Emacs password cache -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

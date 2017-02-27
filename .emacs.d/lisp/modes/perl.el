@@ -1,4 +1,4 @@
-;;; perl.el --- initializes Perl modes
+;;; perl.el --- initializes Perl modes -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; ruby.el --- ruby mode support
+;;; ruby.el --- ruby mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; markdown --- initializes Markdown modes
+;;; markdown --- initializes Markdown modes -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; prodigy.el --- Emacs service manager.
+;;; prodigy.el --- Emacs service manager. -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

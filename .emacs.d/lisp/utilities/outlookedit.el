@@ -1,4 +1,4 @@
-;;; outlookedit.el --- outlook integration
+;;; outlookedit.el --- outlook integration -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

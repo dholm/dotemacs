@@ -1,4 +1,4 @@
-;;; pkg-config.el --- pkg-config support
+;;; pkg-config.el --- pkg-config support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

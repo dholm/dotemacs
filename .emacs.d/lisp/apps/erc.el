@@ -1,4 +1,4 @@
-;;; erc.el --- Internet relay chat client
+;;; erc.el --- Internet relay chat client -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

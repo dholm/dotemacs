@@ -1,4 +1,4 @@
-;;; haskell.el --- initializes Haskell modes
+;;; haskell.el --- initializes Haskell modes -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

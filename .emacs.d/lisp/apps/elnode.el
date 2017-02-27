@@ -1,4 +1,4 @@
-;;; elnode.el --- Emacs event driven web framework.
+;;; elnode.el --- Emacs event driven web framework. -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

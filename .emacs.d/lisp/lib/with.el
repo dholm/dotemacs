@@ -1,4 +1,4 @@
-;;; with.el --- conditional eval wrappers
+;;; with.el --- conditional eval wrappers -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

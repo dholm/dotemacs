@@ -1,4 +1,4 @@
-;;; pcache.el --- Configure Emacs persistent cache
+;;; pcache.el --- Configure Emacs persistent cache -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

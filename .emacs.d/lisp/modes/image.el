@@ -1,4 +1,4 @@
-;;; image.el --- Initializes image mode
+;;; image.el --- Initializes image mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

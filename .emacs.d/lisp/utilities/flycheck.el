@@ -1,4 +1,4 @@
-;;; flycheck.el --- flycheck configuration
+;;; flycheck.el --- flycheck configuration -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

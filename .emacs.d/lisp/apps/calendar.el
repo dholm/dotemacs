@@ -1,4 +1,4 @@
-;;; calendar.el --- Emacs calendar and diary
+;;; calendar.el --- Emacs calendar and diary -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

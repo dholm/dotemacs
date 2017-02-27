@@ -1,4 +1,4 @@
-;;; bbdb.el --- Emacs rolodex
+;;; bbdb.el --- Emacs rolodex -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

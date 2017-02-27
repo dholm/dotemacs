@@ -1,4 +1,4 @@
-;;; web.el --- Web development
+;;; web.el --- Web development -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

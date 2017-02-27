@@ -1,4 +1,4 @@
-;;; ido.el --- interactively do things
+;;; ido.el --- interactively do things -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

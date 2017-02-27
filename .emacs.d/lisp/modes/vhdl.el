@@ -1,4 +1,4 @@
-;;; vhdl.el --- VHDL mode support
+;;; vhdl.el --- VHDL mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

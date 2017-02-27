@@ -1,4 +1,4 @@
-;;; jam.el --- Initializes Jam mode
+;;; jam.el --- Initializes Jam mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

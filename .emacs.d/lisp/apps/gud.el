@@ -1,4 +1,4 @@
-;;; gud.el --- Initializes GUD debugger
+;;; gud.el --- Initializes GUD debugger -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

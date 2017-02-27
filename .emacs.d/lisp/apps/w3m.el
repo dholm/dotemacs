@@ -1,4 +1,4 @@
-;;; w3m.el --- W3M web browser support.
+;;; w3m.el --- W3M web browser support. -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

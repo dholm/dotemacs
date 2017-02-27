@@ -1,4 +1,4 @@
-;;; erlang.el --- Erlang mode support
+;;; erlang.el --- Erlang mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

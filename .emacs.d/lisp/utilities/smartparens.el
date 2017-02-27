@@ -1,4 +1,4 @@
-;;; smartparens.el --- Set up smartparens.
+;;; smartparens.el --- Set up smartparens. -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

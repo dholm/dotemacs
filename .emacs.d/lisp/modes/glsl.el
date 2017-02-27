@@ -1,4 +1,4 @@
-;;; glsl.el --- Initializes GLSL mode
+;;; glsl.el --- Initializes GLSL mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

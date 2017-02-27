@@ -1,4 +1,4 @@
-;;; abbrev.el --- Configure Emacs abbreviations
+;;; abbrev.el --- Configure Emacs abbreviations -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

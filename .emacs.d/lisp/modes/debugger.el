@@ -1,4 +1,4 @@
-;;; debugger.el --- Emacs debugger mode
+;;; debugger.el --- Emacs debugger mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

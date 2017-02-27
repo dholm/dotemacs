@@ -1,4 +1,4 @@
-;;; gnus.el --- Gnus mail and news management system
+;;; gnus.el --- Gnus mail and news management system -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

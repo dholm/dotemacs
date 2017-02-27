@@ -1,4 +1,4 @@
-;;; theme.el --- Configure Emacs theme
+;;; theme.el --- Configure Emacs theme -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; diff.el --- Configure diff mode
+;;; diff.el --- Configure diff mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

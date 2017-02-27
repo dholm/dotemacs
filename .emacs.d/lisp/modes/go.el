@@ -1,4 +1,4 @@
-;;; go.el --- Go mode support
+;;; go.el --- Go mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

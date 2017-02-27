@@ -1,4 +1,4 @@
-;;; frames.el --- Configure behavior of Emacs frames
+;;; frames.el --- Configure behavior of Emacs frames -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

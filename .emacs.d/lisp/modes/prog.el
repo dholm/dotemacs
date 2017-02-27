@@ -1,4 +1,4 @@
-;;; prog.el --- setup shared defaults for programming modes
+;;; prog.el --- setup shared defaults for programming modes -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

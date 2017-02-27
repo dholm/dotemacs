@@ -1,4 +1,4 @@
-;;; elisp.el --- Initializes Emacs Lisp modes
+;;; elisp.el --- Initializes Emacs Lisp modes -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

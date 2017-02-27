@@ -1,4 +1,4 @@
-;;; racket.el --- Set up Racket mode
+;;; racket.el --- Set up Racket mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

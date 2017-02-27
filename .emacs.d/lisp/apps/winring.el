@@ -1,4 +1,4 @@
-;;; winring.el --- Emacs window manager
+;;; winring.el --- Emacs window manager -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

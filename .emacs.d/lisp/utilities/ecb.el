@@ -1,4 +1,4 @@
-;;; ecb --- Emacs Code Browser
+;;; ecb --- Emacs Code Browser -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

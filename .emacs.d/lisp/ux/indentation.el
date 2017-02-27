@@ -1,4 +1,4 @@
-;;; indentation.el --- Configure Emacs indentation behavior
+;;; indentation.el --- Configure Emacs indentation behavior -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

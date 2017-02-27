@@ -1,4 +1,4 @@
-;;; llvm.el --- LLVM mode support
+;;; llvm.el --- LLVM mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

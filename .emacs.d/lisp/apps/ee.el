@@ -1,4 +1,4 @@
-;;; ee.el --- Emacs information browser.
+;;; ee.el --- Emacs information browser. -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

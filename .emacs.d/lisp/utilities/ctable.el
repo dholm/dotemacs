@@ -1,4 +1,4 @@
-;;; ctable --- Table component for Emacs
+;;; ctable --- Table component for Emacs -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

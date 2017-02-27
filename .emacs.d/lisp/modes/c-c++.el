@@ -1,4 +1,4 @@
-;;; c-c++.el --- initializes C/C++ modes
+;;; c-c++.el --- initializes C/C++ modes -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

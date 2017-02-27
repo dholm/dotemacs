@@ -1,4 +1,4 @@
-;;; lisp.el --- Initializes Lisp modes
+;;; lisp.el --- Initializes Lisp modes -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

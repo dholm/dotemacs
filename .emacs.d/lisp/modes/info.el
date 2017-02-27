@@ -1,4 +1,4 @@
-;;; info.el --- Info mode.
+;;; info.el --- Info mode. -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

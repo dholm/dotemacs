@@ -1,4 +1,4 @@
-;;; cmake.el --- Initializes CMake mode
+;;; cmake.el --- Initializes CMake mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

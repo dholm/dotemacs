@@ -1,4 +1,4 @@
-;;; tags.el --- Helpers for working with tags
+;;; tags.el --- Helpers for working with tags -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; scala.el --- initializes Scala modes
+;;; scala.el --- initializes Scala modes -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

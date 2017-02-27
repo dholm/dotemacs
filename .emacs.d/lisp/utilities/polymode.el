@@ -1,4 +1,4 @@
-;;; polymode.el --- Multiple major modes in a single buffer.
+;;; polymode.el --- Multiple major modes in a single buffer. -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

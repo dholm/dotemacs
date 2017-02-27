@@ -1,4 +1,4 @@
-;;; symbols.el --- Configure how Emacs handles certain symbols
+;;; symbols.el --- Configure how Emacs handles certain symbols -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

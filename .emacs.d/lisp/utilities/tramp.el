@@ -1,4 +1,4 @@
-;;; tramp --- remote file access
+;;; tramp --- remote file access -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

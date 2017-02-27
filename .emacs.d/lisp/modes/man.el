@@ -1,4 +1,4 @@
-;;; man.el --- Man page support
+;;; man.el --- Man page support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; rendering.el --- Configure Emacs user interface rendering
+;;; rendering.el --- Configure Emacs user interface rendering -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

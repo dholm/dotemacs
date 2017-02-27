@@ -1,4 +1,4 @@
-;;; dash-app.el --- Dash documentation browser
+;;; dash-app.el --- Dash documentation browser -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

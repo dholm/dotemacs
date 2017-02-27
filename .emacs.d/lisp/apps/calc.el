@@ -1,4 +1,4 @@
-;;; calc.el --- Emacs calculator
+;;; calc.el --- Emacs calculator -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

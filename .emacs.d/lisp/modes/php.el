@@ -1,4 +1,4 @@
-;;; php.el --- initializes PHP modes
+;;; php.el --- initializes PHP modes -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

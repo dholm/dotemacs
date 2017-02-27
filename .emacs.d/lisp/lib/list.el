@@ -1,4 +1,4 @@
-;;; list.el --- Emacs list utilities
+;;; list.el --- Emacs list utilities -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

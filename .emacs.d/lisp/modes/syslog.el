@@ -1,4 +1,4 @@
-;;; syslog --- a mode for syslogs
+;;; syslog --- a mode for syslogs -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

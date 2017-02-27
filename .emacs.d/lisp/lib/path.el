@@ -1,4 +1,4 @@
-;;; path.el --- support functions for working with paths
+;;; path.el --- support functions for working with paths -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; python.el --- initializes Python modes
+;;; python.el --- initializes Python modes -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

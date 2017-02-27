@@ -1,4 +1,4 @@
-;;; string.el --- Emacs string functions.
+;;; string.el --- Emacs string functions. -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

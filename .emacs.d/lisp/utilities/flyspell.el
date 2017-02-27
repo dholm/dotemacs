@@ -1,4 +1,4 @@
-;;; flyspell.el --- spell checking on the fly
+;;; flyspell.el --- spell checking on the fly -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

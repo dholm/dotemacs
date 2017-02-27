@@ -1,4 +1,4 @@
-;;; sql.el --- Initializes SQL mode
+;;; sql.el --- Initializes SQL mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

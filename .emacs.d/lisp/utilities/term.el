@@ -1,4 +1,4 @@
-;;; term.el --- Initialize the Emacs terminal
+;;; term.el --- Initialize the Emacs terminal -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

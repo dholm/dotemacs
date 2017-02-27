@@ -1,4 +1,4 @@
-;;; cask.el --- Cask mode support
+;;; cask.el --- Cask mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

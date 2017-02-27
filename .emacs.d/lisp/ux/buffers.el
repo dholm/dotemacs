@@ -1,4 +1,4 @@
-;;; buffers.el --- Configure Emacs buffers
+;;; buffers.el --- Configure Emacs buffers -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

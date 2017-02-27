@@ -1,4 +1,4 @@
-;;; init-apps.el --- initializes applications
+;;; init-apps.el --- initializes applications -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

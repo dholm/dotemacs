@@ -1,4 +1,4 @@
-;;; shell.el --- initializes shell modes
+;;; shell.el --- initializes shell modes -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

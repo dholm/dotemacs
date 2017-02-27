@@ -1,4 +1,4 @@
-;;; vlf --- Initializes view large file mode
+;;; vlf --- Initializes view large file mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; browser.el --- Web browsing.
+;;; browser.el --- Web browsing. -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

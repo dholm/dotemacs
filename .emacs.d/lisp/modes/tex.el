@@ -1,4 +1,4 @@
-;;; tex.el --- TeX mode support
+;;; tex.el --- TeX mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

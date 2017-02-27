@@ -1,4 +1,4 @@
-;;; project.el --- helpers for working with projects
+;;; project.el --- helpers for working with projects -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

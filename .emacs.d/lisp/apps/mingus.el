@@ -1,4 +1,4 @@
-;;; mingus.el --- MPD frontend for Emacs
+;;; mingus.el --- MPD frontend for Emacs -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

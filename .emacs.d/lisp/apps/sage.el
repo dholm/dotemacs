@@ -1,4 +1,4 @@
-;;; sage.el --- Sage integration with Emacs
+;;; sage.el --- Sage integration with Emacs -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

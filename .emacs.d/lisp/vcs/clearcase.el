@@ -1,4 +1,4 @@
-;;; clearcase.el --- ClearCase integration
+;;; clearcase.el --- ClearCase integration -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

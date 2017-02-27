@@ -1,4 +1,4 @@
-;;; asciidoc.el --- AsciiDoc mode support
+;;; asciidoc.el --- AsciiDoc mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

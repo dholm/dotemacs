@@ -1,4 +1,4 @@
-;;; bindings.el --- Smart VCS bindings
+;;; bindings.el --- Smart VCS bindings -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

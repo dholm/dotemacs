@@ -1,4 +1,4 @@
-;;; octave.el --- Octave mode
+;;; octave.el --- Octave mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

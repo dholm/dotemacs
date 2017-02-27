@@ -1,4 +1,4 @@
-;;; projectile.el --- Projectile project management
+;;; projectile.el --- Projectile project management -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

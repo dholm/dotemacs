@@ -1,4 +1,4 @@
-;;; init-constants.el --- Set up constants required during initialization
+;;; init-constants.el --- Set up constants required during initialization -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

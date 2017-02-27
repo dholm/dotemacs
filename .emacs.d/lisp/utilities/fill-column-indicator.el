@@ -1,4 +1,4 @@
-;;; fill-column-indicator.el --- shows the fill column
+;;; fill-column-indicator.el --- shows the fill column -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

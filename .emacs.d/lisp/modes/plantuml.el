@@ -1,4 +1,4 @@
-;;; plantuml.el --- Mode support for PlantUML.
+;;; plantuml.el --- Mode support for PlantUML. -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

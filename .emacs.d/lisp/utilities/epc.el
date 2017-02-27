@@ -1,4 +1,4 @@
-;;; epc.el --- RPC stack for Emacs
+;;; epc.el --- RPC stack for Emacs -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

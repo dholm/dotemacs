@@ -1,4 +1,4 @@
-;;; javascript.el --- initializes JavaScript modes
+;;; javascript.el --- initializes JavaScript modes -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

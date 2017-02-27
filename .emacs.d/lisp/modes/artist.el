@@ -1,4 +1,4 @@
-;;; artist.el --- Initializes artist mode
+;;; artist.el --- Initializes artist mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

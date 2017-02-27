@@ -1,4 +1,4 @@
-;;; gnuplot --- initializes gnuplot mode
+;;; gnuplot --- initializes gnuplot mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

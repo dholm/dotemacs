@@ -1,4 +1,4 @@
-;;; sauron.el --- Emacs event tracker
+;;; sauron.el --- Emacs event tracker -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

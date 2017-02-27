@@ -1,4 +1,4 @@
-;;; utils.el --- miscellaneous support functions
+;;; utils.el --- miscellaneous support functions -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

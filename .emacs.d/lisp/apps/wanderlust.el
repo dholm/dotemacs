@@ -1,4 +1,4 @@
-;;; wanderlust.el --- wanderlust mail and news management system
+;;; wanderlust.el --- wanderlust mail and news management system -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

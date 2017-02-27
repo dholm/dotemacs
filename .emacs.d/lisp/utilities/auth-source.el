@@ -1,4 +1,4 @@
-;;; auth-source.el --- Configure Emacs authentication sources
+;;; auth-source.el --- Configure Emacs authentication sources -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

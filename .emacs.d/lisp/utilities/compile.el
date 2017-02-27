@@ -1,4 +1,4 @@
-;;; compile.el --- sets up Emacs compile support
+;;; compile.el --- sets up Emacs compile support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

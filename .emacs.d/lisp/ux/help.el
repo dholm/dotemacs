@@ -1,4 +1,4 @@
-;;; help.el --- Emacs help
+;;; help.el --- Emacs help -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

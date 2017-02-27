@@ -1,4 +1,4 @@
-;;; doc-view.el --- Emacs document viewer
+;;; doc-view.el --- Emacs document viewer -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

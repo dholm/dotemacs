@@ -1,4 +1,4 @@
-;;; kill-yank.el --- Configuration for copying and pasting of data
+;;; kill-yank.el --- Configuration for copying and pasting of data -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

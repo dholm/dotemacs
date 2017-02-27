@@ -1,4 +1,4 @@
-;;; elfeed.el --- Emacs web feed reader.
+;;; elfeed.el --- Emacs web feed reader. -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

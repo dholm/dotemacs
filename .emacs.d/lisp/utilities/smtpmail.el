@@ -1,4 +1,4 @@
-;;; smtpmail.el --- Emacs SMTP
+;;; smtpmail.el --- Emacs SMTP -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

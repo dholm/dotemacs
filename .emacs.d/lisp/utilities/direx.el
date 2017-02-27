@@ -1,4 +1,4 @@
-;;; direx.el --- a simple directory explorer
+;;; direx.el --- a simple directory explorer -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

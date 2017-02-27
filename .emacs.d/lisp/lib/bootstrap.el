@@ -1,4 +1,4 @@
-;;; bootstrap.el --- Helpers for bootstrapping Emacs.
+;;; bootstrap.el --- Helpers for bootstrapping Emacs. -*- lexical-binding: t; -*-
 ;;; Commentary:
 
 ;; Stolen from Alexx Ott, https://github.com/alexott/dotemacs

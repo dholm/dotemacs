@@ -1,4 +1,4 @@
-;;; verilog.el --- Verilog mode support
+;;; verilog.el --- Verilog mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

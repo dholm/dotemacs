@@ -1,4 +1,4 @@
-;;; conf.el --- Initializes configuration mode
+;;; conf.el --- Initializes configuration mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

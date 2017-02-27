@@ -1,4 +1,4 @@
-;;; bookmarks.el --- Bookmarks in Emacs
+;;; bookmarks.el --- Bookmarks in Emacs -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

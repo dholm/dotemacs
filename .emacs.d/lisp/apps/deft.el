@@ -1,4 +1,4 @@
-;;; deft.el --- sets up Deft
+;;; deft.el --- sets up Deft -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

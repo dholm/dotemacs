@@ -1,4 +1,4 @@
-;;; tcl.el --- Tcl mode support
+;;; tcl.el --- Tcl mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

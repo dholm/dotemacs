@@ -1,4 +1,4 @@
-;;; r.el --- R mode support
+;;; r.el --- R mode support -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

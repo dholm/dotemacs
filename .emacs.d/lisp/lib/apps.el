@@ -1,4 +1,4 @@
-;;; apps.el --- Support functions for applications
+;;; apps.el --- Support functions for applications -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

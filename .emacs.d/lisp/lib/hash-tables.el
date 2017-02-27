@@ -1,4 +1,4 @@
-;;; hash-tables.el --- utilities for working with LISP hash tables
+;;; hash-tables.el --- utilities for working with LISP hash tables -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

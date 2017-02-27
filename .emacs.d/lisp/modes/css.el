@@ -1,4 +1,4 @@
-;;; css --- initializes CSS modes
+;;; css --- initializes CSS modes -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

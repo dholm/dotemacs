@@ -1,4 +1,4 @@
-;;; bug-hunter.el --- Emacs init file bug hunter
+;;; bug-hunter.el --- Emacs init file bug hunter -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

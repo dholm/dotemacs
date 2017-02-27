@@ -1,4 +1,4 @@
- ;;; google-services.el --- Support for Google services.
+ ;;; google-services.el --- Support for Google services. -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

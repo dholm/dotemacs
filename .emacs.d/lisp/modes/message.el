@@ -1,4 +1,4 @@
-;;; message.el --- Major mode for email and news
+;;; message.el --- Major mode for email and news -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
