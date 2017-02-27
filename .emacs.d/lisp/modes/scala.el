@@ -6,9 +6,6 @@
   "Scala mode hook."
   (user/smartparens-enable)
 
-  ;; Enable YouCompleteMe.
-  (user/ycmd-enable)
-
   (when (feature-p 'ensime)
     (ensime-scala-mode-hook)))
 

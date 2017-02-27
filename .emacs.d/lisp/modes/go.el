@@ -21,9 +21,7 @@
     (with-feature 'company-go
       (set
        (make-local-variable 'company-backends)
-       '(company-go))))
-   ((user/auto-complete-p)
-    (user/ycmd-enable)))
+       '(company-go)))))
 
   ;;; (Bindings) ;;;
   (user/bind-key-local :doc :describe 'godef-describe)

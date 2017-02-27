@@ -33,9 +33,6 @@
   (user/gnu-global-enable)
   (user/cscope-enable)
 
-  ;; Enable YouCompleteMe.
-  (user/ycmd-enable)
-
   (user/smartparens-enable))
 
 

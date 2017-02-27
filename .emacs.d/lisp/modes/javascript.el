@@ -9,9 +9,6 @@
 
   (user/gnu-global-enable)
 
-  ;; Enable YouCompleteMe.
-  (user/ycmd-enable)
-
   (tern-mode t))
 
 
