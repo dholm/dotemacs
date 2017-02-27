@@ -10,8 +10,9 @@
   "Hook for fly spell common mode."
   (if (> (buffer-size) *user-auto-dictionary-buffer-limit*)
       ;; Disables automatic dictionary detection in large buffers.
-      (auto-dictionary-mode -1)
+      (guess-language-mode -1)
     (with-feature 'flyspell-lazy
+      (guess-language-mode t)
       ;; Enables flyspell lazy mode for small buffers.
       (flyspell-lazy-mode t)))
 
@@ -95,7 +96,13 @@
        ;; Idle timeout before running spell check on entire buffer.
        flyspell-lazy-window-idle-seconds 60))
 
-    (use-package auto-dictionary)
+    (use-package guess-language
+      :defer
+      :diminish guess-language-mode
+      :config
+      (validate-setq
+       ;; By default only guess English.
+       guess-language-languages '(en)))
 
     (with-executable 'hunspell
       (use-package rw-hunspell
