@@ -18,8 +18,13 @@
   (savehist-mode t)
   :config
   (validate-setq
+   savehist-file (path-join *user-cache-directory* "savehist")
+   ;; Save minibuffer history.
+   savehist-save-minibuffer-history t
+   ;; Additional history to save.
    savehist-additional-variables '(search-ring regexp-search-ring kill-ring)
-   savehist-file (path-join *user-cache-directory* "savehist"))
+   ;; Autosave every once in a while.
+   savehist-autosave-interval 180))
 
 (use-package saveplace
   :config
