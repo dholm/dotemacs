@@ -17,6 +17,7 @@
   (add-hook 'octave-mode-hook 'user--octave-mode-hook)
   :config
   (use-package ac-octave
+    :disabled
     :after auto-complete
     :defer))
 
