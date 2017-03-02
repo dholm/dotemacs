@@ -49,88 +49,88 @@
 (defun user/tag-toc ()
   "Show table of contents for current context."
   (interactive)
-  (user/eval-until-move
-   '(((user/use-rtags t)
-      (call-interactively 'rtags-imenu))
-     ((or (user/use-helm-gtags) (user/use-semantic))
-      (call-interactively 'helm-semantic-or-imenu))
-     (t (call-interactively 'helm-imenu)))))
+  (unless (and (user/use-rtags t)
+               (rtags-imenu))
+    (user/eval-until-move
+     '(((or (user/use-helm-gtags) (user/use-semantic))
+        (call-interactively 'helm-semantic-or-imenu))
+       (t (call-interactively 'helm-imenu))))))
 
 
 (defun user/tag-follow ()
   "Follow tag at point using best available method."
   (interactive)
-  (user/eval-until-move
-   '(((eq major-mode 'emacs-lisp-mode)
-      (call-interactively 'elisp-slime-nav-find-elisp-thing-at-point))
-     ((and (user/use-rtags)
-           (boundp 'rtags-last-request-not-indexed)
-           (not rtags-last-request-not-indexed))
-      (call-interactively 'rtags-find-symbol-at-point))
-     ((user/use-helm-gtags)
-      (call-interactively 'helm-gtags-dwim))
-     ((user/use-semantic)
-      (call-interactively 'semantic-ia-fast-jump)))))
+  (unless (and (user/use-rtags)
+               (boundp 'rtags-last-request-not-indexed)
+               (not rtags-last-request-not-indexed)
+               (rtags-find-symbol-at-point))
+    (user/eval-until-move
+     '(((eq major-mode 'emacs-lisp-mode)
+        (call-interactively 'elisp-slime-nav-find-elisp-thing-at-point))
+       ((user/use-helm-gtags)
+        (call-interactively 'helm-gtags-dwim))
+       ((user/use-semantic)
+        (call-interactively 'semantic-ia-fast-jump))))))
 
 
 (defun user/tag-references-at-point ()
   "Find references at current point."
   (interactive)
-  (user/eval-until-move
-   '(((and (user/use-rtags (and (boundp 'rtags-last-request-not-indexed)
-                                (not rtags-last-request-not-indexed))))
-      (rtags-find-references-at-point))
-     ((user/use-helm-gtags)
-      (call-interactively 'helm-gtags-find-rtag))
-     ((user/use-semantic)
-      (call-interactively 'semantic-symref)))))
+  (unless (and (user/use-rtags (and (boundp 'rtags-last-request-not-indexed)
+                                    (not rtags-last-request-not-indexed)))
+               (rtags-find-references-at-point))
+    (user/eval-until-move
+     '(((user/use-helm-gtags)
+        (call-interactively 'helm-gtags-find-rtag))
+       ((user/use-semantic)
+        (call-interactively 'semantic-symref))))))
 
 
 (defun user/tag-find ()
   "Find tag by name."
   (interactive)
-  (user/eval-until-move
-   '(((user/use-rtags)
-      (call-interactively 'rtags-find-symbol))
-     ((user/use-helm-gtags)
-      (call-interactively 'helm-gtags-select))
-     ((user/use-semantic)
-      (call-interactively 'semantic-symref-find-tags-by-regexp)))))
+  (unless (and (user/use-rtags)
+               (rtags-find-symbol))
+    (user/eval-until-move
+     '(((user/use-helm-gtags)
+        (call-interactively 'helm-gtags-select))
+       ((user/use-semantic)
+        (call-interactively 'semantic-symref-find-tags-by-regexp))))))
 
 
 (defun user/tag-find-references ()
   "Find references to tag."
   (interactive)
-  (user/eval-until-move
-   '(((user/use-rtags)
-      (call-interactively 'rtags-find-references))
-     ((user/use-helm-gtags)
-      (call-interactively 'helm-gtags-find-rtag))
-     ((user/use-semantic)
-      (call-interactively 'semantic-symref-regexp)))))
+  (unless (and (user/use-rtags)
+               (rtags-find-references))
+    (user/eval-until-move
+     '(((user/use-helm-gtags)
+        (call-interactively 'helm-gtags-find-rtag))
+       ((user/use-semantic)
+        (call-interactively 'semantic-symref-regexp))))))
 
 
 (defun user/tag-find-file ()
   "Find file file using tags."
   (interactive)
-  (user/eval-until-move
-   '(((user/use-rtags t)
-      (call-interactively 'rtags-find-file))
-     ((user/use-helm-gtags)
-      (call-interactively 'helm-gtags-select-path))
-     ((boundp 'projectile-find-file)
-      (call-interactively 'projectile-find-file)))))
+  (unless (and (user/use-rtags t)
+               (call-interactively 'rtags-find-file))
+    (user/eval-until-move
+     '(((user/use-helm-gtags)
+        (call-interactively 'helm-gtags-select-path))
+       ((boundp 'projectile-find-file)
+        (call-interactively 'projectile-find-file))))))
 
 
 (defun user/tag-pop ()
   "Return to the previous point before jump."
   (interactive)
-  (user/eval-until-move
-   '(((user/use-rtags)
-      (call-interactively 'rtags-location-stack-back))
-     ((user/use-helm-gtags)
-      (call-interactively 'helm-gtags-pop-stack))
-     (t (pop-global-mark)))))
+  (unless (and (user/use-rtags)
+               (rtags-location-stack-back))
+    (user/eval-until-move
+     '(((user/use-helm-gtags)
+        (call-interactively 'helm-gtags-pop-stack))
+       (t (pop-global-mark))))))
 
 
 (defun user/tags-try-enable ()
@@ -164,7 +164,10 @@
     (after-load 'tramp
       (validate-setq
        ;; Enable tramp after it has been loaded.
-       rtags-tramp-enabled t))))
+       rtags-tramp-enabled t)
+      ;; This function is causing tramp to lock up waiting for a
+      ;; prompt so disable it for now.
+      (defun rtags-update-current-project ()))))
 
 (when (feature-p 'helm)
   (use-package helm-etags-plus

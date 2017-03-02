@@ -64,8 +64,8 @@
 
   (when (user/company-mode-p)
     (with-feature 'company-rtags
-      (add-company-sources 'company-rtags)
-      (validate-setq rtags-completions-enabled t))
+      (validate-setq rtags-completions-enabled t)
+      (add-company-sources 'company-rtags))
     (with-feature 'company-c-headers
       (add-company-sources 'company-c-headers)))
 
