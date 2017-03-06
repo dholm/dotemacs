@@ -253,8 +253,10 @@
               (:jump-spec-impl . ("C-l i"))
               (:references . ("C-l r"))
               (:find-references . ("C-l M-r"))
+              (:find-virtuals . ("C-l v"))
               (:switch-spec-impl . ("C-l h"))
               (:functions/toc . ("C-l t"))
+              (:file-dependencies . ("C-l d"))
               (:history . ("C-l h"))
 
               (:open . (user/utilities-prefix "o"))))
@@ -304,6 +306,8 @@
                (:eval-buffer . (user/code-eval-prefix "b"))
                (:eval-function . (user/code-eval-prefix "f"))
                (:eval-selection . (user/code-eval-prefix "s"))
+
+               (:insert-dependency . (user/code-eval-prefix "M-d"))
 
                (:macro-expand . (user/code-eval-prefix "m"))
 

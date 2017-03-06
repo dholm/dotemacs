@@ -110,6 +110,33 @@
         (call-interactively 'semantic-symref-regexp))))))
 
 
+(defun user/tag-find-virtuals ()
+  "Find implementers of virtual function at point."
+  (interactive)
+  (unless (and (user/use-rtags)
+               (boundp 'rtags-last-request-not-indexed)
+               (not rtags-last-request-not-indexed)
+               (rtags-find-virtuals-at-point))))
+
+
+(defun user/tag-insert-dependency-from-point ()
+  "Deduce and insert dependency for symbol at point."
+  (interactive)
+  (unless (and (user/use-rtags)
+               (boundp 'rtags-last-request-not-indexed)
+               (not rtags-last-request-not-indexed)
+               (rtags-get-include-file-for-symbol))))
+
+
+(defun user/tag-file-dependencies ()
+  "List dependencies of current file."
+  (interactive)
+  (unless (and (user/use-rtags)
+               (boundp 'rtags-last-request-not-indexed)
+               (not rtags-last-request-not-indexed)
+               (rtags-print-dependencies))))
+
+
 (defun user/tag-find-file ()
   "Find file file using tags."
   (interactive)
@@ -148,15 +175,21 @@
     (user/bind-key-global :nav :follow-symbol 'user/tag-follow)
     (user/bind-key-local :nav :find-symbol 'user/tag-find)
     (user/bind-key-local :nav :references 'user/tag-references-at-point)
+    (user/bind-key-local :nav :find-virtuals 'user/tag-find-virtuals)
     (user/bind-key-local :nav :find-references 'user/tag-find-references)
+    (user/bind-key-local :code :insert-dependency 'user/tag-insert-dependency-from-point)
     (user/bind-key-local :basic :open-file-context 'user/tag-find-file)
+    (user/bind-key-local :nav :file-dependencies 'user/tag-file-dependencies)
     (user/bind-key-local :nav :go-back 'user/tag-pop)))
 
 (with-executable 'llvm-config
   (use-package rtags
     :defer
     :config
-    (after-load 'helm
+    (use-package rtags-helm
+      :ensure nil
+      :requires helm
+      :config
       (validate-setq
        ;; Enable Helm when available.
        rtags-use-helm (when (require 'rtags-helm nil 'noerror) t)))
