@@ -36,8 +36,8 @@
   (add-hook 'smartparens-mode-hook 'user--smartparens-mode-hook)
   :config
   (validate-setq
-   ;; Even kill whitespace with `sp-hybrid-kill'.
-   sp-hybrid-kill-excessive-whitespace t))
+   ;; Don't kill trailing whitespace with `sp-hybrid-kill'.
+   sp-hybrid-kill-excessive-whitespace nil))
 
 
 (provide 'utilities/smartparens)
