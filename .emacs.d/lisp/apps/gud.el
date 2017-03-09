@@ -30,6 +30,31 @@
   ;; Printing
   (user/bind-key-local :debug :show-value 'gud-print))
 
+(defun user/realgud-mode-hook ()
+  "RealGud mode hook."
+  ;;; (Bindings) ;;;
+  ;; Breakpoints
+  (user/bind-key-local :debug :break 'realgud:cmd-break)
+  (user/bind-key-local :debug :watch 'realgud:cmd-watch)
+
+  ;; Stepping
+  (user/bind-key-local :debug :step 'realgud:cmd-step)
+  (user/bind-key-local :debug :step-instruction 'realgud:cmd-stepi)
+  (user/bind-key-local :debug :next 'realgud:cmd-next)
+
+  ;; Execution
+  (user/bind-key-local :debug :run 'realgud:cmd-restart)
+  (user/bind-key-local :debug :continue 'realgud:cmd-continue)
+  (user/bind-key-local :debug :continue-stack 'realgud:cmd-finish)
+  (user/bind-key-local :debug :continue-until 'realgud:cmd-until)
+
+  ;; Stack frames
+  (user/bind-key-local :debug :stack-up 'realgud:cmd-older-frame)
+  (user/bind-key-local :debug :stack-down 'realgud:cmd-newer-frame)
+
+  ;; Printing
+  (user/bind-key-local :debug :show-value 'realgud:cmd-print))
+
 (use-package gud
   :commands gud-gdb
   :init
@@ -49,6 +74,11 @@
      gdb-many-windows t
      ;; Use a separate buffer for IO
      gdb-show-main t)))
+
+(use-package realgud
+  :defer
+  :init
+  (add-hook 'realgud-mode-hook 'user/realgud-mode-hook))
 
 
 (provide 'apps/gud)
