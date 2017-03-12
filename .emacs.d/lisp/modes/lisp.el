@@ -21,6 +21,9 @@
   (with-feature 'redshank
     (redshank-mode t))
 
+  (with-feature 'easy-escape
+    (easy-escape-minor-mode t))
+
   (turn-on-eldoc-mode)
 
   ;;; (Bindings) ;;;
@@ -74,6 +77,7 @@
     (use-package ac-slime
       :config
       (add-ac-modes 'slime-repl-mode)))
+(use-package easy-escape)
 
 
 (provide 'modes/lisp)
