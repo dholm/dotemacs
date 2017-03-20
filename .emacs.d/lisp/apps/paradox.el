@@ -15,7 +15,9 @@
    paradox-display-star-count t
    ;; Don't star automatically.
    paradox-automatically-star nil
-   paradox-github-token nil))
+   paradox-github-token nil
+   ;; Execute asynchronously.
+   paradox-execute-asynchronously t))
 
 
 (provide 'apps/paradox)
