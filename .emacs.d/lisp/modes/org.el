@@ -303,9 +303,8 @@
     (with-executable 'perl
       (add-to-list 'org-babel-load-languages '(perl . t)))
     (when (feature-p 'plantuml-mode)
-      (validate-setq
-       org-plantuml-jar-path (path-join (el-get-package-directory 'plantuml-mode)
-                                        "plantuml.jar"))
+      (setq-default
+       org-plantuml-jar-path *user-plantuml-jar-path*)
       (add-to-list 'org-babel-load-languages '(plantuml . t)))
     (with-executable 'python
       (add-to-list 'org-babel-load-languages '(python . t)))

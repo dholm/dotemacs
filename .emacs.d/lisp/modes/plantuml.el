@@ -2,22 +2,30 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--puml-mode-hook ()
+(defconst *user-plantuml-jar-path*
+  (path-join *user-cache-directory* "plantuml.jar")
+  "Path to user's PlantUML jar file.")
+
+
+(defun user--plantuml-mode-hook ()
   "PlantUML mode hook."
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :auto-complete 'puml-complete-symbol)
   (user/bind-key-local :code :compile 'puml-preview))
 
 
-(defun user--puml-mode-config ()
-  "Initialize PlantUML mode."
-  (add-auto-mode 'puml-mode "\\.puml$" "\\.plantuml$")
+(use-package plantuml-mode
+  :defer
+  :mode (("\\.puml$" . plantuml-mode))
+  :init
+  (add-hook 'plantuml-mode-hook 'user--plantuml-mode-hook)
 
-  ;;; (Hooks) ;;;
-  (add-hook 'puml-mode-hook 'user--puml-mode-hook))
-
-(with-executable 'java
-  (require-package '(:name puml-mode :after (user--puml-mode-config))))
+  (let ((plantuml-url "http://sourceforge.net/projects/plantuml/files/plantuml.jar/download"))
+    (when (not (file-exists-p *user-plantuml-jar-path*))
+      (url-copy-file plantuml-url *user-plantuml-jar-path*)))
+  :config
+  (validate-setq
+   plantuml-jar-path *user-plantuml-jar-path*))
 
 
 (provide 'modes/plantuml)
