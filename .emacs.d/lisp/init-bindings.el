@@ -390,6 +390,7 @@
                (:browse-external . (user/apps-prefix "B"))
                (:feed-reader . (user/apps-prefix "f"))
                (:stack-exchange . (user/apps-prefix "x"))
+               (:weather . (user/apps-prefix "w"))
 
                (:email . (user/apps-prefix "e"))
                (:irc . (user/apps-prefix "i"))

@@ -69,5 +69,10 @@
   (add-to-list 'eudc-server-hotlist '("ldap.host.com" . ldap)))
 
 
+;; Weather info.
+(setq-default
+ wttrin-default-cities '("San Jose" "Stockholm"))
+
+
 (provide '.emacs.local)
 ;;; .emacs.local.el ends here
