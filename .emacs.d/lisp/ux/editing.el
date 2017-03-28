@@ -70,6 +70,31 @@ mode that sets `syntax-ppss' properly."
     (use-package helm-unicode
       :bind ("C-c h 8" . helm-unicode)))
 
+  (use-package selected
+    :ensure t
+    :commands selected-minor-mode
+    :init
+    (setq
+     selected-org-mode-map (make-sparse-keymap))
+    (selected-global-mode t)
+    :bind (:map selected-keymap
+                ;; Region.
+                ("q" . selected-off)
+                ("e" . er/expand-region)
+                ;; Modification.
+                ("f" . fill-region)
+                ("u" . upcase-region)
+                ("d" . downcase-region)
+                ("s" . sort-lines)
+                ("m" . apply-macro-to-region-lines)
+                ;; Information.
+                ("w" . count-words-region)
+                ;; Motion.
+                ("p" . move-text-up)
+                ("n" . move-text-down)
+                :map selected-org-mode-map
+                ("t" . org-table-convert-region)))
+
   ;;; (Bindings) ;;;
   (global-set-key [remap move-beginning-of-line] 'beginning-or-indentation)
   (global-set-key [remap move-end-of-line] 'end-of-line-or-code)

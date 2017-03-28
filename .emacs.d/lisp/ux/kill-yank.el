@@ -90,6 +90,9 @@
    ;; Save clipboard before killing it.
    save-interprogram-paste-before-kill t))
 
+(use-package move-text
+  :defer)
+
 (user/bind-key-global :basic :cut-expr 'kill-sexp)
 
 
