@@ -64,7 +64,9 @@
       'user/magit-toggle-whitespace)
 
     (use-package magit-gerrit)
-    (use-package magit-tramp))
+    (use-package magit-tramp)
+    (use-package magithub
+      :config (magithub-feature-autoinject t)))
 
   (use-package git-timemachine
     :defer)
