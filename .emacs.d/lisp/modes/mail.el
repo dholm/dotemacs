@@ -35,11 +35,14 @@
     :init
     (add-hook 'mail-citation-hook 'mu-cite-original)
     :config
-    (validate-setq
+    ;; Undiagnosed issue with validate-setq.
+    (setq
      ;; Citation format.
      mu-cite-top-format '("On " date ", " full-name " wrote:\n")
      ;; Use > as prefix.
-     mu-cite-prefix-format (quote ("> "))
+     mu-cite-prefix-format (quote ("> ")))
+
+    (validate-setq
      ;; Default message citation function.
      message-cite-function 'mu-cite-original)))
 
