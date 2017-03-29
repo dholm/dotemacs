@@ -320,8 +320,10 @@ Gmail {
   (add-hook 'wl-init-hook 'user--wl-config-hook)
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :email 'wl)
-  :config
+
   (use-package wl
+    :ensure nil
+    :defer
     :init
     ;; Support for writing flowed emails.
     (add-hook 'wl-draft-mode-hook 'user--wl-draft-mode-hook)
@@ -330,6 +332,7 @@ Gmail {
       (fullframe wl wl-exit nil))
 
     (use-package wl-vars
+      :ensure nil
       :init
       (add-hook 'wl-message-redisplay-hook 'user--wl-message-redisplay-hook)
       (add-hook 'wl-message-buffer-created-hook
@@ -428,6 +431,7 @@ Gmail {
       (remove-hook 'wl-draft-send-hook 'wl-draft-config-exec)
 
       (use-package wl-summary
+        :ensure nil
         :config
         ;; Sort threads based on the date of the latest reply.
         (add-to-list 'wl-summary-sort-specs 'reply-date)
@@ -468,11 +472,13 @@ Gmail {
              (method . user/icalendar-import-mime-text)))))
 
       (use-package mime-view
+        :ensure nil
         :init
         ;; Support for reading flowed emails.
         (add-hook 'mime-display-text/plain-hook 'user--mime-display-text/plain-hook))
 
       (use-package elmo
+        :ensure nil
         :config
         (validate-setq
          ;; Maximum size of message to fetch without confirmation.
@@ -482,6 +488,7 @@ Gmail {
           (message "Namazu not found, mail will not be indexed.")))
 
       (use-package elmo-vars
+        :ensure nil
         :config
         (validate-setq
          ;; Put message database in data directory.
@@ -490,26 +497,31 @@ Gmail {
          elmo-cache-directory (path-join *user-wanderlust-cache-directory* "elmo")))
 
       (use-package elmo-archive
+        :ensure nil
         :config
         (validate-setq
          elmo-archive-folder-path *user-wanderlust-data-directory*))
 
       (use-package elmo-search
+        :ensure nil
         :config
         (validate-setq
          elmo-search-namazu-default-index-path *user-wanderlust-data-directory*))
 
       (use-package elmo-localdir
+        :ensure nil
         :config
         (validate-setq
          elmo-localdir-folder-path *user-wanderlust-data-directory*))
 
       (use-package elmo-maildir
+        :ensure nil
         :config
         (validate-setq
          elmo-maildir-folder-path *user-wanderlust-data-directory*))
 
       (use-package elmo-imap4
+        :ensure nil
         :config
         (validate-setq
          ;; Use modified UTF-8 for IMAP4.
