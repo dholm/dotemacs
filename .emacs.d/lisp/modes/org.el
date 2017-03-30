@@ -311,7 +311,14 @@
     (with-executable 'R
       (add-to-list 'org-babel-load-languages '(R . t)))
     (with-executable 'ruby
-      (add-to-list 'org-babel-load-languages '(ruby . t))))
+      (add-to-list 'org-babel-load-languages '(ruby . t)))
+
+    (use-package ob-async
+      :defer
+      :config
+      (add-to-list
+       ;; Execute org-babel asynchronously.
+       'org-ctrl-c-ctrl-c-hook 'ob-async-org-babel-execute-src-block)))
 
   (use-package ox
     :ensure nil
