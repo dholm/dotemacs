@@ -22,6 +22,10 @@
   (unless (derived-mode-p 'text-mode)
     (user--text-mode-hook))
 
+  (with-feature 'org-sticky-header
+    ;; Enable sticky org mode header.
+    (org-sticky-header-mode t))
+
   (setq
    ;; Proper filling of org-mode text, form:
    ;;  * http://lists.gnu.org/archive/html/emacs-orgmode/2008-01/msg00375.html
@@ -393,6 +397,8 @@
      ;; Clock data store.
      org-clock-persist-file (path-join *user-org-cache-directory*
                                        "org-clock-save.el")))
+
+  (use-package org-sticky-header)
 
   (use-package org-sync
     :config
