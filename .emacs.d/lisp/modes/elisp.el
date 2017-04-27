@@ -14,6 +14,9 @@
   (with-feature 'elisp-slime-nav
     (elisp-slime-nav-mode t))
 
+  (with-feature 'eros
+    (eros-mode t))
+
   (cond
    ((user/auto-complete-p)
     (ac-emacs-lisp-mode-setup))
@@ -88,6 +91,11 @@
 
   ;;; (Packages) ;;;
   (use-package macrostep)
+  (use-package eros
+    :config
+    (when (eq default-terminal-coding-system 'utf-8)
+      (validate-setq
+       eros-eval-result-prefix "∴ ")))
   (use-package elisp-slime-nav
     :diminish elisp-slime-nav-mode)
   (use-package auto-compile)
