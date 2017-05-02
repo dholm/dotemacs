@@ -60,15 +60,6 @@
     (indent-region begin end)))
 
 
-(defun user--tdtd-config ()
-  "Initialize tdtd."
-  ;; DTD modes.
-  (add-auto-mode 'dtd-mode "\\.dtd$")
-
-  ;;; (Hooks) ;;;
-  (add-hook 'dtd-mode-hook 'user--dtd-mode-hook))
-
-
 (use-package nxml
   :defer
   :init
@@ -99,7 +90,14 @@
     :config
     (add-ac-modes 'nxml-mode)))
 
-(require-package '(:name tdtd :after (user--tdtd-config)))
+(use-package tdtd
+  :defer
+  :quelpa (tdtd
+           :fetcher github
+           :repo "tkg/tdtd")
+  :mode (("\\.dtd$" . dtd-mode))
+  :init
+  (add-hook 'dtd-mode-hook 'user--dtd-mode-hook))
 
 
 (provide 'modes/xml)
