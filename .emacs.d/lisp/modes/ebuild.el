@@ -2,7 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(require-package '(:name ebuild-mode))
+(use-package ebuild-mode
+  :defer
+  :quelpa (ebuild-mode
+           :fetcher git
+           :url "https://anongit.gentoo.org/git/proj/emacs-tools.git"
+           :branch "ebuild-mode"))
 
 
 (provide 'modes/ebuild)
