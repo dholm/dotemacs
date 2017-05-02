@@ -18,10 +18,6 @@
     ;; Enable Erlang Development Tool Suite.
     (edts-mode t))
 
-  (with-feature 'wrangler
-    ;; Enable wrangler refactoring tool.
-    (erlang-wrangler-on))
-
   ;; Bring in CEDET.
   (user--cedet-hook))
 
@@ -41,16 +37,19 @@
     (add-hook 'erlang-mode-hook 'user--erlang-mode-hook)
     (add-hook 'elixir-mode-hook 'user--elixir-mode-hook)
     :config
-    (use-package edts)
+    (use-package edts
+      :pin "MELPA")
     (require 'edts-start)
 
     (with-feature 'distel
       (distel-setup))
 
-    (use-package alchemist))
-
-  (require-package '(:name distel))
-  (require-package '(:name wrangler)))
+    (use-package alchemist)
+    (use-package distel
+      :quelpa (distel
+               :fetcher github
+               :repo "massemanet/distel"
+               :files ("elisp/*.el")))))
 
 
 (provide 'modes/erlang)
