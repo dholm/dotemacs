@@ -401,6 +401,7 @@
     (validate-setq
      ;; Gnus cache store.
      gnus-cache-directory *user-gnus-cache-directory*
+     gnus-cache-active-file (path-join *user-gnus-cache-directory* "active")
      ;; Cache all types of articles and never remove them.
      gnus-cache-enter-articles '(ticked dormant read unread)
      gnus-cache-remove-articles nil
