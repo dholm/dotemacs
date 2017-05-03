@@ -189,6 +189,7 @@
                 (:describe-key . (user/help-prefix "k"))
                 (:describe-key-extensive . (user/help-prefix "K"))
                 (:describe-variable . (user/help-prefix "v"))
+                (:search-variable-value . (user/help-prefix "V"))
                 (:describe-language . (user/help-prefix "L"))
                 (:describe-mode . (user/help-prefix "m"))
                 (:describe-symbol . (user/help-prefix "s"))

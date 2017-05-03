@@ -17,6 +17,12 @@
   (user/bind-key-global :emacs :describe-variable 'describe-variable)
   (user/bind-key-global :emacs :describe-syntax 'describe-syntax))
 
+(use-package apropos
+  :ensure nil
+  :defer
+  :init
+  (user/bind-key-global :emacs :search-variable-value 'apropos-value))
+
 (use-package info-look
   :ensure nil
   :defer
