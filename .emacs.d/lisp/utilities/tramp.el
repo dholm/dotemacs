@@ -40,6 +40,16 @@
              ,(path-join "/" "etc" "ssh" "ssh_config")
              ,(path-join *user-home-directory* ".ssh" "config")))))
 
+  (unless (fboundp 'tramp-compat-split-string)
+    ;; Workaround for Python mode depending on the deleted TRAMP
+    ;; function `tramp-compat-split-string'.
+    (defun tramp-compat-split-string (string pattern)
+      "Like `split-string' but omit empty strings.
+In Emacs, (split-string \"/foo/bar\" \"/\") returns (\"foo\" \"bar\").
+This is, the first, empty, element is omitted.  In XEmacs, the first
+element is not omitted."
+      (split-string string pattern 'omit)))
+
   (use-package tramp-cache
     :ensure tramp
     :config
