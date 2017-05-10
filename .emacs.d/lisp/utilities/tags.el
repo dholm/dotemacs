@@ -186,13 +186,10 @@
   (use-package rtags
     :defer
     :config
-    (use-package rtags-helm
-      :ensure nil
-      :requires helm
-      :config
-      (validate-setq
-       ;; Enable Helm when available.
-       rtags-use-helm (when (require 'rtags-helm nil 'noerror) t)))
+    (use-package ac-rtags)
+    (use-package company-rtags)
+    (use-package flycheck-rtags)
+    (use-package helm-rtags)
 
     (after-load 'tramp
       (validate-setq
