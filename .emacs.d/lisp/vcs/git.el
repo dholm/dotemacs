@@ -90,6 +90,7 @@
       :defer)
     (use-package helm-git-grep
       :defer
+      :pin "MELPA"
       :commands helm-git-grep)
     (use-package helm-open-github
       :defer)
