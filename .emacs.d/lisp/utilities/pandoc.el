@@ -7,12 +7,12 @@
   (pandoc-load-default-settings))
 
 
-(with-executable 'pandoc
-  (use-package pandoc-mode
-    :defer
-    :diminish pandoc-mode
-    :init
-    (add-hook 'pandoc-mode 'user--pandoc-mode-hook)))
+(use-package pandoc-mode
+  :if (executable-find "pandoc")
+  :defer
+  :diminish pandoc-mode
+  :init
+  (add-hook 'pandoc-mode 'user--pandoc-mode-hook))
 
 
 (provide 'utilities/pandoc)

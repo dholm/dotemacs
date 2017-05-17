@@ -25,18 +25,19 @@
     (helm-cscope-mode t)))
 
 
-(with-executable 'cscope
-  (use-package xcscope
-    :defer
-    :config
-    (validate-setq
-     ;; Always index recursively.
-     cscope-index-recursively t
-     ;; Don't display CScope result buffer by default.
-     cscope-display-cscope-buffer nil))
-  (use-package helm-cscope
-    :defer
-    :diminish helm-cscope-mode))
+(use-package xcscope
+  :if (executable-find "cscope")
+  :defer
+  :config
+  (validate-setq
+   ;; Always index recursively.
+   cscope-index-recursively t
+   ;; Don't display CScope result buffer by default.
+   cscope-display-cscope-buffer nil))
+(use-package helm-cscope
+  :if (executable-find "cscope")
+  :defer
+  :diminish helm-cscope-mode)
 
 
 (provide 'utilities/cscope)

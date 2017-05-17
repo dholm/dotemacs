@@ -2,8 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(with-executable 'keychain
-  (use-package keychain-environment))
+(use-package keychain-environment
+  :if (executable-find "keychain"))
 
 
 (provide 'utilities/keychain)

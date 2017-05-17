@@ -182,22 +182,22 @@
     (user/bind-key-local :nav :file-dependencies 'user/tag-file-dependencies)
     (user/bind-key-local :nav :go-back 'user/tag-pop)))
 
-(with-executable 'llvm-config
-  (use-package rtags
-    :defer
-    :config
-    (use-package ac-rtags)
-    (use-package company-rtags)
-    (use-package flycheck-rtags)
-    (use-package helm-rtags)
+(use-package rtags
+  :if (executable-find "llvm-config")
+  :defer
+  :config
+  (use-package ac-rtags)
+  (use-package company-rtags)
+  (use-package flycheck-rtags)
+  (use-package helm-rtags)
 
-    (after-load 'tramp
-      (validate-setq
-       ;; Enable tramp after it has been loaded.
-       rtags-tramp-enabled t)
-      ;; This function is causing tramp to lock up waiting for a
-      ;; prompt so disable it for now.
-      (defun rtags-update-current-project ()))))
+  (after-load 'tramp
+    (validate-setq
+     ;; Enable tramp after it has been loaded.
+     rtags-tramp-enabled t)
+    ;; This function is causing tramp to lock up waiting for a
+    ;; prompt so disable it for now.
+    (defun rtags-update-current-project ())))
 
 (when (feature-p 'helm)
   (use-package helm-etags-plus

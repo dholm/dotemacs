@@ -104,13 +104,13 @@
        ;; By default only guess English.
        guess-language-languages '(en)))
 
-    (with-executable 'hunspell
-      (use-package rw-hunspell
-        :config
-        (after-load 'ispell
-          (when ispell-really-hunspell
-            ;; Initialize `rw-hunspell` if Hunspell is in use.
-            (rw-hunspell-setup)))))))
+    (use-package rw-hunspell
+      :if (executable-find "hunspell")
+      :config
+      (after-load 'ispell
+        (when ispell-really-hunspell
+          ;; Initialize `rw-hunspell` if Hunspell is in use.
+          (rw-hunspell-setup))))))
 
 
 (provide 'utilities/flyspell)
