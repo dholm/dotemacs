@@ -200,6 +200,7 @@
   (use-package clang-format
     :if (executable-find "clang"))
   (use-package irony
+    :disabled
     :if (and (executable-find "clang") (executable-find "cmake"))
     :bind (:map irony-mode-map
                 ([remap completion-at-point] . irony-completion-at-point-async)
