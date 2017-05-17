@@ -30,26 +30,26 @@
     (alchemist-mode t)))
 
 
-(with-executable 'erl
-  (use-package erlang
-    :defer
-    :init
-    (add-hook 'erlang-mode-hook 'user--erlang-mode-hook)
-    (add-hook 'elixir-mode-hook 'user--elixir-mode-hook)
-    :config
-    (use-package edts
-      :pin "MELPA")
-    (require 'edts-start)
+(use-package erlang
+  :if (executable-find "erl")
+  :defer
+  :init
+  (add-hook 'erlang-mode-hook 'user--erlang-mode-hook)
+  (add-hook 'elixir-mode-hook 'user--elixir-mode-hook)
+  :config
+  (use-package edts
+    :pin "MELPA")
+  (require 'edts-start)
 
-    (with-feature 'distel
-      (distel-setup))
+  (with-feature 'distel
+    (distel-setup))
 
-    (use-package alchemist)
-    (use-package distel
-      :quelpa (distel
-               :fetcher github
-               :repo "massemanet/distel"
-               :files ("elisp/*.el")))))
+  (use-package alchemist)
+  (use-package distel
+    :quelpa (distel
+             :fetcher github
+             :repo "massemanet/distel"
+             :files ("elisp/*.el"))))
 
 
 (provide 'modes/erlang)

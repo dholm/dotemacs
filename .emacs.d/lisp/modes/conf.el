@@ -12,11 +12,11 @@
   (add-hook 'conf-mode-hook 'user--conf-mode-hook)
   :config
   ;;; (Packages) ;;;
-  (with-executable 'nginx
-    (use-package nginx-mode
-      :defer
-      :init
-      (add-auto-mode 'nginx-mode "etc/nginx/.*$"))))
+  (use-package nginx-mode
+    :if (executable-find "nginx")
+    :defer
+    :init
+    (add-auto-mode 'nginx-mode "etc/nginx/.*$")))
 
 
 (provide 'modes/conf)

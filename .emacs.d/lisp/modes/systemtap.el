@@ -2,9 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(with-executable 'stap
-  (use-package systemtap-mode
-    :defer))
+(use-package systemtap-mode
+  :if (executable-find "stap")
+  :defer)
 
 
 (provide 'modes/systemtap)

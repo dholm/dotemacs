@@ -7,11 +7,11 @@
   ;; Bring in CEDET.
   (user--cedet-hook))
 
-(with-executable 'valac
-  (use-package vala-mode
-    :defer
-    :init
-    (add-hook 'vala-mode-hook 'user--vala-mode-hook)))
+(use-package vala-mode
+  :if (executable-find "valac")
+  :defer
+  :init
+  (add-hook 'vala-mode-hook 'user--vala-mode-hook))
 
 
 (provide 'modes/vala)

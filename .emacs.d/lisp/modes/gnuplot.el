@@ -2,11 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(with-executable 'gnuplot
-  (use-package gnuplot-mode
-    :defer
-    :init
-    (add-auto-mode 'gnuplot-mode "\\.gp$")))
+(use-package gnuplot-mode
+  :if (executable-find "gnuplot")
+  :defer
+  :init
+  (add-auto-mode 'gnuplot-mode "\\.gp$"))
 
 
 (provide 'modes/gnuplot)

@@ -66,10 +66,11 @@
    '(("django" . user/current-buffer-django-p)
      ("php" . "\\.php[3-5]?")))
 
-  (with-executable 'npm
-    (use-package tern
-      :init
-      (add-hook 'tern-mode-hook 'user--tern-mode-hook))
+  (use-package tern
+    :if (executable-find "npm")
+    :init
+    (add-hook 'tern-mode-hook 'user--tern-mode-hook)
+    :config
     (use-package company-tern))
   (use-package ac-html
     :config

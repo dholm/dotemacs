@@ -187,41 +187,36 @@
 
   (use-package auto-complete-c-headers)
   (use-package company-c-headers)
+  (use-package flycheck-pkg-config
+    :if (executable-find "pkg-config"))
+  (use-package cpputils-cmake
+    :if (executable-find "cmake")
+    :config
+    (validate-setq
+     ;; Disable Flymake.
+     cppcm-write-flymake-makefile nil))
+  (use-package cmake-ide
+    :if (executable-find "cmake"))
+  (use-package clang-format
+    :if (executable-find "clang"))
+  (use-package irony
+    :if (and (executable-find "clang") (executable-find "cmake"))
+    :bind (:map irony-mode-map
+                ([remap completion-at-point] . irony-completion-at-point-async)
+                ([remap complete-symbol] . irony-completion-at-point-async))
+    :diminish irony-mode
+    :init
+    (add-hook 'irony-mode-hook 'user--irony-mode-hook)
+    :config
+    (validate-setq
+     ;; Install irony server in user's local path.
+     irony-user-dir *user-local-directory*)
 
-  (with-executable 'pkg-config
-    (use-package flycheck-pkg-config))
+    (when (user/auto-complete-p)
+      (irony-enable 'ac))
 
-  (with-executable 'cmake
-    (use-package cpputils-cmake
-      :config
-      (validate-setq
-       ;; Disable Flymake.
-       cppcm-write-flymake-makefile nil))
-
-    (use-package cmake-ide))
-
-  (with-executable 'clang
-    (use-package clang-format)
-
-    (when (and (executable-find "cmake")
-               (executable-find "llvm-config"))
-      (use-package irony
-        :bind (:map irony-mode-map
-                    ([remap completion-at-point] . irony-completion-at-point-async)
-                    ([remap complete-symbol] . irony-completion-at-point-async))
-        :diminish irony-mode
-        :init
-        (add-hook 'irony-mode-hook 'user--irony-mode-hook)
-        :config
-        (validate-setq
-         ;; Install irony server in user's local path.
-         irony-user-dir *user-local-directory*)
-
-        (when (user/auto-complete-p)
-          (irony-enable 'ac)))
     (use-package irony-eldoc)
-    (use-package flycheck-irony)))
-
+    (use-package flycheck-irony))
   (use-package function-args
     :diminish function-args-mode)
   (use-package google-c-style))

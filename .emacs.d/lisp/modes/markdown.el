@@ -27,11 +27,12 @@
       (sp-local-tag "s" "```scheme" "```")
       (sp-local-tag "<"  "<_>" "</_>" :transform 'sp-match-sgml-tags)))
 
-  (with-executable 'npm
-    (use-package livedown
-      :quelpa (livedown
-               :fetcher github
-               :repo "shime/emacs-livedown"))
+  (use-package livedown
+    :if (executable-find "npm")
+    :quelpa (livedown
+             :fetcher github
+             :repo "shime/emacs-livedown")
+    :init
     (require 'livedown)))
 
 

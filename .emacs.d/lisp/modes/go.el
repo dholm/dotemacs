@@ -32,22 +32,22 @@
   (when (feature-p 'go-test)
     (user/bind-key-local :code :test 'go-test-current-file)))
 
-(with-executable 'go
-  (use-package go-mode
-    :defer
-    :init
-    (add-hook 'go-mode-hook 'user--go-mode-hook)
-    :config
-    (use-package go-autocomplete)
-    (use-package company-go)
-    (use-package go-eldoc)
-    (use-package gotest)
-    (use-package go-projectile)
+(use-package go-mode
+  :if (executable-find "go")
+  :defer
+  :init
+  (add-hook 'go-mode-hook 'user--go-mode-hook)
+  :config
+  (use-package go-autocomplete)
+  (use-package company-go)
+  (use-package go-eldoc)
+  (use-package gotest)
+  (use-package go-projectile)
 
-    (when (feature-p 'helm)
-      (use-package helm-go-package
-        :bind (:map go-mode-map
-                    ([remap go-import-add] . helm-go-package))))))
+  (when (feature-p 'helm)
+    (use-package helm-go-package
+      :bind (:map go-mode-map
+                  ([remap go-import-add] . helm-go-package)))))
 
 
 (provide 'modes/go)

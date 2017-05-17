@@ -10,19 +10,19 @@
     (lua-block-mode t)))
 
 
-(with-executable 'lua
-  (use-package lua-mode
-    :defer
+(use-package lua-mode
+  :if (executable-find "lua")
+  :defer
+  :init
+  (add-hook 'lua-mode-hook 'user--lua-mode-hook)
+  :config
+  (use-package lua-block
+    :requires lua-mode
+    :quelpa (lua-block
+             :fetcher wiki
+             :files ("lua-block.el"))
     :init
-    (add-hook 'lua-mode-hook 'user--lua-mode-hook)
-    :config
-    (use-package lua-block
-      :requires lua-mode
-      :quelpa (lua-block
-               :fetcher wiki
-               :files ("lua-block.el"))
-      :init
-      (autoload 'lua-block-mode "lua-block" nil t))))
+    (autoload 'lua-block-mode "lua-block" nil t)))
 
 
 (provide 'modes/lua)

@@ -10,14 +10,14 @@
   ;; Separate camel-case into separate words.
   (subword-mode t))
 
-(with-executable 'cmake
-  (use-package cmake-mode
-    :defer
-    :init
-    (add-hook 'cmake-mode-hook 'user--cmake-mode-hook)
+(use-package cmake-mode
+  :if (executable-find "cmake")
+  :defer
+  :init
+  (add-hook 'cmake-mode-hook 'user--cmake-mode-hook)
 
-    (add-auto-mode 'cmake-mode "CMakeLists\\.txt$")
-    (add-auto-mode 'cmake-mode "\\.cmake$")))
+  (add-auto-mode 'cmake-mode "CMakeLists\\.txt$")
+  (add-auto-mode 'cmake-mode "\\.cmake$"))
 
 
 (provide 'modes/cmake)

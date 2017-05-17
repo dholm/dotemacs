@@ -44,14 +44,14 @@
 
   (turn-on-ghci-completion))
 
-(with-executable 'ghc
-  (use-package haskell-mode
-    :defer
-    :init
-    (add-hook 'haskell-mode-hook 'user--haskell-mode-hook)
-    (add-hook 'inferior-haskell-mode-hook 'user--inferior-haskell-mode-hook)
-    :config
-    (after-load 'smartparens
+(use-package haskell-mode
+  :if (executable-find "ghc")
+  :defer
+  :init
+  (add-hook 'haskell-mode-hook 'user--haskell-mode-hook)
+  (add-hook 'inferior-haskell-mode-hook 'user--inferior-haskell-mode-hook)
+  :config
+  (after-load 'smartparens
     (defun user/haskell-after-symbol-p (_id action _context)
       (when (eq action 'insert)
         (save-excursion
@@ -63,27 +63,27 @@
       (sp-local-pair "\\(" nil :actions nil)))
 
     ;;; (Packages) ;;;
-    (use-package ghci-completion)
-    (use-package hi2)
-    (use-package flycheck-hdevtools)
-    (use-package flycheck-haskell)
-    (use-package structured-haskell-mode
-      :requires haskell-mode
-      :quelpa (structured-haskell-mode
-               :fetcher github
-               :repo "chrisdone/structured-haskell-mode"
-               :files ("elisp/*.el")))
-    (use-package ghc-mod
-      :quelpa (ghc-mod
-               :fetcher github
-               :repo "kazu-yamamoto/ghc-mod"
-               :files ("elisp/*.el")))
-    (use-package ac-ghc-mod
-      :requires auto-complete
-      :quelpa (ac-ghc-mod
-               :fetcher github
-               :repo "Pitometsu/ac-ghc-mod"))
-    (use-package company-ghc)))
+  (use-package ghci-completion)
+  (use-package hi2)
+  (use-package flycheck-hdevtools)
+  (use-package flycheck-haskell)
+  (use-package structured-haskell-mode
+    :requires haskell-mode
+    :quelpa (structured-haskell-mode
+             :fetcher github
+             :repo "chrisdone/structured-haskell-mode"
+             :files ("elisp/*.el")))
+  (use-package ghc-mod
+    :quelpa (ghc-mod
+             :fetcher github
+             :repo "kazu-yamamoto/ghc-mod"
+             :files ("elisp/*.el")))
+  (use-package ac-ghc-mod
+    :requires auto-complete
+    :quelpa (ac-ghc-mod
+             :fetcher github
+             :repo "Pitometsu/ac-ghc-mod"))
+  (use-package company-ghc))
 
 
 (provide 'modes/haskell)

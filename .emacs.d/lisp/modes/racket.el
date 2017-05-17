@@ -31,12 +31,12 @@
   (rainbow-delimiters-mode t))
 
 
-(with-executable 'racket
-  (use-package racket-mode
-    :defer
-    :init
-    (add-hook 'racket-mode-hook 'user--racket-mode-hook)
-    (add-hook 'racket-repl-mode-hook 'user--racket-repl-mode-hook)))
+(use-package racket-mode
+  :if (executable-find "racket")
+  :defer
+  :init
+  (add-hook 'racket-mode-hook 'user--racket-mode-hook)
+  (add-hook 'racket-repl-mode-hook 'user--racket-repl-mode-hook))
 
 
 (provide 'modes/racket)
