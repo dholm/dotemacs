@@ -19,7 +19,11 @@
 
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :comment (if (feature-p 'comment-dwim-2)
-                                          'comment-dwim-2 'comment-dwim)))
+                                          'comment-dwim-2
+                                        'comment-dwim))
+  (with-feature 'quickrun
+    (user/bind-key-local :code :eval-buffer 'quickrun)
+    (user/bind-key-local :code :eval-selection 'quickrun-region)))
 
 
 (use-package prog-mode
@@ -28,7 +32,8 @@
   (add-hook 'prog-mode-hook 'user--prog-mode-hook)
   :config
   ;;; (Packages) ;;;
-  (use-package comment-dwim-2))
+  (use-package comment-dwim-2)
+  (use-package quickrun))
 
 
 (provide 'modes/prog)
