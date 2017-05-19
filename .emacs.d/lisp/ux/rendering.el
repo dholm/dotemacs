@@ -18,7 +18,7 @@
 
 (defun user--rendering-config ()
   "Setup Emacs user interface rendering."
-  (after-load 'font-lock
+  (with-eval-after-load 'font-lock
     ;; Allow reduction of decoration level in large buffers.
     (make-variable-buffer-local 'font-lock-maximum-decoration))
 

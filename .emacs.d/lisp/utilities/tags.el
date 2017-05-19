@@ -191,7 +191,7 @@
   (use-package flycheck-rtags)
   (use-package helm-rtags)
 
-  (after-load 'tramp
+  (with-eval-after-load 'tramp
     (validate-setq
      ;; Enable tramp after it has been loaded.
      rtags-tramp-enabled t)

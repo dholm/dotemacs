@@ -14,7 +14,7 @@
   "Path to user's Wanderlust data store.")
 
 
-(after-load 'url
+(with-eval-after-load 'url
   (setq
    ;; Set up cache directory.
    url-configuration-directory *user-url-cache-directory*
@@ -24,7 +24,7 @@
    url-automatic-caching t))
 
 (make-directory *user-nsm-data-directory* t)
-(after-load 'nsm
+(with-eval-after-load 'nsm
   (setq
    ;; Location of security manager settings.
    nsm-settings-file

@@ -98,7 +98,7 @@
   "Sync OrgMobile directory."
   (org-mobile-pull)
   (org-mobile-push)
-  (after-load 'sauron
+  (with-eval-after-load 'sauron
     (sauron-add-event 'my 3 "Called org-mobile-pull and org-mobile-push")))
 
 
@@ -370,7 +370,7 @@
      ;; Custom agenda view.
      org-mobile-force-id-on-agenda-items nil))
 
-  (after-load 'smartparens
+  (with-eval-after-load 'smartparens
     (defun sp--org-skip-asterisk (ms mb me)
       (or (and (= (line-beginning-position) mb)
                (eq 32 (char-after (1+ mb))))

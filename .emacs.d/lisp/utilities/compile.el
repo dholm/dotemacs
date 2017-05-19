@@ -34,7 +34,7 @@
    ;; Automatically scroll output.
    compilation-scroll-output t)
 
-  (after-load 'popwin
+  (with-eval-after-load 'popwin
     (add-to-list
      'popwin:special-display-config
      ;; Don't select compilation window when shown

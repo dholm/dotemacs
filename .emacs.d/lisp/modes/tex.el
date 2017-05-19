@@ -14,7 +14,7 @@
              (not user/tex-preview-setup))
     ;; Setup LaTeX preview.
     (if (feature-p 'sage-mode)
-        (after-load 'sage
+        (with-eval-after-load 'sage
           ;; If Sage is available, it must be loaded first.
           (LaTeX-preview-setup))
       (LaTeX-preview-setup))
@@ -84,12 +84,12 @@
     (add-hook 'LaTeX-mode-hook 'user--latex-mode-hook)
     (add-hook 'bibtex-mode-hook 'user--bibtex-mode-hook)
     :config
-    (after-load 'mode-compile
+    (with-eval-after-load 'mode-compile
       (setq mode-compile-modes-alist
             (append '((latex-mode . (tex-compile kill-compilation)))
                     mode-compile-modes-alist)))
 
-    (after-load 'smartparens
+    (with-eval-after-load 'smartparens
       (sp-with-modes '(tex-mode plain-tex-mode latex-mode)
                      (sp-local-tag "i" "\"<" "\">")
                      (sp-local-pair "\\[" " \\]")
@@ -149,11 +149,11 @@
        ;; Cache selection buffers for faster access.
        reftex-use-multiple-selection-buffers t)
 
-      (after-load 'preview
+      (with-eval-after-load 'preview
         ;; Support previewing of TikZ.
         (add-to-list 'preview-default-preamble "\\PreviewEnvironment{tikzpicture}" t))
 
-      (after-load 'auctex
+      (with-eval-after-load 'auctex
         (when (user/company-mode-p)
           (with-feature 'company-auctex
             ;; Enable company AUCTeX completion.

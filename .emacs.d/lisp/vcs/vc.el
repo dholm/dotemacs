@@ -40,7 +40,7 @@
   :defer
   :diminish auto-revert-mode
   :config
-  (after-load 'tramp
+  (with-eval-after-load 'tramp
     (validate-setq auto-revert-remote-files t)))
 
 (add-hook 'find-file-hook 'user--vc-find-file-hook)

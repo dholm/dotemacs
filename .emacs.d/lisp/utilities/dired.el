@@ -30,7 +30,7 @@
   (use-package dired-efap
     :defer
     :init
-    (after-load 'dired
+    (with-eval-after-load 'dired
       ;; Load dired-efap when dired is loaded.
       (require 'dired-efap))
     :config

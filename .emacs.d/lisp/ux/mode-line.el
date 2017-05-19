@@ -41,7 +41,7 @@
      sml/name-width 25
      sml/mode-width 'full)
 
-    (after-load 'solarized-theme
+    (with-eval-after-load 'solarized-theme
       (sml/setup)
       (unless (featurep 'projectile)
         (setq

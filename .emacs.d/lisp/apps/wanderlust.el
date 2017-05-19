@@ -457,7 +457,7 @@ Gmail {
            ((text . html) . 2)
            ((text . richtext) . 1)))
 
-        (after-load 'mime-view
+        (with-eval-after-load 'mime-view
           (cond
            ((feature-p 'mime-shr) (user--semi-shr-config))
            ((feature-p 'emacs-w3m) (user--semi-w3m-config)))

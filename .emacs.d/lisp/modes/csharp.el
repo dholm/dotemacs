@@ -31,10 +31,10 @@
   :init
   (add-hook 'csharp-mode-hook 'user--csharp-mode-hook)
   :config
-  (after-load 'csharp-mode
+  (with-eval-after-load 'csharp-mode
     (add-to-list 'c-default-style '(csharp-mode . "Google")))
 
-  (after-load 'mode-compile
+  (with-eval-after-load 'mode-compile
     (add-to-list 'mode-compile-modes-alist
                  '(csharp-mode . (csharp-invoke-compile-interactively))))
 

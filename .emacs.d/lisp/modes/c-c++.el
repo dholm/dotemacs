@@ -169,7 +169,7 @@
    ;; Default mode for C++.
    '(c++-mode . "Stroustrup"))
 
-  (after-load 'smartparens
+  (with-eval-after-load 'smartparens
     (sp-with-modes '(c-mode c++-mode)
                    ;; Automatically add another newline before closing curly brace on enter.
                    (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))

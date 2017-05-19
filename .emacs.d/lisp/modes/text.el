@@ -37,7 +37,7 @@
   :init
   (add-hook 'text-mode-hook 'user--text-mode-hook)
   :config
-  (after-load 'smartparens
+  (with-eval-after-load 'smartparens
     (sp-with-modes '(text-mode)
       (sp-local-pair "`" "'" :actions '(insert wrap)))))
 

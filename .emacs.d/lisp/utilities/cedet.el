@@ -106,7 +106,7 @@
     (use-package ede/locate
       :ensure nil
       :config
-      (after-load 'cedet-contrib-load
+      (with-eval-after-load 'cedet-contrib-load
         ;; Enable CScope if available.
         (with-feature 'cedet-cscope
           (when (cedet-cscope-version-check t)
@@ -132,7 +132,7 @@
       ;; Enable CScope support.
       (with-feature 'cedet-cscope
         (when (cedet-cscope-version-check t)
-          (after-load 'semantic/db
+          (with-eval-after-load 'semantic/db
             ;; Use CScope as a database for SemanticDB.
             (when (fboundp 'semanticdb-enable-cscope-databases)
               (semanticdb-enable-cscope-databases))))))

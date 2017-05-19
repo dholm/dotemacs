@@ -106,7 +106,7 @@
    ;; Limit the number of candidates per source to a reasonable amount.
    helm-candidate-number-limit 75)
 
-  (after-load 'popwin
+  (with-eval-after-load 'popwin
     (add-to-list
      'popwin:special-display-config
      '("helm" :regexp t :height 0.4 :position bottom)))
@@ -127,7 +127,7 @@
     ;;; (Bindings) ;;;
     (define-key isearch-mode-map
       (user/get-key :basic :swoop) 'helm-swoop-from-isearch)
-    (after-load 'helm-swoop
+    (with-eval-after-load 'helm-swoop
       ;; From helm-swoop to helm-multi-swoop-all.
       (define-key helm-swoop-map
         (user/get-key :basic :swoop)

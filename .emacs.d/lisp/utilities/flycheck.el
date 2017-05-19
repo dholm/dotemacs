@@ -55,7 +55,7 @@
    ;; Wait five seconds before starting checker
    flycheck-idle-change-delay 5.0)
 
-  (after-load 'popwin
+  (with-eval-after-load 'popwin
     ;; Use popwin for Flycheck error list.
     (push '(flycheck-error-list-mode :stick t) popwin:special-display-config))
 

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(after-load 'eieio
+(with-eval-after-load 'eieio
   (defclass user/proj ()
     ()
     "Project class.")
@@ -25,7 +25,7 @@
 
   (defmethod user/proj-include-paths ((project user/proj)))
 
-  (after-load 'ede
+  (with-eval-after-load 'ede
     (defclass user/ede-proj (user/proj)
       ((ede :initarg :ede :initform nil
             :documentation "EDE project instance."))
@@ -63,7 +63,7 @@
          ede-proj
          (read-string "Build command: " (oref ede-proj compile-command))))))
 
-  (after-load 'projectile
+  (with-eval-after-load 'projectile
     (defclass user/projectile-proj (user/proj)
       ((root-path :initarg :root-path
                   :type string
@@ -80,7 +80,7 @@
     (defmethod user/proj-root ((project user/projectile-proj))
       (oref project :root-path)))
 
-  (after-load 'vc
+  (with-eval-after-load 'vc
     (defclass user/vc-proj (user/proj)
       ((root-path :initarg :root-path
                   :type string

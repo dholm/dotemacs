@@ -15,7 +15,7 @@
   :init
   (add-hook 'scala-mode-hook 'user--scala-mode-hook)
   :config
-  (after-load 'smartparens
+  (with-eval-after-load 'smartparens
     (sp-with-modes '(scala-mode)
       (sp-local-pair "'" nil :actions nil)))
   (use-package ensime

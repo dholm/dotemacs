@@ -12,7 +12,7 @@
   (use-package popup
     :config
     ;; Install workaround for whitespace-mode bug.
-    (after-load 'modes/whitespace
+    (with-eval-after-load 'modes/whitespace
       (defadvice popup-draw (before user/turn-off-whitespace activate compile)
         "Turn off whitespace mode before showing popup."
         (user/whitespace-mode-suppress t))

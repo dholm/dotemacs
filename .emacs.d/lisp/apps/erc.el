@@ -218,7 +218,7 @@
   (when (feature-p 'bbdb)
     (use-package bbdb2erc))
   (with-executable 'bitlbee
-    (after-load 'prodigy
+    (with-eval-after-load 'prodigy
       (prodigy-define-service
        :name "Bitlbee"
        :command "bitlbee"

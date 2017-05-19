@@ -51,7 +51,7 @@
   (add-hook 'haskell-mode-hook 'user--haskell-mode-hook)
   (add-hook 'inferior-haskell-mode-hook 'user--inferior-haskell-mode-hook)
   :config
-  (after-load 'smartparens
+  (with-eval-after-load 'smartparens
     (defun user/haskell-after-symbol-p (_id action _context)
       (when (eq action 'insert)
         (save-excursion

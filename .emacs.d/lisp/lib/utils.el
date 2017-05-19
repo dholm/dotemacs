@@ -15,13 +15,6 @@
      retval))
 
 
-(defmacro after-load (feature &rest body)
-  "After FEATURE is loaded, evaluate BODY."
-  (declare (indent defun))
-  `(eval-after-load ,feature
-     '(progn ,@body)))
-
-
 (defun feature-p (feature)
   "Check if FEATURE is available."
   (or (featurep feature)

@@ -14,7 +14,7 @@
 
   (when (user/auto-complete-p)
     ;; Enable auto completion.
-    (after-load 'auto-complete
+    (with-eval-after-load 'auto-complete
       (auto-complete-rst-init)))
 
   ;;; (Bindings) ;;;

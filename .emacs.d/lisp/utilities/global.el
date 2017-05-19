@@ -57,7 +57,7 @@
      hippie-expand-try-functions-list
      (cons 'ggtags-try-complete-tag hippie-expand-try-functions-list)))
 
-  (after-load 'semantic
+  (with-eval-after-load 'semantic
     (with-feature 'semantic/db-global
       ;; Enable semantic GNU/GLOBAL database.
       (semanticdb-enable-gnu-global-in-buffer t)))

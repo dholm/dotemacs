@@ -21,10 +21,10 @@
   :if (executable-find "php")
   :defer
   :init
-  (after-load 'web-mode
+  (with-eval-after-load 'web-mode
     (user--add-web-mode-hook 'php 'user--php-mode-hook))
   :config
-  (after-load 'smartparens
+  (with-eval-after-load 'smartparens
     (defun user/php-handle-docstring (&rest _ignored)
       (-when-let (line (save-excursion
                          (forward-line)

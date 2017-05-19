@@ -83,7 +83,7 @@
           ad-do-it))
 
     (when (display-graphic-p)
-      (after-load 'ecb-face
+      (with-eval-after-load 'ecb-face
         ;; Use a slightly smaller face for the ECB tree-buffers.
         (set-face-attribute 'ecb-default-general-face nil :height 0.8)))))
 

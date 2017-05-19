@@ -56,7 +56,7 @@
     (add-hook 'geiser-repl-mode-hook 'user--geiser-repl-mode-hook)
     :config
     (when (feature-p 'ac-geiser)
-      (after-load 'geiser
+      (with-eval-after-load 'geiser
         (add-ac-modes 'geiser-repl-mode))))
   (use-package quack
     :defer

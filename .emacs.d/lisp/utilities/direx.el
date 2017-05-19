@@ -15,7 +15,7 @@
        (with-project-root project-root path
          (and path (equal (file-truename path) (file-truename project-root)))))))
 
-  (after-load 'popwin
+  (with-eval-after-load 'popwin
     (push '(direx:direx-mode :position left :width 30 :dedicated t)
           popwin:special-display-config)))
 

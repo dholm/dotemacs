@@ -18,7 +18,7 @@
    ;; Use default completion that will usually be provided by Helm.
    projectile-completion-system 'default)
 
-  (after-load 'smart-mode-line
+  (with-eval-after-load 'smart-mode-line
     (validate-setq
      ;; Enable in smart mode line.
      sml/use-projectile-p 'after-prefixes))

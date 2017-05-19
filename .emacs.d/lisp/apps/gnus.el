@@ -208,11 +208,11 @@
    ;; Use adaptive scoring.
    gnus-use-adaptive-scoring '(word line))
 
-  (after-load 'message
+  (with-eval-after-load 'message
     (validate-setq
      message-directory (path-join *user-gnus-data-directory* "mail")))
 
-  (after-load 'smtpmail
+  (with-eval-after-load 'smtpmail
     (validate-setq
      smtpmail-queue-dir (path-join *user-gnus-data-directory* "mail" "queued-mail")))
 
@@ -373,7 +373,7 @@
     (add-hook 'gnus-summary-mode-hook 'user--gnus-summary-mode-hook)
 
     ;;; (Bindings) ;;;
-    (after-load 'gnus
+    (with-eval-after-load 'gnus
       (define-key gnus-summary-mode-map (kbd "[")
         (lambda () (interactive) (scroll-other-window -1)))
       (define-key gnus-summary-mode-map (kbd "]")
@@ -484,7 +484,7 @@
        ;; Split followups based on parent's message id.
        (: nnmail-split-fancy-with-parent)))
 
-    (after-load 'nnmail
+    (with-eval-after-load 'nnmail
       (add-many-to-list
        ;; Add keywords for matching articles while splitting.
        'nnmail-split-abbrev-alist
@@ -592,7 +592,7 @@
                :fetcher url
                :url "http://www.informationelle-selbstbestimmung-im-internet.de/emacs/jl-smime3.3/jl-smime.el")
       :init
-      (eval-after-load 'gnus '(load "jl-smime"))))
+      (eval-with-eval-after-load 'gnus '(load "jl-smime"))))
 
   (use-package nnir
     :ensure nil

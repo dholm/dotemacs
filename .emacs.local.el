@@ -2,11 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(after-load 'magit
+(with-eval-after-load 'magit
   ;; Set up root directory where magit will find Git repositories.
   (add-to-list 'magit-repo-dirs (path-join *user-home-directory* "Projects")))
 
-(after-load 'ede
+(with-eval-after-load 'ede
   (when (require 'ede/cpp-root nil t)
     ;; Generic EDE project example.
     (when (file-exists-p "/path/to/project/root/file")
@@ -20,7 +20,7 @@
                             :spp-table '(("DEBUG" . ""))
                             :compile-command "nice make -j"))))
 
-(after-load 'elfeed
+(with-eval-after-load 'elfeed
   (setq elfeed-feeds
         ;; Set up web feeds to read using elfeed.
         '(("http://dholm.com/feed/" blog personal)
@@ -35,7 +35,7 @@
 
 
 ;; Email setup.
-(after-load 'wl
+(with-eval-after-load 'wl
   ;; Wanderlust
   (user/wanderlust-set-gmail-user "John Doe" "john.doe")
   ;;; (Bindings) ;;;
@@ -44,7 +44,7 @@
        (interactive)
        (user/wanderlust-summary-refile "%Archive"))))
 
-(after-load 'gnus
+(with-eval-after-load 'gnus
   ;; Gnus
   (user/gnus-set-gmail-user "John Doe" "john.doe")
 
@@ -59,12 +59,12 @@
 
 
 ;; Directory services.
-(after-load 'ldap
+(with-eval-after-load 'ldap
   (setq-default
    ldap-host-parameters-alist
    '(("ldap.host.com" base "dc=company,dc=com"
       binddn "uid=jdoe,ou=users,o=company"))))
-(after-load 'eudc
+(with-eval-after-load 'eudc
   (eudc-set-server "ldap.host.com" 'ldap t)
   (add-to-list 'eudc-server-hotlist '("ldap.host.com" . ldap)))
 

@@ -107,7 +107,7 @@
     (use-package rw-hunspell
       :if (executable-find "hunspell")
       :config
-      (after-load 'ispell
+      (with-eval-after-load 'ispell
         (when ispell-really-hunspell
           ;; Initialize `rw-hunspell` if Hunspell is in use.
           (rw-hunspell-setup))))))

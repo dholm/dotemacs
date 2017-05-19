@@ -48,7 +48,7 @@
      ;; Show fine differences for currently selected hunk.
      magit-diff-refine-hunk t)
 
-    (after-load 'popwin
+    (with-eval-after-load 'popwin
       ;; Use popwin for certain Magit buffers.
       (add-many-to-list
        'popwin:special-display-config

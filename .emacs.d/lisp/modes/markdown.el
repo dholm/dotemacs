@@ -14,7 +14,7 @@
   :init
   (add-hook 'markdown-mode-hook 'user--markdown-mode-hook)
   :config
-  (after-load 'smartparens
+  (with-eval-after-load 'smartparens
     (defun sp--gfm-skip-asterisk (ms mb me)
       (save-excursion
         (goto-char mb)

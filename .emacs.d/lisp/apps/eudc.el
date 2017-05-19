@@ -28,7 +28,7 @@
    ;; Server hotlist store.
    eudc-options-file (path-join *user-cache-directory* "eudc-options"))
 
-  (after-load 'ldap
+  (with-eval-after-load 'ldap
     (validate-setq
      ;; Default `ldapsearch' parameters.
      ldap-ldapsearch-args '("-tt" "-LLL" "-x"))
@@ -45,7 +45,7 @@
      '((cn) (mail) (cn cn) (cn cn cn) (sn) (uid) (givenname) (givenname name) (name))
      'ldap))
 
-  (after-load 'bbdb
+  (with-eval-after-load 'bbdb
     (eudc-protocol-set
      'eudc-inline-expansion-format
      '("%s %s <%s>" firstname lastname net)

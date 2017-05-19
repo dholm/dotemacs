@@ -14,7 +14,7 @@
     (rainbow-delimiters-mode t))
 
   ;; Enable dtrt-indent to attempt to identify the indentation rules used.
-  (after-load 'dtrt-indent
+  (with-eval-after-load 'dtrt-indent
     (dtrt-indent-mode t))
 
   (with-feature 'annotate

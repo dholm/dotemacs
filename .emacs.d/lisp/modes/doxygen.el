@@ -52,7 +52,7 @@
   ;;; (Packages) ;;;
   (when (pkg-config-has-p "libxml-2.0")
     (require-package '(:name doxymacs
-                             :after (after-load 'doxymacs
+                             :after (with-eval-after-load 'doxymacs
                                       (diminish 'doxymacs-mode)))))
 
   (use-package doc-mode

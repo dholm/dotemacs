@@ -4,12 +4,12 @@
 
 (defun user--elim-config ()
   "Initialize elim."
-  (after-load 'lui
+  (with-eval-after-load 'lui
     (validate-setq
      lui-max-buffer-size 30000
      lui-flyspell-p t
      lui-flyspell-alist '(("." "american"))))
-  (after-load 'elim
+  (with-eval-after-load 'elim
     (validate-setq
      elim-directory (path-join *user-cache-directory* "elim")))
 
