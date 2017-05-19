@@ -23,6 +23,9 @@
   (when (feature-p 'jedi)
     (jedi:setup))
 
+  ;; Enable smart parenthesis handling.
+  (user/smartparens-enable)
+
   ;; Separate camel-case into separate words
   (subword-mode t)
 
