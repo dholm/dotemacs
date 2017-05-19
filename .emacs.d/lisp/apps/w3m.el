@@ -34,6 +34,7 @@
 
 (use-package w3m
   :if (executable-find "w3m")
+  :disabled
   :defer
   :init
   (autoload 'w3m-browse-url "w3m" nil t)
