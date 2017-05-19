@@ -40,7 +40,14 @@
       (when-let (gnu-find (executable-find "gfind"))
         (validate-setq find-program gnu-find)))
     (when-let (gnu-xargs (executable-find "gxargs"))
-      (validate-setq xargs-program gnu-xargs))))
+      (validate-setq xargs-program gnu-xargs))
+
+    (use-package wgrep
+      :defer
+      :config
+      (use-package wgrep-helm)
+      (use-package wgrep-ag
+        :if (executable-find "ag")))))
 
 (user--search-replace-config)
 
