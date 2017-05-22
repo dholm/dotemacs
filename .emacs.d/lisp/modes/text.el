@@ -25,6 +25,9 @@
         ;; Run spell-checker in programming mode.
         (flyspell-prog-mode)))
 
+  (with-feature 'flycheck-vale
+    (flycheck-vale-setup))
+
   (with-feature 'pandoc-mode
     (pandoc-mode t))
 
@@ -39,7 +42,10 @@
   :config
   (with-eval-after-load 'smartparens
     (sp-with-modes '(text-mode)
-      (sp-local-pair "`" "'" :actions '(insert wrap)))))
+      (sp-local-pair "`" "'" :actions '(insert wrap))))
+
+  (use-package flycheck-vale
+    :if (executable-find "vale")))
 
 
 (provide 'modes/text)
