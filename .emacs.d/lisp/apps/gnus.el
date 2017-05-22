@@ -80,7 +80,11 @@
 
   (with-feature 'gnus-dired
     ;; Attach files using dired.
-    (turn-on-gnus-dired-mode)))
+    (turn-on-gnus-dired-mode))
+
+  (with-feature 'gnus-desktop-notify
+    (gnus-desktop-notify-mode)
+    (gnus-demon-add-scanmail)))
 
 
 (defun user/gnus-mailsync ()
@@ -444,6 +448,11 @@
     :config
     (validate-setq
      gnus-gravatar-properties '(:ascent center)))
+
+  (use-package gnus-demon
+    :ensure nil
+    :config
+    (use-package gnus-desktop-notify))
 
   (use-package nnheader
     :ensure nil
