@@ -122,7 +122,8 @@
      ;; Use popup package.
      jedi:tooltip-method '(popup)))
   (when (feature-p 'helm)
-    (use-package helm-pydoc)))
+    (use-package helm-pydoc
+      :pin "MELPA")))
 
 
 (provide 'modes/python)
