@@ -412,7 +412,8 @@
     (load "org-sync-github"))
 
   (use-package org-caldav
-    :defer))
+    :defer)
+  (use-package orgnav))
 
 (use-package org-agenda
   :ensure org-plus-contrib
