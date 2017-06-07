@@ -76,7 +76,9 @@
       (t "java org.mozilla.javascript.tools.shell.Main")))
 
     ;; Workaround for Node.js prompt.
-    (setenv "NODE_NO_READLINE" "1")))
+    (setenv "NODE_NO_READLINE" "1"))
+
+  (use-package prettier-js))
 
 
 (provide 'modes/javascript)
