@@ -392,6 +392,7 @@
                (:feed-reader . (user/apps-prefix "f"))
                (:stack-exchange . (user/apps-prefix "x"))
                (:weather . (user/apps-prefix "w"))
+               (:cheat-sh . (user/apps-prefix "C"))
 
                (:email . (user/apps-prefix "e"))
                (:irc . (user/apps-prefix "i"))
