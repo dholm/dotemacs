@@ -9,13 +9,28 @@
   (user/bind-key-global :emacs :describe-face 'describe-face)
   (user/bind-key-global :emacs :describe-all-faces 'list-faces-display))
 
-(use-package help-fns
+(use-package help-mode
   :ensure nil
   :defer
-  :init
-  (user/bind-key-global :emacs :describe-function 'describe-function)
-  (user/bind-key-global :emacs :describe-variable 'describe-variable)
-  (user/bind-key-global :emacs :describe-syntax 'describe-syntax))
+  :config
+  (use-package help-fns
+    :ensure nil
+    :init
+    (user/bind-key-global :emacs :describe-variable 'describe-variable)
+    (user/bind-key-global :emacs :describe-syntax 'describe-syntax))
+
+  (use-package helpful
+    :init
+    (user/bind-key-global :emacs :describe-function 'helpful-function)
+    (user/bind-key-global :emacs :describe-macro 'helpful-macro)
+    (user/bind-key-global :emacs :describe-command 'helpful-command)
+    :config
+    (with-eval-after-load 'popwin
+      ;; Use popwin for helpful buffer.
+      (add-to-list
+       'popwin:special-display-config
+       ;; Don't select compilation window when shown
+       '(helpful-mode :position bottom :height 20)))))
 
 (use-package apropos
   :ensure nil
