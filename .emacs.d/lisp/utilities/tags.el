@@ -189,7 +189,11 @@
   (use-package ac-rtags)
   (use-package company-rtags)
   (use-package flycheck-rtags)
-  (use-package helm-rtags)
+  (use-package helm-rtags
+    :config
+    (validate-setq
+     ;; Show results using helm.
+     rtags-display-result-backend 'helm))
 
   (with-eval-after-load 'tramp
     (validate-setq
