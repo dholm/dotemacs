@@ -222,6 +222,10 @@
 
     (use-package irony-eldoc)
     (use-package flycheck-irony))
+  (use-package flycheck-clang-analyzer
+    :after flycheck
+    :if (executable-find "scan-build")
+    :config (flycheck-clang-analyzer-setup))
   (use-package function-args
     :diminish function-args-mode)
   (use-package google-c-style))
