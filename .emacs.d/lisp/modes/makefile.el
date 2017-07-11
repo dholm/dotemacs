@@ -22,7 +22,10 @@
   (subword-mode t)
   ;; Support for documentation in Doxygen format.
   (with-feature 'doxymacs
-    (doxymacs-mode t)))
+    (doxymacs-mode t))
+
+  (with-feature 'makefile-executor
+    (makefile-executor-mode t)))
 
 (use-package make-mode
   :defer
@@ -30,7 +33,9 @@
   (add-hook 'makefile-mode-hook 'user--makefile-mode-hook)
   (add-auto-mode 'makefile-mode "\\.mak$")
   ;; Watcom make.
-  (add-auto-mode 'makefile-mode "\\.mif$" "\\.wat$"))
+  (add-auto-mode 'makefile-mode "\\.mif$" "\\.wat$")
+  :config
+  (use-package makefile-executor))
 
 
 (provide 'modes/makefile)
