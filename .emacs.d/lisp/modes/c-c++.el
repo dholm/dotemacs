@@ -33,6 +33,25 @@
   (user/gnu-global-enable)
   (user/cscope-enable)
 
+  (when (user/auto-complete-p)
+    (when (and (require 'rtags-ac nil :noerror)
+               (user/use-rtags))
+      (add-ac-sources 'ac-source-rtags))
+    (with-feature 'auto-complete-c-headers
+      (add-ac-sources 'ac-source-c-headers)))
+
+  (when (user/company-mode-p)
+    (when (and (require 'company-rtags nil :noerror)
+               (user/use-rtags))
+      (validate-setq rtags-completions-enabled t)
+      (add-company-sources 'company-rtags))
+    (with-feature 'company-c-headers
+      (add-company-sources 'company-c-headers)))
+
+  (when (and (require 'flycheck-rtags nil :noerror)
+             (user/use-rtags))
+    (flycheck-select-checker 'rtags))
+
   (user/smartparens-enable))
 
 
@@ -55,21 +74,6 @@
     (when (member major-mode irony-supported-major-modes)
       ;; Better auto completion.
       (irony-mode t)))
-
-  (when (user/auto-complete-p)
-    (when (and (require 'rtags-ac nil :noerror)
-               (user/use-rtags))
-      (add-ac-sources 'ac-source-rtags))
-    (with-feature 'auto-complete-c-headers
-      (add-ac-sources 'ac-source-c-headers)))
-
-  (when (user/company-mode-p)
-    (when (and (require 'company-rtags nil :noerror)
-               (user/use-rtags))
-      (validate-setq rtags-completions-enabled t)
-      (add-company-sources 'company-rtags))
-    (with-feature 'company-c-headers
-      (add-company-sources 'company-c-headers)))
 
   ;;; (Bindings) ;;;
   (when (feature-p 'iasm-mode)
