@@ -636,6 +636,11 @@
                                      "-f" (first nnir-swish-e-index-files) "-e")
          0))))
 
+  (use-package all-the-icons-gnus
+    :if window-system
+    :config
+    (all-the-icons-gnus-setup))
+
   ;; Initialize Gnus modules.
   (require 'nnir))
 
