@@ -66,7 +66,9 @@
     (use-package magit-gerrit)
     (use-package magit-tramp)
     (use-package magithub
-      :config (magithub-feature-autoinject t)))
+      :config (magithub-feature-autoinject t))
+    (use-package magit-imerge
+      :if (executable-find "git-imerge")))
 
   (use-package git-timemachine
     :defer)
