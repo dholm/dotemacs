@@ -2,6 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
+(defvar *user--file-name-handler-alist-original*
+  file-name-handler-alist
+  "Emacs original file name handler alist.")
+
 (eval-when-compile
   (defconst *user-emacs-lisp-directory*
     (expand-file-name "lisp" user-emacs-directory)
@@ -13,6 +17,8 @@
 
 ;; Bring in constants used throughout initialization.
 (require 'init-constants)
+;; Initialize basic Emacs functionality.
+(require 'init-emacs)
 
 
 ;; Load Emacs utilities.
@@ -34,8 +40,7 @@
 ;; Helper functions for other applications.
 (require 'lib/apps)
 
-;; Initialize basic Emacs functionality.
-(require 'init-emacs)
+;; Load Emacs user experience settings.
 (require 'init-bindings)
 (require 'init-ux)
 
