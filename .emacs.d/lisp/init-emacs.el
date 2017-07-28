@@ -7,9 +7,7 @@
 ;; Improve init performance.
 (setq
  ;; Increase garbage collection threshold.
- gc-cons-threshold (* 128 1024 1024)
- ;; Don't invoke any file name handlers.
- file-name-handler-alist nil)
+ gc-cons-threshold (* 128 1024 1024))
 
 ;; Restore garbage collection threshold while Emacs is idle.
 (run-with-idle-timer
@@ -18,9 +16,7 @@
    (validate-setq
     ;; Reduce number of pauses due to garbage collection.
     gc-cons-threshold (* 50 1024 1024)
-    gc-cons-percentage 0.5
-    ;; Restore original file name handlers.
-    file-name-handler-alist *user--file-name-handler-alist-original*)))
+    gc-cons-percentage 0.5)))
 
 
 ;; Create data and cache directories

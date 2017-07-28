@@ -2,10 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defvar *user--file-name-handler-alist-original*
-  file-name-handler-alist
-  "Emacs original file name handler alist.")
-
 (eval-when-compile
   (defconst *user-emacs-lisp-directory*
     (expand-file-name "lisp" user-emacs-directory)
