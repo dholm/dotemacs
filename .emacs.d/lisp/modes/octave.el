@@ -12,8 +12,8 @@
 (use-package octave
   :ensure nil
   :defer
+  :mode ("\.m$" . octave-mode)
   :init
-  (add-auto-mode 'octave-mode "\\.m$")
   (add-hook 'octave-mode-hook 'user--octave-mode-hook)
   :config
   (use-package ac-octave

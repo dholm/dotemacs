@@ -12,9 +12,8 @@
   :quelpa (ttcn-mode
            :fetcher github
            :repo "dholm/ttcn-el")
-  :init
-  (add-auto-mode 'ttcn-mode "\\.mp$")
-  (add-auto-mode 'ttcn-3-mode "\\.ttcn")
+  :mode (("\\.mp$" . ttcn-mode)
+         ("\\.ttcn" . ttcn-3-mode))
   :config
   (add-hook 'ttcn3-mode-hook 'user--ttcn3-mode-hook))
 

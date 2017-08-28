@@ -46,10 +46,10 @@
 
 (use-package js3-mode
   :defer
+  :mode "\.js$"
+  :magic "#!/usr/bin/env node"
   :init
   (add-hook 'js3-mode-hook 'user--js3-mode-hook)
-  (add-auto-mode 'js3-mode "\\.js$")
-  (add-magic-mode 'js3-mode "#!/usr/bin/env node")
   :config
   (validate-setq
    ;; Configure indentation

@@ -45,18 +45,21 @@
   (require 'quelpa-use-package)
   (require 'validate))
 
-(use-package quelpa-use-package
+(use-package use-package
+  :pin "MELPA"
   :config
-  (validate-setq
-   ;; Always ensure packages have been installed.
-   use-package-always-ensure t
-   ;; Only use quelpa for custom packages.
-   quelpa-checkout-melpa-p nil
-   ;; Only load quelpa on demand.
-   quelpa-use-package-inhibit-loading-quelpa t)
+  (use-package quelpa-use-package
+    :config
+    (validate-setq
+     ;; Always ensure packages have been installed.
+     use-package-always-ensure t
+     ;; Only use quelpa for custom packages.
+     quelpa-checkout-melpa-p nil
+     ;; Only load quelpa on demand.
+     quelpa-use-package-inhibit-loading-quelpa t)
 
-  ;; Protect quelpa recipes when forcing ensure.
-  (quelpa-use-package-activate-advice))
+    ;; Protect quelpa recipes when forcing ensure.
+    (quelpa-use-package-activate-advice)))
 
 
 (defun user--el-get-init ()

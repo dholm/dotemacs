@@ -39,9 +39,9 @@
 
 (use-package asm-mode
   :defer
+  :mode "\.[ia]65$"
   :init
   (add-hook 'asm-mode-hook 'user--asm-mode-hook)
-  (add-auto-mode 'asm-mode "\\.[ia]65$")
   :config
   ;;; (Packages) ;;;
   (use-package iasm-mode

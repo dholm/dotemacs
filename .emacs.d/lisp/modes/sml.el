@@ -11,8 +11,8 @@
 (use-package sml-mode
   :if (executable-find "sml")
   :defer
+  :mode "\\.[Mm][Ll]$"
   :init
-  (add-auto-mode 'sml-mode "\\.[Mm][Ll]$")
   (add-hook 'sml-mode-hook 'user--sml-mode-hook))
 
 

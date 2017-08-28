@@ -8,10 +8,9 @@
 
 (use-package adoc-mode
   :defer
+  :mode "\.\(adoc\|asciidoc\)$"
   :init
-  (add-hook 'adoc-mode-hook 'user--adoc-mode-hook)
-
-  (add-auto-mode 'adoc-mode "\\.adoc$" "\\.asciidoc$"))
+  (add-hook 'adoc-mode-hook 'user--adoc-mode-hook))
 
 
 (provide 'modes/asciidoc)

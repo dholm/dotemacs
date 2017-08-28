@@ -11,8 +11,8 @@
   :quelpa (vhdl-mode
            :fetcher url
            :url "https://guest.iis.ee.ethz.ch/~zimmi/emacs/vhdl-mode-3.38.1.tar.gz")
+  :mode "\\.vhdl?$"
   :init
-  (add-auto-mode 'vhdl-mode "\\.vhdl?$")
   (add-hook 'vhdl-mode-hook 'user--vhdl-mode-hook))
 
 

@@ -9,9 +9,9 @@
 
 (use-package jam-mode
   :defer
+  :mode "\(\.jam\|Jamfile.*\)$"
   :init
   (add-hook 'jam-mode-hook 'user--jam-mode-hook)
-  (add-auto-mode 'jam-mode "\\.jam$" "Jamfile.*")
   :config
   (validate-setq
    ;; Default indent width.

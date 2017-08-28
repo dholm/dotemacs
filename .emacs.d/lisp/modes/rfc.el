@@ -4,8 +4,7 @@
 
 (use-package irfc
   :defer
-  :init
-  (add-auto-mode 'irfc-mode "/rfc[0-9]+\\.txt\\'")
+  :mode ("/rfc[0-9]+\\.txt\\'" . irfc-mode)
   :config
   ;; Create cache directory for irfc.
   (make-directory irfc-directory t)

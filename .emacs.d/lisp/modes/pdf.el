@@ -10,8 +10,8 @@
            (pkg-config-has-p "poppler-glib"))
   (use-package pdf-tools
     :defer
+    :mode ("\.pdf$" . pdf-view-mode)
     :init
-    (add-auto-mode 'pdf-view-mode "\\.pdf$")
     (add-hook 'pdf-view-mode-hook 'user--pdf-view-mode-hook)
     :config
     (validate-setq

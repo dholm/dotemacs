@@ -15,8 +15,7 @@
   (use-package nginx-mode
     :if (executable-find "nginx")
     :defer
-    :init
-    (add-auto-mode 'nginx-mode "etc/nginx/.*$")))
+    :mode "etc/nginx/.*$"))
 
 
 (provide 'modes/conf)

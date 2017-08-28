@@ -9,8 +9,8 @@
 
 (use-package diff-mode
   :defer
+  :mode "/patch$"
   :init
-  (add-auto-mode 'diff-mode "/patch$")
   (add-hook 'diff-mode-hook 'user--diff-mode-hook)
   :config
   (validate-setq

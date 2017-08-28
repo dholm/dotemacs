@@ -12,9 +12,9 @@
   :quelpa (verilog-mode
            :fetcher url
            :url "http://www.veripool.org/ftp/verilog-mode.el")
+  :mode "\\.[ds]?vh?$"
   :init
   (add-hook 'verilog-mode-hook 'user--verilog-mode-hook)
-  (add-auto-mode 'verilog-mode "\\.[ds]?vh?$")
   :config
   (when (feature-p 'polymode)
     (add-auto-mode 'poly-verilog+perl-mode "\\.sv$" "\\.svh$"))

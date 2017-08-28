@@ -76,11 +76,10 @@
 
 (use-package elisp-mode
   :ensure nil
+  :mode ("Carton$" . emacs-lisp-mode)
   :init
   (add-hook 'emacs-lisp-mode-hook 'user--emacs-lisp-mode-hook)
   (add-hook 'minibuffer-setup-hook 'user--minibuffer-setup-hook)
-
-  (add-auto-mode 'emacs-lisp-mode "Carton$")
   :config
   (use-package ielm
     :init

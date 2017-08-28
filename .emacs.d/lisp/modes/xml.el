@@ -62,15 +62,11 @@
 
 (use-package nxml
   :defer
+  :mode ("\.\(xml\|xsd\|xslts\|rss\|svg\|plist\|rng\|rnc\)$" . nxml-mode)
+  :magic ("<\\?xml" . nxml-mode)
   :init
   ;; Use nxml-mode for XML
   (fset 'xml-mode 'nxml-mode)
-
-  ;; XML modes.
-  (add-magic-mode 'nxml-mode "<\\?xml")
-  (add-auto-mode 'nxml-mode
-                 "\\.xml$" "\\.xsd$" "\\.xslt$" "\\.rss$" "\\.svg$" "\\.plist$"
-                 "\\.rng$" "\\.rnc$")
 
   (add-hook 'nxml-mode-hook 'user--nxml-mode-hook)
   :config

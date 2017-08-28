@@ -5,8 +5,7 @@
 (use-package gnuplot-mode
   :if (executable-find "gnuplot")
   :defer
-  :init
-  (add-auto-mode 'gnuplot-mode "\\.gp$"))
+  :mode "\\.gp$")
 
 
 (provide 'modes/gnuplot)

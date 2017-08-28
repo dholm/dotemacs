@@ -43,13 +43,13 @@
 
 (use-package web-mode
   :defer
+  :mode "\.\(html?\|phtml\|php[3-5]?\)$"
   :init
   (when (feature-p 'polymode)
     (add-auto-mode 'poly-javascript-erb-mode "\\.js\\.erb$")
     (add-auto-mode 'poly-coffee-erb-mode "\\.coffee\\.erb$")
     (add-auto-mode 'poly-html-erb-mode "\\.html\\.erb$"))
 
-  (add-auto-mode 'web-mode "\\.html?$" "\\.phtml$" "\\.php[3-5]?$")
   (add-hook 'web-mode-hook 'user--web-mode-hook)
   :config
   (validate-setq

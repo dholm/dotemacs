@@ -60,6 +60,9 @@
 (use-package ess
   :if (executable-find "R")
   :defer
+  :mode (("\.R$" . R-mode)
+         ("\.Rd$" . Rd-mode)
+         ("\.Rnw$" . Rnw-mode))
   :bind (:map ess-mode-map
               ;; Workaround issue with ess yank.
               ([remap yank] . yank))
@@ -68,19 +71,14 @@
   (add-hook 'inferior-ess-mode-hook 'user--inferior-ess-mode-hook)
   (add-hook 'R-mode-hook 'user--R-mode-hook)
   (add-hook 'ess-R-post-run-hook 'user--ess-R-post-run-hook)
-  (if (feature-p 'polymode)
-      (progn
-        (add-auto-mode 'poly-noweb+r-mode "\\.Snw$" "\\.Rnw")
-        (add-auto-mode 'poly-markdown+r-mode "\\.Rmd")
-        (add-auto-mode 'poly-rapport-mode "\\.rapport")
-        (add-auto-mode 'poly-html+r-mode "\\.Rhtml")
-        (add-auto-mode 'poly-brew+r-mode "\\.Rbrew")
-        (add-auto-mode 'poly-r+c++-mode "\\.Rcpp")
-        (add-auto-mode 'poly-c++r-mode "\\.cppR"))
-    (progn
-      (add-auto-mode 'R-mode "\\.R$")
-      (add-auto-mode 'Rd-mode "\\.Rd$")
-      (add-auto-mode 'Rnw-mode "\\.Rnw$")))
+  (when (feature-p 'polymode)
+    (add-auto-mode 'poly-noweb+r-mode "\\.Snw$" "\\.Rnw")
+    (add-auto-mode 'poly-markdown+r-mode "\\.Rmd")
+    (add-auto-mode 'poly-rapport-mode "\\.rapport")
+    (add-auto-mode 'poly-html+r-mode "\\.Rhtml")
+    (add-auto-mode 'poly-brew+r-mode "\\.Rbrew")
+    (add-auto-mode 'poly-r+c++-mode "\\.Rcpp")
+    (add-auto-mode 'poly-c++r-mode "\\.cppR"))
 
   (user/bind-key-global :apps :statistics 'R)
   :config

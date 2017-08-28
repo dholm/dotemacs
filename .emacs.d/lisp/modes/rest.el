@@ -34,10 +34,8 @@
   :quelpa (rst
            :fetcher svn
            :url "http://svn.code.sf.net/p/docutils/code/trunk/docutils/tools/editors/emacs")
+  :mode ("\.\(rst\|rest\)$" . rst-mode)
   :init
-  ;; Register auto modes.
-  (add-auto-mode 'rst-mode "\\.rst$" "\\.rest$")
-
   ;; Update TOC automatically if section headers are adjusted.
   (add-hook 'rst-adjust-hook 'rst-toc-update)
 

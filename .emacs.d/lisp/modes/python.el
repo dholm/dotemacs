@@ -56,10 +56,10 @@
 (use-package python
   :if (executable-find "python")
   :defer
+  :mode ("SCon\(struct\|script\)$" . python-mode)
+  :interpreter ("python[0-9.]*" . python-mode)
   :init
-  (add-interpreter-mode 'python-mode "python[0-9.]*")
   (add-hook 'python-mode-hook 'user--python-mode-hook)
-  (add-auto-mode 'python-mode "SConstruct" "SConscript")
   :config
   (validate-setq
    ;; Don't try to guess the indentation.

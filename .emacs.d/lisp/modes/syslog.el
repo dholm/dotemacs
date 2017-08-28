@@ -13,9 +13,8 @@
 
 (use-package syslog-mode
   :defer
+  :mode "\(/var/log.*\|\.log\)$"
   :init
-  (add-auto-mode 'syslog-mode "/var/log.*$" "\\.log$")
-
   (add-hook 'syslog-mode-hook 'user--syslog-mode-hook))
 
 

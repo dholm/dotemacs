@@ -8,10 +8,8 @@
 
 (use-package tcl
   :defer
+  :interpreter ("expect" . tcl-mode)
   :init
-  ;; Use tcl-mode for expect scripts
-  (add-interpreter-mode 'tcl-mode "expect")
-
   (add-hook 'tcl-mode-hook 'user--tcl-mode-hook))
 
 

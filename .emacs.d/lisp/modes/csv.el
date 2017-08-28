@@ -13,8 +13,8 @@
 
 (use-package csv-mode
   :defer
+  :mode "\\.[Cc][Ss][Vv]$"
   :init
-  (add-auto-mode 'csv-mode "\\.[Cc][Ss][Vv]$")
   (add-hook 'csv-mode-hook 'user--csv-mode-hook)
   :config
   (validate-setq

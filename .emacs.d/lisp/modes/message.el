@@ -34,13 +34,11 @@
 (use-package message
   :ensure nil
   :defer
+  :mode ("\.eml$" . message-mode)
   :init
   (add-hook 'message-mode-hook 'user--message-mode-hook)
   (add-hook 'message-setup-hook 'user--message-setup-hook)
   (add-hook 'message-send-hook 'user--message-send-hook)
-
-  ;; Register auto mode.
-  (add-auto-mode 'message-mode "\\.eml$")
   :config
   (validate-setq
    ;; Kill buffer after message is sent.

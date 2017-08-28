@@ -29,11 +29,9 @@
 
 (use-package make-mode
   :defer
+  :mode ("\.\(mak\|mif\|wat\)$" . makefile-mode)
   :init
   (add-hook 'makefile-mode-hook 'user--makefile-mode-hook)
-  (add-auto-mode 'makefile-mode "\\.mak$")
-  ;; Watcom make.
-  (add-auto-mode 'makefile-mode "\\.mif$" "\\.wat$")
   :config
   (use-package makefile-executor))
 

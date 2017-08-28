@@ -53,8 +53,7 @@
     :quelpa (sln-mode
              :fetcher github
              :repo "sensorflo/sln-mode")
-    :init
-    (add-auto-mode 'sln-mode "\\.sln$")))
+    :mode "\.sln$"))
 
 
 (provide 'modes/csharp)
