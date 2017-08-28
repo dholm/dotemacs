@@ -121,6 +121,12 @@
      jedi:complete-on-dot t
      ;; Use popup package.
      jedi:tooltip-method '(popup)))
+
+  (use-package flycheck-pycheckers
+    :after flycheck
+    :config
+    (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
+
   (when (feature-p 'helm)
     (use-package helm-pydoc
       :pin "MELPA")))
