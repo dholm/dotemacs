@@ -66,7 +66,11 @@
     (use-package magit-gerrit)
     (use-package magit-tramp)
     (use-package magithub
-      :config (magithub-feature-autoinject t))
+      :config
+      (validate-setq
+       magithub-dir (path-join *user-data-directory* "magithub"))
+
+      (magithub-feature-autoinject t))
     (use-package magit-imerge
       :if (executable-find "git-imerge")))
 
