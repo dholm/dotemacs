@@ -102,10 +102,7 @@
        '("hh" . ("cpp" "cc"))
        '("cc" . ("h" "hh" "hpp")))
 
-      (user/bind-key-local :nav :switch-spec-impl 'eassist-switch-h-cpp)))
-
-  (with-feature 'function-args
-    (function-args-mode t)))
+      (user/bind-key-local :nav :switch-spec-impl 'eassist-switch-h-cpp))))
 
 
 (defun user--irony-mode-hook ()
@@ -227,7 +224,10 @@
     :if (executable-find "scan-build")
     :config (flycheck-clang-analyzer-setup))
   (use-package function-args
-    :diminish function-args-mode)
+    :pin "MELPA"
+    :diminish function-args-mode
+    :config
+    (fa-config-default))
   (use-package google-c-style))
 
 
