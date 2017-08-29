@@ -168,8 +168,23 @@
    org-treat-S-cursor-todo-selection-as-state-change nil
    ;; Allow refile to create parent tasks, with confirmation.
    org-refile-allow-creating-parent-nodes 'confirm
+   ;; Cache refile operations for performance.
+   org-refile-use-cache t
    ;; Start in folded view.
-   org-startup-folded t)
+   org-startup-folded t
+   ;; Enable speed commands.
+   org-use-speed-commands t
+   org-speed-commands-user
+   '(("0" . 'delete-window)
+     ("1" . 'delete-other-windows)
+     ("2" . 'split-window-vertically)
+     ("3" . 'split-window-horizontally)
+     ("h" . 'hide-other)
+     ("s" . 'org-save-all-org-buffers)
+     ("z" . 'org-add-note)
+     ("N" . 'org-narrow-to-subtree)
+     ("W" . 'widen)
+     ("m" . 'org-mark-subtree)))
 
   (when (eq default-terminal-coding-system 'utf-8)
     (validate-setq
@@ -427,38 +442,188 @@
   (let ((agenda-data-store (path-join *user-org-data-directory* "agendas")))
     (validate-setq
      ;; Agenda data store.
-     org-agenda-files `(,agenda-data-store)
-     ;; Ignore agenda files that are unavailable.
-     org-agenda-skip-unavailable-files t
-     ;; Restore window configuration when done with the agenda.
-     org-agenda-restore-windows-after-quit t
-     ;; Start on Monday.
-     org-agenda-start-on-weekday 1
-     ;; Show month by default.
-     org-agenda-span 'month
-     ;; Don't display scheduled todos.
-     org-agenda-todo-ignore-scheduled 'future
-     ;; Don't show nested todos.
-     org-agenda-todo-list-sublevels nil
-     ;; Don't dim blocked tasks.
-     org-agenda-dim-blocked-tasks nil
-     ;; Compact block agenda view.
-     org-agenda-compact-blocks t
-     ;; Include Emacs' Diary in org-agenda.
-     org-agenda-include-diary t
-     ;; Switch window when opening org-agenda.
-     org-agenda-window-setup 'other-window
-     ;; Display indirect buffers in the "current" window.
-     org-indirect-buffer-display 'current-window)
+     org-agenda-files `(,agenda-data-store))
 
     ;; Ensure that agenda data store exists.
-    (make-directory agenda-data-store t)
+    (make-directory agenda-data-store t))
 
-    (when (not noninteractive)
-      ;; When running in batch, don't setup windows.
-      (validate-setq
-       ;; Show agenda in current window.
-       org-agenda-window-setup 'current-window)))
+  (validate-setq
+   ;; Ignore agenda files that are unavailable.
+   org-agenda-skip-unavailable-files t
+   ;; Restore window configuration when done with the agenda.
+   org-agenda-restore-windows-after-quit t
+   ;; Start on Monday.
+   org-agenda-start-on-weekday 1
+   ;; Show month by default.
+   org-agenda-span 'month
+   ;; Don't display scheduled todos.
+   org-agenda-todo-ignore-scheduled 'future
+   ;; Don't show nested todos.
+   org-agenda-todo-list-sublevels nil
+   ;; Don't dim blocked tasks.
+   org-agenda-dim-blocked-tasks nil
+   ;; Compact block agenda view.
+   org-agenda-compact-blocks t
+   ;; Include Emacs' Diary in org-agenda.
+   org-agenda-include-diary t
+   ;; Switch window when opening org-agenda.
+   org-agenda-window-setup 'other-window
+   ;; Display indirect buffers in the "current" window.
+   org-indirect-buffer-display 'current-window
+   ;; Reset all custom commands.
+   org-agenda-custom-commands nil)
+
+  (add-many-to-list
+   'org-agenda-custom-commands
+   '("a" "Agenda" org-agenda-list)
+   '("c" . "COLLECT...")
+   '("cb" "CollectBox" ((alltodo "")))
+   '("f" . "FOCUS...")
+   '("f." "Today"
+     ((agenda ""
+              ((org-agenda-entry-types '(:timestamp :sexp))
+               (org-agenda-overriding-header
+                (concat "CALENDAR Today"
+                        (format-time-string "%a %d" (current-time))))
+               (org-agenda-span 'day)))
+      (tags-todo "LEVEL=1+REFILE"
+                 ((org-agenda-overriding-header "COLLECTBOX (Unscheduled)")))
+      (tags-todo "DEADLINE=\"<+0d>\""
+                 ((org-agenda-overriding-header "DUE TODAY")
+                  (org-agenda-skip-function
+                   '(org-agenda-skip-entry-if 'notedeadline))
+                  (org-agenda-sorting-strategy '(priority-down))))
+      (tags-todo "DEADLINE<\"<+0d>\""
+                 ((org-agenda-overriding-header "OVERDUE")
+                  (org-agenda-skip-function
+                   '(org-agenda-skip-entry-if 'notedeadline))
+                  (org-agenda-sorting-strategy '(priority-down))))
+      (agenda ""
+              ((org-agenda-entry-types '(:scheduled))
+               (org-agenda-overriding-header "SCHEDULED")
+               (org-agenda-skip-function
+                '(org-agenda-skip-entry-if 'todo 'done))
+               (org-agenda-sorting-strategy
+                '(priority-down time-down))
+               (org-agenda-span 'day)
+               (org-agenda-start-on-weekday nil)
+               (org-agenda-time-grid nil)))
+      (todo "DONE"
+            ((org-agenda-overriding-header "COMPLETED"))))
+     ((org-agenda-format-date "")
+      (org-agenda-start-with-clockreport-mode nil)))
+   '("fh" "Hotlist"
+     ((tags-todo "DEADLINE<\"<+0d>\""
+                 ((org-agenda-overriding-header "OVERDUE")))
+      (tags-todo "DEADLINE>=\"<+0d>\"+DEADLINE<=\"<+1w>\""
+                 ((org-agenda-overriding-header "DUE IN NEXT 7 DAYS")))
+      (tags-todo "DEADLINE=\"\"+FLAGGED|DEADLINE>\"<+1w>\"+FLAGGED"
+                 ((org-agenda-overriding-header "FLAGGED"))))
+     ((org-agenda-todo-ignore-scheduled 'future)))
+   '("r" . "REVIEW...")
+   '("ra" . "All Tasks...")
+   '("rad" "All Tasks (grouped by Due Date)"
+     ((tags-todo "DEADLINE<\"<+0d>\""
+                 ((org-agenda-overriding-header "OVERDUE")
+                  (org-agenda-skip-function
+                   '(org-agenda-skip-entry-if 'notdeadline))))
+      (tags-todo "DEADLINE=\"<+0d>\""
+                 ((org-agenda-overriding-header "DUE TODAY")
+                  (org-agenda-skip-function
+                   '(org-agenda-skip-entry-if 'notdeadline))))
+      (tags-todo "DEADLINE=\"<+1d>\""
+                 ((org-agenda-overriding-header "DUE TOMORROW")
+                  (org-agenda-skip-function
+                   '(org-agenda-skip-entry-if 'notdeadline))))
+      (tags-todo "DEADLINE>\"<+1d>\"+DEADLINE<=\"<+7d>\""
+                 ((org-agenda-overriding-header "DUE WITHIN A WEEK")
+                  (org-agenda-skip-function
+                   '(org-agenda-skip-entry-if 'notdeadline))))
+      (tags-todo "DEADLINE>\"<+7d>\"+DEADLINE<=\"<+28d>\""
+                 ((org-agenda-overriding-header "DUE WITHIN A MONTH")
+                  (org-agenda-skip-function
+                   '(org-agenda-skip-entry-if 'notdeadline))))
+      (tags-todo "DEADLINE>\"<+28d>\""
+                 ((org-agenda-overriding-header "DUE LATER")
+                  (org-agenda-skip-function
+                   '(org-agenda-skip-entry-if 'notdeadline)))                           )
+      (tags-todo "TODO={WAIT}"
+                 ((org-agenda-overriding-header "WAITING FOR")
+                  (org-agenda-skip-function
+                   '(org-agenda-skip-entry-if 'deadline))))
+      (todo ""
+            ((org-agenda-overriding-header "WAITING FOR")
+             (org-agenda-skip-function
+              '(org-agenda-skip-entry-if 'deadline)))))
+     ((org-agenda-sorting-strategy '(priority-down))
+      (org-agenda-write-buffer-name "All Tasks (grouped by Due Date)"))
+     "~/Documents/Org/all-tasks-by-due-date.pdf")
+   '("ra1" "All Tasks with a due date"
+     ((alltodo ""))
+     ((org-agenda-overriding-header "All Tasks (sorted by Due Date)")
+      (org-agenda-skip-function
+       '(org-agenda-skip-entry-if 'notdeadline))
+      (org-agenda-sorting-strategy '(deadline-up))))
+   '("rt" . "Timesheet...")
+   '("rtd" "Daily Timesheet"
+     ((agenda ""))
+     ((org-agenda-log-mode-items '(clock closed))
+      (org-agenda-overriding-header "DAILY TIMESHEET")
+      (org-agenda-show-log 'clockcheck)
+      (org-agenda-span 'day)
+      (org-agenda-start-with-clockreport-mode t)
+      (org-agenda-time-grid nil)))
+   '("rtw" "Weekly Timesheet"
+     ((agenda ""))
+     (
+      ;; (org-agenda-format-date "")
+      (org-agenda-overriding-header "WEEKLY TIMESHEET")
+      (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+      (org-agenda-span 'week)
+      (org-agenda-start-on-weekday 1)
+      (org-agenda-start-with-clockreport-mode t)
+      (org-agenda-time-grid nil)))
+   '("rc" . "Calendar...")
+   '("rc7" "Events and appointments for 7 days"
+     ((agenda ""))
+     ((org-agenda-entry-types '(:timestamp :sexp))
+      ;; (org-agenda-overriding-header "Calendar for 7 days")
+      ;; (org-agenda-repeating-timestamp-show-all t)
+      (org-agenda-span 'week)
+      (org-agenda-format-date "\n%a %d")
+      ;; (org-agenda-date-weekend ... new face ...)
+      (org-agenda-time-grid nil)))
+   '("rw" "Weekly review"
+     ((tags "CATEGORY={@REFILE}&LEVEL<=2"
+            ((org-agenda-overriding-header "NEW TASKS")))
+      (agenda ""
+              ((org-agenda-clockreport-mode t)
+               (org-agenda-format-date
+                (concat "\n"
+                        "%Y-%m-%d" " %a "
+                        (make-string (window-width) ?_)))
+               (org-agenda-overriding-header "PAST WEEK")
+               (org-agenda-prefix-format " %?-11t %i %-12:c% s")
+               (org-agenda-show-log 'clockcheck)
+               (org-agenda-span 7)
+               (org-agenda-start-day "-1w")
+               (org-deadline-warning-days 0)))
+      (agenda ""
+              ((org-agenda-overriding-header "NEXT MONTH")
+               (org-agenda-span 'month)
+               (org-agenda-start-day "+0d")
+               (org-deadline-warning-days 0)))
+      (todo "PROJECT"
+            ((org-agenda-overriding-header "PROJECT LIST")))
+      (todo "DONE|PROJECTDONE"
+            ((org-agenda-overriding-header
+              "Candidates to be archived"))))))
+
+  (when (not noninteractive)
+    ;; When running in batch, don't setup windows.
+    (validate-setq
+     ;; Show agenda in current window.
+     org-agenda-window-setup 'current-window))
 
   (use-package org-habit
     :ensure nil
