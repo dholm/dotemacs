@@ -630,7 +630,21 @@
     :config
     (validate-setq
      ;; Position the habit graph to the right.
-     org-habit-graph-column 50)))
+     org-habit-graph-column 50))
+
+  (use-package org-super-agenda
+    :config
+    (add-to-list
+     'org-agenda-custom-commands
+     '("u" "Super view"
+       ((agenda "" ((org-super-agenda-groups
+                     '((:name "Today"
+                              :time-grid t)))))
+        (todo "" ((org-agenda-overriding-header "")
+                  (org-super-agenda-groups
+                   '((:name "Projects"
+                            :children todo)
+                     (:discard (:anything t)))))))))))
 
 (use-package org-annotate-file
   :ensure org-plus-contrib
