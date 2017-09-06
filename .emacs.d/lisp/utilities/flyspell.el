@@ -16,6 +16,9 @@
       ;; Enables flyspell lazy mode for small buffers.
       (flyspell-lazy-mode t)))
 
+  (with-feature 'auto-correct
+    (auto-correct-mode t))
+
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :spellcheck-word 'ispell-word)
   (user/bind-key-local :code :spellcheck-add-word 'user/flyspell-add-word-to-dict))
@@ -84,6 +87,8 @@
         (when (boundp 'flyspell-list-command)
           (validate-setq
            flyspell-list-command "--list")))))
+
+    (use-package auto-correct)
 
     (use-package helm-flyspell
       :bind ("C-c c s" . helm-flyspell-correct))
