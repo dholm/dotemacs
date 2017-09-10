@@ -66,12 +66,29 @@
    '(("django" . user/current-buffer-django-p)
      ("php" . "\\.php[3-5]?")))
 
+  (use-package restclient
+    :config
+    (use-package company-restclient
+      :config
+      (with-eval-after-load 'company
+        (add-to-list 'company-backends 'company-restclient)))
+
+    (use-package restclient-helm)
+
+    (use-package ob-restclient
+      :config
+      (with-eval-after-load 'ob
+        (org-babel-do-load-languages
+         'org-babel-load-languages
+         '((restclient . t))))))
+
   (use-package tern
     :if (executable-find "npm")
     :init
     (add-hook 'tern-mode-hook 'user--tern-mode-hook)
     :config
     (use-package company-tern))
+
   (use-package ac-html
     :config
     (add-to-list 'web-mode-ac-sources-alist
