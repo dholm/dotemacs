@@ -23,6 +23,10 @@
     :bind* (([remap query-replace-regexp] . vr/query-replace)
             ([remap replace-regexp] . vr/replace)))
 
+  (use-package replace-with-inflections
+    :bind (:map search-map
+           ("n" . query-replace-names-with-inflections)))
+
   (use-package anzu
     :defer
     :diminish anzu-mode
