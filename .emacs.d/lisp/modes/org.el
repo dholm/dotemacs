@@ -426,6 +426,7 @@
     ;; GitHub module.
     (load "org-sync-github"))
 
+  (use-package org-web-tools)
   (use-package org-caldav
     :defer)
   (use-package orgnav))
