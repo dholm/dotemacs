@@ -267,6 +267,7 @@
 
      ;;; (Programming) ;;;
      (:code . ((:compile . (user/code-prefix "c"))
+               (:clean . (user/code-prefix "M-c"))
                (:run . (user/code-prefix "r"))
                (:test . (user/code-prefix "t"))
                (:compilation-result . (user/view-prefix "c"))

@@ -20,6 +20,7 @@
   (let ((ede-proj (user/proj-from-path user/ede-proj (path-abs-buffer))))
     (cond
      (ede-proj (user/proj-build ede-proj))
+     ((feature-p 'flex-compile) (call-interactively 'flex-compile-compile))
      ((fboundp 'mode-compile) (call-interactively 'mode-compile))
      (t (call-interactively 'compile)))))
 
@@ -42,26 +43,28 @@
 
   ;;; (Hooks) ;;;
   (add-hook 'compilation-mode-hook 'user--compilation-mode-hook)
-  (add-hook 'compilation-filter-hook 'user--compilation-filter-hook))
+  (add-hook 'compilation-filter-hook 'user--compilation-filter-hook)
 
-(use-package mode-compile
-  :defer
-  :config
-  ;; Ensure byte-run has been loaded or mode-compile will override
-  ;; `define-obsolete-variable-alias'.
-  (when (load "byte-run.el" nil :noerror)
-    (validate-setq
-     ;; Set a sane compilation frame name.
-     mode-compile-other-frame-name "*compilation*"
-     ;; Run make with low priority and use multiple processes.
-     mode-compile-make-program "nice make"
-     mode-compile-default-make-options "-k -j"
-     ;; Save the current buffer on compilation.
-     mode-compile-always-save-buffer-p t)
+  (use-package flex-compile)
+  (use-package mode-compile
+    :defer
+    :config
+    ;; Ensure byte-run has been loaded or mode-compile will override
+    ;; `define-obsolete-variable-alias'.
+    (when (load "byte-run.el" nil :noerror)
+      (validate-setq
+       ;; Set a sane compilation frame name.
+       mode-compile-other-frame-name "*compilation*"
+       ;; Run make with low priority and use multiple processes.
+       mode-compile-make-program "nice make"
+       mode-compile-default-make-options "-k -j"
+       ;; Save the current buffer on compilation.
+       mode-compile-always-save-buffer-p t)
 
-    (with-executable 'clang
-      (add-to-list 'cc-compilers-list "clang")
-      (add-to-list 'c++-compilers-list "clang++"))))
+      (with-executable 'clang
+        (add-to-list 'cc-compilers-list "clang")
+        (add-to-list 'c++-compilers-list "clang++")))))
+
 
 (provide 'utilities/compile)
 ;;; compile.el ends here
