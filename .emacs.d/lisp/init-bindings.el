@@ -261,6 +261,7 @@
               (:functions/toc . ("C-l t"))
               (:file-dependencies . ("C-l d"))
               (:history . ("C-l h"))
+              (:find-todos . ("C-l M-t"))
 
               (:open . (user/utilities-prefix "o"))))
 

@@ -17,6 +17,9 @@
    ((user/auto-complete-p) (auto-complete-mode t))
    ((user/company-mode-p) (company-mode t)))
 
+  (when (feature-p 'comment-tags)
+    (comment-tags-mode t))
+
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :comment (if (feature-p 'comment-dwim-2)
                                           'comment-dwim-2
@@ -33,7 +36,11 @@
   :config
   ;;; (Packages) ;;;
   (use-package comment-dwim-2)
-  (use-package quickrun))
+  (use-package quickrun)
+  (use-package comment-tags
+    :config
+    (setq
+     comment-tags/keymap-prefix (user/get-key :nav :find-todos))))
 
 
 (provide 'modes/prog)
