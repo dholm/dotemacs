@@ -66,6 +66,8 @@
    ediff-diff-options "-w"
    ediff-ignore-similar-regions t)
 
+  (user/bind-key-global :util :diff 'ediff)
+
   (use-package ediff-wind
     :ensure nil
     :config

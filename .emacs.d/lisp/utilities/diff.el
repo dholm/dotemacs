@@ -19,6 +19,13 @@
   (use-package diff-hl
     :defer))
 
+(use-package dumb-diff
+  :defer
+  :bind (("C-c 1" . dumb-diff-set-region-as-buffer1)
+         ("C-c 2" . dumb-diff-set-region-as-buffer2))
+  :init
+  (user/bind-key-global :util :dumb-diff 'dumb-diff))
+
 
 (provide 'utilities/diff)
 ;;; diff.el ends here

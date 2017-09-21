@@ -355,15 +355,17 @@
 
      ;;; (Utilities) ;;;
      (:util . ((:annotate-buffer . (user/utilities-prefix "a"))
-               (:draw . (user/utilities-prefix "d"))
+               (:draw . (user/utilities-prefix "g"))
+               (:diff . (user/utilities-prefix "d"))
+               (:dumb-diff . (user/utilities-prefix "M-d"))
 
                (:ace-jump-mode . ("C-l a"))
 
                (:ecb-toggle . (user/utilities-prefix "e"))
 
-               (:google . (user/utilities-prefix "g"))
-               (:google-at-point . (user/documentation-prefix "g RET"))
-               (:google-selection . (user/documentation-prefix "g SPC"))
+               (:google . (user/utilities-prefix "s"))
+               (:google-at-point . (user/documentation-prefix "s RET"))
+               (:google-selection . (user/documentation-prefix "s SPC"))
                (:stack-overflow-search . (user/documentation-prefix "s"))
 
                (:notifications . (user/utilities-prefix "n"))
