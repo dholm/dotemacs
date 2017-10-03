@@ -4,6 +4,12 @@
 
 (defconst *user-custom-file* (path-join *user-data-directory* "custom.el"))
 
+(when (version< emacs-version "25.3")
+  ;; Plug security hole in enriched text mode.
+  (eval-after-load "enriched"
+    '(defun enriched-decode-display-prop (start end &optional param)
+       (list start end))))
+
 ;; Improve init performance.
 (setq
  ;; Increase garbage collection threshold.
