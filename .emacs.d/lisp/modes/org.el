@@ -251,7 +251,7 @@
      ;; Stop clock when entry is marked as DONE.
      org-clock-out-when-done t
      ;; Show the amount of time spent on the current task today.
-     org-clock-modeline-total 'today
+     org-clock-mode-line-total 'today
      ;; Resume clock when reopening Emacs.
      org-clock-persist t
      ;; Enable auto clock resolution for finding open clocks.
