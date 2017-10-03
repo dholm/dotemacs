@@ -70,6 +70,10 @@
       (validate-setq
        magithub-dir (path-join *user-data-directory* "magithub"))
 
+      (unless (fboundp #'ghub-request)
+        ;; Compatibility with new version of ghub.
+        (defalias 'ghub-request #'ghub--request))
+
       (magithub-feature-autoinject t))
     (use-package magit-imerge
       :if (executable-find "git-imerge")))
