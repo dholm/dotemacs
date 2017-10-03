@@ -10,6 +10,9 @@
   "Mode hook for eshell."
   (user--shell-mode-common-hook)
 
+  (when (feature-p 'eshell-bookmark)
+    (eshell-bookmark-setup))
+
   (turn-on-eldoc-mode)
 
   ;; Use auto-complete for completion.
@@ -121,7 +124,9 @@
     :config
     (validate-setq
      ;; Announce the terminal type.
-     eshell-term-name "eterm-color")))
+     eshell-term-name "eterm-color"))
+
+  (use-package eshell-bookmark))
 
 (use-package helm-shell
   :ensure helm
