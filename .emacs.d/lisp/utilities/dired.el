@@ -23,12 +23,10 @@
    dired-listing-switches "-alh")
 
   ;;; (Packages) ;;;
-  (use-package dired-k
-    :defer)
-  (use-package async
-    :defer)
+  (use-package diredfl)
+  (use-package dired-k)
+  (use-package async)
   (use-package dired-efap
-    :defer
     :init
     (with-eval-after-load 'dired
       ;; Load dired-efap when dired is loaded.
