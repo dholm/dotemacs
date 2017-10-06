@@ -8,6 +8,8 @@
   :config
   (use-package json-navigator))
 
+(use-package jsonnetmode)
+
 
 (provide 'modes/json)
 ;;; json.el ends here
