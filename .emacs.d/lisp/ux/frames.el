@@ -70,7 +70,19 @@
     (user/bind-key-global :emacs :flip-frame 'flip-frame)
     (user/bind-key-global :emacs :flop-frame 'flop-frame)
     (user/bind-key-global :emacs :rotate-frame-forward 'rotate-frame-clockwise)
-    (user/bind-key-global :emacs :rotate-frame-backward 'rotate-frame-anticlockwise)))
+    (user/bind-key-global :emacs :rotate-frame-backward
+                          'rotate-frame-anticlockwise))
+  (use-package zoom
+    :config
+    (validate-setq
+     ;; Ignored buffers.
+     zoom-ignored-buffer-name-regexps
+     '("^*calc")
+     ;; Ignore predicate definitions.
+     zoom-ignore-predicates
+     '((lambda () (> (count-lines (point-min) (point-max)) 20))))
+
+    (zoom-mode t)))
 
 (user--frames-config)
 
