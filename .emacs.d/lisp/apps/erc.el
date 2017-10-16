@@ -83,25 +83,7 @@
    erc-interpret-mirc-color t
    ;; Open queries in the current window.
    erc-query-display 'buffer
-   ;; Exclude the server buffer when tracking.
-   erc-track-exclude-server-buffer t
-   ;; Non-interesting events.
-   erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
-                             "324" "329" "332" "333" "353" "477")
-   ;; Track all priority faces.
-   erc-track-priority-faces-only 'all
-   ;; List of priority faces to track.
-   erc-track-faces-priority-list
-   '(erc-error-face
-     erc-current-nick-face
-     erc-keyword-face
-     erc-nick-msg-face
-     erc-direct-msg-face
-     erc-dangerous-host-face
-     erc-notice-face
-     erc-prompt-face)
-   ;; Path to log store.
-   erc-log-channels-directory (path-join *user-erc-cache-directory* "logs")
+
    ;; Log channels.
    erc-log-channels t
    ;; Insert log file contents into opened buffers.
@@ -196,6 +178,23 @@
     (use-package erc-track-score
       :config
       (validate-setq
+       ;; Exclude the server buffer when tracking.
+       erc-track-exclude-server-buffer t
+       ;; Non-interesting events.
+       erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
+                                 "324" "329" "332" "333" "353" "477")
+       ;; Track all priority faces.
+       erc-track-priority-faces-only 'all
+       ;; List of priority faces to track.
+       erc-track-faces-priority-list
+       '(erc-error-face
+         erc-current-nick-face
+         erc-keyword-face
+         erc-nick-msg-face
+         erc-direct-msg-face
+         erc-dangerous-host-face
+         erc-notice-face
+         erc-prompt-face)
        ;; Show channel score.
        erc-track-showcount t)
 
@@ -208,7 +207,11 @@
   (use-package erc-view-log
     :quelpa (erc-view-log
              :fetcher github
-             :repo "Niluge-KiWi/erc-view-log"))
+             :repo "Niluge-KiWi/erc-view-log")
+    :config
+    (validate-setq
+     ;; Path to log store.
+     erc-log-channels-directory (path-join *user-erc-cache-directory* "logs")))
   (use-package erc-crypt)
   (use-package erc-tex
     :if window-system
