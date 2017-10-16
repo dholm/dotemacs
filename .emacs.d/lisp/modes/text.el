@@ -31,6 +31,9 @@
   (with-feature 'pandoc-mode
     (pandoc-mode t))
 
+  ;; Nicely wrap long lines.
+  (visual-line-mode t)
+
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :fill-paragraph 'fill-paragraph))
 
