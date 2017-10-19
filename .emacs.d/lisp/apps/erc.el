@@ -58,9 +58,6 @@
                   (string-match *user-erc-noise-regexp* msg))))))
 
 (use-package erc
-  :quelpa (erc
-           :fetcher git
-           :url "git://git.savannah.gnu.org/erc.git")
   :commands erc
   :init
   (add-hook 'erc-connect-pre-hook (lambda (x) (erc-update-modules)))
@@ -68,7 +65,6 @@
   (when (feature-p 'bbdb2erc)
     (add-hook 'bbdb-notice-hook 'bbdb2erc-online-status))
   ;; Notification on important events.
-  (add-hook 'erc-text-matched-hook 'user/erc-global-notify)
   (add-hook 'erc-insert-modify-hook 'user/erc-global-notify)
 
   ;;; (Bindings) ;;;
@@ -79,29 +75,11 @@
    erc-kill-buffer-on-part t
    erc-kill-queries-on-quit t
    erc-kill-server-buffer-on-quit t
-   ;; Interpret mIRC color codes.
-   erc-interpret-mirc-color t
    ;; Open queries in the current window.
    erc-query-display 'buffer
 
-   ;; Log channels.
-   erc-log-channels t
-   ;; Insert log file contents into opened buffers.
-   erc-log-insert-log-on-open t
-   ;; Save buffers to log on activity.
-   erc-log-write-after-send t
-   erc-log-write-after-insert t
-   ;; Always add a timestamp.
-   erc-timestamp-only-if-changed-flag nil
-   ;; Ensure prompt is at the bottom of the window.
-   erc-scrolltobottom-mode t
-   ;; Maximum buffer size.
-   erc-max-buffer-size 100000
    ;; Nicer ERC prompt.
    erc-prompt 'user/erc-prompt
-   ;; Even buttonize links that are not proper URLs.
-   erc-button-url-regexp
-   "\\([-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]+\\.\\)+[-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]*[-a-zA-Z0-9\\/]"
    ;; ERC mode and header line.
    erc-mode-line-format
    (concat
@@ -109,12 +87,89 @@
     "[" (with-face "%S" 'erc-keyword-face) "(%m)] "
     (with-face "%a" 'erc-bold-face))
    erc-header-line-format "%o"
-   ;; Highlight user mentioning us or a keyword.
-   erc-current-nick-highlight-type 'nick-or-keyword
-   ;; Set the width to half the window width.
-   erc-fill-column (/ (window-total-width (frame-root-window)) 2)
    ;; Modify the face of the header line when disconnected.
    erc-header-line-face-method 'erc-update-header-line-show-disconnected)
+
+  (use-package erc-backend
+    :ensure nil
+    :config
+    ;; validate-setq fails for erc-backend for some reason.
+    (setq
+     ;; Attempt to reconnect forever.
+     erc-server-reconnect-attempts t)
+
+    (when (eq default-terminal-coding-system 'utf-8)
+      (setq
+       ;; As long as the terminal handles it, force UTF-8.
+       erc-server-coding-system '(utf-8 . utf-8))))
+
+  (use-package erc-goodies
+    :ensure nil
+    :config
+    (validate-setq
+     ;; Interpret mIRC color codes.
+     erc-interpret-mirc-color t
+     ;; Ensure prompt is at the bottom of the window.
+     erc-scrolltobottom-mode t))
+
+  (use-package erc-log
+    :ensure nil
+    :config
+    (validate-setq
+     ;; Insert log file contents into opened buffers.
+     erc-log-insert-log-on-open t
+     ;; Save buffers to log on activity.
+     erc-log-write-after-send t
+     erc-log-write-after-insert t
+     ;; Path to log store.
+     erc-log-channels-directory (path-join *user-erc-cache-directory* "logs"))
+
+    (make-directory erc-log-channels-directory t)
+    (set-file-modes erc-log-channels-directory #o0700)
+
+    (use-package erc-view-log
+      :quelpa (erc-view-log
+               :fetcher github
+               :repo "Niluge-KiWi/erc-view-log")))
+
+  (use-package erc-stamp
+    :ensure nil
+    :config
+    (validate-setq
+     ;; Always add a timestamp.
+     erc-timestamp-only-if-changed-flag nil))
+
+  (use-package erc-truncate
+    :ensure nil
+    :config
+    (validate-setq
+     ;; Maximum buffer size.
+     erc-max-buffer-size 100000))
+
+  (use-package erc-button
+    :ensure nil
+    :config
+    (validate-setq
+     ;; Even buttonize links that are not proper URLs.
+     erc-button-url-regexp
+     "\\([-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]+\\.\\)+[-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]*[-a-zA-Z0-9\\/]"))
+
+  (use-package erc-match
+    :ensure nil
+    :init
+    ;; Notify when nick has been matched.
+    (add-hook 'erc-text-matched-hook 'user/erc-global-notify)
+    :config
+    (validate-setq
+     ;; Highlight user mentioning us or a keyword.
+     erc-current-nick-highlight-type 'nick-or-keyword))
+
+  (use-package erc-fill
+    :ensure nil
+    :config
+    (validate-setq
+     ;; Set the width to half the window width.
+     erc-fill-column (/ (window-total-width (frame-root-window)) 2)))
 
   (add-many-to-list
    'erc-modules
@@ -157,14 +212,6 @@
    ;; Truncate really long irc buffers.
    'truncate)
 
-  (make-directory erc-log-channels-directory t)
-  (set-file-modes erc-log-channels-directory #o0700)
-
-  (when (eq default-terminal-coding-system 'utf-8)
-    (validate-setq
-     ;; As long as the terminal handles it, force UTF-8.
-     erc-server-coding-system '(utf-8 . utf-8)))
-
   (when (display-graphic-p)
     ;; Replace smileys with icons.
     (add-to-list 'erc-modules 'smiley))
@@ -173,7 +220,9 @@
     :init
     ;; Highlight nicknames in chats.
     (add-to-list 'erc-modules 'colorize))
+
   (use-package erc-track
+    :ensure nil
     :config
     (use-package erc-track-score
       :config
@@ -199,27 +248,27 @@
        erc-track-showcount t)
 
       (erc-track-score-mode t)))
+
   (use-package erc-image
     :if window-system
     :config
     ;; Render posted images inline in buffer.
     (add-to-list 'erc-modules 'image))
-  (use-package erc-view-log
-    :quelpa (erc-view-log
-             :fetcher github
-             :repo "Niluge-KiWi/erc-view-log")
-    :config
-    (validate-setq
-     ;; Path to log store.
-     erc-log-channels-directory (path-join *user-erc-cache-directory* "logs")))
+
   (use-package erc-crypt)
+
   (use-package erc-tex
     :if window-system
+    :quelpa (erc-tex
+             :fetcher github
+             :repo "davazp/erc-tex")
     :init
     ;; Render (La)TeX mathematical expressions.
     (add-to-list 'erc-modules 'tex))
+
   (when (feature-p 'bbdb)
     (use-package bbdb2erc))
+
   (with-executable 'bitlbee
     (with-eval-after-load 'prodigy
       (prodigy-define-service
