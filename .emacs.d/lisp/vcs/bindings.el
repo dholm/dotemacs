@@ -3,7 +3,8 @@
 ;;; Code:
 
 (defvar user/vcs-command-alist
-  '((:Git . ((:status . magit-status)
+  '((:Git . ((:clone . magit-clone)
+             (:status . magit-status)
              (:history . magit-file-log)
              (:version . magit-show)
              (:describe . git-messenger:popup-message)
@@ -45,6 +46,12 @@
       (if (interactive-form (cdr (assq command group)))
           (call-interactively (cdr (assq command group)))
         (funcall (cdr (assq command group)))))))
+
+
+(defun user/vcs-clone ()
+  "Execute VCS clone command."
+  (interactive)
+  (user/vcs-command :clone))
 
 
 (defun user/vcs-status ()
@@ -119,6 +126,7 @@
   (autoload 'vc-responsible-backend "vc.el")
 
   ;;; (Bindings) ;;;
+  (user/bind-key-global :vcs :clone 'user/vcs-clone)
   (user/bind-key-global :vcs :status 'user/vcs-status)
   (user/bind-key-global :vcs :history 'user/vcs-history)
   (user/bind-key-global :vcs :version 'user/vcs-version)

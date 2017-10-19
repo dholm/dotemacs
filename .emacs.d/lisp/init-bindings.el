@@ -339,7 +339,8 @@
                 (:show-value . (user/code-prefix "p"))))
 
      ;;; (Version Control) ;;;
-     (:vcs . ((:status . (user/vcs-prefix "s"))
+     (:vcs . ((:clone . (user/vcs-prefix "c"))
+              (:status . (user/vcs-prefix "s"))
               (:history . (user/vcs-prefix "h"))
               (:version . (user/vcs-prefix "v"))
               (:describe . (user/vcs-prefix "d"))
