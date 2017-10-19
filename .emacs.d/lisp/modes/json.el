@@ -8,7 +8,7 @@
   :config
   (use-package json-navigator))
 
-(use-package jsonnetmode)
+(use-package jsonnet-mode)
 
 
 (provide 'modes/json)
