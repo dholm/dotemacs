@@ -16,7 +16,7 @@
   ;; Undiagnosed issue with validate-setq.
   (setq
    ;; Send alerts to alert buffer.
-   alert-default-style 'log)
+   alert-default-style (user/alert-style))
   (validate-setq
    ;; Disable log.
    alert-log-messages nil))
