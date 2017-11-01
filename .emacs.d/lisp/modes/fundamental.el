@@ -32,8 +32,12 @@
 
   ;;; (Packages) ;;;
   (use-package rainbow-delimiters)
-  (use-package mic-paren)
-  (paren-activate))
+  (use-package mic-paren
+    :config
+    (paren-activate))
+  (use-package dynamic-spaces
+    :config
+    (dynamic-spaces-global-mode t)))
 
 (user--fundamental-mode-config)
 
