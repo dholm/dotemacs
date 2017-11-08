@@ -37,7 +37,10 @@
     (paren-activate))
   (use-package dynamic-spaces
     :config
-    (dynamic-spaces-global-mode t)))
+    (dynamic-spaces-global-mode t))
+  (use-package indent-info
+    :config
+    (global-indent-info-mode t)))
 
 (user--fundamental-mode-config)
 
