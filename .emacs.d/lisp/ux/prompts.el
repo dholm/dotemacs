@@ -6,7 +6,9 @@
   "Initialize Emacs prompting."
   (validate-setq
    ;; Always follow links to version controlled files.
-   vc-follow-symlinks t)
+   vc-follow-symlinks t
+   ;; Always ask before killing Emacs.
+   confirm-kill-emacs 'y-or-n-p)
 
   ;; Use shorter y/n prompts instead of yes/no.
   (fset 'yes-or-no-p 'y-or-n-p)
