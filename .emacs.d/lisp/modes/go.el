@@ -38,6 +38,10 @@
   :init
   (add-hook 'go-mode-hook 'user--go-mode-hook)
   :config
+  (validate-setq
+   ;; Hide errors as they are managed by Flycheck.
+   gofmt-show-errors nil)
+
   (use-package go-autocomplete)
   (use-package company-go)
   (use-package go-eldoc)
