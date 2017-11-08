@@ -52,6 +52,9 @@
              (user/use-rtags))
     (flycheck-select-checker 'rtags))
 
+  (when (feature-p 'helm-ctest)
+    (user/bind-key-local :code :test 'helm-ctest))
+
   (user/smartparens-enable))
 
 
@@ -200,6 +203,8 @@
     :if (executable-find "cmake"))
   (use-package clang-format
     :if (executable-find "clang"))
+  (use-package helm-ctest
+    :if (executable-find "ctest"))
   (use-package irony
     :disabled
     :if (and (executable-find "clang") (executable-find "cmake"))
