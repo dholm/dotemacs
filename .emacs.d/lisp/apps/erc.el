@@ -110,7 +110,12 @@
      ;; Interpret mIRC color codes.
      erc-interpret-mirc-color t
      ;; Ensure prompt is at the bottom of the window.
-     erc-scrolltobottom-mode t))
+     erc-scrolltobottom-mode t)
+
+    (add-to-list
+     'erc-modules
+     ;; Leave point above un-viewed text in channels.
+     'keep-place))
 
   (use-package erc-log
     :ensure nil
@@ -265,6 +270,13 @@
     :init
     ;; Render (La)TeX mathematical expressions.
     (add-to-list 'erc-modules 'tex))
+
+  (use-package erc-scrolltoplace
+    :config
+    (add-to-list
+     'erc-modules
+     ;; Improved keep-place by fitting more unread text.
+     'scrolltoplace))
 
   (when (feature-p 'bbdb)
     (use-package bbdb2erc))
