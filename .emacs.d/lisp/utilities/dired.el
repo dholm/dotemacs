@@ -36,6 +36,8 @@
     (define-key dired-mode-map [R] 'dired-efap)
     (when (display-graphic-p)
       (define-key dired-mode-map [down-mouse-1] 'dired-efap-click)))
+  (use-package all-the-icons-dired
+    :if window-system)
 
   ;;; (Bindings) ;;;
   ;; Do not open new buffers when going down or up a directory.
