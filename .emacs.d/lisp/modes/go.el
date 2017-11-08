@@ -23,8 +23,14 @@
   (user/bind-key-local :nav :follow-symbol 'godef-jump)
   (user/bind-key-local :nav :switch-spec-impl 'go-goto-imports)
   (user/bind-key-local :debug :start 'realgud-gub)
-  (when (feature-p 'go-test)
-    (user/bind-key-local :code :test 'go-test-current-file)))
+  (when (feature-p 'gotest)
+    ;; Prepend compilation error regexes from gotest for current
+    ;; buffer.
+    (dolist (elt (reverse go-test-compilation-error-regexp-alist))
+      (add-to-list 'compilation-error-regexp-alist elt t))
+
+    (user/bind-key-local :code :test 'go-test-current-project))
+  (user/bind-key-local :code :run 'go-run))
 
 (use-package go-mode
   :if (executable-find "go")
@@ -35,7 +41,12 @@
   (use-package go-autocomplete)
   (use-package company-go)
   (use-package go-eldoc)
-  (use-package gotest)
+  (use-package gotest
+    :config
+    ;; Copy compilation error regexes from gotest.
+    (dolist (elt go-test-compilation-error-regexp-alist-alist)
+      (add-to-list 'compilation-error-regexp-alist-alist elt)))
+
   (use-package go-projectile)
 
   (when (feature-p 'helm)
