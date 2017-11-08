@@ -78,7 +78,10 @@
     ;; Workaround for Node.js prompt.
     (setenv "NODE_NO_READLINE" "1"))
 
-  (use-package prettier-js))
+  (use-package prettier-js)
+
+  (use-package helm-js-codemod
+    :if (executable-find "jscodeshift")))
 
 
 (provide 'modes/javascript)
