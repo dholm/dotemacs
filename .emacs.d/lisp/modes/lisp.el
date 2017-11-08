@@ -49,22 +49,23 @@
   :init
   (add-hook 'lisp-mode-hook 'user--lisp-mode-hook)
   :config
+  :config
+  (validate-setq
+   slime-protocol-version 'ignore
+   slime-net-coding-system 'utf-8-unix
+   ;; Set the preferred available inferior lisp program.
+   inferior-lisp-program
+   (cond
+    ((executable-find "sbcl") "sbcl")
+    ((executable-find "lisp") "lisp")
+    ((executable-find "clisp") "clisp -K full")
+    (t inferior-lisp-program)))
+
   (use-package slime
     :init
     (add-hook 'slime-mode-hook 'user--slime-mode-hook)
-    (add-hook 'slime-repl-mode-hook 'user--slime-mode-hook))
+    (add-hook 'slime-repl-mode-hook 'user--slime-mode-hook)
     :config
-    (validate-setq
-     slime-protocol-version 'ignore
-     slime-net-coding-system 'utf-8-unix
-     ;; Set the preferred available inferior lisp program.
-     inferior-lisp-program
-     (cond
-      ((executable-find "sbcl") "sbcl")
-      ((executable-find "lisp") "lisp")
-      ((executable-find "clisp") "clisp -K full")
-      (t inferior-lisp-program)))
-
     (use-package slime-c-p-c
       :ensure slime
       :defer
@@ -77,7 +78,9 @@
     (use-package ac-slime
       :config
       (add-ac-modes 'slime-repl-mode)))
-(use-package easy-escape)
+
+  (use-package easy-escape
+    :diminish easy-escape-minor-mode))
 
 
 (provide 'modes/lisp)

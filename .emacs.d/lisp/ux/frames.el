@@ -73,6 +73,7 @@
     (user/bind-key-global :emacs :rotate-frame-backward
                           'rotate-frame-anticlockwise))
   (use-package zoom
+    :diminish zoom-mode
     :config
     (validate-setq
      ;; Ignored buffers.

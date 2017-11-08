@@ -88,7 +88,8 @@
           (validate-setq
            flyspell-list-command "--list")))))
 
-    (use-package auto-correct)
+    (use-package auto-correct
+      :diminish auto-correct-mode)
 
     (use-package helm-flyspell
       :bind ("C-c c s" . helm-flyspell-correct))

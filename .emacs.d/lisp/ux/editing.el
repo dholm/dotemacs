@@ -72,6 +72,7 @@ mode that sets `syntax-ppss' properly."
 
   (use-package selected
     :ensure t
+    :diminish selected-minor-mode
     :commands selected-minor-mode
     :init
     (setq

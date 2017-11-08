@@ -4,6 +4,7 @@
 
 (use-package docker
   :if (executable-find "docker")
+  :diminish docker-mode
   :config
   (use-package docker-tramp)
 

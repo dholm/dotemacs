@@ -38,6 +38,7 @@
   (use-package comment-dwim-2)
   (use-package quickrun)
   (use-package comment-tags
+    :diminish comment-tags-mode
     :config
     (setq
      comment-tags/keymap-prefix (user/get-key :nav :find-todos))))
