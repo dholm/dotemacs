@@ -56,7 +56,16 @@
   (when (feature-p 'helm)
     (use-package helm-go-package
       :bind (:map go-mode-map
-                  ([remap go-import-add] . helm-go-package)))))
+                  ([remap go-import-add] . helm-go-package))))
+
+  (use-package flycheck-gometalinter
+    :if (executable-find "gometalinter")
+    :config
+    (validate-setq
+     ;; Only check the project being worked on.
+     flycheck-gometalinter-vendor nil)
+
+    (flycheck-gometalinter-setup)))
 
 
 (provide 'modes/go)
