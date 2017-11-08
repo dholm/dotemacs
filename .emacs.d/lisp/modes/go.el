@@ -4,12 +4,6 @@
 
 (defun user--go-mode-hook ()
   "Go mode hook."
-  ;; Automatic code fixes before saving
-  (add-hook 'write-contents-functions
-            '(lambda ()
-               ;; Fix formatting
-               (gofmt-before-save)))
-
   ;; Camel-case separates words.
   (subword-mode t)
 
