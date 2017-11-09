@@ -98,17 +98,11 @@
   (use-package elisp-slime-nav
     :diminish elisp-slime-nav-mode)
   (use-package auto-compile)
-  (use-package eldoc-eval
-    :config
-    (eldoc-in-minibuffer-mode t))
   (use-package rainbow-delimiters)
   (use-package paredit
     :diminish paredit-mode)
   (use-package redshank
     :diminish redshank-mode)
-  (use-package eldoc
-    :ensure nil
-    :diminish eldoc-mode)
   (use-package helm-elisp
     :ensure helm
     :bind (("C-c h a" . helm-apropos)
