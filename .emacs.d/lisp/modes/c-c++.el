@@ -228,6 +228,12 @@
     :after flycheck
     :if (executable-find "scan-build")
     :config (flycheck-clang-analyzer-setup))
+  (use-package flycheck-clang-tidy
+    :if (executable-find "clang-tidy")
+    :config
+    (flycheck-clang-tidy-setup))
+  (use-package flycheck-clang-check
+    :if (executable-find "clang-check"))
   (use-package function-args
     :pin "MELPA"
     :diminish function-args-mode
