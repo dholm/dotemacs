@@ -33,7 +33,10 @@
              :repo "smmcg/showcss-mode"))
   (use-package rainbow-mode)
   (when (feature-p 'helm)
-    (use-package helm-css-scss)))
+    (use-package helm-css-scss))
+  (use-package flycheck-css-colorguard
+    :config
+    (flycheck-css-colorguard-setup)))
 
 
 (provide 'modes/css)
