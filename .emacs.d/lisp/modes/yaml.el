@@ -3,7 +3,12 @@
 ;;; Code:
 
 (use-package yaml-mode
-  :defer)
+  :defer
+  :config
+  (use-package flycheck-yamllint
+    :if (executable-find "yamllint")
+    :config
+    (flycheck-yamllint-setup)))
 
 
 (provide 'modes/yaml)
