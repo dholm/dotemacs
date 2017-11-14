@@ -37,12 +37,13 @@
   (add-hook 'shell-mode-hook 'user--shell-mode-hook)
   :config
   ;;; (Packages) ;;;
-  (use-package bash-completion
-    :defer)
-  (use-package shelldoc
-    :defer)
-  (use-package shell-command
-    :defer))
+  (use-package bash-completion)
+  (use-package shelldoc)
+  (use-package shell-command)
+  (use-package flycheck-checkbashisms
+    :if (executable-find "checkbashisms")
+    :config
+    (flycheck-checkbashisms-setup)))
 
 
 (provide 'modes/shell)
