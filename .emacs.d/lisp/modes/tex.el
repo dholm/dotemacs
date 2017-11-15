@@ -192,7 +192,9 @@ Makes it easier to version control LaTeX-files."
           (set-marker to-marker nil))))
     (use-package ebib
       :config
-      (validate-setq
+      ;; Cannot be validated as it breaks the specification of
+      ;; `ebib-file-search-dirs'.
+      (setq
        ebib-file-search-dirs
        '(lambda ()
           (with-project project (path-buffer-abs)
