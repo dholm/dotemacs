@@ -232,7 +232,7 @@
     :if (executable-find "clang-tidy")
     :config
     (flycheck-clang-tidy-setup))
-  (use-package flycheck-clang-check
+  (use-package flycheck-clangcheck
     :if (executable-find "clang-check"))
   (use-package function-args
     :pin "MELPA"
