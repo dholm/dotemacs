@@ -13,7 +13,8 @@
 
 (defun user--gnus-group-mode-hook ()
   "Gnus group mode hook."
-  (setq header-line-format "    Ticked    New     Unread   Group")
+  (validate-setq
+   header-line-format "    Ticked    New     Unread   Group")
   (gnus-topic-mode t)
   (hl-line-mode t)
 
@@ -34,16 +35,18 @@
 
 (defun user--gnus-agent-plugged-hook ()
   "Gnus agent plugged mode hook."
-  (setq
-   ;; Stop queueing email.
-   smtpmail-queue-mail nil))
+  (when (featurep 'smtpmail)
+    (validate-setq
+     ;; Stop queueing email.
+     smtpmail-queue-mail nil)))
 
 
 (defun user--gnus-agent-unplugged-hook ()
   "Gnus agent unplugged mode hook."
-  (setq
-   ;; Start queueing email.
-   smtpmail-queue-mail t))
+  (when (featurep 'smtpmail)
+    (validate-setq
+     ;; Start queueing email.
+     smtpmail-queue-mail t)))
 
 
 (defun user--gnus-message-sent-hook ()
@@ -63,7 +66,7 @@
                             nil)))
   ;; Automatically create entries in BBDB.
   (bbdb-mua-auto-update-init 'gnus 'message)
-  (setq
+  (validate-setq
    bbdb-mua-update-interactive-p '(query . create)
    bbdb-mua-auto-update-p 'create)
 
@@ -159,12 +162,14 @@
   ;; Set up smtpmail queue based on Gnus queue state.
   (defadvice gnus (after gnus-queue-off activate)
     "Turn off and flush the smtpmail queue when starting a plugged gnus."
-    (setq smtpmail-queue-mail nil)
-    (when (file-exists-p (path-join smtpmail-queue-dir "index"))
-      (smtpmail-send-queued-mail)))
+    (when (featurep 'smtpmail)
+      (validate-setq smtpmail-queue-mail nil)
+      (when (file-exists-p (path-join smtpmail-queue-dir "index"))
+        (smtpmail-send-queued-mail))))
   (defadvice gnus-unplugged (after gnus-queue-on activate)
     "Turn on the smtpmail queue when starting an unplugged gnus."
-    (setq smtpmail-queue-mail t)))
+    (when (featurep 'smtpmail)
+      (validate-setq smtpmail-queue-mail t))))
 
 
 (use-package gnus
