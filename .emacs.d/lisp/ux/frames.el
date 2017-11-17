@@ -32,13 +32,8 @@
   (if (not (one-window-p))
       (delete-window)))
 
-
-(defun user--frames-config ()
-  "Initialize Emacs frames."
+(progn
   (validate-setq
-   ;; Do not show the splash screen or message
-   inhibit-startup-screen t
-   inhibit-startup-echo-area-message (getenv "USER")
    ;; Inhibit GUI features
    use-file-dialog nil
    ;; Don't split frames horizontally.
@@ -84,8 +79,6 @@
      '((lambda () (> (count-lines (point-min) (point-max)) 20))))
 
     (zoom-mode t)))
-
-(user--frames-config)
 
 
 (provide 'ux/frames)
