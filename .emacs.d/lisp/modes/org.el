@@ -128,7 +128,7 @@
   (autoload 'org-add-link-type "org" "" t)
 
   ;; Work around annoying org-mode bug when flyspell is unavailable.
-  (unless (user-flyspell-p)
+  (unless (boundp 'flyspell-delayed-commands)
     (defvar flyspell-delayed-commands nil))
 
   ;;; (Hooks) ;;;
@@ -239,26 +239,6 @@
   (with-executable 'git
     (add-to-list 'org-modules 'org-git-link))
 
-  (when (not noninteractive)
-    ;; When running in batch, don't setup time tracking.
-    (validate-setq
-     ;; Resume clocking task on clock-in if the clock is open.
-     org-clock-in-resume t
-     ;; Save clock data and state changes and notes in the LOGBOOK drawer.
-     org-clock-into-drawer t
-     ;; Remove clock line if time is zero.
-     org-clock-out-remove-zero-time-clocks t
-     ;; Stop clock when entry is marked as DONE.
-     org-clock-out-when-done t
-     ;; Show the amount of time spent on the current task today.
-     org-clock-mode-line-total 'today
-     ;; Resume clock when reopening Emacs.
-     org-clock-persist t
-     ;; Enable auto clock resolution for finding open clocks.
-     org-clock-auto-clock-resolution 'when-no-clock-is-running
-     ;; Include current clocking task in clock reports.
-     org-clock-report-include-clocking-task t))
-
   (when (display-graphic-p)
     (validate-setq
      ;; Display inline images when starting up.
@@ -322,8 +302,12 @@
     (with-executable 'perl
       (add-to-list 'org-babel-load-languages '(perl . t)))
     (when (feature-p 'plantuml-mode)
-      (setq-default
-       org-plantuml-jar-path *user-plantuml-jar-path*)
+      (use-package ob-plantuml
+        :ensure nil
+        :after modes/plantuml
+        :config
+        (validate-setq
+         org-plantuml-jar-path *user-plantuml-jar-path*))
       (add-to-list 'org-babel-load-languages '(plantuml . t)))
     (with-executable 'python
       (add-to-list 'org-babel-load-languages '(python . t)))
@@ -411,7 +395,27 @@
     (validate-setq
      ;; Clock data store.
      org-clock-persist-file (path-join *user-org-cache-directory*
-                                       "org-clock-save.el")))
+                                       "org-clock-save.el"))
+
+    (when (not noninteractive)
+      ;; When running in batch, don't setup time tracking.
+      (validate-setq
+       ;; Resume clocking task on clock-in if the clock is open.
+       org-clock-in-resume t
+       ;; Save clock data and state changes and notes in the LOGBOOK drawer.
+       org-clock-into-drawer t
+       ;; Remove clock line if time is zero.
+       org-clock-out-remove-zero-time-clocks t
+       ;; Stop clock when entry is marked as DONE.
+       org-clock-out-when-done t
+       ;; Show the amount of time spent on the current task today.
+       org-clock-mode-line-total 'today
+       ;; Resume clock when reopening Emacs.
+       org-clock-persist t
+       ;; Enable auto clock resolution for finding open clocks.
+       org-clock-auto-clock-resolution 'when-no-clock-is-running
+       ;; Include current clocking task in clock reports.
+       org-clock-report-include-clocking-task t)))
 
   (use-package org-sticky-header)
 
