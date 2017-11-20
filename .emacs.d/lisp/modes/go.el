@@ -17,6 +17,8 @@
        (make-local-variable 'company-backends)
        '(company-go)))))
 
+  (user/tags-try-enable)
+
   ;;; (Bindings) ;;;
   (user/bind-key-local :doc :describe 'godef-describe)
   (user/bind-key-local :doc :reference 'godoc)

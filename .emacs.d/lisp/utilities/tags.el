@@ -5,6 +5,9 @@
 (defun user/use-rtags (&optional filemanager)
   "Check if rtags can be used, optionally with its FILEMANAGER."
   (and
+   (or
+    (eq major-mode 'c-mode)
+    (eq major-mode 'c++-mode))
    (fboundp 'rtags-executable-find)
    (rtags-executable-find "rc")
    (cond ((not (ggtags-current-project-root)) t)
@@ -25,6 +28,11 @@
   "Check if semantic can be used."
   (and (boundp 'semantic-mode)
        semantic-mode))
+
+
+(defun user/use-go-guru ()
+  "Check if Go guru can be used."
+  (executable-find "guru"))
 
 
 (defun user/eval-until-move (cond-list)
@@ -67,6 +75,11 @@
     (user/eval-until-move
      '(((eq major-mode 'emacs-lisp-mode)
         (call-interactively 'elisp-slime-nav-find-elisp-thing-at-point))
+
+       ((eq major-mode 'go-mode)
+        (when (user/use-go-guru)
+          (call-interactively 'go-guru-definition)))
+
        ((user/use-helm-gtags)
         (call-interactively 'helm-gtags-dwim))
        ((user/use-semantic)
@@ -80,7 +93,11 @@
                                     (not rtags-last-request-not-indexed)))
                (rtags-find-references-at-point))
     (user/eval-until-move
-     '(((user/use-helm-gtags)
+     '(((eq major-mode 'go-mode)
+        (when (user/use-go-guru)
+          (call-interactively 'go-guru-referrers)))
+
+       ((user/use-helm-gtags)
         (call-interactively 'helm-gtags-find-rtag))
        ((user/use-semantic)
         (call-interactively 'semantic-symref))))))
@@ -104,7 +121,11 @@
   (unless (and (user/use-rtags)
                (rtags-find-references))
     (user/eval-until-move
-     '(((user/use-helm-gtags)
+     '(((eq major-mode 'go-mode)
+        (when (user/use-go-guru)
+          (call-interactively 'go-guru-callers)))
+
+       ((user/use-helm-gtags)
         (call-interactively 'helm-gtags-find-rtag))
        ((user/use-semantic)
         (call-interactively 'semantic-symref-regexp))))))
@@ -117,15 +138,6 @@
                (boundp 'rtags-last-request-not-indexed)
                (not rtags-last-request-not-indexed)
                (rtags-find-virtuals-at-point))))
-
-
-(defun user/tag-insert-dependency-from-point ()
-  "Deduce and insert dependency for symbol at point."
-  (interactive)
-  (unless (and (user/use-rtags)
-               (boundp 'rtags-last-request-not-indexed)
-               (not rtags-last-request-not-indexed)
-               (rtags-get-include-file-for-symbol))))
 
 
 (defun user/tag-file-dependencies ()
@@ -155,7 +167,11 @@
   (unless (and (user/use-rtags)
                (rtags-location-stack-back))
     (user/eval-until-move
-     '(((user/use-helm-gtags)
+     '(((eq major-mode 'go-mode)
+        (when (user/use-go-guru)
+          (pop-global-mark)))
+
+       ((user/use-helm-gtags)
         (call-interactively 'helm-gtags-pop-stack))
        (t (pop-global-mark))))))
 
@@ -177,7 +193,6 @@
     (user/bind-key-local :nav :references 'user/tag-references-at-point)
     (user/bind-key-local :nav :find-virtuals 'user/tag-find-virtuals)
     (user/bind-key-local :nav :find-references 'user/tag-find-references)
-    (user/bind-key-local :code :insert-dependency 'user/tag-insert-dependency-from-point)
     (user/bind-key-local :basic :open-file-context 'user/tag-find-file)
     (user/bind-key-local :nav :file-dependencies 'user/tag-file-dependencies)
     (user/bind-key-local :nav :go-back 'user/tag-pop)))

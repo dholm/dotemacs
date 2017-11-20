@@ -48,9 +48,12 @@
     (with-feature 'company-c-headers
       (add-company-sources 'company-c-headers)))
 
-  (when (and (require 'flycheck-rtags nil :noerror)
-             (user/use-rtags))
-    (flycheck-select-checker 'rtags))
+  (when (user/use-rtags)
+    (when (require 'flycheck-rtags nil :noerror)
+      (flycheck-select-checker 'rtags))
+
+    (user/bind-key-local :code :refactor-rename 'rtags-rename-symbol)
+    (user/bind-key-local :code :insert-dependency 'rtags-get-include-file-for-symbol))
 
   (when (feature-p 'helm-ctest)
     (user/bind-key-local :code :test 'helm-ctest))
