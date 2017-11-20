@@ -15,8 +15,17 @@
 
   (turn-on-eldoc-mode)
 
-  ;; Use auto-complete for completion.
-  (add-ac-sources 'ac-source-pcomplete))
+  (when (user/auto-complete-p)
+    ;; Use auto-complete for completion.
+    (add-ac-sources 'ac-source-pcomplete))
+
+  (when (user/company-mode-p)
+    (company-mode t)
+
+    (when (feature-p 'company-eshell-autosuggest)
+      (validate-setq
+       company-backends '(company-eshell-autosuggest)
+       company-frontends '(company-preview-frontend)))))
 
 
 (defun user/shorten-path (path)
@@ -85,8 +94,9 @@
      ;; Extra alias functions.
      'eshell-xtra))
 
-  ;; For `ac-source-pcomplete'.
-  (add-ac-modes 'eshell-mode)
+  (when (user/auto-complete-p)
+    ;; For `ac-source-pcomplete'.
+    (add-ac-modes 'eshell-mode))
 
   (use-package em-script
     :ensure nil
@@ -126,7 +136,9 @@
      ;; Announce the terminal type.
      eshell-term-name "eterm-color"))
 
-  (use-package eshell-bookmark))
+  (use-package eshell-bookmark)
+
+  (use-package company-eshell-autosuggest))
 
 (use-package helm-shell
   :ensure helm
