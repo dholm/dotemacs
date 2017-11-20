@@ -297,6 +297,9 @@
                (:context-promote . (user/code-prefix "P"))
                (:context-demote . (user/code-prefix "N"))
 
+               (:refactor-rename . (user/code-prefix "r"))
+               (:insert-dependency . (user/code-eval-prefix "M-d"))
+
                (:library-list . (user/code-prefix "l"))
                (:disassemble . (user/code-prefix "D"))
 
@@ -311,8 +314,6 @@
                (:eval-buffer . (user/code-eval-prefix "b"))
                (:eval-function . (user/code-eval-prefix "f"))
                (:eval-selection . (user/code-eval-prefix "s"))
-
-               (:insert-dependency . (user/code-eval-prefix "M-d"))
 
                (:macro-expand . (user/code-eval-prefix "m"))
 

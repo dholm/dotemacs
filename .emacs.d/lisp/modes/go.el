@@ -30,6 +30,8 @@
       (add-to-list 'compilation-error-regexp-alist elt t))
 
     (user/bind-key-local :code :test 'go-test-current-project))
+  (when (feature-p 'go-rename)
+    (user/bind-key-local :code :refactor-rename 'go-rename))
   (user/bind-key-local :code :run 'go-run))
 
 (use-package go-mode
@@ -50,6 +52,8 @@
     ;; Copy compilation error regexes from gotest.
     (dolist (elt go-test-compilation-error-regexp-alist-alist)
       (add-to-list 'compilation-error-regexp-alist-alist elt)))
+  (use-package go-rename
+    :if (executable-find "gorename"))
 
   (use-package go-projectile)
 
