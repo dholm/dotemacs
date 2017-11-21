@@ -32,8 +32,10 @@
       (add-to-list 'compilation-error-regexp-alist elt t))
 
     (user/bind-key-local :code :test 'go-test-current-project))
-  (when (feature-p 'go-rename)
-    (user/bind-key-local :code :refactor-rename 'go-rename))
+  (when (feature-p 'godoctor)
+    (user/bind-key-local :code :refactor-rename 'godoctor-rename)
+    (user/bind-key-local :code :refactor-extract 'godoctor-extract)
+    (user/bind-key-local :code :document 'godoctor-godoc))
   (user/bind-key-local :code :run 'go-run))
 
 (use-package go-mode
@@ -54,8 +56,8 @@
     ;; Copy compilation error regexes from gotest.
     (dolist (elt go-test-compilation-error-regexp-alist-alist)
       (add-to-list 'compilation-error-regexp-alist-alist elt)))
-  (use-package go-rename
-    :if (executable-find "gorename"))
+  (use-package godoctor
+    :if (executable-find "godoctor"))
 
   (use-package go-projectile)
 

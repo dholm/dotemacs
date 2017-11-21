@@ -298,6 +298,7 @@
                (:context-demote . (user/code-prefix "N"))
 
                (:refactor-rename . (user/code-prefix "r"))
+               (:refactor-extract . (user/code-prefix "x"))
                (:insert-dependency . (user/code-eval-prefix "M-d"))
 
                (:library-list . (user/code-prefix "l"))
