@@ -127,10 +127,6 @@
   ;; Fix for EIN if org hasn't been setup yet.
   (autoload 'org-add-link-type "org" "" t)
 
-  ;; Work around annoying org-mode bug when flyspell is unavailable.
-  (unless (boundp 'flyspell-delayed-commands)
-    (defvar flyspell-delayed-commands nil))
-
   ;;; (Hooks) ;;;
   (add-hook 'org-load-hook 'user--org-load-hook)
   (add-hook 'org-mode-hook 'user--org-mode-hook)
