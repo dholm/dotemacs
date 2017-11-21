@@ -611,21 +611,6 @@
   (use-package nnir
     :ensure nil
     :config
-    (when (eq system-type 'darwin)
-      (use-package nnir-spotlight
-        :quelpa (nnir-spotlight
-                 :fetcher github
-                 :repo "renard/nnir-spotlight")
-        :config
-        ;; Enable Spotlight search on Darwin.
-        (require 'nnir-spotlight)
-        (validate-setq
-         nnir-method-default-engines
-         '((nnmaildir . spotlight)
-           (nnml . spotlight)
-           (nntp . gmane))
-         nnir-spotlight-prefix message-directory)))
-
     (with-executable 'swish-e
       (validate-setq
        ;; Set search engine to Swish-E.
