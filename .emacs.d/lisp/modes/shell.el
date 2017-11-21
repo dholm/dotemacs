@@ -43,7 +43,11 @@
   (use-package flycheck-checkbashisms
     :if (executable-find "checkbashisms")
     :config
-    (flycheck-checkbashisms-setup)))
+    (flycheck-checkbashisms-setup))
+  (use-package flycheck-bashate
+    :if (executable-find "bashate")
+    :config
+    (flycheck-bashate-setup)))
 
 
 (provide 'modes/shell)
