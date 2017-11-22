@@ -35,6 +35,9 @@
   (add-hook 'prog-mode-hook 'user--prog-mode-hook)
   :config
   ;;; (Packages) ;;;
+  (use-package subword
+    :ensure nil
+    :diminish subword-mode)
   (use-package comment-dwim-2)
   (use-package quickrun)
   (use-package comment-tags
