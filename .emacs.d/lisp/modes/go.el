@@ -4,6 +4,9 @@
 
 (defun user--go-mode-hook ()
   "Go mode hook."
+  ;; Format Go code before saving it.
+  (add-hook 'before-save-hook #'gofmt-before-save nil t)
+
   ;; Camel-case separates words.
   (subword-mode t)
 
