@@ -12,6 +12,9 @@
         ;; Run spell-checker in programming mode.
         (flyspell-prog-mode)))
 
+  ;; Buttonize links.
+  (goto-address-prog-mode t)
+
   ;; Try to enable completion system.
   (cond
    ((user/auto-complete-p) (auto-complete-mode t))
