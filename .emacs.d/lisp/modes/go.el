@@ -73,6 +73,8 @@
     :if (executable-find "gometalinter")
     :config
     (validate-setq
+     ;; Default to using fast linters only.
+     flycheck-gometalinter-fast t
      ;; Only check the project being worked on.
      flycheck-gometalinter-vendor nil)
 
