@@ -297,8 +297,8 @@
                (:context-promote . (user/code-prefix "P"))
                (:context-demote . (user/code-prefix "N"))
 
-               (:refactor-rename . (user/code-prefix "r"))
-               (:refactor-extract . (user/code-prefix "x"))
+               (:refactor-rename . (user/code-prefix "M-r"))
+               (:refactor-extract . (user/code-prefix "M-x"))
                (:insert-dependency . (user/code-eval-prefix "M-d"))
 
                (:library-list . (user/code-prefix "l"))
