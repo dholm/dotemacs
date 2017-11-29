@@ -270,7 +270,16 @@
                       "SCHEDULED: "
                       "%(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n:"
                       "PROPERTIES:\n:STYLE: habit\n"
-                      ":REPEAT_TO_STATE: NEXT\n:END:\n"))))))
+                      ":REPEAT_TO_STATE: NEXT\n:END:\n")))))
+
+    (use-package helm-books
+      :config
+      (add-to-list
+       'org-capture-templates
+       '("b" "book memo" entry
+         (file (concat org-directory "book.org"))
+         "* %(helm-books)"))))
+
   (use-package ob-core
     :ensure nil
     :config
