@@ -5,9 +5,8 @@
 (defun user--xml-mode-common-hook ()
   "XML common mode hook."
   ;; Outline XML support.
-  (setq
+  (validate-setq
    outline-regexp "^[ \t]*\<[a-zA-Z]+")
-  (outline-minor-mode t)
 
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :tidy 'user/xml-tidy-buffer-or-region))

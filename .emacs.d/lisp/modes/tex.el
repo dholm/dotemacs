@@ -21,7 +21,6 @@
     (setq user/tex-preview-setup t))
 
   (turn-on-reftex)
-  (outline-minor-mode t)
   (visual-line-mode t)
   (user/smartparens-enable)
 

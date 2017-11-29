@@ -21,7 +21,26 @@
   (add-hook 'outline-minor-mode-hook 'user--outline-mode-hook)
   :config
   (use-package outline-magic
-    :defer))
+    :defer)
+
+  (use-package outshine
+    :pin "MELPA"
+    :init
+    (add-hook 'outline-minor-mode-hook 'outshine-hook-function)
+    :config
+    (validate-setq
+     ;; Enable org-mode-like speed keys.
+     outshine-use-speed-commands t)
+
+    (use-package navi-mode
+      :pin "MELPA"
+      :config
+      (setf
+       ;; Add "use-package" lines to `navi-keywords'.
+       (cdr (assoc :ALL (cdr (assoc "emacs-lisp" navi-keywords))))
+       "^[[:space:]]*(\\(use-package\\|\\(cl-\\)\\{0,1\\}def[a-z]+\\)\\*? ")
+
+      (use-package helm-navi))))
 
 
 (provide 'utilities/outline)

@@ -15,6 +15,8 @@
   ;; Buttonize links.
   (goto-address-prog-mode t)
 
+  (outline-minor-mode t)
+
   ;; Try to enable completion system.
   (cond
    ((user/auto-complete-p) (auto-complete-mode t))
