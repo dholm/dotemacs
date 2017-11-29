@@ -51,7 +51,11 @@
   (user/bind-key-global :emacs :describe-bindings 'describe-bindings)
   (user/bind-key-global :emacs :describe-key 'describe-key)
   (user/bind-key-global :emacs :where-is 'where-is)
-  (user/bind-key-global :emacs :describe-mode 'describe-mode))
+  (user/bind-key-global :emacs :describe-mode 'describe-mode)
+
+  (use-package helm-describe-modes
+    :init
+    (global-set-key [remap describe-mode] #'helm-describe-modes)))
 
 (use-package find-func
   :ensure nil
