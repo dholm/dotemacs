@@ -129,6 +129,7 @@
    '(;;; (Basic keys) ;;;
      (:basic . ((:open-file . "C-x C-f")
                 (:open-file-context . "C-x f")
+                (:open-file-tramp . "C-x t")
                 (:view-file . "C-x C-v")
                 (:open-buffer . "C-x b")
                 (:open-buffer-context . "C-x M-b")

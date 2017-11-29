@@ -55,7 +55,12 @@ element is not omitted."
     :config
     (validate-setq
      ;; Persistency files.
-     tramp-persistency-file-name (path-join *user-cache-directory* "tramp"))))
+     tramp-persistency-file-name
+     (path-join *user-cache-directory* "tramp")))
+
+  (use-package helm-tramp
+    :init
+    (user/bind-key-global :basic :open-file-tramp 'helm-tramp)))
 
 
 (provide 'utilities/tramp)
