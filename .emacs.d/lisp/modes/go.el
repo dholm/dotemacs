@@ -22,6 +22,9 @@
 
   (user/tags-try-enable)
 
+  ;; Disable whitespace mode settings that don't make sense in Go.
+  (user/whitespace-disable-style '(lines lines-tail))
+
   ;;; (Bindings) ;;;
   (user/bind-key-local :doc :describe 'godef-describe)
   (user/bind-key-local :doc :reference 'godoc)
