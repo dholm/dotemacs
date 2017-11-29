@@ -453,7 +453,9 @@
                   (org-present-small)
                   (org-remove-inline-images)
                   (org-present-show-cursor)
-                  (org-present-read-write))))))
+                  (org-present-read-write)))))
+
+  (use-package helm-org-rifle))
 
 (use-package org-agenda
   :ensure org-plus-contrib
