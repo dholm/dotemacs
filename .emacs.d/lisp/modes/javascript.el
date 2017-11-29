@@ -23,8 +23,8 @@
   (ansi-color-for-comint-mode-on))
 
 
-(defun user--js3-mode-hook ()
-  "JS3 mode hook."
+(defun user--js2-mode-hook ()
+  "JS2 mode hook."
   (user--javascript-mode-common-hook)
   ;; Enable smart indentation
   (smart-tabs-mode t)
@@ -44,25 +44,21 @@
   (add-hook 'javascript-mode-hook 'user--javascript-mode-hook)
   (add-hook 'inferior-js-mode-hook 'user--inferior-javascript-mode-hook))
 
-(use-package js3-mode
+(use-package js2-mode
   :defer
   :mode "\.js$"
   :magic "#!/usr/bin/env node"
   :init
-  (add-hook 'js3-mode-hook 'user--js3-mode-hook)
+  (add-hook 'js2-mode-hook 'user--js2-mode-hook)
   :config
   (validate-setq
    ;; Configure indentation
-   js3-indent-on-enter-key t
-   js3-auto-indent-p t
+   js2-enter-indents-newline t
+   js2-auto-indent-p t
    ;; Idle timeout before reparsing buffer
-   js3-idle-timer-delay 0.5
-   ;; Do not load browser-specific functions
-   js3-include-browser-externs nil
-   ;; Support Node.js
-   js3-skip-preprocessor-directives t
+   js2-idle-timer-delay 0.5
    ;; Disable error parsing in favor of Flycheck
-   js3-strict-missing-semi-warning nil)
+   js2-strict-missing-semi-warning nil)
 
   (use-package js-comint
     :config
@@ -81,7 +77,11 @@
   (use-package prettier-js)
 
   (use-package helm-js-codemod
-    :if (executable-find "jscodeshift")))
+    :if (executable-find "jscodeshift"))
+
+  (use-package xref-js2
+    :init
+    (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
 
 
 (provide 'modes/javascript)
