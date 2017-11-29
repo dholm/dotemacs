@@ -29,7 +29,7 @@
 (defun user/whitespace-disable-style (styles)
   "Disable STYLES in current mode."
   (when (boundp 'whitespace-style)
-    (let ((options (user/filter-form (member styles it) whitespace-style)))
+    (let ((options (cl-intersection styles whitespace-style)))
       (when (and (boundp 'global-whitespace-mode) global-whitespace-mode)
         (global-whitespace-toggle-options options))
       (when (and (boundp 'whitespace-mode) whitespace-mode)
