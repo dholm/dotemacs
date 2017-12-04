@@ -64,6 +64,8 @@
       (add-to-list 'compilation-error-regexp-alist-alist elt)))
   (use-package godoctor
     :if (executable-find "godoctor"))
+  (use-package go-tag
+    :if (executable-find "gomodifytags"))
 
   (use-package go-projectile)
 
