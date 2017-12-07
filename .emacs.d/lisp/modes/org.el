@@ -36,6 +36,10 @@
            "[0-9]+[.)][ \t] +\\)\\|[ \t]*[:|]\\|"
            "^[ \t]+\\[[0-9]\\{4\\}-"))
 
+  (with-feature 'org-table-sticky-header
+    ;; Enable sticky headers for tables.
+    (org-table-sticky-header-mode t))
+
   (user/smartparens-enable)
 
   ;;; (Bindings) ;;;
@@ -239,6 +243,11 @@
     (validate-setq
      ;; Display inline images when starting up.
      org-startup-with-inline-images t))
+
+  (use-package org-table
+    :ensure nil
+    :config
+    (use-package org-table-sticky-header))
 
   (use-package org-capture
     :ensure nil
