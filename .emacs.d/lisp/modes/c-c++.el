@@ -50,13 +50,7 @@
 
   (when (user/use-rtags)
     (when (require 'flycheck-rtags nil :noerror)
-      (flycheck-select-checker 'rtags))
-
-    (user/bind-key-local :code :refactor-rename 'rtags-rename-symbol)
-    (user/bind-key-local :code :insert-dependency 'rtags-get-include-file-for-symbol))
-
-  (when (feature-p 'helm-ctest)
-    (user/bind-key-local :code :test 'helm-ctest))
+      (flycheck-select-checker 'rtags)))
 
   (user/smartparens-enable))
 
@@ -79,16 +73,7 @@
   (with-feature 'irony
     (when (member major-mode irony-supported-major-modes)
       ;; Better auto completion.
-      (irony-mode t)))
-
-  ;;; (Bindings) ;;;
-  (when (feature-p 'iasm-mode)
-    (user/bind-key-local :code :library-list 'iasm-disasm-link-buffer)
-    (user/bind-key-local :code :disassemble 'iasm-goto-disasm-buffer))
-  (with-feature 'clang-format
-    (user/bind-key-local :code :tidy 'clang-format-region))
-  (with-executable 'gdb
-    (user/bind-key-local :debug :start 'realgud-gdb)))
+      (irony-mode t))))
 
 
 (defun user--c-mode-cedet-hook ()
@@ -205,9 +190,15 @@
   (use-package cmake-ide
     :if (executable-find "cmake"))
   (use-package clang-format
-    :if (executable-find "clang"))
+    :if (executable-find "clang")
+    :bind-wrap
+    (:map c-mode-base-map
+          ((:key :code :tidy) . clang-format-region)))
   (use-package helm-ctest
-    :if (executable-find "ctest"))
+    :if (executable-find "ctest")
+    :bind-wrap
+    (:map c-mode-base-map
+          ((:key :code :test) . helm-ctest)))
   (use-package irony
     :disabled
     :if (and (executable-find "clang") (executable-find "cmake"))

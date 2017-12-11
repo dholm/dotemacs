@@ -25,28 +25,21 @@
   ;; Disable whitespace mode settings that don't make sense in Go.
   (user/whitespace-disable-style '(lines lines-tail))
 
-  ;;; (Bindings) ;;;
-  (user/bind-key-local :doc :describe 'godef-describe)
-  (user/bind-key-local :doc :reference 'godoc)
-  (user/bind-key-local :nav :follow-symbol 'godef-jump)
-  (user/bind-key-local :nav :switch-spec-impl 'go-goto-imports)
-  (user/bind-key-local :debug :start 'realgud-gub)
   (when (feature-p 'gotest)
     ;; Prepend compilation error regexes from gotest for current
     ;; buffer.
     (dolist (elt (reverse go-test-compilation-error-regexp-alist))
-      (add-to-list 'compilation-error-regexp-alist elt t))
-
-    (user/bind-key-local :code :test 'go-test-current-project))
-  (when (feature-p 'godoctor)
-    (user/bind-key-local :code :refactor-rename 'godoctor-rename)
-    (user/bind-key-local :code :refactor-extract 'godoctor-extract)
-    (user/bind-key-local :code :document 'godoctor-godoc))
-  (user/bind-key-local :code :run 'go-run))
+      (add-to-list 'compilation-error-regexp-alist elt t))))
 
 (use-package go-mode
   :if (executable-find "go")
   :defer
+  :bind-wrap
+  (:map go-mode-map
+        ((:key :doc :describe) . godef-describe)
+        ((:key :doc :reference) . godoc)
+        ((:key :nav :follow-symbol) . godef-jump)
+        ((:key :nav :switch-spec-impl) . go-goto-imports))
   :init
   (add-hook 'go-mode-hook 'user--go-mode-hook)
   :config
@@ -58,12 +51,21 @@
   (use-package company-go)
   (use-package go-eldoc)
   (use-package gotest
+    :bind-wrap
+    (:map go-mode-map
+          ((:key :code :test) . go-test-current-project)
+          ((:key :code :run) . go-run))
     :config
     ;; Copy compilation error regexes from gotest.
     (dolist (elt go-test-compilation-error-regexp-alist-alist)
       (add-to-list 'compilation-error-regexp-alist-alist elt)))
   (use-package godoctor
-    :if (executable-find "godoctor"))
+    :if (executable-find "godoctor")
+    :bind-wrap
+    (:map go-mode-map
+          ((:key :code :refactor-rename) . godoctor-rename)
+          ((:key :code :refactor-extract) . godoctor-extract)
+          ((:key :code :document) . godoctor-godoc)))
   (use-package go-tag
     :if (executable-find "gomodifytags"))
 

@@ -45,10 +45,13 @@
   :config
   ;;; (Packages) ;;;
   (use-package iasm-mode
-    :init
-    ;;; (Bindings) ;;;
-    (user/bind-key-local :code :library-list 'iasm-ldd)
-    (user/bind-key-local :code :disassemble 'iasm-disasm)))
+    :bind-wrap
+    (:map asm-mode-map
+          ((:key :code :library-list) . iasm-ldd)
+          ((:key :code :disassemble) . iasm-disasm)
+     :map c-mode-base-map
+          ((:key :code :library-list) . iasm-disasm-link-buffer)
+          ((:key :code :disassemble) . iasm-goto-disasm-buffer))))
 
 
 (provide 'modes/asm)

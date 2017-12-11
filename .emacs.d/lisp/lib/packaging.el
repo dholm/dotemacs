@@ -59,8 +59,38 @@
      quelpa-use-package-inhibit-loading-quelpa t)
 
     ;; Protect quelpa recipes when forcing ensure.
-    (quelpa-use-package-activate-advice)))
+    (quelpa-use-package-activate-advice))
 
+  ;; Support using keys from init-bindings by using (:key <group> <function>).
+  (push :bind-wrap (cdr (member :bind use-package-keywords)))
+  (push :bind*-wrap (cdr (member :bind* use-package-keywords)))
+  (defun use-package-normalize-bind-wrap (name keyword args)
+    (let ((arg args)
+          args*)
+      (while arg
+        (let ((x (car arg)))
+          (cond
+           ((and (consp x)
+                 (consp (car x))
+                 (equal (caar x) :key))
+            (setq args* (nconc args*
+                               (list (cons (apply 'user/get-key (cdar x))
+                                     (cdar arg)))))
+            (setq arg (cdr arg)))
+           ((listp x)
+            (setq args*
+                  (nconc args* (use-package-normalize/:bind-wrap name keyword x)))
+            (setq arg (cdr arg)))
+           (t
+            (setq args* (nconc args* (list x)))
+            (setq arg (cdr arg))))))
+      (use-package-normalize/:bind name keyword args*)))
+  (defalias 'use-package-normalize/:bind-wrap 'use-package-normalize-bind-wrap)
+  (defalias 'use-package-normalize/:bind*-wrap 'use-package-normalize-bind-wrap)
+  (defun use-package-handler/:bind-wrap (name keyword arg rest state)
+    (use-package-handler/:bind name keyword arg rest state))
+  (defun use-package-handler/:bind*-wrap (name keyword arg rest state)
+    (use-package-handler/:bind name keyword arg rest state 'bind-keys*)))
 
 (defun user--el-get-init ()
   "Initialize el-get."

@@ -199,6 +199,10 @@
 
 (use-package rtags
   :if (executable-find "llvm-config")
+  :bind-wrap
+  (:map rtags-mode-map
+        ((:key :code :refactor-rename) . rtags-rename-symbol)
+        ((:key :code :insert-dependency) . rtags-get-include-file-for-symbol))
   :defer
   :config
   (use-package ac-rtags)

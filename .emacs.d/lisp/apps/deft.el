@@ -6,16 +6,13 @@
   (path-join *user-documents-directory* "Notes")
   "Path to user's notes data store.")
 
-(defun user--deft-mode-hook ()
-  "Deft mode hook."
-  ;;; (Bindings) ;;;
-  (user/bind-key-local :basic :open-file-context 'deft-find-file))
-
 (use-package deft
   :commands deft
+  :bind-wrap
+  (:map deft-mode-map
+        ((:key :basic :open-file-context) . deft-find-file))
   :init
   (make-directory *user-notes-data-directory* t)
-  (add-hook 'deft-mode-hook 'user--deft-mode-hook)
   (user/bind-key-global :apps :notes 'deft)
   :config
   (validate-setq

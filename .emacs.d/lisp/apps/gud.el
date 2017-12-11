@@ -77,6 +77,11 @@
 
 (use-package realgud
   :defer
+  :bind-wrap
+  (:map c-mode-base-map
+        ((:key :debug :start) . realgud-gdb)
+   :map go-mode-map
+        ((:key :debug :start) . realgud-gub))
   :init
   (add-hook 'realgud-mode-hook 'user/realgud-mode-hook))
 
