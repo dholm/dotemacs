@@ -25,7 +25,10 @@
     (when (feature-p 'company-eshell-autosuggest)
       (validate-setq
        company-backends '(company-eshell-autosuggest)
-       company-frontends '(company-preview-frontend)))))
+       company-frontends '(company-preview-frontend))))
+
+  (with-feature 'esh-autosuggest
+    (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)))
 
 
 (defun user/shorten-path (path)
@@ -138,7 +141,10 @@
 
   (use-package eshell-bookmark)
 
-  (use-package company-eshell-autosuggest))
+  (use-package company-eshell-autosuggest)
+
+  (use-package esh-autosuggest
+    :hook (eshell-mode . esh-autosuggest-mode)))
 
 (use-package helm-shell
   :ensure helm
