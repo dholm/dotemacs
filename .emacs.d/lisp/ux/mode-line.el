@@ -46,7 +46,11 @@
       (unless (featurep 'projectile)
         (setq
          ;; Temporary workaround for sml thinking projectile has been loaded.
-         sml/projectile-loaded-p nil)))))
+         sml/projectile-loaded-p nil))))
+
+  (use-package mode-line-bell
+    :init
+    (mode-line-bell-mode t)))
 
 (user--modeline-config)
 
