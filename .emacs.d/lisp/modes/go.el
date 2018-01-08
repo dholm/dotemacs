@@ -85,7 +85,13 @@
      ;; Only check the project being worked on.
      flycheck-gometalinter-vendor nil)
 
-    (flycheck-gometalinter-setup)))
+    (flycheck-gometalinter-setup))
+
+  (use-package go-fill-struct
+    :if (executable-find "fillstruct"))
+
+  (use-package go-imports
+    :if (executable-find "goimports")))
 
 
 (provide 'modes/go)
