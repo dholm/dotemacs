@@ -48,7 +48,9 @@
       (sp-local-pair "`" "'" :actions '(insert wrap))))
 
   (use-package flycheck-vale
-    :if (executable-find "vale")))
+    :if (executable-find "vale")
+    :config
+    (add-to-list 'flycheck-vale-modes 'org-mode)))
 
 
 (provide 'modes/text)
