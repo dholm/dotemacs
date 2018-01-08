@@ -222,7 +222,12 @@ Makes it easier to version control LaTeX-files."
     (use-package ltx-help
       :quelpa (ltx-help
                :fetcher url
-               :url "http://mirror.switch.ch/ftp/mirror/tex/info/latex2e-help-texinfo/ltx-help.el"))))
+               :url "http://mirror.switch.ch/ftp/mirror/tex/info/latex2e-help-texinfo/ltx-help.el")))
+
+  (use-package texfrag
+    :diminish texfrag-mode
+    :init
+    (texfrag-global-mode t)))
 
 
 (provide 'modes/tex)
