@@ -15,7 +15,10 @@
   :defer
   :mode "\(/var/log.*\|\.log\)$"
   :init
-  (add-hook 'syslog-mode-hook 'user--syslog-mode-hook))
+  (add-hook 'syslog-mode-hook 'user--syslog-mode-hook)
+  :config
+  (use-package lognav-mode
+    :hook (syslog-mode . lognav-mode)))
 
 
 (provide 'modes/syslog)
