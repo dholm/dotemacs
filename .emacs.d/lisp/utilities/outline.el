@@ -15,6 +15,7 @@
   (user/bind-key-local :nav :context-backward 'outline-previous-heading))
 
 (use-package outline
+  :diminish outline-minor-mode
   :defer
   :init
   (add-hook 'outline-mode-hook 'user--outline-mode-hook)
