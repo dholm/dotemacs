@@ -19,8 +19,8 @@
   (use-package lua-block
     :requires lua-mode
     :quelpa (lua-block
-             :fetcher wiki
-             :files ("lua-block.el"))
+             :fetcher url
+             :url "http://www.emacswiki.org/emacs/download/lua-block.el")
     :init
     (autoload 'lua-block-mode "lua-block" nil t)))
 

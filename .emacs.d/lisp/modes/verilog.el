@@ -23,8 +23,8 @@
   (use-package auto-complete-verilog
     :requires auto-complete
     :quelpa (auto-complete-verilog
-             :fetcher wiki
-             :files ("auto-complete-verilog.el"))))
+             :fetcher url
+             :url "http://www.emacswiki.org/emacs-en/download/auto-complete-verilog.el")))
 
 
 (provide 'modes/verilog)

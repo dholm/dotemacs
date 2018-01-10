@@ -55,8 +55,8 @@
 (use-package rect-mark
   :defer
   :quelpa (rect-mark
-           :fetcher wiki
-           :files ("rect-mark.el")))
+           :fetcher url
+           :url "https://www.emacswiki.org/emacs/download/rect-mark.el"))
 
 (use-package simple
   :ensure nil
