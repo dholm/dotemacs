@@ -24,6 +24,9 @@
   (visual-line-mode t)
   (user/smartparens-enable)
 
+  (with-feature 'tex-fold
+    (tex-fold-mode t))
+
   ;; Completion backends.
   (cond
    ((user/auto-complete-p)
@@ -44,6 +47,8 @@
     (kill-local-variable 'compile-command))
 
   ;;; (Bindings) ;;;
+  (when (feature-p 'latexdiff)
+    (user/bind-key-local :util :diff 'helm-latexdiff))
   (when (feature-p 'ltx-help)
     (user/bind-key-local :doc :reference 'latex-help))
   (user/bind-key-local :nav :functions/toc 'reftex-toc)
@@ -98,12 +103,27 @@
                      (sp-local-pair "\\left\\{" " \\right\\}")))
 
     ;;; (Packages) ;;;
+    (use-package reftex
+      :ensure nil
+      :diminish reftex-mode)
+
+    (use-package latex-extra
+      :hook (LaTeX-mode . latex-extra-mode))
+
+    (use-package latexdiff
+      :if (executable-find "latexdiff"))
+
     (use-package bibtex
       :config
       (validate-setq
        ;; (BibTeX) ;;
        bibtex-autokey-name-case-convert 'identity
-       bibtex-autokey-year-length 4))
+       bibtex-autokey-year-length 4)
+
+      (use-package gscholar-bibtex)
+
+      (use-package bibtex-utils))
+
     (use-package auctex
       :bind (:map LaTeX-mode-map
                   ([remap fill-paragraph] . LaTeX-fill-paragraph))
@@ -116,7 +136,6 @@
        TeX-save-query nil
        ;; Use PDF rather than DVI by default.
        TeX-PDF-mode t
-       TeX-fold-mode t
        TeX-interactive-mode t
        ;; Parse file after load/save unless it has a style hook.
        TeX-parse-self t
@@ -188,7 +207,23 @@ Makes it easier to version control LaTeX-files."
                      (bolp)
                      (looking-at "\\s *$"))
               (LaTeX-newline)))
-          (set-marker to-marker nil))))
+          (set-marker to-marker nil)))
+
+      ;;; (Packages) ;;;
+      (use-package auctex-latexmk
+        :if (executable-find "latexmk")
+        :init
+        (auctex-latexmk-setup))
+
+      (use-package auctex-lua
+        :if (executable-find "luatex"))
+
+      (use-package company-auctex
+        :init
+        (company-auctex-init))
+
+      (use-package bibretrieve))
+
     (use-package ebib
       :config
       ;; Cannot be validated as it breaks the specification of
@@ -198,14 +233,18 @@ Makes it easier to version control LaTeX-files."
        '(lambda ()
           (with-project project (path-buffer-abs)
             (user/proj-root project)))))
+
     (use-package zotelo
+      :diminish zotelo-minor-mode
       :config
       (add-hook 'TeX-mode-hook 'zotelo-minor-mode))
+
     (use-package ac-math
       :config
       (validate-setq
        ;; Enable unicode math input.
        ac-math-unicode-in-math-p t))
+
     (use-package auto-complete-latex
       :requires auto-complete
       :quelpa (auto-complete-latex
@@ -217,8 +256,9 @@ Makes it easier to version control LaTeX-files."
                                        'auto-complete-latex)
                                       "ac-l-dict"))
       (add-ac-modes 'latex-mode 'LaTeX-mode))
-    (use-package company-auctex)
+
     (use-package company-math)
+
     (use-package ltx-help
       :quelpa (ltx-help
                :fetcher url
