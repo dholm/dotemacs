@@ -27,6 +27,10 @@
       (sp-local-tag "s" "```scheme" "```")
       (sp-local-tag "<"  "<_>" "</_>" :transform 'sp-match-sgml-tags)))
 
+  (use-package flycheck-mmark
+    :if (executable-find "mmark")
+    :hook (flycheck-mode . flycheck-mmark-setup))
+
   (use-package livedown
     :if (executable-find "npm")
     :quelpa (livedown
