@@ -97,7 +97,11 @@
                              ac-source-html-attribute))))
   (use-package company-web)
   (use-package skewer-mode)
-  (use-package tidy))
+  (use-package tidy)
+
+  (use-package cakecrumbs
+    :init
+    (cakecrumbs-auto-setup)))
 
 
 (provide 'modes/web)
