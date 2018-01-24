@@ -90,8 +90,6 @@
    ess-eldoc-show-on-symbol t
    ;; Optimize by only printing results, not code.
    ess-eval-visibly-p nil
-   ;; Automatically scroll when output reaches bottom of buffer.
-   ess-comint-scroll-to-bottom-on-output t
    ;; Start R in the current directory.
    ess-ask-for-ess-directory nil
    ess-local-process-name "R"
