@@ -26,17 +26,22 @@
   :init
   (add-hook 'css-mode-hook 'user--css-mode-hook)
   :config
-  ;;; (Packages) ;;;
   (use-package showcss-mode
     :quelpa (showcss-mode
              :fetcher github
              :repo "smmcg/showcss-mode"))
+
   (use-package rainbow-mode)
+
   (when (feature-p 'helm)
     (use-package helm-css-scss))
+
   (use-package flycheck-css-colorguard
     :config
-    (flycheck-css-colorguard-setup)))
+    (flycheck-css-colorguard-setup))
+
+  (use-package css-autoprefixer
+    :if (executable-find "npx")))
 
 
 (provide 'modes/css)
