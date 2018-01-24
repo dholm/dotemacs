@@ -40,7 +40,11 @@
     (dynamic-spaces-global-mode t))
   (use-package indent-info
     :config
-    (global-indent-info-mode t)))
+    (global-indent-info-mode t))
+  (use-package goldendict
+    :if (executable-find "goldendict")
+    :bind-wrap
+    ((:key :doc :dictionary) . goldendict-dwim)))
 
 (user--fundamental-mode-config)
 

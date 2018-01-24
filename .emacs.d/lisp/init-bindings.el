@@ -232,6 +232,8 @@
               (:describe-function . (user/documentation-prefix "f"))
               (:describe-variable . (user/documentation-prefix "v"))
 
+              (:dictionary . (user/documentation-prefix "D"))
+
               (:reference . (user/documentation-prefix "r"))))
 
      ;;; (Navigation) ;;;
