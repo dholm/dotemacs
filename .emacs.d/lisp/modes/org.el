@@ -465,7 +465,8 @@
                   (org-present-read-write)))))
 
   (use-package helm-org-rifle)
-  (use-package org-noter))
+  (use-package org-noter)
+  (use-package anki-editor))
 
 (use-package org-agenda
   :ensure org-plus-contrib
