@@ -12,8 +12,8 @@
 
 (use-package info
   :defer
+  :hook (Info-mode-hook . user--info-mode-hook)
   :init
-  (add-hook 'Info-mode-hook 'user--info-mode-hook)
   (user/bind-key-global :emacs :describe-key-extensive
                         'Info-goto-emacs-key-command-node)
   (user/bind-key-global :emacs :manual 'info-emacs-manual)
@@ -29,8 +29,11 @@
 
   (use-package niceify-info
     :defer
-    :init
-    (add-hook 'Info-selection-hook #'niceify-info))
+    :hook (Info-selection-hook . niceify-info))
+
+  (use-package info-colors
+    :defer
+    :hook (Info-selection-hook . info-colors-fontify-node))
 
   (use-package helm-info
     :defer
