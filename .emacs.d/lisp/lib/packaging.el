@@ -48,6 +48,10 @@
 (use-package use-package
   :pin "MELPA"
   :config
+  (validate-setq
+   ;; Hooks are verbatim.
+   use-package-hook-name-suffix nil)
+
   (use-package quelpa-use-package
     :config
     (validate-setq

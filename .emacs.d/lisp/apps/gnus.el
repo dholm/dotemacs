@@ -174,6 +174,8 @@
 
 (use-package gnus
   :commands gnus
+  :hook ((gnus-startup-hook . user--gnus-startup-hook)
+         (message-sent-hook . user--gnus-message-sent-hook))
   :init
   ;; Create data and cache stores.
   (let ((article-dir (path-join *user-gnus-data-directory* "articles")))
@@ -185,10 +187,6 @@
   (set-file-modes *user-gnus-data-directory* #o0700)
   (make-directory *user-gnus-cache-directory* t)
   (set-file-modes *user-gnus-cache-directory* #o0700)
-
-  ;; Hooks
-  (add-hook 'gnus-startup-hook 'user--gnus-startup-hook)
-  (add-hook 'message-sent-hook 'user--gnus-message-sent-hook)
   :config
   (validate-setq
    ;; Make Gnus the default mail reader.
@@ -253,6 +251,7 @@
 
   (use-package gnus-art
     :ensure gnus
+    :hook (gnus-article-prepare-hook . user--gnus-article-prepare-hook)
     :config
     (validate-setq
      ;; Headers visible by default.
@@ -285,13 +284,11 @@
        gnus-blocked-images nil
        ;; Enable gravatars.
        gnus-treat-from-gravatar 'head
-       gnus-treat-mail-gravatar 'head))
-
-    ;;; (Hooks) ;;;
-    (add-hook 'gnus-article-prepare-hook 'user--gnus-article-prepare-hook))
+       gnus-treat-mail-gravatar 'head)))
 
   (use-package gnus-group
     :ensure gnus
+    :hook (gnus-group-mode-hook . user--gnus-group-mode-hook)
     :config
     (validate-setq
      ;; Groups format.
@@ -308,13 +305,11 @@
     ;; Use smtpmail queue instead of Gnus queue.
     (defadvice gnus-group-send-queue (after smtp-flush-queue activate)
       "Empty the smtpmail queue after emptying the gnus send queue."
-      (smtpmail-send-queued-mail))
-
-    ;;; (Hooks) ;;;
-    (add-hook 'gnus-group-mode-hook 'user--gnus-group-mode-hook))
+      (smtpmail-send-queued-mail)))
 
   (use-package gnus-sum
     :ensure gnus
+    :hook (gnus-summary-mode-hook . user--gnus-summary-mode-hook)
     :config
     (validate-setq
      ;; Date format.
@@ -377,9 +372,6 @@
        gnus-sum-thread-tree-vertical        "|"
        gnus-sum-thread-tree-leaf-with-other "+-> "
        gnus-sum-thread-tree-single-leaf     "\\-> "))
-
-    ;;; (Hooks) ;;;
-    (add-hook 'gnus-summary-mode-hook 'user--gnus-summary-mode-hook)
 
     ;;; (Bindings) ;;;
     (with-eval-after-load 'gnus

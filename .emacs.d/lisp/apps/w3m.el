@@ -36,9 +36,9 @@
   :if (executable-find "w3m")
   :disabled
   :defer
+  :hook (w3m-display-hook . user--w3m-display-hook)
   :init
   (autoload 'w3m-browse-url "w3m" nil t)
-  (add-hook 'w3m-display-hook 'user--w3m-display-hook)
   :config
   (validate-setq
    ;; Set up data paths.

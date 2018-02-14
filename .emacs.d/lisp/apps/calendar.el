@@ -159,9 +159,8 @@
 (use-package calendar
   :commands calendar
   :defer
-  :init
-  (add-hook 'calendar-today-visible-hook 'calendar-mark-today)
-  (add-hook 'calendar-load-hook 'user--calendar-load-hook)
+  :hook ((calendar-today-visible-hook . calendar-mark-today)
+         (calendar-load-hook . user--calendar-load-hook))
   :config
   (let ((diary-data-store (path-join *user-org-data-directory* "diary.org")))
     (validate-setq
@@ -187,8 +186,7 @@
 
   (use-package diary-lib
     :ensure calendar
-    :init
-    (add-hook 'diary-display-function 'diary-fancy-display)
+    :hook (diary-display-function . diary-fancy-display)
     :config
     (validate-setq
      ;; Display one week of entries from current date.

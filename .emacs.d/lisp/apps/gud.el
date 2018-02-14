@@ -30,7 +30,7 @@
   ;; Printing
   (user/bind-key-local :debug :show-value 'gud-print))
 
-(defun user/realgud-mode-hook ()
+(defun user--realgud-mode-hook ()
   "RealGud mode hook."
   ;;; (Bindings) ;;;
   ;; Breakpoints
@@ -57,8 +57,7 @@
 
 (use-package gud
   :commands gud-gdb
-  :init
-  (add-hook 'gud-mode-hook 'user--gud-mode-hook)
+  :hook (gud-mode-hook . user--gud-mode-hook)
   :config
   (validate-setq
    ;; Do not change the working directory before running inferior
@@ -82,8 +81,7 @@
         ((:key :debug :start) . realgud-gdb)
    :map go-mode-map
         ((:key :debug :start) . realgud-gub))
-  :init
-  (add-hook 'realgud-mode-hook 'user/realgud-mode-hook))
+  :hook (realgud-mode-hook . user--realgud-mode-hook))
 
 
 (provide 'apps/gud)

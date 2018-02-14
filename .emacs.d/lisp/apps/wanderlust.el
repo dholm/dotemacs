@@ -62,9 +62,6 @@
 
 (defun user--wl-mail-setup-hook ()
   "Setup hook for new emails."
-  ;; Pick email account template when opening a draft.
-  (add-hook 'wl-mail-setup-hook 'wl-draft-config-exec)
-
   ;; Set format to flowed.
   (save-excursion
     (mail-text)
@@ -310,38 +307,36 @@ Gmail {
 
 (use-package wanderlust
   :commands wl
+  :hook ((wl-init-hook . user--wl-config-hook)
+         ;; Pick email account template when opening a draft.
+         (wl-mail-setup-hook . wl-draft-config-exec))
   :init
   ;; Create data and cache stores.
   (make-directory *user-wanderlust-data-directory* t)
   (set-file-modes *user-wanderlust-data-directory* #o0700)
   (make-directory *user-wanderlust-cache-directory* t)
   (set-file-modes *user-wanderlust-cache-directory* #o0700)
-  ;;; (Hooks) ;;;
-  (add-hook 'wl-init-hook 'user--wl-config-hook)
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :email 'wl)
 
   (use-package wl
     :ensure nil
     :defer
-    :init
-    ;; Support for writing flowed emails.
-    (add-hook 'wl-draft-mode-hook 'user--wl-draft-mode-hook)
+    :hook (wl-draft-mode-hook . user--wl-draft-mode-hook)
     :config
     (with-feature 'fullframe
       (fullframe wl wl-exit nil))
 
     (use-package wl-vars
       :ensure nil
-      :init
-      (add-hook 'wl-message-redisplay-hook 'user--wl-message-redisplay-hook)
-      (add-hook 'wl-message-buffer-created-hook
-                'user--wl-message-buffer-created-hook)
-      ;;; (Drafts) ;;;
-      (add-hook 'wl-mail-setup-hook 'user--wl-mail-setup-hook)
-      ;;; (Summary) ;;;
-      (add-hook 'wl-folder-mode-hook 'user--wl-folder-mode-hook)
-      (add-hook 'wl-summary-mode-hook 'user--wl-summary-mode-hook)
+      :hook ((wl-message-redisplay-hook . user--wl-message-redisplay-hook)
+             (wl-message-buffer-created-hook
+              . user--wl-message-buffer-created-hook)
+             ;;; (Drafts) ;;;
+             (wl-mail-setup-hook . user--wl-mail-setup-hook)
+             ;;; (Summary) ;;;
+             (wl-folder-mode-hook . user--wl-folder-mode-hook)
+             (wl-summary-mode-hook . user--wl-summary-mode-hook))
       :config
       (validate-setq
        ;;; (Basic Configuration) ;;;
@@ -441,9 +436,8 @@ Gmail {
         (user/wanderlust-set-summary-guides))
 
       (use-package semi
-        :init
-        (add-hook 'mime-view-mode-hook 'user--mime-view-mode-hook)
-        (add-hook 'mime-edit-mode-hook 'user--mime-edit-mode-hook)
+        :hook ((mime-view-mode-hook . user--mime-view-mode-hook)
+               (mime-edit-mode-hook . user--mime-edit-mode-hook))
         :config
         (validate-setq
          ;; Don't split large mails.
@@ -480,9 +474,7 @@ Gmail {
 
       (use-package mime-view
         :ensure nil
-        :init
-        ;; Support for reading flowed emails.
-        (add-hook 'mime-display-text/plain-hook 'user--mime-display-text/plain-hook))
+        :hook (mime-display-text/plain-hook . user--mime-display-text/plain-hook))
 
       (use-package elmo
         :ensure nil

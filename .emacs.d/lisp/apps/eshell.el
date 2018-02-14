@@ -77,8 +77,8 @@
 (use-package eshell
   :commands user/raise-eshell
   :defer
+  :hook (eshell-mode-hook . user--eshell-mode-hook)
   :init
-  (add-hook 'eshell-mode-hook 'user--eshell-mode-hook)
   (user/bind-key-global :apps :shell 'user/raise-eshell)
   :config
   (validate-setq
@@ -144,25 +144,20 @@
   (use-package company-eshell-autosuggest)
 
   (use-package esh-autosuggest
-    :hook (eshell-mode . esh-autosuggest-mode)))
+    :hook (eshell-mode-hook . esh-autosuggest-mode)))
 
 (use-package helm-shell
   :ensure helm
   :defer
-  :init
-  ;; Shell history
-  (add-hook 'eshell-mode-hook
-            (lambda ()
+  :hook ((eshell-mode-hook
+          . (lambda ()
               (bind-key "C-c C-l"
                         #'helm-eshell-history
                         eshell-mode-map)))
-
-  ;; Completion with helm
-  (add-hook 'eshell-mode-hook
-            (lambda ()
+         (eshell-mode-hook
+          . (lambda ()
               (bind-key [remap eshell-pcomplete]
-                        'helm-esh-pcomplete eshell-mode-map)))
-
+                        'helm-esh-pcomplete eshell-mode-map))))
   :config
   (bind-key "C-c C-l" #'helm-comint-input-ring shell-mode-map))
 

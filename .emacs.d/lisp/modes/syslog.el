@@ -18,7 +18,7 @@
   (add-hook 'syslog-mode-hook 'user--syslog-mode-hook)
   :config
   (use-package lognav-mode
-    :hook (syslog-mode . lognav-mode)))
+    :hook (syslog-mode-hook . lognav-mode)))
 
 
 (provide 'modes/syslog)

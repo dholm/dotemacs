@@ -108,7 +108,7 @@
       :diminish reftex-mode)
 
     (use-package latex-extra
-      :hook (LaTeX-mode . latex-extra-mode))
+      :hook (LaTeX-mode-hook . latex-extra-mode))
 
     (use-package latexdiff
       :if (executable-find "latexdiff"))

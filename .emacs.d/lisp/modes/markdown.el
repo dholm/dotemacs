@@ -29,7 +29,7 @@
 
   (use-package flycheck-mmark
     :if (executable-find "mmark")
-    :hook (flycheck-mode . flycheck-mmark-setup))
+    :hook (flycheck-mode-hook . flycheck-mmark-setup))
 
   (use-package livedown
     :if (executable-find "npm")

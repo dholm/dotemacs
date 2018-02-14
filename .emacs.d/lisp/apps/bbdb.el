@@ -35,10 +35,8 @@
 (use-package bbdb
   :commands bbdb-initialize
   :defer
-  :init
-  ;; Add notes when updating a record.
-  (add-hook 'bbdb-notice-mail-hook 'bbdb-auto-notes)
-  (add-hook 'bbdb-initialize-hook 'user--bbdb-configialize-hook)
+  :hook ((bbdb-notice-mail-hook . bbdb-auto-notes)
+         (bbdb-initialize-hook . user--bbdb-configialize-hook))
   :config
   (validate-setq
    ;; Set up location of database.

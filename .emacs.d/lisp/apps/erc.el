@@ -24,7 +24,7 @@
           (t 'erc-header-line-disconnected))))
 
 
-(defun user/erc-global-notify (&optional match-type nick message)
+(defun user--erc-global-notify (&optional match-type nick message)
   "Global notification on MATCH-TYPE when NICK sent a MESSAGE to user."
   (when (or (null match-type) (not (eq match-type 'fool)))
     (if (feature-p 'alert)
@@ -59,14 +59,9 @@
 
 (use-package erc
   :commands erc
+  :hook ((erc-connect-pre-hook . (lambda (x) (erc-update-modules)))
+         (erc-insert-modify-hook . user--erc-global-notify))
   :init
-  (add-hook 'erc-connect-pre-hook (lambda (x) (erc-update-modules)))
-
-  (when (feature-p 'bbdb2erc)
-    (add-hook 'bbdb-notice-hook 'bbdb2erc-online-status))
-  ;; Notification on important events.
-  (add-hook 'erc-insert-modify-hook 'user/erc-global-notify)
-
   ;;; (Bindings) ;;;
   (user/bind-key-global :apps :irc 'erc)
   :config
@@ -161,9 +156,7 @@
 
   (use-package erc-match
     :ensure nil
-    :init
-    ;; Notify when nick has been matched.
-    (add-hook 'erc-text-matched-hook 'user/erc-global-notify)
+    :hook (erc-text-matched-hook . user--erc-global-notify)
     :config
     (validate-setq
      ;; Highlight user mentioning us or a keyword.
@@ -279,7 +272,8 @@
      'scrolltoplace))
 
   (when (feature-p 'bbdb)
-    (use-package bbdb2erc))
+    (use-package bbdb2erc
+      :hook (bbdb-notice-hook . bbdb2erc-online-status)))
 
   (with-executable 'bitlbee
     (with-eval-after-load 'prodigy
