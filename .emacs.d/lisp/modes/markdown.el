@@ -32,7 +32,7 @@
     :hook (flycheck-mode-hook . flycheck-mmark-setup))
 
   (use-package livedown
-    :if (executable-find "npm")
+    :if (executable-find "livedown")
     :quelpa (livedown
              :fetcher github
              :repo "shime/emacs-livedown")
