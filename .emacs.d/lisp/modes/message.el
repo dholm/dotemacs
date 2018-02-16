@@ -79,7 +79,9 @@
      ;; Don't modify quoted mail.
      org-mime-beautify-quoted-mail nil
      ;; Be nice to PGP signatures.
-     org-mime-find-html-start #'user--org-mime-skip-pgp)))
+     org-mime-find-html-start #'identity)
+
+    (use-package htmlize)))
 
 
 (provide 'modes/message)
