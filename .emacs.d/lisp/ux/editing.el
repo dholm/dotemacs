@@ -66,8 +66,14 @@ mode that sets `syntax-ppss' properly."
        ;; Use right option key for writing special characters.
        mac-right-option-modifier nil)))
 
+  (use-package unicode-fonts
+    :if (eq default-terminal-coding-system 'utf-8)
+    :config
+    (unicode-fonts-setup))
+
   (when (feature-p 'helm)
     (use-package helm-unicode
+      :if (eq default-terminal-coding-system 'utf-8)
       :bind ("C-c h 8" . helm-unicode)))
 
   (use-package selected
