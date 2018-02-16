@@ -214,27 +214,28 @@
            ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
            ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
 
-  (add-many-to-list 'org-modules
-                    ;; File attachment manager.
-                    'org-attach
-                    ;; Link to BibTeX entries.
-                    'org-bibtex
-                    ;; Link to tags.
-                    'org-ctags
-                    ;; Link to articles and messages in Gnus.
-                    'org-gnus
-                    ;; Habit tracking.
-                    'org-habit
-                    ;; Support links to info pages.
-                    'org-info
-                    ;; Support links to man pages.
-                    'org-man
-                    ;; Export org buffer to MIME email message.
-                    'org-mime
-                    ;; Allow external applications to talk to org.
-                    'org-protocol
-                    ;; Embed source code in org-mode.
-                    'org-src)
+  (add-many-to-list
+   'org-modules
+   ;; File attachment manager.
+   'org-attach
+   ;; Link to BibTeX entries.
+   'org-bibtex
+   ;; Link to tags.
+   'org-ctags
+   ;; Link to articles and messages in Gnus.
+   'org-gnus
+   ;; Habit tracking.
+   'org-habit
+   ;; Support links to info pages.
+   'org-info
+   ;; Support links to man pages.
+   'org-man
+   ;; Export org buffer to MIME email message.
+   'org-mime
+   ;; Allow external applications to talk to org.
+   'org-protocol
+   ;; Embed source code in org-mode.
+   'org-src)
 
   (when (feature-p 'bbdb)
     (add-to-list 'org-modules 'org-bbdb))

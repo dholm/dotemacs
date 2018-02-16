@@ -21,24 +21,36 @@
   ;; Ensure C-x # is used to save and close message.
   (local-set-key (kbd "C-x #") 'user/server-save))
 
-(defun user--message-send-hook ()
-  "Hook run when sending a message."
-  ;; Normalize all footnotes in message.
-  (org-footnote-normalize))
+(defun user--org-mime-html-hook ()
+  "Hook for tweaking the HTML output from org-mime."
+  ;; Set a dark background for code blocks.
+  (org-mime-change-element-style
+   "pre" (format "color: %s; background-color: %s; padding: 0.5em;"
+                 "#E6E1DC" "#232323"))
+
+  ;; Offset block quotes.
+  (org-mime-change-element-style
+   "blockquote" "border-left: 2px solid gray; padding-left: 4px;"))
 
 (defun user--message-setup-hook ()
   "Outgoing message setup hook."
   ;; Load Emacs directory client.
   (eudc-load-eudc))
 
+(defun user--org-mime-skip-pgp (start)
+  "Keep PGP signature outside multipart from START."
+  (save-excursion
+    (goto-char start)
+    (search-forward "<#secure method=pgpmime mode=sign>")
+    (+ (point) 1)))
+
 (use-package message
   :ensure nil
   :defer
   :mode ("\.eml$" . message-mode)
-  :init
-  (add-hook 'message-mode-hook 'user--message-mode-hook)
-  (add-hook 'message-setup-hook 'user--message-setup-hook)
-  (add-hook 'message-send-hook 'user--message-send-hook)
+  :hook
+  ((message-mode-hook . user--message-mode-hook)
+   (message-setup-hook . user--message-setup-hook))
   :config
   (validate-setq
    ;; Kill buffer after message is sent.
@@ -49,7 +61,25 @@
    ;; Ask for confirmation before sending.
    message-confirm-send t
    ;; Generate headers before editing message.
-   message-generate-headers-first t))
+   message-generate-headers-first t)
+
+  (use-package org-mime
+    :pin "MELPA"
+    :hook (org-mime-html-hook . user--org-mime-html-hook)
+    :bind-wrap
+    (:map message-mode-map
+          ((:key :code :compile) . org-mime-htmlize))
+    :config
+    (validate-setq
+     ;; Don't include a table of contents.
+     org-mime-export-options
+     '(:section-numbers nil
+                        :with-author nil
+                        :with-toc nil)
+     ;; Don't modify quoted mail.
+     org-mime-beautify-quoted-mail nil
+     ;; Be nice to PGP signatures.
+     org-mime-find-html-start #'user--org-mime-skip-pgp)))
 
 
 (provide 'modes/message)
