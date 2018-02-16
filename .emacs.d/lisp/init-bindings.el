@@ -208,6 +208,7 @@
                 (:redraw . "C-l C-l")
                 (:recenter . "C-l l")
                 (:fullscreen . "C-c <C-return>")
+                (:text-scale-reset . "C-0")
                 (:text-scale-increase . "C-+")
                 (:text-scale-decrease . "C--")
 

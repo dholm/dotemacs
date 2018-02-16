@@ -2,13 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package faces
-  :ensure nil
-  :defer
-  :init
-  (user/bind-key-global :emacs :describe-face 'describe-face)
-  (user/bind-key-global :emacs :describe-all-faces 'list-faces-display))
-
 (use-package help-mode
   :ensure nil
   :defer

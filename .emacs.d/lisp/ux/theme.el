@@ -13,35 +13,40 @@
 
   (load-theme 'solarized t))
 
+(use-package custom
+  :ensure nil
+  :config
+  (require-package
+   '(:name solarized-theme
+           :type github
+           :pkgname "dholm/solarized-theme"
+           :prepare (add-to-list 'custom-theme-load-path default-directory)
+           :after (user--solarized-config))))
 
-(defun user--theme-config ()
-  "Initialize Emacs theme."
+(use-package faces
+  :ensure nil
+  :defer
+  :bind-wrap
+  (((:key :emacs :describe-face) . describe-face)
+   ((:key :emacs :describe-all-faces) . list-faces-display))
+  :config
   (when (display-graphic-p)
     (cond
-         ((eq system-type 'darwin)
-          (set-face-attribute 'default nil :family "Menlo" :height 110 :weight 'normal))
-         ((eq system-type 'windows-nt)
-          (set-face-attribute 'default nil :family "Consolas" :height 100 :weight 'normal))
-         ((eq system-type 'gnu/linux)
-          (set-face-attribute 'default nil :foundry "bitstream" :family "Meslo LG S DZ"
-                              :height 74 :weight 'normal))))
+     ((eq system-type 'darwin)
+      (set-face-attribute 'default nil :family "Menlo" :height 110 :weight 'normal))
+     ((eq system-type 'windows-nt)
+      (set-face-attribute 'default nil :family "Consolas" :height 100 :weight 'normal))
+     ((eq system-type 'gnu/linux)
+      (set-face-attribute 'default nil :foundry "bitstream" :family "Meslo LG S DZ"
+                          :height 74 :weight 'normal)))))
 
-  ;; Enable blinking cursor
-  (blink-cursor-mode)
-
-  ;;; (Bindings) ;;;
-  (when (display-graphic-p)
-    (user/bind-key-global :emacs :text-scale-increase 'text-scale-increase)
-    (user/bind-key-global :emacs :text-scale-decrease 'text-scale-decrease))
-
-  ;;; (Packages) ;;;
-  (require-package '(:name solarized-theme
-                           :type github
-                           :pkgname "dholm/solarized-theme"
-                           :prepare (add-to-list 'custom-theme-load-path default-directory)
-                           :after (user--solarized-config))))
-
-(user--theme-config)
+(use-package face-remap
+  :ensure nil
+  :bind-wrap
+  (((:key :emacs :text-scale-reset) . (lambda () (interactive)
+                                        (text-scale-set 0)))
+   ((:key :emacs :text-scale-increase) . text-scale-increase)
+   ((:key :emacs :text-scale-decrease)  . text-scale-decrease)))
 
 
 (provide 'ux/theme)

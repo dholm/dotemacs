@@ -78,7 +78,13 @@
      zoom-ignore-predicates
      '((lambda () (> (count-lines (point-min) (point-max)) 20))))
 
-    (zoom-mode t)))
+    (zoom-mode t))
+
+  (use-package frame
+    :ensure nil
+    :config
+    ;; Enable blinking cursor
+    (blink-cursor-mode)))
 
 
 (provide 'ux/frames)
