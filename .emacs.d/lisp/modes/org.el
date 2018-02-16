@@ -189,7 +189,13 @@
   (when (eq default-terminal-coding-system 'utf-8)
     (validate-setq
      ;; Prettify content using UTF-8.
-     org-pretty-entities t))
+     org-pretty-entities t)
+
+    (use-package org-bullets
+      :hook (org-mode-hook . org-bullets-mode)
+      :config
+      (validate-setq
+       org-bullets-bullet-list '("◉" "○" "✸" "✿" "☼" "⚬"))))
 
   ;; Incompatible with validate-setq.
   (setq
