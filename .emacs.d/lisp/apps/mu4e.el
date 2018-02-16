@@ -67,13 +67,14 @@
        ;; Shorter prefixes.
        mu4e-headers-from-or-to-prefix '("" . "➜ ")
        ;; Representations of marks.
-       mu4e-headers-attach-mark    '("a" . "📎")
+       mu4e-headers-attach-mark    '("a" . "✇")
        mu4e-headers-new-mark       '("N" . "★")
-       mu4e-headers-draft-mark     '("D" . "📝")
+       mu4e-headers-draft-mark     '("D" . "✍")
        mu4e-headers-encrypted-mark '("x" . "⚷")
        mu4e-headers-flagged-mark   '("F" . "⚑")
-       mu4e-headers-trashed-mark   '("T" . "🗑")
-       mu4e-headers-unread-mark    '("u" . "🖂")
+       mu4e-headers-trashed-mark   '("T" . "♻")
+       mu4e-headers-seen-mark      '("S" . "☑")
+       mu4e-headers-unread-mark    '("u" . "☐")
        ;; Thread prefix marks.
        mu4e-headers-empty-parent-prefix '("-" . "──▶")
        mu4e-headers-default-prefix      '("|" . "   ")
