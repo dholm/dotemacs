@@ -22,23 +22,21 @@
      mu4e-attachment-dir (path-join *user-home-directory* "Downloads")
      mu4e-completing-read-function 'helm--completing-read-default
      ;; Automatically retrieve public keys.
-     mu4e-auto-retrieve-keys t)
-
-    ;; Bookmarks
-    (add-to-list 'mu4e-bookmarks
-                 '("flag:flagged" "Flagged" ?f))
-    (add-to-list 'mu4e-bookmarks
-                 '("date:1h..now" "Last hour" ?h))
-    (add-to-list 'mu4e-bookmarks
-                 '("flag:unread AND NOT flag:trashed AND NOT list:*"
-                   "Unread messages, no lists" ?U))
-    (add-to-list 'mu4e-bookmarks
-                 '("flag:attach" "With attachments" ?a) t)
-    (add-to-list 'mu4e-bookmarks
-                 '("mime:application/pdf" "With documents" ?d) t)
-    (add-to-list 'mu4e-bookmarks
-                 '("flag:unread AND NOT flag:trashed AND list:*"
-                   "Unread lists" ?l))
+     mu4e-auto-retrieve-keys t
+     ;; Open first context by default.
+     mu4e-context-policy 'pick-first
+     ;; Bookmarks.
+     mu4e-bookmarks
+     '(("flag:unread AND NOT flag:trashed AND NOT flag:list" "Unread messages, no lists" ?U)
+       ("flag:unread AND NOT flag:trashed"                   "Unread messages"           ?u)
+       ("flag:flagged"                                       "Flagged"                   ?f)
+       ("flag:unread AND NOT flag:trashed AND flag:list"     "Unread lists"              ?l)
+       ("date:1h..now AND NOT flag:list"                     "Last hour"                 ?h)
+       ("date:today..now AND NOT flag:list"                  "Today's messages"          ?t)
+       ("date:7d..now AND NOT flag:list"                     "Last 7 days"               ?w)
+       ("mime:image/*"                                       "Messages with images"      ?p)
+       ("flag:attach"                                        "With attachments"          ?a)
+       ("mime:application/pdf"                               "With documents"            ?d)))
 
     (when (eq default-terminal-coding-system 'utf-8)
       (validate-setq
