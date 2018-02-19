@@ -127,6 +127,14 @@
      ;; Don't include signature by default.
      mu4e-compose-signature-auto-include nil))
 
+  (use-package mu4e-compose
+    :ensure nil
+    :hook (mu4e-compose-pre-hook . user--message-setup-hook)
+    :config
+    (validate-setq
+     ;; Composed format=flowed by default.
+     mu4e-compose-format-flowed t))
+
   (use-package mu4e-contrib
     :ensure nil)
 
