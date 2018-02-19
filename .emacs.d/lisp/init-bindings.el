@@ -138,6 +138,7 @@
                 (:save-as . "C-x M-s")
                 (:close . "C-x k")
                 (:quit . "C-x C-c")
+                (:server-edit . "C-x #")
 
                 (:undo . "C-_")
                 (:redo . "M-_")

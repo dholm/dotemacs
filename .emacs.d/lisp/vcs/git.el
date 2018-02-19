@@ -8,8 +8,6 @@
   (user--vc-log-edit-hook)
 
   ;;; (Bindings) ;;;
-  ;; Override C-x # for Git.
-  (local-set-key (kbd "C-x #") 'git-commit-commit)
   ;; Ensure C-c C-c and C-c C-k are bound to git and not org.
   (local-set-key (kbd "C-c C-c") 'git-commit-commit)
   (local-set-key (kbd "C-c C-k") 'git-commit-abort))
@@ -35,8 +33,10 @@
 
   (use-package git-commit
     :ensure nil
-    :init
-    (add-hook 'git-commit-mode-hook 'user--git-commit-mode-hook))
+    :hook (git-commit-mode-hook . user--git-commit-mode-hook)
+    :bind-wrap
+    (:map git-commit-mode-map
+          ((:key :basic :server-edit) . git-commit-commit)))
 
   ;;; (Packages) ;;;
   (use-package magit

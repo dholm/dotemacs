@@ -6,7 +6,7 @@
   "Message mode hook."
   (user--mail-mode-hook)
 
-  (setq
+  (validate-setq
    ;; Select abbrev table for message mode.
    local-abbrev-table message-mode-abbrev-table)
 
@@ -15,11 +15,7 @@
 
   (when (feature-p 'google-contacts)
     ;; Google Contacts for message mode.
-    (require 'google-contacts-message))
-
-  ;;; (Bindings) ;;;
-  ;; Ensure C-x # is used to save and close message.
-  (local-set-key (kbd "C-x #") 'user/server-save))
+    (require 'google-contacts-message)))
 
 (defun user--org-mime-html-hook ()
   "Hook for tweaking the HTML output from org-mime."
@@ -51,6 +47,10 @@
   :hook
   ((message-mode-hook . user--message-mode-hook)
    (message-setup-hook . user--message-setup-hook))
+  :bind-wrap
+  (:map message-mode-map
+        ((:key :code :try-complete) . user/eudc-expand-inline)
+        ((:key :basic :server-edit) . user/server-save))
   :config
   (validate-setq
    ;; Kill buffer after message is sent.
