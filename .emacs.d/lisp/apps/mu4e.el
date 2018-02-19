@@ -53,9 +53,11 @@
      mu4e-headers-include-related t
      ;; Hide duplicates in search.
      mu4e-headers-skip-duplicates t
+     ;; ISO-ish dates.
+     mu4e-headers-date-format "%Y-%m-%d %H:%M"
      ;; Fields in header.
      mu4e-headers-fields
-     '((:human-date . 10)
+     '((:human-date . 16)
        (:flags . 5)
        (:mailing-list . 15)
        (:size . 6)
