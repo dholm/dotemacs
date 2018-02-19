@@ -219,10 +219,6 @@
     (validate-setq
      message-directory (path-join *user-gnus-data-directory* "mail")))
 
-  (with-eval-after-load 'smtpmail
-    (validate-setq
-     smtpmail-queue-dir (path-join *user-gnus-data-directory* "mail" "queued-mail")))
-
   (validate-setq
    ;; Archive using nnfolder.
    gnus-message-archive-method
