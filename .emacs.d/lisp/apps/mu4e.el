@@ -156,7 +156,16 @@
      "flag:unread AND NOT flag:list")
 
     ;; Enable alerts.
-    (mu4e-alert-enable-notifications)))
+    (mu4e-alert-enable-notifications))
+
+  (use-package helm-mu
+    :bind
+    (:map mu4e-headers-mode-map
+          ("s" . helm-mu)
+          :map mu4e-main-mode-map
+          ("s" . helm-mu)
+          :map mu4e-view-mode-map
+          ("s" . helm-mu))))
 
 
 (provide 'apps/mu4e)
