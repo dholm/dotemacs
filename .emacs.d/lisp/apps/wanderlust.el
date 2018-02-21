@@ -483,8 +483,9 @@ Gmail {
          ;; Maximum size of message to fetch without confirmation.
          elmo-message-fetch-threshold (* 512 1024))
 
-        (unless (executable-find "namazu")
-          (message "Namazu not found, mail will not be indexed.")))
+        (unless (or (executable-find "namazu")
+                    (executable-find "mu"))
+          (message "Namazu or mu not found, mail will not be indexed.")))
 
       (use-package elmo-vars
         :ensure nil
@@ -505,7 +506,21 @@ Gmail {
         :ensure nil
         :config
         (validate-setq
-         elmo-search-namazu-default-index-path *user-wanderlust-data-directory*))
+         elmo-search-namazu-default-index-path
+         *user-wanderlust-data-directory*)
+
+        (when (executable-find "mu")
+          (validate-setq
+           ;; Use mu instead of namazu, when available.
+           elmo-search-default-engine 'mu
+           ;; Default folder name prefix.
+           wl-default-spec "[")
+
+          (elmo-search-register-engine
+           'mu 'local-file
+           :prog "mu"
+           :args '("find" pattern "--format" "plain" "--fields" "location")
+           :charset 'utf-8)))
 
       (use-package elmo-localdir
         :ensure nil
