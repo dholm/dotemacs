@@ -73,7 +73,9 @@
                (not rtags-last-request-not-indexed)
                (rtags-find-symbol-at-point))
     (user/eval-until-move
-     '(((eq major-mode 'emacs-lisp-mode)
+     '(((bound-and-true-p elisp-def-mode)
+        (call-interactively 'elisp-def))
+       ((eq major-mode 'emacs-lisp-mode)
         (call-interactively 'elisp-slime-nav-find-elisp-thing-at-point))
 
        ((eq major-mode 'go-mode)
@@ -221,6 +223,10 @@
     ;; This function is causing tramp to lock up waiting for a
     ;; prompt so disable it for now.
     (defun rtags-update-current-project ())))
+
+(use-package elisp-def
+  :hook ((emacs-lisp-mode-hook . elisp-def-mode)
+         (ielm-mode-hook . elisp-def-mode)))
 
 (when (feature-p 'helm)
   (use-package helm-etags-plus
