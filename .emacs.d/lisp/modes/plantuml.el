@@ -7,25 +7,25 @@
   "Path to user's PlantUML jar file.")
 
 
-(defun user--plantuml-mode-hook ()
-  "PlantUML mode hook."
-  ;;; (Bindings) ;;;
-  (user/bind-key-local :code :auto-complete 'puml-complete-symbol)
-  (user/bind-key-local :code :compile 'puml-preview))
-
-
 (use-package plantuml-mode
   :defer
   :mode (("\\.puml$" . plantuml-mode))
+  :bind-wrap
+  (:map plantuml-mode-map
+        ((:key :code :complete) . plantuml-complete-symbol)
+        ((:key :code :compile) . plantuml-preview))
   :init
-  (add-hook 'plantuml-mode-hook 'user--plantuml-mode-hook)
-
-  (let ((plantuml-url "http://sourceforge.net/projects/plantuml/files/plantuml.jar/download"))
+  (let ((plantuml-url "https://sourceforge.net/projects/plantuml/files/latest/download?source=files"))
     (when (not (file-exists-p *user-plantuml-jar-path*))
       (url-copy-file plantuml-url *user-plantuml-jar-path*)))
   :config
   (validate-setq
-   plantuml-jar-path *user-plantuml-jar-path*))
+   plantuml-jar-path *user-plantuml-jar-path*)
+
+  (with-eval-after-load 'org-src
+    (add-to-list
+     ;; Enable PlantUML editing in org-mode code blocks.
+     'org-src-lang-modes '("plantuml" . plantuml))))
 
 
 (provide 'modes/plantuml)
