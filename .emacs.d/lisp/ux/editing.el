@@ -69,6 +69,7 @@ mode that sets `syntax-ppss' properly."
   (use-package unicode-fonts
     :if (eq default-terminal-coding-system 'utf-8)
     :config
+    (require 'persistent-soft)
     (unicode-fonts-setup))
 
   (when (feature-p 'helm)
