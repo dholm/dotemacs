@@ -473,7 +473,10 @@
 
   (use-package helm-org-rifle)
   (use-package org-noter)
-  (use-package anki-editor))
+  (use-package anki-editor)
+  (use-package org-attach-screenshot)
+  (use-package org-fancy-priorities
+    :hook (org-mode-hook . org-fancy-priorities-mode)))
 
 (use-package org-agenda
   :ensure org-plus-contrib
