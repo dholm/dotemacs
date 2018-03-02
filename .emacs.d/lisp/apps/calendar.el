@@ -220,7 +220,9 @@
    cfw:fchar-right-junction ?┫
    cfw:fchar-top-junction ?┯
    cfw:fchar-top-left-corner ?┏
-   cfw:fchar-top-right-corner ?┓))
+   cfw:fchar-top-right-corner ?┓)
+
+  (use-package calfw-org))
 
 (use-package excorporate
   :defer)
