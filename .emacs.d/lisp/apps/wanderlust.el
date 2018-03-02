@@ -77,7 +77,7 @@
     (bbdb-initialize))
 
   (when (feature-p 'org-mode)
-    (with-feature 'org-mime
+    (with-eval-after-load 'org-mime
       (validate-setq
        org-mime-library 'semi)))
 
