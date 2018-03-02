@@ -393,6 +393,7 @@
 
                (:shell . (user/apps-prefix "s"))
                (:processes . (user/apps-prefix "p"))
+               (:daemons . (user/apps-prefix "M-d"))
                (:services . (user/apps-prefix "P"))
 
                (:agenda . (user/apps-prefix "a"))
