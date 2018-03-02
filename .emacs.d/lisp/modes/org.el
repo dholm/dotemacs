@@ -451,9 +451,24 @@
     ;; GitHub module.
     (load "org-sync-github"))
 
-  (use-package org-web-tools)
   (use-package org-caldav
-    :defer)
+    :config
+    (validate-setq
+     ;; Path to state synchronization file.
+     org-caldav-save-directory (path-join *user-org-cache-directory* "org-caldav")
+     ;; Path to inbox file.
+     org-caldav-inbox (path-join *user-org-data-directory* "org-caldav-inbox.org")
+     ;; Path to backup file.
+     org-caldav-backup-file (path-join *user-org-data-directory* "org-caldav-backup.org")
+     ;; Link to org agenda.
+     org-caldav-files org-agenda-files
+     ;; Ask before deleting entries on server.
+     org-caldav-delete-calendar-entries 'ask)
+
+    ;; Ensure that state synchronization directory exists.
+    (make-directory org-caldav-save-directory t))
+
+  (use-package org-web-tools)
   (use-package orgnav)
   (use-package org-present
     :config
