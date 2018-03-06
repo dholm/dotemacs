@@ -2,10 +2,17 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user--paradox-menu-visit-homepage (pkg)
+  "Visit the homepage of package named PKG using external browser."
+  (interactive '(nil))
+  (let ((browse-url-browser-function 'browse-url-default-browser))
+    (paradox-menu-visit-homepage pkg)))
+
 (use-package paradox
   :defer
-  :init
-  (user/bind-key-global :apps :packages 'paradox-list-packages)
+  :bind-wrap
+  (((:key :apps :packages) . paradox-list-packages)
+   ("V" . user--paradox-menu-visit-homepage))
   :config
   (validate-setq
    ;; Nice spinner.
