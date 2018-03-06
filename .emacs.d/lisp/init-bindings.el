@@ -175,6 +175,7 @@
                 (:copy-expr . "C-M-w")
                 (:cut-expr . "C-M-k")
                 (:paste . "C-y")
+                (:alternate-paste . "C-M-y")
                 (:cycle-paste . "M-y")
                 (:cut-word-left . "C-w")
                 (:cut-word-right . "M-w")

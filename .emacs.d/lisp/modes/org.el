@@ -419,6 +419,11 @@
   (define-key org-mode-map (kbd "C-c C-o") #'user/org-open-at-point)
 
   ;;; (Packages) ;;;
+  (use-package org-rich-yank
+    :bind-wrap
+    (:map org-mode-map
+     ((:key :basic :alternate-paste) . org-rich-yank)))
+
   (use-package org-clock
     :ensure nil
     :config
