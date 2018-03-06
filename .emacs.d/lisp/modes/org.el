@@ -294,7 +294,16 @@
        'org-capture-templates
        '("b" "book memo" entry
          (file (concat org-directory "book.org"))
-         "* %(helm-books)"))))
+         "* %(helm-books)")))
+
+    (use-package org-chef
+      :config
+      (add-to-list
+       'org-capture-templates
+       `(("c" "Cookbook" entry
+          (file ,(path-join *user-org-data-directory* "cookbook.org"))
+          "%(org-chef-get-recipe-from-url)"
+          :empty-lines 1)))))
 
   (use-package ob-core
     :ensure nil
