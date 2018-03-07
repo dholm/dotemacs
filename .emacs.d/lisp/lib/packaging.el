@@ -74,6 +74,7 @@
       (while arg
         (let ((x (car arg)))
           (cond
+           ;; ((:key :category :function) . COMMAND)
            ((and (consp x)
                  (consp (car x))
                  (equal (caar x) :key))
@@ -81,12 +82,14 @@
                                (list (cons (apply 'user/get-key (cdar x))
                                      (cdar arg)))))
             (setq arg (cdr arg)))
+           ;; (KEY . COMMAND)
            ((and (consp x)
                  (or (stringp (car x))
                      (vectorp (car x)))
                  (or (use-package-recognize-function (cdr x) t #'stringp)))
             (setq args* (nconc args* (list x)))
             (setq arg (cdr arg)))
+           ;; Nested list.
            ((listp x)
             (setq args*
                   (nconc args* (use-package-normalize/:bind-wrap name keyword x)))

@@ -12,6 +12,7 @@
   :defer
   :bind-wrap
   (((:key :apps :packages) . paradox-list-packages)
+   :map paradox-menu-mode-map
    ("V" . user--paradox-menu-visit-homepage))
   :config
   (validate-setq
