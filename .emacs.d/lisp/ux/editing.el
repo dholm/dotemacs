@@ -68,6 +68,8 @@ mode that sets `syntax-ppss' properly."
 
   (use-package unicode-fonts
     :if (eq default-terminal-coding-system 'utf-8)
+    ;; Ensure `pcache-directory' has been set first.
+    :after ux/cache
     :config
     (require 'persistent-soft)
     (unicode-fonts-setup))
