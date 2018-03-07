@@ -756,7 +756,9 @@
   (use-package org-alert
     :after alert
     :config
-    (org-alert-enable)))
+    (org-alert-enable))
+
+  (use-package org-agenda-property))
 
 (use-package org-annotate-file
   :ensure org-plus-contrib
