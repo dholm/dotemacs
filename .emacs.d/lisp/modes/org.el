@@ -352,7 +352,24 @@
       :config
       (add-to-list
        ;; Execute org-babel asynchronously.
-       'org-ctrl-c-ctrl-c-hook 'ob-async-org-babel-execute-src-block)))
+       'org-ctrl-c-ctrl-c-hook 'ob-async-org-babel-execute-src-block))
+
+    (use-package ob-go
+      :if (executable-find "go")
+      :init (add-to-list 'org-babel-load-languages '(go . t)))
+
+    (use-package ob-http
+      :init (add-to-list 'org-babel-load-languages '(http . t)))
+
+    (use-package ob-rust
+      :if (executable-find "rustc")
+      :init (add-to-list 'org-babel-load-languages '(rust . t)))
+
+    (use-package ob-translate
+      :init (add-to-list 'org-babel-load-languages '(translate . t)))
+
+    (use-package ob-uart
+      :init (add-to-list 'org-babel-load-languages '(uart . t))))
 
   (use-package ox
     :ensure nil
