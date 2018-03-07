@@ -3,7 +3,7 @@
 ;;; Code:
 
 (defconst *user-org-data-directory*
-  (path-join *user-documents-directory* "Org")
+  (path-join *user-data-directory* "org")
   "Path to user's org data store.")
 
 (defconst *user-org-cache-directory*
