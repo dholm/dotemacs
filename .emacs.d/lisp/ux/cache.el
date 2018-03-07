@@ -3,8 +3,8 @@
 ;;; Code:
 
 (use-package pcache
-  :config
-  (validate-setq
+  :init
+  (setq-default
    pcache-directory (path-join *user-cache-directory* "pcache")))
 
 
