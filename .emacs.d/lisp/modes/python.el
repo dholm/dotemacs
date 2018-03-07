@@ -85,7 +85,7 @@
             (ansi-term "bpython" "bpython"))
         (switch-to-buffer "*bpython*"))))
 
-    ;;; (Packages) ;;;
+  ;;; (Packages) ;;;
   (use-package anaconda-mode)
   (use-package py-autopep8)
   (use-package ropemacs
@@ -122,14 +122,17 @@
      ;; Use popup package.
      jedi:tooltip-method '(popup)))
 
+  (use-package pipenv
+    :if (executable-find "pipenv")
+    :hook (python-mode-hook . pipenv-mode))
+
   (use-package flycheck-pycheckers
     :after flycheck
     :config
     (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
 
-  (when (feature-p 'helm)
-    (use-package helm-pydoc
-      :pin "MELPA")))
+  (use-package helm-pydoc
+    :pin "MELPA"))
 
 
 (provide 'modes/python)
