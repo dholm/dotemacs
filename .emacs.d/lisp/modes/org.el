@@ -347,6 +347,7 @@
     (with-executable 'ruby
       (add-to-list 'org-babel-load-languages '(ruby . t)))
 
+    (use-package helm-lib-babel)
     (use-package ob-async
       :defer
       :config
