@@ -397,9 +397,15 @@
        'latex))
 
     (use-package ox-mediawiki
-      :defer)
+      :init (add-to-list 'org-export-backends 'mediawiki))
     (use-package ox-gfm
-      :defer))
+      :init (add-to-list 'org-export-backends 'gfm))
+    (use-package ox-jira
+      :init (add-to-list 'org-export-backends 'jira))
+    (use-package ox-pandoc
+      :if (executable-find "pandoc")
+      :pin "MELPA"
+      :init (add-to-list 'org-export-backends 'pandoc)))
 
   ;; Load org agenda.
   (add-to-list 'org-modules 'org-agenda)
