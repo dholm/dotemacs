@@ -282,6 +282,13 @@
                       "PROPERTIES:\n:STYLE: habit\n"
                       ":REPEAT_TO_STATE: NEXT\n:END:\n")))))
 
+    (use-package org-id
+      :ensure nil
+      :config
+      (validate-setq
+       org-id-locations-file
+       (path-join *user-org-data-directory* "org-id-locations")))
+
     (use-package helm-books
       :config
       (add-to-list
