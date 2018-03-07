@@ -529,16 +529,22 @@
   (use-package anki-editor)
   (use-package org-attach-screenshot)
   (use-package org-fancy-priorities
-    :hook (org-mode-hook . org-fancy-priorities-mode)))
+    :hook (org-mode-hook . org-fancy-priorities-mode))
+  (use-package org-autolist
+    :hook (org-mode-hook . org-autolist-mode))
+  (use-package org-download)
+  (use-package org-elisp-help)
+  ;; Enables `#+BEGIN_FSTREE: <dir>' for directory listings.
+  (use-package org-fstree)
+  (use-package org-vcard))
 
 (use-package org-agenda
   :ensure org-plus-contrib
   :defer
-  :init
-  (add-hook 'org-agenda-finalize-hook 'user--org-agenda-finalize-hook)
-
-  (user/bind-key-global :apps :agenda 'org-agenda)
-  (user/bind-key-global :apps :todo 'org-todo-list)
+  :hook (org-agenda-finalize-hook . user--org-agenda-finalize-hook)
+  :bind-wrap
+  (((:key :apps :agenda) . org-agenda)
+   ((:key :apps :todo) . org-todo-list))
   :config
   (let ((agenda-data-store (path-join *user-org-data-directory* "agendas")))
     (validate-setq
