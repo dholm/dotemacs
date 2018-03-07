@@ -76,7 +76,8 @@
 
       (magithub-feature-autoinject t))
     (use-package magit-imerge
-      :if (executable-find "git-imerge")))
+      :if (executable-find "git-imerge"))
+    (use-package orgit))
 
   (use-package git-timemachine
     :defer)
