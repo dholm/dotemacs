@@ -537,7 +537,9 @@
   (use-package org-elisp-help)
   ;; Enables `#+BEGIN_FSTREE: <dir>' for directory listings.
   (use-package org-fstree)
-  (use-package org-vcard))
+  (use-package org-vcard)
+  ;; Enables `#+BEGIN: kanban' for producing a kanban table.
+  (use-package org-kanban))
 
 (use-package org-agenda
   :ensure org-plus-contrib
