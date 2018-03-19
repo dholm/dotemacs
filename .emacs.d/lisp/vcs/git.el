@@ -77,7 +77,10 @@
       (magithub-feature-autoinject t))
     (use-package magit-imerge
       :if (executable-find "git-imerge"))
-    (use-package orgit))
+    (use-package orgit)
+    (use-package magit-org-todos
+      :config
+      (magit-org-todos-autoinsert)))
 
   (use-package git-timemachine
     :defer)

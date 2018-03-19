@@ -301,10 +301,12 @@
       :config
       (add-to-list
        'org-capture-templates
-       `(("c" "Cookbook" entry
-          (file ,(path-join *user-org-data-directory* "cookbook.org"))
-          "%(org-chef-get-recipe-from-url)"
-          :empty-lines 1)))))
+       `("c" "Cookbook" entry
+         (file ,(path-join *user-org-data-directory* "cookbook.org"))
+         "%(org-chef-get-recipe-from-url)"
+         :empty-lines 1)))
+
+    (use-package org-repo-todo))
 
   (use-package ob-core
     :ensure nil
