@@ -49,7 +49,11 @@
     :quelpa (distel
              :fetcher github
              :repo "massemanet/distel"
-             :files ("elisp/*.el"))))
+             :files ("elisp/*.el")))
+  (use-package flycheck-dialyzer
+    :if (executable-find "dialyzer"))
+  (use-package flycheck-rebar3
+    :if (executable-find "rebar3")))
 
 
 (provide 'modes/erlang)
