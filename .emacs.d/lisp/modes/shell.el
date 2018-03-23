@@ -38,6 +38,9 @@
   :config
   ;;; (Packages) ;;;
   (use-package bash-completion)
+  (use-package company-shell
+    :config
+    (add-to-list 'company-backends '(company-shell company-shell-env)))
   (use-package shelldoc)
   (use-package shell-command)
   (use-package flycheck-checkbashisms
