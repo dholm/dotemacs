@@ -44,11 +44,11 @@
 
 
 (use-package flycheck
+  :hook
+  ((flycheck-mode-hook . user--flycheck-mode-hook)
+   (ede-minor-mode-hook . user/ede-flycheck-setup)
+   (ede-compdb-project-rescan-hook . user/ede-flycheck-setup))
   :init
-  (add-hook 'flycheck-mode-hook 'user--flycheck-mode-hook)
-  (add-hook 'ede-minor-mode-hook 'user/ede-flycheck-setup)
-  (add-hook 'ede-compdb-project-rescan-hook 'user/ede-flycheck-setup)
-
   (global-flycheck-mode t)
   :config
   (validate-setq
