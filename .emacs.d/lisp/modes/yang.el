@@ -10,10 +10,10 @@
 (use-package yang-mode
   :defer
   :mode "\.yang$"
-  :init
-  (add-hook 'yang-mode-hook 'user--yang-mode-hook)
+  :hook (yang-mode-hook . user--yang-mode-hook)
   :config
-  (use-package flycheck-yang))
+  (use-package flycheck-yang
+    :if (executable-find "pyang")))
 
 
 (provide 'modes/yang)
