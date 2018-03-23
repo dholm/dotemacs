@@ -233,6 +233,10 @@
     :diminish function-args-mode
     :config
     (fa-config-default))
+  (use-package flycheck-flawfinder
+    :if (executable-find "flawfinder")
+    :config
+    (flycheck-flawfinder-setup))
   (use-package google-c-style))
 
 
