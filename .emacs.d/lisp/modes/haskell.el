@@ -74,15 +74,19 @@
              :repo "chrisdone/structured-haskell-mode"
              :files ("elisp/*.el")))
   (use-package ghc-mod
+    :if (executable-find "ghc-mod")
     :quelpa (ghc-mod
              :fetcher github
              :repo "kazu-yamamoto/ghc-mod"
              :files ("elisp/*.el")))
   (use-package ac-ghc-mod
+    :if (executable-find "ghc-mod")
     :requires auto-complete
     :quelpa (ac-ghc-mod
              :fetcher github
              :repo "Pitometsu/ac-ghc-mod"))
+  (use-package flycheck-ghcmod
+    :if (executable-find "ghc-mod"))
   (use-package company-ghc))
 
 
