@@ -110,7 +110,10 @@
     :config
     (validate-setq
      helm-apropos-fuzzy-match t
-     helm-lisp-fuzzy-completion t)))
+     helm-lisp-fuzzy-completion t))
+  (use-package flycheck-package
+    :config
+    (flycheck-package-setup)))
 
 
 (provide 'modes/elisp)
