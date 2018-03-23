@@ -14,8 +14,11 @@
   :if (executable-find "cmake")
   :defer
   :mode "\(CMakeLists\.txt|\.cmake\)$"
-  :init
-  (add-hook 'cmake-mode-hook 'user--cmake-mode-hook))
+  :hook (cmake-mode-hook . user--cmake-mode-hook)
+  :config
+  (use-package company-cmake
+    :config
+    (add-to-list 'company-backends 'company-cmake)))
 
 
 (provide 'modes/cmake)
