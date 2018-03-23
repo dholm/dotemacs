@@ -25,7 +25,11 @@
   (with-eval-after-load 'org-src
     (add-to-list
      ;; Enable PlantUML editing in org-mode code blocks.
-     'org-src-lang-modes '("plantuml" . plantuml))))
+     'org-src-lang-modes '("plantuml" . plantuml)))
+
+  (use-package flycheck-plantuml
+    :config
+    (flycheck-plantuml-setup)))
 
 
 (provide 'modes/plantuml)
