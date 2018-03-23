@@ -130,6 +130,8 @@
     :after flycheck
     :config
     (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
+  (use-package flycheck-mypy
+    :if (executable-find "mypy"))
 
   (use-package helm-pydoc
     :pin "MELPA"))
