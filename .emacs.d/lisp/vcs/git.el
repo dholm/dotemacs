@@ -77,6 +77,9 @@
         (defalias 'ghub-request #'ghub--request))
 
       (magithub-feature-autoinject t))
+    (use-package magit-svn
+      :if (executable-find "svn")
+      :hook (magit-mode-hook . magit-svn-mode))
     (use-package magit-imerge
       :if (executable-find "git-imerge"))
     (use-package orgit)
