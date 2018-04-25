@@ -7,6 +7,9 @@
   ;; Format Go code before saving it.
   (add-hook 'before-save-hook #'gofmt-before-save nil t)
 
+  ;; Don't automatically break lines, gofmt will handle formatting.
+  (auto-fill-mode -1)
+
   ;; Camel-case separates words.
   (subword-mode t)
 
@@ -40,8 +43,7 @@
         ((:key :doc :reference) . godoc)
         ((:key :nav :follow-symbol) . godef-jump)
         ((:key :nav :switch-spec-impl) . go-goto-imports))
-  :init
-  (add-hook 'go-mode-hook 'user--go-mode-hook)
+  :hook (go-mode-hook . user--go-mode-hook)
   :config
   (validate-setq
    ;; Hide errors as they are managed by Flycheck.
