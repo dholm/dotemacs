@@ -93,7 +93,12 @@
     :if (executable-find "fillstruct"))
 
   (use-package go-imports
-    :if (executable-find "goimports")))
+    :if (executable-find "goimports")
+    :config
+    (validate-setq
+     ;; Use goimports as formatter so that imports are updated at the
+     ;; same time.
+     gofmt-command "goimports")))
 
 
 (provide 'modes/go)
