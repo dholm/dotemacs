@@ -31,6 +31,9 @@
     :if (executable-find "mmark")
     :hook (flycheck-mode-hook . flycheck-mmark-setup))
 
+  (use-package markdown-preview-eww)
+  (use-package markdown-preview-mode)
+
   (use-package livedown
     :if (executable-find "livedown")
     :quelpa (livedown
