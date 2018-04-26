@@ -28,6 +28,20 @@
     (validate-setq
      browse-url-browser-function (cdr (assq :browse-url browser)))
 
+    (use-package eww
+      :ensure nil
+      :config
+      (use-package helm-eww
+        :bind (:map eww-mode-map
+                    ([remap eww-list-histories] . helm-eww-history)
+                    ([remap eww-list-bookmarks] . helm-eww-bookmarks)
+                    ([remap eww-list-buffers] . helm-eww-buffers)))
+
+      (use-package eww-lnum
+        :bind (:map eww-mode-map
+                    ("f" . eww-lnum-follow)
+                    ("F" . eww-lnum-universal))))
+
     ;;; (Bindings) ;;;
     (user/bind-key-global :apps :browse (cdr (assq :launch browser)))
     (user/bind-key-global :apps :browse-external
