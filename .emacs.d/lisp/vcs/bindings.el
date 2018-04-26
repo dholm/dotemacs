@@ -16,6 +16,7 @@
                               (magit-run-git "add" (path-abs-buffer))))
              (:mergetool . magit-ediff)
              (:search . helm-git-grep)
+             (:find-file . magit-find-file-completing-read)
              (:time-machine . (lambda ()
                                 (when (feature-p 'git-timemachine)
                                   (call-interactively 'git-timemachine))))))
@@ -32,7 +33,7 @@
 
 (defun user/vcs-command-group (file-name)
   "Get the appropriate command group for FILE-NAME."
-  (let ((backend (vc-responsible-backend (path-abs-buffer))))
+  (let ((backend (vc-responsible-backend file-name)))
     (cond ((eq backend 'Git)
            (cdr (assq :Git user/vcs-command-alist)))
           ((eq backend 'CLEARCASE)
@@ -114,6 +115,12 @@
   (user/vcs-command :search))
 
 
+(defun user/vcs-find-file ()
+  "Run VCS find file on the current buffer."
+  (interactive)
+  (user/vcs-command :find-file))
+
+
 (defun user/vcs-time-machine ()
   "Run VCS time machine on the current buffer."
   (interactive)
@@ -139,6 +146,7 @@
   (user/bind-key-global :vcs :mergetool 'user/vcs-mergetool)
 
   (user/bind-key-global :vcs :search 'user/vcs-search)
+  (user/bind-key-global :vcs :find-file 'user/vcs-find-file)
   (user/bind-key-global :vcs :time-machine 'user/vcs-time-machine))
 
 (user--vcs-bindings-config)

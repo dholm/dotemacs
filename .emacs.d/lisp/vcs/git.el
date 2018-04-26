@@ -85,7 +85,8 @@
     (use-package orgit)
     (use-package magit-org-todos
       :config
-      (magit-org-todos-autoinsert)))
+      (magit-org-todos-autoinsert))
+    (use-package magit-find-file))
 
   (use-package git-timemachine
     :defer)

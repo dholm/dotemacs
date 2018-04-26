@@ -360,6 +360,7 @@
               (:mergetool . (user/vcs-prefix "m"))
 
               (:search . (user/vcs-prefix "M-s"))
+              (:find-file . ("C-c p"))
               (:time-machine . (user/vcs-prefix "t"))))
 
      ;;; (Utilities) ;;;
