@@ -38,6 +38,10 @@
       (define-key dired-mode-map [down-mouse-1] 'dired-efap-click)))
   (use-package all-the-icons-dired
     :if window-system)
+  (use-package dired-rsync
+    :if (executable-find "rsync")
+    :bind (:map dired-mode-map
+                ("C-c C-r" . dired-rsync)))
 
   ;;; (Bindings) ;;;
   ;; Do not open new buffers when going down or up a directory.
