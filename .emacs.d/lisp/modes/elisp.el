@@ -113,7 +113,9 @@
      helm-lisp-fuzzy-completion t))
   (use-package flycheck-package
     :config
-    (flycheck-package-setup)))
+    (flycheck-package-setup))
+  (use-package fontify-face
+    :hook (emacs-lisp-mode-hook . fontify-face-mode)))
 
 
 (provide 'modes/elisp)
