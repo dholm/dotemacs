@@ -68,6 +68,7 @@
     (use-package magit-gh-pulls
       :hook (magit-mode-hook . turn-on-magit-gh-pulls))
     (use-package magithub
+      :disabled
       :config
       (validate-setq
        magithub-dir (path-join *user-data-directory* "magithub"))
