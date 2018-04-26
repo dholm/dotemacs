@@ -5,8 +5,6 @@
 (require 'lib/net)
 
 
-(defvar el-get-sources nil
-  "List of package definitions for el-get.")
 (defvar el-get-safe-mode nil
   "Start el-get in safe mode.")
 (defcustom user--after-init-hook nil
@@ -49,14 +47,14 @@
   :pin "MELPA"
   :config
   (validate-setq
+   ;; Always ensure packages have been installed.
+   use-package-always-ensure t
    ;; Hooks are verbatim.
    use-package-hook-name-suffix nil)
 
   (use-package quelpa-use-package
     :config
     (validate-setq
-     ;; Always ensure packages have been installed.
-     use-package-always-ensure t
      ;; Only use quelpa for custom packages.
      quelpa-checkout-melpa-p nil
      ;; Only load quelpa on demand.
@@ -112,10 +110,6 @@
 
   (add-to-list 'load-path (path-join *user-el-get-directory* "el-get")))
 
-(defun user--el-get-config ()
-  "Configure el-get."
-  (add-to-list 'el-get-recipe-path
-               (path-join *user-el-get-directory* "el-get" "recipes")))
 
 ;; Configure and load el-get
 (user--el-get-init)
@@ -126,7 +120,6 @@
     (let (el-get-master-branch)
       (goto-char (point-max))
       (eval-print-last-sexp))))
-(user--el-get-config)
 
 
 (defun user/package-as-el-get (package)
@@ -155,6 +148,14 @@
    ;; Don't produce system notifications.
    el-get-notify-type 'message)
 
+  (add-to-list 'el-get-recipe-path
+               (path-join *user-el-get-directory* "el-get" "recipes"))
+
+  (use-package use-package-el-get
+    :config
+    (message "Setup use-package-el-get")
+    (use-package-el-get-setup))
+
   (defun require-package (package)
     "Add the specified PACKAGE to el-get-sources."
     (add-to-list 'el-get-sources (user/package-as-el-get package)))
@@ -169,10 +170,7 @@
       (if el-get-safe-mode
           (el-get 'sync package-list)
         (el-get nil package-list)))
-    (run-hooks 'user--after-init-hook))
-
-  ;; Make sure el-get is registered so that el-get-cleanup doesn't remove it
-  (require-package '(:name el-get)))
+    (run-hooks 'user--after-init-hook)))
 
 
 (defun user--nil-package-config ()
