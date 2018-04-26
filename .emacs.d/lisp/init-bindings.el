@@ -381,6 +381,7 @@
                (:notifications . (user/utilities-prefix "n"))
 
                (:perspective . ("C-x x s"))
+               (:presentation . (user/utilities-prefix "P"))
 
                (:popwin-close . (user/view-prefix "0"))
                (:popwin-buffer . (user/view-prefix "p"))
