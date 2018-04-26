@@ -105,7 +105,9 @@
     ;;; (Packages) ;;;
     (use-package reftex
       :ensure nil
-      :diminish reftex-mode)
+      :diminish reftex-mode
+      :config
+      (use-package company-reftex))
 
     (use-package latex-extra
       :hook (LaTeX-mode-hook . latex-extra-mode))
