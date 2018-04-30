@@ -3,10 +3,9 @@
 ;;; Code:
 
 (use-package recentf
-  :init
   ;; Prevent entries from loading tramp resulting in the stable
   ;; version of CEDET being loaded before devel.
-  (add-hook 'user--after-init-hook 'recentf-mode t)
+  :hook (after-init-hook . recentf-mode)
   :config
   (validate-setq
    recentf-max-saved-items 1000

@@ -92,13 +92,12 @@
 
 (use-package helm
   :diminish helm-mode
+  ;; Since Helm depends on `eieio', enable it after package initialization.
+  :hook (after-init-hook . user/helm-mode)
   :init
   (user/bind-key-global :nav :context 'user/helm-navigate)
   (user/bind-key-global :doc :apropos 'user/helm-apropos)
   (user/bind-key-global :emacs :elisp-search 'helm-info-elisp)
-
-  ;; Since Helm depends on `eieio', enable it after package initialization.
-  (add-hook 'user--after-init-hook 'user/helm-mode)
   :config
   (validate-setq
    ;; Idle delays.

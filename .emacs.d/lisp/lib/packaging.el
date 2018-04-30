@@ -7,11 +7,6 @@
 
 (defvar el-get-safe-mode nil
   "Start el-get in safe mode.")
-(defcustom user--after-init-hook nil
-  "Hook that is run after both Emacs and package manager have completed init."
-  :group 'init
-  :type 'hook)
-
 
 (with-feature 'package
   (setq
@@ -103,24 +98,6 @@
   (defun use-package-handler/:bind*-wrap (name keyword arg rest state)
     (use-package-handler/:bind name keyword arg rest state 'bind-keys*)))
 
-(defun user--el-get-init ()
-  "Initialize el-get."
-  (validate-setq
-   el-get-safe-mode t)
-
-  (add-to-list 'load-path (path-join *user-el-get-directory* "el-get")))
-
-
-;; Configure and load el-get
-(user--el-get-init)
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (let (el-get-master-branch)
-      (goto-char (point-max))
-      (eval-print-last-sexp))))
-
 
 (defun user/package-as-el-get (package)
   "Convert PACKAGE into el-get format."
@@ -140,20 +117,20 @@
        ((plist-member package :pkgname) `(:pkgname ,(plist-get package :pkgname))))))))
 
 
-(defun user--el-get-config ()
-  "Initialize el-get as package manager."
+(use-package el-get
+  :pin "MELPA"
+  :init
+  (validate-setq
+   el-get-safe-mode t)
+  :config
   (validate-setq
    el-get-user-package-directory (path-join user-emacs-directory "init")
    el-get-verbose el-get-safe-mode
    ;; Don't produce system notifications.
    el-get-notify-type 'message)
 
-  (add-to-list 'el-get-recipe-path
-               (path-join *user-el-get-directory* "el-get" "recipes"))
-
   (use-package use-package-el-get
     :config
-    (message "Setup use-package-el-get")
     (use-package-el-get-setup))
 
   (defun require-package (package)
@@ -169,26 +146,11 @@
     (let ((package-list (user/package-list)))
       (if el-get-safe-mode
           (el-get 'sync package-list)
-        (el-get nil package-list)))
-    (run-hooks 'user--after-init-hook)))
+        (el-get nil package-list))))
 
-
-(defun user--nil-package-config ()
-  "Initialize nil as package manager."
-  (defun require-package (package)
-    "Add the specified PACKAGE to nil.")
-
-  (defun user/package-list ()
-    "Get the list of registered packages from nil.")
-
-  (defun user/sync-packages ()
-    "Sync all required packages."
-    (run-hooks 'user--after-init-hook)))
-
-
-(cond
- ((featurep 'el-get) (user--el-get-config))
- (t (user--nil-package-config)))
+  (require-package '(:name el-get))
+  (add-to-list 'el-get-recipe-path
+               (path-join *user-el-get-directory* "el-get" "recipes")))
 
 
 (provide 'lib/packaging)
