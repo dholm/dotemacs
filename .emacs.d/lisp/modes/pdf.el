@@ -6,17 +6,24 @@
   "PDF view mode hook."
   (user/bind-key-local :nav :goto-line 'pdf-view-goto-page))
 
-(when (and (display-graphic-p)
-           (pkg-config-has-p "poppler-glib"))
-  (use-package pdf-tools
-    :defer
+(use-package pdf-tools
+  :if (pkg-config-has-p "poppler-glib")
+  :config
+  (use-package pdf-view
+    :ensure nil
+    :if window-system
+    :hook (pdf-view-mode-hook . user--pdf-view-mode-hook)
     :mode ("\.pdf$" . pdf-view-mode)
-    :init
-    (add-hook 'pdf-view-mode-hook 'user--pdf-view-mode-hook)
     :config
     (validate-setq
      ;; Fit page to view by default.
-     pdf-view-display-size 'fit-page)))
+     pdf-view-display-size 'fit-page
+     pdf-view-use-imagemagick t
+     pdf-view-midnight-colors '("white smoke" . "gray5"))
+
+    (use-package org-pdfview))
+
+  (pdf-tools-install))
 
 
 (provide 'modes/pdf)
