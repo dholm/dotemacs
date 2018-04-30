@@ -50,10 +50,11 @@
   (add-hook 'doxygen-mode-hook 'user--doxygen-mode-hook)
 
   ;;; (Packages) ;;;
-  (when (pkg-config-has-p "libxml-2.0")
-    (require-package '(:name doxymacs
-                             :after (with-eval-after-load 'doxymacs
-                                      (diminish 'doxymacs-mode)))))
+  (use-package doxymacs
+    :if (pkg-config-has-p "libxml-2.0")
+    :ensure nil
+    :el-get t
+    :diminish doxymacs-mode)
 
   (use-package doc-mode
     :defer
