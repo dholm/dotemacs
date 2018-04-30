@@ -465,7 +465,8 @@ Gmail {
              (subtype . calendar)
              (method . user/icalendar-import-mime-text)))))
 
-      (use-package apel
+      (use-package mcs-20
+        :ensure nil
         :config
         (validate-setq
          default-mime-charset
