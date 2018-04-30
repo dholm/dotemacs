@@ -10,10 +10,12 @@
 (use-package oauth2
   :defer
   :config
-  (validate-setq
-   ;; Store OAuth2 token in data store.
-   oauth2-token-file
-   (path-join *user-google-services-data-directory* "oauth2.plstore")))
+  (let ((plstore (path-join *user-google-services-data-directory*
+                            "oauth2.plstore")))
+    (when (file-exists-p plstore)
+      (validate-setq
+       ;; Store OAuth2 token in data store.
+       oauth2-token-file plstore))))
 
 (use-package google-contacts
   :defer)
