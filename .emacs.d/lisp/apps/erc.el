@@ -271,6 +271,8 @@
      ;; Improved keep-place by fitting more unread text.
      'scrolltoplace))
 
+  (use-package erc-status-sidebar)
+
   (when (feature-p 'bbdb)
     (use-package bbdb2erc
       :hook (bbdb-notice-hook . bbdb2erc-online-status)))
