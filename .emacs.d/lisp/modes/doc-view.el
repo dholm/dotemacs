@@ -2,21 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--doc-view-mode-hook ()
-  "Document viewer mode hook."
-  ;;; (Bindings) ;;;
-  (when (feature-p 'doc-view-fit-to-page)
-    (local-set-key "f" 'doc-view-fit-page-to-window)
-    (local-set-key "w" 'doc-view-fit-width-to-window)
-    (local-set-key "h" 'doc-view-fit-height-to-window))
-
-  (user/bind-key-local :nav :go-forward 'doc-view-scroll-up-or-next-page)
-  (user/bind-key-local :nav :go-back 'doc-view-scroll-down-or-previous-page))
-
 (use-package doc-view
   :defer
-  :init
-  (add-hook 'doc-view-mode-hook 'user--doc-view-mode-hook)
+  :bind-wrap
+  (:map doc-view-mode-map
+        ((:key :nav :go-forward) . doc-view-scroll-up-or-next-page)
+        ((:key :nav :go-back) . doc-view-scroll-down-or-previous-page))
   :config
   (validate-setq
    ;; Render documents in high resolution.
@@ -55,10 +46,17 @@
              :repo "dengste/doc-present")
     :init
     (autoload 'doc-present "doc-present" nil t)
-    (autoload 'doc-present-mode "doc-present" nil t)))
+    (autoload 'doc-present-mode "doc-present" nil t))
 
-(when (display-graphic-p)
-  (require-package '(:name doc-view-fit-to-page)))
+  (use-package doc-view-fit-to-page
+    :disabled
+    :if window-system
+    :el-get t
+    :bind
+    (:map doc-view-mode-map
+          ("f" . doc-view-fit-page-to-window)
+          ("w" . doc-view-fit-width-to-window)
+          ("h" . doc-view-fit-height-to-window))))
 
 
 (provide 'modes/doc-view)
