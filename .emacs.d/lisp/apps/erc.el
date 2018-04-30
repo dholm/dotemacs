@@ -247,6 +247,14 @@
 
       (erc-track-score-mode t)))
 
+  (use-package erc-services
+    :ensure nil
+    :config
+    (add-to-list
+     'erc-nickserv-alist
+     ;; Don't talk to nickserv if server is unknown.
+     `(Unknown nil nil ,(getenv "USER") "IDENTIFY" nil nil nil)))
+
   (use-package erc-image
     :if window-system
     :config
