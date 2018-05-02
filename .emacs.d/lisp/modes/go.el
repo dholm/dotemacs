@@ -116,6 +116,15 @@
        ;; Don't select compilation window when shown
        '(go-test-mode :height 20 :dedicated t))))
 
+  (use-package gorepl-mode
+    :if (executable-find "gore")
+    :diminish gorepl-mode
+    :hook (go-mode-hook . gorepl-mode)
+    :bind-wrap (:map gorepl-mode-map
+                     ((:key :code :eval-expression) . gorepl-eval-line)
+                     ((:key :code :eval-selection)
+                      . gorepl-eval-region)))
+
   (use-package go-gen-test
     :if (executable-find "gotests")
     :bind-wrap (:map go-mode-map
