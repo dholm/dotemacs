@@ -104,6 +104,18 @@
     :if (executable-find "go-langserver")
     :hook (go-mode-hook . go-lsp-enable))
 
+  (use-package rats
+    :hook (go-mode-hook . rats-mode)
+    :bind-wrap (:map rats-mode-map
+                     ((:key :code :test)
+                      . rats-run-test-in-current-buffer))
+    :config
+    (with-eval-after-load 'popwin
+      (add-to-list
+       'popwin:special-display-config
+       ;; Don't select compilation window when shown
+       '(go-test-mode :height 20 :dedicated t))))
+
   (use-package go-gen-test
     :if (executable-find "gotests")
     :bind-wrap (:map go-mode-map
