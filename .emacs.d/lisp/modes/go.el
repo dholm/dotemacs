@@ -102,7 +102,12 @@
 
   (use-package lsp-go
     :if (executable-find "go-langserver")
-    :hook (go-mode-hook . go-lsp-enable)))
+    :hook (go-mode-hook . go-lsp-enable))
+
+  (use-package go-gen-test
+    :if (executable-find "gotests")
+    :bind-wrap (:map go-mode-map
+                     ((:key :code :generate-test) . go-gen-test-dwim))))
 
 
 (provide 'modes/go)

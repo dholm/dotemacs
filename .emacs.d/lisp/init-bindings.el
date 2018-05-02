@@ -306,6 +306,7 @@
                (:refactor-rename . (user/code-prefix "M-r"))
                (:refactor-extract . (user/code-prefix "M-x"))
                (:insert-dependency . (user/code-eval-prefix "M-d"))
+               (:generate-test . (user/code-prefix "M-t"))
 
                (:library-list . (user/code-prefix "l"))
                (:disassemble . (user/code-prefix "D"))
