@@ -18,7 +18,10 @@
   (use-package rusti
     :quelpa (rusti
              :fetcher github
-             :repo "ruediger/rusti.el")))
+             :repo "ruediger/rusti.el"))
+  (use-package lsp-rust
+    :if (executable-find "rls")
+    :hook (rust-mode-hook . lsp-rust-enable)))
 
 
 (provide 'modes/rust)

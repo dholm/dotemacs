@@ -18,6 +18,12 @@
          (t (rtags-is-indexed)))))
 
 
+(defun user/use-lsp ()
+  "Check if language server protocol is supported."
+  (and (boundp 'lsp-mode)
+       lsp-mode))
+
+
 (defun user/use-helm-gtags ()
   "Check if helm-gtags can be used."
   (and (boundp 'helm-gtags-mode) helm-gtags-mode
@@ -73,7 +79,10 @@
                (not rtags-last-request-not-indexed)
                (rtags-find-symbol-at-point))
     (user/eval-until-move
-     '(((bound-and-true-p elisp-def-mode)
+     '(((user/use-lsp)
+        (call-interactively 'xref-find-definitions))
+
+       ((bound-and-true-p elisp-def-mode)
         (call-interactively 'elisp-def))
        ((eq major-mode 'emacs-lisp-mode)
         (call-interactively 'elisp-slime-nav-find-elisp-thing-at-point))
@@ -95,7 +104,10 @@
                                     (not rtags-last-request-not-indexed)))
                (rtags-find-references-at-point))
     (user/eval-until-move
-     '(((eq major-mode 'go-mode)
+     '(((user/use-lsp)
+        (call-interactively 'xref-find-references))
+
+       ((eq major-mode 'go-mode)
         (when (user/use-go-guru)
           (call-interactively 'go-guru-referrers)))
 
@@ -111,7 +123,9 @@
   (unless (and (user/use-rtags)
                (rtags-find-symbol))
     (user/eval-until-move
-     '(((user/use-helm-gtags)
+     '(((user/use-lsp)
+        (call-interactively 'xref-find-apropos))
+       ((user/use-helm-gtags)
         (call-interactively 'helm-gtags-select))
        ((user/use-semantic)
         (call-interactively 'semantic-symref-find-tags-by-regexp))))))
@@ -123,7 +137,10 @@
   (unless (and (user/use-rtags)
                (rtags-find-references))
     (user/eval-until-move
-     '(((eq major-mode 'go-mode)
+     '(((user/use-lsp)
+        (call-interactively 'xref-find-references))
+
+       ((eq major-mode 'go-mode)
         (when (user/use-go-guru)
           (call-interactively 'go-guru-callers)))
 
@@ -169,7 +186,10 @@
   (unless (and (user/use-rtags)
                (rtags-location-stack-back))
     (user/eval-until-move
-     '(((eq major-mode 'go-mode)
+     '(((user/use-lsp)
+        (call-interactively 'xref-pop-marker-stack))
+
+       ((eq major-mode 'go-mode)
         (when (user/use-go-guru)
           (pop-global-mark)))
 
@@ -228,9 +248,13 @@
   :hook ((emacs-lisp-mode-hook . elisp-def-mode)
          (ielm-mode-hook . elisp-def-mode)))
 
-(when (feature-p 'helm)
-  (use-package helm-etags-plus
-    :defer))
+(use-package helm-etags-plus
+  :defer)
+
+(use-package helm-xref
+  :config
+  (validate-setq
+   xref-show-xrefs-function 'helm-xref-show-xrefs))
 
 
 (provide 'utilities/tags)

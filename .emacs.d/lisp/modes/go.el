@@ -98,7 +98,11 @@
     (validate-setq
      ;; Use goimports as formatter so that imports are updated at the
      ;; same time.
-     gofmt-command "goimports")))
+     gofmt-command "goimports"))
+
+  (use-package lsp-go
+    :if (executable-find "go-langserver")
+    :hook (go-mode-hook . go-lsp-enable)))
 
 
 (provide 'modes/go)

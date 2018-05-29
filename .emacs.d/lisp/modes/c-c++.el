@@ -237,7 +237,23 @@
     :if (executable-find "flawfinder")
     :config
     (flycheck-flawfinder-setup))
-  (use-package google-c-style))
+  (use-package google-c-style)
+  (use-package ccls
+    :if (executable-find "ccls")
+    :hook (c-mode-common-hook . lsp-ccls-enable)
+    :config
+    (validate-setq
+     ;; Enable extra features.
+     ccls-extra-init-params
+     '(:index (:comments 2) :cacheFormat "msgpack" :completion (:detailedLabel t))))
+  (use-package cquery
+    :if (executable-find "cquery")
+    :hook (c-mode-common-hook . lsp-cquery-enable)
+    :config
+    (validate-setq
+     ;; Enable extra features.
+     cquery-extra-init-params
+     '(:index (:comments 2) :cacheFormat "msgpack" :completion (:detailedLabel t)))))
 
 
 (provide 'modes/c-c++)

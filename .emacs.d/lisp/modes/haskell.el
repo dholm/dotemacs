@@ -87,7 +87,10 @@
              :repo "Pitometsu/ac-ghc-mod"))
   (use-package flycheck-ghcmod
     :if (executable-find "ghc-mod"))
-  (use-package company-ghc))
+  (use-package company-ghc)
+  (use-package lsp-haskell
+    :if (executable-find "hie")
+    :hook (haskell-mode-hook . lsp-haskell-enable)))
 
 
 (provide 'modes/haskell)

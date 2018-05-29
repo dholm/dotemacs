@@ -134,7 +134,11 @@
     :if (executable-find "mypy"))
 
   (use-package helm-pydoc
-    :pin "MELPA"))
+    :pin "MELPA")
+
+  (use-package lsp-python
+    :if (executable-find "pyls")
+    :hook (python-mode-hook . lsp-python-enable)))
 
 
 (provide 'modes/python)
