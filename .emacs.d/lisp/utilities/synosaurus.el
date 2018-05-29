@@ -3,6 +3,7 @@
 ;;; Code:
 
 (use-package synosaurus
+  :disabled
   :if (executable-find "wn")
   :defer
   :init
