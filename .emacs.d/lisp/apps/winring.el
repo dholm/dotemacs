@@ -3,12 +3,13 @@
 ;;; Code:
 
 (use-package winring
+  :pin "MELPA"
   :config
   (use-package zoom-window
     :config
-    (define-key winring-map (kbd "z") 'zoom-window-zoom)))
+    (define-key winring-map (kbd "z") 'zoom-window-zoom))
 
-(winring-initialize)
+  (winring-initialize))
 
 
 (provide 'apps/winring)
