@@ -33,14 +33,15 @@
 
 (use-package ruby-mode
   :defer
-  :init
-  (add-hook 'ruby-mode-hook 'user--ruby-mode-hook)
+  :hook (ruby-mode-hook . user--ruby-mode-hook)
   :config
   (use-package robe
-    :init
-    (add-hook 'robe-mode-hook 'user--robe-mode-hook))
+    :hook (robe-mode-hook . user--robe-mode-hook))
   (use-package inf-ruby)
-  (use-package yari))
+  (use-package yari)
+  (use-package rubocopfmt
+    :if (executable-find "rubocop")
+    :hook (ruby-mode-hook . rubocopfmt-mode)))
 
 
 (provide 'modes/ruby)
