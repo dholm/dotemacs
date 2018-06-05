@@ -128,10 +128,12 @@
 
   (use-package flycheck-pycheckers
     :after flycheck
-    :config
-    (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
+    :hook (flycheck-mode-hook . flycheck-pycheckers-setup))
   (use-package flycheck-mypy
     :if (executable-find "mypy"))
+  (use-package flycheck-prospector
+    :if (executable-find "prospector")
+    :hook (flycheck-mode-hook . flycheck-prospector-setup))
 
   (use-package helm-pydoc
     :pin "MELPA")
