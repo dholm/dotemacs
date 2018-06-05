@@ -42,6 +42,13 @@
     :if (executable-find "rsync")
     :bind (:map dired-mode-map
                 ("C-c C-r" . dired-rsync)))
+  (use-package dired-recent
+    :config
+    (validate-setq
+     ;; Path to history database.
+     dired-recent-directories-file (path-join *user-cache-directory* "dired-history"))
+
+    (dired-recent-mode t))
 
   ;;; (Bindings) ;;;
   ;; Do not open new buffers when going down or up a directory.
