@@ -8,14 +8,15 @@
 
 (use-package conf-mode
   :defer
-  :init
-  (add-hook 'conf-mode-hook 'user--conf-mode-hook)
+  :hook (conf-mode-hook . user--conf-mode-hook)
   :config
-  ;;; (Packages) ;;;
   (use-package nginx-mode
     :if (executable-find "nginx")
     :defer
-    :mode "etc/nginx/.*$"))
+    :mode "etc/nginx/.*$"
+    :config
+    (use-package company-nginx
+      :hook (nginx-mode-hook . company-nginx-keywords))))
 
 
 (provide 'modes/conf)
