@@ -201,6 +201,7 @@
 (defun user/tags-try-enable ()
   "Enable tags if any of the tag backends is located."
   (when (or (user/use-rtags)
+            (user/use-lsp)
             (user/use-helm-gtags)
             (user/use-semantic))
     (when (feature-p 'rtags)
