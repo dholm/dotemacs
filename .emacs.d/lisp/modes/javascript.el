@@ -40,16 +40,14 @@
 
 (use-package js
   :defer
-  :init
-  (add-hook 'javascript-mode-hook 'user--javascript-mode-hook)
-  (add-hook 'inferior-js-mode-hook 'user--inferior-javascript-mode-hook))
+  :hook ((javascript-mode-hook . user--javascript-mode-hook)
+         (inferior-js-mode-hook . user--inferior-javascript-mode-hook)))
 
 (use-package js2-mode
   :defer
   :mode "\.js$"
   :magic "#!/usr/bin/env node"
-  :init
-  (add-hook 'js2-mode-hook 'user--js2-mode-hook)
+  :hook (js2-mode-hook . user--js2-mode-hook)
   :config
   (validate-setq
    ;; Configure indentation
@@ -75,6 +73,10 @@
     (setenv "NODE_NO_READLINE" "1"))
 
   (use-package prettier-js)
+
+  (use-package lsp-javascript-typescript
+    :if (executable-find "javascript-typescript-langserver")
+    :hook (js2-mode-hook . lsp-javascript-typescript-enable))
 
   (use-package helm-js-codemod
     :if (executable-find "jscodeshift"))
