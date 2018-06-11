@@ -41,7 +41,6 @@
   (:map go-mode-map
         ((:key :doc :describe) . godef-describe)
         ((:key :doc :reference) . godoc)
-        ((:key :nav :follow-symbol) . godef-jump)
         ((:key :nav :switch-spec-impl) . go-goto-imports))
   :hook (go-mode-hook . user--go-mode-hook)
   :config
