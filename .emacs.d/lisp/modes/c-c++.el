@@ -242,16 +242,16 @@
     :if (executable-find "ccls")
     :hook (c-mode-common-hook . lsp-ccls-enable)
     :config
-    (validate-setq
-     ;; Enable extra features.
+    (setq
+     ;; Enable extra features (incompatible with `validate-setq').
      ccls-extra-init-params
      '(:index (:comments 2) :cacheFormat "msgpack" :completion (:detailedLabel t))))
   (use-package cquery
     :if (executable-find "cquery")
     :hook (c-mode-common-hook . lsp-cquery-enable)
     :config
-    (validate-setq
-     ;; Enable extra features.
+    (setq
+     ;; Enable extra features (incompatible with `validate-setq').
      cquery-extra-init-params
      '(:index (:comments 2) :cacheFormat "msgpack" :completion (:detailedLabel t)))))
 
