@@ -15,6 +15,12 @@
   ;; Don't indent when inside `extern "<lang>"'.
   (c-set-offset 'inextern-lang 0)
 
+  ;; Propertize "#if 0" regions as comments.
+  (font-lock-add-keywords
+   nil
+   '((user/c-mode-font-lock-if0 (0 font-lock-comment-face prepend)))
+   'add-to-end)
+
   ;; Enable Doxygen support.
   (doxygen-mode t)
 
@@ -24,6 +30,9 @@
   (when (feature-p 'mic-paren)
     ;; Match context to open parentheses.
     (paren-toggle-open-paren-context t))
+
+  ;; Load CEDET.
+  (user--c-mode-common-cedet-hook)
 
   (when (and *user-cedet-ectags-enabled*
              (feature-p 'helm-etags-plus))
@@ -48,24 +57,6 @@
     (with-feature 'company-c-headers
       (add-company-sources 'company-c-headers)))
 
-  (when (user/use-rtags)
-    (when (require 'flycheck-rtags nil :noerror)
-      (flycheck-select-checker 'rtags)))
-
-  (user/smartparens-enable))
-
-
-(defun user--c-mode-hook ()
-  "C mode hook."
-  ;; Propertize "#if 0" regions as comments.
-  (font-lock-add-keywords
-   nil
-   '((user/c-mode-font-lock-if0 (0 font-lock-comment-face prepend)))
-   'add-to-end)
-
-  ;; Load CEDET
-  (user--c-mode-cedet-hook)
-
   (with-feature 'cpputils-cmake
     ;; Enable CMake C/C++ utilities.
     (cppcm-reload-all))
@@ -73,10 +64,21 @@
   (with-feature 'irony
     (when (member major-mode irony-supported-major-modes)
       ;; Better auto completion.
-      (irony-mode t))))
+      (irony-mode t)))
+
+  ;; Enable LSP components, if installed.
+  (cond
+   ((feature-p 'cquery) (ignore-errors (lsp-cquery-enable)))
+   ((feature-p 'ccls) (ignore-errors (lsp-ccls-enable))))
+
+  (when (user/use-rtags)
+    (when (require 'flycheck-rtags nil :noerror)
+      (flycheck-select-checker 'rtags)))
+
+  (user/smartparens-enable))
 
 
-(defun user--c-mode-cedet-hook ()
+(defun user--c-mode-common-cedet-hook ()
   "C mode CEDET hook."
   (with-feature 'semantic/bovine/c
     ;; Load extra semantic helpers.
@@ -148,9 +150,8 @@
 
 (use-package cc-mode
   :defer
+  :hook (c-mode-common-hook . user--c-mode-common-hook)
   :init
-  (add-hook 'c-mode-common-hook 'user--c-mode-common-hook)
-  (add-hook 'c-mode-hook 'user--c-mode-hook)
   ;; Detect if inside a C++ header file.
   (add-magic-mode 'c++-mode 'user/c++-header-file-p)
   :config
@@ -240,7 +241,6 @@
   (use-package google-c-style)
   (use-package ccls
     :if (executable-find "ccls")
-    :hook (c-mode-common-hook . lsp-ccls-enable)
     :config
     (setq
      ;; Enable extra features (incompatible with `validate-setq').
@@ -248,7 +248,6 @@
      '(:index (:comments 2) :cacheFormat "msgpack" :completion (:detailedLabel t))))
   (use-package cquery
     :if (executable-find "cquery")
-    :hook (c-mode-common-hook . lsp-cquery-enable)
     :config
     (setq
      ;; Enable extra features (incompatible with `validate-setq').
