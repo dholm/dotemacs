@@ -59,8 +59,7 @@
     (user/tags-try-enable)
 
     ;;; (Bindings) ;;;
-    (user/bind-key-local :nav :jump-spec-impl 'semantic-analyze-proto-impl-toggle)
-    (user/bind-key-local :doc :describe 'semantic-ia-show-doc)))
+    (user/bind-key-local :nav :jump-spec-impl 'semantic-analyze-proto-impl-toggle)))
 
 
 (defun ede-object-system-include-path ()

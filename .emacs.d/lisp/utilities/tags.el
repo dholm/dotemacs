@@ -150,6 +150,18 @@
         (call-interactively 'semantic-symref-regexp))))))
 
 
+(defun user/tag-describe ()
+  "Describe the tag."
+  (interactive)
+  (cond
+   ((user/use-rtags) (call-interactively 'rtags-print-symbol-info))
+   ((user/use-lsp) (call-interactively 'lsp-info-under-point))
+   ((eq major-mode 'go-mode)
+    (when (user/use-go-guru)
+      (call-interactively 'go-guru-describe)))
+   ((user/use-semantic) (call-interactively 'semantic-ia-show-doc))))
+
+
 (defun user/tag-find-virtuals ()
   "Find implementers of virtual function at point."
   (interactive)
@@ -211,9 +223,10 @@
     ;;; (Bindings) ;;;
     (user/bind-key-local :code :update-index 'user/tag-update-index)
     (user/bind-key-local :nav :functions/toc 'user/tag-toc)
-    (user/bind-key-global :nav :follow-symbol 'user/tag-follow)
+    (user/bind-key-local :nav :follow-symbol 'user/tag-follow)
     (user/bind-key-local :nav :find-symbol 'user/tag-find)
     (user/bind-key-local :nav :references 'user/tag-references-at-point)
+    (user/bind-key-local :doc :describe 'user/tag-describe)
     (user/bind-key-local :nav :find-virtuals 'user/tag-find-virtuals)
     (user/bind-key-local :nav :find-references 'user/tag-find-references)
     (user/bind-key-local :basic :open-file-context 'user/tag-find-file)
