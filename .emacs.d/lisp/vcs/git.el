@@ -38,7 +38,6 @@
     (:map git-commit-mode-map
           ((:key :basic :server-edit) . git-commit-commit)))
 
-  ;;; (Packages) ;;;
   (use-package magit
     :defer
     :config
@@ -84,6 +83,8 @@
     (use-package magit-imerge
       :if (executable-find "git-imerge"))
     (use-package orgit)
+    (use-package magit-todos
+      :hook (magit-mode-hook . magit-todos-mode))
     (use-package magit-org-todos
       :config
       (magit-org-todos-autoinsert))
