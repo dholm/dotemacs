@@ -173,7 +173,10 @@
                 ("C-k" . helm-buffer-run-kill-persistent))
     :config
     (validate-setq
-     helm-buffers-fuzzy-matching t))
+     ;; Use fuzzy matching for buffer names.
+     helm-buffers-fuzzy-matching t
+     ;; Don't check if remote files exist.
+     helm-buffer-skip-remote-checking t))
 
   (use-package helm-ring
     :ensure helm
