@@ -30,23 +30,11 @@
                                " %d°C")))
       (display-battery-mode t)))
 
-  (use-package smart-mode-line
+  (use-package doom-modeline
+    :hook (after-init-hook . doom-modeline-init)
     :config
     (validate-setq
-     ;; Configure theme.
-     sml/theme 'automatic
-     ;; Shorten path and modes.
-     sml/shorten-directory t
-     sml/shorten-modes t
-     sml/name-width 25
-     sml/mode-width 'full)
-
-    (with-eval-after-load 'solarized-theme
-      (sml/setup)
-      (unless (featurep 'projectile)
-        (setq
-         ;; Temporary workaround for sml thinking projectile has been loaded.
-         sml/projectile-loaded-p nil))))
+     doom-modeline-height 18))
 
   (use-package mode-line-bell
     :init
