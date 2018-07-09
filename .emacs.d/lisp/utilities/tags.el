@@ -162,6 +162,18 @@
    ((user/use-semantic) (call-interactively 'semantic-ia-show-doc))))
 
 
+(defun user/tag-rename ()
+  "Rename the tag."
+  (interactive)
+  (cond
+   ((user/use-rtags) (call-interactively 'rtags-rename-symbol))
+   ((user/use-lsp) (call-interactively 'lsp-rename))
+   ((eq major-mode 'go-mode)
+    (if (executable-find "godoctor")
+        (call-interactively 'godoctor-rename)
+      (call-interactively 'go-rename)))))
+
+
 (defun user/tag-find-virtuals ()
   "Find implementers of virtual function at point."
   (interactive)
@@ -227,6 +239,7 @@
     (user/bind-key-local :nav :find-symbol 'user/tag-find)
     (user/bind-key-local :nav :references 'user/tag-references-at-point)
     (user/bind-key-local :doc :describe 'user/tag-describe)
+    (user/bind-key-local :code :refactor-rename 'user/tag-rename)
     (user/bind-key-local :nav :find-virtuals 'user/tag-find-virtuals)
     (user/bind-key-local :nav :find-references 'user/tag-find-references)
     (user/bind-key-local :basic :open-file-context 'user/tag-find-file)
@@ -237,7 +250,6 @@
   :if (executable-find "llvm-config")
   :bind-wrap
   (:map rtags-mode-map
-        ((:key :code :refactor-rename) . rtags-rename-symbol)
         ((:key :code :insert-dependency) . rtags-get-include-file-for-symbol))
   :defer
   :config
