@@ -245,14 +245,14 @@
     (setq
      ;; Enable extra features (incompatible with `validate-setq').
      ccls-extra-init-params
-     '(:index (:comments 2) :cacheFormat "msgpack" :completion (:detailedLabel t))))
+     '(:index (:comments 1) :cacheFormat "msgpack")))
   (use-package cquery
     :if (executable-find "cquery")
     :config
     (setq
      ;; Enable extra features (incompatible with `validate-setq').
      cquery-extra-init-params
-     '(:index (:comments 2) :cacheFormat "msgpack" :completion (:detailedLabel t)))))
+     '(:index (:comments 1) :cacheFormat "msgpack"))))
 
 
 (provide 'modes/c-c++)
