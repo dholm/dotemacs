@@ -5,11 +5,9 @@
 (use-package docker
   :if (executable-find "docker")
   :diminish docker-mode
+  :bind-wrap ((:key :util :docker) . docker)
   :config
-  (use-package docker-tramp)
-
-  ;; Enabled docker support globally.
-  (docker-global-mode t))
+  (use-package docker-tramp))
 
 
 (provide 'utilities/docker)

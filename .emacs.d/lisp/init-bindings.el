@@ -390,7 +390,9 @@
 
                (:undo-tree . (user/utilities-prefix "u"))
 
-               (:wc-mode . (user/utilities-prefix "w"))))
+               (:wc-mode . (user/utilities-prefix "w"))
+
+               (:docker . (user/utilities-prefix "d"))))
 
      ;;; (Applications) ;;;
      (:apps . ((:packages . (user/apps-prefix "M-p"))
