@@ -43,15 +43,15 @@
   (user/cscope-enable)
 
   (when (user/auto-complete-p)
-    (when (and (require 'rtags-ac nil :noerror)
-               (user/use-rtags))
+    (when (and (user/use-rtags)
+               (require 'rtags-ac nil :noerror))
       (add-ac-sources 'ac-source-rtags))
     (with-feature 'auto-complete-c-headers
       (add-ac-sources 'ac-source-c-headers)))
 
   (when (user/company-mode-p)
-    (when (and (require 'company-rtags nil :noerror)
-               (user/use-rtags))
+    (when (and (user/use-rtags)
+               (require 'company-rtags nil :noerror))
       (validate-setq rtags-completions-enabled t)
       (add-company-sources 'company-rtags))
     (with-feature 'company-c-headers

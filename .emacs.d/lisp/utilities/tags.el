@@ -2,9 +2,21 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user/use-lsp ()
+  "Check if language server protocol is supported."
+  (and
+   ;; Don't use lsp-mode over Tramp until it is supported.
+   ;;  - https://github.com/emacs-lsp/lsp-mode/issues/197
+   (not (file-remote-p buffer-file-name))
+   (boundp 'lsp-mode)
+   lsp-mode))
+
+
 (defun user/use-rtags (&optional filemanager)
   "Check if rtags can be used, optionally with its FILEMANAGER."
   (and
+   ;; Only use rtags if LSP is unavailable.
+   (not (user/use-lsp))
    (or
     (eq major-mode 'c-mode)
     (eq major-mode 'c++-mode))
@@ -16,12 +28,6 @@
           (rtags-has-filemanager))
          (filemanager (rtags-has-filemanager))
          (t (rtags-is-indexed)))))
-
-
-(defun user/use-lsp ()
-  "Check if language server protocol is supported."
-  (and (boundp 'lsp-mode)
-       lsp-mode))
 
 
 (defun user/use-helm-gtags ()
