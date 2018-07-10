@@ -3,6 +3,7 @@
 ;;; Code:
 
 (use-package coin-ticker
+  :disabled
   :config
   (validate-setq
    ;; Update interval.
