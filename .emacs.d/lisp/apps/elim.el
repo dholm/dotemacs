@@ -2,23 +2,24 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--elim-config ()
-  "Initialize elim."
-  (with-eval-after-load 'lui
-    (validate-setq
-     lui-max-buffer-size 30000
-     lui-flyspell-p t
-     lui-flyspell-alist '(("." "american"))))
-  (with-eval-after-load 'elim
-    (validate-setq
-     elim-directory (path-join *user-cache-directory* "elim")))
-
-  ;;; (Bindings) ;;;
-  (user/bind-key-global :apps :instant-messenger 'garak))
-
 (when (and (pkg-config-has-p "libxml-2.0")
            (pkg-config-has-p "purple"))
-  (require-package '(:name elim :after (user--elim-config))))
+  (use-package elim
+    :ensure nil
+    :disabled
+    :el-get t
+    :bind-wrap
+    ((:key :apps :instant-messenger) . garak)
+    :config
+    (with-eval-after-load 'lui
+      (validate-setq
+       lui-max-buffer-size 30000
+       lui-flyspell-p t
+       lui-flyspell-alist '(("." "american"))))
+    (with-eval-after-load 'elim
+      (validate-setq
+       elim-directory (path-join *user-cache-directory* "elim")))))
+
 
 
 (provide 'apps/elim)
