@@ -57,9 +57,10 @@
     (with-feature 'company-c-headers
       (add-company-sources 'company-c-headers)))
 
-  (with-feature 'cpputils-cmake
-    ;; Enable CMake C/C++ utilities.
-    (cppcm-reload-all))
+  (when (derived-mode-p 'c-mode 'c++-mode)
+    (with-feature 'cpputils-cmake
+      ;; Enable CMake C/C++ utilities.
+      (cppcm-reload-all)))
 
   (with-feature 'irony
     (when (member major-mode irony-supported-major-modes)
