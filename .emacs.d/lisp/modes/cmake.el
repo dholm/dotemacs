@@ -19,7 +19,10 @@
   (use-package company-cmake
     :after (company)
     :config
-    (add-to-list 'company-backends 'company-cmake)))
+    (add-to-list 'company-backends 'company-cmake))
+
+  (use-package cmake-font-lock
+    :hook (cmake-mode-hook . cmake-font-lock-activate)))
 
 
 (provide 'modes/cmake)
