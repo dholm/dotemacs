@@ -81,7 +81,7 @@
 
   ;;; (Packages) ;;;
   (use-package auto-complete-nxml
-    :requires auto-complete
+    :after (auto-complete)
     :config
     (add-ac-modes 'nxml-mode)))
 

@@ -178,7 +178,8 @@
      c-tab-always-indent nil
      c-insert-tab-function 'indent-for-tab-command))
 
-  (use-package auto-complete-c-headers)
+  (use-package auto-complete-c-headers
+    :after (auto-complete))
   (use-package company-c-headers
     :after (company))
   (use-package flycheck-pkg-config

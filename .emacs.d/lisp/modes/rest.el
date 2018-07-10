@@ -35,14 +35,11 @@
            :fetcher svn
            :url "http://svn.code.sf.net/p/docutils/code/trunk/docutils/tools/editors/emacs")
   :mode ("\.\(rst\|rest\)$" . rst-mode)
-  :init
-  ;; Update TOC automatically if section headers are adjusted.
-  (add-hook 'rst-adjust-hook 'rst-toc-update)
-
-  ;; Register mode hook.
-  (add-hook 'rst-mode-hook 'user--rst-mode-hook)
+  :hook ((rst-adjust-hook . rst-toc-update)
+         (rst-mode-hook . user--rst-mode-hook))
   :config
-  (use-package auto-complete-rst))
+  (use-package auto-complete-rst
+    :after (auto-complete)))
 
 
 (provide 'modes/rest)

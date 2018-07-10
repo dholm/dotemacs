@@ -244,13 +244,14 @@ Makes it easier to version control LaTeX-files."
       (add-hook 'TeX-mode-hook 'zotelo-minor-mode))
 
     (use-package ac-math
+      :after (auto-complete)
       :config
       (validate-setq
        ;; Enable unicode math input.
        ac-math-unicode-in-math-p t))
 
     (use-package auto-complete-latex
-      :requires auto-complete
+      :after (auto-complete)
       :quelpa (auto-complete-latex
                :fetcher hg
                :url "https://bitbucket.org/tequilasunset/auto-complete-latex")

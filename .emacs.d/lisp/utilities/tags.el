@@ -259,7 +259,8 @@
         ((:key :code :insert-dependency) . rtags-get-include-file-for-symbol))
   :defer
   :config
-  (use-package ac-rtags)
+  (use-package ac-rtags
+    :after (auto-complete))
   (use-package company-rtags
     :after (company))
   (use-package flycheck-rtags)

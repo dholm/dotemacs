@@ -76,6 +76,7 @@
     (slime-setup '(slime-repl))
 
     (use-package ac-slime
+      :after (auto-complete)
       :config
       (add-ac-modes 'slime-repl-mode)))
 

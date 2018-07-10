@@ -90,6 +90,7 @@
       :after (company)))
 
   (use-package ac-html
+    :after (auto-complete)
     :config
     (add-to-list 'web-mode-ac-sources-alist
                  '("html" . (ac-source-html-attribute-value

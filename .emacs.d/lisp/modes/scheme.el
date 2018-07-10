@@ -65,6 +65,7 @@
      ;; Use Emacs-style fontification.
      quack-fontify-style 'emacs))
   (use-package ac-geiser
+    :after (auto-complete)
     :defer))
 
 

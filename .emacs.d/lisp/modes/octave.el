@@ -13,12 +13,11 @@
   :ensure nil
   :defer
   :mode ("\.m$" . octave-mode)
-  :init
-  (add-hook 'octave-mode-hook 'user--octave-mode-hook)
+  :hook (octave-mode-hook . user--octave-mode-hook)
   :config
   (use-package ac-octave
     :disabled
-    :after auto-complete
+    :after (auto-complete)
     :defer))
 
 

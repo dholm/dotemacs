@@ -81,6 +81,7 @@
              :files ("elisp/*.el")))
   (use-package ac-ghc-mod
     :if (executable-find "ghc-mod")
+    :after (auto-complete)
     :requires auto-complete
     :quelpa (ac-ghc-mod
              :fetcher github

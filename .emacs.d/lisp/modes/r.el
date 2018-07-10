@@ -108,6 +108,7 @@
 
   (use-package ess-smart-underscore)
   (use-package ac-R
+    :after (auto-complete)
     :init
     (autoload 'ess-ac-init "ac-R")))
 
