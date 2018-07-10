@@ -7,7 +7,8 @@
   (and
    ;; Don't use lsp-mode over Tramp until it is supported.
    ;;  - https://github.com/emacs-lsp/lsp-mode/issues/197
-   (not (file-remote-p buffer-file-name))
+   (when buffer-file-name
+     (not (file-remote-p buffer-file-name)))
    (boundp 'lsp-mode)
    lsp-mode))
 
