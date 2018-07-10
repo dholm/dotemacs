@@ -141,7 +141,8 @@
 
   (use-package eshell-bookmark)
 
-  (use-package company-eshell-autosuggest)
+  (use-package company-eshell-autosuggest
+    :after (company))
 
   (use-package esh-autosuggest
     :hook (eshell-mode-hook . esh-autosuggest-mode)))

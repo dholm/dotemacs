@@ -16,6 +16,7 @@
     :mode "etc/nginx/.*$"
     :config
     (use-package company-nginx
+      :after (company)
       :hook (nginx-mode-hook . company-nginx-keywords))))
 
 

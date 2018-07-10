@@ -260,7 +260,8 @@
   :defer
   :config
   (use-package ac-rtags)
-  (use-package company-rtags)
+  (use-package company-rtags
+    :after (company))
   (use-package flycheck-rtags)
   (use-package helm-rtags
     :config

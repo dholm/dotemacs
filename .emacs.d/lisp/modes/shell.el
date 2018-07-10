@@ -39,6 +39,7 @@
   ;;; (Packages) ;;;
   (use-package bash-completion)
   (use-package company-shell
+    :after (company)
     :config
     (add-to-list 'company-backends '(company-shell company-shell-env)))
   (use-package shelldoc)

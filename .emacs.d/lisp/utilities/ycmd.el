@@ -18,6 +18,7 @@
    ycmd-force-semantic-completion t)
 
   (use-package company-ycmd
+    :after (company)
     :config
     (company-ycmd-setup))
 

@@ -17,6 +17,7 @@
   :hook (cmake-mode-hook . user--cmake-mode-hook)
   :config
   (use-package company-cmake
+    :after (company)
     :config
     (add-to-list 'company-backends 'company-cmake)))
 

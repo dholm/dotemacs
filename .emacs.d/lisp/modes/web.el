@@ -68,6 +68,7 @@
   (use-package restclient
     :config
     (use-package company-restclient
+      :after (company)
       :config
       (with-eval-after-load 'company
         (add-to-list 'company-backends 'company-restclient)))
@@ -85,7 +86,8 @@
     :if (executable-find "npm")
     :hook (tern-mode-hook . user--tern-mode-hook)
     :config
-    (use-package company-tern))
+    (use-package company-tern
+      :after (company)))
 
   (use-package ac-html
     :config
@@ -93,7 +95,8 @@
                  '("html" . (ac-source-html-attribute-value
                              ac-source-html-tag
                              ac-source-html-attribute))))
-  (use-package company-web)
+  (use-package company-web
+    :after (company))
   (use-package skewer-mode)
   (use-package tidy)
 

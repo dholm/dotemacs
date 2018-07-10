@@ -49,7 +49,8 @@
    gofmt-show-errors nil)
 
   (use-package go-autocomplete)
-  (use-package company-go)
+  (use-package company-go
+    :after (company))
   (use-package go-eldoc)
   (use-package gotest
     :bind-wrap

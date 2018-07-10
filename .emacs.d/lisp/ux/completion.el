@@ -263,12 +263,14 @@
       (validate-setq
        ;; Complete even outside of code.
        company-dabbrev-code-everywhere t))
-    (use-package company-flx)
+    (use-package company-flx
+      :after (company)
+      :config
+      (company-flx-mode t))
     (use-package company-quickhelp
       :if window-system
-      :init
-      (add-hook 'company-mode-hook 'company-quickhelp-mode t)
-      (company-flx-mode t)
+      :after (company)
+      :hook (company-mode-hook . company-quickhelp-mode)
       :config
       (validate-setq
        ;; Show quick help popup after half a second.

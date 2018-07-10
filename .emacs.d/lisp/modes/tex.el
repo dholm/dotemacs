@@ -107,7 +107,8 @@
       :ensure nil
       :diminish reftex-mode
       :config
-      (use-package company-reftex))
+      (use-package company-reftex
+        :after (company)))
 
     (use-package latex-extra
       :hook (LaTeX-mode-hook . latex-extra-mode))
@@ -221,6 +222,7 @@ Makes it easier to version control LaTeX-files."
         :if (executable-find "luatex"))
 
       (use-package company-auctex
+        :after (company)
         :init
         (company-auctex-init))
 
@@ -259,7 +261,8 @@ Makes it easier to version control LaTeX-files."
                                       "ac-l-dict"))
       (add-ac-modes 'latex-mode 'LaTeX-mode))
 
-    (use-package company-math)
+    (use-package company-math
+      :after (company))
 
     (use-package ltx-help
       :quelpa (ltx-help

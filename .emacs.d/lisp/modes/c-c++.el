@@ -179,7 +179,8 @@
      c-insert-tab-function 'indent-for-tab-command))
 
   (use-package auto-complete-c-headers)
-  (use-package company-c-headers)
+  (use-package company-c-headers
+    :after (company))
   (use-package flycheck-pkg-config
     :if (executable-find "pkg-config"))
   (use-package cpputils-cmake
