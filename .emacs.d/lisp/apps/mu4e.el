@@ -7,6 +7,11 @@
   (mu4e-headers-search
    (concat "from:" (cdar (mu4e-message-field msg :from)))))
 
+(defun user--mu4e-view-mode-hook ()
+  "MU4E email view mode hook."
+  ;; Enable decryption/clearsign verification.
+  (epa-mail-mode))
+
 (use-package mu4e
   :ensure nil
   :el-get t
@@ -84,6 +89,7 @@
 
   (use-package mu4e-view
     :ensure nil
+    :hook (mu4e-view-mode-hook . user--mu4e-view-mode-hook)
     :config
     (validate-setq
      ;; Show name and address.
