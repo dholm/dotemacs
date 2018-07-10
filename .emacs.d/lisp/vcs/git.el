@@ -68,6 +68,7 @@
       :hook (magit-mode-hook . turn-on-magit-gh-pulls))
     (use-package magithub
       :disabled
+      :pin "MELPA"
       :config
       (validate-setq
        magithub-dir (path-join *user-data-directory* "magithub"))
