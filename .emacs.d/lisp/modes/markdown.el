@@ -2,17 +2,27 @@
 ;;; Commentary:
 ;;; Code:
 
+(defconst *user-flymd-cache-directory*
+  (path-join *user-cache-directory* "flymd")
+  "Path to user's FLYMD cache store.")
+
+
 (defun user--markdown-mode-hook ()
   "Markdown mode hook."
   (user/smartparens-enable)
+
+  ;; org-mode table editing tools.
+  (orgtbl-mode t)
 
   (when (feature-p 'polymode)
     (poly-markdown-mode t)))
 
 (use-package markdown-mode
   :defer
-  :init
-  (add-hook 'markdown-mode-hook 'user--markdown-mode-hook)
+  :hook (markdown-mode-hook . user--markdown-mode-hook)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
   :config
   (with-eval-after-load 'smartparens
     (defun sp--gfm-skip-asterisk (ms mb me)
@@ -33,6 +43,19 @@
 
   (use-package markdown-preview-eww)
   (use-package markdown-preview-mode)
+
+  (use-package mkdown
+    :config
+    (add-to-list 'markdown-css-paths mkdown-css-file-name))
+
+  (use-package gh-md)
+
+  (use-package flymd
+    :init
+    (make-directory *user-flymd-cache-directory* t)
+    :config
+    (validate-setq
+     flymd-output-directory *user-flymd-cache-directory*))
 
   (use-package livedown
     :if (executable-find "livedown")
