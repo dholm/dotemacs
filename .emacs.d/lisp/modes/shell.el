@@ -32,11 +32,14 @@
 
 (use-package shell
   :defer
-  :init
-  (add-hook 'sh-mode-hook 'user--sh-mode-hook)
-  (add-hook 'shell-mode-hook 'user--shell-mode-hook)
+  :hook ((sh-mode-hook . user--sh-mode-hook)
+         (shell-mode-hook . user--shell-mode-hook))
   :config
   ;;; (Packages) ;;;
+  (use-package lsp-sh
+    :if (executable-find "bash-language-server")
+    :quelpa (lsp-sh :fetcher github :repo "emacs-lsp/lsp-sh")
+    :hook (sh-mode-hook . lsp-sh-enable))
   (use-package bash-completion)
   (use-package company-shell
     :after (company)
