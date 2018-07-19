@@ -2,8 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun user--lsp-mode-hook ()
+  "Mode hook for LSP minor modes."
+  (user/tags-try-enable))
+
 (use-package lsp-mode
-  :hook (lsp-after-open-hook . lsp-enable-imenu)
+  :hook ((lsp-after-open-hook . lsp-enable-imenu)
+         (lsp-mode-hook . user--lsp-mode-hook))
   :config
   (use-package lsp-ui
     :hook (lsp-mode-hook . lsp-ui-mode))
