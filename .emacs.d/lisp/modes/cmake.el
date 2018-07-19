@@ -7,6 +7,10 @@
   (unless (derived-mode-p 'prog-mode)
     (user--prog-mode-hook))
 
+  (validate-setq
+   ;; Indent using spaces.
+   indent-tabs-mode nil)
+
   ;; Separate camel-case into separate words.
   (subword-mode t))
 
