@@ -255,7 +255,12 @@
     (setq
      ;; Enable extra features (incompatible with `validate-setq').
      cquery-extra-init-params
-     '(:index (:comments 1) :cacheFormat "msgpack"))))
+     '(:index (:comments 1) :cacheFormat "msgpack")))
+  (use-package lsp-clangd
+    :if (executable-find "clangd")
+    :hook ((c-mode--hook . lsp-clangd-c-enable)
+           (c++-mode-hook . lsp-clangd-c++-enable)
+           (objc-mode-hook . lsp-clangd-objc-enable))))
 
 
 (provide 'modes/c-c++)
