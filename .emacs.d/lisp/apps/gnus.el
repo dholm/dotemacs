@@ -173,6 +173,7 @@
 
 
 (use-package gnus
+  :defer
   :commands gnus
   :hook ((gnus-startup-hook . user--gnus-startup-hook)
          (message-sent-hook . user--gnus-message-sent-hook))
@@ -594,7 +595,13 @@
                :fetcher url
                :url "http://www.informationelle-selbstbestimmung-im-internet.de/emacs/jl-smime3.3/jl-smime.el")
       :init
-      (eval-with-eval-after-load 'gnus '(load "jl-smime"))))
+      (with-eval-after-load 'gnus
+        (load "jl-smime"))
+      ;; Enable S/MIME via EasyPG.
+      (require 'epa-file)
+      ;; S/MIME LDAP support.
+      (require 'ldap)
+      (load "jl-smime")))
 
   (use-package nnir
     :ensure nil
