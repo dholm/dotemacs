@@ -4,9 +4,7 @@
 
 (defun user--fundamental-mode-hook ()
   "Fundamental mode hook."
-  ;; Automatically break long lines.
-  (with-feature 'filladapt
-    (filladapt-mode t))
+  (auto-fill-mode t)
 
   ;; Enable whitespace mode globally.
   (whitespace-mode t)
@@ -46,7 +44,8 @@
     :if (executable-find "goldendict")
     :bind-wrap
     ((:key :doc :dictionary) . goldendict-dwim))
-  (use-package filladapt))
+  (use-package filladapt
+    :disabled))
 
 (user--fundamental-mode-config)
 
