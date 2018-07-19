@@ -6,6 +6,9 @@
   "Message mode hook."
   (user--mail-mode-hook)
 
+  ;; Enable encryption/clearsign.
+  (epa-mail-mode)
+
   (validate-setq
    ;; Select abbrev table for message mode.
    local-abbrev-table message-mode-abbrev-table)
