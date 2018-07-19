@@ -12,6 +12,10 @@
    ;; Select abbrev table for mail mode.
    local-abbrev-table mail-mode-abbrev-table)
 
+  ;; For format=flowed support.
+  (turn-off-auto-fill)
+  (whitespace-mode -1)
+
   ;; Use org structured editing.
   (orgstruct-mode t)
   (orgtbl-mode t)
