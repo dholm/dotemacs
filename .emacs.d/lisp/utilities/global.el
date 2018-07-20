@@ -20,8 +20,8 @@
      ggtags-update-on-save (not (and (boundp 'helm-gtags-auto-update)
                                      helm-gtags-auto-update))))
 
-  (when (tramp-tramp-file-p (buffer-file-name (current-buffer)))
-    ;; Disable eldoc in tramp buffers.
+  (when (file-remote-p (buffer-file-name (current-buffer)))
+    ;; Disable eldoc in remote buffers.
     (remove-function (local 'eldoc-documentation-function) 'ggtags-eldoc-function)))
 
 

@@ -148,8 +148,7 @@
     ;; Disable semantic over Tramp as SemanticDB's save function keeps freezing
     ;; Emacs.
     (add-to-list 'semantic-inhibit-functions
-                 (lambda () (tramp-tramp-file-p (buffer-file-name
-                                                 (current-buffer)))))
+                 (lambda () (file-remote-p (buffer-file-name (current-buffer)))))
     ;; Ensure semantic is aware that it supports emacs-lisp.
     (add-to-list 'semantic-new-buffer-setup-functions
                  '(emacs-lisp-mode . semantic-default-elisp-setup))
