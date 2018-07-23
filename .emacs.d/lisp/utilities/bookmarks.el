@@ -11,7 +11,8 @@
 (defun bookmark--local-directory-bookmarks-to-zsh ()
   "Store Emacs bookmarks in ZSH bookmarks file."
   (interactive)
-  (when (require 'bookmark nil t)
+  (when (and (require 'tramp nil t)
+             (require 'bookmark nil t))
     (set-buffer (find-file-noselect "~/.zsh_bookmarks" t t))
     (delete-region (point-min) (point-max))
     (insert "# -*- mode:sh -*-\n")
@@ -20,7 +21,7 @@
               (let ((name (replace-regexp-in-string "-" "_" (car item)))
                     (file (cdr (assoc 'filename
                                       (if (cddr item) item (cadr item))))))
-                (when (and (not (file-remote-p file))
+                (when (and (not (tramp-tramp-file-p file))
                            (file-directory-p file))
                   (setq collect-names (cons (concat "~" name) collect-names))
                   (insert (format "%s=\"%s\"\n" name (expand-file-name file))))))
