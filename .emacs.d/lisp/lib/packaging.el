@@ -118,6 +118,7 @@
 
 
 (use-package el-get
+  :ensure
   :pin "MELPA"
   :init
   (validate-setq
@@ -130,6 +131,7 @@
    el-get-notify-type 'message)
 
   (use-package use-package-el-get
+    :ensure
     :config
     (use-package-el-get-setup))
 
