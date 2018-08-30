@@ -372,7 +372,11 @@
       :init (add-to-list 'org-babel-load-languages '(translate . t)))
 
     (use-package ob-uart
-      :init (add-to-list 'org-babel-load-languages '(uart . t))))
+      :init (add-to-list 'org-babel-load-languages '(uart . t)))
+
+    (use-package ob-tmux
+      :if (executable-find "tmux")
+      :init (add-to-list 'org-babel-load-languages '(tmux . t))))
 
   (use-package ox
     :ensure nil
