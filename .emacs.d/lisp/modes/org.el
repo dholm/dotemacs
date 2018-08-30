@@ -751,7 +751,10 @@
     :config
     (org-alert-enable))
 
-  (use-package org-agenda-property))
+  (use-package org-agenda-property)
+
+  (use-package org-timeline
+    :hook (org-agenda-finalize-hook . org-timeline-insert-timeline)))
 
 (use-package org-annotate-file
   :ensure org-plus-contrib
