@@ -22,34 +22,35 @@
    ((user/auto-complete-p) (auto-complete-mode t))
    ((user/company-mode-p) (company-mode t)))
 
-  (when (feature-p 'comment-tags)
-    (comment-tags-mode t))
-
   ;;; (Bindings) ;;;
   (user/bind-key-local :code :comment (if (feature-p 'comment-dwim-2)
                                           'comment-dwim-2
-                                        'comment-dwim))
-  (with-feature 'quickrun
-    (user/bind-key-local :code :eval-buffer 'quickrun)
-    (user/bind-key-local :code :eval-selection 'quickrun-region)))
+                                        'comment-dwim)))
 
 
 (use-package prog-mode
   :ensure nil
-  :init
-  (add-hook 'prog-mode-hook 'user--prog-mode-hook)
+  :hook (prog-mode-hook . user--prog-mode-hook)
   :config
   ;;; (Packages) ;;;
   (use-package subword
     :ensure nil
     :diminish subword-mode)
   (use-package comment-dwim-2)
-  (use-package quickrun)
+  (use-package quickrun
+    :bind-wrap
+    (:map prog-mode-map
+          ((:key :code :eval-buffer) . quickrun)
+          ((:key :code :eval-selection) . quickrun-region)))
   (use-package comment-tags
     :diminish comment-tags-mode
+    :hook (prog-mode-hook . comment-tags-mode)
     :config
     (setq
-     comment-tags/keymap-prefix (user/get-key :nav :find-todos))))
+     comment-tags/keymap-prefix (user/get-key :nav :find-todos)))
+  (use-package idle-highlight-in-visible-buffers-mode
+    :disabled
+    :hook (prog-mode-hook . idle-highlight-in-visible-buffers-mode)))
 
 
 (provide 'modes/prog)
