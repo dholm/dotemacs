@@ -9,9 +9,6 @@
 
   (user/gnu-global-enable)
 
-  ;; Enable robe mode
-  (robe-mode t)
-
   ;; Enable inferior ruby mode
   (inf-ruby-minor-mode t)
 
@@ -19,12 +16,7 @@
   (eldoc-mode t)
 
   ;; Separate camel-case into separate words
-  (subword-mode t)
-
-  ;;; (Bindings) ;;;
-  (define-key ruby-mode-map (kbd "TAB") 'indent-for-tab-command)
-  (with-feature 'yari
-    (user/bind-key-local :doc :reference 'yari)))
+  (subword-mode t))
 
 
 (defun user--robe-mode-hook ()
@@ -34,14 +26,25 @@
 (use-package ruby-mode
   :defer
   :hook (ruby-mode-hook . user--ruby-mode-hook)
+  :bind
+  (:map ruby-mode-map
+        ("TAB" . indent-for-tab-command))
   :config
   (use-package robe
-    :hook (robe-mode-hook . user--robe-mode-hook))
+    :hook
+    ((ruby-mode-hook . robe-mode)
+     (robe-mode-hook . user--robe-mode-hook)))
   (use-package inf-ruby)
-  (use-package yari)
+  (use-package yari
+    :bind-wrap
+    (:map ruby-mode-map
+          ((:key :doc :reference) . yari)))
   (use-package rubocopfmt
     :if (executable-find "rubocop")
-    :hook (ruby-mode-hook . rubocopfmt-mode)))
+    :hook (ruby-mode-hook . rubocopfmt-mode))
+  (use-package lsp-ruby
+    :if (executable-find "solargraph")
+    :hook (ruby-mode-hook . lsp-ruby-enable)))
 
 
 (provide 'modes/ruby)
