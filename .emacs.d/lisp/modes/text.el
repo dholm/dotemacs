@@ -43,10 +43,6 @@
   :init
   (add-hook 'text-mode-hook 'user--text-mode-hook)
   :config
-  (with-eval-after-load 'smartparens
-    (sp-with-modes '(text-mode)
-      (sp-local-pair "`" "'" :actions '(insert wrap))))
-
   (use-package flycheck-vale
     :if (executable-find "vale")
     :config

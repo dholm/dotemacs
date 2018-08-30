@@ -426,22 +426,6 @@
      ;; Custom agenda view.
      org-mobile-force-id-on-agenda-items nil))
 
-  (with-eval-after-load 'smartparens
-    (defun sp--org-skip-asterisk (ms mb me)
-      (or (and (= (line-beginning-position) mb)
-               (eq 32 (char-after (1+ mb))))
-          (and (= (1+ (line-beginning-position)) me)
-               (eq 32 (char-after me)))))
-
-    (sp-with-modes 'org-mode
-      (sp-local-pair "*" "*" :actions '(insert wrap)
-                     :unless '(sp-point-after-word-p sp-point-at-bol-p)
-                     :wrap "C-*" :skip-match 'sp--org-skip-asterisk)
-      (sp-local-pair "/" "/" :unless '(sp-point-after-word-p) :post-handlers '(("[d1]" "SPC")))
-      (sp-local-pair "~" "~" :unless '(sp-point-after-word-p) :post-handlers '(("[d1]" "SPC")))
-      (sp-local-pair "=" "=" :unless '(sp-point-after-word-p) :post-handlers '(("[d1]" "SPC")))
-      (sp-local-pair "«" "»")))
-
   ;;; (Bindings) ;;;
   (define-key org-mode-map (kbd "C-c C-o") #'user/org-open-at-point)
 

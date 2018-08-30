@@ -51,18 +51,7 @@
   (add-hook 'haskell-mode-hook 'user--haskell-mode-hook)
   (add-hook 'inferior-haskell-mode-hook 'user--inferior-haskell-mode-hook)
   :config
-  (with-eval-after-load 'smartparens
-    (defun user/haskell-after-symbol-p (_id action _context)
-      (when (eq action 'insert)
-        (save-excursion
-          (backward-char 1)
-          (looking-back "\\sw\\|\\s_\\|\\s'"))))
-
-    (sp-with-modes '(haskell-mode)
-      (sp-local-pair "'" nil :unless '(user/haskell-after-symbol-p))
-      (sp-local-pair "\\(" nil :actions nil)))
-
-    ;;; (Packages) ;;;
+  ;;; (Packages) ;;;
   (use-package ghci-completion)
   (use-package hi2)
   (use-package flycheck-hdevtools)

@@ -93,15 +93,6 @@
             (append '((latex-mode . (tex-compile kill-compilation)))
                     mode-compile-modes-alist)))
 
-    (with-eval-after-load 'smartparens
-      (sp-with-modes '(tex-mode plain-tex-mode latex-mode)
-                     (sp-local-tag "i" "\"<" "\">")
-                     (sp-local-pair "\\[" " \\]")
-                     (sp-local-pair "\\(" " \\)")
-                     (sp-local-pair "\\{" " \\}")
-                     (sp-local-pair "\\left(" " \\right)")
-                     (sp-local-pair "\\left\\{" " \\right\\}")))
-
     ;;; (Packages) ;;;
     (use-package reftex
       :ensure nil
