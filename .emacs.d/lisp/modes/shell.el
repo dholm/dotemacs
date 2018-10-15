@@ -38,7 +38,6 @@
   ;;; (Packages) ;;;
   (use-package lsp-sh
     :if (executable-find "bash-language-server")
-    :quelpa (lsp-sh :fetcher github :repo "emacs-lsp/lsp-sh")
     :hook (sh-mode-hook . lsp-sh-enable))
   (use-package bash-completion)
   (use-package company-shell
