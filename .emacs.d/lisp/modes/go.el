@@ -128,7 +128,12 @@
   (use-package go-gen-test
     :if (executable-find "gotests")
     :bind-wrap (:map go-mode-map
-                     ((:key :code :generate-test) . go-gen-test-dwim))))
+                     ((:key :code :generate-test)
+                      . go-gen-test-dwim)))
+
+  (use-package go-imenu
+    :if (executable-find "go-outline")
+    :hook (go-mode-hook . go-imenu-setup)))
 
 
 (provide 'modes/go)
