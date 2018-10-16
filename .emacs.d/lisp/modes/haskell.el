@@ -46,10 +46,8 @@
 
 (use-package haskell-mode
   :if (executable-find "ghc")
-  :defer
-  :init
-  (add-hook 'haskell-mode-hook 'user--haskell-mode-hook)
-  (add-hook 'inferior-haskell-mode-hook 'user--inferior-haskell-mode-hook)
+  :hook ((haskell-mode-hook . user--haskell-mode-hook)
+         (inferior-haskell-mode-hook . user--inferior-haskell-mode-hook))
   :config
   ;;; (Packages) ;;;
   (use-package ghci-completion)
