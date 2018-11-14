@@ -2,26 +2,19 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun user--solarized-config ()
-  "Initialize Solarized theme."
-  (when window-system
-    (setq-default
-     ;; Force using the 256-color palette since it looks nicer.
-     solarized-force-256color t
-     ;; Make the fringe stand out.
-     solarized-distinct-fringe-background t))
-
-  (load-theme 'solarized t))
-
 (use-package custom
   :ensure nil
   :config
-  (require-package
-   '(:name solarized-theme
-           :type github
-           :pkgname "dholm/solarized-theme"
-           :prepare (add-to-list 'custom-theme-load-path default-directory)
-           :after (user--solarized-config))))
+  (use-package solarized-theme
+    :quelpa (solarized-theme
+             :fetcher github
+             :repo "dholm/solarized-theme")
+    :config
+    (setq
+     ;; Make the fringe stand out.
+     solarized-distinct-fringe-background t)
+
+    (load-theme 'solarized t)))
 
 (use-package faces
   :ensure nil
