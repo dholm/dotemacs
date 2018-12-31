@@ -244,6 +244,7 @@
      '(:index (:comments 1) :cacheFormat "msgpack")))
   (use-package cquery
     :if (executable-find "cquery")
+    :pin "MELPA"
     :config
     (setq
      ;; Enable extra features (incompatible with `validate-setq').

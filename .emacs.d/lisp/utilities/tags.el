@@ -9,8 +9,8 @@
    ;;  - https://github.com/emacs-lsp/lsp-mode/issues/197
    (when buffer-file-name
      (not (tramp-tramp-file-p buffer-file-name)))
-   (boundp 'lsp-mode)
-   lsp-mode))
+   (fboundp 'lsp)
+   (lsp)))
 
 
 (defun user/use-rtags (&optional filemanager)
