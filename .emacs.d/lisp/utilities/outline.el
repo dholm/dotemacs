@@ -26,8 +26,7 @@
 
   (use-package outshine
     :pin "MELPA"
-    :init
-    (add-hook 'outline-minor-mode-hook 'outshine-hook-function)
+    :hook (outline-minor-mode-hook . outshine-mode)
     :config
     (validate-setq
      ;; Enable org-mode-like speed keys.
