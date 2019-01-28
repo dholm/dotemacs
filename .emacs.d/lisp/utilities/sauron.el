@@ -4,17 +4,17 @@
 
 (use-package sauron
   :defer
-  :init
-  (user/bind-key-global :util :notifications 'sauron-toggle-hide-show)
-
-  (sauron-start-hidden)
+  :bind-wrap
+  ((:key :util :notifications) . sauron-toggle-hide-show)
   :config
   (validate-setq
    ;; Display sauron in current frame.
    sauron-separate-frame nil)
 
   (with-eval-after-load 'alert
-    (add-hook 'sauron-event-added-functions 'sauron-alert-el-adapter)))
+    (add-hook 'sauron-event-added-functions 'sauron-alert-el-adapter))
+
+  (sauron-start-hidden))
 
 
 (provide 'utilities/sauron)

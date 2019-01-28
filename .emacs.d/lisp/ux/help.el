@@ -76,8 +76,6 @@
 
 (use-package which-key
   :diminish which-key-mode
-  :init
-  (which-key-mode t)
   :config
   (validate-setq
    ;; Number of seconds until help is shown.
@@ -108,7 +106,9 @@
     user/code-eval-prefix     "eval"
     user/vcs-prefix           "vcs"
     user/utilities-prefix     "utils"
-    user/apps-prefix          "apps"))
+    user/apps-prefix          "apps")
+
+  (which-key-mode t))
 
 
 (provide 'ux/help)

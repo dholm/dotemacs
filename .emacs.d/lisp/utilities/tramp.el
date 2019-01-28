@@ -10,8 +10,9 @@
 
 (use-package tramp
   :after dash
-  :init
-  (autoload 'tramp-check-proper-method-and-host "tramp.el")
+  :commands
+  (tramp-tramp-file-p
+   tramp-check-proper-method-and-host)
   :config
   (validate-setq
    ;; Auto save storage.

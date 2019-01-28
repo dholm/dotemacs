@@ -30,7 +30,7 @@
   (use-package anzu
     :defer
     :diminish anzu-mode
-    :init
+    :config
     (global-anzu-mode t))
 
   (use-package grep

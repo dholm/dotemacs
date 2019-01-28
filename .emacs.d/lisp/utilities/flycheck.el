@@ -48,8 +48,6 @@
   ((flycheck-mode-hook . user--flycheck-mode-hook)
    (ede-minor-mode-hook . user/ede-flycheck-setup)
    (ede-compdb-project-rescan-hook . user/ede-flycheck-setup))
-  :init
-  (global-flycheck-mode t)
   :config
   (validate-setq
    ;; Wait five seconds before starting checker
@@ -66,7 +64,9 @@
     ;; Make sure flycheck-pos-tip is loaded.
     (require 'flycheck-pos-tip nil t))
 
-  (use-package helm-flycheck))
+  (use-package helm-flycheck)
+
+  (global-flycheck-mode t))
 
 
 (provide 'utilities/flycheck)

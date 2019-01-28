@@ -228,10 +228,7 @@
 
   (use-package company
     :diminish company-mode
-    :init
-    (add-hook 'company-mode-hook 'user--company-mode-hook)
-
-    (global-company-mode t)
+    :hook (company-mode-hook . user--company-mode-hook)
     :config
     (validate-setq
      ;; Do not trigger completion automatically.
@@ -274,7 +271,9 @@
       :config
       (validate-setq
        ;; Show quick help popup after half a second.
-       company-quickhelp-delay 0.5))))
+       company-quickhelp-delay 0.5))
+
+    (global-company-mode t)))
 
 (user--completion-config)
 

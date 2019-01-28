@@ -263,7 +263,7 @@ Makes it easier to version control LaTeX-files."
 
   (use-package texfrag
     :diminish texfrag-mode
-    :init
+    :config
     (texfrag-global-mode t)))
 
 

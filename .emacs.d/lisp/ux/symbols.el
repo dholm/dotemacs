@@ -4,7 +4,7 @@
 
 (use-package page-break-lines
   :diminish page-break-lines-mode
-  :init
+  :config
   (global-page-break-lines-mode t))
 
 (with-eval-after-load 'ux/coding

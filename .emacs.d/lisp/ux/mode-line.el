@@ -37,7 +37,7 @@
      doom-modeline-height 18))
 
   (use-package mode-line-bell
-    :init
+    :config
     (mode-line-bell-mode t)))
 
 (user--modeline-config)

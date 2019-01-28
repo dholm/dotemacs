@@ -27,15 +27,14 @@
   (use-package dired-k)
   (use-package async)
   (use-package dired-efap
-    :init
-    (with-eval-after-load 'dired
-      ;; Load dired-efap when dired is loaded.
-      (require 'dired-efap))
     :config
     ;;; (Bindings) ;;;
     (define-key dired-mode-map [R] 'dired-efap)
     (when (display-graphic-p)
-      (define-key dired-mode-map [down-mouse-1] 'dired-efap-click)))
+      (define-key dired-mode-map [down-mouse-1] 'dired-efap-click))
+    (with-eval-after-load 'dired
+      ;; Load dired-efap when dired is loaded.
+      (require 'dired-efap)))
   (use-package all-the-icons-dired
     :if window-system)
   (use-package dired-rsync
