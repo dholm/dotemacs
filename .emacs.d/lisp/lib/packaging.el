@@ -12,7 +12,7 @@
   (setq
    ;; Configure GNU/Emacs package repositories.
    package-archives
-   '(("GNU ELPA"     . "http://elpa.gnu.org/packages/")
+   '(("GNU ELPA"     . "https://elpa.gnu.org/packages/")
      ("MELPA Stable" . "http://stable.melpa.org/packages/")
      ("MELPA"        . "http://melpa.org/packages/")
      ("org"          . "http://orgmode.org/elpa/")
