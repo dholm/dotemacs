@@ -17,7 +17,6 @@
   (whitespace-mode -1)
 
   ;; Use org structured editing.
-  (orgstruct-mode t)
   (orgtbl-mode t)
 
   ;; Enable footnotes.

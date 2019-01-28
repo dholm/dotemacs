@@ -20,7 +20,6 @@
   (setq-local whitespace-line-column 72)
 
   ;; Enable org minor mode editing tools.
-  (orgstruct-mode t)
   (orgtbl-mode t))
 
 (use-package vc-annotate
