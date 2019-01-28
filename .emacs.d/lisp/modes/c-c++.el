@@ -72,9 +72,10 @@
    ((feature-p 'cquery) (ignore-errors (lsp-cquery-enable)))
    ((feature-p 'ccls) (ignore-errors (lsp-ccls-enable))))
 
-  (when (user/use-rtags)
-    (when (require 'flycheck-rtags nil :noerror)
-      (flycheck-select-checker 'rtags)))
+  (when (require 'flycheck-rtags nil :noerror)
+    (if (user/use-rtags)
+        (flycheck-select-checker 'rtags)
+      (flycheck-disable-checker 'rtags)))
 
   (user/smartparens-enable))
 
