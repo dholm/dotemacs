@@ -57,14 +57,11 @@
       (executable-find "hunspell")))
 
 (when (user-flyspell-p)
-  (require-package '(:name flyspell))
   (use-package flyspell
     :ensure nil
-    :defer
     :diminish flyspell-mode
-    :init
-    (add-hook 'flyspell-mode-hook 'user--flyspell-mode-hook)
-    (add-hook 'flyspell-prog-mode-hook 'user--flyspell-prog-mode-hook)
+    :hook ((flyspell-mode-hook . user--flyspell-mode-hook)
+	   (flyspell-prog-mode-hook . user--flyspell-prog-mode-hook))
     :config
     (validate-setq
      ;; Be silent when checking words.
@@ -103,7 +100,6 @@
        flyspell-lazy-window-idle-seconds 60))
 
     (use-package guess-language
-      :defer
       :diminish guess-language-mode
       :config
       (validate-setq

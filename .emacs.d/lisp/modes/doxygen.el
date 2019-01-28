@@ -49,14 +49,6 @@
     :hook (doxygen-mode-hook . highlight-doxygen-mode))
 
   ;;; (Packages) ;;;
-  (use-package doxymacs
-    :disabled
-    :if (pkg-config-has-p "libxml-2.0")
-    :ensure nil
-    :el-get t
-    :diminish doxymacs-mode
-    :hook (doxygen-mode-hook . doxymacs-font-lock))
-
   (use-package doc-mode
     :defer
     :quelpa (doc-mode

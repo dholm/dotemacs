@@ -5,9 +5,6 @@
 (require 'lib/net)
 
 
-(defvar el-get-safe-mode nil
-  "Start el-get in safe mode.")
-
 (with-feature 'package
   (setq
    ;; Configure GNU/Emacs package repositories.
@@ -97,62 +94,6 @@
     (use-package-handler/:bind name keyword arg rest state))
   (defun use-package-handler/:bind*-wrap (name keyword arg rest state)
     (use-package-handler/:bind name keyword arg rest state 'bind-keys*)))
-
-
-(defun user/package-as-el-get (package)
-  "Convert PACKAGE into el-get format."
-  (append
-   `(:name ,(plist-get package :name))
-   (when (plist-member package :before)
-     `(:before ,(plist-get package :before)))
-   (when (plist-member package :after)
-     `(:after ,(plist-get package :after)))
-   (when (plist-member package :prepare)
-     `(:prepare ,(plist-get package :prepare)))
-   (when (plist-member package :type)
-     (append
-      `(:type ,(plist-get package :type))
-      (cond
-       ((plist-member package :url) `(:url ,(plist-get package :url)))
-       ((plist-member package :pkgname) `(:pkgname ,(plist-get package :pkgname))))))))
-
-
-(use-package el-get
-  :ensure
-  :pin "MELPA"
-  :init
-  (validate-setq
-   el-get-safe-mode t)
-  :config
-  (validate-setq
-   el-get-user-package-directory (path-join user-emacs-directory "init")
-   el-get-verbose el-get-safe-mode
-   ;; Don't produce system notifications.
-   el-get-notify-type 'message)
-
-  (use-package use-package-el-get
-    :ensure
-    :config
-    (use-package-el-get-setup))
-
-  (defun require-package (package)
-    "Add the specified PACKAGE to el-get-sources."
-    (add-to-list 'el-get-sources (user/package-as-el-get package)))
-
-  (defun user/package-list ()
-    "Get the list of registered packages from el-get."
-    (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources)))
-
-  (defun user/sync-packages ()
-    "Sync all required packages."
-    (let ((package-list (user/package-list)))
-      (if el-get-safe-mode
-          (el-get 'sync package-list)
-        (el-get nil package-list))))
-
-  (require-package '(:name el-get))
-  (add-to-list 'el-get-recipe-path
-               (path-join *user-el-get-directory* "el-get" "recipes")))
 
 
 (provide 'lib/packaging)

@@ -46,17 +46,7 @@
              :repo "dengste/doc-present")
     :init
     (autoload 'doc-present "doc-present" nil t)
-    (autoload 'doc-present-mode "doc-present" nil t))
-
-  (use-package doc-view-fit-to-page
-    :disabled
-    :if window-system
-    :el-get t
-    :bind
-    (:map doc-view-mode-map
-          ("f" . doc-view-fit-page-to-window)
-          ("w" . doc-view-fit-width-to-window)
-          ("h" . doc-view-fit-height-to-window))))
+    (autoload 'doc-present-mode "doc-present" nil t)))
 
 
 (provide 'modes/doc-view)

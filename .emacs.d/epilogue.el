@@ -11,11 +11,7 @@
   (load *user-local-init*))
 
 
-;; Synchronize all registered packages.
-(user/sync-packages)
-
-
-;; Load custom after all packages have been synced.
+;; Load custom after all packages have been installed.
 (when (file-exists-p *user-custom-file*)
   (load *user-custom-file*))
 

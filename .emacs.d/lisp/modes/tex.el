@@ -247,10 +247,6 @@ Makes it easier to version control LaTeX-files."
                :fetcher hg
                :url "https://bitbucket.org/tequilasunset/auto-complete-latex")
       :config
-      (validate-setq
-       ac-l-dict-directory (path-join (el-get-package-directory
-                                       'auto-complete-latex)
-                                      "ac-l-dict"))
       (add-ac-modes 'latex-mode 'LaTeX-mode))
 
     (use-package company-math

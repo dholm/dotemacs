@@ -35,9 +35,6 @@
   (path-join *user-home-directory* "Documents")
   "Path to user's documents directory.")
 
-(defconst *user-el-get-directory*
-  (path-join user-emacs-directory "el-get")
-  "Path to user's el-get store.")
 (defconst *user-local-init*
   (path-join *user-home-directory* ".emacs.local.el")
   "Path to user's machine-local configuration file.")
