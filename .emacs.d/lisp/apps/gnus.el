@@ -162,7 +162,7 @@
   ;; Set up smtpmail queue based on Gnus queue state.
   (defadvice gnus (after gnus-queue-off activate)
     "Turn off and flush the smtpmail queue when starting a plugged gnus."
-    (when (featurep 'smtpmail)
+    (with-feature 'smtpmail
       (validate-setq smtpmail-queue-mail nil)
       (when (file-exists-p (path-join smtpmail-queue-dir "index"))
         (smtpmail-send-queued-mail))))
