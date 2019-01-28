@@ -40,32 +40,33 @@
 
 (defun user/gnu-global-enable ()
   "Activate GNU Global in current major mode."
-  (with-feature 'helm-gtags
-    (helm-gtags-mode t))
+  (when (executable-find "global")
+    (with-feature 'helm-gtags
+      (helm-gtags-mode t))
 
-  (with-feature 'ggtags
-    (ggtags-mode t)
+    (with-feature 'ggtags
+      (ggtags-mode t)
 
-    (unless (and (boundp 'imenu-create-index-function)
-                 imenu-create-index-function)
+      (unless (and (boundp 'imenu-create-index-function)
+                   imenu-create-index-function)
+        (setq-local
+         ;; Use ggtags to generate imenu.
+         imenu-create-index-function #'ggtags-build-imenu-index))
+
       (setq-local
-       ;; Use ggtags to generate imenu.
-       imenu-create-index-function #'ggtags-build-imenu-index))
+       ;; Use as source for `hippie-exp'.
+       hippie-expand-try-functions-list
+       (cons 'ggtags-try-complete-tag hippie-expand-try-functions-list)))
 
-    (setq-local
-     ;; Use as source for `hippie-exp'.
-     hippie-expand-try-functions-list
-     (cons 'ggtags-try-complete-tag hippie-expand-try-functions-list)))
+    (with-eval-after-load 'semantic
+      (with-feature 'semantic/db-global
+        ;; Enable semantic GNU/GLOBAL database.
+        (semanticdb-enable-gnu-global-in-buffer t)))
 
-  (with-eval-after-load 'semantic
-    (with-feature 'semantic/db-global
-      ;; Enable semantic GNU/GLOBAL database.
-      (semanticdb-enable-gnu-global-in-buffer t)))
+    ;; Register as auto-completion source.
+    (add-ac-sources 'ac-source-gtags)
 
-  ;; Register as auto-completion source.
-  (add-ac-sources 'ac-source-gtags)
-
-  (user/tags-try-enable))
+    (user/tags-try-enable)))
 
 
 (defsubst user/gnu-global-query-label ()
