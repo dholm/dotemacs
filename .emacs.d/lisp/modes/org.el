@@ -121,9 +121,6 @@
 
 
 (use-package org
-  :ensure org-plus-contrib
-  :defer
-  :commands org-mode
   :init
   ;; Create data and cache stores.
   (make-directory *user-org-data-directory* t)
@@ -135,6 +132,10 @@
   (add-hook 'org-load-hook 'user--org-load-hook)
   (add-hook 'org-mode-hook 'user--org-mode-hook)
   :config
+  (use-package org-plus-contrib
+    :ensure t
+    :no-require t)
+
   (validate-setq
    ;; Org data store.
    org-directory *user-org-data-directory*
