@@ -3,6 +3,7 @@
 ;;; Code:
 
 (use-package ebuild-mode
+  :disabled
   :defer
   :quelpa (ebuild-mode
            :fetcher git

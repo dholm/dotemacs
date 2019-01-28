@@ -73,7 +73,7 @@
     (bookmark--local-directory-bookmarks-to-zsh))
 
   (use-package bookmark+
-    :defer
+    :disabled
     :config
     (validate-setq
      ;; Save bookmarks after ten updates.

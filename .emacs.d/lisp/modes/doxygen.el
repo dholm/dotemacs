@@ -50,6 +50,7 @@
 
   ;;; (Packages) ;;;
   (use-package doxymacs
+    :disabled
     :if (pkg-config-has-p "libxml-2.0")
     :ensure nil
     :el-get t

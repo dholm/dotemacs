@@ -13,7 +13,7 @@
   (epa-mail-mode))
 
 (use-package mu4e
-  :ensure nil
+  :disabled
   :el-get t
   :commands mu4e
   :config

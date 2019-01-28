@@ -20,7 +20,7 @@
   :config
   ;;; (Packages) ;;;
   (use-package info+
-    :defer
+    :disabled
     :config
     (validate-setq
      ;; Enable breadcrumbs in header line.

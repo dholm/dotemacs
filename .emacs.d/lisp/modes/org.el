@@ -526,7 +526,8 @@
   (use-package org-download)
   (use-package org-elisp-help)
   ;; Enables `#+BEGIN_FSTREE: <dir>' for directory listings.
-  (use-package org-fstree)
+  (use-package org-fstree
+    :disabled)
   (use-package org-vcard)
   ;; Enables `#+BEGIN: kanban' for producing a kanban table.
   (use-package org-kanban))

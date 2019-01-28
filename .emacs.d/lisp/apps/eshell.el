@@ -142,6 +142,7 @@
   (use-package eshell-bookmark)
 
   (use-package company-eshell-autosuggest
+    :disabled
     :after (company))
 
   (use-package esh-autosuggest
