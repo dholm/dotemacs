@@ -254,7 +254,7 @@
     (user/bind-key-local :nav :go-back 'user/tag-pop)))
 
 (use-package rtags
-  :if (executable-find "llvm-config")
+  :if (executable-find "rc")
   :bind-wrap
   (:map rtags-mode-map
         ((:key :code :insert-dependency) . rtags-get-include-file-for-symbol))
