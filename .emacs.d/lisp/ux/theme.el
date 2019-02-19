@@ -5,16 +5,17 @@
 (use-package custom
   :ensure nil
   :config
-  (use-package solarized-theme
-    :quelpa (solarized-theme
+  (use-package solarized-dholm-theme
+    :quelpa (solarized-dholm-theme
              :fetcher github
              :repo "dholm/solarized-theme")
+    :ensure t
     :config
     (setq
      ;; Make the fringe stand out.
      solarized-distinct-fringe-background t)
 
-    (load-theme 'solarized t)))
+    (load-theme 'solarized-dholm t)))
 
 (use-package faces
   :ensure nil
