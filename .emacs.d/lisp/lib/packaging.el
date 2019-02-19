@@ -39,8 +39,6 @@
   :pin "MELPA"
   :config
   (validate-setq
-   ;; Always ensure packages have been installed.
-   use-package-always-ensure t
    ;; Hooks are verbatim.
    use-package-hook-name-suffix nil)
 
