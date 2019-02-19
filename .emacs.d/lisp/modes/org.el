@@ -529,7 +529,10 @@
   ;; Enables `#+BEGIN_FSTREE: <dir>' for directory listings.
   (use-package org-fstree
     :disabled)
-  (use-package org-vcard)
+  (use-package org-vcard
+    :config
+    (validate-setq
+     org-vcard-custom-styles-dir (path-join *user-org-data-directory* "org-vcard-styles")))
   ;; Enables `#+BEGIN: kanban' for producing a kanban table.
   (use-package org-kanban))
 
