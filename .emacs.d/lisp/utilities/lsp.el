@@ -13,6 +13,8 @@
          (lsp-mode-hook . user--lsp-mode-hook))
   :config
   (validate-setq
+   ;; Prefer Flycheck.
+   lsp-prefer-flymake nil
    ;; Location of persistent LSP session.
    lsp-session-file (path-join *user-cache-directory* "lsp-session"))
 
