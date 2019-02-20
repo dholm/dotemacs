@@ -13,6 +13,8 @@
          (lsp-mode-hook . user--lsp-mode-hook))
   :config
   (validate-setq
+   ;; Automatically try to figure out project root.
+   lsp-auto-guess-root t
    ;; Prefer Flycheck.
    lsp-prefer-flymake nil
    ;; Location of persistent LSP session.
