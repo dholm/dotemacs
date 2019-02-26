@@ -8,11 +8,11 @@
   (use-package flycheck-yamllint
     :if (executable-find "yamllint")
     :config
-    (flycheck-yamllint-setup)
+    (flycheck-yamllint-setup))
 
-    (use-package yaml-imenu
-      :config
-      (yaml-imenu-enable))))
+  (use-package yaml-imenu
+    :config
+    (yaml-imenu-enable)))
 
 
 (provide 'modes/yaml)
