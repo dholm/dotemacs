@@ -405,15 +405,17 @@
        'latex))
 
     (use-package ox-mediawiki
-      :init (add-to-list 'org-export-backends 'mediawiki))
+      :config (add-to-list 'org-export-backends 'mediawiki))
     (use-package ox-gfm
-      :init (add-to-list 'org-export-backends 'gfm))
+      :config (add-to-list 'org-export-backends 'gfm))
     (use-package ox-jira
-      :init (add-to-list 'org-export-backends 'jira))
+      :config (add-to-list 'org-export-backends 'jira))
     (use-package ox-pandoc
       :if (executable-find "pandoc")
       :pin "MELPA"
-      :init (add-to-list 'org-export-backends 'pandoc)))
+      :config (add-to-list 'org-export-backends 'pandoc))
+    (use-package ox-rfc
+      :config (add-to-list 'org-export-backends 'rfc)))
 
   ;; Load org agenda.
   (add-to-list 'org-modules 'org-agenda)
