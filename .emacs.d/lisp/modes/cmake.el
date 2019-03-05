@@ -26,7 +26,10 @@
     (add-to-list 'company-backends 'company-cmake))
 
   (use-package cmake-font-lock
-    :hook (cmake-mode-hook . cmake-font-lock-activate)))
+    :hook (cmake-mode-hook . cmake-font-lock-activate))
+
+  (use-package eldoc-cmake
+    :hook (cmake-mode . eldoc-cmake-enable)))
 
 
 (provide 'modes/cmake)
