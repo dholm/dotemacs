@@ -81,12 +81,12 @@
           (executable-find "latex"))
   (use-package tex-mode
     :defer
-    :init
-    (add-hook 'tex-mode-hook 'user--tex-mode-hook)
-    (add-hook 'TeX-mode-hook 'user--tex-mode-hook)
-    (add-hook 'latex-mode-hook 'user--latex-mode-hook)
-    (add-hook 'LaTeX-mode-hook 'user--latex-mode-hook)
-    (add-hook 'bibtex-mode-hook 'user--bibtex-mode-hook)
+    :hook
+    ((tex-mode-hook . user--tex-mode-hook)
+     (TeX-mode-hook . user--tex-mode-hook)
+     (latex-mode-hook . user--latex-mode-hook)
+     (LaTeX-mode-hook . user--latex-mode-hook)
+     (bibtex-mode-hook . user--bibtex-mode-hook))
     :config
     (with-eval-after-load 'mode-compile
       (setq mode-compile-modes-alist
@@ -115,8 +115,10 @@
        bibtex-autokey-year-length 4)
 
       (use-package gscholar-bibtex)
-
-      (use-package bibtex-utils))
+      (use-package bibtex-utils)
+      (use-package bibclean-format
+        :if (executable-find "bibclean")
+        :hook (bibtex-mode-hook . bibclean-format-on-save-mode)))
 
     (use-package auctex
       :bind (:map LaTeX-mode-map
@@ -231,8 +233,7 @@ Makes it easier to version control LaTeX-files."
 
     (use-package zotelo
       :diminish zotelo-minor-mode
-      :config
-      (add-hook 'TeX-mode-hook 'zotelo-minor-mode))
+      :hook (TeX-mode-hook . zotelo-minor-mode))
 
     (use-package ac-math
       :after (auto-complete)
