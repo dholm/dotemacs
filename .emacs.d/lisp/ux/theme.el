@@ -34,6 +34,11 @@
       (set-face-attribute 'default nil :foundry "bitstream" :family "Meslo LG S DZ"
                           :height 74 :weight 'normal)))))
 
+(use-package ns-auto-titlebar
+  :if (eq system-type 'darwin)
+  :config
+  (ns-auto-titlebar-mode))
+
 (use-package face-remap
   :ensure nil
   :bind-wrap
