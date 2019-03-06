@@ -25,6 +25,7 @@
   ;;; (Bindings) ;;;
   (user/bind-key-global :nav :scroll-up 'user/scroll-up)
   (user/bind-key-global :nav :scroll-down 'user/scroll-down)
+  (user/bind-key-global :nav :goto-line 'goto-line)
   (user/bind-key-global :nav :go-back 'pop-global-mark)
 
   ;;; (Packages) ;;;
@@ -33,6 +34,7 @@
     :init
     (user/bind-key-global :util :ace-jump-mode 'ace-jump-mode))
   (use-package goto-line-preview
+    :disabled
     :config
     (user/bind-key-global :nav :goto-line 'goto-line-preview))
   (use-package smart-forward
