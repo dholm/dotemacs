@@ -41,9 +41,9 @@
      grep-highlight-matches t)
 
     (when (eq system-type 'darwin)
-      (when-let (gnu-find (executable-find "gfind"))
+      (-when-let (gnu-find (executable-find "gfind"))
         (validate-setq find-program gnu-find)))
-    (when-let (gnu-xargs (executable-find "gxargs"))
+    (-when-let (gnu-xargs (executable-find "gxargs"))
       (validate-setq xargs-program gnu-xargs))
 
     (use-package wgrep
