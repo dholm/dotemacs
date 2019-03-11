@@ -36,7 +36,6 @@
   (require 'validate))
 
 (use-package use-package
-  :pin "MELPA"
   :config
   (validate-setq
    ;; Hooks are verbatim.
