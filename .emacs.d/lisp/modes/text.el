@@ -8,7 +8,7 @@
 
   (user/smartparens-enable)
 
-  (setq
+  (validate-setq
    ;; Colons are followed by two spaces.
    colon-double-space t
    ;; Sentences end after two spaces.
