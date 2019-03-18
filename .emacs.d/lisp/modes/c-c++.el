@@ -69,8 +69,8 @@
 
   ;; Enable LSP components, if installed.
   (cond
-   ((feature-p 'cquery) (ignore-errors (lsp-cquery-enable)))
-   ((feature-p 'ccls) (ignore-errors (lsp-ccls-enable))))
+   ((feature-p 'ccls) (ignore-errors (lsp-ccls-enable)))
+   ((feature-p 'cquery) (ignore-errors (lsp-cquery-enable))))
 
   (when (require 'flycheck-rtags nil :noerror)
     (if (user/use-rtags)
