@@ -25,7 +25,8 @@
         ;; Run spell-checker in programming mode.
         (flyspell-prog-mode)))
 
-  (with-feature 'flycheck-vale
+  (when (and (feature-p 'flycheck-vale)
+             (executable-find "vale"))
     (flycheck-vale-setup))
 
   (with-feature 'pandoc-mode
