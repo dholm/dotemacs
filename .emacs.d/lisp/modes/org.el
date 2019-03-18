@@ -751,7 +751,9 @@
                   (org-super-agenda-groups
                    '((:name "Projects"
                             :children todo)
-                     (:discard (:anything t))))))))))
+                     (:discard (:anything t)))))))))
+
+    (org-super-agenda-mode))
 
   (use-package org-alert
     :after alert
