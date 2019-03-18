@@ -10,7 +10,13 @@
 
   (when (and (boundp 'excorporate-configuration) excorporate-configuration)
     ;; If excorporate has been configured make sure it's up and running.
-    (excorporate)))
+    (excorporate)
+    (excorporate-diary-enable)))
+
+
+(defun user--exco-agenda-update-diary ()
+  "Call excorporate to update the diary for today."
+  (exco-diary-diary-advice (calendar-current-date) (calendar-current-date) #'message "diary updated"))
 
 
 (defun user/swedish-easter (year)
@@ -225,7 +231,8 @@
   (use-package calfw-org))
 
 (use-package excorporate
-  :defer)
+  :after org
+  :hook (org-agenda-cleanup-fancy-diary-hook . user--exco-agenda-update-diary))
 
 (provide 'apps/calendar)
 ;;; calendar.el ends here
