@@ -39,7 +39,8 @@
          (rst-mode-hook . user--rst-mode-hook))
   :config
   (use-package auto-complete-rst
-    :after (auto-complete)))
+    :after (auto-complete))
+  (use-package poly-rst))
 
 
 (provide 'modes/rest)
