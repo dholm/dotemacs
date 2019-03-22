@@ -370,6 +370,13 @@
        gnus-sum-thread-tree-leaf-with-other "+-> "
        gnus-sum-thread-tree-single-leaf     "\\-> "))
 
+    (use-package gnus-recent
+      :bind-wrap
+      (:map gnus-summary-mode-map
+            ((:key :nav :go-back) . gnus-recent-goto-previous)
+            :map gnus-group-mode-map
+            ((:key :nav :go-back) . gnus-recent-goto-previous)))
+
     ;;; (Bindings) ;;;
     (with-eval-after-load 'gnus
       (define-key gnus-summary-mode-map (kbd "[")
