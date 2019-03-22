@@ -633,6 +633,11 @@
     :config
     (all-the-icons-gnus-setup))
 
+  (use-package gnus-select-account
+    :pin "MELPA"
+    :config
+    (gnus-select-account-enable))
+
   ;; Initialize Gnus modules.
   (require 'nnir))
 
