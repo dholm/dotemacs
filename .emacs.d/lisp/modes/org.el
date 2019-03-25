@@ -127,10 +127,12 @@
   (make-directory *user-org-cache-directory* t)
   ;; Fix for EIN if org hasn't been setup yet.
   (autoload 'org-add-link-type "org" "" t)
-
-  ;;; (Hooks) ;;;
-  (add-hook 'org-load-hook 'user--org-load-hook)
-  (add-hook 'org-mode-hook 'user--org-mode-hook)
+  :hook
+  ((org-load-hook . user--org-load-hook)
+   (org-mode-hook . user--org-mode-hook))
+  :bind
+  (:map org-mode-map
+        ("C-c C-o" . user/org-open-at-point))
   :config
   (use-package org-plus-contrib
     :ensure t
@@ -433,8 +435,6 @@
      ;; Custom agenda view.
      org-mobile-force-id-on-agenda-items nil))
 
-  ;;; (Bindings) ;;;
-  (define-key org-mode-map (kbd "C-c C-o") #'user/org-open-at-point)
 
   ;;; (Packages) ;;;
   (use-package org-rich-yank
@@ -770,8 +770,8 @@
   :defer
   :init
   (autoload 'org-annotate-file "org-annotate-file" nil t)
-
-  (user/bind-key-global :util :annotate-buffer 'user/org-annotate-file)
+  :bind-wrap
+  ((:key :util :annotate-buffer) . user/org-annotate-file)
   :config
   (validate-setq
    ;; Annotations data store.
