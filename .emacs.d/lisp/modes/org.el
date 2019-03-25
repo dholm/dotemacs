@@ -435,6 +435,7 @@
      ;; Custom agenda view.
      org-mobile-force-id-on-agenda-items nil))
 
+  (use-package org-onenote)
 
   ;;; (Packages) ;;;
   (use-package org-rich-yank
