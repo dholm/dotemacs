@@ -3,8 +3,7 @@
 ;;; Code:
 
 (defun user--lsp-mode-hook ()
-  "Mode hook for LSP minor modes."
-  (user/tags-try-enable))
+  "Mode hook for LSP minor modes.")
 
 (use-package lsp-mode
   :pin "MELPA"
