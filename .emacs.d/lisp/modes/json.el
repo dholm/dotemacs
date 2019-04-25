@@ -6,7 +6,9 @@
   :defer
   :mode "\\.bowerrc$"
   :config
-  (use-package json-navigator))
+  (use-package json-navigator)
+  (use-package json-reformatter-jq
+    :if (executable-find "jq")))
 
 (use-package jsonnet-mode)
 
