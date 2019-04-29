@@ -84,8 +84,6 @@
 (use-package move-text
   :defer)
 
-(user/bind-key-global :basic :cut-expr 'kill-sexp)
-
 
 (provide 'ux/kill-yank)
 ;;; kill-yank.el ends here
