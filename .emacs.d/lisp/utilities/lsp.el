@@ -6,7 +6,6 @@
   "Mode hook for LSP minor modes.")
 
 (use-package lsp-mode
-  :pin "MELPA"
   :commands lsp
   :hook ((lsp-after-open-hook . lsp-enable-imenu)
          (lsp-mode-hook . user--lsp-mode-hook))
@@ -20,10 +19,8 @@
    lsp-session-file (path-join *user-cache-directory* "lsp-session"))
 
   (use-package lsp-ui
-    :pin "MELPA"
     :hook (lsp-mode-hook . lsp-ui-mode))
   (use-package company-lsp
-    :pin "MELPA"
     :after (company)
     :config
     (validate-setq
