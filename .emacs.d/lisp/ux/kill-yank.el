@@ -40,17 +40,19 @@
     (global-set-key [remap yank] 'clipboard-yank)))
 
 (use-package expand-region
-  :defer
-  :init
-  (user/bind-key-global :basic :selection-expand 'er/expand-region))
+  :bind-wrap
+  (((:key :basic :selection-expand) . er/expand-region)
+   ((:key :basic :select-paragraph) . er/mark-paragraph)
+   ((:key :basic :select-function) . er/mark-defun)
+   ((:key :basic :select-inside) . er/mark-inside-pairs)))
 
 (use-package multiple-cursors
   :defer
-  :init
-  (user/bind-key-global :basic :selection-next 'mc/mark-next-like-this)
-  (user/bind-key-global :basic :selection-prev 'mc/mark-previous-like-this)
-  (user/bind-key-global :basic :selection-all 'mc/mark-all-like-this)
-  (user/bind-key-global :basic :selection-edit-lines 'mc/edit-lines))
+  :bind-wrap
+  (((:key :basic :selection-next) . mc/mark-next-like-this)
+   ((:key :basic :selection-prev) . mc/mark-previous-like-this)
+   ((:key :basic :selection-all) . mc/mark-all-like-this)
+   ((:key :basic :selection-edit-lines) . mc/edit-lines)))
 
 (use-package rect-mark
   :defer
@@ -60,16 +62,16 @@
 
 (use-package simple
   :ensure nil
-  :init
-  ;; Delete words with C/M-w and rebind kill/yank region to C-x C-k/C-x C-w.
-  (user/bind-key-global :basic :cut-word-left 'backward-kill-word)
-  (user/bind-key-global :basic :cut-word-right 'kill-word)
-  ;; Set up basic copy/paste
-  (user/bind-key-global :basic :selection-start 'set-mark-command)
-  (user/bind-key-global :basic :copy 'kill-ring-save)
-  (user/bind-key-global :basic :cut 'kill-region)
-  (user/bind-key-global :basic :paste 'yank)
-  (user/bind-key-global :basic :cycle-paste 'yank-pop)
+  :bind-wrap
+  (;; Delete words with C/M-w and rebind kill/yank region to C-x C-k/C-x C-w.
+   ((:key :basic :cut-word-left) . backward-kill-word)
+   ((:key :basic :cut-word-right) . kill-word)
+   ;; Set up basic copy/paste
+   ((:key :basic :selection-start) . set-mark-command)
+   ((:key :basic :copy) . kill-ring-save)
+   ((:key :basic :cut) . kill-region)
+   ((:key :basic :paste) . yank)
+   ((:key :basic :cycle-paste) . yank-pop))
   :config
   (validate-setq
    ;; Increase the maximum number of saved kill ring entries.

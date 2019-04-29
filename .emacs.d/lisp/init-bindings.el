@@ -165,6 +165,10 @@
                 (:selection-all . "C-c M-.")
                 (:selection-edit-lines . "C-c M-e")
 
+                (:select-paragraph . "M-h")
+                (:select-function . "C-M-h")
+                (:select-inside . "M-+")
+
                 (:widen . (user/view-prefix "n w"))
                 (:narrow-to-page . (user/view-prefix "n p"))
                 (:narrow-to-region . (user/view-prefix "n r"))
