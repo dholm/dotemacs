@@ -51,14 +51,13 @@
 (use-package lisp-mode
   :ensure nil
   :defer
-  :init
-  (add-hook 'lisp-mode-hook 'user--lisp-mode-hook)
+  :hook (lisp-mode-hook . user--lisp-mode-hook)
   :config
   :config
   (use-package slime
-    :init
-    (add-hook 'slime-mode-hook 'user--slime-mode-hook)
-    (add-hook 'slime-repl-mode-hook 'user--slime-mode-hook)
+    :hook
+    ((slime-mode-hook . user--slime-mode-hook)
+     (slime-repl-mode-hook . user--slime-mode-hook))
     :config
     (validate-setq
      slime-protocol-version 'ignore
@@ -83,7 +82,10 @@
     (use-package ac-slime
       :after (auto-complete)
       :config
-      (add-ac-modes 'slime-repl-mode)))
+      (add-ac-modes 'slime-repl-mode))
+
+    (use-package slime-repl-ansi-color
+      :hook (slime-mode-hook . slime-repl-ansi-color-mode)))
 
   (use-package easy-escape
     :diminish easy-escape-minor-mode))
