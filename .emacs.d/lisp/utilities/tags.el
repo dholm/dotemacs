@@ -33,13 +33,13 @@
 
 (defun user/use-helm-gtags ()
   "Check if helm-gtags can be used."
-  (and (boundp 'helm-gtags-mode) helm-gtags-mode
-       (boundp 'helm-gtags-tag-location) helm-gtags-tag-location))
+  (and (fboundp 'helm-gtags-mode) helm-gtags-mode
+       (fboundp 'helm-gtags-tag-location) helm-gtags-tag-location))
 
 
 (defun user/use-semantic ()
   "Check if semantic can be used."
-  (and (boundp 'semantic-mode)
+  (and (fboundp 'semantic-mode)
        semantic-mode))
 
 
@@ -82,7 +82,7 @@
   "Follow tag at point using best available method."
   (interactive)
   (unless (and (user/use-rtags)
-               (boundp 'rtags-last-request-not-indexed)
+               (fboundp 'rtags-last-request-not-indexed)
                (not rtags-last-request-not-indexed)
                (rtags-find-symbol-at-point))
     (user/eval-until-move
@@ -107,7 +107,7 @@
 (defun user/tag-references-at-point ()
   "Find references at current point."
   (interactive)
-  (unless (and (user/use-rtags (and (boundp 'rtags-last-request-not-indexed)
+  (unless (and (user/use-rtags (and (fboundp 'rtags-last-request-not-indexed)
                                     (not rtags-last-request-not-indexed)))
                (rtags-find-references-at-point))
     (user/eval-until-move
@@ -185,7 +185,7 @@
   "Find implementers of virtual function at point."
   (interactive)
   (unless (and (user/use-rtags)
-               (boundp 'rtags-last-request-not-indexed)
+               (fboundp 'rtags-last-request-not-indexed)
                (not rtags-last-request-not-indexed)
                (rtags-find-virtuals-at-point))))
 
@@ -194,7 +194,7 @@
   "List dependencies of current file."
   (interactive)
   (unless (and (user/use-rtags)
-               (boundp 'rtags-last-request-not-indexed)
+               (fboundp 'rtags-last-request-not-indexed)
                (not rtags-last-request-not-indexed)
                (rtags-print-dependencies))))
 
@@ -207,7 +207,7 @@
     (user/eval-until-move
      '(((user/use-helm-gtags)
         (call-interactively 'helm-gtags-select-path))
-       ((boundp 'projectile-find-file)
+       ((fboundp 'projectile-find-file)
         (call-interactively 'projectile-find-file))))))
 
 
