@@ -43,11 +43,6 @@
   (when (feature-p 'ac-slime)
     (set-up-slime-ac)))
 
-(use-package lisp
-  :ensure nil
-  :bind-wrap
-  (((:key :basic :cut-expr) . kill-sexp)))
-
 (use-package lisp-mode
   :ensure nil
   :defer
