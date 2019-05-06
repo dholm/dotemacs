@@ -6,6 +6,7 @@
   "Mode hook for LSP minor modes.")
 
 (use-package lsp-mode
+  :pin "MELPA"
   :commands lsp
   :hook ((lsp-after-open-hook . lsp-enable-imenu)
          (lsp-mode-hook . user--lsp-mode-hook))
@@ -16,7 +17,9 @@
    ;; Prefer Flycheck.
    lsp-prefer-flymake nil
    ;; Location of persistent LSP session.
-   lsp-session-file (path-join *user-cache-directory* "lsp-session"))
+   lsp-session-file (path-join *user-cache-directory* "lsp-session")
+   ;; Disable yasnippet integration.
+   lsp-enable-snippet nil)
 
   (use-package lsp-ui
     :hook (lsp-mode-hook . lsp-ui-mode))

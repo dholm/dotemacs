@@ -101,6 +101,7 @@
      gofmt-command "goimports"))
 
   (use-package lsp-go
+    :ensure nil
     :if (executable-find "go-langserver")
     :hook (go-mode-hook . lsp-go-enable))
 
