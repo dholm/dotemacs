@@ -12,10 +12,7 @@
   (user/smartparens-enable)
 
   ;; org-mode table editing tools.
-  (orgtbl-mode t)
-
-  (when (feature-p 'polymode)
-    (poly-markdown-mode t)))
+  (orgtbl-mode t))
 
 (use-package markdown-mode
   :defer
@@ -27,6 +24,10 @@
   (use-package flycheck-mmark
     :if (executable-find "mmark")
     :hook (flycheck-mode-hook . flycheck-mmark-setup))
+
+  (use-package poly-markdown
+    :after polymode
+    :hook (markdown-mode-hook . poly-markdown-mode))
 
   (use-package markdown-preview-eww)
   (use-package markdown-preview-mode)
