@@ -138,9 +138,10 @@
   (use-package helm-pydoc
     :pin "MELPA")
 
-  (use-package lsp-python
+  (use-package lsp-pyls
+    :ensure nil
     :if (executable-find "pyls")
-    :hook (python-mode-hook . lsp-python-enable)))
+    :hook (python-mode-hook . lsp-mode)))
 
 
 (provide 'modes/python)

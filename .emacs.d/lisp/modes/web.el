@@ -106,9 +106,10 @@
     (cakecrumbs-auto-setup))
 
   (use-package lsp-html
+    :ensure nil
     :if (executable-find "html-languageserver")
-    :hook ((web-mode-hook . lsp-html-enable)
-           (html-mode-hook . lsp-html-enable))))
+    :hook ((web-mode-hook . lsp-mode)
+           (html-mode-hook . lsp-mode))))
 
 
 (provide 'modes/web)

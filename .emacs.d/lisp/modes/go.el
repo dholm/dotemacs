@@ -103,7 +103,7 @@
   (use-package lsp-go
     :ensure nil
     :if (executable-find "go-langserver")
-    :hook (go-mode-hook . lsp-go-enable))
+    :hook (go-mode-hook . lsp-mode))
 
   (use-package rats
     :hook (go-mode-hook . rats-mode)

@@ -20,8 +20,9 @@
              :fetcher github
              :repo "ruediger/rusti.el"))
   (use-package lsp-rust
+    :ensure nil
     :if (executable-find "rls")
-    :hook (rust-mode-hook . lsp-rust-enable)))
+    :hook (rust-mode-hook . lsp-mode)))
 
 
 (provide 'modes/rust)
