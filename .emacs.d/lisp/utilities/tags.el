@@ -33,8 +33,8 @@
 
 (defun user/use-helm-gtags ()
   "Check if helm-gtags can be used."
-  (and (fboundp 'helm-gtags-mode) helm-gtags-mode
-       (fboundp 'helm-gtags-tag-location) helm-gtags-tag-location))
+  (when (boundp 'helm-gtags-mode)
+    helm-gtags-mode))
 
 
 (defun user/use-semantic ()
