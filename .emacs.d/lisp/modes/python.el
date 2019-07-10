@@ -65,10 +65,10 @@
    ;; Don't try to guess the indentation.
    python-indent-guess-indent-offset nil)
 
-  (with-executable 'ipython
+  (with-executable 'ipython3
     (validate-setq
      ;; Set IPython as default interpreter.
-     python-shell-interpreter "ipython"
+     python-shell-interpreter "ipython3"
      python-shell-interpreter-args ""
      python-shell-prompt-regexp "In \\[[0-9]+\\]: "
      python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
