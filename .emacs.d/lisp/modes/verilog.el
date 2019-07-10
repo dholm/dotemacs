@@ -9,21 +9,24 @@
 
 (use-package verilog-mode
   :defer
-  :quelpa (verilog-mode
-           :fetcher url
-           :url "http://www.veripool.org/ftp/verilog-mode.el")
   :mode "\\.[ds]?vh?$"
   :hook (verilog-mode-hook . user--verilog-mode-hook)
   :config
   (when (feature-p 'polymode)
     (add-auto-mode 'poly-verilog+perl-mode "\\.sv$" "\\.svh$"))
 
-  ;;; (Packages) ;;;
   (use-package auto-complete-verilog
     :after (auto-complete)
     :quelpa (auto-complete-verilog
              :fetcher url
-             :url "http://www.emacswiki.org/emacs-en/download/auto-complete-verilog.el")))
+             :url
+             "http://www.emacswiki.org/emacs-en/download/auto-complete-verilog.el"))
+
+  (use-package veri-kompass
+    :hook (verilog-mode-hook . veri-kompass-minor-mode)
+    :bind-wrap
+    (:map verilog-mode-map
+     ((:key :nav :functions/toc) . veri-kompass))))
 
 
 (provide 'modes/verilog)
