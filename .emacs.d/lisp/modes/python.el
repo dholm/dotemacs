@@ -58,8 +58,8 @@
   :defer
   :mode ("SCon\(struct\|script\)$" . python-mode)
   :interpreter ("python[0-9.]*" . python-mode)
-  :init
-  (add-hook 'python-mode-hook 'user--python-mode-hook)
+  :hook
+  (python-mode-hook . user--python-mode-hook)
   :config
   (validate-setq
    ;; Don't try to guess the indentation.
@@ -136,12 +136,7 @@
     :hook (flycheck-mode-hook . flycheck-prospector-setup))
 
   (use-package helm-pydoc
-    :pin "MELPA")
-
-  (use-package lsp-pyls
-    :ensure nil
-    :if (executable-find "pyls")
-    :hook (python-mode-hook . lsp-mode)))
+    :pin "MELPA"))
 
 
 (provide 'modes/python)
