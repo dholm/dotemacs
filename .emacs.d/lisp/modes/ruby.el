@@ -21,7 +21,8 @@
 
 (defun user--robe-mode-hook ()
   "Robe mode hook."
-  (ac-robe-setup))
+  (when (user/auto-complete-p)
+    (ac-robe-setup)))
 
 (use-package ruby-mode
   :defer
@@ -33,7 +34,10 @@
   (use-package robe
     :hook
     ((ruby-mode-hook . robe-mode)
-     (robe-mode-hook . user--robe-mode-hook)))
+     (robe-mode-hook . user--robe-mode-hook))
+    :config
+    (eval-after-load 'company
+      (push 'company-robe company-backends)))
   (use-package inf-ruby)
   (use-package yari
     :bind-wrap
