@@ -239,9 +239,8 @@
   (use-package ccls
     :if (executable-find "ccls")
     :config
-    (setq
-     ;; Enable extra features (incompatible with `validate-setq').
-     ccls-extra-init-params
+    (validate-setq
+     ccls-initialization-options
      '(:index (:comments 1) :cacheFormat "msgpack")))
   (use-package cquery
     :if (executable-find "cquery")
