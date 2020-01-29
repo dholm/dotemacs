@@ -4,6 +4,9 @@
 
 (defun user--fundamental-mode-hook ()
   "Fundamental mode hook."
+  (with-feature 'undo-tree
+    (undo-tree-mode t))
+
   (auto-fill-mode t)
 
   ;; Enable whitespace mode globally.
