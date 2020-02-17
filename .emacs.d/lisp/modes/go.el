@@ -78,16 +78,12 @@
       :bind (:map go-mode-map
                   ([remap go-import-add] . helm-go-package))))
 
-  (use-package flycheck-gometalinter
-    :if (executable-find "gometalinter")
+  (use-package flycheck-golangci-lint
+    :hook (go-mode . flycheck-golangci-lint-setup)
     :config
     (validate-setq
      ;; Default to using fast linters only.
-     flycheck-gometalinter-fast t
-     ;; Only check the project being worked on.
-     flycheck-gometalinter-vendor nil)
-
-    (flycheck-gometalinter-setup))
+     flycheck-golangci-lint-fast t))
 
   (use-package go-fill-struct
     :if (executable-find "fillstruct"))
