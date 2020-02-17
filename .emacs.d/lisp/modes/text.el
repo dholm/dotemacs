@@ -41,13 +41,15 @@
 (use-package text-mode
   :ensure nil
   :defer
-  :init
-  (add-hook 'text-mode-hook 'user--text-mode-hook)
+  :hook (text-mode-hook . user--text-mode-hook)
   :config
   (use-package flycheck-vale
     :if (executable-find "vale")
     :config
-    (add-to-list 'flycheck-vale-modes 'org-mode)))
+    (add-to-list 'flycheck-vale-modes 'org-mode))
+
+  (use-package smog
+    :if (executable-find "style")))
 
 
 (provide 'modes/text)
