@@ -19,7 +19,9 @@
    ;; Location of persistent LSP session.
    lsp-session-file (path-join *user-cache-directory* "lsp-session")
    ;; Disable yasnippet integration.
-   lsp-enable-snippet nil)
+   lsp-enable-snippet nil
+   ;; Don't watch files for changes, prevents freeze during compilation.
+   lsp-enable-file-watchers nil)
 
   (use-package lsp-ui
     :hook (lsp-mode-hook . lsp-ui-mode)
