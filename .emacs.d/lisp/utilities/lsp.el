@@ -7,7 +7,7 @@
 
 (use-package lsp-mode
   :pin "MELPA"
-  :commands lsp
+  :commands (lsp lsp-deferred)
   :hook ((lsp-after-open-hook . lsp-enable-imenu)
          (lsp-mode-hook . user--lsp-mode-hook))
   :config
@@ -22,7 +22,12 @@
    lsp-enable-snippet nil)
 
   (use-package lsp-ui
-    :hook (lsp-mode-hook . lsp-ui-mode))
+    :hook (lsp-mode-hook . lsp-ui-mode)
+    :config
+    (validate-setq
+     ;; Disable the sideline popup.
+     lsp-ui-sideline-enable nil))
+
   (use-package company-lsp
     :after (company)
     :config
