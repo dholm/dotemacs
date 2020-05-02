@@ -114,6 +114,9 @@
   (use-package flycheck-package
     :config
     (flycheck-package-setup))
+  (use-package flycheck-relint
+    :config
+    (flycheck-relint-setup))
   (use-package fontify-face
     :hook (emacs-lisp-mode-hook . fontify-face-mode)))
 
