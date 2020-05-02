@@ -3,6 +3,7 @@
 ;;; Code:
 
 (use-package dap-mode
+  :pin "MELPA"
   :hook ((lsp-mode-hook . dap-mode)
          (lsp-mode-hook . dap-ui-mode))
   :bind-wrap
