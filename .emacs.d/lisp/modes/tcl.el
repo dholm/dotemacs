@@ -9,8 +9,12 @@
 (use-package tcl
   :defer
   :interpreter ("expect" . tcl-mode)
-  :init
-  (add-hook 'tcl-mode-hook 'user--tcl-mode-hook))
+  :hook (tcl-mode-hook . user--tcl-mode-hook)
+  :config
+  (use-package flycheck-tcl
+    :if (executable-find "tclchecker")
+    :config
+    (flycheck-tcl-setup))
 
 
 (provide 'modes/tcl)
