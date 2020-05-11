@@ -26,6 +26,10 @@
     ;; Enable sticky org mode header.
     (org-sticky-header-mode t))
 
+  ;; Highlighting lines that are too long since it often causes false
+  ;; positives on URLs.
+  (user/whitespace-disable-style '(lines lines-tail))
+
   (setq
    ;; Proper filling of org-mode text, form:
    ;;  * http://lists.gnu.org/archive/html/emacs-orgmode/2008-01/msg00375.html
