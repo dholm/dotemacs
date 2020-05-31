@@ -14,8 +14,6 @@
   (validate-setq
    ;; Automatically try to figure out project root.
    lsp-auto-guess-root t
-   ;; Prefer Flycheck.
-   lsp-prefer-flymake nil
    ;; Location of persistent LSP session.
    lsp-session-file (path-join *user-cache-directory* "lsp-session")
    ;; Disable yasnippet integration.

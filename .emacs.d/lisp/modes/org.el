@@ -170,7 +170,7 @@
    ;; Prevent editing of invisible regions.
    org-catch-invisible-edits 'error
    ;; Allow fast state transitions.
-   org-use-fast-todo-selection t
+   org-use-fast-todo-selection 'auto
    ;; Do not record timestamp when using S-cursor to change state.
    org-treat-S-cursor-todo-selection-as-state-change nil
    ;; Allow refile to create parent tasks, with confirmation.
