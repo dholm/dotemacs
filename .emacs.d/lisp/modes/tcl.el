@@ -14,7 +14,7 @@
   (use-package flycheck-tcl
     :if (executable-find "tclchecker")
     :config
-    (flycheck-tcl-setup))
+    (flycheck-tcl-setup)))
 
 
 (provide 'modes/tcl)
