@@ -7,21 +7,14 @@
   ;; Load CEDET
   (user--python-mode-cedet-hook)
 
-  (user/gnu-global-enable)
+  (user/tags-try-enable)
 
   ;; Enable virtualenv support.
   (when (feature-p 'pyvenv)
     (pyvenv-mode t))
 
-  (when (feature-p 'pymacs)
-    (pymacs-load "ropemacs" "rope-"))
-
   (when (feature-p 'anaconda-mode)
     (anaconda-mode t))
-
-  ;; Enable Jedi
-  (when (feature-p 'jedi)
-    (jedi:setup))
 
   ;; Enable smart parenthesis handling.
   (user/smartparens-enable)
@@ -36,15 +29,7 @@
   (when (feature-p 'nose)
     (user/bind-key-local :code :test 'nosetests-all))
   (when (feature-p 'pyvenv)
-    (user/bind-key-local :code :virtual 'pyvenv-workon))
-  (when (feature-p 'jedi)
-    (user/bind-key-local :nav :follow-symbol 'jedi:goto-definition)
-    (user/bind-key-local :nav :go-back 'jedi:goto-definition-pop-marker)
-    (when (feature-p 'helm)
-      (user/bind-key-local :nav :references 'helm-jedi-related-names))
-    (user/bind-key-local :doc :describe 'jedi:show-doc)
-    (unless (or (user/auto-complete-p) (user/company-mode-p))
-      (user/bind-key-local :code :auto-complete 'jedi:complete))))
+    (user/bind-key-local :code :virtual 'pyvenv-workon)))
 
 
 (defun user--python-mode-cedet-hook ()
@@ -88,18 +73,6 @@
   ;;; (Packages) ;;;
   (use-package anaconda-mode)
   (use-package py-autopep8)
-  (use-package ropemacs
-    :requires rope pymacs
-    :quelpa (ropemacs
-             :fetcher git
-             :url "https://github.com/python-rope/ropemacs")
-    :config
-    (validate-setq
-     ropemacs-guess-project t
-     ropemacs-enable-autoimport t
-     ;; Don't generate an error on syntax errors.
-     ropemacs-codeassist-maxfixes 3))
-  (use-package pymacs)
   (use-package pylookup
     :quelpa (pylookup
              :fetcher github
@@ -111,16 +84,11 @@
      ;; Locate of Python environment store.
      python-environment-directory (path-join *user-cache-directory*
                                              "python-environment")))
-  (use-package pyvenv)
-  (use-package jedi
+  (use-package lsp-jedi
     :config
-    (validate-setq
-     ;; Don't install Jedi's bindings.
-     jedi:setup-keys nil
-     ;; Automatically launch completion on dot.
-     jedi:complete-on-dot t
-     ;; Use popup package.
-     jedi:tooltip-method '(popup)))
+    (with-eval-after-load "lsp-mode"
+      (add-to-list 'lsp-disabled-clients 'pyls)
+      (add-to-list 'lsp-enabled-clients 'jedi)))
 
   (use-package pipenv
     :if (executable-find "pipenv")
