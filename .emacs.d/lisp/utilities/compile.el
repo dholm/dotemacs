@@ -28,6 +28,8 @@
   :defer
   :init
   (user/bind-key-global :code :compile 'user/compile)
+  :hook ((compilation-mode-hook . user--compilation-mode-hook)
+         (compilation-filter-hook . user--compilation-filter-hook))
   :config
   (validate-setq
    ;; Prevent input in compilation buffer.
@@ -41,11 +43,10 @@
      ;; Don't select compilation window when shown
      '(compilation-mode :height 20 :dedicated t)))
 
-  ;;; (Hooks) ;;;
-  (add-hook 'compilation-mode-hook 'user--compilation-mode-hook)
-  (add-hook 'compilation-filter-hook 'user--compilation-filter-hook)
+  (use-package flex-compile
+    :disabled
+    :pin "MELPA")
 
-  (use-package flex-compile)
   (use-package mode-compile
     :defer
     :config
