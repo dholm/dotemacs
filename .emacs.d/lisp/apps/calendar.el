@@ -2,6 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
+(defconst *user-excorporate-cache-directory*
+  (path-join *user-cache-directory* "excorporate")
+  "Path to user's org data store.")
+
 (defun user--calendar-load-hook ()
   "Calendar initialization hook."
   (with-feature 'appt
@@ -16,7 +20,9 @@
 
 (defun user--exco-agenda-update-diary ()
   "Call excorporate to update the diary for today."
-  (exco-diary-diary-advice (calendar-current-date) (calendar-current-date) #'message "diary updated"))
+  (with-feature 'excorporate-diary
+    (when exco--connections
+      (exco-diary-diary-advice (calendar-current-date) (calendar-current-date) #'message "diary updated"))))
 
 
 (defun user/swedish-easter (year)
@@ -231,8 +237,25 @@
   (use-package calfw-org))
 
 (use-package excorporate
-  :after org
-  :hook (org-agenda-cleanup-fancy-diary-hook . user--exco-agenda-update-diary))
+  :ensure t
+  :config
+  (use-package excorporate-diary
+    :ensure nil
+    :after org
+    :hook (org-agenda-cleanup-fancy-diary-hook
+           . user--exco-agenda-update-diary)
+    :init
+    (make-directory *user-excorporate-cache-directory* t)
+    :config
+    (validate-setq
+     ;; Set paths to excorporate data stores.
+     excorporate-diary-today-file
+     (path-join *user-excorporate-cache-directory* "diary-today")
+     excorporate-diary-transient-file
+     (path-join *user-excorporate-cache-directory* "diary-transient"))
+
+    (excorporate-diary-enable)))
+
 
 (provide 'apps/calendar)
 ;;; calendar.el ends here
