@@ -118,7 +118,10 @@
     :config
     (flycheck-relint-setup))
   (use-package fontify-face
-    :hook (emacs-lisp-mode-hook . fontify-face-mode)))
+    :hook (emacs-lisp-mode-hook . fontify-face-mode))
+  (use-package elpl
+    :bind-wrap
+    ((:key :code :repl) . elpl)))
 
 
 (provide 'modes/elisp)

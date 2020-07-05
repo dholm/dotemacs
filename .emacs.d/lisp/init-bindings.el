@@ -281,6 +281,7 @@
                (:run . (user/code-prefix "r"))
                (:test . (user/code-prefix "t"))
                (:compilation-result . (user/view-prefix "c"))
+               (:repl . (user/code-prefix "M-r"))
 
                (:bookmark-prefix . "C-c b")
                (:bookmark-toggle . "C-c b v")
