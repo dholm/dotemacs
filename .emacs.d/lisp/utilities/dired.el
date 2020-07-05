@@ -25,6 +25,9 @@
   ;;; (Packages) ;;;
   (use-package diredfl)
   (use-package dired-k)
+  (use-package dired-git-info
+    :bind (:map dired-mode-map
+                (")" . dired-git-info-mode)))
   (use-package async)
   (use-package dired-efap
     :config
