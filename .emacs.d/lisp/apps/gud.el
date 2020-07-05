@@ -81,7 +81,12 @@
         ((:key :debug :start) . realgud-gdb)
    :map go-mode-map
         ((:key :debug :start) . realgud-gub))
-  :hook (realgud-mode-hook . user--realgud-mode-hook))
+  :hook (realgud-mode-hook . user--realgud-mode-hook)
+  :config
+  (use-package realgud-lldb
+    :if (executable-find "lldb"))
+  (use-package realgud-ipdb
+    :if (executable-find "ipdb")))
 
 
 (provide 'apps/gud)
