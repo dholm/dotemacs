@@ -97,6 +97,23 @@
        eros-eval-result-prefix "∴ ")))
   (use-package elisp-slime-nav
     :diminish elisp-slime-nav-mode)
+  (use-package trinary
+    :quelpa (trinary
+             :fetcher github
+             :repo "emacs-elsa/trinary-logic"))
+  (use-package elsa
+    :quelpa (elsa
+             :requires (trinary)
+             :fetcher github
+             :repo "emacs-elsa/Elsa")
+    :config
+    (use-package flycheck-elsa
+      :quelpa (flycheck-elsa
+               :requires (cask)
+               :fetcher github
+               :repo "emacs-elsa/flycheck-elsa")
+      :config
+      (flycheck-elsa-setup)))
   (use-package auto-compile)
   (use-package rainbow-delimiters)
   (use-package paredit
