@@ -3,6 +3,7 @@
 ;;; Code:
 
 (use-package pcache
+  :pin "MELPA"
   :init
   (setq-default
    pcache-directory (path-join *user-cache-directory* "pcache")))
