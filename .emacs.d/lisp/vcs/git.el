@@ -119,7 +119,12 @@
     (use-package helm-open-github
       :defer)
     (use-package helm-hunks
-      :defer)))
+      :defer))
+
+  (use-package magit-diff-flycheck)
+
+  (use-package magit-delta
+    :if (executable-find "delta")))
 
 (with-executable 'git
   (user--git-config))
