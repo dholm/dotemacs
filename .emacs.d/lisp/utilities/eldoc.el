@@ -3,7 +3,6 @@
 ;;; Code:
 
 (use-package eldoc
-  :ensure nil
   :diminish eldoc-mode
   :config
   (use-package eldoc-eval
