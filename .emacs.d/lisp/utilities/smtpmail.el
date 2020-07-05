@@ -27,12 +27,6 @@
 
 (use-package smtpmail
   :defer
-  :init
-  ;; Create directory for send queue.
-  (let ((smtpmail-queue-dir
-         (path-join *user-smtpmail-data-directory* "send-queue")))
-    (make-directory smtpmail-queue-dir t)
-    (set-file-modes smtpmail-queue-dir #o0700))
   :config
   (validate-setq
    ;; Location of send queue.
@@ -41,6 +35,10 @@
    ;; Use smtpmail as the default method of sending email.
    send-mail-function 'smtpmail-send-it
    message-send-mail-function 'message-smtpmail-send-it)
+
+  ;; Create directory for send queue.
+  (make-directory smtpmail-queue-dir t)
+  (set-file-modes smtpmail-queue-dir #o0700)
 
   (use-package smtpmail-multi
     :config
