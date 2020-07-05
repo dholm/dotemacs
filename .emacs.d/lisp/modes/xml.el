@@ -83,7 +83,10 @@
   (use-package auto-complete-nxml
     :after (auto-complete)
     :config
-    (add-ac-modes 'nxml-mode)))
+    (add-ac-modes 'nxml-mode))
+
+  (use-package xml-format
+    :if (executable-find "xmllint")))
 
 (use-package tdtd
   :defer
