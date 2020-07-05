@@ -64,6 +64,9 @@
     ;; Make sure flycheck-pos-tip is loaded.
     (require 'flycheck-pos-tip nil t))
 
+  (use-package flycheck-indicator
+    :hook (flycheck-mode-hook . flycheck-indicator-mode))
+
   (use-package helm-flycheck)
 
   (global-flycheck-mode t))
