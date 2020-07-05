@@ -10,7 +10,7 @@
    (when buffer-file-name
      (not (tramp-tramp-file-p buffer-file-name)))
    (fboundp 'lsp)
-   (lsp)))
+   (lsp-deferred)))
 
 
 (defun user/use-rtags (&optional filemanager)
@@ -286,10 +286,12 @@
 (use-package helm-etags-plus
   :defer)
 
-(use-package helm-xref
+(use-package xref
   :config
-  (validate-setq
-   xref-show-xrefs-function 'helm-xref-show-xrefs))
+  (use-package helm-xref
+    :config
+    (validate-setq
+     xref-show-xrefs-function 'helm-xref-show-xrefs)))
 
 
 (provide 'utilities/tags)
