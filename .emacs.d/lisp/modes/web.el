@@ -109,7 +109,11 @@
     :ensure nil
     :if (executable-find "html-languageserver")
     :hook ((web-mode-hook . lsp-mode)
-           (html-mode-hook . lsp-mode))))
+           (html-mode-hook . lsp-mode)))
+
+  (use-package prettier
+    :if (executable-find "prettier")
+    :hook (after-init-hook . global-prettier-mode)))
 
 
 (provide 'modes/web)
