@@ -46,7 +46,8 @@
 (use-package message
   :ensure nil
   :defer
-  :mode ("\.eml$" . message-mode)
+  :mode (("\.eml$" . message-mode)
+         (".*mutt.*" . message-mode))
   :hook
   ((message-mode-hook . user--message-mode-hook)
    (message-setup-hook . user--message-setup-hook))
