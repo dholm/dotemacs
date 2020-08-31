@@ -5,10 +5,12 @@
 (use-package telega
   :pin "MELPA"
   :commands (telega)
+  :hook ((telega-load-hook . telega-mode-line-mode)
+         (telega-load-hook . telega-notifications-mode)
+         (telega-load-hook . global-telega-squash-message-mode))
   :config
-  (when (or (eq system-type 'gnu/linux)
-            (eq system-type 'darwin))
-    (telega-notifications-mode t)))
+  (when (feature-p 'alert)
+    (telega-alert-mode 1)))
 
 
 (provide 'apps/telega)
