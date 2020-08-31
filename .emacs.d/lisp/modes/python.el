@@ -29,7 +29,9 @@
   (when (feature-p 'nose)
     (user/bind-key-local :code :test 'nosetests-all))
   (when (feature-p 'pyvenv)
-    (user/bind-key-local :code :virtual 'pyvenv-workon)))
+    (user/bind-key-local :code :virtual 'pyvenv-workon))
+  (when (feature-p 'lsp-pyright)
+    (require 'lsp-pyright)))
 
 
 (defun user--python-mode-cedet-hook ()
@@ -71,6 +73,8 @@
         (switch-to-buffer "*bpython*"))))
 
   ;;; (Packages) ;;;
+  (use-package lsp-pyright
+    :if (executable-find "pyright-langserver"))
   (use-package anaconda-mode)
   (use-package py-autopep8)
   (use-package pylookup
