@@ -7,7 +7,10 @@
   (validate-setq
    ;; Indent with four spaces.
    sh-basic-offset 4
-   sh-indentation 4))
+   sh-indentation 4)
+
+  (when (feature-p 'modern-sh)
+    (modern-sh-mode)))
 
 
 (defun user--shell-mode-common-hook ()
@@ -36,6 +39,7 @@
          (shell-mode-hook . user--shell-mode-hook))
   :config
   ;;; (Packages) ;;;
+  (use-package modern-sh)
   (use-package lsp-sh
     :if (executable-find "bash-language-server")
     :hook (sh-mode-hook . lsp-sh-enable))
