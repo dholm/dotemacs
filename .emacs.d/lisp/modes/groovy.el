@@ -3,7 +3,9 @@
 ;;; Code:
 
 (use-package groovy-mode
-  :mode "Jenkinsfile")
+  :config
+  (use-package jenkinsfile-mode
+    :mode "Jenkinsfile"))
 
 
 (provide 'modes/groovy)
