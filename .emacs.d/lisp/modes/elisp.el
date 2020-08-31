@@ -138,7 +138,8 @@
     :hook (emacs-lisp-mode-hook . fontify-face-mode))
   (use-package elpl
     :bind-wrap
-    ((:key :code :repl) . elpl)))
+    ((:key :code :repl) . elpl))
+  (use-package describe-hash))
 
 
 (provide 'modes/elisp)
