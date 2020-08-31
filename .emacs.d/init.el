@@ -2,6 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
+(when (version< "27.1" emacs-version)
+  ;; Workaround for deprecated parameter referenced by Helm.
+  (defvar browse-url-mosaic-program nil))
+
 ;; Bring in package.
 (setq-default
   package--init-file-ensured t
