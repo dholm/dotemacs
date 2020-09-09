@@ -146,7 +146,12 @@
     :after (company))
 
   (use-package esh-autosuggest
-    :hook (eshell-mode-hook . esh-autosuggest-mode)))
+    :hook (eshell-mode-hook . esh-autosuggest-mode))
+
+  (use-package eshell-syntax-highlighting
+    :after esh-mode
+    :config
+    (eshell-syntax-highlighting-global-mode +1)))
 
 (use-package helm-shell
   :ensure helm
