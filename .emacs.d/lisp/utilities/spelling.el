@@ -54,14 +54,15 @@
   "Check if flyspell is available."
   (or (executable-find "ispell")
       (executable-find "aspell")
-      (executable-find "hunspell")))
+      (executable-find "hunspell"))
+  nil)
 
 (when (user-flyspell-p)
   (use-package flyspell
     :ensure nil
     :diminish flyspell-mode
     :hook ((flyspell-mode-hook . user--flyspell-mode-hook)
-	   (flyspell-prog-mode-hook . user--flyspell-prog-mode-hook))
+           (flyspell-prog-mode-hook . user--flyspell-prog-mode-hook))
     :config
     (validate-setq
      ;; Be silent when checking words.
