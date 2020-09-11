@@ -7,23 +7,23 @@
     ()
     "Project class.")
 
-  (defgeneric user/proj-name ((project user/proj))
+  (cl-defgeneric user/proj-name ((project user/proj))
     "Get the PROJECT name.")
 
-  (defgeneric user/proj-root ((project user/proj))
+  (cl-defgeneric user/proj-root ((project user/proj))
     "Get the PROJECT root path.")
 
-  (defgeneric user/proj-include-paths ((project user/proj))
+  (cl-defgeneric user/proj-include-paths ((project user/proj))
     "Get the include paths for PROJECT.")
 
-  (defgeneric user/proj-build ((project user/proj))
+  (cl-defgeneric user/proj-build ((project user/proj))
     "Build PROJECT.")
 
-  (defmethod user/proj-name ((project user/proj))
+  (cl-defmethod user/proj-name ((project user/proj))
     (file-name-nondirectory
      (directory-file-name (user/proj-root project))))
 
-  (defmethod user/proj-include-paths ((project user/proj)))
+  (cl-defmethod user/proj-include-paths ((project user/proj)))
 
   (with-eval-after-load 'ede
     (defclass user/ede-proj (user/proj)
@@ -31,7 +31,7 @@
             :documentation "EDE project instance."))
       "EDE project class.")
 
-    (defmethod user/proj-from-path :static ((project user/ede-proj) &rest args)
+    (cl-defmethod user/proj-from-path :static ((project user/ede-proj) &rest args)
       "Constructor for EDE project at path in ARGS."
       (when (featurep 'ede)
         (let ((ede-proj (ede-current-project (expand-file-name (first args)))))
@@ -45,19 +45,19 @@
                            (ede/compdb ede-compdb-project-p)))
             (make-instance 'user/ede-proj :ede ede-proj)))))
 
-    (defmethod user/proj-name ((project user/ede-proj))
+    (cl-defmethod user/proj-name ((project user/ede-proj))
       (ede-name (oref project :ede)))
 
-    (defmethod user/proj-root ((project user/ede-proj))
+    (cl-defmethod user/proj-root ((project user/ede-proj))
       (ede-project-root-directory (oref project :ede)))
 
-    (defmethod user/proj-include-paths ((project user/ede-proj))
+    (cl-defmethod user/proj-include-paths ((project user/ede-proj))
       (let ((root-path (user/proj-root project))
             (include-paths (oref (oref project :ede) include-path)))
         (mapcar #'(lambda (path) (expand-file-name path root-path))
                 include-paths)))
 
-    (defmethod user/proj-build ((project user/ede-proj))
+    (cl-defmethod user/proj-build ((project user/ede-proj))
       (let ((ede-proj (oref project :ede)))
         (project-compile-project
          ede-proj
@@ -70,14 +70,14 @@
                   :documentation "Project root path."))
       "Projectile project class.")
 
-    (defmethod user/proj-from-path :static ((project user/projectile-proj) &rest args)
+    (cl-defmethod user/proj-from-path :static ((project user/projectile-proj) &rest args)
       "Constructor for projectile project at path in ARGS."
       (let ((default-directory (file-name-as-directory (first args)))
             (projectile-require-project-root nil))
         (when (and (feature-p 'projectile) (projectile-project-p))
           (make-instance 'user/projectile-proj :root-path (projectile-project-root)))))
 
-    (defmethod user/proj-root ((project user/projectile-proj))
+    (cl-defmethod user/proj-root ((project user/projectile-proj))
       (oref project :root-path)))
 
   (with-eval-after-load 'vc
@@ -87,7 +87,7 @@
                   :documentation "Project root path."))
       "VC project class.")
 
-    (defmethod user/proj-from-path :static ((project user/vc-proj) &rest args)
+    (cl-defmethod user/proj-from-path :static ((project user/vc-proj) &rest args)
       "Constructor for VC project at path in ARGS."
       (let* ((vc-backend (and (fboundp 'vc-responsible-backend)
                               (ignore-errors
@@ -99,10 +99,10 @@
         (when root-path
               (make-instance 'user/vc-proj :root-path root-path))))
 
-    (defmethod user/proj-root ((project user/vc-proj))
+    (cl-defmethod user/proj-root ((project user/vc-proj))
       (oref project :root-path)))
 
-  (defmethod user/proj-from-path :static ((project user/proj) &rest args)
+  (cl-defmethod user/proj-from-path :static ((project user/proj) &rest args)
     "Constructor for project at path in ARGS."
     (let ((f (lambda (proj-type)
                (when (fboundp proj-type)
