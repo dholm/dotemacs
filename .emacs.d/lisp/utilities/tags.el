@@ -87,7 +87,7 @@
                (rtags-find-symbol-at-point))
     (user/eval-until-move
      '(((user/use-lsp)
-        (call-interactively 'xref-find-definitions))
+        (call-interactively 'lsp-find-definition))
 
        ((bound-and-true-p elisp-def-mode)
         (call-interactively 'elisp-def))
@@ -112,7 +112,7 @@
                (rtags-find-references-at-point))
     (user/eval-until-move
      '(((user/use-lsp)
-        (call-interactively 'xref-find-references))
+        (call-interactively 'lsp-find-references))
 
        ((eq major-mode 'go-mode)
         (when (user/use-go-guru)
@@ -145,7 +145,7 @@
                (rtags-find-references))
     (user/eval-until-move
      '(((user/use-lsp)
-        (call-interactively 'xref-find-references))
+        (call-interactively 'lsp-find-references))
 
        ((eq major-mode 'go-mode)
         (when (user/use-go-guru)
@@ -162,7 +162,7 @@
   (interactive)
   (cond
    ((user/use-rtags) (call-interactively 'rtags-print-symbol-info))
-   ((user/use-lsp) (call-interactively 'lsp-info-under-point))
+   ((user/use-lsp) (call-interactively 'lsp-describe-thing-at-point))
    ((eq major-mode 'go-mode)
     (when (user/use-go-guru)
       (call-interactively 'go-guru-describe)))
