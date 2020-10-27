@@ -2,13 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-;; Override built-in TRAMP.
-(quelpa '(tramp
-          :fetcher git
-          :url "git://git.savannah.gnu.org/tramp.git"
-          :files ("lisp/*.el" "texi/*.texi")))
-
 (use-package tramp
+  :ensure nil
   :after dash
   :commands
   (tramp-tramp-file-p
