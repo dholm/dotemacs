@@ -173,10 +173,6 @@
    org-use-fast-todo-selection 'auto
    ;; Do not record timestamp when using S-cursor to change state.
    org-treat-S-cursor-todo-selection-as-state-change nil
-   ;; Allow refile to create parent tasks, with confirmation.
-   org-refile-allow-creating-parent-nodes 'confirm
-   ;; Cache refile operations for performance.
-   org-refile-use-cache t
    ;; Start in folded view.
    org-startup-folded t
    ;; Enable speed commands.
@@ -251,6 +247,15 @@
     (validate-setq
      ;; Display inline images when starting up.
      org-startup-with-inline-images t))
+
+  (use-package org-refile
+    :ensure nil
+    :config
+    (validate-setq
+     ;; Allow refile to create parent tasks, with confirmation.
+     org-refile-allow-creating-parent-nodes 'confirm
+     ;; Cache refile operations for performance.
+     org-refile-use-cache t))
 
   (use-package org-table
     :ensure nil
