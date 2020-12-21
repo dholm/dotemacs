@@ -5,7 +5,10 @@
 (defun user--yang-mode-hook ()
   "YANG mode hook."
   (when (feature-p 'flycheck-yang)
-    (flycheck-mode t)))
+    (flycheck-mode t))
+
+  (validate-setq
+   fill-column 80))
 
 (use-package yang-mode
   :defer
