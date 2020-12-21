@@ -86,6 +86,7 @@
       :if (executable-find "git-imerge"))
     (use-package orgit)
     (use-package magit-todos
+      :disabled
       :hook (magit-mode-hook . magit-todos-mode))
     (use-package magit-org-todos
       :config
