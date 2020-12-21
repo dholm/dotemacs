@@ -223,6 +223,7 @@
 
   (use-package helm-icons
     :if (display-graphic-p)
+    :disabled
     :config
     (helm-icons-enable)))
 
