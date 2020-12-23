@@ -180,6 +180,7 @@
   (use-package flycheck-pkg-config
     :if (executable-find "pkg-config"))
   (use-package cpputils-cmake
+    :disabled
     :if (executable-find "cmake")
     :config
     (validate-setq
@@ -227,6 +228,7 @@
   (use-package flycheck-clangcheck
     :if (executable-find "clang-check"))
   (use-package function-args
+    :disabled
     :pin "MELPA"
     :diminish function-args-mode
     :config
