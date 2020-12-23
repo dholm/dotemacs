@@ -10,7 +10,8 @@
   (use-package jq-format
     :if (executable-find "jq")))
 
-(use-package jsonnet-mode)
+(use-package jsonnet-mode
+  :pin "MELPA")
 
 
 (provide 'modes/json)
