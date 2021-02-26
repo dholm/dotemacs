@@ -90,6 +90,11 @@
 
   ;;; (Packages) ;;;
   (use-package macrostep)
+  (use-package edebug-inline-result
+    :ensure t
+    :defer t
+    :custom (edebug-inline-result-backend 'posframe)
+    :hook (edebug-mode . edebug-inline-result-mode))
   (use-package eros
     :config
     (when (eq default-terminal-coding-system 'utf-8)
