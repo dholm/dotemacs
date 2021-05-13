@@ -19,7 +19,9 @@
    ;; Disable yasnippet integration.
    lsp-enable-snippet nil
    ;; Don't watch files for changes, prevents freeze during compilation.
-   lsp-enable-file-watchers nil)
+   lsp-enable-file-watchers nil
+   ;; Increase the amount of data that can be read from a language server.
+   read-process-output-max (* 3 1024 1024))
 
   (use-package lsp-ui
     :hook (lsp-mode-hook . lsp-ui-mode)
