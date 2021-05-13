@@ -18,7 +18,11 @@
     :config
     (validate-setq
      ;; Path to LSP server.
-     lsp-java-server-install-dir (path-join *user-cache-directory* "lsp-java")))
+     lsp-java-server-install-dir (path-join *user-cache-directory* "lsp-java" "server")
+     ;; Workspace path.
+     lsp-java-workspace-dir (path-join *user-data-directory* "lsp-java")
+     ;; Workspace cache.
+     lsp-java-workspace-cache-dir  (path-join *user-cache-directory* "lsp-java" "cache")))
 
   (use-package mvn))
 
