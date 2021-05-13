@@ -5,7 +5,9 @@
 (use-package transient
   :ensure nil
   :config
-  (validate-setq
+  ;; Using `validate-setq' here will cause loading to file if the
+  ;; history file does not exist.
+  (setq
    ;; Location of transient files.
    transient-history-file (path-join *user-cache-directory* "transient" "history.el")
    transient-values-file (path-join *user-cache-directory* "transient" "values.el")
