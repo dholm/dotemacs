@@ -272,6 +272,9 @@
       (validate-setq
        ;; Show quick help popup after half a second.
        company-quickhelp-delay 0.5))
+    (use-package company-box
+      :if (display-graphic-p)
+      :hook (company-mode . company-box-mode))
 
     (global-company-mode t)))
 
