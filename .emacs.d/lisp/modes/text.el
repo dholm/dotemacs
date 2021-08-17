@@ -49,7 +49,9 @@
     (add-to-list 'flycheck-vale-modes 'org-mode))
 
   (use-package smog
-    :if (executable-find "style")))
+    :if (executable-find "style"))
+
+  (use-package ftable))
 
 
 (provide 'modes/text)
