@@ -34,7 +34,10 @@
    ;; Put autosave files (ie #foo#) and backup files (ie foo~) into a cache dir.
    auto-save-file-name-transforms `((".*" ,(concat *user-auto-save-directory* "/\\1") t))
    ;; Put session backups into the cache directory.
-   auto-save-list-file-prefix (path-join *user-auto-save-directory* ".saves-")))
+   auto-save-list-file-prefix (path-join *user-auto-save-directory* ".saves-"))
+
+  (use-package async-backup
+    :hook (after-save-hook . async-backup)))
 
 
 (user--backups-config)
