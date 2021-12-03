@@ -276,6 +276,10 @@
       :if (display-graphic-p)
       :hook (company-mode . company-box-mode))
 
+    (use-package kind-icon
+      :if (display-graphic-p)
+      :ensure t)
+
     (global-company-mode t)))
 
 (user--completion-config)
