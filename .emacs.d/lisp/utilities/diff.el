@@ -9,15 +9,17 @@
 
 (use-package diff
   :defer
-  :init
-  (add-hook 'diff-mode-hook 'user--diff-mode-hook)
+  :hook (diff-mode-hook . user--diff-mode-hook)
   :config
   (validate-setq
    ;; Use unified diffs by default.
    diff-switches "-u")
 
   (use-package diff-hl
-    :defer))
+    :defer)
+
+  (use-package diff-ansi
+    :commands (diff-ansi-mode diff-ansi-buffer)))
 
 (use-package dumb-diff
   :defer
