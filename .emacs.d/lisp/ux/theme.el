@@ -32,7 +32,11 @@
       (set-face-attribute 'default nil :family "Consolas" :height 100 :weight 'normal))
      ((eq system-type 'gnu/linux)
       (set-face-attribute 'default nil :foundry "bitstream" :family "Meslo LG S DZ"
-                          :height 74 :weight 'normal)))))
+                          :height 74 :weight 'normal))))
+
+  (use-package textsize
+    :commands textsize-mode
+    :init (textsize-mode)))
 
 (use-package ns-auto-titlebar
   :if (eq system-type 'darwin)
