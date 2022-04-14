@@ -85,7 +85,8 @@ mode that sets `syntax-ppss' properly."
     :commands selected-minor-mode
     :init
     (setq
-     selected-org-mode-map (make-sparse-keymap))
+     selected-org-mode-map (make-sparse-keymap)
+     selected-magit-status-mode-map (make-sparse-keymap))
     (selected-global-mode t)
     :bind (:map selected-keymap
                 ;; Region.
@@ -103,7 +104,9 @@ mode that sets `syntax-ppss' properly."
                 ("p" . move-text-up)
                 ("n" . move-text-down)
                 :map selected-org-mode-map
-                ("t" . org-table-convert-region)))
+                ("t" . org-table-convert-region)
+                :map selected-magit-status-mode-map
+                ("s" . magit-stage)))
 
   ;;; (Bindings) ;;;
   (global-set-key [remap move-beginning-of-line] 'beginning-or-indentation)
