@@ -36,7 +36,14 @@
 
   (use-package textsize
     :commands textsize-mode
-    :init (textsize-mode)))
+    :bind-wrap
+    (((:key :emacs :text-scale-reset) . textsize-reset)
+     ((:key :emacs :text-scale-increase) . textsize-increment)
+     ((:key :emacs :text-scale-decrease)  . textsize-decrement))
+    :init (textsize-mode)
+    :config
+    (validate-setq
+     textsize-default-points 11)))
 
 (use-package ns-auto-titlebar
   :if (eq system-type 'darwin)
