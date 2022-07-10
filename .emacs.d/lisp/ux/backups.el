@@ -37,7 +37,11 @@
    auto-save-list-file-prefix (path-join *user-auto-save-directory* ".saves-"))
 
   (use-package async-backup
-    :hook (after-save-hook . async-backup)))
+    :hook (after-save-hook . async-backup)
+    :config
+    (validate-setq
+     ;; Put the backups in the cache folder.
+     async-backup-location (path-join *user-cache-directory* "async-backup"))))
 
 
 (user--backups-config)
