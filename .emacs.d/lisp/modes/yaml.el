@@ -10,6 +10,9 @@
     :config
     (flycheck-yamllint-setup))
 
+  (use-package yaml-pro
+    :hook (yaml-mode . yaml-pro-mode))
+
   (use-package yaml-imenu
     :config
     (yaml-imenu-enable)))
