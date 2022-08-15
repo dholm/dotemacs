@@ -43,6 +43,12 @@
      ;; Don't select compilation window when shown
      '(compilation-mode :height 20 :dedicated t)))
 
+  (use-package fancy-compilation
+    :commands (fancy-compilation-mode)
+    :init
+    (with-eval-after-load 'compile
+      (fancy-compilation-mode)))
+
   (use-package flex-compile
     :disabled
     :pin "MELPA")
