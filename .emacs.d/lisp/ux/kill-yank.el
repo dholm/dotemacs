@@ -54,12 +54,6 @@
    ((:key :basic :selection-all) . mc/mark-all-like-this)
    ((:key :basic :selection-edit-lines) . mc/edit-lines)))
 
-(use-package rect-mark
-  :defer
-  :quelpa (rect-mark
-           :fetcher url
-           :url "https://www.emacswiki.org/emacs/download/rect-mark.el"))
-
 (use-package simple
   :ensure nil
   :bind-wrap
