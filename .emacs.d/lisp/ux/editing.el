@@ -106,7 +106,8 @@ mode that sets `syntax-ppss' properly."
                 :map selected-org-mode-map
                 ("t" . org-table-convert-region)
                 :map selected-magit-status-mode-map
-                ("s" . magit-stage)))
+                ("s" . magit-stage)
+                ("u" . magit-unstage)))
 
   ;;; (Bindings) ;;;
   (global-set-key [remap move-beginning-of-line] 'beginning-or-indentation)
