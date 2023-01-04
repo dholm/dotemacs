@@ -11,16 +11,12 @@
    package-archives
    '(("GNU ELPA"     . "https://elpa.gnu.org/packages/")
      ("MELPA Stable" . "http://stable.melpa.org/packages/")
-     ("MELPA"        . "http://melpa.org/packages/")
-     ("org"          . "http://orgmode.org/elpa/")
-     ("marmalade"    . "http://marmalade-repo.org/packages/"))
+     ("MELPA"        . "http://melpa.org/packages/"))
    ;; Prefer MELPA Stable over GNU over MELPA.
    package-archive-priorities
    '(("MELPA Stable" . 20)
      ("GNU ELPA"     . 15)
-     ("MELPA"        . 10)
-     ("org"          . 5)
-     ("marmalade"    . 0))))
+     ("MELPA"        . 10))))
 
 
 ;; Bootstrap `use-package'.
@@ -38,6 +34,7 @@
 (use-package use-package
   :config
   (validate-setq
+   use-package-always-ensure t
    ;; Hooks are verbatim.
    use-package-hook-name-suffix nil)
 

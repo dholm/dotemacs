@@ -66,6 +66,9 @@ mode that sets `syntax-ppss' properly."
        ;; Use right option key for writing special characters.
        mac-right-option-modifier nil)))
 
+  ; Dependency of unicode-fonts.
+  (use-package list-utils
+    :pin "MELPA")
   (use-package unicode-fonts
     :if (eq default-terminal-coding-system 'utf-8)
     ;; Ensure `pcache-directory' has been set first.

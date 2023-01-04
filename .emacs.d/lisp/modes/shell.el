@@ -36,16 +36,12 @@
          (shell-mode-hook . user--shell-mode-hook))
   :config
   ;;; (Packages) ;;;
-  (use-package lsp-sh
-    :if (executable-find "bash-language-server")
-    :hook (sh-mode-hook . lsp-sh-enable))
   (use-package bash-completion)
   (use-package company-shell
     :after (company)
     :config
     (add-to-list 'company-backends '(company-shell company-shell-env)))
   (use-package shelldoc)
-  (use-package shell-command)
   (use-package flycheck-checkbashisms
     :if (executable-find "checkbashisms")
     :config

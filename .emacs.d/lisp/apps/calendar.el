@@ -132,24 +132,6 @@
            )))
 
 
-(defun user/appt-disp-window (due-in-min cur-date appt-msg)
-  "Appointment DUE-IN-MIN on CUR-DATE regarding APPT-MSG."
-  (cond
-   ((feature-p 'alert)
-    (alert appt-msg
-           :severity 'high
-           :title (format "Appointment in %s minute(s)" due-in-min)
-           :style (user/alert-style)))
-   (t (appt-disp-window due-in-min cur-date appt-msg))))
-
-
-(defun user/appt-delete-window ()
-  "Undisplay appointment."
-  (cond
-   ((feature-p 'alert) t)
-   (t (appt-delete-window))))
-
-
 (defun user--calendar-week-config ()
   "Initialize display of week numbers in calendar."
   (copy-face 'calendar-weekend-header 'calendar-iso-week-header-face)
@@ -214,9 +196,7 @@
        ;; Show time until next event in mode-line.
        appt-display-mode-line t
        ;; Appointment display type.
-       appt-display-format 'window
-       appt-disp-window-function 'user/appt-disp-window
-       appt-delete-window-function 'user/appt-delete-window))))
+       appt-display-format 'window))))
 
 (use-package calfw
   :defer

@@ -63,7 +63,6 @@
       'user/magit-toggle-whitespace)
 
     (use-package magit-gerrit)
-    (use-package magit-tramp)
     (use-package magit-gh-pulls
       :pin "MELPA"
       :hook (magit-mode-hook . turn-on-magit-gh-pulls))

@@ -254,6 +254,7 @@
     (user/bind-key-local :nav :go-back 'user/tag-pop)))
 
 (use-package rtags
+  :disabled
   :if (executable-find "rc")
   :bind-wrap
   (:map rtags-mode-map

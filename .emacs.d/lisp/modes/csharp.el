@@ -34,10 +34,6 @@
   (with-eval-after-load 'csharp-mode
     (add-to-list 'c-default-style '(csharp-mode . "Google")))
 
-  (with-eval-after-load 'mode-compile
-    (add-to-list 'mode-compile-modes-alist
-                 '(csharp-mode . (csharp-invoke-compile-interactively))))
-
   ;;; (Packages) ;;;
   (when (file-exists-p *user-omnisharp-path*)
     (use-package omnisharp

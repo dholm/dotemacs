@@ -28,6 +28,7 @@
 
 ;; Install benchmark-init if present.
 (use-package benchmark-init
+  :pin "MELPA"
   :ensure t)
 
 ;; Helper functions for bootstrapping Emacs.

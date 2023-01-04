@@ -102,10 +102,6 @@
        eros-eval-result-prefix "∴ ")))
   (use-package elisp-slime-nav
     :diminish elisp-slime-nav-mode)
-  (use-package trinary
-    :quelpa (trinary
-             :fetcher github
-             :repo "emacs-elsa/trinary-logic"))
   (use-package elsa
     :config
     (use-package flycheck-elsa

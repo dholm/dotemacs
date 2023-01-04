@@ -81,7 +81,7 @@
                         :with-author nil
                         :with-toc nil)
      ;; Don't modify quoted mail.
-     org-mime-beautify-quoted-mail nil
+     org-mime-beautify-quoted-mail-p nil
      ;; Be nice to PGP signatures.
      org-mime-find-html-start #'identity)
 

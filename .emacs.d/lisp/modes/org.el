@@ -125,6 +125,7 @@
 
 
 (use-package org
+  :ensure t
   :init
   ;; Create data and cache stores.
   (make-directory *user-org-data-directory* t)
@@ -138,10 +139,6 @@
   (:map org-mode-map
         ("C-c C-o" . user/org-open-at-point))
   :config
-  (use-package org-plus-contrib
-    :ensure t
-    :no-require t)
-
   (validate-setq
    ;; Org data store.
    org-directory *user-org-data-directory*
@@ -176,18 +173,7 @@
    ;; Start in folded view.
    org-startup-folded t
    ;; Enable speed commands.
-   org-use-speed-commands t
-   org-speed-commands-user
-   '(("0" . 'delete-window)
-     ("1" . 'delete-other-windows)
-     ("2" . 'split-window-vertically)
-     ("3" . 'split-window-horizontally)
-     ("h" . 'hide-other)
-     ("s" . 'org-save-all-org-buffers)
-     ("z" . 'org-add-note)
-     ("N" . 'org-narrow-to-subtree)
-     ("W" . 'widen)
-     ("m" . 'org-mark-subtree)))
+   org-use-speed-commands t)
 
   (when (eq default-terminal-coding-system 'utf-8)
     (validate-setq
@@ -549,7 +535,7 @@
   (use-package org-kanban))
 
 (use-package org-agenda
-  :ensure org-plus-contrib
+  :ensure org
   :defer
   :hook (org-agenda-finalize-hook . user--org-agenda-finalize-hook)
   :bind-wrap
@@ -776,7 +762,7 @@
     :hook (org-agenda-finalize-hook . org-timeline-insert-timeline)))
 
 (use-package org-annotate-file
-  :ensure org-plus-contrib
+  :ensure org
   :defer
   :init
   (autoload 'org-annotate-file "org-annotate-file" nil t)

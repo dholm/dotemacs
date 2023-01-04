@@ -42,10 +42,6 @@
     ;; Match paired delimiters.
     (paren-toggle-matching-paired-delimiter t))
 
-  (when (feature-p 'mode-compile)
-    ;; Override AUCTeX in favor of mode-compile.
-    (kill-local-variable 'compile-command))
-
   ;;; (Bindings) ;;;
   (when (feature-p 'latexdiff)
     (user/bind-key-local :util :diff 'helm-latexdiff))
@@ -86,11 +82,6 @@
    (LaTeX-mode-hook . user--latex-mode-hook)
    (bibtex-mode-hook . user--bibtex-mode-hook))
   :config
-  (with-eval-after-load 'mode-compile
-    (setq mode-compile-modes-alist
-          (append '((latex-mode . (tex-compile kill-compilation)))
-                  mode-compile-modes-alist)))
-
   ;;; (Packages) ;;;
   (use-package reftex
     :ensure nil
