@@ -63,9 +63,6 @@
       'user/magit-toggle-whitespace)
 
     (use-package magit-gerrit)
-    (use-package magit-gh-pulls
-      :pin "MELPA"
-      :hook (magit-mode-hook . turn-on-magit-gh-pulls))
     (use-package magithub
       :disabled
       :pin "MELPA"
@@ -116,8 +113,6 @@
       :defer
       :pin "MELPA"
       :commands helm-git-grep)
-    (use-package helm-open-github
-      :defer)
     (use-package helm-hunks
       :defer))
 
