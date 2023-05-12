@@ -40,11 +40,7 @@
 
     (with-project project current-file
       ;; Bookmarks.
-      (add-to-list 'helm-sources 'helm-source-bookmarks)
-      ;; Semantic.
-      (with-feature 'helm-semantic
-        (when (user/proj-from-path user/ede-proj current-file)
-          (add-to-list 'helm-sources 'helm-source-semantic))))
+      (add-to-list 'helm-sources 'helm-source-bookmarks))
 
     (helm-other-buffer helm-sources "*helm-navigate-prog*")))
 

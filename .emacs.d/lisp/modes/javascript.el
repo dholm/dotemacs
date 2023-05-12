@@ -5,7 +5,7 @@
 (defun user--javascript-mode-common-hook ()
   "JavaScript common mode hook."
   ;; Load CEDET
-  (user--javascript-mode-cedet-hook)
+  (user--cedet-hook)
 
   (user/gnu-global-enable)
 
@@ -31,12 +31,6 @@
   ;; Enable Flycheck
   (flycheck-mode t))
 
-
-(defun user--javascript-mode-cedet-hook ()
-  "JavaScript CEDET support hook."
-  (with-feature 'semantic/wisent/javascript
-    (wisent-javascript-setup-parser)
-    (user--cedet-hook)))
 
 (use-package js
   :defer

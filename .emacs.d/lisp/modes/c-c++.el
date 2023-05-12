@@ -32,7 +32,7 @@
     (paren-toggle-open-paren-context t))
 
   ;; Load CEDET.
-  (user--c-mode-common-cedet-hook)
+  (user--cedet-hook)
 
   (when (and *user-cedet-ectags-enabled*
              (feature-p 'helm-etags-plus))
@@ -78,26 +78,6 @@
       (flycheck-disable-checker 'rtags)))
 
   (user/smartparens-enable))
-
-
-(defun user--c-mode-common-cedet-hook ()
-  "C mode CEDET hook."
-  (with-feature 'semantic/bovine/c
-    ;; Load extra semantic helpers.
-    (require 'semantic/bovine/gcc)
-    (require 'semantic/bovine/clang nil :noerror)
-
-    (user--cedet-hook)
-
-    ;;; (Bindings) ;;;
-    (with-feature 'eassist
-      (add-many-to-list
-       'eassist-header-switches
-       ;; Add "hh" as C++ header file.
-       '("hh" . ("cpp" "cc"))
-       '("cc" . ("h" "hh" "hpp")))
-
-      (user/bind-key-local :nav :switch-spec-impl 'eassist-switch-h-cpp))))
 
 
 (defun user--irony-mode-hook ()

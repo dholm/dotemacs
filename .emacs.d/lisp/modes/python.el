@@ -4,9 +4,6 @@
 
 (defun user--python-mode-hook ()
   "Python mode hook."
-  ;; Load CEDET
-  (user--python-mode-cedet-hook)
-
   (user/tags-try-enable)
 
   ;; Enable virtualenv support.
@@ -30,12 +27,6 @@
     (user/bind-key-local :code :virtual 'pyvenv-workon))
   (when (feature-p 'lsp-pyright)
     (require 'lsp-pyright)))
-
-
-(defun user--python-mode-cedet-hook ()
-  "CEDET hook for Python mode."
-  (with-feature 'semantic/wisent/python
-    (user--cedet-hook)))
 
 
 (use-package python

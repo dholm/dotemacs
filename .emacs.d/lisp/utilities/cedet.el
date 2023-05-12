@@ -10,10 +10,7 @@
 (defun user--cedet-hook ()
   "Hook for modes with CEDET support."
   ;; Enable EDE.
-  (ede-minor-mode t)
-
-  ;; Enable semantic.
-  (semantic-mode t))
+  (ede-minor-mode t))
 
 
 (defun user/ede-get-local-var (fname var)
@@ -176,8 +173,6 @@
     (use-package semantic/db
       :ensure nil
       :after semantic
-      :init
-      (global-semanticdb-minor-mode t)
       :config
       (use-package semantic/db-file
         :ensure nil
