@@ -26,8 +26,6 @@
   (eldoc-mode t)
 
   ;;; (Bindings) ;;;
-  (when (feature-p 'nose)
-    (user/bind-key-local :code :test 'nosetests-all))
   (when (feature-p 'pyvenv)
     (user/bind-key-local :code :virtual 'pyvenv-workon))
   (when (feature-p 'lsp-pyright)
@@ -81,7 +79,6 @@
     :quelpa (pylookup
              :fetcher github
              :repo "tsgates/pylookup"))
-  (use-package nose)
   (use-package python-environment
     :config
     (validate-setq
