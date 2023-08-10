@@ -5,9 +5,7 @@
 (use-package docker
   :if (executable-find "docker")
   :diminish docker-mode
-  :bind-wrap ((:key :util :docker) . docker)
-  :config
-  (use-package docker-tramp))
+  :bind-wrap ((:key :util :docker) . docker))
 
 
 (provide 'utilities/docker)

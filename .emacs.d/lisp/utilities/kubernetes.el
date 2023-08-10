@@ -5,7 +5,6 @@
 (use-package kubernetes
   :if (executable-find "kubectl")
   :config
-  (use-package kubernetes-tramp)
   (use-package timonier)
   (use-package kubedoc))
 
