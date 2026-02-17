@@ -32,22 +32,7 @@
 (use-package sendmail
   :defer
   :init
-  (add-hook 'mail-mode-hook 'user--mail-mode-hook)
-  :config
-  (use-package mu-cite
-    :init
-    (add-hook 'mail-citation-hook 'mu-cite-original)
-    :config
-    ;; Undiagnosed issue with validate-setq.
-    (setq
-     ;; Citation format.
-     mu-cite-top-format '("On " date ", " full-name " wrote:\n")
-     ;; Use > as prefix.
-     mu-cite-prefix-format (quote ("> ")))
-
-    (validate-setq
-     ;; Default message citation function.
-     message-cite-function 'mu-cite-original)))
+  (add-hook 'mail-mode-hook 'user--mail-mode-hook))
 
 
 (provide 'modes/mail)
