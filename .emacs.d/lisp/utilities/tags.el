@@ -284,9 +284,6 @@
   :hook ((emacs-lisp-mode-hook . elisp-def-mode)
          (ielm-mode-hook . elisp-def-mode)))
 
-(use-package helm-etags-plus
-  :defer)
-
 (use-package xref
   :config
   (use-package helm-xref

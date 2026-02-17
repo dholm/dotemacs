@@ -34,11 +34,6 @@
   ;; Load CEDET.
   (user--cedet-hook)
 
-  (when (and *user-cedet-ectags-enabled*
-             (feature-p 'helm-etags-plus))
-    ;; Automatically update tags.
-    (turn-on-ctags-auto-update-mode))
-
   (user/gnu-global-enable)
   (user/cscope-enable)
 
