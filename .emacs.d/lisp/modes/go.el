@@ -125,7 +125,10 @@
 
   (use-package go-imenu
     :if (executable-find "go-outline")
-    :hook (go-mode-hook . go-imenu-setup)))
+    :hook (go-mode-hook . go-imenu-setup))
+
+  (use-package go-template-mode
+    :mode ("\\.\\(gotmpl\\|tpl\\|tmpl\\)\\'" . go-template-mode)))
 
 
 (provide 'modes/go)
