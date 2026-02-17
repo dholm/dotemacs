@@ -38,9 +38,7 @@
       (setf
        ;; Add "use-package" lines to `navi-keywords'.
        (cdr (assoc :ALL (cdr (assoc "emacs-lisp" navi-keywords))))
-       "^[[:space:]]*(\\(use-package\\|\\(cl-\\)\\{0,1\\}def[a-z]+\\)\\*? ")
-
-      (use-package helm-navi))))
+       "^[[:space:]]*(\\(use-package\\|\\(cl-\\)\\{0,1\\}def[a-z]+\\)\\*? "))))
 
 
 (provide 'utilities/outline)
